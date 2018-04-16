@@ -2,11 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  #latitude: 51.1663
   latitude: !secret home_latitude
-  #longitude: 16.898
   longitude: !secret home_longitude
-  # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: !secret home_elevation
   # metric for Metric, imperial for Imperial
   unit_system: metric
@@ -59,7 +56,6 @@ sun:
 sensor: !include sensors.yaml
 
 xiaomi_aqara:
-  discovery_retry: 5
   gateways:
     - mac: 34:CE:00:91:D7:ED
       key: !secret xiaomi_getway_key
@@ -100,15 +96,15 @@ switch:
     switches:
       kids_light:
         # icon: mdi:lightbulb
-        value_template: 'on' #"{{ is_state('switch.source', 'on') }}"
+        value_template: "{{ is_state('switch.kids_light', 'on') }}"
         turn_on:
           service: switch.turn_on
           data: 
-            entity_id: switch.kids_light
+            entity_id: switch.kids_light_on
         turn_off:
           service: switch.turn_off
           data:
-            entity_id: switch.kids_light
+            entity_id: switch.kids_light_off
 
 # device tracking
 device_tracker:
@@ -123,10 +119,6 @@ device_tracker:
     region_mapping:
       cabin: home
       office: work
-# - platform: mqtt
-#   devices:
-#     nizm0_phone: location/Nizm0
-#     gosia_phone: location/Gosia
   - platform: tomato
     host: 192.168.1.1
     username: !secret tomato_username
@@ -155,3 +147,6 @@ http:
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
   base_url: !secret base_url
+  login_attempts_threshold: 3
+  trusted_networks:
+    - 192.168.1.0/24
