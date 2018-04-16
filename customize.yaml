@@ -1,0 +1,20 @@
+device_tracker.nizm0_phone:
+  icon: mdi:cellphone-android
+  friendly_name: Nizm0 Phone
+device_tracker.gosia_phone:
+  icon: mdi:cellphone-android
+  friendly_name: Gosia Phone
+device_tracker.nizm0_surface:
+  hidden: yes
+device_tracker.gosia_laptop:
+  hidden: yes
+device_tracker.office_tv:
+  hidden: yes
+device_tracker.mi_home_gateway:
+  hidden: yes
+device_tracker.mac_bls:
+  hidden: yes
+device_tracker.esp_8344fe:
+  hidden: yes
+switch.kids_light:
+  friendly_name: Kids light

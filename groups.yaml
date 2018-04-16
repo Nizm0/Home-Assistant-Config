@@ -1,0 +1,81 @@
+### VIEWS
+# default_view:
+#   view: yes
+#   icon: mdi:home
+#   entities:
+#     - group.office
+#     - device_tracker.nizm0_phone
+office_view:
+  view: yes
+  name: Office
+  # icon: mdi.briefcase
+  entities:
+    - group.office
+bedroom_view:
+  view: yes
+  name: Bedroom
+  entities:
+    - group.bedroom
+kids_room_view:
+  view: yes
+  name: Kids room
+  entities:
+    - group.kids_room
+family:
+  name: Family
+  view: yes
+  entities:
+    - device_tracker.nizm0_phone
+    - device_tracker.gosia_phone
+### GROUPS
+office: 
+  name: Office
+  entities:
+    - media_player.gpm_desktop_player
+    - media_player.office_tv
+    - sensor.office_gateway_illumination
+    - script.1523397023682
+    - light.office_gateway_light
+bedroom:
+  name: Bedroom
+  entities:
+    - sensor.bedroom_temperature
+    - sensor.bedroom_humidity
+    - sensor.bedroom_pressure
+kids_room:
+  name: Kids room
+  entities:
+    - switch.kids_light
+kitchen:
+  name: Kichen
+environment:
+  name: Environment
+  entities:
+    - sensor.yr_symbol
+    - sun.sun
+    - sensor.moon
+    # - homeassistant.weathet
+    # - sensor.airvisual
+weather:
+  name: Weather for next our
+  entities:
+    - sensor.weather_cloudiness
+    - sensor.weather_dewpoint_temperature
+    - sensor.weather_fog
+    - sensor.weather_high_clouds
+    - sensor.weather_humidity
+    - sensor.weather_low_clouds
+    - sensor.weather_medium_clouds
+    - sensor.weather_precipitation
+    - sensor.weather_pressure
+    - sensor.weather_symbol
+    - sensor.weather_temperature
+    - sensor.weather_wind_direction
+    - sensor.weather_wind_speed
+system:
+  name: System stats
+  entities:
+    - sensor.processor_use
+    - sensor.since_last_boot
+    - sensor.memory_free
+    - sensor.disk_use_percent_home

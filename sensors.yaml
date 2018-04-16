@@ -1,0 +1,40 @@
+
+- platform: yr
+  name: Weather
+  forecast: 1
+  monitored_conditions:
+    - temperature
+    - symbol
+    - precipitation
+    - windSpeed
+    - pressure
+    - windDirection
+    - humidity
+    - fog
+    - cloudiness
+    - lowClouds
+    - mediumClouds
+    - highClouds
+    - dewpointTemperature
+- platform: moon
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: processor_use
+    - type: since_last_boot
+- platform: command_line
+  name: SSL cert expiry
+  unit_of_measurement: days
+  scan_interval: 10800
+  command: "ssl-cert-check -b -c /etc/letsencrypt/live/has.nizmo.eu/cert.pem | awk '{ print $NF }'"
+#  - platform: airvisual
+#    api_key: !secret airvisual_api_key
+#    monitored_conditions:
+#      - us
+#      - cn
+#    latitude: !secret home_latitude
+#    longitude: !secret home_longitude
+#    radius: 500
+#    show_on_map: true

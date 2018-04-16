@@ -1,0 +1,16 @@
+*
+!*.yaml
+!*.yml
+!scenes
+!.gitignore
+secrets.yaml
+known_devices.yaml
+
+*.uuid
+*.db
+*.log
+*.conf
+*.cloud
+
+deps
+tts

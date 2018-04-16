@@ -1,0 +1,105 @@
+- action:
+  - data: {}
+    service: script.1523397023682
+  alias: Sun test
+  condition: []
+  id: '1523308495536'
+  trigger:
+  - event: sunrise
+    platform: sun
+  - event: sunset
+    platform: sun
+
+# - action:
+#   - alias: New device
+#     data:
+#       message: New Device Tracked
+#     service: persistent_notification.create
+#   alias: New Device Tracked
+#   condition: []
+#   id: '1509371767814'
+#   trigger:
+#   - event_data:
+#       message: >
+#           New device:
+#           {{trigger.event.data.host_name}}
+#           ({{trigger.event.data.entity_id}})
+#           {{trigger.event.data.source_type}}
+#       title: New device
+#     event_type: device_tracker_new_device
+#     platform: event
+
+# - alias: New Device Detection
+#   trigger:
+#     platform: event
+#     event_type: device_tracker_new_device
+#   action:
+#     - service: notify.telegram
+#       data:
+#         message: 'A new device just connected to your wifi.'
+#     - service: ifttt.trigger
+#       data:
+#         event: wifi_connected
+#         value1: NEW DEVICE!
+
+- alias: Notify If New Devices
+  trigger:
+    - platform: event
+      event_type: device_tracker_new_device
+  action:
+    - service: notify.pushbullet
+      data_template:
+        message: >
+          New device:
+          {{trigger.event.data.host_name}}
+          ({{trigger.event.data.entity_id}})
+          {{trigger.event.data.source_type}}
+        title: New device tracked
+        # target: device/oneplus 3
+    - service: persistent_notification.create
+      data_template:
+        message: >
+          New device:
+          {{trigger.event.data.host_name}}
+          ({{trigger.event.data.entity_id}})
+          {{trigger.event.data.source_type}}
+        title: New device tracked
+    # - service: notify.home_assistant
+    #   data_template:
+    #     message: >
+    #       New device:
+    #       {{trigger.event.data.host_name}}
+    #       ({{trigger.event.data.entity_id}})
+    #     title: New device 
+
+- alias: Change kids lights
+  trigger:
+    - platform: state
+      entity_id: switch.kids_light
+  action:
+    - service: ifttt.trigger
+      data_template:
+        event: "{% if trigger.to_state.state == 'on' %}kids_light_on{% else %}kids_light_off{% endif %}"
+        value1: "{{ trigger.to_state.state }}"
+    - service: persistent_notification.create
+      data_template:
+        message: "Kids room switch changed to {{ trigger.to_state.state }}"
+        title: "Kids room switch"
+
+- alias: Change kids lights to on
+  trigger:
+    - platform: state
+      entity_id: switch.kids_light
+      to: 'on'
+  action:
+    - service: ifttt.trigger
+      data: {"event": "kids_light_on"}
+
+# - action:
+#   - delay: '10'
+#   alias: New Automation
+#   condition: []
+#   id: '1523710360889'
+#   trigger:
+#   - entity_id: switch.kids_light
+#     platform: state

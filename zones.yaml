@@ -1,0 +1,26 @@
+- name: Michał Work
+  latitude: !secret work_latitude
+  longitude: !secret work_longitude
+  radius: 250
+  icon: mdi:domain
+- name: Sweet Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  radius: 100
+  icon: mdi:home-outline
+- name: MP
+  latitude: !secret michal_parents_latitude
+  longitude: !secret michal_parents_longitude
+  radius: 100
+- name: GP
+  latitude: !secret gosia_parents_latitude
+  longitude: !secret gosia_parents_longitude
+  radius: 100
+- name: Kindergarden
+  latitude: 51.1034798
+  longitude: 17.0838719
+  radius: 250
+- name: Nursery
+  latitude: 51.1062541
+  longitude: 17.0206531
+  radius: 250

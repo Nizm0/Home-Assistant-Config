@@ -1,0 +1,13 @@
+'1523397023682':
+  alias: sun
+  sequence:
+  - data:
+      data:
+        color: gray
+        duration: 5
+        interrupt: 1
+        position: center
+        transparency: 75%
+      message: '{{states.sun.sun.state}}'
+      title: Sun is going to
+    service: notify.office_tv

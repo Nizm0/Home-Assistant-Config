@@ -1,0 +1,157 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  #latitude: 51.1663
+  latitude: !secret home_latitude
+  #longitude: 16.898
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: !secret home_elevation
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: Europe/Warsaw
+  # Customization file
+  customize: !include customize.yaml
+
+# Enables the frontend
+frontend:
+
+# Enables configuration UI
+config:
+
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+  include:
+    domains:
+      - sun
+      - sensor
+      - switch
+      - device_tracker
+
+# View all events in a logbook
+logbook:
+
+# Log Severities: notset, debug, info, warn, warning, error, fatal, critical
+logger:
+  default: error
+  logs:
+    ifttt.trigger: debug
+
+# Enables a map showing the location of tracked devices
+map:
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor: !include sensors.yaml
+
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - mac: 34:CE:00:91:D7:ED
+      key: !secret xiaomi_getway_key
+
+# Text to speech
+tts:
+  - platform: google
+
+# Cloud
+cloud:
+
+# ifttt
+ifttt:
+  key: !secret ifttt_key
+
+# notifications
+notify:
+  - platform: nfandroidtv
+    name: Office TV
+    host: 192.168.1.46
+  - name: pushbullet
+    platform: pushbullet
+    api_key: !secret pushbullet_api_key
+  # - name: html5
+  #   platform: html5
+  #   gcm_api_key: 'gcm-server-key'
+  #   gcm_sender_id: 'gcm-sender-id'
+
+# chromcast
+media_player:
+  - platform: cast
+    host: 192.168.1.46
+  - platform: gpmdp
+    host: 192.168.1.100
+
+switch:
+  - platform: template
+    switches:
+      kids_light:
+        # icon: mdi:lightbulb
+        value_template: 'on' #"{{ is_state('switch.source', 'on') }}"
+        turn_on:
+          service: switch.turn_on
+          data: 
+            entity_id: switch.kids_light
+        turn_off:
+          service: switch.turn_off
+          data:
+            entity_id: switch.kids_light
+
+# device tracking
+device_tracker:
+  - platform: owntracks
+    max_gps_accuracy: 200
+    waypoints: True
+    mqtt_topic: "owntracks/#"
+    events_only: True
+    waypoint_whitelist:
+      - Nizm0
+      - Gosia
+    region_mapping:
+      cabin: home
+      office: work
+# - platform: mqtt
+#   devices:
+#     nizm0_phone: location/Nizm0
+#     gosia_phone: location/Gosia
+  - platform: tomato
+    host: 192.168.1.1
+    username: !secret tomato_username
+    password:  !secret tomato_password
+    http_id: !secret tomato_http_id
+    interval_seconds: 10
+    new_device_defaults:
+      track_new_devices: True
+      hide_if_away: False
+  
+# mqtt
+mqtt:
+  broker: !secret mqtt_broker
+  port: !secret mqtt_port
+  keepalive: 60
+  username: !secret mqtt_login
+  password: !secret mqtt_password
+
+zone: !include zones.yaml
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+http:
+  api_password: !secret http_password
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
