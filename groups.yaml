@@ -21,12 +21,18 @@ kids_room_view:
   name: Kids room
   entities:
     - group.kids_room
-family:
+family_view:
   name: Family
   view: yes
   entities:
     - device_tracker.nizm0_phone
     - device_tracker.gosia_phone
+system_view:
+  view: yes
+  name: Status
+  entities:
+    - group.system
+    - group.travis
 ### GROUPS
 office: 
   name: Office
@@ -79,3 +85,10 @@ system:
     - sensor.since_last_boot
     - sensor.memory_free
     - sensor.disk_use_percent_home
+travis:
+  name: Travis status
+  entities:
+    - sensor.nizm0homeassistantconfig_last_build_duration
+    - sensor.nizm0homeassistantconfig_last_build_id
+    - sensor.nizm0homeassistantconfig_last_build_state
+    - sensor.nizm0homeassistantconfig_state

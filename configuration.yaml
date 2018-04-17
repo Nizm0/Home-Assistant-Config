@@ -55,6 +55,9 @@ sun:
 # Weather prediction
 sensor: !include sensors.yaml
 
+shell_command:
+  get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
+
 xiaomi_aqara:
   gateways:
     - mac: !secret xiaomi_getway1_mac

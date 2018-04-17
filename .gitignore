@@ -2,7 +2,9 @@
 !*.yaml
 !*.yml
 !*.fake*
+!*.sh
 !scenes
+!bash
 !.gitignore
 secrets.yaml
 known_devices.yaml

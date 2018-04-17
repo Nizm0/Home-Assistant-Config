@@ -103,3 +103,10 @@
 #   trigger:
 #   - entity_id: switch.kids_light
 #     platform: state
+- alias: 'Misc: Update config if travis build is successfull'
+  trigger:
+    platform: state
+    entity_id: sensor.nizm0homeassistantconfig_state
+    to: 'passed'
+  action:
+    - service: script.update_config
