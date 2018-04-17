@@ -88,6 +88,7 @@ system:
 travis:
   name: Travis status
   entities:
+    - script.update_config
     - sensor.nizm0homeassistantconfig_last_build_duration
     - sensor.nizm0homeassistantconfig_last_build_id
     - sensor.nizm0homeassistantconfig_last_build_state
