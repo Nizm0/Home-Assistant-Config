@@ -1,6 +1,7 @@
 *
 !*.yaml
 !*.yml
+!*.fake*
 !scenes
 !.gitignore
 secrets.yaml
@@ -11,6 +12,7 @@ known_devices.yaml
 *.log
 *.conf
 *.cloud
+*.save
 
 deps
 tts
