@@ -29,6 +29,15 @@
   unit_of_measurement: days
   scan_interval: 10800
   command: "ssl-cert-check -b -c /etc/letsencrypt/live/has.nizmo.eu/cert.pem | awk '{ print $NF }'"
+- platform: travisci
+  api_key: !secret travisapi
+  scan_interval: 3600
+  repository: Home-AssistantConfig
+  monitored_conditions: 
+    - last_build_state
+    - last_build_id
+    - last_build_duration
+    - state 
 #  - platform: airvisual
 #    api_key: !secret airvisual_api_key
 #    monitored_conditions:
