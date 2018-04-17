@@ -57,8 +57,8 @@ sensor: !include sensors.yaml
 
 xiaomi_aqara:
   gateways:
-    - mac: 34:CE:00:91:D7:ED
-      key: !secret xiaomi_getway_key
+    - mac: !secret xiaomi_getway1_mac
+      key: !secret xiaomi_getway1_key
 
 # Text to speech
 tts:
@@ -120,7 +120,7 @@ device_tracker:
       cabin: home
       office: work
   - platform: tomato
-    host: 192.168.1.1
+    host: !secret tomato_ip
     username: !secret tomato_username
     password:  !secret tomato_password
     http_id: !secret tomato_http_id
