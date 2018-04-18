@@ -27,6 +27,7 @@ family_view:
   entities:
     - device_tracker.nizm0_phone
     - device_tracker.gosia_phone
+    - device_tracker.tablet1
 system_view:
   view: yes
   name: Status

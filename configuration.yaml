@@ -119,6 +119,7 @@ device_tracker:
     waypoint_whitelist:
       - Nizm0
       - Gosia
+      - Tablet1
     region_mapping:
       cabin: home
       office: work

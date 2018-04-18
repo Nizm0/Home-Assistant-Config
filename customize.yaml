@@ -4,6 +4,9 @@ device_tracker.nizm0_phone:
 device_tracker.gosia_phone:
   icon: mdi:cellphone-android
   friendly_name: Gosia Phone
+device_tracker.tablet:
+  icon: mdi:cellphone-android
+  friendly_name: Tablet
 device_tracker.nizm0_surface:
   hidden: yes
 device_tracker.gosia_laptop:
@@ -15,6 +18,8 @@ device_tracker.mi_home_gateway:
 device_tracker.mac_bls:
   hidden: yes
 device_tracker.esp_8344fe:
+  hidden: yes
+device_tracker.brother_printer:
   hidden: yes
 switch.kids_light:
   friendly_name: Kids light
