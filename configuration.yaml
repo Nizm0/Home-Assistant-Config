@@ -123,6 +123,10 @@ device_tracker:
     region_mapping:
       cabin: home
       office: work
+      kindergarden: kindergarden
+      nursery: nursery
+      mp: mp
+      gp: gp
   - platform: tomato
     host: !secret tomato_ip
     username: !secret tomato_username
