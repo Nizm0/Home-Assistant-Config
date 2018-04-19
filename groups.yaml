@@ -94,3 +94,8 @@ travis:
     - sensor.nizm0homeassistantconfig_last_build_id
     - sensor.nizm0homeassistantconfig_last_build_state
     - sensor.nizm0homeassistantconfig_state
+
+battery_alert:
+  control: hidden
+  entities:
+    - automation.battery_alert
