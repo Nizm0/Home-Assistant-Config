@@ -48,13 +48,6 @@ logger:
 
 # Enables a map showing the location of tracked devices
 map:
-
-# Track the sun
-sun:
-
-# Weather prediction
-sensor: !include sensors.yaml
-
 shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 
@@ -93,6 +86,17 @@ media_player:
     host: 192.168.1.46
   - platform: gpmdp
     host: 192.168.1.100
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor: !include sensors.yaml
+
+input_boolean:
+  battery_status_update:
+    name: Battery Status Update
+
 
 switch:
   - platform: template
