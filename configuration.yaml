@@ -97,7 +97,6 @@ input_boolean:
   battery_status_update:
     name: Battery Status Update
 
-
 switch:
   - platform: template
     switches:
