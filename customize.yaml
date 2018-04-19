@@ -23,3 +23,33 @@ device_tracker.brother_printer:
   hidden: yes
 switch.kids_light:
   friendly_name: Kids light
+
+################################################
+## Node Anchors
+################################################
+
+package.node_anchors:
+  customize: &customize
+    package: 'battery_alert'
+
+  expose: &expose
+    <<: *customize
+    haaska_hidden: false
+    homebridge_hidden: false
+
+################################################
+## Group
+################################################
+
+group.battery_alert:
+  <<: *customize
+  friendly_name: "Battery Alert"
+  icon: mdi:steam
+
+################################################
+## Automation
+################################################
+
+automation.battery_alert:
+  <<: *customize
+  friendly_name: "Battery Alert"
