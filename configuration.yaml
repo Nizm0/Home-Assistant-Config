@@ -75,10 +75,10 @@ notify:
   - name: pushbullet
     platform: pushbullet
     api_key: !secret pushbullet_api_key
-  # - name: html5
-  #   platform: html5
-  #   gcm_api_key: 'gcm-server-key'
-  #   gcm_sender_id: 'gcm-sender-id'
+  - name: html5
+    platform: html5
+    gcm_api_key: !secret google_push_api_key
+    gcm_sender_id: !secret google_push_sender_id
 
 # chromcast
 media_player:

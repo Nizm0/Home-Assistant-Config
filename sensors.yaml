@@ -65,21 +65,21 @@
 #    radius: 500
 #    show_on_map: true
 
-- platform: mqtt
-  state_topic: "owntracks/Nizm0/phone"
-  name: "Nizm0 battery"
-  unit_of_measurement: "%"
-  value_template: '{{ value_json.batt }}'
-- platform: mqtt
-  state_topic: "owntracks/gosia/phone"
-  name: "Gosia battery"
-  unit_of_measurement: "%"
-  value_template: '{{ value_json.batt }}'
-- platform: mqtt
-  state_topic: "owntracks/tablet1/tablet"
-  name: "Tablet battery"
-  unit_of_measurement: "%"
-  value_template: '{{ value_json.batt }}'
+# - platform: mqtt
+#   state_topic: "owntracks/Nizm0/phone"
+#   name: "Nizm0 battery"
+#   unit_of_measurement: "%"
+#   value_template: '{{ value_json.batt }}'
+# - platform: mqtt
+#   state_topic: "owntracks/gosia/phone"
+#   name: "Gosia battery"
+#   unit_of_measurement: "%"
+#   value_template: '{{ value_json.batt }}'
+# - platform: mqtt
+#   state_topic: "owntracks/tablet1/tablet"
+#   name: "Tablet battery"
+#   unit_of_measurement: "%"
+#   value_template: '{{ value_json.batt }}'
 # - platform: attributes
 #   friendly_name: "Bedroom room batteries"
 #   attribute: battery_level
