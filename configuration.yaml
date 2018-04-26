@@ -139,6 +139,10 @@ device_tracker:
     new_device_defaults:
       track_new_devices: True
       hide_if_away: False
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://192.168.1.29:8080/video
   
 # mqtt
 mqtt:
