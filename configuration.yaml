@@ -84,8 +84,13 @@ notify:
 media_player:
   - platform: cast
     host: 192.168.1.46
+    # name: Office Android Tv Philips
   - platform: gpmdp
     host: 192.168.1.100
+    name: My Pc Google Play
+  - platform: cast
+    host: 192.168.1.47
+    # name: Office Google Home Mini
 
 # Track the sun
 sun:
@@ -140,9 +145,35 @@ device_tracker:
       track_new_devices: True
       hide_if_away: False
 
-camera:
-  - platform: mjpeg
-    mjpeg_url: http://192.168.1.29:8080/video
+# camera:
+#   - platform: mjpeg
+#     name: Office camera
+#     mjpeg_url: http://192.168.1.29:8080/video
+android_ip_webcam:
+  - host: 192.168.1.29
+    name: Office camera
+    port: 8080
+    sensors:
+      - audio_connections
+      - battery_level
+      - battery_temp
+      - battery_voltage
+      - light
+      - motion
+      - pressure
+      - proximity
+      - sound
+      - video_connections
+    switches:
+      - exposure_lock
+      - ffc # front camera
+      - focus
+      - gps_active
+      - night_vision
+      - overlay
+      - torch
+      - whitebalance_lock
+      - video_recording
   
 # mqtt
 mqtt:

@@ -3,7 +3,7 @@ media_player.office_speaker:
   platform: cast
   unique_id: 58d90edc-436f-d073-1e43-dcc465862db1
 media_player.office_tv:
-  name: Philips TV
+  name: Office TV
   platform: cast
   unique_id: 5ad55909-2073-c403-7c09-4732f9328245
 sensor.office_gateway_illumination:

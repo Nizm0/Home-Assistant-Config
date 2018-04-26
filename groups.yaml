@@ -11,6 +11,8 @@ office_view:
   # icon: mdi.briefcase
   entities:
     - group.office
+    - group.office_camera_senors
+    - group.office_camera_switch
 bedroom_view:
   view: yes
   name: Bedroom
@@ -40,9 +42,11 @@ office:
   entities:
     - media_player.gpm_desktop_player
     - media_player.office_tv
+    - media_player.office_speaker
     - sensor.office_gateway_illumination
     - script.1523397023682
     - light.office_gateway_light
+    - camera.office_camera
 bedroom:
   name: Bedroom
   entities:
@@ -99,3 +103,29 @@ battery_alert:
   control: hidden
   entities:
     - automation.battery_alert
+
+office_camera_senors:
+  name: Office Camera Sensors
+  entities:
+    - sensor.office_camera_audio_connections
+    - sensor.office_camera_battery_level
+    - sensor.office_camera_battery_temperature
+    - sensor.office_camera_battery_voltage
+    - sensor.office_camera_light_level
+    - sensor.office_camera_motion
+    - sensor.office_camera_pressure
+    - sensor.office_camera_proximity
+    - sensor.office_camera_sound
+    - sensor.office_camera_video_connections
+office_camera_switch:
+  name: Office Camera Switches
+  entities:
+    - switch.office_camera_exposure_lock
+    - switch.office_camera_focus
+    - switch.office_camera_frontfacing_camera
+    - switch.office_camera_gps_active
+    - switch.office_camera_night_vision
+    - switch.office_camera_overlay
+    - switch.office_camera_torch
+    - switch.office_camera_video_recording
+    - switch.office_camera_white_balance_lock

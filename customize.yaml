@@ -13,7 +13,7 @@ device_tracker.gosia_laptop:
   hidden: yes
 device_tracker.office_tv:
   hidden: yes
-device_tracker.googlehomemini:
+device_tracker.office_speaker:
   hidden: yes
 device_tracker.huawei_camera:
   hidden: yes
