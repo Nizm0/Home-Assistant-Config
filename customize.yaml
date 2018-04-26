@@ -13,9 +13,9 @@ device_tracker.gosia_laptop:
   hidden: yes
 device_tracker.office_tv:
   hidden: yes
-googlehomemini:
+device_tracker.googlehomemini:
   hidden: yes
-huawei_cameraa:
+device_tracker.huawei_camera:
   hidden: yes
 device_tracker.mi_home_gateway:
   hidden: yes
