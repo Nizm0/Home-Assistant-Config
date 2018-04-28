@@ -26,3 +26,51 @@ sensor.bedroom_pressure:
   name: Pressure
   platform: xiaomi_aqara
   unique_id: pressure158d000201894b
+sensor.office_temperature:
+  name: Temperature
+  platform: xiaomi_aqara
+  unique_id: temperature158d0001f23a1a
+sensor.office_humidity:
+  name: Humidity
+  platform: xiaomi_aqara
+  unique_id: humidity158d0001f23a1a
+sensor.office_pressure:
+  name: Presure
+  platform: xiaomi_aqara
+  unique_id: pressure158d0001f23a1a
+sensor.kitchen_humidity:
+  name: Humidity
+  platform: xiaomi_aqara
+  unique_id: humidity158d000223a25a
+sensor.kitchen_pressure:
+  name: Pressure
+  platform: xiaomi_aqara
+  unique_id: pressure158d000223a25a
+sensor.kitchen_temperature:
+  name: Temperature
+  platform: xiaomi_aqara
+  unique_id: temperature158d000223a25a
+sensor.bathroom_temperature:
+  name: Bathroom
+  platform: xiaomi_aqara
+  unique_id: temperature158d0001f2392c
+sensor.bathroom_humidity:
+  name: Bathroom
+  platform: xiaomi_aqara
+  unique_id: humidity158d0001f2392c
+sensor.bathroom_pressure:
+  name: Bathroom
+  platform: xiaomi_aqara
+  unique_id: pressure158d0001f2392c
+sensor.kids_temperature:
+  name: Kids room
+  platform: xiaomi_aqara
+  unique_id: temperature158d0001f23a04
+sensor.kids_humidity:
+  name: Kids room
+  platform: xiaomi_aqara
+  unique_id: humidity158d0001f23a04
+sensor.kids_pressure:
+  name: Kids room
+  platform: xiaomi_aqara
+  unique_id: pressure158d0001f23a04

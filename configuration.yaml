@@ -53,8 +53,9 @@ shell_command:
 
 xiaomi_aqara:
   gateways:
-    - mac: !secret xiaomi_getway1_mac
-      key: !secret xiaomi_getway1_key
+    - key: !secret xiaomi_getway1_key
+      # interface: 192.168.1.110
+      mac: !secret xiaomi_getway1_mac
 
 # Text to speech
 tts:

@@ -11,18 +11,33 @@ office_view:
   # icon: mdi.briefcase
   entities:
     - group.office
+    - group.office_sensors
     - group.office_camera_senors
     - group.office_camera_switch
+    - media_player.my_pc_google_play
+    - media_player.office_tv
+    - media_player.office_speaker
 bedroom_view:
   view: yes
   name: Bedroom
   entities:
-    - group.bedroom
+    - group.bedroom_sensors
+bathroom_view:
+  view: yes
+  name: Bathroom
+  entities:
+    - group.bath_room_sensors
+kitchen_view:
+  view: yes
+  name: Kithen
+  entities:
+    - group.kitchen_sensors
 kids_room_view:
   view: yes
   name: Kids room
   entities:
-    - group.kids_room
+    - group.kids_room_switch
+    - group.kids_room_sensors
 family_view:
   name: Family
   view: yes
@@ -40,25 +55,44 @@ system_view:
 office: 
   name: Office
   entities:
-    - media_player.gpm_desktop_player
-    - media_player.office_tv
-    - media_player.office_speaker
-    - sensor.office_gateway_illumination
     - script.1523397023682
     - light.office_gateway_light
     - camera.office_camera
-bedroom:
+office_sensors:
+  name: Office
+  entities:
+    - sensor.office_temperature
+    - sensor.office_humidity
+    - sensor.office_pressure
+    - sensor.office_gateway_illumination
+bedroom_sensors:
   name: Bedroom
   entities:
     - sensor.bedroom_temperature
     - sensor.bedroom_humidity
     - sensor.bedroom_pressure
-kids_room:
+kitchen_sensors:
+  name: Kitchen
+  entities:
+    - sensor.kitchen_temperature
+    - sensor.kitchen_humidity
+    - sensor.kitchen_pressure
+bath_room_sensors:
+  name: Bathroom
+  entities:
+    - sensor.bathroom_temperature
+    - sensor.bathroom_humidity
+    - sensor.bathroom_pressure
+kids_room_sensors:
+  name: Kids room
+  entities:
+    - sensor.kids_temperature
+    - sensor.kids_humidity
+    - sensor.kids_pressure
+kids_room_switch:
   name: Kids room
   entities:
     - switch.kids_light
-kitchen:
-  name: Kichen
 environment:
   name: Environment
   entities:
