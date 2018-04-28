@@ -64,6 +64,14 @@
           ({{trigger.event.data.entity_id}})
           {{trigger.event.data.source_type}}
         title: New device tracked
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          New device:
+          {{trigger.event.data.host_name}}
+          ({{trigger.event.data.entity_id}})
+          {{trigger.event.data.source_type}}
+        title: New device tracked
     # - service: notify.home_assistant
     #   data_template:
     #     message: >
@@ -86,14 +94,14 @@
         message: "Kids room switch changed to {{ trigger.to_state.state }}"
         title: "Kids room switch"
 
-- alias: Change kids lights to on
-  trigger:
-    - platform: state
-      entity_id: switch.kids_light
-      to: 'on'
-  action:
-    - service: ifttt.trigger
-      data: {"event": "kids_light_on"}
+# - alias: Change kids lights to on
+#   trigger:
+#     - platform: state
+#       entity_id: switch.kids_light
+#       to: 'on'
+#   action:
+#     - service: ifttt.trigger
+#       data: {"event": "kids_light_on"}
 
 # - action:
 #   - delay: '10'

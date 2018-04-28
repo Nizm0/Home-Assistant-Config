@@ -12,6 +12,8 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
+api:
+
 # Enables the frontend
 frontend:
 
@@ -76,7 +78,7 @@ notify:
   - name: pushbullet
     platform: pushbullet
     api_key: !secret pushbullet_api_key
-  - name: html5
+  - name: push_to_chrome
     platform: html5
     gcm_api_key: !secret google_push_api_key
     gcm_sender_id: !secret google_push_sender_id
@@ -146,31 +148,27 @@ device_tracker:
       track_new_devices: True
       hide_if_away: False
 
-# camera:
-#   - platform: mjpeg
-#     name: Office camera
-#     mjpeg_url: http://192.168.1.29:8080/video
 android_ip_webcam:
   - host: 192.168.1.29
     name: Office camera
     port: 8080
     sensors:
       - audio_connections
-      - battery_level
-      - battery_temp
-      - battery_voltage
-      - light
-      - motion
-      - pressure
-      - proximity
-      - sound
+      # - battery_level
+      # - battery_temp
+      # - battery_voltage
+      # - light
+      # - motion
+      # - pressure
+      # - proximity
+      # - sound
       - video_connections
     switches:
       - exposure_lock
-      - ffc # front camera
+      # - ffc # front camera
       - focus
-      - gps_active
-      - night_vision
+      # - gps_active
+      # - night_vision
       - overlay
       - torch
       - whitebalance_lock
