@@ -1,0 +1,24 @@
+secrets: .homeassistant/secrets.yaml
+log:
+  # accessfile: /export/hass/appdaemon_test/logs/access.log
+  # errorfile: /export/hass/appdaemon_test/logs/error.log
+  # logfile: /export/hass/appdaemon_test/logs/appdaemon.log
+  log_generations: 3
+  log_size: 1000000
+appdaemon:
+  threads: 10
+  time_zone: Europe/Warsaw
+  # api_port: 5000
+  api_key: !secrets http_password
+  api_ssl_certificate: !secrets ssl_cert
+  api_ssl_key: !secrets ssl_key
+  plugins:
+    HASS:
+      type: hass
+      ha_key: !secrets http_password
+      ha_url: https://has.nizmo.eu
+homeassistant:
+  ha_url: https://has.nizmo.eu
+  ha_key: !secrets http_password
+hadashboard:
+  dash_url: http://192.168.1.101:5050

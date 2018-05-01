@@ -1,0 +1,31 @@
+clock:
+  widget_type: clock
+  time_format: "24hr"
+  show_seconds: 1
+  date_format_country: "pl"
+  date_style: "color: white"
+  time_style: "color: cyan"
+
+light_level:
+  widget_type: sensor
+  title: Office brightness
+  units: "lux"
+  precision: 0
+  shorten: 1
+  entity: sensor.office_gateway_illumination
+
+sun:
+
+office_gateway_light:
+  widget_type: light
+  title: Office gateway
+  entity: light.office_gateway_light
+  on_attributes:
+    brightness: 100
+    rgb_color: 128, 34, 56
+  icon_on: mdi-lanp
+  icon_off: mdi-lamp
+
+layout:
+  - clock(2x1), light_level, sun.sun
+  - office_gateway_light, light.office_gateway_light

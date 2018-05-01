@@ -3,9 +3,16 @@
 !*.yml
 !*.fake*
 !*.sh
-!scenes
+!*.dash
+
+!sensors
 !bash
+!conf
+!conf/*
+!themes
+
 !.gitignore
+
 secrets.yaml
 known_devices.yaml
 
