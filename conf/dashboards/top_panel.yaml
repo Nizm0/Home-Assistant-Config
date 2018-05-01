@@ -14,18 +14,22 @@ light_level:
   shorten: 1
   entity: sensor.office_gateway_illumination
 
-sun:
-
 office_gateway_light:
   widget_type: light
   title: Office gateway
   entity: light.office_gateway_light
   on_attributes:
-    brightness: 100
+    brightness: 150
     rgb_color: 128, 34, 56
-  icon_on: mdi-lanp
-  icon_off: mdi-lamp
+  # icon_on: fa-sun
+  # icon_off: fa-sun
+
+# slider:
+#   widget_type: input_slider
+#   title: test lihgt slider
+#   entity: sensor.office_gateway_illumination
+#   units: "%"
 
 layout:
-  - clock(2x1), light_level, sun.sun
-  - office_gateway_light, light.office_gateway_light
+  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizm0_phone, device_tracker.gosia_phone
+  - office_gateway_light, group.all_lights, slider(2x1)

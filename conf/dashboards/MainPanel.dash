@@ -1,6 +1,7 @@
 title: Main Panel
 widget_dimensions: [120, 120]
 widget_margins: [5, 5]
+widget_size: [1, 1]
 columns: 10
 global_parameters:
     use_comma: 0
