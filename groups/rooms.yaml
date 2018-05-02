@@ -1,0 +1,15 @@
+### ROOMS
+office: 
+  name: Office
+  entities:
+    - light.office_gateway_light
+# kids_room_switch:
+#   name: Kids room
+#   entities:
+#     - switch.kids_light
+
+### Lights
+kids_lights:
+  name: Kids lights
+  entities:
+    - input_boolean.kids_light

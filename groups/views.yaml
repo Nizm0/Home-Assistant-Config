@@ -1,0 +1,55 @@
+### VIEWS
+# default_view:
+#   view: yes
+#   icon: mdi:home
+#   entities:
+#     - group.office
+#     - device_tracker.nizm0_phone
+office_view:
+  view: yes
+  name: Office
+  # icon: mdi.briefcase
+  entities:
+    - camera.office_camera
+    - group.office
+    - group.office_camera_control
+    - group.office_sensors
+    # - group.office_camera_senors
+    - media_player.my_pc_google_play
+    - media_player.office_tv
+    - media_player.office_speaker
+bedroom_view:
+  view: yes
+  name: Bedroom
+  entities:
+    - group.bedroom_sensors
+bathroom_view:
+  view: yes
+  name: Bathroom
+  entities:
+    - group.bath_room_sensors
+kitchen_view:
+  view: yes
+  name: Kithen
+  entities:
+    - group.kitchen_sensors
+kids_room_view:
+  view: yes
+  name: Kids room
+  entities:
+    - group.kids_lights
+    - group.kids_room_switch
+    - group.kids_room_sensors
+family_view:
+  name: Family
+  view: yes
+  entities:
+    - device_tracker.nizm0_phone
+    - device_tracker.gosia_phone
+    - device_tracker.tablet1
+system_view:
+  view: yes
+  name: Status
+  entities:
+    - group.system
+    - group.travis

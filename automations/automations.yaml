@@ -83,16 +83,20 @@
 - alias: Change kids lights
   trigger:
     - platform: state
-      entity_id: switch.kids_light
+      entity_id: input_boolean.kids_light
   action:
     - service: ifttt.trigger
       data_template:
         event: "{% if trigger.to_state.state == 'on' %}kids_light_on{% else %}kids_light_off{% endif %}"
         value1: "{{ trigger.to_state.state }}"
-    - service: persistent_notification.create
-      data_template:
-        message: "Kids room switch changed to {{ trigger.to_state.state }}"
-        title: "Kids room switch"
+    # - service: persistent_notification.create
+    #   data_template:
+    #     message: "Kids room switch changed to {{ trigger.to_state.state }}"
+    #     title: "Kids room switch"
+    # - service: ifttt.trigger
+    #   data_template:
+    #     event: "TestHA_Trigger"
+    #     value1: "{{ trigger.to_state.state }}"
 
 # - alias: Change kids lights to on
 #   trigger:

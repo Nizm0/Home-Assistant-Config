@@ -1,0 +1,60 @@
+environment:
+  name: Environment
+  entities:
+    - script.1523397023682
+    - sensor.yr_symbol
+    - sun.sun
+    - sensor.moon
+    # - homeassistant.weathet
+    # - sensor.airvisual
+
+system:
+  name: System stats
+  entities:
+    - sensor.processor_use
+    - sensor.since_last_boot
+    - sensor.memory_free
+    - sensor.disk_use_percent_home
+travis:
+  name: Travis status
+  entities:
+    - script.update_config
+    - sensor.nizm0homeassistantconfig_last_build_duration
+    - sensor.nizm0homeassistantconfig_last_build_id
+    - sensor.nizm0homeassistantconfig_last_build_state
+    - sensor.nizm0homeassistantconfig_state
+
+office_camera_control:
+  name: Office Camera Control
+  entities:
+    - sensor.office_camera_video_connections
+    - sensor.office_camera_audio_connections
+    - switch.office_camera_exposure_lock
+    - switch.office_camera_focus
+    # - switch.office_camera_frontfacing_camera
+    # - switch.office_camera_gps_active
+    # - switch.office_camera_night_vision
+    - switch.office_camera_overlay
+    - switch.office_camera_torch
+    - switch.office_camera_video_recording
+    - switch.office_camera_white_balance_lock
+
+battery_alert:
+  control: hidden
+  entities:
+    - automation.battery_alert
+
+# office_camera_control:
+#   name: Office Camera Sensors
+#   entities:
+#     - sensor.office_camera_audio_connections
+    # - sensor.office_camera_battery_level
+    # - sensor.office_camera_battery_temperature
+    # - sensor.office_camera_battery_voltage
+    # - sensor.office_camera_light_level
+    # - sensor.office_camera_motion
+    # - sensor.office_camera_pressure
+    # - sensor.office_camera_proximity
+    # - sensor.office_camera_sound
+    # - sensor.office_camera_video_connections
+

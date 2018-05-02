@@ -14,25 +14,28 @@ homeassistant:
 
 api:
 
-shopping_list:
-
-# Enables the frontend
+sun:
+automation: !include_dir_merge_named automations/
+cloud:
+config:
+conversation:
+discovery:
 frontend:
   themes: !include_dir_merge_named themes/
-
-
-# Enables configuration UI
-config:
-
+group: !include_dir_merge_named groups/
+ifttt:
+  key: !secret ifttt_key
+logbook:
+map:
+notify: !include_dir_merge_named notify/
+script: !include_dir_merge_named scripts/
+sensor: !include_dir_merge_named sensors/
+shopping_list:
+tts:
+  - platform: google
 updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
+zone: !include zones.yaml
 
-# Discover some devices automatically
-discovery:
-
-# Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -42,9 +45,14 @@ history:
       - sensor
       - switch
       - device_tracker
-
-# View all events in a logbook
-logbook:
+http:
+  api_password: !secret http_password
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_key
+  base_url: !secret base_url
+  login_attempts_threshold: 3
+  trusted_networks:
+    - 192.168.1.0/24
 
 # Log Severities: notset, debug, info, warn, warning, error, fatal, critical
 logger:
@@ -52,8 +60,6 @@ logger:
   logs:
     ifttt.trigger: debug
 
-# Enables a map showing the location of tracked devices
-map:
 shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 
@@ -62,30 +68,6 @@ xiaomi_aqara:
     - key: !secret xiaomi_getway1_key
       # interface: 192.168.1.110
       mac: !secret xiaomi_getway1_mac
-
-# Text to speech
-tts:
-  - platform: google
-
-# Cloud
-cloud:
-
-# ifttt
-ifttt:
-  key: !secret ifttt_key
-
-# notifications
-notify:
-  - platform: nfandroidtv
-    name: Office TV
-    host: 192.168.1.46
-  - name: pushbullet
-    platform: pushbullet
-    api_key: !secret pushbullet_api_key
-  - name: push_to_chrome
-    platform: html5
-    gcm_api_key: !secret google_push_api_key
-    gcm_sender_id: !secret google_push_sender_id
 
 # chromcast
 media_player:
@@ -99,30 +81,29 @@ media_player:
     host: 192.168.1.47
     # name: Office Google Home Mini
 
-# Track the sun
-sun:
-
-# Weather prediction
-sensor: !include sensors.yaml
-
 input_boolean:
   battery_status_update:
     name: Battery Status Update
+  kids_light:
+    icon: mdi:lightbulb
+    initial: off
 
-switch:
-  - platform: template
-    switches:
-      kids_light:
-        # icon: mdi:lightbulb
-        value_template: "{{ is_state('switch.kids_light', 'on') }}"
-        turn_on:
-          service: switch.turn_on
-          data: 
-            entity_id: switch.kids_light_on
-        turn_off:
-          service: switch.turn_off
-          data:
-            entity_id: switch.kids_light_off
+# light:
+#   - platform: template
+#     lights:
+#       kids_light:
+#         icon: mdi:lightbulb
+#         value_template: "{{ is_state('input_boolean.kids_light', 'on') }}"
+#         value_template: "off"
+#         initial: off
+#         turn_on:
+#           service: light.turn_on
+#           data: 
+#             entity_id: switch.kids_light
+#         turn_off:
+#           service: light.turn_off
+#           data:
+#             entity_id: switch.kids_light
 
 # device tracking
 device_tracker:
@@ -185,17 +166,3 @@ mqtt:
   keepalive: 60
   username: !secret mqtt_login
   password: !secret mqtt_password
-
-zone: !include zones.yaml
-group: !include groups.yaml
-automation: !include automations.yaml
-script: !include scripts.yaml
-
-http:
-  api_password: !secret http_password
-  ssl_certificate: !secret ssl_cert
-  ssl_key: !secret ssl_key
-  base_url: !secret base_url
-  login_attempts_threshold: 3
-  trusted_networks:
-    - 192.168.1.0/24

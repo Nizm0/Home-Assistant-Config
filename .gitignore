@@ -1,4 +1,3 @@
-*
 !*.yaml
 !*.yml
 !*.fake*
@@ -10,12 +9,17 @@
 !conf
 !conf/*
 !themes
+!groups
+!scripts
+!sensors
+!automations
+!notify
 
 !.gitignore
 
 secrets.yaml
 known_devices.yaml
-
+.HA_VERSION
 *.uuid
 *.db
 *.log
@@ -23,5 +27,8 @@ known_devices.yaml
 *.cloud
 *.save
 
+conf/compiled
+conf/export
 deps
 tts
+www
