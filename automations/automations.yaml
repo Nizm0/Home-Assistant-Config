@@ -69,7 +69,7 @@
         message: >
           New device:
           {{trigger.event.data.host_name}}
-          ({{trigger.event.data.entity_id}})
+          {{trigger.event.data.entity_id}}
           {{trigger.event.data.source_type}}
         title: New device tracked
     # - service: notify.home_assistant
@@ -93,28 +93,13 @@
     #   data_template:
     #     message: "Kids room switch changed to {{ trigger.to_state.state }}"
     #     title: "Kids room switch"
-    # - service: ifttt.trigger
-    #   data_template:
-    #     event: "TestHA_Trigger"
-    #     value1: "{{ trigger.to_state.state }}"
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          New value is:
+            {{ trigger.to_state.state }}
+        title: Kids light changed
 
-# - alias: Change kids lights to on
-#   trigger:
-#     - platform: state
-#       entity_id: switch.kids_light
-#       to: 'on'
-#   action:
-#     - service: ifttt.trigger
-#       data: {"event": "kids_light_on"}
-
-# - action:
-#   - delay: '10'
-#   alias: New Automation
-#   condition: []
-#   id: '1523710360889'
-#   trigger:
-#   - entity_id: switch.kids_light
-#     platform: state
 - alias: 'Misc: Update config if travis build is successfull'
   trigger:
     platform: state
@@ -122,6 +107,12 @@
     to: 'passed'
   action:
     - service: script.update_config
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          Info about update:
+            {{ trigger.to_state.state }}
+        title: Travis compiled succesfully
 
 - alias: battery_alert
   trigger:

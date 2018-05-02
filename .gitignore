@@ -3,25 +3,13 @@
 !*.fake*
 !*.sh
 !*.dash
-
-!sensors
-!bash
-!conf
-!conf/*
-!themes
-!groups
-!scripts
-!sensors
-!automations
-!notify
-
 !.gitignore
 
 secrets.yaml
 known_devices.yaml
 .HA_VERSION
 *.uuid
-*.db
+*.db*
 *.log
 *.conf
 *.cloud

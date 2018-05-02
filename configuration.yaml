@@ -15,7 +15,7 @@ homeassistant:
 api:
 
 sun:
-automation: !include_dir_merge_named automations/
+automation: !include_dir_merge_list automations/
 cloud:
 config:
 conversation:
@@ -27,9 +27,9 @@ ifttt:
   key: !secret ifttt_key
 logbook:
 map:
-notify: !include_dir_merge_named notify/
+notify: !include_dir_merge_list notify/
 script: !include_dir_merge_named scripts/
-sensor: !include_dir_merge_named sensors/
+sensor: !include_dir_merge_list sensors/
 shopping_list:
 tts:
   - platform: google
@@ -82,9 +82,10 @@ media_player:
     # name: Office Google Home Mini
 
 input_boolean:
-  battery_status_update:
-    name: Battery Status Update
+  # battery_status_update:
+  #   name: Battery Status Update
   kids_light:
+    name: Main light
     icon: mdi:lightbulb
     initial: off
 

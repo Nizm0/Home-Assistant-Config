@@ -39,10 +39,10 @@ office_camera_control:
     - switch.office_camera_video_recording
     - switch.office_camera_white_balance_lock
 
-battery_alert:
-  control: hidden
-  entities:
-    - automation.battery_alert
+# battery_alert:
+#   control: hidden
+#   entities:
+#     - automation.battery_alert
 
 # office_camera_control:
 #   name: Office Camera Sensors
