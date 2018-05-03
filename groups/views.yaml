@@ -11,8 +11,8 @@ office_view:
   # icon: mdi.briefcase
   entities:
     - camera.office_camera
-    - group.office
     - group.office_camera_control
+    - group.office
     - group.office_sensors
     # - group.office_camera_senors
     - media_player.my_pc_google_play
@@ -32,7 +32,9 @@ kitchen_view:
   view: yes
   name: Kithen
   entities:
+    - camera.kitchen_camera
     - group.kitchen_sensors
+    - group.kitchen_camera_control
 kids_room_view:
   view: yes
   name: Kids room

@@ -140,14 +140,14 @@ android_ip_webcam:
     port: 8080
     sensors:
       - audio_connections
-      # - battery_level
-      # - battery_temp
-      # - battery_voltage
-      # - light
-      # - motion
-      # - pressure
-      # - proximity
-      # - sound
+      - battery_level
+      - battery_temp
+      - battery_voltage
+      - light
+      - motion
+      - pressure
+      - proximity
+      - sound
       - video_connections
     switches:
       - exposure_lock
@@ -159,6 +159,31 @@ android_ip_webcam:
       - torch
       - whitebalance_lock
       - video_recording
+  - host: 192.168.1.18
+    name: Kitchen Camera
+    port: 8080
+    sensors:
+      - audio_connections
+      - battery_level
+      - battery_temp
+      - battery_voltage
+      - light
+      - motion
+      - pressure
+      - proximity
+      - sound
+      - video_connections
+    switches:
+      - exposure_lock
+      - ffc # front camera
+      - focus
+      - gps_active
+      - night_vision
+      - overlay
+      - torch
+      - whitebalance_lock
+      - video_recording
+
   
 # mqtt
 mqtt:

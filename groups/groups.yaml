@@ -27,8 +27,16 @@ travis:
 office_camera_control:
   name: Office Camera Control
   entities:
-    - sensor.office_camera_video_connections
     - sensor.office_camera_audio_connections
+    - sensor.office_camera_battery_level
+    - sensor.office_camera_battery_temperature
+    - sensor.office_camera_battery_voltage
+    - sensor.office_camera_light_level
+    - sensor.office_camera_motion
+    - sensor.office_camera_pressure
+    - sensor.office_camera_proximity
+    - sensor.office_camera_sound
+    - sensor.office_camera_video_connections
     - switch.office_camera_exposure_lock
     - switch.office_camera_focus
     # - switch.office_camera_frontfacing_camera
@@ -38,6 +46,29 @@ office_camera_control:
     - switch.office_camera_torch
     - switch.office_camera_video_recording
     - switch.office_camera_white_balance_lock
+  
+kitchen_camera_control:
+  name: Kitchen Camera Control
+  entities:
+    - sensor.kitchen_camera_audio_connections
+    - sensor.kitchen_camera_battery_level
+    - sensor.kitchen_camera_battery_temperature
+    - sensor.kitchen_camera_battery_voltage
+    - sensor.kitchen_camera_light_level
+    - sensor.kitchen_camera_motion
+    - sensor.kitchen_camera_pressure
+    - sensor.kitchen_camera_proximity
+    - sensor.kitchen_camera_sound
+    - sensor.kitchen_camera_video_connections
+    - switch.kitchen_camera_exposure_lock
+    - switch.kitchen_camera_focus
+    - switch.kitchen_camera_frontfacing_camera
+    - switch.kitchen_camera_gps_active
+    - switch.kitchen_camera_night_vision
+    - switch.kitchen_camera_overlay
+    - switch.kitchen_camera_torch
+    - switch.kitchen_camera_video_recording
+    - switch.kitchen_camera_white_balance_lock
 
 # battery_alert:
 #   control: hidden

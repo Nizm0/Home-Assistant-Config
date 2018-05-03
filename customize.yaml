@@ -17,6 +17,8 @@ device_tracker.office_speaker:
   hidden: yes
 device_tracker.huawei_camera:
   hidden: yes
+device_tracker.samsung_camera:
+  hidden: yes
 device_tracker.mi_home_gateway:
   hidden: yes
 device_tracker.mac_bls:
