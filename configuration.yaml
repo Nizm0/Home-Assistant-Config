@@ -13,7 +13,6 @@ homeassistant:
   customize: !include customize.yaml
 
 api:
-
 sun:
 automation: !include_dir_merge_list automations/
 cloud:
@@ -41,10 +40,88 @@ zone: !include zones.yaml
 history:
   include:
     domains:
-      - sun
-      - sensor
-      - switch
       - device_tracker
+      # - sensor
+    entities:
+      - sensor.bedroom_temperature
+      - sensor.office_temperature
+      - sensor.kitchen_temperature
+      - sensor.bathroom_temperature
+      - sensor.kids_temperature
+      - sensor.bedroom_humidity
+      - sensor.office_humidity
+      - sensor.kitchen_humidity
+      - sensor.bathroom_humidity
+      - sensor.kids_humidity
+      - sensor.bedroom_pressure
+      - sensor.office_pressure
+      - sensor.kitchen_pressure
+      - sensor.bathroom_pressure
+      - sensor.kids_pressure
+      - sensor.office_gateway_illumination
+      - light.office_gateway_light
+      - sensor.processor_use
+      - sensor.memory_free
+      - sensor.disk_use_percent_home
+  exclude:
+    domains:
+      # - sensor
+      - switch
+      - sun
+    entities:
+      - sensor.weather_cloudiness
+      - sensor.weather_dewpoint_temperature
+      - sensor.weather_fog
+      - sensor.weather_high_clouds
+      - sensor.weather_humidity
+      - sensor.weather_low_clouds
+      - sensor.weather_medium_clouds
+      - sensor.weather_precipitation
+      - sensor.weather_pressure
+      - sensor.weather_symbol
+      - sensor.weather_temperature
+      - sensor.weather_wind_direction
+      - sensor.weather_wind_speed
+
+history_graph:
+  # gr1:
+  #   name: Lights Graph
+  #   entities:
+  #     - light.ceiling.lights
+  #     - light.bed_light
+  #   hours_to_show: 240
+  #   refresh: 60
+  room_temp:
+    name: Temperature in rooms
+    entities:
+      - sensor.bedroom_temperature
+      - sensor.office_temperature
+      - sensor.kitchen_temperature
+      - sensor.bathroom_temperature
+      - sensor.kids_temperature
+    hours_to_show: 120
+    refresh: 60
+  room_humidity:
+    name: Humidity in rooms
+    entities:
+      - sensor.bedroom_humidity
+      - sensor.office_humidity
+      - sensor.kitchen_humidity
+      - sensor.bathroom_humidity
+      - sensor.kids_humidity
+    hours_to_show: 120
+    refresh: 60
+  rooms_presure:
+    name: Presure in rooms
+    entities:
+      - sensor.bedroom_pressure
+      - sensor.office_pressure
+      - sensor.kitchen_pressure
+      - sensor.bathroom_pressure
+      - sensor.kids_pressure
+    hours_to_show: 120
+    refresh: 60
+
 http:
   api_password: !secret http_password
   ssl_certificate: !secret ssl_cert
@@ -64,10 +141,11 @@ shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 
 xiaomi_aqara:
+  discovery_retry: 5
   gateways:
     - key: !secret xiaomi_getway1_key
-      # interface: 192.168.1.110
       mac: !secret xiaomi_getway1_mac
+      host: !secret xiaomi_getway1_ip
 
 # chromcast
 media_player:
@@ -76,7 +154,7 @@ media_player:
     # name: Office Android Tv Philips
   - platform: gpmdp
     host: 192.168.1.100
-    name: My Pc Google Play
+    name: pc_gpmdp
   - platform: cast
     host: 192.168.1.47
     # name: Office Google Home Mini

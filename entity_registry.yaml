@@ -15,62 +15,66 @@ light.office_gateway_light:
   platform: xiaomi_aqara
   unique_id: rgb34ce0091d7ed
 sensor.bedroom_temperature:
-  name: Temperature
+  name: Bedroom
   platform: xiaomi_aqara
   unique_id: temperature158d000201894b
 sensor.bedroom_humidity:
-  name: Humidity
+  name: Bedroom
   platform: xiaomi_aqara
   unique_id: humidity158d000201894b
 sensor.bedroom_pressure:
-  name: Pressure
+  name: Bedroom
   platform: xiaomi_aqara
   unique_id: pressure158d000201894b
 sensor.office_temperature:
-  name: Temperature
+  name: Office
   platform: xiaomi_aqara
   unique_id: temperature158d0001f23a1a
 sensor.office_humidity:
-  name: Humidity
+  name: Office
   platform: xiaomi_aqara
   unique_id: humidity158d0001f23a1a
 sensor.office_pressure:
-  name: Presure
+  name: Office
   platform: xiaomi_aqara
   unique_id: pressure158d0001f23a1a
 sensor.kitchen_humidity:
-  name: Humidity
+  name: Kitchen
   platform: xiaomi_aqara
   unique_id: humidity158d000223a25a
 sensor.kitchen_pressure:
-  name: Pressure
+  name: Kitchen
   platform: xiaomi_aqara
   unique_id: pressure158d000223a25a
 sensor.kitchen_temperature:
-  name: Temperature
+  name: Kitchen
   platform: xiaomi_aqara
   unique_id: temperature158d000223a25a
 sensor.bathroom_temperature:
-  name: Temperature
+  name: Bathroom
   platform: xiaomi_aqara
   unique_id: temperature158d0001f2392c
 sensor.bathroom_humidity:
-  name: Humidity
+  name: Bathroom
   platform: xiaomi_aqara
   unique_id: humidity158d0001f2392c
 sensor.bathroom_pressure:
-  name: Presure
+  name: Bathroom
   platform: xiaomi_aqara
   unique_id: pressure158d0001f2392c
 sensor.kids_temperature:
-  name: Temperature
+  name: Kids room
   platform: xiaomi_aqara
   unique_id: temperature158d0001f23a04
 sensor.kids_humidity:
-  name: Humidity
+  name: Kids room
   platform: xiaomi_aqara
   unique_id: humidity158d0001f23a04
 sensor.kids_pressure:
-  name: Presure
+  name: Kids room
   platform: xiaomi_aqara
   unique_id: pressure158d0001f23a04
+binary_sensor.office_switch:
+  name: Office Switch
+  platform: xiaomi_aqara
+  unique_id: status158d0002241c98

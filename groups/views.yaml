@@ -15,7 +15,7 @@ office_view:
     - group.office
     - group.office_sensors
     # - group.office_camera_senors
-    - media_player.my_pc_google_play
+    - media_player.pc_gpmdp
     - media_player.office_tv
     - media_player.office_speaker
 bedroom_view:
