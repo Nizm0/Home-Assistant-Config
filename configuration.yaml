@@ -262,11 +262,11 @@ android_ip_webcam:
       - whitebalance_lock
       - video_recording
 
-  
-# mqtt
 mqtt:
-  broker: !secret mqtt_broker
-  port: !secret mqtt_port
-  keepalive: 60
-  username: !secret mqtt_login
-  password: !secret mqtt_password
+  embedded:
+# mqtt:
+#   broker: !secret mqtt_broker
+#   port: !secret mqtt_port
+#   keepalive: 60
+#   username: !secret mqtt_login
+#   password: !secret mqtt_password

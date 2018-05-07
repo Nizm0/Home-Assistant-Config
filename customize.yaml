@@ -29,6 +29,8 @@ device_tracker.brother_printer:
   hidden: yes
 switch.kids_light:
   friendly_name: Kids light
+binary_sensor.office_switch:
+  hidden: yes
 
 ################################################
 ## Node Anchors

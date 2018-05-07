@@ -18,7 +18,12 @@
     - service: notify.push_to_chrome
       data_template:
         message: >
-          "We have {% if trigger.to_state.state == 'below_horizon' %}sunset{% else %}sunrize{% endif %}"
+          We have {% if trigger.to_state.state == 'below_horizon' %}sunset{% else %}sunrize{% endif %} "trigger.to_state.state"
+        title: Sun is changin state
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          We have {% if states.sun.sun.state == 'below_horizon' %}sunset{% else %}sunrize{% endif %} "states.sun.sun.state"
         title: Sun is changin state
 
 - alias: Change kids lights

@@ -70,6 +70,17 @@ kitchen_camera_control:
     - switch.kitchen_camera_video_recording
     - switch.kitchen_camera_white_balance_lock
 
+Financial:
+  - sensor.broadlink_rm_pro
+  - sensor.xiaomi_360_degree_camera
+  - sensor.xiaomi_aqara_human_body_sensor
+  - sensor.xiaomi_aqara_water_sensor
+  - sensor.xiaomi_bedside_lamp
+  - sensor.xiaomi_smart_button
+  - sensor.xiaomi_yeelight_white
+  - sensor.yeelight_smart_light_strip
+  - sensor.xiaomi_door_window_sensor
+
 # battery_alert:
 #   control: hidden
 #   entities:
