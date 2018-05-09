@@ -32,6 +32,11 @@ switch.kids_light:
 binary_sensor.office_switch:
   hidden: yes
 
+device_tracker.esp_377896:
+  hidden: yes
+device_tracker.bcddc2018377:
+  hidden: yes
+
 ################################################
 ## Node Anchors
 ################################################

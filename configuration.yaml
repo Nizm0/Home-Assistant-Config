@@ -111,16 +111,16 @@ history_graph:
       - sensor.kids_humidity
     hours_to_show: 120
     refresh: 60
-  rooms_presure:
-    name: Presure in rooms
-    entities:
-      - sensor.bedroom_pressure
-      - sensor.office_pressure
-      - sensor.kitchen_pressure
-      - sensor.bathroom_pressure
-      - sensor.kids_pressure
-    hours_to_show: 120
-    refresh: 60
+  # rooms_presure:
+  #   name: Presure in rooms
+  #   entities:
+  #     - sensor.bedroom_pressure
+  #     - sensor.office_pressure
+  #     - sensor.kitchen_pressure
+  #     - sensor.bathroom_pressure
+  #     - sensor.kids_pressure
+  #   hours_to_show: 120
+  #   refresh: 60
 
 http:
   api_password: !secret http_password
@@ -212,55 +212,55 @@ device_tracker:
       track_new_devices: True
       hide_if_away: False
 
-android_ip_webcam:
-  - host: 192.168.1.29
-    name: Office camera
-    port: 8080
-    sensors:
-      - audio_connections
-      - battery_level
-      - battery_temp
-      - battery_voltage
-      - light
-      - motion
-      - pressure
-      - proximity
-      - sound
-      - video_connections
-    switches:
-      - exposure_lock
-      # - ffc # front camera
-      - focus
-      # - gps_active
-      # - night_vision
-      - overlay
-      - torch
-      - whitebalance_lock
-      - video_recording
-  - host: 192.168.1.18
-    name: Kitchen Camera
-    port: 8080
-    sensors:
-      - audio_connections
-      - battery_level
-      - battery_temp
-      - battery_voltage
-      - light
-      - motion
-      - pressure
-      - proximity
-      - sound
-      - video_connections
-    switches:
-      - exposure_lock
-      - ffc # front camera
-      - focus
-      - gps_active
-      - night_vision
-      - overlay
-      - torch
-      - whitebalance_lock
-      - video_recording
+# android_ip_webcam:
+#   - host: 192.168.1.29
+#     name: Office camera
+#     port: 8080
+#     sensors:
+#       - audio_connections
+#       - battery_level
+#       - battery_temp
+#       - battery_voltage
+#       - light
+#       - motion
+#       - pressure
+#       - proximity
+#       - sound
+#       - video_connections
+#     switches:
+#       - exposure_lock
+#       # - ffc # front camera
+#       - focus
+#       # - gps_active
+#       # - night_vision
+#       - overlay
+#       - torch
+#       - whitebalance_lock
+#       - video_recording
+#   - host: 192.168.1.18
+#     name: Kitchen Camera
+#     port: 8080
+#     sensors:
+#       - audio_connections
+#       - battery_level
+#       - battery_temp
+#       - battery_voltage
+#       - light
+#       - motion
+#       - pressure
+#       - proximity
+#       - sound
+#       - video_connections
+#     switches:
+#       - exposure_lock
+#       - ffc # front camera
+#       - focus
+#       - gps_active
+#       - night_vision
+#       - overlay
+#       - torch
+#       - whitebalance_lock
+#       - video_recording
 
 mqtt:
   embedded:
