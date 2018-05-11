@@ -16,6 +16,35 @@ api:
 sun:
 automation: !include_dir_merge_list automations/
 cloud:
+  google_actions:
+    filter:
+      # include_domains:
+      #   - switch
+      #   - light
+      #   - group
+      include_entities:
+        - input_boolean.kids_light
+        - light.office_gateway_light
+    entity_config:
+      input_boolean.kids_light:
+        name: Kids Light
+        aliases:
+          - input_boolean.kids_light
+      light.office_gateway_light:
+        name: Gateway Light
+        aliases:
+          - light.office_gateway_light
+          - bright lights
+          - entry lights
+  # entity_config:
+  #   switch.kitchen:
+  #     name: Custom Name for Google Assistant
+  #     aliases:
+  #       - bright lights
+  #       - entry lights
+  #   light.living_room:
+  #     expose: false
+  #     room: living room
 config:
 conversation:
 discovery:
@@ -111,6 +140,21 @@ history_graph:
       - sensor.kids_humidity
     hours_to_show: 120
     refresh: 60
+  pricess:
+    name: GearBest price history
+    entities:
+      - sensor.broadlink_rm_pro
+      - sensor.xiaomi_360_degree_camera
+      - sensor.xiaomi_aqara_door_window_sensor
+      - sensor.xiaomi_aqara_human_body_sensor
+      - sensor.xiaomi_aqara_water_sensor
+      - sensor.xiaomi_bedside_lamp
+      - sensor.xiaomi_smart_button
+      - sensor.xiaomi_yeelight_white
+      - sensor.yeelight_smart_light_strip
+      - sensor.xiaomi_door_window_sensor
+    hours_to_show: 120
+    refresh: 3600
   # rooms_presure:
   #   name: Presure in rooms
   #   entities:
@@ -158,6 +202,12 @@ media_player:
   - platform: cast
     host: 192.168.1.47
     # name: Office Google Home Mini
+  - platform: broadlink
+    name: Office TV
+    host: 192.168.1.51
+    mac: 78:0F:77:00:6A:7D
+    ircodes_ini: 'broadlink_media_codes/philips.ini'
+    ping_host: 192.168.1.51
 
 input_boolean:
   # battery_status_update:
@@ -167,6 +217,36 @@ input_boolean:
     icon: mdi:lightbulb
     initial: off
 
+switch:
+  - platform: broadlink
+    host: 192.168.1.51
+    mac: 78:0F:77:00:6A:7D
+    switches:
+      tv_philips:
+        friendly_name: Philips TV Power
+        command_on: "JgAqAFYfDR4ODw4PKy0NEA0QDRAODw4PDg8ODw4PDg8OEA0QHA8OHg4PDgANBQAAAAAAAAAAAAAAAAAA="
+    togles:
+      1:
+        command_on: "JgAqAFkcEBwQDRANLSoQDRANEA0QDRAODw4QDRANEA0QDRANEA0QDRANHwANBQAAAAAAAAAAAAAAAAAA="
+      2:
+        command_on: "JgAsAFgcEBwQDRANEBsfDRANEA0QDRANEA4PDhANEA0QDRANEA0QDRANHxwPAA0FAAAAAAAAAAAAAAAA="
+      3:
+        command_on: "JgAqAFgcEBwQDRANLSoQDRANEA0QDRAODw4QDRANEA0QDRANEA0QDR8NEAANBQAAAAAAAAAAAAAAAAAA="
+      4:
+        command_on: "JgAsAFkcEBsQDg8ODxweDhANEA0QDRANEA0QDRAODw4PDhANEA0QDR4cEA0QAA0FAAAAAAAAAAAAAAAA="
+      5:
+        command_on: "JgAoAFkcEBsQDRAOLCsQDRANEA0QDRANEA0QDRANEA0QDhANEA0eHB4ADQU="
+      6:
+        command_on: "JgAsAFkcEBwQDRANEBsfDRANEA0QDRANEA4PDg8OEA0QDRANEA0QDR8NEBsQAA0FAAAAAAAAAAAAAAAA="
+      7:
+        command_on: "JgAqAFgdDx0ODw4PLCsPDg8ODw4PDg8ODw8ODw4PDg8PDg8ODw4dDw8ODwANBQAAAAAAAAAAAAAAAAAA="
+      8:
+        command_on: "JgAsAFYeDh4ODw4PDxwdDw4PEA4NEA0QDw4PDg8ODw4QDRANEA0eHQ8ODw4NAA0FAAAAAAAAAAAAAAAA="
+      9:
+        command_on: "JgAoAFceDR4OEA0QKi0NEA4PDg8ODw4PDg8ODw4QDRANEA0QHB4ODxwADQU="
+      0:
+        command_on: "JgAuAFgcDx0PDg8ODxweDg8OEA0QDRANEA4PDg8ODw4ODw8ODg8PDhANDg8OEA8ADQUAAAAAAAAAAAAA="
+        # command_off: "JgAqAFYfDR4ODw4PKy0NEA0QDRAODw4PDg8ODw4PDg8OEA0QHA8OHg4PDgANBQAAAAAAAAAAAAAAAAAA="
 # light:
 #   - platform: template
 #     lights:

@@ -5,6 +5,7 @@
 !*.dash
 !.gitignore
 
+.shopping_list.json
 secrets.yaml
 known_devices.yaml
 .HA_VERSION

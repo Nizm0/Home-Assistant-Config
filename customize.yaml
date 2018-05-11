@@ -27,6 +27,8 @@ device_tracker.esp_8344fe:
   hidden: yes
 device_tracker.brother_printer:
   hidden: yes
+device_tracker.broadlink:
+  hidden: yes
 switch.kids_light:
   friendly_name: Kids light
 binary_sensor.office_switch:
