@@ -2,7 +2,7 @@ media_player.office_speaker:
   name: Office Speaker
   platform: cast
   unique_id: 58d90edc-436f-d073-1e43-dcc465862db1
-media_player.office_tv:
+media_player.office_tv_cast:
   name: Office TV Chromcast
   platform: cast
   unique_id: 5ad55909-2073-c403-7c09-4732f9328245
@@ -78,3 +78,7 @@ binary_sensor.office_switch:
   name: Office Switch
   platform: xiaomi_aqara
   unique_id: status158d0002241c98
+binary_sensor.bedroom_switch:
+  name:
+  platform: xiaomi_aqara
+  unique_id: status158d0001f3786a
