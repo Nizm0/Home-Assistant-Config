@@ -8,8 +8,12 @@ office:
 #   entities:
 #     - switch.kids_light
 
-### Lights
-kids_lights:
-  name: Kids lights
+kids:
+  name: Kids
   entities:
     - input_boolean.kids_light
+
+bedroom:
+  name: Bedroom
+  entities:
+    - light.bedroom_main_light

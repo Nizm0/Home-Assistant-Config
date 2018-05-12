@@ -15,10 +15,10 @@ homeassistant:
 api:
 sun:
 automation: !include_dir_merge_list automations/
-cloud:
+cloud: !include cloud.yaml
 config:
 conversation:
-discovery:
+# discovery:
 frontend:
   themes: !include_dir_merge_named themes/
 group: !include_dir_merge_named groups/
@@ -37,90 +37,9 @@ zone: !include zones.yaml
 
 
 # Enables support for tracking state changes over time
-history:
-  include:
-    domains:
-      - device_tracker
-      # - sensor
-    entities:
-      - sensor.bedroom_temperature
-      - sensor.office_temperature
-      - sensor.kitchen_temperature
-      - sensor.bathroom_temperature
-      - sensor.kids_temperature
-      - sensor.bedroom_humidity
-      - sensor.office_humidity
-      - sensor.kitchen_humidity
-      - sensor.bathroom_humidity
-      - sensor.kids_humidity
-      - sensor.bedroom_pressure
-      - sensor.office_pressure
-      - sensor.kitchen_pressure
-      - sensor.bathroom_pressure
-      - sensor.kids_pressure
-      - sensor.office_gateway_illumination
-      - light.office_gateway_light
-      - sensor.processor_use
-      - sensor.memory_free
-      - sensor.disk_use_percent_home
-  exclude:
-    domains:
-      # - sensor
-      - switch
-      - sun
-    entities:
-      - sensor.weather_cloudiness
-      - sensor.weather_dewpoint_temperature
-      - sensor.weather_fog
-      - sensor.weather_high_clouds
-      - sensor.weather_humidity
-      - sensor.weather_low_clouds
-      - sensor.weather_medium_clouds
-      - sensor.weather_precipitation
-      - sensor.weather_pressure
-      - sensor.weather_symbol
-      - sensor.weather_temperature
-      - sensor.weather_wind_direction
-      - sensor.weather_wind_speed
+history: !include history.yaml
 
-history_graph:
-  # gr1:
-  #   name: Lights Graph
-  #   entities:
-  #     - light.ceiling.lights
-  #     - light.bed_light
-  #   hours_to_show: 240
-  #   refresh: 60
-  room_temp:
-    name: Temperature in rooms
-    entities:
-      - sensor.bedroom_temperature
-      - sensor.office_temperature
-      - sensor.kitchen_temperature
-      - sensor.bathroom_temperature
-      - sensor.kids_temperature
-    hours_to_show: 120
-    refresh: 60
-  room_humidity:
-    name: Humidity in rooms
-    entities:
-      - sensor.bedroom_humidity
-      - sensor.office_humidity
-      - sensor.kitchen_humidity
-      - sensor.bathroom_humidity
-      - sensor.kids_humidity
-    hours_to_show: 120
-    refresh: 60
-  # rooms_presure:
-  #   name: Presure in rooms
-  #   entities:
-  #     - sensor.bedroom_pressure
-  #     - sensor.office_pressure
-  #     - sensor.kitchen_pressure
-  #     - sensor.bathroom_pressure
-  #     - sensor.kids_pressure
-  #   hours_to_show: 120
-  #   refresh: 60
+history_graph: !include history_graph.yaml
 
 http:
   api_password: !secret http_password
@@ -147,6 +66,15 @@ xiaomi_aqara:
       mac: !secret xiaomi_getway1_mac
       host: !secret xiaomi_getway1_ip
 
+light:
+  - platform: yeelight
+    devices:
+      192.168.1.3:
+        name: bedroom_main_light
+        transition: 10
+        use_music_mode: true #(defaults to False)
+        save_on_change: true #(defaults to True)
+
 # chromcast
 media_player:
   - platform: cast
@@ -158,6 +86,12 @@ media_player:
   - platform: cast
     host: 192.168.1.47
     # name: Office Google Home Mini
+  - platform: broadlink
+    name: Office TV
+    host: 192.168.1.51
+    mac: 78:0F:77:00:6A:7D
+    ircodes_ini: 'broadlink_media_codes/philips.ini'
+    ping_host: 192.168.1.46
 
 input_boolean:
   # battery_status_update:
@@ -167,6 +101,36 @@ input_boolean:
     icon: mdi:lightbulb
     initial: off
 
+switch:
+  - platform: broadlink
+    host: 192.168.1.51
+    mac: 78:0F:77:00:6A:7D
+    switches:
+      tv_philips:
+        friendly_name: Philips TV Power
+        command_on: "JgAqAFYfDR4ODw4PKy0NEA0QDRAODw4PDg8ODw4PDg8OEA0QHA8OHg4PDgANBQAAAAAAAAAAAAAAAAAA="
+    togles:
+      1:
+        command_on: "JgAqAFkcEBwQDRANLSoQDRANEA0QDRAODw4QDRANEA0QDRANEA0QDRANHwANBQAAAAAAAAAAAAAAAAAA="
+      2:
+        command_on: "JgAsAFgcEBwQDRANEBsfDRANEA0QDRANEA4PDhANEA0QDRANEA0QDRANHxwPAA0FAAAAAAAAAAAAAAAA="
+      3:
+        command_on: "JgAqAFgcEBwQDRANLSoQDRANEA0QDRAODw4QDRANEA0QDRANEA0QDR8NEAANBQAAAAAAAAAAAAAAAAAA="
+      4:
+        command_on: "JgAsAFkcEBsQDg8ODxweDhANEA0QDRANEA0QDRAODw4PDhANEA0QDR4cEA0QAA0FAAAAAAAAAAAAAAAA="
+      5:
+        command_on: "JgAoAFkcEBsQDRAOLCsQDRANEA0QDRANEA0QDRANEA0QDhANEA0eHB4ADQU="
+      6:
+        command_on: "JgAsAFkcEBwQDRANEBsfDRANEA0QDRANEA4PDg8OEA0QDRANEA0QDR8NEBsQAA0FAAAAAAAAAAAAAAAA="
+      7:
+        command_on: "JgAqAFgdDx0ODw4PLCsPDg8ODw4PDg8ODw8ODw4PDg8PDg8ODw4dDw8ODwANBQAAAAAAAAAAAAAAAAAA="
+      8:
+        command_on: "JgAsAFYeDh4ODw4PDxwdDw4PEA4NEA0QDw4PDg8ODw4QDRANEA0eHQ8ODw4NAA0FAAAAAAAAAAAAAAAA="
+      9:
+        command_on: "JgAoAFceDR4OEA0QKi0NEA4PDg8ODw4PDg8ODw4QDRANEA0QHB4ODxwADQU="
+      0:
+        command_on: "JgAuAFgcDx0PDg8ODxweDg8OEA0QDRANEA4PDg8ODw4ODw8ODg8PDhANDg8OEA8ADQUAAAAAAAAAAAAA="
+        # command_off: "JgAqAFYfDR4ODw4PKy0NEA0QDRAODw4PDg8ODw4PDg8OEA0QHA8OHg4PDgANBQAAAAAAAAAAAAAAAAAA="
 # light:
 #   - platform: template
 #     lights:
@@ -212,31 +176,31 @@ device_tracker:
       track_new_devices: True
       hide_if_away: False
 
-# android_ip_webcam:
-#   - host: 192.168.1.29
-#     name: Office camera
-#     port: 8080
-#     sensors:
-#       - audio_connections
-#       - battery_level
-#       - battery_temp
-#       - battery_voltage
-#       - light
-#       - motion
-#       - pressure
-#       - proximity
-#       - sound
-#       - video_connections
-#     switches:
-#       - exposure_lock
-#       # - ffc # front camera
-#       - focus
-#       # - gps_active
-#       # - night_vision
-#       - overlay
-#       - torch
-#       - whitebalance_lock
-#       - video_recording
+android_ip_webcam:
+  - host: 192.168.1.17
+    name: Office camera
+    port: 8080
+    sensors:
+      - audio_connections
+      - battery_level
+      - battery_temp
+      - battery_voltage
+      - light
+      - motion
+      - pressure
+      - proximity
+      - sound
+      - video_connections
+    switches:
+      - exposure_lock
+      # - ffc # front camera
+      - focus
+      # - gps_active
+      # - night_vision
+      - overlay
+      - torch
+      - whitebalance_lock
+      - video_recording
 #   - host: 192.168.1.18
 #     name: Kitchen Camera
 #     port: 8080

@@ -27,9 +27,15 @@ device_tracker.esp_8344fe:
   hidden: yes
 device_tracker.brother_printer:
   hidden: yes
+device_tracker.broadlink:
+  hidden: yes
+device_tracker.yeelinklightcolor2_miio87148988:
+  hidden: yes
 switch.kids_light:
   friendly_name: Kids light
 binary_sensor.office_switch:
+  hidden: yes
+binary_sensor.bedroom_switch:
   hidden: yes
 
 device_tracker.esp_377896:

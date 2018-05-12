@@ -18,11 +18,13 @@ office_view:
     - media_player.pc_gpmdp
     - media_player.office_tv
     - media_player.office_speaker
+    - media_player.office_tv_cast
 bedroom_view:
   view: yes
   name: Bedroom
   entities:
     - group.bedroom_sensors
+    - group.bedroom
 bathroom_view:
   view: yes
   name: Bathroom
@@ -39,7 +41,7 @@ kids_room_view:
   view: yes
   name: Kids room
   entities:
-    - group.kids_lights
+    - group.kids
     - group.kids_room_switch
     - group.kids_room_sensors
 family_view:
