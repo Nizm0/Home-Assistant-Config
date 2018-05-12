@@ -1,0 +1,15 @@
+- platform: cast
+  host: 192.168.1.46
+  # name: Office Android Tv Philips
+- platform: gpmdp
+  host: 192.168.1.100
+  name: pc_gpmdp
+- platform: cast
+  host: 192.168.1.47
+  # name: Office Google Home Mini
+- platform: broadlink
+  name: Office TV
+  host: 192.168.1.51
+  mac: 78:0F:77:00:6A:7D
+  ircodes_ini: 'broadlink_media_codes/philips.ini'
+  ping_host: 192.168.1.46
