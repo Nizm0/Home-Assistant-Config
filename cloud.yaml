@@ -1,0 +1,38 @@
+google_actions:
+  filter:
+    # include_domains:
+    #   - switch
+    #   - light
+    #   - group
+    include_entities:
+      - input_boolean.kids_light
+      - light.office_gateway_light
+  entity_config:
+    input_boolean.kids_light:
+      name: Kids Light
+      aliases:
+        - input_boolean.kids_light
+    light.office_gateway_light:
+      name: Gateway Light
+      aliases:
+        # - light.office_gateway_light
+        - Gateway Light
+        - coridor light
+    light.bedroom_main_light:
+      name: Bedroom main light
+      aliases:
+        # - light.bedroom_mail_light
+        - bedroom lights
+    media_player.office_tv:
+      name: TV
+      aliases:
+        - office tv
+# entity_config:
+#   switch.kitchen:
+#     name: Custom Name for Google Assistant
+#     aliases:
+#       - bright lights
+#       - entry lights
+#   light.living_room:
+#     expose: false
+#     room: living room
