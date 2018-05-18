@@ -23,6 +23,8 @@ from homeassistant.util import Throttle
 from requests.auth import HTTPDigestAuth
 from requests.adapters import HTTPAdapter
 
+REQUIREMENTS = ['philips_2016==0.0.1']
+
 MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=15)
 
 SUPPORT_PHILIPS_2016 = SUPPORT_STOP | SUPPORT_TURN_OFF | SUPPORT_TURN_ON | SUPPORT_VOLUME_STEP | \
