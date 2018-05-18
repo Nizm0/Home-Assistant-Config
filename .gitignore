@@ -5,16 +5,19 @@
 !*.dash
 !.gitignore
 
+ip_bans.yaml
 .shopping_list.json
 secrets.yaml
 known_devices.yaml
 .HA_VERSION
+. vscode
 *.uuid
 *.db*
 *.log
 *.conf
 *.cloud
 *.save
+*.pyc
 
 conf/compiled
 conf/export

@@ -7,9 +7,14 @@
 - platform: cast
   host: 192.168.1.47
   # name: Office Google Home Mini
-- platform: broadlink
-  name: Office TV
-  host: 192.168.1.51
-  mac: 78:0F:77:00:6A:7D
-  ircodes_ini: 'broadlink_media_codes/philips.ini'
-  ping_host: 192.168.1.46
+# - platform: broadlink
+#   name: Office TV
+#   host: 192.168.1.51
+#   mac: 78:0F:77:00:6A:7D
+#   ircodes_ini: 'broadlink_media_codes/philips.ini'
+#   ping_host: 192.168.1.46
+- platform: philips_2016
+  name: Philips TV
+  host: 192.168.1.46
+  username: !secret philips_user
+  password: !secret philips_pass
