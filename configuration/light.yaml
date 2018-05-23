@@ -1,6 +1,6 @@
 - platform: yeelight
   devices:
-    192.168.1.3:
+    192.168.1.111:
       name: bedroom_main_light
       transition: 10
       use_music_mode: true #(defaults to False)

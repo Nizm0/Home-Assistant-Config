@@ -47,7 +47,7 @@
       data:
         entity_id: light.bedroom_main_light
         color_name: red
-        brightness_pct: 10
+        brightness_pct: 5
 - alias: Turn off bedroom main light
   trigger:
     platform: event

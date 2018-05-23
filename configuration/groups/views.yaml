@@ -16,9 +16,10 @@ office_view:
     - group.office_sensors
     # - group.office_camera_senors
     - media_player.pc_gpmdp
-    - media_player.office_tv
+    - media_player.philips_tv
     - media_player.office_speaker
     - media_player.office_tv_cast
+    - vacuum.rockrobo
 bedroom_view:
   view: yes
   name: Bedroom

@@ -31,6 +31,8 @@ device_tracker.broadlink:
   hidden: yes
 device_tracker.yeelinklightcolor2_miio87148988:
   hidden: yes
+device_tracker.rockrobo:
+  hidden: yes
 switch.kids_light:
   friendly_name: Kids light
 binary_sensor.office_switch:

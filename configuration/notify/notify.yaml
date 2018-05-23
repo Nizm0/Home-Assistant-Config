@@ -1,6 +1,6 @@
   - platform: nfandroidtv
     name: Office TV
-    host: 192.168.1.46
+    host: 192.168.1.130
   - name: pushbullet
     platform: pushbullet
     api_key: !secret pushbullet_api_key

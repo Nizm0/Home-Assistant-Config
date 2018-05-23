@@ -1,11 +1,11 @@
 - platform: cast
-  host: 192.168.1.46
+  host: 192.168.1.130
   # name: Office Android Tv Philips
 - platform: gpmdp
   host: 192.168.1.100
   name: pc_gpmdp
 - platform: cast
-  host: 192.168.1.47
+  host: 192.168.1.131
   # name: Office Google Home Mini
 # - platform: broadlink
 #   name: Office TV
@@ -15,6 +15,6 @@
 #   ping_host: 192.168.1.46
 - platform: philips_2016
   name: Philips TV
-  host: 192.168.1.46
+  host: 192.168.1.130
   username: !secret philips_user
   password: !secret philips_pass

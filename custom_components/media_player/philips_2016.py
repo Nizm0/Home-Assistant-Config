@@ -23,7 +23,7 @@ from homeassistant.util import Throttle
 from requests.auth import HTTPDigestAuth
 from requests.adapters import HTTPAdapter
 
-REQUIREMENTS = ['philips_2016==0.0.1']
+# REQUIREMENTS = ['philips_2016==0.0.1']
 
 MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=15)
 
@@ -289,6 +289,8 @@ class PhilipsTVBase(object):
 		r = self._getReq('powerstate')
 		if r:
 			self.state = r['powerstate']
+		else:
+			self.state = STATE_UNKNOWN
 
 	def setVolume(self, level):
 		if level:
