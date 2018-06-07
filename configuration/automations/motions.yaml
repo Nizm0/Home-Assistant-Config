@@ -10,3 +10,19 @@
   action:
     - service: homeassistant.turn_on
       entity_id: script.corridor_motion_detected
+- alias: Corridor motion detected in empty home
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.corridor_motion_sensor
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: group.all_devices
+      state: 'not_home'
+  action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          New value is:
+            {{ trigger.to_state.state }}
+        title: Somone wolking in empty home

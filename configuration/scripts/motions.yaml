@@ -11,9 +11,9 @@ corridor_motion_detected:
     - service: script.turn_on
       data: 
         entity_id: script.corridor_light_timer
-    - service: notify.push_to_chrome
-      data_template:
-        message: >
-          New value is:
-            'on'
-        title: somone wolking in coriridor
+    # - service: notify.push_to_chrome
+    #   data_template:
+    #     message: >
+    #       New value is:
+    #         'on'
+    #     title: somone wolking in coriridor
