@@ -14,7 +14,16 @@
 #   ircodes_ini: 'broadlink_media_codes/philips.ini'
 #   ping_host: 192.168.1.46
 - platform: philips_2016
-  name: Philips TV
+  name: phTV
   host: 192.168.1.130
   username: !secret philips_user
   password: !secret philips_pass
+- platform: universal
+  name: Philips TV
+  children:
+    - media_player.phTV
+  commands:
+    turn_on:
+      service: switch.turn_on
+      data:
+        entity_id: switch.phtvir

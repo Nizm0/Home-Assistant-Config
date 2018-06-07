@@ -45,6 +45,9 @@ device_tracker.esp_377896:
 device_tracker.bcddc2018377:
   hidden: yes
 
+media_player.phtv:
+  hidden: true
+
 ################################################
 ## Node Anchors
 ################################################

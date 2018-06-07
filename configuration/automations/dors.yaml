@@ -1,0 +1,8 @@
+- alias: Home door opened
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_door_sensor
+      to: 'on'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: script.home_doors_has_been_opened

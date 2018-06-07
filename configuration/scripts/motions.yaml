@@ -1,0 +1,19 @@
+corridor_motion_detected:
+  sequence:
+    - service: script.turn_off
+      data:
+        entity_id: script.corridor_light_timer
+    - service: light.turn_on
+      data:
+        entity_id: light.office_gateway_light
+        color_name: red
+        brightness_pct: 100
+    - service: script.turn_on
+      data: 
+        entity_id: script.corridor_light_timer
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          New value is:
+            'on'
+        title: somone wolking in coriridor

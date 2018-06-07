@@ -1,0 +1,12 @@
+- alias: Corridor motion detected
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.corridor_motion_sensor
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: script.corridor_motion_detected

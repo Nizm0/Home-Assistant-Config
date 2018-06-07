@@ -82,3 +82,11 @@ binary_sensor.bedroom_switch:
   name:
   platform: xiaomi_aqara
   unique_id: status158d0001f3786a
+binary_sensor.corridor_motion_sensor:
+  name: Corridor
+  platform: xiaomi_aqara
+  unique_id: status158d0001ae808f
+binary_sensor.home_door_sensor:
+  name: Home door
+  platform: xiaomi_aqara
+  unique_id: status158d0002228e90

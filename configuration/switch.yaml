@@ -5,6 +5,10 @@
     tv_philips:
       friendly_name: Philips TV Power
       command_on: "JgAqAFYfDR4ODw4PKy0NEA0QDRAODw4PDg8ODw4PDg8OEA0QHA8OHg4PDgANBQAAAAAAAAAAAAAAAAAA="
+    phtvir:
+      friendly_name: "Philips TV IR"
+      command_on: 'JgAcABweHR07HhweHR0dHhw8HR0dHhweHB4dHhwADQUAAAAAAAAAAAAAAAA='
+      command_off: 'JgAaAB0dOx4cHhweHR4cHhw8HR0dHhweOzsdAA0FAAAAAAAAAAAAAAAAAAA='
   # togles:
   #   1:
   #     command_on: "JgAqAFkcEBwQDRANLSoQDRANEA0QDRAODw4QDRANEA0QDRANEA0QDRANHwANBQAAAAAAAAAAAAAAAAAA="

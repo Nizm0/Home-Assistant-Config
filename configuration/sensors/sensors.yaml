@@ -87,39 +87,41 @@
 #   unit_of_measurement: "%"
 #   entities:
 #     - sensor.bedroom_temperature
-- platform: template
-  sensors:
-    bedroom_battery_level:
-      friendly_name: "Bedroom room batteries"
-      # entity_id: sensor.bedroom_temperature
-      unit_of_measurement: "%"
-      value_template: "{{states.sensor.bedroom_temperature.attributes.battery_level}}"
-      icon_template: '{% if states.binary_sensor.bedroom_temperature.attributes.battery_level == 100 %}
-                          mdi:battery
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 90 %}
-                          mdi:battery-90
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 80 %}
-                          mdi:battery-80
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 70 %}
-                          mdi:battery-70
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 60 %}
-                          mdi:battery-60
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 50 %}
-                          mdi:battery-50
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 40 %}
-                          mdi:battery-40
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 30 %}
-                          mdi:battery-30
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 20 %}
-                          mdi:battery-20
-                      {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 10 %}
-                          mdi:battery-10
-                      {% else %}
-                          mdi:battery-charging-wireless-outline
-                      {% endif %}'
+# - platform: template
+#   sensors:
+#     bedroom_battery_level:
+#       friendly_name: "Bedroom room batteries"
+#       # entity_id: sensor.bedroom_temperature
+#       unit_of_measurement: "%"
+#       value_template: "{{states.sensor.bedroom_temperature.attributes.battery_level}}"
+#       icon_template: '{% if states.binary_sensor.bedroom_temperature.attributes.battery_level == 100 %}
+#                           mdi:battery
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 90 %}
+#                           mdi:battery-90
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 80 %}
+#                           mdi:battery-80
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 70 %}
+#                           mdi:battery-70
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 60 %}
+#                           mdi:battery-60
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 50 %}
+#                           mdi:battery-50
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 40 %}
+#                           mdi:battery-40
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 30 %}
+#                           mdi:battery-30
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 20 %}
+#                           mdi:battery-20
+#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 10 %}
+#                           mdi:battery-10
+#                       {% else %}
+#                           mdi:battery-charging-wireless-outline
+#                       {% endif %}'
 - platform: gearbest
   currency: USD
   items:
+    - id: 659226
+      name: Xiaomi Aqara Human Body Sensor
     - url: https://www.gearbest.com/alarm-systems/pp_659226.html
       name: Xiaomi Aqara Human Body Sensor
     - url: https://www.gearbest.com/smart-lighting/pp_1664464.html

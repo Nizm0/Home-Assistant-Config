@@ -12,7 +12,7 @@ homeassistant:
   # Customization file
   customize: !include customize.yaml
 
-android_ip_webcam: !include configuration/android_ip_webcam.yaml
+# android_ip_webcam: !include configuration/android_ip_webcam.yaml
 api:
 automation: !include_dir_merge_list configuration/automations/
 cloud: !include configuration/cloud.yaml
@@ -68,11 +68,11 @@ xiaomi_aqara:
       mac: !secret xiaomi_getway1_mac
       host: !secret xiaomi_getway1_ip
 
-vacuum:
-  - platform: xiaomi_miio
-    host: 192.168.1.150
-    name: rockrobo
-    token: !secret xiaomi_rockrobo_key
+# vacuum:
+#   - platform: xiaomi_miio
+#     host: 192.168.1.150
+#     name: rockrobo
+#     token: !secret xiaomi_rockrobo_key
 
 input_select:
   who_cooks:

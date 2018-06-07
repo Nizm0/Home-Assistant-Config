@@ -23,7 +23,7 @@ from homeassistant.util import Throttle
 from requests.auth import HTTPDigestAuth
 from requests.adapters import HTTPAdapter
 
-# REQUIREMENTS = ['philips_2016==0.0.1']
+# REQUIREMENTS = ['philips_2016']
 
 MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=15)
 
@@ -113,12 +113,12 @@ class PhilipsTV(MediaPlayerDevice):
 	def turn_off(self):
 		"""Turn off the device."""
 		self._tv.sendKey('Standby')
-		self._state = STATE_OFF
+		# self._state = STATE_OFF
 
 	def turn_on(self):
 		"""Turn on the device."""
 		self._tv.sendKey('Standby')
-		self._state = STATE_ON
+		# self._state = STATE_ON
 
 	# def ambilight_on(self):
 	# 	"""Turn on the ambilight."""
@@ -164,11 +164,11 @@ class PhilipsTV(MediaPlayerDevice):
 	
 	def media_next_track(self):
 		"""Send next track command."""
-		self._tv.sendKey('FastForward')
+		self._tv.sendKey('ChannelStepUp')
 
 	def media_previous_track(self):
 		"""Send the previous track command."""
-		self._tv.sendKey('Rewind')
+		self._tv.sendKey('ChannelStepDown')
 		
 	@property
 	def media_title(self):
@@ -191,6 +191,11 @@ class PhilipsTV(MediaPlayerDevice):
 		self._muted = self._tv.muted
 		# self._ambilight = self._tv._ambilight
 		self._name = "%s (%s)" % (self._default_name, self._tv.name)
+		# self._state - self.tv.state
+		# if self._state == STATE_ON:
+		# 	self._tv.on = 1
+		# else:
+		# 	self._tv.on = 0
 		if self._tv.on:
 			self._state = STATE_ON
 		else:
@@ -287,10 +292,10 @@ class PhilipsTVBase(object):
 
 	def getPowerState(self):
 		r = self._getReq('powerstate')
-		if r:
-			self.state = r['powerstate']
+		if r and r['powerstate'] == 'On':
+			self.state = STATE_ON
 		else:
-			self.state = STATE_UNKNOWN
+			self.state = STATE_OFF
 
 	def setVolume(self, level):
 		if level:
