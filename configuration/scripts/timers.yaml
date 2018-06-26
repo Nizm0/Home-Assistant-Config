@@ -1,7 +1,7 @@
 corridor_light_timer:
   sequence:
     - delay:
-        minutes: 1
+        seconds: 1
     - service: light.turn_off
       data:
         entity_id: light.office_gateway_light

@@ -42,12 +42,27 @@ bedroom_light_white:
   entity: light.bedroom_main_light
   on_attributess: 100
   color: white
+
 slider:
   widget_type: input_slider
   title: test lihgt slider
   entity: sensor.office_gateway_illumination
   units: "%"
 
+corridor_sensor:
+  widget_type: binary_sensor
+  title: Corridor motion sensor
+  entity: binary_sensor.corridor_motion_sensor
+  icon_on: mdi-walk
+  icon_off: mdi-human-male
+
+main_door_sensor:
+  widget_type: binary_sensor
+  title: Main door sensor
+  entity: binary_sensor.home_door_sensor
+  icon_on: mdi-door-open
+  icon_off: mdi-door-closed
+
 layout:
-  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizm0_phone, device_tracker.gosia_phone
+  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizm0_phone, device_tracker.gosia_phone, corridor_sensor, main_door_sensor
   - office_gateway_light, kids_light, group.all_lights, bedroom_light_red, bedroom_light_white, slider(2x1)

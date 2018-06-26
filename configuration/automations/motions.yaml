@@ -1,3 +1,4 @@
+#### MOTION BEGUN
 - alias: Corridor motion detected
   trigger:
     - platform: state
@@ -26,3 +27,13 @@
           New value is:
             {{ trigger.to_state.state }}
         title: Somone wolking in empty home
+
+#### MOTION OVER
+- alias: Corridor motion over
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.corridor_motion_sensor
+      to: 'off'
+  action:
+    - service: homeassistant.turn_on
+      entity_id: script.corridor_motion_over

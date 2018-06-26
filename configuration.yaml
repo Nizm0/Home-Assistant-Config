@@ -28,7 +28,7 @@ history_graph: !include configuration/history_graph.yaml
 ifttt:
   key: !secret ifttt_key
 input_boolean: !include configuration/input_boolean.yaml
-light: !include configuration/light.yaml
+# light: !include configuration/light.yaml
 logbook:
 # Log Severities: notset, debug, info, warn, warning, error, fatal, critical
 logger:
