@@ -105,8 +105,8 @@ class PhilipsTV(MediaPlayerDevice):
 		"""Volume level of the media player (0..1)."""
 		if self._volume:
 			return self._volume / self._max_volume
-		else:
-    		return 0
+		# else:
+		return self
 
 	@property
 	def is_volume_muted(self):

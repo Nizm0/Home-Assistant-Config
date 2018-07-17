@@ -24,8 +24,7 @@
     - service: notify.push_to_chrome
       data_template:
         message: >
-          New value is:
-            {{ trigger.to_state.state }}
+          New value is: {{ trigger.to_state.state }}
         title: Somone wolking in empty home
 
 #### MOTION OVER

@@ -39,9 +39,8 @@
     #   data_template:
     #     message: "Kids room switch changed to {{ trigger.to_state.state }}"
     #     title: "Kids room switch"
-    - service: notify.push_to_chrome
-      data_template:
-        message: >
-          New value is:
-            {{ trigger.to_state.state }}
-        title: Kids light changed
+    # - service: notify.push_to_chrome
+    #   data_template:
+    #     message: >
+    #       New value is: {{ trigger.to_state.state }}
+    #     title: Kids light changed

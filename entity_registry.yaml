@@ -1,92 +1,120 @@
 media_player.office_speaker:
+  config_entry_id:
   name: Office Speaker
   platform: cast
   unique_id: 58d90edc-436f-d073-1e43-dcc465862db1
 media_player.office_tv_cast:
+  config_entry_id:
   name: Office TV Chromcast
   platform: cast
   unique_id: 5ad55909-2073-c403-7c09-4732f9328245
 sensor.office_gateway_illumination:
+  config_entry_id:
   name: Illumination
   platform: xiaomi_aqara
   unique_id: illumination34ce0091d7ed
 light.office_gateway_light:
+  config_entry_id:
   name: Mi Gateway Light
   platform: xiaomi_aqara
   unique_id: rgb34ce0091d7ed
 sensor.bedroom_temperature:
+  config_entry_id:
   name: Bedroom
   platform: xiaomi_aqara
   unique_id: temperature158d000201894b
 sensor.bedroom_humidity:
+  config_entry_id:
   name: Bedroom
   platform: xiaomi_aqara
   unique_id: humidity158d000201894b
 sensor.bedroom_pressure:
+  config_entry_id:
   name: Bedroom
   platform: xiaomi_aqara
   unique_id: pressure158d000201894b
 sensor.office_temperature:
+  config_entry_id:
   name: Office
   platform: xiaomi_aqara
   unique_id: temperature158d0001f23a1a
 sensor.office_humidity:
+  config_entry_id:
   name: Office
   platform: xiaomi_aqara
   unique_id: humidity158d0001f23a1a
 sensor.office_pressure:
+  config_entry_id:
   name: Office
   platform: xiaomi_aqara
   unique_id: pressure158d0001f23a1a
 sensor.kitchen_humidity:
+  config_entry_id:
   name: Kitchen
   platform: xiaomi_aqara
   unique_id: humidity158d000223a25a
 sensor.kitchen_pressure:
+  config_entry_id:
   name: Kitchen
   platform: xiaomi_aqara
   unique_id: pressure158d000223a25a
 sensor.kitchen_temperature:
+  config_entry_id:
   name: Kitchen
   platform: xiaomi_aqara
   unique_id: temperature158d000223a25a
 sensor.bathroom_temperature:
+  config_entry_id:
   name: Bathroom
   platform: xiaomi_aqara
   unique_id: temperature158d0001f2392c
 sensor.bathroom_humidity:
+  config_entry_id:
   name: Bathroom
   platform: xiaomi_aqara
   unique_id: humidity158d0001f2392c
 sensor.bathroom_pressure:
+  config_entry_id:
   name: Bathroom
   platform: xiaomi_aqara
   unique_id: pressure158d0001f2392c
 sensor.kids_temperature:
+  config_entry_id:
   name: Kids room
   platform: xiaomi_aqara
   unique_id: temperature158d0001f23a04
 sensor.kids_humidity:
+  config_entry_id:
   name: Kids room
   platform: xiaomi_aqara
   unique_id: humidity158d0001f23a04
 sensor.kids_pressure:
+  config_entry_id:
   name: Kids room
   platform: xiaomi_aqara
   unique_id: pressure158d0001f23a04
 binary_sensor.office_switch:
+  config_entry_id:
   name: Office Switch
   platform: xiaomi_aqara
   unique_id: status158d0002241c98
 binary_sensor.bedroom_switch:
+  config_entry_id:
   name:
   platform: xiaomi_aqara
   unique_id: status158d0001f3786a
 binary_sensor.corridor_motion_sensor:
+  config_entry_id:
   name: Corridor
   platform: xiaomi_aqara
   unique_id: status158d0001ae808f
 binary_sensor.home_door_sensor:
+  config_entry_id:
   name: Home door
   platform: xiaomi_aqara
   unique_id: status158d0002228e90
+binary_sensor.aquara_cube:
+  config_entry_id:
+  name: Magic Cube
+  platform: xiaomi_aqara
+  unique_id: cube158d00027946e1
