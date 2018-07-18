@@ -109,6 +109,12 @@ xiaomi_aqara:
       mac: !secret xiaomi_getway1_mac
       host: !secret xiaomi_getway1_ip
 
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: https://has.nizmo.eu:3218
+
 
 input_select:
   who_cooks:

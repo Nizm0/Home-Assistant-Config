@@ -103,18 +103,33 @@ binary_sensor.bedroom_switch:
   name:
   platform: xiaomi_aqara
   unique_id: status158d0001f3786a
-binary_sensor.corridor_motion_sensor:
-  config_entry_id:
-  name: Corridor
-  platform: xiaomi_aqara
-  unique_id: status158d0001ae808f
-binary_sensor.home_door_sensor:
-  config_entry_id:
-  name: Home door
-  platform: xiaomi_aqara
-  unique_id: status158d0002228e90
 binary_sensor.aquara_cube:
   config_entry_id:
   name: Magic Cube
   platform: xiaomi_aqara
   unique_id: cube158d00027946e1
+binary_sensor.corridor_motion_sensor:
+  config_entry_id:
+  name: Corridor
+  platform: xiaomi_aqara
+  unique_id: status158d0001ae808f
+binary_sensor.office_motion_sensor:
+  config_entry_id:
+  name: Office
+  platform: xiaomi_aqara
+  unique_id: status158d0001a8d379
+binary_sensor.home_door_sensor:
+  config_entry_id:
+  name: Home door
+  platform: xiaomi_aqara
+  unique_id: status158d0002228e90
+binary_sensor.office_balcon_window_sensor:
+  config_entry_id:
+  name: Office balcon
+  platform: xiaomi_aqara
+  unique_id: status158d000205b166
+binary_sensor.kitchen_left_window_sensor:
+  config_entry_id:
+  name: Kitchen
+  platform: xiaomi_aqara
+  unique_id: status158d0002048860
