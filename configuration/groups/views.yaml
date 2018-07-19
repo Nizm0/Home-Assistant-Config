@@ -20,6 +20,7 @@ office_view:
     - media_player.office_speaker
     - media_player.office_tv_cast
     - vacuum.rockrobo
+    - binary_sensor.office_balcon_window_sensor
 bedroom_view:
   view: yes
   name: Bedroom
@@ -38,6 +39,7 @@ kitchen_view:
     - camera.kitchen_camera
     - group.kitchen_sensors
     - group.kitchen_camera_control
+    - binary_sensor.kitchen_left_window_sensor
 kids_room_view:
   view: yes
   name: Kids room
@@ -45,6 +47,12 @@ kids_room_view:
     - group.kids
     - group.kids_room_switch
     - group.kids_room_sensors
+corridor_view:
+  view: yes
+  name: Corridor
+  entities:
+    - binary_sensor.corridor_motion_sensor
+    - binary_sensor.home_door_sensor
 family_view:
   name: Family
   view: yes

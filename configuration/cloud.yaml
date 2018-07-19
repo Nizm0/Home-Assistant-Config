@@ -6,16 +6,16 @@ google_actions:
     #   - group
     include_entities:
       - input_boolean.kids_light
-      - light.office_gateway_light
+      - light.corridor_gateway_light
   entity_config:
     input_boolean.kids_light:
       name: Kids Light
       aliases:
         - input_boolean.kids_light
-    light.office_gateway_light:
+    light.corridor_gateway_light:
       name: Gateway Light
       aliases:
-        # - light.office_gateway_light
+        # - light.corridor_gateway_light
         - Gateway Light
         - coridor light
     light.bedroom_main_light:

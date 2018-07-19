@@ -117,18 +117,12 @@ panel_iframe:
 
 
 input_select:
-  who_cooks:
-    name: Who cooks today
+  home_preset:
     options:
-     - Paulus
-     - Anne Therese
-    initial: Anne Therese
-    icon: mdi:panda
-  living_room_preset:
-    options:
+      - Empty
       - Visitors
-      - Visitors with kids
-      - Home Alone
+      - Alone
+    initial: Empty
 input_number:
   slider1:
     name: Slider
@@ -143,3 +137,9 @@ input_number:
     max: 100
     step: 1
     mode: box
+input_datetime:
+  both_date_and_time:
+    name: Alarm Clock
+    has_date: true
+    has_time: true
+    # initial: '{{datetime.datetime.now().strftime('%Y-%m-%d %H:%M'))}}'

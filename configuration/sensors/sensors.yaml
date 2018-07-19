@@ -24,11 +24,11 @@
     - type: processor_use
     - type: since_last_boot
 - platform: api_streams
-- platform: command_line
-  name: SSL cert expiry
-  unit_of_measurement: days
-  scan_interval: 10800
-  command: "ssl-cert-check -b -c /ssl/fullchain.pem | awk '{ print $NF }'"
+# - platform: command_line
+#   name: SSL cert expiry
+#   unit_of_measurement: days
+#   scan_interval: 10800
+#   command: "ssl-cert-check -b -c /ssl/fullchain.pem | awk '{ print $NF }'"
 - platform: travisci
   api_key: !secret travisapi
   scan_interval: 3600
@@ -39,6 +39,9 @@
     - last_build_id
     - last_build_duration
     - state
+- platform: cert_expiry
+  host: has.nizmo.eu
+  name: LetsEncrypt
 #  - platform: airvisual
 #    api_key: !secret airvisual_api_key
 #    monitored_conditions:

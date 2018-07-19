@@ -11,15 +11,23 @@
   action:
     - service: homeassistant.turn_on
       entity_id: script.corridor_motion_detected
-- alias: Corridor motion detected in empty home
+- alias: Motion detected in empty home
   trigger:
     - platform: state
-      entity_id: binary_sensor.corridor_motion_sensor
+      entity_id: binary_sensor.corridor_motion_sensor, binary_sensor.office_motion_sensor
       to: 'on'
+    # - platform: state
+    #   entity_id: binary_sensor.office_motion_sensor
+    #   to: 'on'
   condition:
-    - condition: state
-      entity_id: group.all_devices
-      state: 'not_home'
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'not_home'
+      - condition: state
+        entity_id: input_select.home_preset
+        state: "Empty"
   action:
     - service: notify.push_to_chrome
       data_template:
@@ -33,6 +41,13 @@
     - platform: state
       entity_id: binary_sensor.corridor_motion_sensor
       to: 'off'
+    - platform: state
+      entity_id: binary_sensor.office_motion_sensor
+      to: 'off'
+  condition:
+    - condition: state
+      entity_id: binary_sensor.home_door_sensor
+      state: 'off'
   action:
     - service: homeassistant.turn_on
       entity_id: script.corridor_motion_over

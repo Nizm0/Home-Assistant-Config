@@ -1,8 +1,8 @@
 ### ROOMS
-office: 
-  name: Office
+corridor: 
+  name: Corridor
   entities:
-    - light.office_gateway_light
+    - light.corridor_gateway_light
 # kids_room_switch:
 #   name: Kids room
 #   entities:

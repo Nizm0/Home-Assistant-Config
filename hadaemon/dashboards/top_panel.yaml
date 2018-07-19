@@ -14,10 +14,10 @@ light_level:
   shorten: 1
   entity: sensor.office_gateway_illumination
 
-office_gateway_light:
+corridor_gateway_light:
   widget_type: light_with_brightness
   title: Office gateway
-  entity: light.office_gateway_light
+  entity: light.corridor_gateway_light
   on_attributes:
     brightness: 100
     # rgb_color: 128, 34, 56
@@ -65,4 +65,4 @@ main_door_sensor:
 
 layout:
   - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizm0_phone, device_tracker.gosia_phone, corridor_sensor, main_door_sensor
-  - office_gateway_light, kids_light, group.all_lights, bedroom_light_red, bedroom_light_white, slider(2x1)
+  - corridor_gateway_light, kids_light, group.all_lights, bedroom_light_red, bedroom_light_white, slider(2x1)

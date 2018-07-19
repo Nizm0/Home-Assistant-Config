@@ -13,7 +13,7 @@ sensor.office_gateway_illumination:
   name: Illumination
   platform: xiaomi_aqara
   unique_id: illumination34ce0091d7ed
-light.office_gateway_light:
+light.corridor_gateway_light:
   config_entry_id:
   name: Mi Gateway Light
   platform: xiaomi_aqara

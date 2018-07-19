@@ -19,10 +19,19 @@ include:
     - sensor.bathroom_pressure
     - sensor.kids_pressure
     - sensor.office_gateway_illumination
-    - light.office_gateway_light
+    ### Lights
+    - light.corridor_gateway_light
+    ### Raspberry stats
     - sensor.processor_use
     - sensor.memory_free
     - sensor.disk_use_percent_home
+    ### Motion sensors
+    - binary_sensor.corridor_motion_sensor
+    - binary_sensor.office_motion_sensor
+    ### Dor Windows sensors
+    - binary_sensor.home_door_sensor
+    - binary_sensor.office_balcon_window_sensor
+    - binary_sensor.kitchen_left_window_sensor
 exclude:
   domains:
     # - sensor
