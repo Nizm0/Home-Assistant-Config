@@ -47,13 +47,13 @@ windows:
 #     - sensor.xiaomi_door_window_sensor
 #   hours_to_show: 120
 #   refresh: 3600
-# rooms_presure:
-#   name: Presure in rooms
-#   entities:
-#     - sensor.bedroom_pressure
-#     - sensor.office_pressure
-#     - sensor.kitchen_pressure
-#     - sensor.bathroom_pressure
-#     - sensor.kids_pressure
-#   hours_to_show: 120
-#   refresh: 60
+rooms_presure:
+  name: Presure in rooms
+  entities:
+    - sensor.bedroom_pressure
+    - sensor.office_pressure
+    - sensor.kitchen_pressure
+    - sensor.bathroom_pressure
+    - sensor.kids_pressure
+  hours_to_show: 120
+  refresh: 60

@@ -60,9 +60,15 @@ family_view:
     - device_tracker.nizm0_phone
     - device_tracker.gosia_phone
     - device_tracker.tablet1
-system_view:
+stats_view:
   view: yes
-  name: Status
+  name: Stats
   entities:
     - group.system
     - group.travis
+    - history_graph.temperature_in_rooms
+    - history_graph.humidity_in_rooms
+    - history_graph.presure_in_rooms
+    - history_graph.motions_in_home
+    - history_graph.dors_in_home
+    - history_graph.windows_in_home

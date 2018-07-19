@@ -120,7 +120,7 @@ binary_sensor.office_motion_sensor:
   unique_id: status158d0001a8d379
 binary_sensor.home_door_sensor:
   config_entry_id:
-  name: Home door
+  name: Home
   platform: xiaomi_aqara
   unique_id: status158d0002228e90
 binary_sensor.office_balcon_window_sensor:
