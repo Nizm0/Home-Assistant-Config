@@ -1,0 +1,63 @@
+kids_temperature:
+  widget_type: sensor
+  title: Kids room
+  units: "&deg;C"
+  entity: sensor.kids_temperature
+
+bedroom_temperature:
+  widget_type: sensor
+  title: Bedroom
+  units: "&deg;C"
+  entity: sensor.bedroom_temperature
+
+office_temperature:
+  widget_type: sensor
+  title: Office
+  units: "&deg;C"
+  entity: sensor.office_temperature
+
+bathroom_temperature:
+  widget_type: sensor
+  title: Bathroom
+  units: "&deg;C"
+  entity: sensor.bathroom_temperature
+
+kitchen_temperature:
+  widget_type: sensor
+  title: Kitchen
+  units: "&deg;C"
+  entity: sensor.kitchen_temperature
+
+kids_humidity:
+  widget_type: sensor
+  title: Kids room
+  units: "%"
+  entity: sensor.kids_humidity
+
+bedroom_humidity:
+  widget_type: sensor
+  title: Bedroom
+  units: "%"
+  entity: sensor.bedroom_humidity
+
+office_humidity:
+  widget_type: sensor
+  title: Office
+  units: "%"
+  entity: sensor.office_humidity
+
+bathroom_humidity:
+  widget_type: sensor
+  title: Bathroom
+  units: "%"
+  entity: sensor.bathroom_humidity
+
+kitchen_humidity:
+  widget_type: sensor
+  title: Kitchen
+  units: "%"
+  entity: sensor.kitchen_humidity
+
+layout:
+  - kids_temperature, bedroom_temperature, office_temperature, bathroom_temperature, kitchen_temperature
+  - kids_humidity, bedroom_humidity, office_humidity, bathroom_humidity, kitchen_humidity

@@ -1,0 +1,12 @@
+
+reload:
+  widget_type: reload
+
+load_system:
+  widget_type: navigate
+  title: System
+  icon_inactive: fa-cogs
+  dashboard: System
+
+layout:
+  - load_system, reload(1x1)

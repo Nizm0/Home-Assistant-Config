@@ -1,0 +1,19 @@
+title: Main Panel
+widget_dimensions: [120, 120]
+widget_margins: [5, 5]
+widget_size: [1, 1]
+columns: 10
+global_parameters:
+    use_comma: 0
+    precision: 1
+    use_hass_icon: 1
+    namespace: default
+    devices:
+      media_player:
+        step: 5
+
+layout:
+    - include: top_panel
+    - include: main_middle_panel
+    - include: mode_panel
+    - include: bottom_panel

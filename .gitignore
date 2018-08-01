@@ -19,6 +19,7 @@ known_devices.yaml
 *.save
 *.pyc
 
+appdaemon/custom_widgets
 conf/compiled
 conf/export
 deps
