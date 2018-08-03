@@ -48,6 +48,11 @@ sensor.office_pressure:
   name: Office
   platform: xiaomi_aqara
   unique_id: pressure158d0001f23a1a
+sensor.kitchen_temperature:
+  config_entry_id:
+  name: Kitchen
+  platform: xiaomi_aqara
+  unique_id: temperature158d000223a25a
 sensor.kitchen_humidity:
   config_entry_id:
   name: Kitchen
@@ -58,11 +63,6 @@ sensor.kitchen_pressure:
   name: Kitchen
   platform: xiaomi_aqara
   unique_id: pressure158d000223a25a
-sensor.kitchen_temperature:
-  config_entry_id:
-  name: Kitchen
-  platform: xiaomi_aqara
-  unique_id: temperature158d000223a25a
 sensor.bathroom_temperature:
   config_entry_id:
   name: Bathroom
