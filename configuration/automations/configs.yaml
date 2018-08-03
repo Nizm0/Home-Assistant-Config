@@ -21,8 +21,10 @@
       entity_id: input_number.temp_max
       state: input_number.temp_min.state
   action:
-    - entity_id: input_number.temp_max
-      state: {{input_number.temp_min + 1}}
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.temp_max
+        state: {{input_number.temp_min + 1}}
 
 - alias: Notify If New Devices
   trigger:
