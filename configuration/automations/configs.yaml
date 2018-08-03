@@ -24,7 +24,7 @@
     - service: input_number.set_value
       data_template:
         entity_id: input_number.temp_max
-        value: '{{ input_number.temp_min.state }}' # | float) + 1}}'
+        value: '{{ input_number.temp_min.state }} | float) + 1}}'
 
 - alias: Notify If New Devices
   trigger:
