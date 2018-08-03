@@ -133,7 +133,7 @@ views:
       - type: entities
         title: all devices
         show_header_toggle: true
-        entities:
+        badges:
           - device_tracker.nizm0_phone
           - device_tracker.gosia_phone
           - device_tracker.babcia_teresa

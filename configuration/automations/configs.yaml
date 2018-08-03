@@ -12,6 +12,18 @@
             {{ trigger.to_state.state }}
         title: Travis compiled succesfully
 
+- alias: Change max temp greater than min temp
+  trigger:
+    - platform: state
+      entity_id: input_number.temp_max, input_number.temp_min
+  condition:
+    - condition:
+      entity_id: input_number.temp_max
+      state: input_number.temp_min.state
+  action:
+    - entity_id: input_number.temp_max
+      state: {{input_number.temp_min + 1}}
+
 - alias: Notify If New Devices
   trigger:
     - platform: event

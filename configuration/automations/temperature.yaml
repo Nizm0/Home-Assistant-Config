@@ -1,0 +1,13 @@
+- alias:
+  trigger:
+    platform: state
+    entity_id: sensor.bedroom_temperature, sensor.office_temperature, sensor.kitchen_temperature, sensor.bathroom_temperature, sensor.kids_temperature
+  condition:
+    - condition:
+      data: {{ (trigger.to_state.state > input_number.temp_max) or (trigger.to_state.state < input_number.temp_min)}}
+  action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          Temperature {{trigger.to_state.state}} in {{trigger.entity_id.name}} and is out of demaded params
+        title: Problem with Teperature in {{trigger.entity_id.name}}

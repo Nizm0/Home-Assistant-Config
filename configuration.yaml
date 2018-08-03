@@ -124,19 +124,26 @@ input_select:
       - Alone
     initial: Empty
 input_number:
-  slider1:
-    name: Slider
-    initial: 1
+  temp_min:
+    name: Min temp
+    initial: 20
     min: 1
-    max: 100
+    max: input_number.temp_max.state
     step: 1
-  box1:
-    name: Numeric Input Box
+    mode: box
+  temp_max:
+    name: Max temp
+    initial: 30
+    min: input_number.temp_min.state
+    max: 50
+    step: 1
+    mode: box
+  slider1:
+    name: Numeric Input lider
     initial: 30
     min: 0
     max: 100
     step: 1
-    mode: box
 input_datetime:
   both_date_and_time:
     name: Alarm Clock
