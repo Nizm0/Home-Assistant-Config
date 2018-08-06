@@ -17,14 +17,14 @@
     - platform: state
       entity_id: input_number.temp_max, input_number.temp_min
   condition:
-    - condition:
+    - condition: state
       entity_id: input_number.temp_max
-      state: input_number.temp_min.state
+      state: '{{ input_number.temp_min.state}}'
   action:
     - service: input_number.set_value
       data_template:
         entity_id: input_number.temp_max
-        state: {{input_number.temp_min.state + 1}}
+        value: '{{ input_number.temp_min.state }} | float) + 1}}'
 
 - alias: Notify If New Devices
   trigger:

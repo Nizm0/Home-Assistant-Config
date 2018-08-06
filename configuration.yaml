@@ -128,13 +128,13 @@ input_number:
     name: Min temp
     initial: 20
     min: 1
-    max: input_number.temp_max.state
+    max: 30
     step: 1
     mode: box
   temp_max:
     name: Max temp
     initial: 30
-    min: input_number.temp_min.state
+    min: 20
     max: 50
     step: 1
     mode: box

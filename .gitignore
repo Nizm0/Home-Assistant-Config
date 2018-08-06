@@ -10,7 +10,9 @@ ip_bans.yaml
 secrets.yaml
 known_devices.yaml
 .HA_VERSION
-. vscode
+.cloud
+.storage
+.vscode
 *.uuid
 *.db*
 *.log
@@ -20,8 +22,5 @@ known_devices.yaml
 *.pyc
 
 appdaemon/custom_widgets
-conf/compiled
-conf/export
 deps
 tts
-www
