@@ -92,7 +92,10 @@ logger:
 # map:
 media_player: !include configuration/media_player.yaml
 mqtt:
-  embedded:
+  broker: core-mosquitto
+  username: !secret mosquitto_username
+  password: !secret mosquitto_password
+  # embedded:
 notify: !include_dir_merge_list configuration/notify/
 script: !include_dir_merge_named configuration/scripts/
 sensor: !include_dir_merge_list configuration/sensors/
@@ -109,11 +112,25 @@ xiaomi_aqara:
       mac: !secret xiaomi_getway1_mac
       host: !secret xiaomi_getway1_ip
 
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.1.150
+    name: rockrobo
+    token: !secret xiaomi_rockrobo_key
+
 panel_iframe:
   configurator:
     title: Configurator
     icon: mdi:wrench
     url: https://has.nizmo.eu:3218
+  tasmoadmin:
+    title: Tasmo Admin
+    icon: mdi:lightbulb-on
+    url: https://has.nizmo.eu:9541/devices
+  nodered:
+    title: Node-RED
+    icon: mdi:shuffle-variant
+    url: https://has.nizmo.eu:1880
 
 
 input_select:

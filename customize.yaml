@@ -64,6 +64,16 @@ binary_sensor.kitchen_left_window_sensor:
   # icon: mdi:door
   # icon: '{% if is_state("binary_sensor.kitchen_left_window_sensor", "on") %}mdi:window-closed{% else %}mdi:window-open{% endif %}'
 
+switch.light_1:
+  # device_class: light
+  icon: mdi:lightbulb
+switch.light_2:
+  # device_class: light
+  icon: mdi:lightbulb
+switch.top_light:
+  # device_class: light
+  icon: mdi:lightbulb
+
 device_tracker.esp_377896:
   hidden: yes
 device_tracker.bcddc2018377:

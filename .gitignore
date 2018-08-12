@@ -20,7 +20,9 @@ known_devices.yaml
 *.cloud
 *.save
 *.pyc
+*.cookies
 
 appdaemon/custom_widgets
 deps
+node-red
 tts
