@@ -17,3 +17,10 @@ bedroom:
   name: Bedroom
   entities:
     - light.bedroom_main_light
+
+office:
+  name: Office
+  entities:
+    - switch.light_1
+    - switch.light_2
+    - switch.top_light
