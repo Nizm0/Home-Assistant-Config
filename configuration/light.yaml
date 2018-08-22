@@ -5,18 +5,40 @@
       transition: 10
       use_music_mode: true #(defaults to False)
       save_on_change: true #(defaults to True)
-# - platform: template
-#   lights:
-#     kids_light:
-#       icon: mdi:lightbulb
-#       value_template: "{{ is_state('input_boolean.kids_light', 'on') }}"
-#       value_template: "off"
-#       initial: off
-#       turn_on:
-#         service: light.turn_on
-#         data: 
-#           entity_id: switch.kids_light
-#       turn_off:
-#         service: light.turn_off
-#         data:
-#           entity_id: switch.kids_light
+# - platform: mqtt
+#   name: Office Light 1
+#   state_topic: "stat/d1mini-office/POWER1"
+#   command_topic: "cmnd/d1mini-office/POWER1"
+#   # availability_topic: "tele/d1mini-office/LWT"
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   # state_value_template: "{{ value_json.POWER }}"
+#   state_on: "ON"
+#   state_off: "OFF"
+#   optimistic: false
+#   qos: 0
+#   retain: true
+# - platform: mqtt
+#   name: Office Light 2
+#   state_topic: "stat/d1mini-office/POWER2"
+#   command_topic: "cmnd/d1mini-office/POWER2"
+#   # availability_topic: "tele/d1mini-office/LWT"
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   state_on: "ON"
+#   state_off: "OFF"
+#   optimistic: false
+#   qos: 0
+#   retain: true
+# - platform: mqtt
+#   name: Office Top Light
+#   state_topic: "stat/d1mini-office/POWER4"
+#   command_topic: "cmnd/d1mini-office/POWER4"
+#   # availability_topic: "tele/d1mini-office/LWT"
+#   payload_on: "ON"
+#   payload_off: "OFF"
+#   state_on: "ON"
+#   state_off: "OFF"
+#   optimistic: false
+#   qos: 0
+#   retain: true
