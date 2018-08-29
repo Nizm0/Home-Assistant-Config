@@ -73,14 +73,15 @@ kitchen_camera_control:
 Financial:
   - sensor.broadlink_rm_pro
   - sensor.xiaomi_360_degree_camera
-  - sensor.xiaomi_aqara_door_window_sensor
-  - sensor.xiaomi_aqara_human_body_sensor
+  - sensor.xiaomi_aqara_smart_wireless_switch
+  # - sensor.xiaomi_aqara_door_window_sensor
+  # - sensor.xiaomi_aqara_human_body_sensor
   - sensor.xiaomi_aqara_water_sensor
   - sensor.xiaomi_bedside_lamp
   - sensor.xiaomi_smart_button
   - sensor.xiaomi_yeelight_white
   - sensor.yeelight_smart_light_strip
-  - sensor.xiaomi_door_window_sensor
+  # - sensor.xiaomi_door_window_sensor
 
 Flower inside 1:
   - sensor.flower_1_battery
@@ -95,6 +96,14 @@ Flower outside:
   - sensor.flower_2_light_intensity
   - sensor.flower_2_moisture
   - sensor.flower_2_temperature
+
+AirQuality:
+  - sensor.chinese_air_pollution_level
+  - sensor.chinese_air_quality_index
+  - sensor.chinese_main_pollutant
+  - sensor.us_air_pollution_level
+  - sensor.us_air_quality_index
+  - sensor.us_main_pollutant
 
 # battery_alert:
 #   control: hidden

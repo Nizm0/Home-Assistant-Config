@@ -1,6 +1,7 @@
 homeassistant:
-  auth_providers:
-   - type: homeassistant
+  # auth_providers:
+  #   - type: homeassistant
+    # - type: legacy_api_password
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
@@ -13,21 +14,16 @@ homeassistant:
   time_zone: Europe/Warsaw
   # Customization file
   customize: !include customize.yaml
-
-# Show links to resources in log and frontend
-# introduction:
-
-# Enables configuration UI
+api:
 config:
-
 http:
-  api_password: !secret http_password
+  # api_password: !secret http_password
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
   base_url: !secret base_url
-  login_attempts_threshold: 5
-  trusted_networks:
-    - 192.168.1.0/24
+  # login_attempts_threshold: 5
+  # trusted_networks:
+  #   - 192.168.1.0/24
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -44,9 +40,6 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-# Enables support for tracking state changes over time
-# history:
-
 # View all events in a logbook
 logbook:
 
@@ -56,24 +49,11 @@ map:
 # Track the sun
 sun:
 
-# Weather prediction
-# sensor:
-#   - platform: yr
-
 # Text to speech
 tts:
   - platform: google
 
-# Cloud
-# cloud:
-
-# group: !include groups.yaml
-# automation: !include automations.yaml
-# script: !include scripts.yaml
-
-
 # android_ip_webcam: !include configuration/android_ip_webcam.yaml
-api:
 automation: !include_dir_merge_list configuration/automations/
 cloud: !include configuration/cloud.yaml
 
@@ -91,22 +71,20 @@ logger:
   default: error
   logs:
     ifttt.trigger: debug
-# map:
 media_player: !include configuration/media_player.yaml
 mqtt:
   broker: core-mosquitto
   username: !secret mosquitto_username
   password: !secret mosquitto_password
   discovery: true
-  # embedded:
 notify: !include_dir_merge_list configuration/notify/
 script: !include_dir_merge_named configuration/scripts/
 sensor: !include_dir_merge_list configuration/sensors/
 shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 shopping_list:
-# sun:
 switch: !include configuration/switch.yaml
+zone: !include configuration/zone.yaml
 
 xiaomi_aqara:
   discovery_retry: 5
@@ -121,6 +99,12 @@ vacuum:
     name: rockrobo
     token: !secret xiaomi_rockrobo_key
 
+binary_sensor:
+  - platform: workday
+    country: PL
+    workdays: [mon, tue, wed, thu, fri]
+
+
 panel_iframe:
   configurator:
     title: Configurator
@@ -134,6 +118,10 @@ panel_iframe:
     title: Node-RED
     icon: mdi:shuffle-variant
     url: https://has.nizmo.eu:1880
+  grafana:
+    title: Grafana
+    icon: mdi:chart-timeline
+    url: https://has.nizmo.eu:3000
 
 
 input_select:
