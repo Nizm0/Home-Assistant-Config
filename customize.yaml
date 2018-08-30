@@ -49,6 +49,16 @@ history_graph.windows_in_home:
   hidden: yes
 history_graph.presure_in_rooms:
   hidden: yes
+# history_graph.flower_conductivity:
+  # hidden: yes
+# history_graph.flower_light_intensity:
+#   hidden: yes
+history_graph.flower_moisture:
+  hidden: yes
+# history_graph.flower_temperature:
+  # hidden: yes
+history_graph.gearbest_price_history:
+  hidden: yes
 
 # binary_sensor.corridor_motion_sensor:
 # binary_sensor.office_motion_sensor:

@@ -29,6 +29,39 @@
   action:
     - service: media_player.media_previous_track
       entity_id: media_player.pc_gpmdp
+- alias: Office top light turned on
+  trigger:
+    - platform: state
+      entity_id: switch.top_light
+      to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: switch.light_1
+        state: 'on'
+      - condition: state
+        entity_id: switch.light_2
+        state: 'on'
+  action:
+    - delay: '00:00:02'
+    - service: homeassistant.turn_off
+      entity_id: switch.light_1
+    - service: homeassistant.turn_off
+      entity_id: switch.light_2
+- alias: Office light 1 and 2 turned on
+  trigger:
+    - platform: state
+      entity_id: switch.light_1, switch.light_2
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: switch.top_light
+      state: 'on'
+  action:
+    - delay: '00:00:02'
+    - service: homeassistant.turn_off
+      entity_id: switch.top_light
 
 ### Bedroom
 # - alias: Turn on bedroom main light to red 10%

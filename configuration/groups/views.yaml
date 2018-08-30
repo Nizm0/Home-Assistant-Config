@@ -72,3 +72,8 @@ stats_view:
     - history_graph.motions_in_home
     - history_graph.dors_in_home
     - history_graph.windows_in_home
+    - history_graph.flower_conductivity
+    - history_graph.flower_light_intensity
+    - history_graph.flower_moisture
+    - history_graph.flower_temperature
+    - history_graph.gearbest_price_history
