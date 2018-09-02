@@ -1,0 +1,40 @@
+- alias: Vacuum end cleaning finished
+  trigger:
+    - platform: template
+      value_template: "{% if is_state('vacuum.rockrobo.status', 'Docked') %}true{% endif %}"
+    - platform: template
+      value_template: "{% if is_state('vacuum.rockrobo.status', 'Returning to dock') %}true{% endif %}"
+      # entity_id: vacuum.rockrobo
+      # from: 'on'
+      # to: 'Docked' # cleaning, Returning to dock, idle, Blocked
+  action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          Vacuum has stoped and now is {{ trigger.to_state.state }}
+        title: Vacuum stopt working
+    - service: notify.pushbullet
+      data_template:
+        message: >
+          Vacuum has stoped and now is {{ trigger.to_state.state }}
+        title: Vacuum stopt working
+
+- alias: Weekday Vacuum
+  trigger:
+  - platform: time
+    at: '15:00:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: group.all_devices
+      state: 'not_home'
+    - condition: state
+      entity_id: input_select.home_preset
+      state: "Empty"
+  action:
+    service: vacuum.start
+    entity_id: vacuum.rockrobo

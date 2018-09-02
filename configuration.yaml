@@ -22,8 +22,8 @@ http:
   ssl_key: !secret ssl_key
   base_url: !secret base_url
   # login_attempts_threshold: 5
-  # trusted_networks:
-  #   - 192.168.1.0/24
+  trusted_networks:
+    - 192.168.1.0/24
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -67,6 +67,7 @@ history_graph: !include configuration/history_graph.yaml
 ifttt:
   key: !secret ifttt_key
 input_boolean: !include configuration/input_boolean.yaml
+light: !include configuration/light.yaml
 logger:
   default: error
   logs:

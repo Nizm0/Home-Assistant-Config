@@ -44,19 +44,3 @@
     #     message: >
     #       New value is: {{ trigger.to_state.state }}
     #     title: Kids light changed
-
-- alias: Vacuum end cleaning
-  trigger:
-    - platform: state
-      entity_id: vacuum.rockrobo
-      # from: 'on'
-      to: 'off'
-  action:
-    - service: notify.push_to_chrome
-      data_template:
-        message: "Vacuum has stoped and now is {{ trigger.entity_id.attributes.status }}"
-        title: Vacuum stopt working
-    - service: notify.pushbullet
-      data_template:
-        message: "Vacuum has stoped and now is {{ trigger.entity_id.attributes.status }}"
-        title: Vacuum stopt working

@@ -64,53 +64,53 @@
       entity_id: switch.top_light
 
 ### Bedroom
-# - alias: Turn on bedroom main light to red 10%
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       event_id: binary_sensor.bedroom_switch
-#       click_type: single
-#   condition:
-#     - condition: state
-#       entity_id: light.bedroom_main_light
-#       state: 'off'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.bedroom_main_light
-#         color_name: red
-#         brightness_pct: 5
-# - alias: Turn off bedroom main light
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       event_id: binary_sensor.bedroom_switch
-#       click_type: single
-#   condition:
-#     - condition: state
-#       entity_id: light.bedroom_main_light
-#       state: 'on'
-#   action:
-#     - service: light.turn_off
-#       data:
-#         entity_id: light.bedroom_main_light
-# - alias: Turn on bedroom main light to wite 100%
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       event_id: binary_sensor.bedroom_switch
-#       click_type: double
-#   # condition:
-#   #   - condition: state
-#   #     entity_id: light.bedroom_main_light
-#   #     state: 'off'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.bedroom_main_light
-#         white_value: 255
-#         brightness: 255
-#         kelvin: 2700
+- alias: Turn on bedroom main light to red 10%
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      event_id: binary_sensor.bedroom_switch
+      click_type: single
+  condition:
+    - condition: state
+      entity_id: light.bedroom_main_light
+      state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_main_light
+        color_name: red
+        brightness_pct: 5
+- alias: Turn off bedroom main light
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      event_id: binary_sensor.bedroom_switch
+      click_type: single
+  condition:
+    - condition: state
+      entity_id: light.bedroom_main_light
+      state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.bedroom_main_light
+- alias: Turn on bedroom main light to wite 100%
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      event_id: binary_sensor.bedroom_switch
+      click_type: double
+  # condition:
+  #   - condition: state
+  #     entity_id: light.bedroom_main_light
+  #     state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bedroom_main_light
+        white_value: 255
+        brightness: 255
+        kelvin: 2700
