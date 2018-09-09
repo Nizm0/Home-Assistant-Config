@@ -1,23 +1,56 @@
 - alias: Vacuum end cleaning finished
   trigger:
-    - platform: template
-      value_template: "{% if is_state('vacuum.rockrobo.status', 'Docked') %}true{% endif %}"
-    - platform: template
-      value_template: "{% if is_state('vacuum.rockrobo.status', 'Returning to dock') %}true{% endif %}"
-      # entity_id: vacuum.rockrobo
-      # from: 'on'
-      # to: 'Docked' # cleaning, Returning to dock, idle, Blocked
+  - platform: template
+    value_template: "{% if is_state('vacuum.rockrobo', 'docked') or is_state('vacuum.rockrobo', 'returning') %}true{% endif %}"
+    # to: 'docked' # cleaning, returning, idle, blocked, error, docked
   action:
-    - service: notify.push_to_chrome
-      data_template:
-        message: >
-          Vacuum has stoped and now is {{ trigger.to_state.state }}
-        title: Vacuum stopt working
-    - service: notify.pushbullet
-      data_template:
-        message: >
-          Vacuum has stoped and now is {{ trigger.to_state.state }}
-        title: Vacuum stopt working
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum stopt working
+  - service: notify.pushbullet
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum finished working
+
+- alias: Vacuum end cleaning finisheda and docked
+  trigger:
+  - platform: state
+    entity_id: vacuum.rockrobo
+    # from: 'docked'
+    to: 'docked' # cleaning, returning, idle, blocked, error, docked
+  action:
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum stopt working
+  - service: notify.pushbullet
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum finished working
+
+- alias: Vacuum start cleaning
+  trigger:
+  - platform: state
+  #   value_template: "{% if is_state('vacuum.rockrobo.status', 'cleaning') %}true{% endif %}"
+    entity_id: vacuum.rockrobo
+    from: 'docked'
+    to: 'cleaning' # cleaning, returning, idle, blocked, error, docked
+  action:
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has started and now is {{ trigger.to_state.state }}
+      title: Vacuum start working
+  - service: notify.pushbullet
+    data_template:
+      message: >
+        Vacuum has started and now is {{ trigger.to_state.state }}
+      title: Vacuum start working
 
 - alias: Weekday Vacuum
   trigger:

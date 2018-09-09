@@ -42,3 +42,9 @@
 #   optimistic: false
 #   qos: 0
 #   retain: true
+
+- platform: ambilights
+  name: Office Ambilights
+  host: 192.168.1.130
+  username: !secret philips_user
+  password: !secret philips_pass

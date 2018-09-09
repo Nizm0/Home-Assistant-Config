@@ -1,7 +1,4 @@
-"""
-Media Player component to integrate TVs exposing the Joint Space API.
-Updated to support Android-based Philips TVs manufactured from 2016 onwards.
-"""
+"""Philips TV"""
 import homeassistant.helpers.config_validation as cv
 import argparse
 import json
@@ -14,22 +11,20 @@ import voluptuous as vol
 from base64 import b64encode,b64decode
 from Crypto.Hash import SHA, HMAC
 from datetime import timedelta, datetime
-from homeassistant.components.media_player import (SUPPORT_STOP, SUPPORT_PLAY, SUPPORT_NEXT_TRACK, SUPPORT_PAUSE, 
-												   SUPPORT_PREVIOUS_TRACK, SUPPORT_VOLUME_SET, PLATFORM_SCHEMA, SUPPORT_TURN_OFF, 
-												   SUPPORT_TURN_ON, SUPPORT_VOLUME_MUTE, SUPPORT_VOLUME_STEP, MediaPlayerDevice)
-from homeassistant.const import (CONF_HOST, CONF_NAME, CONF_USERNAME, CONF_PASSWORD, 
+from homeassistant.components.media_player import (SUPPORT_STOP, SUPPORT_PLAY, SUPPORT_NEXT_TRACK, SUPPORT_PAUSE,
+												   SUPPORT_PREVIOUS_TRACK, SUPPORT_VOLUME_SET, PLATFORM_SCHEMA, SUPPORT_TURN_OFF, SUPPORT_TURN_ON,
+												   SUPPORT_VOLUME_MUTE, SUPPORT_VOLUME_STEP, SUPPORT_SELECT_SOURCE, MediaPlayerDevice)
+from homeassistant.const import (CONF_HOST, CONF_NAME, CONF_USERNAME, CONF_PASSWORD,
 								 STATE_OFF, STATE_ON, STATE_UNKNOWN)
 from homeassistant.util import Throttle
 from requests.auth import HTTPDigestAuth
 from requests.adapters import HTTPAdapter
 
-# REQUIREMENTS = ['philips_2016']
-
-MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=15)
+MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=5)
 
 SUPPORT_PHILIPS_2016 = SUPPORT_STOP | SUPPORT_TURN_OFF | SUPPORT_TURN_ON | SUPPORT_VOLUME_STEP | \
 					   SUPPORT_VOLUME_MUTE | SUPPORT_VOLUME_SET |SUPPORT_NEXT_TRACK | \
-					   SUPPORT_PAUSE | SUPPORT_PREVIOUS_TRACK | SUPPORT_PLAY
+					   SUPPORT_PAUSE | SUPPORT_PREVIOUS_TRACK | SUPPORT_PLAY | SUPPORT_SELECT_SOURCE
 
 DEFAULT_DEVICE = 'default'
 DEFAULT_HOST = '127.0.0.1'
@@ -65,20 +60,29 @@ class PhilipsTV(MediaPlayerDevice):
 		self._tv = tv
 		self._default_name = name
 		self._name = name
+		self._StateC = None
 		self._state = STATE_UNKNOWN
 		self._min_volume = 0
 		self._max_volume = 60
 		self._volume = 0
 		self._muted = False
-		# self._ambilight = STATE_UNKNOWN
 		self._channel_id = None
 		self._channel_name = None
 		self._connfail = 0
+		self._source = None
+		self._source_list = []
+		self._media_cont_type = None
+		self._app_name = None
 
 	@property
 	def name(self):
 		"""Return the device name."""
 		return self._name
+
+	@property
+	def StateC(self):
+		"""Return the device name."""
+		return self._StateC
 
 	@property
 	def should_poll(self):
@@ -95,18 +99,12 @@ class PhilipsTV(MediaPlayerDevice):
 		"""Get the device state. An exception means OFF state."""
 		return self._state
 
-	# @property
-	# def ambilight(self):
-	# 	"""Get the ambilight state. An exception means OFF state."""
-	# 	return self._ambilight
-
 	@property
 	def volume_level(self):
 		"""Volume level of the media player (0..1)."""
-		if self._volume:
+		if self._StateC == 'On':
+		#if self._tv._getReq('audio/volume'):
 			return self._volume / self._max_volume
-		# else:
-		return self
 
 	@property
 	def is_volume_muted(self):
@@ -116,22 +114,14 @@ class PhilipsTV(MediaPlayerDevice):
 	def turn_off(self):
 		"""Turn off the device."""
 		self._tv.sendKey('Standby')
-		# self._state = STATE_OFF
+		if self._tv._getReq('powerstate') == 'Off':
+			self._state = STATE_OFF
 
 	def turn_on(self):
 		"""Turn on the device."""
 		self._tv.sendKey('Standby')
-		# self._state = STATE_ON
-
-	# def ambilight_on(self):
-	# 	"""Turn on the ambilight."""
-	# 	self._tv.sendKey('AmbilightOnOff')
-	# 	self._ambilight = STATE_ON
-
-	# def ambilight_off(self):
-	# 	"""Turn off the ambilight."""
-	# 	self._tv.sendKey('AmbilightOnOff')
-	# 	self._ambilight = STATE_OFF
+		if self._tv._getReq('powerstate') == 'On':
+			self._state = STATE_ON
 
 	def volume_up(self):
 		"""Send volume up command."""
@@ -146,41 +136,72 @@ class PhilipsTV(MediaPlayerDevice):
 		tv_volume = volume * self._max_volume
 		self._tv.setVolume(tv_volume)
 
+
 	def mute_volume(self, mute):
 		"""Send mute command."""
 		self._tv.sendKey('Mute')
-			
+
 	def media_play(self):
 		"""Send media play command to media player."""
 		self._tv.sendKey('Play')
-		
+
 	def media_play_pause(self):
 		self._tv.sendKey('PlayPause')
 
 	def media_pause(self):
 		"""Send media pause command to media player."""
 		self._tv.sendKey('Pause')
-		
+
 	def media_stop(self):
 		"""Send media stop command to media player."""
 		self._tv.sendKey('Stop')
-	
+
 	def media_next_track(self):
 		"""Send next track command."""
-		self._tv.sendKey('ChannelStepUp')
+		if self.media_content_type == "channel":
+			self._tv.sendKey('CursorUp')
+		else:
+			self._tv.sendKey('Forward')
 
 	def media_previous_track(self):
 		"""Send the previous track command."""
-		self._tv.sendKey('ChannelStepDown')
-		
+		if self.media_content_type == "channel":
+			self._tv.sendKey('CursorDown')
+		else:
+			self._tv.sendKey('Rewind')
+
+	def mmedia_next_track(self):
+		"""Send the next track command."""
+		self._tv.sendKey('FastForward')
+
+	def select_source(self, source):
+		self._tv.changechannel(source)
+
 	@property
 	def media_title(self):
 		"""Title of current playing media."""
-		return "%s - %s" % (self._channel_id, self._channel_name)
-		
+		#return self._channel_name
+		if self.media_content_type == "channel":
+			return '{} - {}'.format(self._channel_id, self._channel_name)
+		else:
+			return self._channel_name
+
 	@property
 	def media_content_id(self):
 		return self._channel_id
+
+	@property
+	def media_content_type(self):
+		return self._media_cont_type
+
+	@property
+	def source_list(self):
+		return self._source_list
+
+	@property
+	def app_name(self):
+		return self._app_name
+
 
 	@Throttle(MIN_TIME_BETWEEN_UPDATES)
 	def update(self):
@@ -188,21 +209,21 @@ class PhilipsTV(MediaPlayerDevice):
 		self._tv.update()
 		self._min_volume = self._tv.min_volume
 		self._max_volume = self._tv.max_volume
+		self._source_list = self._tv.source_list_1
 		self._channel_id = self._tv.channel_id
 		self._channel_name = self._tv.channel_name
+		self._media_cont_type = self._tv.media_content_type_1
 		self._volume = self._tv.volume
 		self._muted = self._tv.muted
-		# self._ambilight = self._tv._ambilight
-		self._name = "%s (%s)" % (self._default_name, self._tv.name)
-		# self._state - self.tv.state
-		# if self._state == STATE_ON:
-		# 	self._tv.on = 1
-		# else:
-		# 	self._tv.on = 0
-		if self._tv.on:
+		self._StateC = self._tv.StateC
+		self._name = self._default_name
+		self._app_name = self._tv.app_name_1
+		if self._StateC == 'On':
 			self._state = STATE_ON
-		else:
+		elif self._StateC == 'Standby':
 			self._state = STATE_OFF
+		else:
+			self._state = STATE_UNKNOWN
 
 class PhilipsTVBase(object):
 	def __init__(self, host, user, password):
@@ -218,11 +239,14 @@ class PhilipsTVBase(object):
 		self.muted = None
 		self.sources = None
 		self.source_id = None
+		self.source_list_1 = None
 		self.channels = None
 		self.channel_id = None
+		self.media_content_type_1 = None
 		self.channel_name = None
-		# self.ambilight = None
-
+		self.StateC = None
+		self.channellistresp = {}
+		self.app_name_1 = None
 		# The XTV app appears to have a bug that limits the nummber of SSL session to 100
 		# The code below forces the control to keep re-using a single connection
 		self._session = requests.Session()
@@ -258,27 +282,52 @@ class PhilipsTVBase(object):
 			return False
 
 	def update(self):
+		self.getStateC()
 		self.getName()
+		self.getChannelList()
+		self.getSourceList()
 		self.getAudiodata()
 		self.getChannel()
-		self.getPowerState()
-		# self.getAmbiLightState()
-		
+
 	def getChannel(self):
-		r = self._getReq('activities/tv')
-		if r:
-			self.channel_id = r["channel"]["preset"]
-			self.channel_name = r["channel"]["name"]
+		rr = self._getReq('activities/current')
+		if rr:
+			if rr["component"]["packageName"] == "org.droidtv.zapster":
+				r = self._getReq('activities/tv')
+				self.channel_id = r["channel"]["preset"]
+				self.channel_name = r["channel"]["name"]
+				self.media_content_type_1 = "channel"
+			else:
+				r = self._getReq('applications')
+				if r:
+					for apl in r["applications"]:
+						if apl["intent"]["component"]["packageName"] == rr["component"]["packageName"]:
+							self.app_name_1 = apl["label"]
+							self.channel_name = self.app_name_1
+							self.media_content_type_1 = "app"
 
 	def getName(self):
 		r = self._getReq('system/name')
 		if r:
 			self.name = r['name']
 
-	# def getAmbiLightState(self):
-	# 	r = self._getReq('ambilight/power')
-	# 	if r:
-	# 		self.ambilight = r['power']
+	def getChannelList(self):
+		r = self._getReq('channeldb/tv/channelLists/all')
+		if r:
+			self.channellistresp = r
+
+	def getSourceList(self):
+		r = self.channellistresp
+		if r:
+			_atemp = []
+			for nm in r['Channel']:
+				_atemp.append(nm['name'])
+			self.source_list_1 = _atemp
+
+	def getStateC(self):
+		r = self._getReq('powerstate')
+		if r:
+			self.StateC = r['powerstate']
 
 	def getAudiodata(self):
 		audiodata = self._getReq('audio/volume')
@@ -292,13 +341,6 @@ class PhilipsTVBase(object):
 			self.max_volume = None
 			self.volume = None
 			self.muted = None
-
-	def getPowerState(self):
-		r = self._getReq('powerstate')
-		if r and r['powerstate'] == 'On':
-			self.state = STATE_ON
-		else:
-			self.state = STATE_OFF
 
 	def setVolume(self, level):
 		if level:
@@ -314,6 +356,12 @@ class PhilipsTVBase(object):
 				return
 			self._postReq('audio/volume', {'current': targetlevel, 'muted': False})
 			self.volume = targetlevel
-	
+
+	def changechannel(self, channeldata):
+		if channeldata:
+			for chn in self.channellistresp['Channel']:
+				if chn['name'] == channeldata:
+					self._postReq('activities/tv', {'channel':{'ccid':chn['ccid'],'preset':chn['preset'],'name':chn['name']},'channelList':{'id':'allter','version':'30'}})
+
 	def sendKey(self, key):
 		self._postReq('input/key', {'key': key})

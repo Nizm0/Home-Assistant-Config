@@ -44,3 +44,12 @@
     #     message: >
     #       New value is: {{ trigger.to_state.state }}
     #     title: Kids light changed
+
+# Aqara cube actions
+# free_fall
+# move
+# rotate
+# shake_air
+# tap_twice
+# flip90
+# flip180
