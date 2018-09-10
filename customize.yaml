@@ -64,15 +64,11 @@ history_graph.gearbest_price_history:
 # binary_sensor.office_motion_sensor:
 binary_sensor.home_door_sensor:
   device_class: door
-  # icon: mdi:door
-  # icon: ‘{% if is_state(“binary_sensor.home_door_sensor_status”, “on”) %}mdi:door{% else %}mdi:door-open{% endif %}’
 binary_sensor.office_balcon_window_sensor:
   device_class: door
   # icon: mdi:glassdoor
 binary_sensor.kitchen_left_window_sensor:
   device_class: window
-  # icon: mdi:door
-  # icon: '{% if is_state("binary_sensor.kitchen_left_window_sensor", "on") %}mdi:window-closed{% else %}mdi:window-open{% endif %}'
 
 switch.light_1:
   # device_class: light
@@ -88,9 +84,6 @@ device_tracker.esp_377896:
   hidden: yes
 device_tracker.bcddc2018377:
   hidden: yes
-
-media_player.phtv:
-  hidden: true
 
 group.all_automations:
   hidden: true
