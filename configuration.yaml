@@ -17,13 +17,16 @@ homeassistant:
 api:
 config:
 http:
-  # api_password: !secret http_password
+  api_password: !secret http_password
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
   base_url: !secret base_url
   # login_attempts_threshold: 5
-  # trusted_networks:
-  #   - 192.168.1.0/24
+  trusted_networks:
+  - 127.0.0.1
+  - 172.19.0.0/24
+  - 192.168.1.0/24
+  - 192.168.2.0/24
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -36,6 +39,8 @@ updater:
 
 # Discover some devices automatically
 discovery:
+  ignore:
+    - yeelight
 
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
@@ -55,8 +60,15 @@ tts:
 
 # android_ip_webcam: !include configuration/android_ip_webcam.yaml
 automation: !include_dir_merge_list configuration/automations/
+# camera:
+# - platform: ffmpeg
+#   input: FFMPEG_SUPPORTED_INPUT
+# - platform: xiaomi
+#   name: Camera
+#   host: '192.168.1.135'
+#   model: 'yi'
+#   password: '5547'
 cloud: !include configuration/cloud.yaml
-
 
 device_tracker: !include configuration/device_tracker.yaml
 frontend:
@@ -67,6 +79,7 @@ history_graph: !include configuration/history_graph.yaml
 ifttt:
   key: !secret ifttt_key
 input_boolean: !include configuration/input_boolean.yaml
+light: !include configuration/light.yaml
 logger:
   default: error
   logs:
@@ -84,25 +97,32 @@ shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 shopping_list:
 switch: !include configuration/switch.yaml
+weather:
+- platform: darksky
+  api_key: !secret darksky_api_key
 zone: !include configuration/zone.yaml
 
+fan:
+  - platform: xiaomi_miio
+    host: 192.168.1.9
+    token: !secret xiaomi_airpurifierr_key
 xiaomi_aqara:
   discovery_retry: 5
   gateways:
-    - key: !secret xiaomi_getway1_key
-      mac: !secret xiaomi_getway1_mac
-      host: !secret xiaomi_getway1_ip
+  - key: !secret xiaomi_getway1_key
+    mac: !secret xiaomi_getway1_mac
+    host: !secret xiaomi_getway1_ip
 
 vacuum:
-  - platform: xiaomi_miio
-    host: 192.168.1.150
-    name: rockrobo
-    token: !secret xiaomi_rockrobo_key
+- platform: xiaomi_miio
+  host: 192.168.1.150
+  name: rockrobo
+  token: !secret xiaomi_rockrobo_key
 
 binary_sensor:
-  - platform: workday
-    country: PL
-    workdays: [mon, tue, wed, thu, fri]
+- platform: workday
+  country: PL
+  workdays: [mon, tue, wed, thu, fri]
 
 
 panel_iframe:

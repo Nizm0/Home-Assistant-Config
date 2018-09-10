@@ -7,8 +7,8 @@
       event_id: binary_sensor.office_switch
       click_type: long_click_press
   action:
-    - service: media_player.media_pause
-      entity_id: media_player.pc_gpmdp
+  - service: media_player.media_pause
+    entity_id: media_player.pc_gpmdp
 - alias: Play next
   trigger:
     platform: event
@@ -17,8 +17,8 @@
       event_id: binary_sensor.office_switch
       click_type: single
   action:
-    - service: media_player.media_next_track
-      entity_id: media_player.pc_gpmdp
+  - service: media_player.media_next_track
+    entity_id: media_player.pc_gpmdp
 - alias: Play previous
   trigger:
     platform: event
@@ -27,90 +27,93 @@
       event_id: binary_sensor.office_switch
       click_type: double
   action:
-    - service: media_player.media_previous_track
-      entity_id: media_player.pc_gpmdp
+  - service: media_player.media_previous_track
+    entity_id: media_player.pc_gpmdp
+
 - alias: Office top light turned on
   trigger:
-    - platform: state
-      entity_id: switch.top_light
-      to: 'on'
+  - platform: state
+    entity_id: switch.top_light
+    to: 'on'
+    for:
+      seconds: 3
   condition:
     condition: or
     conditions:
-      - condition: state
-        entity_id: switch.light_1
-        state: 'on'
-      - condition: state
-        entity_id: switch.light_2
-        state: 'on'
-  action:
-    - delay: '00:00:02'
-    - service: homeassistant.turn_off
-      entity_id: switch.light_1
-    - service: homeassistant.turn_off
-      entity_id: switch.light_2
-- alias: Office light 1 and 2 turned on
-  trigger:
-    - platform: state
-      entity_id: switch.light_1, switch.light_2
-      to: 'on'
-  condition:
     - condition: state
-      entity_id: switch.top_light
+      entity_id: switch.light_1
+      state: 'on'
+    - condition: state
+      entity_id: switch.light_2
       state: 'on'
   action:
-    - delay: '00:00:02'
-    - service: homeassistant.turn_off
-      entity_id: switch.top_light
+  - service: homeassistant.turn_off
+    entity_id: switch.light_1
+  - service: homeassistant.turn_off
+    entity_id: switch.light_2
+- alias: Office light 1 and 2 turned on
+  trigger:
+  - platform: state
+    entity_id: switch.light_1, switch.light_2
+    to: 'on'
+    for:
+      seconds: 3
+  condition:
+  - condition: state
+    entity_id: switch.top_light
+    state: 'on'
+  action:
+  - service: homeassistant.turn_off
+    entity_id: switch.top_light
 
 ### Bedroom
-# - alias: Turn on bedroom main light to red 10%
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       event_id: binary_sensor.bedroom_switch
-#       click_type: single
-#   condition:
-#     - condition: state
-#       entity_id: light.bedroom_main_light
-#       state: 'off'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.bedroom_main_light
-#         color_name: red
-#         brightness_pct: 5
-# - alias: Turn off bedroom main light
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       event_id: binary_sensor.bedroom_switch
-#       click_type: single
-#   condition:
-#     - condition: state
-#       entity_id: light.bedroom_main_light
-#       state: 'on'
-#   action:
-#     - service: light.turn_off
-#       data:
-#         entity_id: light.bedroom_main_light
-# - alias: Turn on bedroom main light to wite 100%
-#   trigger:
-#     platform: event
-#     event_type: click
-#     event_data:
-#       event_id: binary_sensor.bedroom_switch
-#       click_type: double
-#   # condition:
-#   #   - condition: state
-#   #     entity_id: light.bedroom_main_light
-#   #     state: 'off'
-#   action:
-#     - service: light.turn_on
-#       data:
-#         entity_id: light.bedroom_main_light
-#         white_value: 255
-#         brightness: 255
-#         kelvin: 2700
+- alias: Turn on bedroom main light to red 10%
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      event_id: binary_sensor.bedroom_switch
+      click_type: single
+  condition:
+  - condition: state
+    entity_id: light.bedroom_main_light
+    state: 'off'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.bedroom_main_light
+      color_name: red
+      brightness_pct: 5
+- alias: Turn off bedroom main light
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      event_id: binary_sensor.bedroom_switch
+      click_type: single
+  condition:
+  - condition: state
+    entity_id: light.bedroom_main_light
+    state: 'on'
+  action:
+  - service: light.turn_off
+    data:
+      entity_id: light.bedroom_main_light
+- alias: Turn on bedroom main light to wite 100%
+  trigger:
+    platform: event
+    event_type: click
+    event_data:
+      event_id: binary_sensor.bedroom_switch
+      click_type: double
+  # condition:
+  #   - condition: state
+  #     entity_id: light.bedroom_main_light
+  #     state: 'off'
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.bedroom_main_light
+      white_value: 255
+      brightness: 255
+      kelvin: 2700

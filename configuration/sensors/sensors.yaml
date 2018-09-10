@@ -1,28 +1,51 @@
-- platform: yr
-  name: Weather
-  forecast: 1
+- platform: darksky
+  api_key: !secret darksky_api_key
   monitored_conditions:
-    - temperature
-    - symbol
-    - precipitation
-    - windSpeed
-    - pressure
-    - windDirection
-    - humidity
-    - fog
-    - cloudiness
-    - lowClouds
-    - mediumClouds
-    - highClouds
-    - dewpointTemperature
+  - summary
+  - minutely_summary
+  - hourly_summary
+  - daily_summary
+#      - icon
+  - nearest_storm_distance
+  - nearest_storm_bearing
+  - precip_type
+  - precip_intensity
+  - precip_probability
+  - temperature
+  - apparent_temperature
+  - dew_point
+  - wind_speed
+  - wind_bearing
+  - cloud_cover
+  - humidity
+  - pressure
+  - visibility
+  - ozone
+# - platform: yr
+#   name: Weather
+#   forecast: 1
+#   monitored_conditions:
+#   - temperature
+#   - symbol
+#   - precipitation
+#   - windSpeed
+#   - pressure
+#   - windDirection
+#   - humidity
+#   - fog
+#   - cloudiness
+#   - lowClouds
+#   - mediumClouds
+#   - highClouds
+#   - dewpointTemperature
 - platform: moon
 - platform: systemmonitor
   resources:
-    - type: disk_use_percent
-      arg: /home
-    - type: memory_free
-    - type: processor_use
-    - type: since_last_boot
+  - type: disk_use_percent
+    arg: /home
+  - type: memory_free
+  - type: processor_use
+  - type: since_last_boot
 - platform: api_streams
 # - platform: command_line
 #   name: SSL cert expiry
@@ -35,18 +58,18 @@
   repository: Home-Assistant-Config
   branch: hassio
   monitored_conditions: 
-    - last_build_state
-    - last_build_id
-    - last_build_duration
-    - state
+  - last_build_state
+  - last_build_id
+  - last_build_duration
+  - state
 - platform: cert_expiry
   host: has.nizmo.eu
   name: LetsEncrypt
 - platform: airvisual
   api_key: !secret airvisual_api_key
   monitored_conditions:
-    - us
-    - cn
+  - us
+  - cn
   latitude: !secret home_latitude
   longitude: !secret home_longitude
 #  radius: 500
