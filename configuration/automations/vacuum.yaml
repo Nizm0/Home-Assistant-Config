@@ -8,12 +8,12 @@
     data_template:
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working
+      title: Vacuum stopt working template
   - service: notify.pushbullet
     data_template:
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum finished working
+      title: Vacuum stopt working template
 
 - alias: Vacuum end cleaning finisheda and docked
   trigger:
@@ -32,6 +32,24 @@
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
       title: Vacuum finished working
+
+- alias: Vacuum have encounter problem
+  trigger:
+  - platform: state
+    entity_id: vacuum.rockrobo
+    # from: 'docked'
+    to: 'error' # cleaning, returning, idle, blocked, error, docked
+  action:
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has encounter {{ trigger.to_state.state }} and stoped
+      title: Vacuum encounter problem
+  - service: notify.pushbullet
+    data_template:
+      message: >
+        Vacuum has encounter {{ trigger.to_state.state }} and stoped
+      title: Vacuum encounter problem
 
 - alias: Vacuum start cleaning
   trigger:
