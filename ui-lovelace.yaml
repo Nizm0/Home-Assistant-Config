@@ -8,7 +8,7 @@ views:
     icon: mdi:home
     badges:
       - entities:
-        - device_tracker.nizm0_phone
+        - device_tracker.nizmo_phone
         - device_tracker.gosia_phone
         - device_tracker.babcia_teresa
         - device_tracker.portex
@@ -21,7 +21,7 @@ views:
         title: all devices
         show_header_toggle: true
         entities:
-          - device_tracker.nizm0_phone
+          - device_tracker.nizmo_phone
           - device_tracker.gosia_phone
           - device_tracker.babcia_teresa
           - device_tracker.portex
@@ -153,12 +153,6 @@ views:
         show_header_toggle: true
         entities:
           - light.corridor_gateway_light
-      - type: entities
-        title: all switches
-        show_header_toggle: true
-        entities:
-          - switch.phtvir
-          - switch.tv_philips
       - type: history-graph
         title: Temperature in rooms
         hours_to_show: 120
@@ -300,7 +294,7 @@ views:
     cards:
       - type: entities
         entities:
-          - device_tracker.nizm0_phone
+          - device_tracker.nizmo_phone
           - device_tracker.gosia_phone
   - title: Stats
     icon: mdi:settings

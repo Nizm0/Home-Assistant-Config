@@ -31,39 +31,3 @@
   #   0:
   #     command_on: "JgAuAFgcDx0PDg8ODxweDg8OEA0QDRANEA4PDg8ODw4ODw8ODg8PDhANDg8OEA8ADQUAAAAAAAAAAAAA="
   #     # command_off: "JgAqAFYfDR4ODw4PKy0NEA0QDRAODw4PDg8ODw4PDg8OEA0QHA8OHg4PDgANBQAAAAAAAAAAAAAAAAAA="
-- platform: mqtt
-  name: Light 1
-  state_topic: "stat/d1mini-office/POWER1"
-  command_topic: "cmnd/d1mini-office/POWER1"
-  # availability_topic: "tele/d1mini-office/LWT"
-  payload_on: "ON"
-  payload_off: "OFF"
-  state_on: "ON"
-  state_off: "OFF"
-  optimistic: false
-  qos: 0
-  retain: true
-- platform: mqtt
-  name: Light 2
-  state_topic: "stat/d1mini-office/POWER2"
-  command_topic: "cmnd/d1mini-office/POWER2"
-  # availability_topic: "tele/d1mini-office/LWT"
-  payload_on: "ON"
-  payload_off: "OFF"
-  state_on: "ON"
-  state_off: "OFF"
-  optimistic: false
-  qos: 0
-  retain: true
-- platform: mqtt
-  name: Top Light
-  state_topic: "stat/d1mini-office/POWER4"
-  command_topic: "cmnd/d1mini-office/POWER4"
-  # availability_topic: "tele/d1mini-office/LWT"
-  payload_on: "ON"
-  payload_off: "OFF"
-  state_on: "ON"
-  state_off: "OFF"
-  optimistic: false
-  qos: 0
-  retain: true

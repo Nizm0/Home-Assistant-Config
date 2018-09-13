@@ -1,10 +1,12 @@
-  - platform: nfandroidtv
-    name: Office TV
-    host: 192.168.1.130
-  - name: pushbullet
-    platform: pushbullet
-    api_key: !secret pushbullet_api_key
-  - name: push_to_chrome
-    platform: html5
-    gcm_api_key: !secret google_push_api_key
-    gcm_sender_id: !secret google_push_sender_id
+- platform: nfandroidtv
+  name: Office TV
+  host: 192.168.1.130
+
+- name: pushbullet nizmo
+  platform: pushbullet
+  api_key: !secret pushbullet_api_key
+
+- name: push_to_chrome
+  platform: html5
+  gcm_api_key: !secret google_push_api_key
+  gcm_sender_id: !secret google_push_sender_id

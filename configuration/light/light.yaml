@@ -1,0 +1,13 @@
+- platform: yeelight
+  devices:
+    192.168.1.111:
+      name: Bedroom Main Light
+      transition: 10
+      use_music_mode: true #(defaults to False)
+      save_on_change: true #(defaults to True)
+
+- platform: ambilights
+  name: Philips Ambilights
+  host: 192.168.1.130
+  username: !secret philips_user
+  password: !secret philips_pass

@@ -68,6 +68,21 @@ automation: !include_dir_merge_list configuration/automations/
 #   host: '192.168.1.135'
 #   model: 'yi'
 #   password: '5547'
+calendar:
+  - platform: todoist
+    token: !secret todois_api_key
+    custom_projects:
+    - name: 'All Projects'
+    - name: 'Due Today'
+      due_date_days: 0
+    - name: 'Due This Week'
+      due_date_days: 7
+    # - name: 'Math Homework'
+    #   labels:
+    #     - Homework
+      # include_projects:
+      #   - Mathematical Structures II
+      #   - Calculus II
 cloud: !include configuration/cloud.yaml
 
 device_tracker: !include configuration/device_tracker.yaml
@@ -79,7 +94,7 @@ history_graph: !include configuration/history_graph.yaml
 ifttt:
   key: !secret ifttt_key
 input_boolean: !include configuration/input_boolean.yaml
-light: !include configuration/light.yaml
+light: !include_dir_merge_list configuration/light
 logger:
   default: error
   logs:
@@ -96,7 +111,7 @@ sensor: !include_dir_merge_list configuration/sensors/
 shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 shopping_list:
-switch: !include configuration/switch.yaml
+switch: !include_dir_merge_list configuration/switch
 weather:
 - platform: darksky
   api_key: !secret darksky_api_key

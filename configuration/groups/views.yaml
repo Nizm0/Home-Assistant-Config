@@ -4,7 +4,7 @@
 #   icon: mdi:home
 #   entities:
 #     - group.office
-#     - device_tracker.nizm0_phone
+#     - device_tracker.nizmo_phone
 office_view:
   view: yes
   name: Office
@@ -57,7 +57,7 @@ family_view:
   name: Family
   view: yes
   entities:
-    - device_tracker.nizm0_phone
+    - device_tracker.nizmo_phone
     - device_tracker.gosia_phone
     - device_tracker.tablet1
 stats_view:
