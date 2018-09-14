@@ -64,5 +64,5 @@ main_door_sensor:
   icon_off: mdi-door-closed
 
 layout:
-  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizm0_phone, device_tracker.gosia_phone, corridor_sensor, main_door_sensor
+  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizmo_phone, device_tracker.gosia_phone, corridor_sensor, main_door_sensor
   - corridor_gateway_light, kids_light, group.all_lights, bedroom_light_red, bedroom_light_white, slider(2x1)

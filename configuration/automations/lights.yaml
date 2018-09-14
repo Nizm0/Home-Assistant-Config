@@ -33,7 +33,7 @@
 - alias: Office top light turned on
   trigger:
   - platform: state
-    entity_id: switch.top_light
+    entity_id: light.top_light
     to: 'on'
     for:
       seconds: 3
@@ -41,30 +41,30 @@
     condition: or
     conditions:
     - condition: state
-      entity_id: switch.light_1
+      entity_id: light.light_1
       state: 'on'
     - condition: state
-      entity_id: switch.light_2
+      entity_id: light.light_2
       state: 'on'
   action:
   - service: homeassistant.turn_off
-    entity_id: switch.light_1
+    entity_id: light.light_1
   - service: homeassistant.turn_off
-    entity_id: switch.light_2
+    entity_id: light.light_2
 - alias: Office light 1 and 2 turned on
   trigger:
   - platform: state
-    entity_id: switch.light_1, switch.light_2
+    entity_id: light.light_1, light.light_2
     to: 'on'
     for:
       seconds: 3
   condition:
   - condition: state
-    entity_id: switch.top_light
+    entity_id: light.top_light
     state: 'on'
   action:
   - service: homeassistant.turn_off
-    entity_id: switch.top_light
+    entity_id: light.top_light
 
 ### Bedroom
 - alias: Turn on bedroom main light to red 10%

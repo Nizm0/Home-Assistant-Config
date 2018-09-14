@@ -1,4 +1,4 @@
-device_tracker.nizm0_phone:
+device_tracker.nizmo_phone:
   icon: mdi:cellphone-android
   friendly_name: Nizm0 Phone
 device_tracker.gosia_phone:
@@ -70,15 +70,15 @@ binary_sensor.office_balcon_window_sensor:
 binary_sensor.kitchen_left_window_sensor:
   device_class: window
 
-switch.light_1:
-  # device_class: light
-  icon: mdi:lightbulb
-switch.light_2:
-  # device_class: light
-  icon: mdi:lightbulb
-switch.top_light:
-  # device_class: light
-  icon: mdi:lightbulb
+# switch.light_1:
+#   # device_class: light
+#   icon: mdi:lightbulb
+# switch.light_2:
+#   # device_class: light
+#   icon: mdi:lightbulb
+# switch.top_light:
+#   # device_class: light
+#   icon: mdi:lightbulb
 
 device_tracker.esp_377896:
   hidden: yes

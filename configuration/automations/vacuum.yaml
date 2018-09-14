@@ -86,6 +86,9 @@
     - condition: state
       entity_id: input_select.home_preset
       state: "Empty"
+    - condition: state
+      entity_id: input_boolean.ready_to_vacuum
+      state: "on"
   action:
     service: vacuum.start
     entity_id: vacuum.rockrobo

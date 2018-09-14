@@ -1,19 +1,19 @@
-# - platform: owntracks
-#   max_gps_accuracy: 200
-#   waypoints: True
-#   mqtt_topic: "owntracks/#"
-#   events_only: True
-#   waypoint_whitelist:
-#     - Nizm0
-#     - Gosia
-#     - Tablet1
-#   region_mapping:
-#     cabin: home
-#     office: work
-#     kindergarden: kindergarden
-#     nursery: nursery
-#     mp: mp
-#     gp: gp
+- platform: owntracks_http
+  max_gps_accuracy: 200
+  waypoints: True
+  # mqtt_topic: "owntracks/#"
+  events_only: True
+  waypoint_whitelist:
+    - Nizm0
+    - Gosia
+    - Tablet1
+  region_mapping:
+    cabin: home
+    office: work
+    kindergarden: kindergarden
+    nursery: nursery
+    mp: mp
+    gp: gp
 - platform: tomato
   host: !secret tomato_ip
   username: !secret tomato_username
