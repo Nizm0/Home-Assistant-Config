@@ -21,8 +21,8 @@ bedroom:
 office:
   name: Office
   entities:
-    - light.light_1
-    - light.light_2
+    - light.general_light
+    - light.directional_light
     - light.top_light
     - light.philips_ambilights
     # - light.light_1

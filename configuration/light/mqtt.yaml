@@ -1,5 +1,5 @@
 - platform: mqtt
-  name: Light 1
+  name: General light 
   state_topic: "stat/d1mini-office/POWER1"
   command_topic: "cmnd/d1mini-office/POWER1"
   availability_topic: "tele/d1mini-office/LWT"
@@ -13,7 +13,7 @@
   qos: 0
   retain: false
 - platform: mqtt
-  name: Light 2
+  name: Directional light
   state_topic: "stat/d1mini-office/POWER2"
   command_topic: "cmnd/d1mini-office/POWER2"
   availability_topic: "tele/d1mini-office/LWT"
@@ -27,7 +27,7 @@
   qos: 0
   retain: false
 - platform: mqtt
-  name: Top Light
+  name: Top light
   state_topic: "stat/d1mini-office/POWER4"
   command_topic: "cmnd/d1mini-office/POWER4"
   availability_topic: "tele/d1mini-office/LWT"

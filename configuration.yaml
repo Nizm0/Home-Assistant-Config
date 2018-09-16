@@ -131,7 +131,7 @@ xiaomi_aqara:
 vacuum:
 - platform: xiaomi_miio
   host: 192.168.1.150
-  name: rockrobo
+  name: Rockrobo
   token: !secret xiaomi_rockrobo_key
 
 binary_sensor:
