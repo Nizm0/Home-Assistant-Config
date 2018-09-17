@@ -1,38 +1,58 @@
 google_actions:
   filter:
-    # include_domains:
-    #   - switch
-    #   - light
-    #   - group
+    include_domains:
+    # - switch
+    - light
+    - vacuum
+    # - group
     include_entities:
-      - input_boolean.kids_light
-      - light.corridor_gateway_light
+    - script.start_vacuum
+    - script.stop_vacuum
+    # - input_boolean.kids_light
+    # - light.corridor_gateway_light
   entity_config:
     input_boolean.kids_light:
       name: Kids Light
       aliases:
-        - input_boolean.kids_light
+      - Kids light
+      room: Kids
     light.corridor_gateway_light:
       name: Gateway Light
       aliases:
-        # - light.corridor_gateway_light
-        - Gateway Light
-        - coridor light
+      # - light.corridor_gateway_light
+      - Gateway Light
+      - Coridor light
+      room: Corridor
     light.bedroom_main_light:
       name: Bedroom main light
       aliases:
-        # - light.bedroom_mail_light
-        - bedroom lights
-    media_player.office_tv:
+      # - light.bedroom_mail_light
+      - Bedroom lights
+      room: Bedroom
+    media_player.philips_tv:
       name: TV
       aliases:
-        - office tv
+      - Office tv
+      room: Office
+    script.start_vacuum:
+      name: Clean flat
+      aliases:
+      - Clean flat
+      - Vacuum
+      - Clean flor
+      - Roborock
+      room: Office
+    script.stop_vacuum:
+      name: Stop cleaning
+      aliases:
+      - Cancel vacuum
+      room: Office
 # entity_config:
 #   switch.kitchen:
 #     name: Custom Name for Google Assistant
 #     aliases:
-#       - bright lights
-#       - entry lights
+#     - bright lights
+#     - entry lights
 #   light.living_room:
 #     expose: false
 #     room: living room

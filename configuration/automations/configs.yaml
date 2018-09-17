@@ -31,7 +31,7 @@
     - platform: event
       event_type: device_tracker_new_device
   action:
-    - service: notify.pushbullet
+    - service: notify.pushbullet_nizmo
       data_template:
         message: >
           New device:

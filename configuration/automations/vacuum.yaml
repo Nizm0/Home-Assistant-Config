@@ -1,56 +1,3 @@
-- alias: Vacuum end cleaning finished
-  trigger:
-  - platform: template
-    value_template: "{% if is_state('vacuum.rockrobo', 'docked') or is_state('vacuum.rockrobo', 'returning') %}true{% endif %}"
-    # to: 'docked' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working template
-  - service: notify.pushbullet
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working template
-
-- alias: Vacuum end cleaning finisheda and docked
-  trigger:
-  - platform: state
-    entity_id: vacuum.rockrobo
-    # from: 'docked'
-    to: 'docked' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working
-  - service: notify.pushbullet
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum finished working
-
-- alias: Vacuum have encounter problem
-  trigger:
-  - platform: state
-    entity_id: vacuum.rockrobo
-    # from: 'docked'
-    to: 'error' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has encounter {{ trigger.to_state.state }} and stoped
-      title: Vacuum encounter problem
-  - service: notify.pushbullet
-    data_template:
-      message: >
-        Vacuum has encounter {{ trigger.to_state.state }} and stoped
-      title: Vacuum encounter problem
-
 - alias: Vacuum start cleaning
   trigger:
   - platform: state
@@ -64,11 +11,68 @@
       message: >
         Vacuum has started and now is {{ trigger.to_state.state }}
       title: Vacuum start working
-  - service: notify.pushbullet
+  - service: notify.pushbullet_nizmo
     data_template:
       message: >
         Vacuum has started and now is {{ trigger.to_state.state }}
       title: Vacuum start working
+
+- alias: Vacuum end cleaning finished
+  trigger:
+  # - platform: template
+  #   value_template: "{% if is_state('vacuum.rockrobo', 'docked') or is_state('vacuum.rockrobo', 'returning') %}true{% endif %}"
+    # to: 'docked' # cleaning, returning, idle, blocked, error, docked
+  - platform: state
+    entity_id: vacuum.rockrobo
+    from: 'cleaning'
+    to: 'returning' # cleaning, returning, idle, blocked, error, docked
+  action:
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum stopt working template
+  - service: notify.pushbullet_nizmo
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum stopt working template
+
+- alias: Vacuum end cleaning finisheda and docked
+  trigger:
+  - platform: state
+    entity_id: vacuum.rockrobo
+    from: 'returning'
+    to: 'docked' # cleaning, returning, idle, blocked, error, docked
+  action:
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum stopt working
+  - service: notify.pushbullet_nizmo
+    data_template:
+      message: >
+        Vacuum has stoped and now is {{ trigger.to_state.state }}
+      title: Vacuum finished working
+
+- alias: Vacuum have encounter problem
+  trigger:
+  - platform: state
+    entity_id: vacuum.rockrobo
+    from: 'cleaning'
+    to: 'error' # cleaning, returning, idle, blocked, error, docked
+  action:
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        Vacuum has encounter {{ trigger.to_state.state }} and stoped
+      title: Vacuum encounter problem
+  - service: notify.pushbullet_nizmo
+    data_template:
+      message: >
+        Vacuum has encounter {{ trigger.to_state.state }} and stoped
+      title: Vacuum encounter problem
 
 - alias: Weekday Vacuum
   trigger:
