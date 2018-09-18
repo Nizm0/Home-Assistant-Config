@@ -84,6 +84,9 @@ calendar:
       #   - Mathematical Structures II
       #   - Calculus II
 cloud: !include configuration/cloud.yaml
+custom_updater:
+  card_urls: 
+    - https://raw.githubusercontent.com/kuuji/button-card/0.0.2/tracker.json
 
 device_tracker: !include configuration/device_tracker.yaml
 frontend:
@@ -117,10 +120,10 @@ weather:
   api_key: !secret darksky_api_key
 zone: !include configuration/zone.yaml
 
-fan:
-  - platform: xiaomi_miio
-    host: 192.168.1.9
-    token: !secret xiaomi_airpurifierr_key
+# fan:
+#   - platform: xiaomi_miio
+#     host: 192.168.1.9
+#     token: !secret xiaomi_airpurifierr_key
 xiaomi_aqara:
   discovery_retry: 5
   gateways:
