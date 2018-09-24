@@ -2,7 +2,7 @@
 corridor: 
   name: Corridor
   entities:
-    - light.corridor_gateway_light
+  - light.corridor_gateway_light
 # kids_room_switch:
 #   name: Kids room
 #   entities:
@@ -11,20 +11,27 @@ corridor:
 kids:
   name: Kids
   entities:
-    - input_boolean.kids_light
+  - input_boolean.kids_light
+  - sensor.kids_temperature
+  - sensor.kids_humidity
+  - sensor.kids_pressure
 
 bedroom:
   name: Bedroom
   entities:
-    - light.bedroom_main_light
+  - light.bedroom_main_light
+  - sensor.bedroom_temperature
+  - sensor.bedroom_humidity
+  - sensor.bedroom_pressure
 
 office:
   name: Office
   entities:
-    - light.general_light
-    - light.directional_light
-    - light.top_light
-    - light.philips_ambilights
-    # - light.light_1
-    # - light.light_2
-    # - light.top_light
+  - light.general_light
+  - light.directional_light
+  - light.top_light
+  - light.tv_ambilights
+  - sensor.office_temperature
+  - sensor.office_humidity
+  - sensor.office_pressure
+  - sensor.office_gateway_illumination

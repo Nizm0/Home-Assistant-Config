@@ -7,7 +7,7 @@
       save_on_change: true #(defaults to True)
 
 - platform: ambilights
-  name: Philips Ambilights
+  name: Tv Ambilights
   host: 192.168.1.130
   username: !secret philips_user
   password: !secret philips_pass

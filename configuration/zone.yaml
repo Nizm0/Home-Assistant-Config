@@ -1,9 +1,9 @@
-- name: Michał Work
+- name: Work
   latitude: !secret work_latitude
   longitude: !secret work_longitude
   radius: 250
   icon: mdi:domain
-- name: Sweet Home
+- name: Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   radius: 100

@@ -17,7 +17,7 @@ homeassistant:
 api:
 config:
 http:
-  api_password: !secret http_password
+  # api_password: !secret http_password
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_key
   base_url: !secret base_url
@@ -45,8 +45,6 @@ discovery:
 # Allows you to issue voice commands from the frontend in enabled browsers
 conversation:
 
-# View all events in a logbook
-logbook:
 
 # Enables a map showing the location of tracked devices
 map:
@@ -92,16 +90,34 @@ device_tracker: !include configuration/device_tracker.yaml
 frontend:
   themes: !include_dir_merge_named themes/
 group: !include_dir_merge_named configuration/groups/
+
+### Logger ###
 history: !include configuration/history.yaml
+recorder:
+  purge_keep_days: 10
+  # include:
+  #   domains:
+  #     - sensor
+  #     - switch
+  #     - media_player
+  # exclude:
+  #   domains:
+  #   - device_tracker
+  #   entities:
+  #    - sensor.last_boot
+  #    - sensor.date
 history_graph: !include configuration/history_graph.yaml
+logger:   
+  default: error
+  logs:
+    ifttt.trigger: debug
+# View all events in a logbook
+logbook:
+
 ifttt:
   key: !secret ifttt_key
 input_boolean: !include configuration/input_boolean.yaml
 light: !include_dir_merge_list configuration/light
-logger:
-  default: error
-  logs:
-    ifttt.trigger: debug
 media_player: !include configuration/media_player.yaml
 mqtt:
   broker: core-mosquitto

@@ -38,7 +38,7 @@ google_actions:
       name: Clean flat
       aliases:
       - Clean flat
-      - Vacuum
+      # - Vacuum
       - Clean flor
       - Roborock
       room: Office

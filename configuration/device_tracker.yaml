@@ -23,6 +23,8 @@
   new_device_defaults:
     track_new_devices: True
     hide_if_away: False
-- platform: google_maps
-  username: !secret google_maps_login
-  password: !secret google_maps_password
+- platform: gpslogger
+
+# - platform: google_maps
+#   username: !secret google_maps_login
+#   password: !secret google_maps_password

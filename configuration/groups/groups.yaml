@@ -12,8 +12,7 @@ vacuum:
 environment:
   name: Environment
   entities:
-    - script.1523397023682
-    - sensor.yr_symbol
+    # - sensor.yr_symbol
     - sun.sun
     - sensor.moon
     # - homeassistant.weathet
