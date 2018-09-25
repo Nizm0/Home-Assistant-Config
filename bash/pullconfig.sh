@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd "/home/homeassistant/.homeassistant/"
+cd "/opt/home_assistant/"
 git pull

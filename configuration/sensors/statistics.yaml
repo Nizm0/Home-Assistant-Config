@@ -1,0 +1,28 @@
+- platform: history_stats
+  name: Nizm0 work
+  entity_id: device_tracker.nizmo_phone
+  state: 'Work'
+  type: time
+  start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+  end: '{{ now() }}'
+- platform: history_stats
+  name: Gosia parents
+  entity_id: device_tracker.gosia_phone
+  state: 'GP'
+  type: time
+  start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+  end: '{{ now() }}'
+- platform: history_stats
+  name: TV is on
+  entity_id: media_player.philips_tv
+  state: 'on'
+  type: time
+  start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+  end: '{{ now() }}'
+  
+# - platform: statistics
+#   entity_id: device_tracker.nizmo_phone
+# - platform: statistics
+#   entity_id: device_tracker.gosia_phone
+  # max_age:
+  #   minutes: 30

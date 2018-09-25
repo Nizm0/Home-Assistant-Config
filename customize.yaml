@@ -1,9 +1,9 @@
-device_tracker.nizmo_phone:
-  icon: mdi:cellphone-android
-  friendly_name: Nizm0 Phone
+# device_tracker.nizmo_phone:
+#   icon: mdi:cellphone-android
+#   friendly_name: Nizm0
 device_tracker.gosia_phone:
   icon: mdi:cellphone-android
-  friendly_name: Gosia Phone
+  friendly_name: Gosia
 device_tracker.tablet1_tablet:
   icon: mdi:cellphone-android
   friendly_name: Tablet

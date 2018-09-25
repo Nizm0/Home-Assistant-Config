@@ -1,7 +1,7 @@
 - name: Work
   latitude: !secret work_latitude
   longitude: !secret work_longitude
-  radius: 250
+  radius: 150
   icon: mdi:domain
 - name: Home
   latitude: !secret home_latitude
@@ -19,8 +19,8 @@
 - name: Kindergarden
   latitude: 51.1034798
   longitude: 17.0838719
-  radius: 250
+  radius: 150
 - name: Nursery
   latitude: 51.1062541
   longitude: 17.0206531
-  radius: 250
+  radius: 150
