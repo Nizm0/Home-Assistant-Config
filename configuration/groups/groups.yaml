@@ -1,119 +1,114 @@
-Weather Summary:
-  - sensor.dark_sky_summary
-  - sensor.dark_sky_minutely_summary
-  - sensor.dark_sky_hourly_summary
-  - sensor.dark_sky_daily_summary
-
 vacuum:
   name: Vacuum
   entities:
-    - vacuum.rockrobo
-    - input_boolean.ready_to_vacuum
-environment:
-  name: Environment
-  entities:
-    # - sensor.yr_symbol
-    - sun.sun
-    - sensor.moon
+  - vacuum.rockrobo
+  - input_boolean.ready_to_vacuum
+# environment:
+#   name: Environment
+#   entities:
+#     - script.1523397023682
+#     - sensor.yr_symbol
+#     - sun.sun
+#     - sensor.moon
     # - homeassistant.weathet
     # - sensor.airvisual
 
 system:
   name: System stats
   entities:
-    - sensor.processor_use
-    - sensor.since_last_boot
-    - sensor.memory_free
-    - sensor.disk_use_percent_home
+  - sensor.processor_use
+  - sensor.since_last_boot
+  - sensor.memory_free
+  - sensor.disk_use_percent_home
 travis:
   name: Travis status
   entities:
-    - script.update_config
-    - sensor.nizm0homeassistantconfig_last_build_duration
-    - sensor.nizm0homeassistantconfig_last_build_id
-    - sensor.nizm0homeassistantconfig_last_build_state
-    - sensor.nizm0homeassistantconfig_state
+  - script.update_config
+  - sensor.nizm0homeassistantconfig_last_build_duration
+  - sensor.nizm0homeassistantconfig_last_build_id
+  - sensor.nizm0homeassistantconfig_last_build_state
+  - sensor.nizm0homeassistantconfig_state
 
 office_camera_control:
   name: Office Camera Control
   entities:
-    - sensor.office_camera_audio_connections
-    - sensor.office_camera_battery_level
-    - sensor.office_camera_battery_temperature
-    - sensor.office_camera_battery_voltage
-    - sensor.office_camera_light_level
-    - sensor.office_camera_motion
-    - sensor.office_camera_pressure
-    - sensor.office_camera_proximity
-    - sensor.office_camera_sound
-    - sensor.office_camera_video_connections
-    - switch.office_camera_exposure_lock
-    - switch.office_camera_focus
-    # - switch.office_camera_frontfacing_camera
-    # - switch.office_camera_gps_active
-    # - switch.office_camera_night_vision
-    - switch.office_camera_overlay
-    - switch.office_camera_torch
-    - switch.office_camera_video_recording
-    - switch.office_camera_white_balance_lock
+  - sensor.office_camera_audio_connections
+  - sensor.office_camera_battery_level
+  - sensor.office_camera_battery_temperature
+  - sensor.office_camera_battery_voltage
+  - sensor.office_camera_light_level
+  - sensor.office_camera_motion
+  - sensor.office_camera_pressure
+  - sensor.office_camera_proximity
+  - sensor.office_camera_sound
+  - sensor.office_camera_video_connections
+  - switch.office_camera_exposure_lock
+  - switch.office_camera_focus
+  # - switch.office_camera_frontfacing_camera
+  # - switch.office_camera_gps_active
+  # - switch.office_camera_night_vision
+  - switch.office_camera_overlay
+  - switch.office_camera_torch
+  - switch.office_camera_video_recording
+  - switch.office_camera_white_balance_lock
   
 kitchen_camera_control:
   name: Kitchen Camera Control
   entities:
-    - sensor.kitchen_camera_audio_connections
-    - sensor.kitchen_camera_battery_level
-    - sensor.kitchen_camera_battery_temperature
-    - sensor.kitchen_camera_battery_voltage
-    - sensor.kitchen_camera_light_level
-    - sensor.kitchen_camera_motion
-    - sensor.kitchen_camera_pressure
-    - sensor.kitchen_camera_proximity
-    - sensor.kitchen_camera_sound
-    - sensor.kitchen_camera_video_connections
-    - switch.kitchen_camera_exposure_lock
-    - switch.kitchen_camera_focus
-    - switch.kitchen_camera_frontfacing_camera
-    - switch.kitchen_camera_gps_active
-    - switch.kitchen_camera_night_vision
-    - switch.kitchen_camera_overlay
-    - switch.kitchen_camera_torch
-    - switch.kitchen_camera_video_recording
-    - switch.kitchen_camera_white_balance_lock
+  - sensor.kitchen_camera_audio_connections
+  - sensor.kitchen_camera_battery_level
+  - sensor.kitchen_camera_battery_temperature
+  - sensor.kitchen_camera_battery_voltage
+  - sensor.kitchen_camera_light_level
+  - sensor.kitchen_camera_motion
+  - sensor.kitchen_camera_pressure
+  - sensor.kitchen_camera_proximity
+  - sensor.kitchen_camera_sound
+  - sensor.kitchen_camera_video_connections
+  - switch.kitchen_camera_exposure_lock
+  - switch.kitchen_camera_focus
+  - switch.kitchen_camera_frontfacing_camera
+  - switch.kitchen_camera_gps_active
+  - switch.kitchen_camera_night_vision
+  - switch.kitchen_camera_overlay
+  - switch.kitchen_camera_torch
+  - switch.kitchen_camera_video_recording
+  - switch.kitchen_camera_white_balance_lock
 
 Financial:
-  - sensor.broadlink_rm_pro
-  # - sensor.xiaomi_360_degree_camera
-  - sensor.xiaomi_aqara_smart_wireless_switch
-  # - sensor.xiaomi_aqara_door_window_sensor
-  # - sensor.xiaomi_aqara_human_body_sensor
-  - sensor.aqara_smart_vibration_sensor
-  - sensor.xiaomi_bedside_lamp
-  - sensor.xiaomi_smart_button
-  - sensor.xiaomi_yeelight_white
-  - sensor.yeelight_smart_light_strip
-  # - sensor.xiaomi_door_window_sensor
+- sensor.broadlink_rm_pro
+# - sensor.xiaomi_360_degree_camera
+- sensor.xiaomi_aqara_smart_wireless_switch
+# - sensor.xiaomi_aqara_door_window_sensor
+# - sensor.xiaomi_aqara_human_body_sensor
+- sensor.aqara_smart_vibration_sensor
+- sensor.xiaomi_bedside_lamp
+- sensor.xiaomi_smart_button
+- sensor.xiaomi_yeelight_white
+- sensor.yeelight_smart_light_strip
+# - sensor.xiaomi_door_window_sensor
 
 Flower inside 1:
-  - sensor.flower_1_battery
-  - sensor.flower_1_conductivity
-  - sensor.flower_1_light_intensity
-  - sensor.flower_1_moisture
-  - sensor.flower_1_temperature
+- sensor.flower_1_battery
+- sensor.flower_1_conductivity
+- sensor.flower_1_light_intensity
+- sensor.flower_1_moisture
+- sensor.flower_1_temperature
 
 Flower outside:
-  - sensor.flower_2_battery
-  - sensor.flower_2_conductivity
-  - sensor.flower_2_light_intensity
-  - sensor.flower_2_moisture
-  - sensor.flower_2_temperature
+- sensor.flower_2_battery
+- sensor.flower_2_conductivity
+- sensor.flower_2_light_intensity
+- sensor.flower_2_moisture
+- sensor.flower_2_temperature
 
 AirQuality:
-  - sensor.chinese_air_pollution_level
-  - sensor.chinese_air_quality_index
-  - sensor.chinese_main_pollutant
-  - sensor.us_air_pollution_level
-  - sensor.us_air_quality_index
-  - sensor.us_main_pollutant
+- sensor.chinese_air_pollution_level
+- sensor.chinese_air_quality_index
+- sensor.chinese_main_pollutant
+- sensor.us_air_pollution_level
+- sensor.us_air_quality_index
+- sensor.us_main_pollutant
 
 # battery_alert:
 #   control: hidden
@@ -134,21 +129,27 @@ AirQuality:
     # - sensor.office_camera_sound
     # - sensor.office_camera_video_connections
 
+Weather Summary:
+- sensor.dark_sky_summary
+# - sensor.dark_sky_minutely_summary
+- sensor.dark_sky_hourly_summary
+- sensor.dark_sky_daily_summary
+
 Weather:
-  - sun.sun
-  - sensor.moon
-  - sensor.dark_sky_temperature
-  - sensor.dark_sky_apparent_temperature
-  - sensor.dark_sky_humidity
-  - sensor.dark_sky_cloud_coverage
-  - sensor.dark_sky_precip
-  - sensor.dark_sky_precip_probability
-  - sensor.dark_sky_precip_intensity
-  - sensor.dark_sky_nearest_storm_distance
-  - sensor.dark_sky_nearest_storm_bearing
-  - sensor.dark_sky_wind_speed
-  - sensor.dark_sky_wind_bearing
-  - sensor.dark_sky_visibility
-  - sensor.dark_sky_ozone
-  - sensor.dark_sky_pressure
-  - sensor.dark_sky_dew_point
+- sun.sun
+- sensor.moon
+- sensor.dark_sky_temperature
+- sensor.dark_sky_apparent_temperature
+- sensor.dark_sky_humidity
+- sensor.dark_sky_cloud_coverage
+- sensor.dark_sky_precip
+- sensor.dark_sky_precip_probability
+- sensor.dark_sky_precip_intensity
+# - sensor.dark_sky_nearest_storm_distance
+# - sensor.dark_sky_nearest_storm_bearing
+- sensor.dark_sky_wind_speed
+- sensor.dark_sky_wind_bearing
+- sensor.dark_sky_visibility
+- sensor.dark_sky_ozone
+- sensor.dark_sky_pressure
+- sensor.dark_sky_dew_point

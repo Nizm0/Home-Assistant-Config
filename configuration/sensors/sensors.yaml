@@ -2,12 +2,12 @@
   api_key: !secret darksky_api_key
   monitored_conditions:
   - summary
-  - minutely_summary
+#  - minutely_summary
   - hourly_summary
   - daily_summary
-#      - icon
-  - nearest_storm_distance
-  - nearest_storm_bearing
+#  - icon
+#  - nearest_storm_distance
+#  - nearest_storm_bearing
   - precip_type
   - precip_intensity
   - precip_probability
@@ -77,6 +77,6 @@
 - platform: mold_indicator
   indoor_temp_sensor: sensor.office_temperature
   indoor_humidity_sensor: sensor.office_humidity
-  # outdoor_temp_sensor: sensor.weather_temperature
-  outdoor_temp_sensor: sensor.flower_2_temperature
+  outdoor_temp_sensor: sensor.dark_sky_temperature
+  # outdoor_temp_sensor: sensor.flower_2_temperature
   calibration_factor: 2.0
