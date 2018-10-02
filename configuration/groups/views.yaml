@@ -57,8 +57,10 @@ family_view:
   name: Family
   view: yes
   entities:
-    - device_tracker.nizmo_phone
-    - device_tracker.gosia_phone
+    # - device_tracker.nizmo_phone
+    - device_tracker.google_maps_104688658658376260645 #nizmo
+    # - device_tracker.gosia_phone
+    - device_tracker.google_maps_109218123589188227395 #gosia
     - device_tracker.tablet1
 stats_view:
   view: yes

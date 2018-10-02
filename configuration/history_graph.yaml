@@ -1,8 +1,10 @@
 presence:
   name: Presence
   entities:
-  - device_tracker.nizmo_phone
-  - device_tracker.gosia_phone
+  # - device_tracker.nizmo_phone
+  - device_tracker.google_maps_104688658658376260645 #nizmo
+  # - device_tracker.gosia_phone
+  - device_tracker.google_maps_109218123589188227395 #gosia
   hours_to_show: 120
   refresh: 60
 room_temp:

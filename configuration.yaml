@@ -82,9 +82,10 @@ calendar:
       #   - Mathematical Structures II
       #   - Calculus II
 cloud: !include configuration/cloud.yaml
-custom_updater:
-  card_urls: 
-    - https://raw.githubusercontent.com/kuuji/button-card/0.0.2/tracker.json
+
+# custom_updater:
+#   card_urls: 
+#     - https://raw.githubusercontent.com/kuuji/button-card/0.0.2/tracker.json
 
 device_tracker: !include configuration/device_tracker.yaml
 frontend:

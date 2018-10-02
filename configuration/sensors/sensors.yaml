@@ -73,7 +73,7 @@
   latitude: !secret home_latitude
   longitude: !secret home_longitude
 #  radius: 500
-  show_on_map: true
+  show_on_map: false
 - platform: mold_indicator
   indoor_temp_sensor: sensor.office_temperature
   indoor_humidity_sensor: sensor.office_humidity

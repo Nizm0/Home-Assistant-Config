@@ -1,13 +1,13 @@
 - platform: history_stats
   name: Nizm0 work
-  entity_id: device_tracker.nizmo_phone
+  entity_id: device_tracker.google_maps_104688658658376260645 #nizmo
   state: 'Work'
   type: time
   start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
   end: '{{ now() }}'
 - platform: history_stats
   name: Gosia parents
-  entity_id: device_tracker.gosia_phone
+  entity_id: device_tracker.google_maps_109218123589188227395 #gosia
   state: 'GP'
   type: time
   start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'

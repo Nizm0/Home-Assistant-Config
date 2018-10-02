@@ -14,3 +14,8 @@
   platform: html5
   gcm_api_key: !secret google_push_api_key
   gcm_sender_id: !secret google_push_sender_id
+
+- name: hangouts
+  platform: hangouts
+  default_conversations:
+    - id: UgwLFucuyD1KYDehqHp4AaABAQ

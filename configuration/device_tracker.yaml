@@ -21,7 +21,7 @@
   http_id: !secret tomato_http_id
   interval_seconds: 10
   new_device_defaults:
-    track_new_devices: True
+    track_new_devices: False
     hide_if_away: False
 - platform: gpslogger
 
