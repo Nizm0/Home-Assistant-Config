@@ -86,6 +86,7 @@ cloud: !include configuration/cloud.yaml
 # custom_updater:
 #   card_urls: 
 #     - https://raw.githubusercontent.com/kuuji/button-card/0.0.2/tracker.json
+#     - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
 
 device_tracker: !include configuration/device_tracker.yaml
 frontend:
