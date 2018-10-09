@@ -71,7 +71,7 @@ views:
       #     exclude:
       #       - entity_id: group.*
       - type: picture-elements
-        image: /local/house-element.jpg
+        image: /local/images/house-element.jpg
         elements:
           # - type: state-icon
           #   entity: alarm_control_panel.home_alarm
@@ -169,7 +169,7 @@ views:
               left: 92%
               color: white
       - type: picture-elements
-        image: /local/vacuum_card.jpg
+        image: /local/images/vacuum_card.jpg
         elements:
         - type: icon
           icon: mdi:bell-ring
@@ -178,8 +178,15 @@ views:
           service: vacuum.locate
           style:
             top: 80%
-            left: 80%
+            left: 81%
             "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: state-icon
+          tap_action: toggle
+          entity: input_boolean.ready_to_vacuum
+          style:
+            top: 80%
+            left: 10%
 
         - type: icon
           tap_action: call-service
@@ -188,7 +195,7 @@ views:
           service: vacuum.return_to_base
           style:
             top: 80%
-            left: 60%
+            left: 62%
             "--paper-item-icon-color": rgb(115, 122, 130)
 
         - type: icon
@@ -198,7 +205,7 @@ views:
           service: vacuum.start_pause
           style:
             top: 80%
-            left: 40%
+            left: 43%
             "--paper-item-icon-color": rgb(115, 122, 130)
 
         - type: icon
@@ -208,7 +215,7 @@ views:
           service: vacuum.stop
           style:
             top: 80%
-            left: 20%
+            left: 25%
             "--paper-item-icon-color": rgb(115, 122, 130)
 
         - type: state-label
@@ -246,9 +253,9 @@ views:
             opacity: 0.8
 
         - type: state-label
-          entity: sensor.vacuum_sensor
+          entity: sensor.vacuum_sensors
           style:
-            top: 20%
+            top: 24%
             right: 5%
             color: rgb(255, 255, 255)
             transform: translate(0%,-50%)
@@ -473,32 +480,32 @@ views:
         refresh_interval: 0
         entities:
           - binary_sensor.kitchen_left_window_sensor
-      - type: media-control
-        entity: media_player.office_tv_cast
-      - type: media-control
-        entity: media_player.philips_tv
-      - type: media-control
-        entity: media_player.pc_gpmdp
-      - type: media-control
-        entity: media_player.office_speaker
-      # - type: custom:plant-card
-      #   title: 'Flower inside 1'
-      #   image: images/calathea-zebrina.jpg
-      #   entities:
-      #   - moisture:sensor.flower_inside_1_moisture
-      #   - intensity:sensor.flower_inside_1_light_intensity
-      #   - conductivity:sensor.flower_inside_1_conductivity
-      #   - battery:sensor.flower_inside_1_battery
-      #   - temperature:sensor.flower_inside_1_temperature
-      # - type: custom:plant-card
-      #   title: 'Flower outside'
-      #   image: images/calathea-zebrina.jpg
-      #   entities:
-      #   - moisture:sensor.flower_outside_moisture
-      #   - intensity:sensor.flower_outside_light_intensity
-      #   - conductivity:sensor.flower_outside_conductivity
-      #   - battery:sensor.flower_outside_battery
-      #   - temperature:sensor.flower_outside_temperature
+      - type: entities
+        entities:
+        - entity: media_player.office_speaker
+          # name: Skip, no pause
+        - entity: media_player.pc_gpmdp
+        - entity: media_player.office_tv_cast
+        - entity: media_player.philips_tv
+          # name: Pause, No skip, tvshow
+      - type: custom:plant-card
+        title: 'Flower inside 1'
+        image: images/calathea-zebrina.jpg
+        entities:
+        - moisture:sensor.flower_1_moisture
+        - intensity:sensor.flower_1_light_intensity
+        - conductivity:sensor.flower_1_conductivity
+        - battery:sensor.flower_1_battery
+        - temperature:sensor.flower_1_temperature
+      - type: custom:plant-card
+        title: 'Flower outside'
+        image: images/calathea-zebrina.jpg
+        entities:
+        - moisture:sensor.flower_2_moisture
+        - intensity:sensor.flower_2_light_intensity
+        - conductivity:sensor.flower_2_conductivity
+        - battery:sensor.flower_2_battery
+        - temperature:sensor.flower_2_temperature
 ## Tabs
   - title: Office
     icon: mdi:office

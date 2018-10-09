@@ -3,6 +3,10 @@ vacuum:
   entities:
   - vacuum.rockrobo
   - input_boolean.ready_to_vacuum
+  - sensor.vacuum_sensors
+  - sensor.vacuum_filter
+  - sensor.vacuum_main_brush
+  - sensor.vacuum_side_brush
 # environment:
 #   name: Environment
 #   entities:
