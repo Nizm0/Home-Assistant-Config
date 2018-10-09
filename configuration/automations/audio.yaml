@@ -1,4 +1,5 @@
 - alias: Play pause
+  id: play_pause
   trigger:
     platform: event
     event_type: click
@@ -9,6 +10,7 @@
   - service: media_player.media_pause
     entity_id: media_player.pc_gpmdp
 - alias: Play next
+  id: play_next
   trigger:
     platform: event
     event_type: click
@@ -19,6 +21,7 @@
   - service: media_player.media_next_track
     entity_id: media_player.pc_gpmdp
 - alias: Play previous
+  id: play_previous
   trigger:
     platform: event
     event_type: click

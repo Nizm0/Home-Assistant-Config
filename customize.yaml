@@ -87,6 +87,8 @@ device_tracker.bcddc2018377:
 
 group.all_automations:
   hidden: true
+group.Lovalece_Wether:
+  hidden: true
 
 ################################################
 ## Node Anchors

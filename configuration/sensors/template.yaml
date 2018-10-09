@@ -15,6 +15,44 @@
         {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
         {%- endfor -%}
         {%- endfor -%}
+
+- platform: template
+  sensors:
+    vacuum_battery:
+      friendly_name: "Vacuum - Battery"
+      value_template: "Battery: {{ states.vacuum.rockrobo.attributes.battery_level }}"
+      device_class: battery
+      unit_of_measurement: '%'
+
+- platform: template
+  sensors:
+    vacuum_main_brush:
+      friendly_name: "Vacuum - Main Brush left"
+      value_template: "Battery: {{ states.vacuum.rockrobo.attributes.main_brush_left }}"
+      # device_class: battery
+      # unit_of_measurement: '%'
+- platform: template
+  sensors:
+    vacuum_side_brush:
+      friendly_name: "Vacuum - Side Brush left"
+      value_template: "Battery: {{ states.vacuum.rockrobo.attributes.side_brush_left }}"
+      # device_class: battery
+      # unit_of_measurement: '%'
+- platform: template
+  sensors:
+    vacuum_filter:
+      friendly_name: "Vacuum - Filter left"
+      value_template: "Battery: {{ states.vacuum.rockrobo.attributes.filter_left }}"
+      # device_class: battery
+      # unit_of_measurement: '%'
+- platform: template
+  sensors:
+    vacuum_sensor:
+      friendly_name: "Vacuum - Sensor dirty left"
+      value_template: "Battery: {{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
+      # device_class: battery
+      # unit_of_measurement: '%'
+
 # - platform: template
 #   sensors:
 #     bedroom_battery_level:

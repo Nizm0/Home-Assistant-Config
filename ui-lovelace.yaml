@@ -168,6 +168,99 @@ views:
               top: 95%
               left: 92%
               color: white
+      - type: picture-elements
+        image: /local/vacuum_card.jpg
+        elements:
+        - type: icon
+          icon: mdi:bell-ring
+          tap_action: call-service
+          entity: vacuum.rockrobo
+          service: vacuum.locate
+          style:
+            top: 80%
+            left: 80%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: icon
+          tap_action: call-service
+          icon: mdi:home
+          entity: vacuum.rockrobo
+          service: vacuum.return_to_base
+          style:
+            top: 80%
+            left: 60%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: icon
+          icon: mdi:play-pause
+          tap_action: call-service
+          entity: vacuum.rockrobo
+          service: vacuum.start_pause
+          style:
+            top: 80%
+            left: 40%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: icon
+          icon: mdi:stop
+          tap_action: call-service
+          entity: vacuum.rockrobo
+          service: vacuum.stop
+          style:
+            top: 80%
+            left: 20%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: state-label
+          entity: vacuum.rockrobo
+          style:
+            top: 10%
+            left: 5%
+            color: rgb(255, 255, 255)
+            transform: translate(0%,-50%)
+            pointer-events: none
+            text-shadow: 1px 1px black
+            font-family: Trebuchet MS
+            font-size: 90%
+            font-weight: bold
+            border-left-style: solid
+            border-color: rgb(34, 154, 210)
+            background-color: rgb(54, 65, 78)
+            opacity: 0.8
+
+        - type: state-label
+          entity: sensor.vacuum_battery
+          style:
+            top: 10%
+            right: 5%
+            color: rgb(255, 255, 255)
+            transform: translate(0%,-50%)
+            pointer-events: none
+            text-shadow: 1px 1px black
+            font-family: Trebuchet MS
+            font-size: 90%
+            font-weight: bold
+            border-right-style: solid
+            border-color: rgb(34, 154, 210)
+            background-color: rgb(54, 65, 78)
+            opacity: 0.8
+
+        - type: state-label
+          entity: sensor.vacuum_sensor
+          style:
+            top: 20%
+            right: 5%
+            color: rgb(255, 255, 255)
+            transform: translate(0%,-50%)
+            pointer-events: none
+            text-shadow: 1px 1px black
+            font-family: Trebuchet MS
+            font-size: 90%
+            font-weight: bold
+            border-right-style: solid
+            border-color: rgb(34, 154, 210)
+            background-color: rgb(54, 65, 78)
+            opacity: 0.8
       - type: custom:dark-sky-weather-card
         entity_sun: sun.sun
         entity_daily_summary: sensor.dark_sky_daily_summary

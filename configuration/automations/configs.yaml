@@ -1,4 +1,5 @@
-- alias: 'Misc: Update config if travis build is successfull'
+- alias: Update config if travis build is successfull
+  id: update_config_if_travis_build_is_successfull
   trigger:
     platform: state
     entity_id: sensor.nizm0homeassistantconfig_state
@@ -13,6 +14,7 @@
         title: Travis compiled succesfully
 
 - alias: Change max temp greater than min temp
+  id: change_max_temp_greater_than_min_temp
   trigger:
     - platform: state
       entity_id: input_number.temp_max, input_number.temp_min
@@ -26,7 +28,8 @@
         entity_id: input_number.temp_max
         value: '{{ input_number.temp_min.state }} | float) + 1}}'
 
-- alias: Notify If New Devices
+- alias: Notify if new devices
+  id: notify_if_new_devices
   trigger:
     - platform: event
       event_type: device_tracker_new_device
@@ -97,7 +100,8 @@
 #         value1: NEW DEVICE!
 
 ### Batery status uodate
-- alias: battery_alert
+- alias: Battery alert
+  id: battery_alert
   trigger:
     - platform: time
       at: '10:00:00'
