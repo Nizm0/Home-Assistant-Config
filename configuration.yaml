@@ -57,7 +57,8 @@ tts:
   - platform: google
 
 # android_ip_webcam: !include configuration/android_ip_webcam.yaml
-automation: !include_dir_merge_list configuration/automations/
+automation: !include configuration/automation.yaml
+automation old: !include_dir_merge_list configuration/automations/
 # camera:
 # - platform: ffmpeg
 #   input: FFMPEG_SUPPORTED_INPUT
@@ -123,6 +124,7 @@ ifttt:
 input_boolean: !include configuration/input_boolean.yaml
 light: !include_dir_merge_list configuration/light
 media_player: !include configuration/media_player.yaml
+
 mqtt:
   broker: core-mosquitto
   username: !secret mosquitto_username
@@ -161,6 +163,37 @@ binary_sensor:
 - platform: workday
   country: PL
   workdays: [mon, tue, wed, thu, fri]
+- platform: bayesian
+  name: 'in_bed'
+  prior: 0.25
+  probability_threshold: 0.95
+  observations:
+    - entity_id: 'binary_sensor.corridor_motion_sensor'
+      prob_given_true: 0.4
+      prob_given_false: 0.2
+      platform: 'state'
+      to_state: 'off'
+    - entity_id: 'binary_sensor.office_motion_sensor'
+      prob_given_true: 0.5
+      prob_given_false: 0.4
+      platform: 'state'
+      to_state: 'off'
+    - entity_id: media_player.philips_tv
+      prob_given_true: 0.7
+      platform: state
+      to_state: off
+    - entity_id: device_tracker.google_maps_104688658658376260645
+      prob_give_true: 0.7
+      prob_give_false: 0.7
+      to_state: 'home'
+    # - entity_id: device_tracker.google_maps_109218123589188227395
+    #   prob_give_true: 0.7
+    #   prob_give_false: 0.7
+    #   to_state: 'home'
+    - entity_id: 'sun.sun'
+      prob_given_true: 0.7
+      platform: 'state'
+      to_state: 'below_horizon'
 
 
 panel_iframe:
