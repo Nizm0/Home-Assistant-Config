@@ -3,6 +3,7 @@ vacuum:
   entities:
   - vacuum.rockrobo
   - input_boolean.ready_to_vacuum
+  - sensor.vacuum_battery
   - sensor.vacuum_sensors
   - sensor.vacuum_filter
   - sensor.vacuum_main_brush
