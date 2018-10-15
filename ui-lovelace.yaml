@@ -514,13 +514,39 @@ views:
         entities:
           - binary_sensor.office_balcon_window_sensor
           - binary_sensor.office_motion_sensor
+      - type: sensor
+        entity: sensor.office_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.office_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.office_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: gauge
+        title: Temperature
+        unit_of_measurement: 'C'
+        entity: sensor.office_temperature
+        severity:
+          green: 20
+          yellow: 25
+          red: 30
       - type: entities
         title: Office
         show_header_toggle: true
         entities:
-        - sensor.office_temperature
-        - sensor.office_humidity
-        - sensor.office_pressure
+        # - sensor.office_temperature
+        # - sensor.office_humidity
+        # - sensor.office_pressure
         - light.general_light
         - light.directional_light
         - light.top_light
@@ -536,6 +562,24 @@ views:
   - title: Bedroom
     icon: mdi:bed-empty
     cards:
+      - type: sensor
+        entity: sensor.bedroom_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bedroom_temperature
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bedroom_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         title: Bedroom
         show_header_toggle: true
@@ -547,6 +591,24 @@ views:
   - title: Bathroom
     icon: mdi:shower
     cards:
+      - type: sensor
+        entity: sensor.bathroom_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bathroom_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bathroom_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         title: Bathroom
         show_header_toggle: true
@@ -557,6 +619,24 @@ views:
   - title: Kithen
     icon: mdi:kettle
     cards:
+      - type: sensor
+        entity: sensor.kitchen_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kitchen_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kitchen_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         entities:
           - binary_sensor.kitchen_left_window_sensor
@@ -570,6 +650,24 @@ views:
   - title: Kids room
     icon: mdi:human-child
     cards:
+      - type: sensor
+        entity: sensor.kids_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kids_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kids_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         title: Kids
         show_header_toggle: true

@@ -6,14 +6,19 @@
     entity_id: binary_sensor.corridor_motion_sensor
     to: 'on'
   condition:
-    condition: or
+    condition: and
     conditions:
-    - condition: sun
-      after: sunset
-      after_offset: '00:30:00'
-    - condition: sun
-      before: sunrise
-      before_offset: '-00:30:00'
+    - condition: state
+      entity_id: binary_sensor.home_door_sensor
+      state: 'off'
+    - condition: or
+      conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '00:30:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:30:00'
   action:
   - service: homeassistant.turn_on
     entity_id: script.corridor_motion_detected

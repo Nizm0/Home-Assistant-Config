@@ -16,6 +16,10 @@
     - platform: state
       entity_id: binary_sensor.home_door_sensor
       to: 'off'
+  condition:
+    - platform: state
+      entity_id: binary_sensor.corridor_motion_sensor
+      state: 'off'
   action:
     - service: homeassistant.turn_on
       entity_id: script.home_doors_has_been_closed
