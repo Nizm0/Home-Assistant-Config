@@ -137,9 +137,9 @@ shell_command:
   get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
 shopping_list:
 switch: !include_dir_merge_list configuration/switch
-# weather:
-# - platform: darksky
-#   api_key: !secret darksky_api_key
+weather:
+- platform: darksky
+  api_key: !secret darksky_api_key
 zone: !include configuration/zone.yaml
 
 # fan:

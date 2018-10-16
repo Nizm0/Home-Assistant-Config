@@ -168,6 +168,33 @@ views:
               top: 95%
               left: 92%
               color: white
+      - type: weather-forecast
+        entity: weather.dark_sky
+      # - type: custom:dark-sky-weather-card
+      #   entity_sun: sun.sun
+      #   entity_daily_summary: sensor.dark_sky_daily_summary
+      #   entity_current_conditions: sensor.dark_sky_icon  
+      #   entity_humidity: sensor.dark_sky_humidity
+      #   entity_pressure: sensor.dark_sky_pressure
+      #   entity_temperature: sensor.dark_sky_temperature
+      #   entity_visibility: sensor.dark_sky_visibility
+      #   entity_wind_bearing: sensor.dark_sky_wind_bearing
+      #   entity_wind_speed: sensor.dark_sky_wind_speed
+      #   entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
+      #   entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
+      #   entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
+      #   entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
+      #   entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
+      #   entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature
+      #   entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
+      #   entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
+      #   entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
+      #   entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
+      #   entity_forecast_icon_1: sensor.dark_sky_icon_1
+      #   entity_forecast_icon_2: sensor.dark_sky_icon_2
+      #   entity_forecast_icon_3: sensor.dark_sky_icon_3
+      #   entity_forecast_icon_4: sensor.dark_sky_icon_4
+      #   entity_forecast_icon_5: sensor.dark_sky_icon_5
       - type: picture-elements
         image: /local/images/vacuum_card.jpg
         elements:
@@ -268,31 +295,31 @@ views:
             border-color: rgb(34, 154, 210)
             background-color: rgb(54, 65, 78)
             opacity: 0.8
-      - type: custom:dark-sky-weather-card
-        entity_sun: sun.sun
-        entity_daily_summary: sensor.dark_sky_daily_summary
-        entity_current_conditions: sensor.dark_sky_icon  
-        entity_humidity: sensor.dark_sky_humidity
-        entity_pressure: sensor.dark_sky_pressure
-        entity_temperature: sensor.dark_sky_temperature
-        entity_visibility: sensor.dark_sky_visibility
-        entity_wind_bearing: sensor.dark_sky_wind_bearing
-        entity_wind_speed: sensor.dark_sky_wind_speed
-        entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
-        entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
-        entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
-        entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
-        entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
-        entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature
-        entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
-        entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
-        entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
-        entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
-        entity_forecast_icon_1: sensor.dark_sky_icon_1
-        entity_forecast_icon_2: sensor.dark_sky_icon_2
-        entity_forecast_icon_3: sensor.dark_sky_icon_3
-        entity_forecast_icon_4: sensor.dark_sky_icon_4
-        entity_forecast_icon_5: sensor.dark_sky_icon_5
+      # - type: custom:dark-sky-weather-card
+      #   entity_sun: sun.sun
+      #   entity_daily_summary: sensor.dark_sky_daily_summary
+      #   entity_current_conditions: sensor.dark_sky_icon  
+      #   entity_humidity: sensor.dark_sky_humidity
+      #   entity_pressure: sensor.dark_sky_pressure
+      #   entity_temperature: sensor.dark_sky_temperature
+      #   entity_visibility: sensor.dark_sky_visibility
+      #   entity_wind_bearing: sensor.dark_sky_wind_bearing
+      #   entity_wind_speed: sensor.dark_sky_wind_speed
+      #   entity_forecast_high_temp_1: sensor.dark_sky_daytime_high_temperature_1
+      #   entity_forecast_high_temp_2: sensor.dark_sky_daytime_high_temperature_2
+      #   entity_forecast_high_temp_3: sensor.dark_sky_daytime_high_temperature_3
+      #   entity_forecast_high_temp_4: sensor.dark_sky_daytime_high_temperature_4
+      #   entity_forecast_high_temp_5: sensor.dark_sky_daytime_high_temperature_5
+      #   entity_forecast_low_temp_1: sensor.dark_sky_overnight_low_temperature
+      #   entity_forecast_low_temp_2: sensor.dark_sky_overnight_low_temperature_1
+      #   entity_forecast_low_temp_3: sensor.dark_sky_overnight_low_temperature_2
+      #   entity_forecast_low_temp_4: sensor.dark_sky_overnight_low_temperature_3
+      #   entity_forecast_low_temp_5: sensor.dark_sky_overnight_low_temperature_4
+      #   entity_forecast_icon_1: sensor.dark_sky_icon_1
+      #   entity_forecast_icon_2: sensor.dark_sky_icon_2
+      #   entity_forecast_icon_3: sensor.dark_sky_icon_3
+      #   entity_forecast_icon_4: sensor.dark_sky_icon_4
+      #   entity_forecast_icon_5: sensor.dark_sky_icon_5
       - type: entity-filter
         title: All lights
         show_header_toggle: false
@@ -498,7 +525,7 @@ views:
         - battery:sensor.flower_1_battery
         - temperature:sensor.flower_1_temperature
       - type: custom:plant-card
-        title: 'Flower outside'
+        title: 'Flower inside 2'
         image: images/calathea-zebrina.jpg
         entities:
         - moisture:sensor.flower_2_moisture
@@ -506,6 +533,24 @@ views:
         - conductivity:sensor.flower_2_conductivity
         - battery:sensor.flower_2_battery
         - temperature:sensor.flower_2_temperature
+      - type: custom:plant-card
+        title: 'Flower inside 3'
+        image: images/calathea-zebrina.jpg
+        entities:
+        - moisture:sensor.flower_3_moisture
+        - intensity:sensor.flower_3_light_intensity
+        - conductivity:sensor.flower_3_conductivity
+        - battery:sensor.flower_3_battery
+        - temperature:sensor.flower_3_temperature
+      - type: custom:plant-card
+        title: 'Flower inside 4'
+        image: images/calathea-zebrina.jpg
+        entities:
+        - moisture:sensor.flower_4_moisture
+        - intensity:sensor.flower_4_light_intensity
+        - conductivity:sensor.flower_4_conductivity
+        - battery:sensor.flower_4_battery
+        - temperature:sensor.flower_4_temperature
 ## Tabs
   - title: Office
     icon: mdi:office
@@ -529,7 +574,7 @@ views:
       - type: sensor
         entity: sensor.office_pressure
         name: Presure
-        height: 1100
+        height: 100
         line_color: "#3498db"
         hours_to_show: 48
       - type: gauge
@@ -551,14 +596,14 @@ views:
         - light.directional_light
         - light.top_light
         - light.tv_ambilights
-      - type: media-control
-        entity: media_player.pc_gpmdp
-      - type: media-control
-        entity: media_player.philips_tv
-      - type: media-control
-        entity: media_player.office_speaker
-      - type: media-control
-        entity: media_player.office_tv_cast
+      - type: entities
+        entities:
+        - entity: media_player.office_speaker
+          # name: Skip, no pause
+        - entity: media_player.pc_gpmdp
+        - entity: media_player.office_tv_cast
+        - entity: media_player.philips_tv
+          # name: Pause, No skip, tvshow
   - title: Bedroom
     icon: mdi:bed-empty
     cards:
@@ -569,7 +614,7 @@ views:
         line_color: "#3498db"
         hours_to_show: 48
       - type: sensor
-        entity: sensor.bedroom_temperature
+        entity: sensor.bedroom_humidity
         name: Humidity
         height: 80
         line_color: "#3498db"
@@ -577,7 +622,7 @@ views:
       - type: sensor
         entity: sensor.bedroom_pressure
         name: Presure
-        height: 1100
+        height: 100
         line_color: "#3498db"
         hours_to_show: 48
       - type: entities
@@ -606,7 +651,7 @@ views:
       - type: sensor
         entity: sensor.bathroom_pressure
         name: Presure
-        height: 1100
+        height: 100
         line_color: "#3498db"
         hours_to_show: 48
       - type: entities
@@ -634,7 +679,7 @@ views:
       - type: sensor
         entity: sensor.kitchen_pressure
         name: Presure
-        height: 1100
+        height: 100
         line_color: "#3498db"
         hours_to_show: 48
       - type: entities
@@ -665,7 +710,7 @@ views:
       - type: sensor
         entity: sensor.kids_pressure
         name: Presure
-        height: 1100
+        height: 100
         line_color: "#3498db"
         hours_to_show: 48
       - type: entities

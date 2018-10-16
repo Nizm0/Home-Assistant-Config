@@ -32,6 +32,8 @@ flower_temp:
   entities:
   - sensor.flower_1_temperature
   - sensor.flower_2_temperature
+  - sensor.flower_3_temperature
+  - sensor.flower_4_temperature
   hours_to_show: 240
   refresh: 60
 flower_conductivity:
@@ -39,6 +41,8 @@ flower_conductivity:
   entities:
   - sensor.flower_1_conductivity
   - sensor.flower_2_conductivity
+  - sensor.flower_3_conductivity
+  - sensor.flower_4_conductivity
   hours_to_show: 240
   refresh: 60
 flower_moisture:
@@ -46,6 +50,8 @@ flower_moisture:
   entities:
   - sensor.flower_1_moisture
   - sensor.flower_2_moisture
+  - sensor.flower_3_moisture
+  - sensor.flower_4_moisture
   hours_to_show: 240
   refresh: 60
 # flower_light_intensity:

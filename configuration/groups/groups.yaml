@@ -93,19 +93,33 @@ Financial:
 - sensor.yeelight_smart_light_strip
 # - sensor.xiaomi_door_window_sensor
 
-Flower inside 1:
+Flower outside:
 - sensor.flower_1_battery
 - sensor.flower_1_conductivity
 - sensor.flower_1_light_intensity
 - sensor.flower_1_moisture
 - sensor.flower_1_temperature
 
-Flower outside:
+Flower inside 2:
 - sensor.flower_2_battery
 - sensor.flower_2_conductivity
 - sensor.flower_2_light_intensity
 - sensor.flower_2_moisture
 - sensor.flower_2_temperature
+
+Flower inside 3:
+- sensor.flower_3_battery
+- sensor.flower_3_conductivity
+- sensor.flower_3_light_intensity
+- sensor.flower_3_moisture
+- sensor.flower_3_temperature
+
+Flower inside 4:
+- sensor.flower_4_battery
+- sensor.flower_4_conductivity
+- sensor.flower_4_light_intensity
+- sensor.flower_4_moisture
+- sensor.flower_4_temperature
 
 AirQuality:
 - sensor.chinese_air_pollution_level
