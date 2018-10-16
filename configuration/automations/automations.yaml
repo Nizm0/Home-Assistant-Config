@@ -1,4 +1,5 @@
 - alias: Notify on sun change
+  id: notify_on_sun_change
   trigger:
   - event: sunrise
     platform: sun
@@ -26,15 +27,15 @@
     #       We have {% if states.sun.sun.state == 'below_horizon' %}sunset{% else %}sunrize{% endif %} "states.sun.sun.state"
     #     title: Sun is changin state
 
-- alias: Change kids lights
-  trigger:
-    - platform: state
-      entity_id: input_boolean.kids_light
-  action:
-    - service: ifttt.trigger
-      data_template:
-        event: "{% if trigger.to_state.state == 'on' %}kids_light_on{% else %}kids_light_off{% endif %}"
-        value1: "{{ trigger.to_state.state }}"
+# - alias: Change kids lights
+#   trigger:
+#     - platform: state
+#       entity_id: input_boolean.kids_light
+#   action:
+#     - service: ifttt.trigger
+#       data_template:
+#         event: "{% if trigger.to_state.state == 'on' %}kids_light_on{% else %}kids_light_off{% endif %}"
+#         value1: "{{ trigger.to_state.state }}"
     # - service: persistent_notification.create
     #   data_template:
     #     message: "Kids room switch changed to {{ trigger.to_state.state }}"

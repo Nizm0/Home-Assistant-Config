@@ -1,23 +1,30 @@
 #### MOTION BEGUN
 - alias: Corridor motion detected
+  id: corridor_motion_detected
   trigger:
   - platform: state
     entity_id: binary_sensor.corridor_motion_sensor
     to: 'on'
   condition:
-    condition: or
+    condition: and
     conditions:
-    - condition: sun
-      after: sunset
-      after_offset: '00:30:00'
-    - condition: sun
-      before: sunrise
-      before_offset: '-00:30:00'
+    - condition: state
+      entity_id: binary_sensor.home_door_sensor
+      state: 'off'
+    - condition: or
+      conditions:
+      - condition: sun
+        after: sunset
+        after_offset: '00:30:00'
+      - condition: sun
+        before: sunrise
+        before_offset: '-00:30:00'
   action:
   - service: homeassistant.turn_on
     entity_id: script.corridor_motion_detected
 
 - alias: Motion detected in empty home
+  id: motion_detected_in_empty_home
   trigger:
   - platform: state
     entity_id: binary_sensor.corridor_motion_sensor, binary_sensor.office_motion_sensor
@@ -43,6 +50,7 @@
 
 #### MOTION OVER
 - alias: Corridor motion over
+  id: corridor_motion_over
   trigger:
   - platform: state
     entity_id: binary_sensor.corridor_motion_sensor

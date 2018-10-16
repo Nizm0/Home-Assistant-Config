@@ -17,10 +17,18 @@
   longitude: !secret gosia_parents_longitude
   radius: 100
 - name: Kindergarden
-  latitude: 51.1034798
-  longitude: 17.0838719
+  latitude: !secret kindergarden_latitude
+  longitude: !secret kindergarden_longitude
   radius: 150
 - name: Nursery
-  latitude: 51.1062541
-  longitude: 17.0206531
+  latitude: !secret nursery_latitude
+  longitude: !secret nursery_longitude
   radius: 250
+- name: UP Ch
+  latitude: 51.099976
+  longitude: 17.095733
+  radius: 250
+- name: UP G
+  latitude: 51.113061
+  longitude: 17.063483
+  radius: 100

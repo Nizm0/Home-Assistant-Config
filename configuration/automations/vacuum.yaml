@@ -1,4 +1,5 @@
 - alias: Vacuum start cleaning
+  id: vacuum_start_cleaning
   trigger:
   - platform: state
   #   value_template: "{% if is_state('vacuum.rockrobo.status', 'cleaning') %}true{% endif %}"
@@ -17,28 +18,30 @@
         Vacuum has started and now is {{ trigger.to_state.state }}
       title: Vacuum start working
 
-- alias: Vacuum end cleaning finished
-  trigger:
-  # - platform: template
-  #   value_template: "{% if is_state('vacuum.rockrobo', 'docked') or is_state('vacuum.rockrobo', 'returning') %}true{% endif %}"
-    # to: 'docked' # cleaning, returning, idle, blocked, error, docked
-  - platform: state
-    entity_id: vacuum.rockrobo
-    from: 'cleaning'
-    to: 'returning' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working template
-  - service: notify.pushbullet_nizmo
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working template
+# - alias: Vacuum end cleaning finished
+#   id: vacuum_end_cleaning_finished
+#   trigger:
+#   # - platform: template
+#   #   value_template: "{% if is_state('vacuum.rockrobo', 'docked') or is_state('vacuum.rockrobo', 'returning') %}true{% endif %}"
+#     # to: 'docked' # cleaning, returning, idle, blocked, error, docked
+#   - platform: state
+#     entity_id: vacuum.rockrobo
+#     from: 'cleaning'
+#     to: 'returning' # cleaning, returning, idle, blocked, error, docked
+#   action:
+#   - service: notify.push_to_chrome
+#     data_template:
+#       message: >
+#         Vacuum has stoped and now is {{ trigger.to_state.state }}
+#       title: Vacuum stopt working template
+#   - service: notify.pushbullet_nizmo
+#     data_template:
+#       message: >
+#         Vacuum has stoped and now is {{ trigger.to_state.state }}
+#       title: Vacuum stopt working template
 
 - alias: Vacuum end cleaning finisheda and docked
+  id: vacuum_end_cleaning_finisheda_and_docked
   trigger:
   - platform: state
     entity_id: vacuum.rockrobo
@@ -57,6 +60,7 @@
       title: Vacuum finished working
 
 - alias: Vacuum have encounter problem
+  id: vacuum_have_encounter_problem
   trigger:
   - platform: state
     entity_id: vacuum.rockrobo
@@ -67,14 +71,15 @@
     data_template:
       message: >
         Vacuum has encounter {{ trigger.to_state.state }} and stoped
-      title: Vacuum encounter problem
+      title: The vacuum cleaner found a problem
   - service: notify.pushbullet_nizmo
     data_template:
       message: >
         Vacuum has encounter {{ trigger.to_state.state }} and stoped
-      title: Vacuum encounter problem
+      title: The vacuum cleaner found a problem
 
 - alias: Weekday Vacuum
+  id: weekday_vacuum
   trigger:
   - platform: time
     at: '15:00:00'
@@ -94,5 +99,42 @@
       entity_id: input_boolean.ready_to_vacuum
       state: "on"
   action:
-    service: vacuum.start
+  - service: vacuum.start
     entity_id: vacuum.rockrobo
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.ready_to_vacuum
+
+- alias: Vacuum monitoring system for sensors
+  id: vacuum_monitoring_system_for_sensors
+  trigger:
+  - platform: template
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', '2') %}true{%endif%}"
+  action:
+  - service: calendar.todoist_new_task
+    data_template:
+      content: "Clean sensors in vacuum rockrobo"
+      priority: 2
+
+- alias: Vacuum monitoring system for filters
+  id: vacuum_monitoring_system_for_filters
+  trigger:
+  - platform: template
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'filter_left', '10') %}true{%endif%}"
+  action:
+  - service: calendar.todoist_new_task
+    data_template:
+      content: "Replace filter in vacuum rockrobo"
+      priority: 2
+
+- alias: Vacuum monitoring system for brushes
+  id: vacuum_monitoring_system_for_brushes
+  trigger:
+  - platform: template
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'side_brush_left', '10') %}true{%endif%}"
+  - platform: template
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'main_brush_left', '10') %}true{%endif%}"
+  action:
+  - service: calendar.todoist_new_task
+    data_template:
+      content: "Replace side or main brush in vacuum rockrobo"
+      priority: 2

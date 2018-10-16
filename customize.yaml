@@ -70,6 +70,15 @@ binary_sensor.office_balcon_window_sensor:
 binary_sensor.kitchen_left_window_sensor:
   device_class: window
 
+# input_boolean.ready_to_vacuum:
+#   templates:
+#     # icon: >
+#     #   if (state === 'on') return 'mdi:bell';
+#     #   return 'mdi:bell-off';
+#     icon_color: >
+#       if (state === 'on') return 'rgb(251, 210, 41)';
+#       return 'rgb(54, 95, 140)';
+
 # switch.light_1:
 #   # device_class: light
 #   icon: mdi:lightbulb
@@ -86,7 +95,9 @@ device_tracker.bcddc2018377:
   hidden: yes
 
 group.all_automations:
-  hidden: true
+  hidden: yes
+# group.lovalece_weather:
+#   hidden: yes
 
 ################################################
 ## Node Anchors

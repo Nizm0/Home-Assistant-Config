@@ -3,6 +3,11 @@ vacuum:
   entities:
   - vacuum.rockrobo
   - input_boolean.ready_to_vacuum
+  - sensor.vacuum_battery
+  - sensor.vacuum_sensors
+  - sensor.vacuum_filter
+  - sensor.vacuum_main_brush
+  - sensor.vacuum_side_brush
 # environment:
 #   name: Environment
 #   entities:
@@ -128,28 +133,3 @@ AirQuality:
     # - sensor.office_camera_proximity
     # - sensor.office_camera_sound
     # - sensor.office_camera_video_connections
-
-Weather Summary:
-- sensor.dark_sky_summary
-# - sensor.dark_sky_minutely_summary
-- sensor.dark_sky_hourly_summary
-- sensor.dark_sky_daily_summary
-
-Weather:
-- sun.sun
-- sensor.moon
-- sensor.dark_sky_temperature
-- sensor.dark_sky_apparent_temperature
-- sensor.dark_sky_humidity
-- sensor.dark_sky_cloud_coverage
-- sensor.dark_sky_precip
-- sensor.dark_sky_precip_probability
-- sensor.dark_sky_precip_intensity
-# - sensor.dark_sky_nearest_storm_distance
-# - sensor.dark_sky_nearest_storm_bearing
-- sensor.dark_sky_wind_speed
-- sensor.dark_sky_wind_bearing
-- sensor.dark_sky_visibility
-- sensor.dark_sky_ozone
-- sensor.dark_sky_pressure
-- sensor.dark_sky_dew_point

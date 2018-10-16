@@ -71,7 +71,7 @@ views:
       #     exclude:
       #       - entity_id: group.*
       - type: picture-elements
-        image: /local/house-element.jpg
+        image: /local/images/house-element.jpg
         elements:
           # - type: state-icon
           #   entity: alarm_control_panel.home_alarm
@@ -168,6 +168,106 @@ views:
               top: 95%
               left: 92%
               color: white
+      - type: picture-elements
+        image: /local/images/vacuum_card.jpg
+        elements:
+        - type: icon
+          icon: mdi:bell-ring
+          tap_action: call-service
+          entity: vacuum.rockrobo
+          service: vacuum.locate
+          style:
+            top: 80%
+            left: 81%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: state-icon
+          tap_action: toggle
+          entity: input_boolean.ready_to_vacuum
+          style:
+            top: 80%
+            left: 10%
+
+        - type: icon
+          tap_action: call-service
+          icon: mdi:home
+          entity: vacuum.rockrobo
+          service: vacuum.return_to_base
+          style:
+            top: 80%
+            left: 62%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: icon
+          icon: mdi:play-pause
+          tap_action: call-service
+          entity: vacuum.rockrobo
+          service: vacuum.start_pause
+          style:
+            top: 80%
+            left: 43%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: icon
+          icon: mdi:stop
+          tap_action: call-service
+          entity: vacuum.rockrobo
+          service: vacuum.stop
+          style:
+            top: 80%
+            left: 25%
+            "--paper-item-icon-color": rgb(115, 122, 130)
+
+        - type: state-label
+          entity: vacuum.rockrobo
+          style:
+            top: 10%
+            left: 5%
+            color: rgb(255, 255, 255)
+            transform: translate(0%,-50%)
+            pointer-events: none
+            text-shadow: 1px 1px black
+            font-family: Trebuchet MS
+            font-size: 90%
+            font-weight: bold
+            border-left-style: solid
+            border-color: rgb(34, 154, 210)
+            background-color: rgb(54, 65, 78)
+            opacity: 0.8
+
+        - type: state-label
+          entity: sensor.vacuum_battery
+          style:
+            top: 10%
+            right: 5%
+            color: rgb(255, 255, 255)
+            transform: translate(0%,-50%)
+            pointer-events: none
+            text-shadow: 1px 1px black
+            font-family: Trebuchet MS
+            font-size: 90%
+            font-weight: bold
+            border-right-style: solid
+            border-color: rgb(34, 154, 210)
+            background-color: rgb(54, 65, 78)
+            opacity: 0.8
+
+        - type: state-label
+          entity: sensor.vacuum_sensors
+          style:
+            top: 24%
+            right: 5%
+            color: rgb(255, 255, 255)
+            transform: translate(0%,-50%)
+            pointer-events: none
+            text-shadow: 1px 1px black
+            font-family: Trebuchet MS
+            font-size: 90%
+            font-weight: bold
+            border-right-style: solid
+            border-color: rgb(34, 154, 210)
+            background-color: rgb(54, 65, 78)
+            opacity: 0.8
       - type: custom:dark-sky-weather-card
         entity_sun: sun.sun
         entity_daily_summary: sensor.dark_sky_daily_summary
@@ -380,32 +480,32 @@ views:
         refresh_interval: 0
         entities:
           - binary_sensor.kitchen_left_window_sensor
-      - type: media-control
-        entity: media_player.office_tv_cast
-      - type: media-control
-        entity: media_player.philips_tv
-      - type: media-control
-        entity: media_player.pc_gpmdp
-      - type: media-control
-        entity: media_player.office_speaker
-      # - type: custom:plant-card
-      #   title: 'Flower inside 1'
-      #   image: images/calathea-zebrina.jpg
-      #   entities:
-      #   - moisture:sensor.flower_inside_1_moisture
-      #   - intensity:sensor.flower_inside_1_light_intensity
-      #   - conductivity:sensor.flower_inside_1_conductivity
-      #   - battery:sensor.flower_inside_1_battery
-      #   - temperature:sensor.flower_inside_1_temperature
-      # - type: custom:plant-card
-      #   title: 'Flower outside'
-      #   image: images/calathea-zebrina.jpg
-      #   entities:
-      #   - moisture:sensor.flower_outside_moisture
-      #   - intensity:sensor.flower_outside_light_intensity
-      #   - conductivity:sensor.flower_outside_conductivity
-      #   - battery:sensor.flower_outside_battery
-      #   - temperature:sensor.flower_outside_temperature
+      - type: entities
+        entities:
+        - entity: media_player.office_speaker
+          # name: Skip, no pause
+        - entity: media_player.pc_gpmdp
+        - entity: media_player.office_tv_cast
+        - entity: media_player.philips_tv
+          # name: Pause, No skip, tvshow
+      - type: custom:plant-card
+        title: 'Flower inside 1'
+        image: images/calathea-zebrina.jpg
+        entities:
+        - moisture:sensor.flower_1_moisture
+        - intensity:sensor.flower_1_light_intensity
+        - conductivity:sensor.flower_1_conductivity
+        - battery:sensor.flower_1_battery
+        - temperature:sensor.flower_1_temperature
+      - type: custom:plant-card
+        title: 'Flower outside'
+        image: images/calathea-zebrina.jpg
+        entities:
+        - moisture:sensor.flower_2_moisture
+        - intensity:sensor.flower_2_light_intensity
+        - conductivity:sensor.flower_2_conductivity
+        - battery:sensor.flower_2_battery
+        - temperature:sensor.flower_2_temperature
 ## Tabs
   - title: Office
     icon: mdi:office
@@ -414,13 +514,39 @@ views:
         entities:
           - binary_sensor.office_balcon_window_sensor
           - binary_sensor.office_motion_sensor
+      - type: sensor
+        entity: sensor.office_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.office_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.office_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: gauge
+        title: Temperature
+        unit_of_measurement: 'C'
+        entity: sensor.office_temperature
+        severity:
+          green: 20
+          yellow: 25
+          red: 30
       - type: entities
         title: Office
         show_header_toggle: true
         entities:
-        - sensor.office_temperature
-        - sensor.office_humidity
-        - sensor.office_pressure
+        # - sensor.office_temperature
+        # - sensor.office_humidity
+        # - sensor.office_pressure
         - light.general_light
         - light.directional_light
         - light.top_light
@@ -436,6 +562,24 @@ views:
   - title: Bedroom
     icon: mdi:bed-empty
     cards:
+      - type: sensor
+        entity: sensor.bedroom_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bedroom_temperature
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bedroom_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         title: Bedroom
         show_header_toggle: true
@@ -447,6 +591,24 @@ views:
   - title: Bathroom
     icon: mdi:shower
     cards:
+      - type: sensor
+        entity: sensor.bathroom_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bathroom_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.bathroom_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         title: Bathroom
         show_header_toggle: true
@@ -457,6 +619,24 @@ views:
   - title: Kithen
     icon: mdi:kettle
     cards:
+      - type: sensor
+        entity: sensor.kitchen_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kitchen_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kitchen_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         entities:
           - binary_sensor.kitchen_left_window_sensor
@@ -470,6 +650,24 @@ views:
   - title: Kids room
     icon: mdi:human-child
     cards:
+      - type: sensor
+        entity: sensor.kids_temperature
+        name: Temperature
+        height: 40
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kids_humidity
+        name: Humidity
+        height: 80
+        line_color: "#3498db"
+        hours_to_show: 48
+      - type: sensor
+        entity: sensor.kids_pressure
+        name: Presure
+        height: 1100
+        line_color: "#3498db"
+        hours_to_show: 48
       - type: entities
         title: Kids
         show_header_toggle: true
