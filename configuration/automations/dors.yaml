@@ -17,7 +17,7 @@
       entity_id: binary_sensor.home_door_sensor
       to: 'off'
   condition:
-    - platform: state
+    - condition: state
       entity_id: binary_sensor.corridor_motion_sensor
       state: 'off'
   action:
