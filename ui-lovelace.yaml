@@ -33,8 +33,10 @@ views:
         entities:
         - device_tracker.nizmo_phone
         - device_tracker.google_maps_104688658658376260645
+          # secondary_info: battery_level
         - device_tracker.gosia_phone
         - device_tracker.google_maps_109218123589188227395
+          # secondary_info: battery_level
         - device_tracker.babcia_teresa
         - device_tracker.portex
         - device_tracker.bozena_phone
@@ -516,7 +518,7 @@ views:
         - entity: media_player.philips_tv
           # name: Pause, No skip, tvshow
       - type: custom:plant-card
-        title: 'Flower inside 1'
+        title: 'Flower outside'
         image: images/calathea-zebrina.jpg
         entities:
         - moisture:sensor.flower_1_moisture
@@ -525,7 +527,7 @@ views:
         - battery:sensor.flower_1_battery
         - temperature:sensor.flower_1_temperature
       - type: custom:plant-card
-        title: 'Flower inside 2'
+        title: 'Flower inside office'
         image: images/calathea-zebrina.jpg
         entities:
         - moisture:sensor.flower_2_moisture
@@ -534,7 +536,7 @@ views:
         - battery:sensor.flower_2_battery
         - temperature:sensor.flower_2_temperature
       - type: custom:plant-card
-        title: 'Flower inside 3'
+        title: 'Flower inside kids room'
         image: images/calathea-zebrina.jpg
         entities:
         - moisture:sensor.flower_3_moisture
@@ -543,7 +545,7 @@ views:
         - battery:sensor.flower_3_battery
         - temperature:sensor.flower_3_temperature
       - type: custom:plant-card
-        title: 'Flower inside 4'
+        title: 'Flower inside kitchen'
         image: images/calathea-zebrina.jpg
         entities:
         - moisture:sensor.flower_4_moisture

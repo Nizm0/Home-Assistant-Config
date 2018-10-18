@@ -23,7 +23,7 @@
 - name: Nursery
   latitude: !secret nursery_latitude
   longitude: !secret nursery_longitude
-  radius: 250
+  radius: 150
 - name: UP Ch
   latitude: 51.099976
   longitude: 17.095733
