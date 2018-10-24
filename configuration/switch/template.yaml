@@ -1,0 +1,13 @@
+- platform: template
+  switches:
+    rockrobo_switch:
+      entity_id: vacuum.rockrobo
+      value_template: "{{ is_state('vacuum.rockrobo', 'docked') }}"
+      turn_on:
+        service: vacuum.start_pause
+        data:
+          entity_id: vacuum.rockrobo
+      turn_off:
+        service: vacuum.stop
+        data:
+          entity_id: vacuum.rockrobo
