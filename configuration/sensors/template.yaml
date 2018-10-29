@@ -19,37 +19,42 @@
 - platform: template
   sensors:
     vacuum_battery:
+      entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Battery"
-      value_template: "Battery: {{ states.vacuum.rockrobo.attributes.battery_level }}"
+      value_template: "{{ states.vacuum.rockrobo.attributes.battery_level }}"
       device_class: battery
       unit_of_measurement: '%'
 
 - platform: template
   sensors:
     vacuum_main_brush:
+      entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Main Brush left"
-      value_template: "Main brush: {{ states.vacuum.rockrobo.attributes.main_brush_left }}"
+      value_template: "{{ states.vacuum.rockrobo.attributes.main_brush_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
 - platform: template
   sensors:
     vacuum_side_brush:
+      entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Side Brush left"
-      value_template: "Side brush: {{ states.vacuum.rockrobo.attributes.side_brush_left }}"
+      value_template: "{{ states.vacuum.rockrobo.attributes.side_brush_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
 - platform: template
   sensors:
     vacuum_filter:
+      entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Filter left"
-      value_template: "Filter: {{ states.vacuum.rockrobo.attributes.filter_left }}"
+      value_template: "{{ states.vacuum.rockrobo.attributes.filter_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
 - platform: template
   sensors:
     vacuum_sensors:
+      entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Sensor dirty left"
-      value_template: "Sensors: {{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
+      value_template: "{{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
 

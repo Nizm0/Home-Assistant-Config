@@ -2,7 +2,7 @@
   switches:
     rockrobo_switch:
       entity_id: vacuum.rockrobo
-      value_template: "{{ is_state('vacuum.rockrobo', 'docked') }}"
+      value_template: "{{ is_state('vacuum.rockrobo', 'cleaning') }}"
       turn_on:
         service: vacuum.start_pause
         data:
