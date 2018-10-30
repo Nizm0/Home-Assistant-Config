@@ -24,6 +24,7 @@ http:
   # login_attempts_threshold: 5
   trusted_networks:
   - 127.0.0.1
+  - 165.225.84.96
   - 172.19.0.0/24
   - 192.168.1.0/24
   - 192.168.2.0/24
@@ -171,12 +172,12 @@ binary_sensor:
   observations:
     - entity_id: 'binary_sensor.corridor_motion_sensor'
       prob_given_true: 0.5
-      prob_given_false: 0.5
+      prob_given_false: 0.3
       platform: 'state'
       to_state: 'off'
     - entity_id: 'binary_sensor.office_motion_sensor'
       prob_given_true: 0.5
-      prob_given_false: 0.5
+      prob_given_false: 0.3
       platform: 'state'
       to_state: 'off'
     - entity_id: media_player.philips_tv
