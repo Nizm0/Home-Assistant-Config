@@ -5,8 +5,8 @@
       entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
       zone: zone.work
       event: leave
-      for:
-        minutes: 2
+      # for:
+      #   minutes: 2
   condition:
   action: 
   - service: notify.push_to_chrome
