@@ -3,10 +3,10 @@
 kids_light:
   name: Main light
   icon: mdi:lightbulb
-  initial: off
+  # initial: off
 
 ready_to_vacuum:
   name: Flor is ready to vacuum
   icon: mdi:robot-vacuum
-  initial: off
+  # initial: off
   # restore_state:

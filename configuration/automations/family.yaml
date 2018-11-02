@@ -1,0 +1,61 @@
+- alias: Michał is out from Work
+  id: michal_is_out_from_home
+  trigger: 
+    - platform: zone
+      entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
+      zone: zone.work
+      event: leave
+      for:
+        minutes: 2
+  condition:
+  action: 
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Michał is out form work
+  - service: notify.hangouts
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Michał is out form work
+
+- alias: Michał entered the house
+  id: michal_is_out_from_home
+  trigger: 
+    - platform: zone
+      entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
+      zone: zone.home
+      event: enter
+  condition:
+  action: 
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Michał entered the house
+  - service: notify.hangouts
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Michał entered the house
+
+- alias: Gosia entered the house
+  id: michal_is_out_from_home
+  trigger: 
+    - platform: zone
+      entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
+      zone: zone.home
+      event: enter
+  condition:
+  action: 
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Gosia entered the house
+  - service: notify.hangouts
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Gosia entered the house
