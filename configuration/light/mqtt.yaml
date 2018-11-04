@@ -1,5 +1,6 @@
+### D1 Mini
 - platform: mqtt
-  name: General light 
+  name: General light
   state_topic: "stat/d1mini-office/POWER1"
   command_topic: "cmnd/d1mini-office/POWER1"
   availability_topic: "tele/d1mini-office/LWT"
@@ -31,6 +32,64 @@
   state_topic: "stat/d1mini-office/POWER4"
   command_topic: "cmnd/d1mini-office/POWER4"
   availability_topic: "tele/d1mini-office/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  payload_on: "ON"
+  payload_off: "OFF"
+  state_on: "ON"
+  state_off: "OFF"
+  optimistic: false
+  qos: 0
+  retain: false
+
+### Shelsies
+- platform: mqtt
+  name: Kitchen top light
+  state_topic: "shellies/shelly1-4A5B11/relay/0"
+  command_topic: "shellies/shelly1-4A5B11/relay/0/command"
+  # availability_topic: "tele/d1mini-office/LWT"
+  # payload_available: "Online"
+  # payload_not_available: "Offline"
+  payload_on: "on"
+  payload_off: "off"
+  # state_on: "ON"
+  # state_off: "OFF"
+  optimistic: false
+  qos: 2
+  retain: false
+- platform: mqtt
+  name: Hallway top light
+  state_topic: "stat/shelly1-hallway/POWER"
+  command_topic: "cmnd/shelly1-hallway/POWER"
+  availability_topic: "tele/shelly1-hallway/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  payload_on: "ON"
+  payload_off: "OFF"
+  state_on: "ON"
+  state_off: "OFF"
+  optimistic: false
+  qos: 0
+  retain: false
+- platform: mqtt
+  name: Bathroom top light
+  state_topic: "stat/shelly1-bathroom/POWER"
+  command_topic: "cmnd/shelly1-bathroom/POWER"
+  availability_topic: "tele/shelly1-bathroom/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+  payload_on: "ON"
+  payload_off: "OFF"
+  state_on: "ON"
+  state_off: "OFF"
+  optimistic: false
+  qos: 0
+  retain: false
+- platform: mqtt
+  name: Kids top light
+  state_topic: "stat/shelly1-kids/POWER"
+  command_topic: "cmnd/shelly1-kids/POWER"
+  availability_topic: "tele/shelly1-kids/LWT"
   payload_available: "Online"
   payload_not_available: "Offline"
   payload_on: "ON"
