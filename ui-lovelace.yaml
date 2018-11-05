@@ -537,20 +537,24 @@ views:
     title: Office
     icon: mdi:office
     cards:
-      - type: vertical-stack
-        card:
-          - type: light
-            entity_id: light.general_light
-            # tap_action: toggle
-          - type: light
-            entity_id: light.directional_light
-            # tap_action: toggle
-          - type: light
-            entity_id: light.top_light
-            # tap_action: toggle
-          - type: light
-            entity_id: light.tv_ambilights
-            # tap_action: toggle
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: light.general_light
+            tap_action: toggle
+            hold_action: more-info
+          - type: entity-button
+            entity: light.directional_light
+            tap_action: toggle
+            hold_action: more-info
+          - type: entity-button
+            entity: light.top_light
+            tap_action: toggle
+            hold_action: more-info
+          - type: entity-button
+            entity: light.tv_ambilights
+            tap_action: toggle
+            hold_action: more-info
       - id: 0415f952da314e2a94bf007aad3d3353  # Automatically created id
         type: entities
         entities:
@@ -586,18 +590,18 @@ views:
           green: 20
           yellow: 25
           red: 30
-      - id: 2be749dbd0824c3aac6693c6c65120a9  # Automatically created id
-        type: entities
-        title: Office
-        show_header_toggle: true
-        entities:
-        # - sensor.office_temperature
-        # - sensor.office_humidity
-        # - sensor.office_pressure
-          - light.general_light
-          - light.directional_light
-          - light.top_light
-          - light.tv_ambilights
+      # - id: 2be749dbd0824c3aac6693c6c65120a9  # Automatically created id
+      #   type: entities
+      #   title: Office
+      #   show_header_toggle: true
+      #   entities:
+      #   # - sensor.office_temperature
+      #   # - sensor.office_humidity
+      #   # - sensor.office_pressure
+      #     - light.general_light
+      #     - light.directional_light
+      #     - light.top_light
+      #     - light.tv_ambilights
       - id: 1f5ab300fd7542bf80ba020ba99e0330  # Automatically created id
         type: entities
         entities:
@@ -611,6 +615,10 @@ views:
     title: Bedroom
     icon: mdi:bed-empty
     cards:
+      - type: entity-button
+        entity: light.bedroom_main_light
+        tap_action: toggle
+        hold_action: more-info
       - id: 4154da7602da4fc2a156db4fce78bf11  # Automatically created id
         type: sensor
         entity: sensor.bedroom_temperature
@@ -632,22 +640,23 @@ views:
         height: 100
         line_color: '#3498db'
         hours_to_show: 48
-      - id: 09a3ffa9e2d849c48cb0f8f64e0ad02e  # Automatically created id
-        type: entities
-        title: Bedroom
-        show_header_toggle: true
-        entities:
-          - light.bedroom_main_light
-          - sensor.bedroom_temperature
-          - sensor.bedroom_humidity
-          - sensor.bedroom_pressure
-      - type: light
-        entity_id: light.bedroom_top_light
-        # tap_action: toggle
+      # - id: 09a3ffa9e2d849c48cb0f8f64e0ad02e  # Automatically created id
+      #   type: entities
+      #   title: Bedroom
+      #   show_header_toggle: true
+      #   entities:
+      #     - light.bedroom_main_light
+      #     - sensor.bedroom_temperature
+      #     - sensor.bedroom_humidity
+      #     - sensor.bedroom_pressure
   - id: 3  # Automatically created id
     title: Bathroom
     icon: mdi:shower
     cards:
+      - type: entity-button
+        entity: light.bathroom_top_light
+        tap_action: toggle
+        hold_action: more-info
       - id: e3e224609c1e43d899f1971d7c5671c8  # Automatically created id
         type: sensor
         entity: sensor.bathroom_temperature
@@ -669,21 +678,22 @@ views:
         height: 100
         line_color: '#3498db'
         hours_to_show: 48
-      - id: 2862eebdaf8347b09de84bea6c9e98e0  # Automatically created id
-        type: entities
-        title: Bathroom
-        show_header_toggle: true
-        entities:
-          - sensor.bathroom_temperature
-          - sensor.bathroom_humidity
-          - sensor.bathroom_pressure
-      - type: light
-        entity_id: light.bathroom_top_light
-        # tap_action: toggle
+      # - id: 2862eebdaf8347b09de84bea6c9e98e0  # Automatically created id
+      #   type: entities
+      #   title: Bathroom
+      #   show_header_toggle: true
+      #   entities:
+      #     - sensor.bathroom_temperature
+      #     - sensor.bathroom_humidity
+      #     - sensor.bathroom_pressure
   - id: 4  # Automatically created id
     title: Kithen
     icon: mdi:kettle
     cards:
+      - type: entity-button
+        entity: light.kitchen_top_light
+        tap_action: toggle
+        hold_action: more-info
       - id: 9b80f81fc2604ea5b7ee97048ae56302  # Automatically created id
         type: sensor
         entity: sensor.kitchen_temperature
@@ -709,21 +719,22 @@ views:
         type: entities
         entities:
           - binary_sensor.kitchen_left_window_sensor
-      - id: 2beed17d585e41d39ee03095eca9c089  # Automatically created id
-        type: entities
-        title: Kitchen
-        show_header_toggle: true
-        entities:
-          - sensor.kitchen_temperature
-          - sensor.kitchen_humidity
-          - sensor.kitchen_pressure
-      - type: light
-        entity_id: light.kitchen_top_light
-        # tap_action: toggle
+      # - id: 2beed17d585e41d39ee03095eca9c089  # Automatically created id
+      #   type: entities
+      #   title: Kitchen
+      #   show_header_toggle: true
+      #   entities:
+      #     - sensor.kitchen_temperature
+      #     - sensor.kitchen_humidity
+      #     - sensor.kitchen_pressure
   - id: 5  # Automatically created id
     title: Kids room
     icon: mdi:human-child
     cards:
+      - type: entity-button
+        entity: light.kids_top_light
+        tap_action: toggle
+        hold_action: more-info
       - id: 8baba3d031b340b398a27397bfc410a5  # Automatically created id
         type: sensor
         entity: sensor.kids_temperature
@@ -751,33 +762,35 @@ views:
         show_header_toggle: true
         entities:
           - input_boolean.kids_light
-      - id: 59d3704538f44a33b247bdd296b96762  # Automatically created id
-        type: entities
-        title: Kids room
-        show_header_toggle: true
-        entities:
-          - sensor.kids_temperature
-          - sensor.kids_humidity
-          - sensor.kids_pressure
-      - type: light
-        entity_id: light.kids_top_light
-        # tap_action: toggle
+      # - id: 59d3704538f44a33b247bdd296b96762  # Automatically created id
+      #   type: entities
+      #   title: Kids room
+      #   show_header_toggle: true
+      #   entities:
+      #     - sensor.kids_temperature
+      #     - sensor.kids_humidity
+      #     - sensor.kids_pressure
   - id: 6  # Automatically created id
     title: Hallway
+    # panel: true
     icon: mdi:stairs
     cards:
+      - type: horizontal-stack
+        cards:
+          - type: entity-button
+            entity: light.hallway_top_light
+            tap_action: toggle
+            hold_action: more-info
+          - type: entity-button
+            entity: light.corridor_gateway_light
+            tap_action: toggle
+            hold_action: more-info
       - id: 46d30691d0094733a8104a833c83334c  # Automatically created id
         type: entities
         entities:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.home_door_sensor
           - sensor.office_gateway_illumination
-      - type: light
-        entity_id: light.hallway_top_light
-        # tap_action: toggle
-      - type: light
-        entity_id: light.corridor_gateway_light
-        # tap_action: toggle
   - id: 7  # Automatically created id
     title: Family
     icon: mdi:home-heart
@@ -785,9 +798,9 @@ views:
       - id: 6c3dc7b0098a41fd8e17a98f0e4c33bb  # Automatically created id
         type: entities
         entities:
-          - device_tracker.nizmo_phone
+          # - device_tracker.nizmo_phone
           - device_tracker.google_maps_104688658658376260645
-          - device_tracker.gosia_phone
+          # - device_tracker.gosia_phone
           - device_tracker.google_maps_109218123589188227395
   - id: 8  # Automatically created id
     title: Stats

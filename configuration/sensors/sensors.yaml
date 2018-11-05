@@ -75,10 +75,10 @@
 - platform: moon
 - platform: systemmonitor
   resources:
-  - type: disk_use_percent
-    arg: /home
-  - type: memory_free
-  - type: processor_use
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: processor_use
   # - type: since_last_boot
 - platform: api_streams
 # - platform: command_line
@@ -92,18 +92,18 @@
   repository: Home-Assistant-Config
   branch: hassio
   monitored_conditions: 
-  - last_build_state
-  - last_build_id
-  - last_build_duration
-  - state
+    - last_build_state
+    - last_build_id
+    - last_build_duration
+    - state
 - platform: cert_expiry
   host: has.nizmo.eu
   name: LetsEncrypt
 - platform: airvisual
   api_key: !secret airvisual_api_key
   monitored_conditions:
-  - us
-  - cn
+    - us
+    - cn
   latitude: !secret home_latitude
   longitude: !secret home_longitude
 #  radius: 500
