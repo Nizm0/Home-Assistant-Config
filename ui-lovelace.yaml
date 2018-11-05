@@ -194,7 +194,7 @@ views:
               --paper-item-icon-color: rgb(115, 122, 130)
 
           - type: state-icon
-            tap_action: toggle
+            # tap_action: toggle
             entity: input_boolean.ready_to_vacuum
             style:
               top: 80%
@@ -537,6 +537,20 @@ views:
     title: Office
     icon: mdi:office
     cards:
+      - type: vertical-stack
+        card:
+          - type: light
+            entity_id: light.general_light
+            # tap_action: toggle
+          - type: light
+            entity_id: light.directional_light
+            # tap_action: toggle
+          - type: light
+            entity_id: light.top_light
+            # tap_action: toggle
+          - type: light
+            entity_id: light.tv_ambilights
+            # tap_action: toggle
       - id: 0415f952da314e2a94bf007aad3d3353  # Automatically created id
         type: entities
         entities:
@@ -627,6 +641,9 @@ views:
           - sensor.bedroom_temperature
           - sensor.bedroom_humidity
           - sensor.bedroom_pressure
+      - type: light
+        entity_id: light.bedroom_top_light
+        # tap_action: toggle
   - id: 3  # Automatically created id
     title: Bathroom
     icon: mdi:shower
@@ -660,6 +677,9 @@ views:
           - sensor.bathroom_temperature
           - sensor.bathroom_humidity
           - sensor.bathroom_pressure
+      - type: light
+        entity_id: light.bathroom_top_light
+        # tap_action: toggle
   - id: 4  # Automatically created id
     title: Kithen
     icon: mdi:kettle
@@ -697,6 +717,9 @@ views:
           - sensor.kitchen_temperature
           - sensor.kitchen_humidity
           - sensor.kitchen_pressure
+      - type: light
+        entity_id: light.kitchen_top_light
+        # tap_action: toggle
   - id: 5  # Automatically created id
     title: Kids room
     icon: mdi:human-child
@@ -736,8 +759,11 @@ views:
           - sensor.kids_temperature
           - sensor.kids_humidity
           - sensor.kids_pressure
+      - type: light
+        entity_id: light.kids_top_light
+        # tap_action: toggle
   - id: 6  # Automatically created id
-    title: Corridor
+    title: Hallway
     icon: mdi:stairs
     cards:
       - id: 46d30691d0094733a8104a833c83334c  # Automatically created id
@@ -746,6 +772,12 @@ views:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.home_door_sensor
           - sensor.office_gateway_illumination
+      - type: light
+        entity_id: light.hallway_top_light
+        # tap_action: toggle
+      - type: light
+        entity_id: light.corridor_gateway_light
+        # tap_action: toggle
   - id: 7  # Automatically created id
     title: Family
     icon: mdi:home-heart
@@ -754,7 +786,9 @@ views:
         type: entities
         entities:
           - device_tracker.nizmo_phone
+          - device_tracker.google_maps_104688658658376260645
           - device_tracker.gosia_phone
+          - device_tracker.google_maps_109218123589188227395
   - id: 8  # Automatically created id
     title: Stats
     icon: mdi:settings
