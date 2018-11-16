@@ -537,7 +537,8 @@ views:
     title: Office
     icon: mdi:office
     cards:
-      - type: horizontal-stack
+      - id: 2kj6h24jkhb67kj2h3v5hj2gv6hjk2gj62
+        type: horizontal-stack
         cards:
           - type: entity-button
             entity: light.general_light
@@ -615,7 +616,8 @@ views:
     title: Bedroom
     icon: mdi:bed-empty
     cards:
-      - type: entity-button
+      - id: 34jk7jk347kj34b6jh23b6kj34jk3h4k
+        type: entity-button
         entity: light.bedroom_main_light
         tap_action: toggle
         hold_action: more-info
@@ -653,7 +655,8 @@ views:
     title: Bathroom
     icon: mdi:shower
     cards:
-      - type: entity-button
+      - id: jk67n4kj623jkh6jk245gh7k5hjk2g3k6
+        type: entity-button
         entity: light.bathroom_top_light
         tap_action: toggle
         hold_action: more-info
@@ -690,7 +693,8 @@ views:
     title: Kithen
     icon: mdi:kettle
     cards:
-      - type: entity-button
+      - id: afisya9875s7f95ai8yrqwtr7i8as5g
+        type: entity-button
         entity: light.kitchen_top_light
         tap_action: toggle
         hold_action: more-info
@@ -731,7 +735,8 @@ views:
     title: Kids room
     icon: mdi:human-child
     cards:
-      - type: entity-button
+      - id: 8g7s98d76f78sg89s67d98g75sd87f65
+        type: entity-button
         entity: light.kids_top_light
         tap_action: toggle
         hold_action: more-info
@@ -775,7 +780,8 @@ views:
     # panel: true
     icon: mdi:stairs
     cards:
-      - type: horizontal-stack
+      - id: s907gsadg78sd65h65df4j7d5f5kg26j
+        type: horizontal-stack
         cards:
           - type: entity-button
             entity: light.hallway_top_light

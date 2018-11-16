@@ -126,11 +126,11 @@ input_boolean: !include configuration/input_boolean.yaml
 light: !include_dir_merge_list configuration/light
 media_player: !include configuration/media_player.yaml
 
-mqtt:
-  broker: core-mosquitto
-  username: !secret mosquitto_username
-  password: !secret mosquitto_password
-  discovery: true
+# mqtt:
+#   broker: core-mosquitto
+#   username: !secret mosquitto_username
+#   password: !secret mosquitto_password
+#   discovery: true
 notify: !include_dir_merge_list configuration/notify/
 script: !include_dir_merge_named configuration/scripts/
 sensor: !include_dir_merge_list configuration/sensors/
