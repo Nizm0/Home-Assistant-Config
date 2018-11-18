@@ -1,5 +1,5 @@
-- alias: Michał is out from Work
-  id: michal_is_out_from_home
+- id: michal_is_out_from_home
+  alias: Michał is out from Work
   trigger: 
     - platform: zone
       entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
@@ -20,8 +20,8 @@
         New value is: {{ trigger.to_state.state }}
       title: Michał is out form work
 
-- alias: Michał entered the house
-  id: michal_is_out_from_home
+- id: michal_is_out_from_home
+  alias: Michał entered the house
   trigger: 
     - platform: zone
       entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
@@ -40,8 +40,8 @@
         New value is: {{ trigger.to_state.state }}
       title: Michał entered the house
 
-- alias: Gosia entered the house
-  id: michal_is_out_from_home
+- id: michal_is_out_from_home
+  alias: Gosia entered the house
   trigger: 
     - platform: zone
       entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
@@ -59,3 +59,16 @@
       message: >
         New value is: {{ trigger.to_state.state }}
       title: Gosia entered the house
+
+- id: 589437twnoe86ogw6pw
+  alias: Time to go home
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.nizm0_today_at_work
+      above: 8
+  action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          New value is: {{ trigger.to_state.state }}
+        title: Michał it's time to leave
