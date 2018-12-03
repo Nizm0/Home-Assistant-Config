@@ -113,4 +113,4 @@
   indoor_humidity_sensor: sensor.office_humidity
   outdoor_temp_sensor: sensor.dark_sky_temperature
   # outdoor_temp_sensor: sensor.flower_2_temperature
-  calibration_factor: 2.0
+  calibration_factor: 1.0

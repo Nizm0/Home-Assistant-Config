@@ -18,28 +18,6 @@
         Vacuum has started and now is {{ trigger.to_state.state }}
       title: Vacuum start working
 
-# - alias: Vacuum end cleaning finished
-#   id: vacuum_end_cleaning_finished
-#   trigger:
-#   # - platform: template
-#   #   value_template: "{% if is_state('vacuum.rockrobo', 'docked') or is_state('vacuum.rockrobo', 'returning') %}true{% endif %}"
-#     # to: 'docked' # cleaning, returning, idle, blocked, error, docked
-#   - platform: state
-#     entity_id: vacuum.rockrobo
-#     from: 'cleaning'
-#     to: 'returning' # cleaning, returning, idle, blocked, error, docked
-#   action:
-#   - service: notify.push_to_chrome
-#     data_template:
-#       message: >
-#         Vacuum has stoped and now is {{ trigger.to_state.state }}
-#       title: Vacuum stopt working template
-#   - service: notify.pushbullet_nizmo
-#     data_template:
-#       message: >
-#         Vacuum has stoped and now is {{ trigger.to_state.state }}
-#       title: Vacuum stopt working template
-
 - alias: Vacuum end cleaning finisheda and docked
   id: vacuum_end_cleaning_finisheda_and_docked
   trigger:
@@ -108,7 +86,7 @@
   id: vacuum_monitoring_system_for_sensors
   trigger:
   - platform: template
-    value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', '2') %}true{%endif%}"
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', '5') %}true{%endif%}"
   action:
   - service: calendar.todoist_new_task
     data_template:
