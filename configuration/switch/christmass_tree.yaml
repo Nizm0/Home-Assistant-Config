@@ -1,0 +1,18 @@
+- platform: mqtt
+  state_topic: "tele/RF_Bridge/RESULT"
+  command_topic: "cmnd/RF_Bridge/RfCode"
+  name: Christmas tree test
+  value_template: '{{value_json.RfReceived.Data}}'
+  payload_on: "#051533#"
+  payload_off: "#051500#"
+  qos: 1
+  retain: false
+- platform: mqtt
+  name: Christmas tree test 2
+  state_topic: "tele/RF_Bridge/RESULT"
+  command_topic: "cmnd/RF_Bridge/Backlog"
+  value_template: '{{value_json.RfReceived.Data}}'
+  qos: 1
+  payload_on: "RfSync 5740; RfLow 190; RfHigh 550; RfCode 051533"
+  payload_off: "RfSync 5770; RfLow 180; RfHigh 550; RfCode 051500"
+  retain: false
