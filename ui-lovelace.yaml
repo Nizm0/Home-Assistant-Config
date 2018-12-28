@@ -17,17 +17,16 @@ views:
     title: Home
     icon: mdi:home
     badges:
-      - entities:
-          - device_tracker.nizmo_phone
-          - device_tracker.google_maps_104688658658376260645
-          - device_tracker.gosia_phone
-          - device_tracker.google_maps_109218123589188227395
-          - device_tracker.babcia_teresa
-          - device_tracker.portex
-          - device_tracker.nizm0_surface
-          - device_tracker.mac_bls
-          - device_tracker.gosia_laptop
-          - device_tracker.samsung_camera
+        - device_tracker.nizmo_phone
+        - device_tracker.google_maps_104688658658376260645
+        - device_tracker.gosia_phone
+        - device_tracker.google_maps_109218123589188227395
+        - device_tracker.babcia_teresa
+        - device_tracker.portex
+        - device_tracker.nizm0_surface
+        - device_tracker.mac_bls
+        - device_tracker.gosia_laptop
+        - device_tracker.samsung_camera
     cards:
       - id: 3e09b1d3dd714297a0e1d1fda1f9aa66  # Automatically created id
         type: entity-filter
