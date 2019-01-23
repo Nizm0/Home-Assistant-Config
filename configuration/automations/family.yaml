@@ -12,12 +12,12 @@
   - service: notify.push_to_chrome
     data_template:
       message: >
-        New value is: {{ trigger.to_state.state }}
+        Current location: {{ state_attr('device_tracker.google_maps_104688658658376260645', 'address') }}
       title: Michał is out form work
   - service: notify.hangouts
     data_template:
       message: >
-        New value is: {{ trigger.to_state.state }}
+        Current location: {{ state_attr('device_tracker.google_maps_104688658658376260645', 'address') }}
       title: Michał is out form work
 
 - id: michal_is_out_from_home

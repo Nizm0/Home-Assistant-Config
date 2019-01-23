@@ -43,7 +43,7 @@
   id: turn_on_bedroom_main_light_to_red_10%
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       event_id: binary_sensor.bedroom_switch
       click_type: single
@@ -61,7 +61,7 @@
   id: turn_off_bedroom_main_light
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       event_id: binary_sensor.bedroom_switch
       click_type: single
@@ -77,7 +77,7 @@
   id: turn_on_bedroom_main_light_to_wite_100%
   trigger:
     platform: event
-    event_type: click
+    event_type: xiaomi_aqara.click
     event_data:
       event_id: binary_sensor.bedroom_switch
       click_type: double

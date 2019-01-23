@@ -12,3 +12,14 @@
   - data:
       message: Test message
     service: notify.push_to_chrome
+- id: '1546595642051'
+  alias: SD card warning
+  trigger:
+  - above: '50'
+    entity_id: sensor.disk_use_percent_home
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      title: SD Card usage is bigger than 50%
+    service: notify.push_to_chrome
