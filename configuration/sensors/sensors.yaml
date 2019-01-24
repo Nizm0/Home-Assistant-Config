@@ -1,3 +1,50 @@
+- platform: moon
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /home
+    - type: memory_free
+    - type: processor_use
+  # - type: since_last_boot
+- platform: api_streams
+# - platform: command_line
+#   name: SSL cert expiry
+#   unit_of_measurement: days
+#   scan_interval: 10800
+#   command: "ssl-cert-check -b -c /ssl/fullchain.pem | awk '{ print $NF }'"
+- platform: travisci
+  api_key: !secret travisapi
+  scan_interval: 3600
+  repository: Home-Assistant-Config
+  branch: hassio
+  monitored_conditions: 
+    - last_build_state
+    - last_build_id
+    - last_build_duration
+    - state
+- platform: cert_expiry
+  host: has.nizmo.eu
+  name: LetsEncrypt
+- platform: airvisual
+  api_key: !secret airvisual_api_key
+  monitored_conditions:
+    - us
+    - cn
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+#  radius: 500
+  show_on_map: false
+- platform: mold_indicator
+  indoor_temp_sensor: sensor.office_temperature
+  indoor_humidity_sensor: sensor.office_humidity
+  outdoor_temp_sensor: sensor.dark_sky_temperature
+  # outdoor_temp_sensor: sensor.flower_2_temperature
+  calibration_factor: 1.0
+
+- platform: seventeentrack
+  username: !secret 17_track_user
+  password: !secret 17_track_pass
+
 - platform: darksky
   api_key: !secret darksky_api_key
   monitored_conditions:
@@ -72,45 +119,3 @@
 #   - mediumClouds
 #   - highClouds
 #   - dewpointTemperature
-- platform: moon
-- platform: systemmonitor
-  resources:
-    - type: disk_use_percent
-      arg: /home
-    - type: memory_free
-    - type: processor_use
-  # - type: since_last_boot
-- platform: api_streams
-# - platform: command_line
-#   name: SSL cert expiry
-#   unit_of_measurement: days
-#   scan_interval: 10800
-#   command: "ssl-cert-check -b -c /ssl/fullchain.pem | awk '{ print $NF }'"
-- platform: travisci
-  api_key: !secret travisapi
-  scan_interval: 3600
-  repository: Home-Assistant-Config
-  branch: hassio
-  monitored_conditions: 
-    - last_build_state
-    - last_build_id
-    - last_build_duration
-    - state
-- platform: cert_expiry
-  host: has.nizmo.eu
-  name: LetsEncrypt
-- platform: airvisual
-  api_key: !secret airvisual_api_key
-  monitored_conditions:
-    - us
-    - cn
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-#  radius: 500
-  show_on_map: false
-- platform: mold_indicator
-  indoor_temp_sensor: sensor.office_temperature
-  indoor_humidity_sensor: sensor.office_humidity
-  outdoor_temp_sensor: sensor.dark_sky_temperature
-  # outdoor_temp_sensor: sensor.flower_2_temperature
-  calibration_factor: 1.0

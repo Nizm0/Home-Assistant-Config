@@ -11,20 +11,7 @@ resources:
     url: /local/plant-card.js
 title: Home
 views:
-  - badges:
-      - device_tracker.nizmo_phone
-      - device_tracker.google_maps_104688658658376260645
-      - device_tracker.gosia_phone
-      - device_tracker.google_maps_109218123589188227395
-      - device_tracker.portex
-      - device_tracker.nizmo_surface
-      - device_tracker.mac_bls
-      - device_tracker.gosia_laptop
-      - device_tracker.samsung_camera
-      - binary_sensor.office_motion_sensor
-      - binary_sensor.corridor_motion_sensor
-      - binary_sensor.home_door_sensor
-    cards:
+  - cards:
       - card:
           show_state: false
           title: People at home
@@ -41,16 +28,15 @@ views:
           - device_tracker.mac_bls
           - device_tracker.gosia_laptop
           - device_tracker.samsung_camera
-        id: 3e09b1d3dd714297a0e1d1fda1f9aa66
         show_header_toggle: true
         state_filter:
           - home
         title: all devices
         type: entity-filter
       - card:
+          entities: []
           title: Low Battery Devices
           type: glance
-          entities: []
         filter:
           include:
             - entity_id: '*battery_level*'
@@ -59,7 +45,6 @@ views:
                 battery: < 25
             - attributes:
                 battery_level: < 25
-        id: 71f6f3e6e87545fd8ee49911e0c3b6c4
         show_empty: false
         type: 'custom:monster-card'
       - elements:
@@ -143,52 +128,69 @@ views:
         image: /local/images/house-element.jpg
         type: picture-elements
       - entity: weather.dark_sky
-        id: 12c3880cff604284b2138bf1a490e565
         type: weather-forecast
-      - id: 9c2b74b6e0574280bcb6f2f6df5241bc
-        type: iframe
+      - type: iframe
         url: 'https://embed.windy.com/embed2.html'
       - elements:
-          - entity: vacuum.rockrobo
-            icon: 'mdi:bell-ring'
-            service: vacuum.locate
+          - icon: 'mdi:bell-ring'
             style:
               '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 81%
+              left: 80%
               top: 80%
-            tap_action: call-service
+            tap_action:
+              action: call-service
+              service: vacuum.locate
+              service_data:
+                entity_id: vacuum.rockrobo
             type: icon
           - entity: input_boolean.ready_to_vacuum
             style:
               left: 10%
               top: 80%
             type: state-icon
-          - entity: vacuum.rockrobo
-            icon: 'mdi:home'
-            service: vacuum.return_to_base
+          - icon: 'mdi:home'
             style:
               '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 62%
+              left: 65%
               top: 80%
-            tap_action: call-service
+            tap_action:
+              action: call-service
+              service: vacuum.return_to_base
+              service_data:
+                entity_id: vacuum.rockrobo
             type: icon
-          - entity: vacuum.rockrobo
-            icon: 'mdi:play'
-            service: vacuum.start
+          - icon: 'mdi:play'
             style:
               '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 43%
+              left: 50%
               top: 80%
-            tap_action: call-service
+            tap_action:
+              action: call-service
+              service: vacuum.start
+              service_data:
+                entity_id: vacuum.rockrobo
             type: icon
-          - entity: vacuum.rockrobo
-            icon: 'mdi:stop'
-            service: vacuum.stop
+          - icon: 'mdi:pause'
             style:
               '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 25%
+              left: 35%
               top: 80%
-            tap_action: call-service
+            tap_action:
+              action: call-service
+              service: vacuum.pause
+              service_data:
+                entity_id: vacuum.rockrobo
+            type: icon
+          - icon: 'mdi:stop'
+            style:
+              '--paper-item-icon-color': 'rgb(155, 122, 130)'
+              left: 20%
+              top: 80%
+            tap_action:
+              action: call-service
+              service: vacuum.stop
+              service_data:
+                entity_id: vacuum.rockrobo
             type: icon
           - entity: vacuum.rockrobo
             style:
@@ -238,7 +240,6 @@ views:
               top: 24%
               transform: 'translate(0%,-50%)'
             type: state-label
-        id: 6d78b24058be4b3299929b494cbf7046
         image: /local/images/vacuum_card.jpg
         type: picture-elements
       - card:
@@ -258,7 +259,6 @@ views:
           - light.kitchen_top_light
           - light.top_light
           - light.tv_ambilights
-        id: 4cbbe7a4c5cf46b1afe1f5e405072129
         show_header_toggle: false
         state_filter:
           - 'on'
@@ -281,7 +281,6 @@ views:
           - light.kitchen_top_light
           - light.top_light
           - light.tv_ambilights
-        id: 127c9ca761bd41b08daf88b27ca0f842
         show_header_toggle: false
         state_filter:
           - 'off'
@@ -306,7 +305,6 @@ views:
           - sensor.bedroom_temperature
           - sensor.bedroom_humidity
           - sensor.bedroom_pressure
-        id: 05d5cada681545f8a0d63b93ea55fc17
         show_header_toggle: true
         title: Bedroom
         type: entities
@@ -315,7 +313,6 @@ views:
           - sensor.kitchen_temperature
           - sensor.kitchen_humidity
           - sensor.kitchen_pressure
-        id: ca2205e807134a77a387385a12eadbd5
         show_header_toggle: true
         title: Kitchen
         type: entities
@@ -337,10 +334,18 @@ views:
         show_header_toggle: true
         title: Kids room
         type: entities
+      - card:
+          entities: []
+          title: 17track
+          type: glance
+        filter:
+          include:
+            - entity_id: '*seventeentrack_package_*'
+        show_empty: false
+        type: 'custom:monster-card'
       - entities:
           - sun.sun
           - sensor.moon
-        id: 8d6f92092fdb4575bf81b84666540f92
         show_header_toggle: true
         title: Environment
         type: entities
@@ -356,7 +361,6 @@ views:
           - sensor.processor_use
           - sensor.memory_free
           - sensor.disk_use_percent_home
-        id: befa3f9cea504824b040d8014d22a24f
         show_header_toggle: true
         title: System stats
         type: entities
@@ -364,7 +368,6 @@ views:
           - device_tracker.google_maps_104688658658376260645
           - device_tracker.google_maps_109218123589188227395
         hours_to_show: 120
-        id: 24824466f79e4fed8f748b6d5c990794
         refresh_interval: 60
         title: Family tracking
         type: history-graph
@@ -375,7 +378,6 @@ views:
           - sensor.bathroom_temperature
           - sensor.kids_temperature
         hours_to_show: 120
-        id: 536e08fb7e784d2d80f43d88c2d0498b
         refresh_interval: 60
         title: Temperature in rooms
         type: history-graph
@@ -386,15 +388,13 @@ views:
           - sensor.bathroom_pressure
           - sensor.kids_pressure
         hours_to_show: 120
-        id: d7bad09997754180bbb297efeecab744
         refresh_interval: 60
-        title: Presure in rooms
+        title: Pressure in rooms
         type: history-graph
       - entities:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.office_motion_sensor
         hours_to_show: 24
-        id: d69c1b8c012546d396dbbaaa95a4b66f
         refresh_interval: 0
         title: Motions in home
         type: history-graph
@@ -413,7 +413,6 @@ views:
           - sensor.bathroom_humidity
           - sensor.kids_humidity
         hours_to_show: 120
-        id: cabfb4694b0f48c4914c2815212bfecb
         refresh_interval: 60
         title: Humidity in rooms
         type: history-graph
@@ -429,7 +428,6 @@ views:
       - entities:
           - binary_sensor.kitchen_left_window_sensor
         hours_to_show: 24
-        id: a5f2136c5e214b06b21ab27c7de8c2fe
         refresh_interval: 0
         title: Windows in home
         type: history-graph
@@ -438,7 +436,6 @@ views:
           - entity: media_player.pc_gpmdp
           - entity: media_player.office_tv_cast
           - entity: media_player.philips_tv
-        id: 713188323c794b3e932af384fa772953
         type: entities
       - cards:
           - artwork_border: true
@@ -457,7 +454,6 @@ views:
             entity: media_player.philips_tv
             show_source: true
             type: 'custom:mini-media-player'
-        id: uf8asd986d98ghso9g98a7d6d98a6s2g
         type: vertical-stack
       - entities:
           - 'moisture:sensor.flower_1_moisture'
@@ -465,7 +461,6 @@ views:
           - 'conductivity:sensor.flower_1_conductivity'
           - 'battery:sensor.flower_1_battery'
           - 'temperature:sensor.flower_1_temperature'
-        id: 8fb2ca73c8ff4c31a29ead516df7fc47
         image: images/calathea-zebrina.jpg
         title: Flower outside
         type: 'custom:plant-card'
@@ -475,7 +470,6 @@ views:
           - 'conductivity:sensor.flower_2_conductivity'
           - 'battery:sensor.flower_2_battery'
           - 'temperature:sensor.flower_2_temperature'
-        id: 592b2e2bb6e64804b382c2e9a029c694
         image: images/calathea-zebrina.jpg
         title: Flower inside office
         type: 'custom:plant-card'
@@ -485,7 +479,6 @@ views:
           - 'conductivity:sensor.flower_3_conductivity'
           - 'battery:sensor.flower_3_battery'
           - 'temperature:sensor.flower_3_temperature'
-        id: 2ec5cf2fd6784971b4539a7c03c1bdb1
         image: images/calathea-zebrina.jpg
         title: Flower inside kids room
         type: 'custom:plant-card'
@@ -495,204 +488,273 @@ views:
           - 'conductivity:sensor.flower_4_conductivity'
           - 'battery:sensor.flower_4_battery'
           - 'temperature:sensor.flower_4_temperature'
-        id: 3d05f9994aab4cde85535d5015fc0f23
         image: images/calathea-zebrina.jpg
         title: Flower inside kitchen
         type: 'custom:plant-card'
       - type: shopping-list
+    badges:
+      - device_tracker.nizmo_phone
+      - device_tracker.google_maps_104688658658376260645
+      - device_tracker.gosia_phone
+      - device_tracker.google_maps_109218123589188227395
+      - device_tracker.portex
+      - device_tracker.nizmo_surface
+      - device_tracker.mac_bls
+      - device_tracker.gosia_laptop
+      - device_tracker.samsung_camera
+      - binary_sensor.office_motion_sensor
+      - binary_sensor.corridor_motion_sensor
+      - binary_sensor.home_door_sensor
+      - sensor.nizm0_today_at_work
     icon: 'mdi:home'
     id: 0
     title: Home
   - cards:
       - cards:
-          - entity: light.general_light
-            hold_action: more-info
-            tap_action: toggle
-            type: entity-button
-          - entity: light.directional_light
-            hold_action: more-info
-            tap_action: toggle
-            type: entity-button
-          - entity: light.top_light
-            hold_action: more-info
-            tap_action: toggle
-            type: entity-button
-          - entity: light.tv_ambilights
-            hold_action: more-info
-            tap_action: toggle
-            type: entity-button
-        id: 2kj6h24jkhb67kj2h3v5hj2gv6hjk2gj62
+          - type: entity-button
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+            entity: light.general_light
+          - type: entity-button
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+            entity: light.directional_light
+          - type: entity-button
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+            entity: light.top_light
+          - type: entity-button
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+            entity: light.tv_ambilights
         type: horizontal-stack
       - entities:
           - binary_sensor.office_balcon_window_sensor
           - binary_sensor.office_motion_sensor
-        id: 0415f952da314e2a94bf007aad3d3353
         type: entities
       - entity: sensor.office_temperature
-        height: 40
-        hours_to_show: 48
-        id: 6c560042a28f45e2b71826356387c1bb
-        line_color: '#3498db'
+        max: 100
+        min: 0
         name: Temperature
-        type: sensor
-      - entity: sensor.office_humidity
-        height: 80
-        hours_to_show: 48
-        id: 03b60fe601e944128128a3b32335aa06
-        line_color: '#3498db'
-        name: Humidity
-        type: sensor
-      - entity: sensor.office_pressure
-        height: 100
-        hours_to_show: 48
-        id: 46dfaae4bc0a4913b5f21ef054341844
-        line_color: '#3498db'
-        name: Presure
-        type: sensor
-      - entity: sensor.office_temperature
-        id: 6f290f1fa93b4fcdb46854cc7b6d89ce
         severity:
-          green: 20
+          green: 18
           red: 30
           yellow: 25
-        title: Temperature
+        theme: default
         type: gauge
-        unit_of_measurement: C
       - entities:
           - entity: media_player.office_speaker
           - entity: media_player.pc_gpmdp
           - entity: media_player.office_tv_cast
           - entity: media_player.philips_tv
-        id: 1f5ab300fd7542bf80ba020ba99e0330
         type: entities
+      - entity: sensor.office_humidity
+        max: 100
+        min: 0
+        name: Humidity
+        severity:
+          green: 30
+          red: 60
+          yellow: 50
+        theme: default
+        type: gauge
+      - detail: 2
+        entity: sensor.office_temperature
+        graph: line
+        name: Temperature
+        type: sensor
+      - detail: 2
+        entity: sensor.office_humidity
+        graph: line
+        name: Humidify
+        type: sensor
+      - detail: 2
+        entity: sensor.office_pressure
+        graph: line
+        name: Presure
+        type: sensor
     icon: 'mdi:office'
     id: 1
     title: Office
   - cards:
       - entity: light.bedroom_main_light
-        id: 34jk7jk347kj34b6jh23b6kj34jk3h4k
         type: light
+      - type: sensor
+        entity: sensor.bedroom_temperature
+        graph: line
+        detail: 2
       - entity: sensor.bedroom_temperature
-        height: 40
-        hours_to_show: 48
-        id: 4154da7602da4fc2a156db4fce78bf11
-        line_color: '#3498db'
+        max: 40
+        min: 0
         name: Temperature
-        type: sensor
-      - entity: sensor.bedroom_humidity
-        height: 80
-        hours_to_show: 48
-        id: a3e4517dad7c4c12b6d41033cee4bf17
-        line_color: '#3498db'
+        severity:
+          green: 18
+          red: 30
+          yellow: 25
+        theme: default
+        type: gauge
+      - type: sensor
+        entity: sensor.bedroom_humidity
+        detail: 2
+        graph: line
+      - entity: sensor.office_humidity
+        max: 100
+        min: 0
         name: Humidity
-        type: sensor
-      - entity: sensor.bedroom_pressure
-        height: 100
-        hours_to_show: 48
-        id: 4f80233347da4b1ebc0693162cca1aa0
-        line_color: '#3498db'
-        name: Presure
-        type: sensor
+        severity:
+          green: 30
+          red: 60
+          yellow: 50
+        theme: default
+        type: gauge
+      - type: sensor
+        entity: sensor.bedroom_pressure
+        detail: 2
+        graph: line
     icon: 'mdi:bed-empty'
     id: 2
     title: Bedroom
   - cards:
-      - entity: light.bathroom_top_light
-        hold_action: more-info
-        id: jk67n4kj623jkh6jk245gh7k5hjk2g3k6
-        tap_action: toggle
-        type: entity-button
+      - type: entity-button
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        entity: light.bathroom_top_light
+      - type: sensor
+        entity: sensor.bathroom_humidity
+        graph: line
+        detail: 2
       - entity: sensor.bathroom_temperature
-        height: 40
-        hours_to_show: 48
-        id: e3e224609c1e43d899f1971d7c5671c8
-        line_color: '#3498db'
+        max: 40
+        min: 0
         name: Temperature
-        type: sensor
+        severity:
+          green: 18
+          red: 30
+          yellow: 25
+        theme: default
+        type: gauge
+        unit: C
+      - type: sensor
+        entity: sensor.bathroom_pressure
+        detail: 2
+        graph: line
       - entity: sensor.bathroom_humidity
-        height: 80
-        hours_to_show: 48
-        id: ffafe73e64414b6782901f26180039d0
-        line_color: '#3498db'
+        max: 100
+        min: 0
         name: Humidity
-        type: sensor
-      - entity: sensor.bathroom_pressure
-        height: 100
-        hours_to_show: 48
-        id: af801f5a51174c43aafa8a49397e4d14
-        line_color: '#3498db'
-        name: Presure
-        type: sensor
+        severity:
+          green: 30
+          red: 60
+          yellow: 50
+        theme: default
+        type: gauge
+        unit: '%'
+      - type: sensor
+        entity: sensor.bathroom_temperature
+        graph: line
+        detail: 2
     icon: 'mdi:shower'
     id: 3
     title: Bathroom
   - cards:
-      - entity: light.kitchen_top_light
-        hold_action: more-info
-        id: afisya9875s7f95ai8yrqwtr7i8as5g
-        tap_action: toggle
-        type: entity-button
-      - entity: sensor.kitchen_temperature
-        height: 40
-        hours_to_show: 48
-        id: 9b80f81fc2604ea5b7ee97048ae56302
-        line_color: '#3498db'
-        name: Temperature
-        type: sensor
-      - entity: sensor.kitchen_humidity
-        height: 80
-        hours_to_show: 48
-        id: 370099f1a26a49c08b0b4929da5ad21b
-        line_color: '#3498db'
-        name: Humidity
-        type: sensor
-      - entity: sensor.kitchen_pressure
-        height: 100
-        hours_to_show: 48
-        id: 7dcde55952914c92865c6f2b2814c80a
-        line_color: '#3498db'
-        name: Presure
-        type: sensor
+      - type: entity-button
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        entity: light.kitchen_top_light
+      - type: sensor
+        entity: sensor.kitchen_temperature
+        detail: 2
+        graph: line
       - entities:
           - binary_sensor.kitchen_left_window_sensor
         id: 6634ec0cd04045c78ed3cefb5f3ac3e6
         type: entities
+      - entity: sensor.kitchen_temperature
+        max: 40
+        min: 0
+        name: Temperature
+        severity:
+          green: 18
+          red: 30
+          yellow: 25
+        theme: default
+        type: gauge
+        unit: C
+      - type: sensor
+        entity: sensor.kitchen_humidity
+        detail: 2
+        graph: line
+      - entity: sensor.kitchen_humidity
+        max: 100
+        min: 0
+        name: Humidity
+        severity:
+          green: 30
+          red: 60
+          yellow: 50
+        theme: default
+        type: gauge
+        unit: '%'
+      - type: sensor
+        entity: sensor.kitchen_pressure
+        detail: 2
+        graph: line
     icon: 'mdi:kettle'
     id: 4
     title: Kithen
   - cards:
-      - entity: light.kids_top_light
-        hold_action: more-info
-        id: 8g7s98d76f78sg89s67d98g75sd87f65
-        tap_action: toggle
-        type: entity-button
+      - type: entity-button
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        entity: light.kids_top_light
+      - type: sensor
+        entity: sensor.kitchen_temperature
+        graph: line
+        detail: 2
       - entity: sensor.kids_temperature
-        height: 40
-        hours_to_show: 48
-        id: 8baba3d031b340b398a27397bfc410a5
-        line_color: '#3498db'
+        max: 40
+        min: 0
         name: Temperature
-        type: sensor
+        severity:
+          green: 18
+          red: 30
+          yellow: 25
+        theme: default
+        type: gauge
+        unit: C
+      - type: sensor
+        entity: sensor.kids_humidity
+        graph: line
+        detail: 2
       - entity: sensor.kids_humidity
-        height: 80
-        hours_to_show: 48
-        id: fdf1a46f28e64d8bbfe4fdfcc3f95847
-        line_color: '#3498db'
+        max: 100
+        min: 0
         name: Humidity
-        type: sensor
-      - entity: sensor.kids_pressure
-        height: 100
-        hours_to_show: 48
-        id: 837fb435fdb940e6ba5b7ef7e75c8e34
-        line_color: '#3498db'
-        name: Presure
-        type: sensor
-      - entities:
-          - input_boolean.kids_light
-        id: 81027f3ec7624389884d45ccd98b3a8b
-        show_header_toggle: true
-        title: Kids
-        type: entities
+        severity:
+          green: 30
+          red: 60
+          yellow: 50
+        theme: default
+        type: gauge
+        unit: '%'
+      - type: sensor
+        entity: sensor.kids_pressure
+        graph: line
+        detail: 2
     icon: 'mdi:human-child'
     id: 5
     title: Kids room
@@ -704,13 +766,11 @@ views:
             type: entity-button
           - entity: light.corridor_gateway_light
             type: light
-        id: s907gsadg78sd65h65df4j7d5f5kg26j
         type: horizontal-stack
       - entities:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.home_door_sensor
           - sensor.office_gateway_illumination
-        id: 46d30691d0094733a8104a833c83334c
         type: entities
     icon: 'mdi:stairs'
     id: 6
@@ -719,8 +779,9 @@ views:
       - entities:
           - device_tracker.google_maps_104688658658376260645
           - device_tracker.google_maps_109218123589188227395
-        id: 6c3dc7b0098a41fd8e17a98f0e4c33bb
         type: entities
+        show_header_toggle: false
+        theme: default
     icon: 'mdi:home-heart'
     id: 7
     title: Family
@@ -729,18 +790,16 @@ views:
           - sensor.processor_use
           - sensor.memory_free
           - sensor.disk_use_percent_home
-        id: d90253325b4a4dab84d675392d990ad4
-        show_header_toggle: true
+        show_header_toggle: false
         title: System stats
         type: entities
       - entities:
-          - script.update_config
-          - sensor.nizm0homeassistantconfig_last_build_duration
-          - sensor.nizm0homeassistantconfig_last_build_id
-          - sensor.nizm0homeassistantconfig_last_build_state
-          - sensor.nizm0homeassistantconfig_state
-        id: 79487098da004fa292bda7840b1a9a66
-        show_header_toggle: true
+          - entity: script.update_config
+          - entity: sensor.nizm0_home_assistant_config_last_build_duration
+          - entity: sensor.nizm0_home_assistant_config_last_build_id
+          - entity: sensor.nizm0_home_assistant_config_last_build_state
+          - entity: sensor.nizm0_home_assistant_config_state
+        show_header_toggle: false
         title: Travis status
         type: entities
       - entities:
@@ -750,7 +809,6 @@ views:
           - sensor.bathroom_temperature
           - sensor.kids_temperature
         hours_to_show: 120
-        id: 8512abcc8261489ebb597eb051957f33
         refresh_interval: 60
         title: Temperature in rooms
         type: history-graph
@@ -761,7 +819,6 @@ views:
           - sensor.bathroom_humidity
           - sensor.kids_humidity
         hours_to_show: 120
-        id: 1c2300bf5fc94a66805c342c62e5c0e4
         refresh_interval: 60
         title: Humidity in rooms
         type: history-graph
@@ -772,7 +829,6 @@ views:
           - sensor.bathroom_pressure
           - sensor.kids_pressure
         hours_to_show: 120
-        id: 6bb5949f2ae84b39ad54cc8706614190
         refresh_interval: 60
         title: Presure in rooms
         type: history-graph
@@ -780,7 +836,6 @@ views:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.office_motion_sensor
         hours_to_show: 24
-        id: 4e0104e1a5de4f3bac6985147784a11f
         refresh_interval: 0
         title: Motions in home
         type: history-graph
@@ -788,17 +843,19 @@ views:
           - binary_sensor.home_door_sensor
           - binary_sensor.office_balcon_window_sensor
         hours_to_show: 24
-        id: 73876cb23076452fa4db808472d36efa
         refresh_interval: 0
         title: Dors in home
         type: history-graph
       - entities:
           - binary_sensor.kitchen_left_window_sensor
         hours_to_show: 24
-        id: bdd8f11b2c9a496bab5c488c65946393
         refresh_interval: 0
         title: Windows in home
         type: history-graph
     icon: 'mdi:settings'
     id: 8
     title: Stats
+  - cards: []
+    badges: []
+    title: Testings
+    theme: Backend-selected

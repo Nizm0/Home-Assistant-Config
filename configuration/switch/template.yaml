@@ -4,7 +4,7 @@
       entity_id: vacuum.rockrobo
       value_template: "{{ is_state('vacuum.rockrobo', 'cleaning') }}"
       turn_on:
-        service: vacuum.start_pause
+        service: vacuum.start
         data:
           entity_id: vacuum.rockrobo
       turn_off:
