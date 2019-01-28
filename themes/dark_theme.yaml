@@ -6,7 +6,7 @@ dark_theme:
   paper-card-background-color: "#424242" # Card background colour
   paper-item-icon-color: "#1ABA92" # Icon colour
   primary-text-color: "#FFFFFF" # Primary text colour
-  secondary-text-color: "rgba(255, 255, 255, 0.7)" # Secondary text colour
+  secondary-text-color: "#389638" #"rgba(255, 255, 255, 0.7)" # Secondary text colour
   disabled-text-color: "rgba(255, 255, 255, 0.5)" # Disabled text colour
   divider-color: "rgba(255, 255, 255, 0.12)" # Divider colour
   paper-card-header-color: "#FFFFFF" # Card header text colour
