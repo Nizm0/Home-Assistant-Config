@@ -1,18 +1,18 @@
-# - alias: Notify when temperature is to hight or to low
-#   id: notify_when_temperature_is_to_hight_or_to_low
-#   trigger:
-#     platform: state
-#     entity_id:
-#     - sensor.bedroom_temperature
-#     - sensor.office_temperature
-#     - sensor.kitchen_temperature
-#     - sensor.bathroom_temperature
-#     - sensor.kids_temperature
-#   condition:
-#     - condition: template
-#       value_template: '{{ trigger.to_state.state > states.input_number.temp_max.state or trigger.to_state.state < states.input_number.temp_min.state }}'
-#   action:
-#     - service: notify.push_to_chrome
-#       data_template:
-#         message: "Temperature {{ trigger.to_state.state }} in {{ trigger.entity_id.attributes.friendly_name }} and is out of demaded params"
-#         title: "Problem with Teperature in {{ trigger.entity_id.attributes.friendly_name }}"
+- alias: Notify when temperature is to hight or to low
+  id: notify_when_temperature_is_to_hight_or_to_low
+  trigger:
+    platform: state
+    entity_id:
+    - sensor.bedroom_temperature
+    - sensor.office_temperature
+    - sensor.kitchen_temperature
+    - sensor.bathroom_temperature
+    - sensor.kids_temperature
+  condition:
+    - condition: template
+      value_template: '{{ trigger.to_state.state > states.input_number.temp_max.state or trigger.to_state.state < states.input_number.temp_min.state }}'
+  action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: "Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demaded params"
+        title: "Problem with Teperature in {{ trigger.to_state.attributes.friendly_name }}"

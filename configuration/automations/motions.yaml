@@ -11,6 +11,9 @@
     - condition: state
       entity_id: binary_sensor.home_door_sensor
       state: 'off'
+    # - condition: numeric_state
+    #   entity_id: sensor.office_gateway_illumination
+    #   below: 600
     # - condition: state
     #   entity_id: light.hallway_top_light
     #   state: 'off'
@@ -47,9 +50,9 @@
   action:
   - service: notify.push_to_chrome
     data_template:
-      message: >
-        New value is: {{ trigger.to_state.state }}
       title: Somone wolking in empty home
+      message: >
+        Motiot detected in: {{ trigger.to_state.attributes.friendly_name }}
 
 #### MOTION OVER
 - alias: Corridor motion over
