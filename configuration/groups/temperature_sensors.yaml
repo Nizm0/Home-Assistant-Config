@@ -12,18 +12,18 @@
 #   - sensor.bedroom_temperature
 #   - sensor.bedroom_humidity
 #   - sensor.bedroom_pressure
-kitchen_sensors:
-  name: Kitchen
-  entities:
-  - sensor.kitchen_temperature
-  - sensor.kitchen_humidity
-  - sensor.kitchen_pressure
-bath_room_sensors:
-  name: Bathroom
-  entities:
-  - sensor.bathroom_temperature
-  - sensor.bathroom_humidity
-  - sensor.bathroom_pressure
+# kitchen_sensors:
+#   name: Kitchen
+#   entities:
+#   - sensor.kitchen_temperature
+#   - sensor.kitchen_humidity
+#   - sensor.kitchen_pressure
+# bath_room_sensors:
+#   name: Bathroom
+#   entities:
+#   - sensor.bathroom_temperature
+#   - sensor.bathroom_humidity
+#   - sensor.bathroom_pressure
 # kids_room_sensors:
 #   name: Kids room
 #   entities:

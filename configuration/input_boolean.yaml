@@ -1,8 +1,8 @@
 # battery_status_update:
 #   name: Battery Status Update
-kids_light:
-  name: Main light
-  icon: mdi:lightbulb
+# kids_light:
+#   name: Main light
+#   icon: mdi:lightbulb
   # initial: off
 
 ready_to_vacuum:

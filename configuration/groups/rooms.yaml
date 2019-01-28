@@ -13,6 +13,9 @@ kitchen:
   name: Kitchen
   entities: 
   - light.kitchen_top_light
+  - sensor.kitchen_temperature
+  - sensor.kitchen_humidity
+  - sensor.kitchen_pressure
 
 kids:
   name: Kids
@@ -27,6 +30,9 @@ bathroom:
   name: Bathroom
   entities:
   - light.bathroom_top_light
+  - sensor.bathroom_temperature
+  - sensor.bathroom_humidity
+  - sensor.bathroom_pressure
 
 bedroom:
   name: Bedroom

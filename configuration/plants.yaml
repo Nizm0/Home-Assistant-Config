@@ -1,0 +1,48 @@
+outside_plant:
+  sensors:
+    moisture: sensor.flower_1_moisture
+    brightness: sensor.flower_1_light_intensity
+    conductivity: sensor.flower_1_conductivity
+    battery: sensor.flower_1_battery
+    temperature: sensor.flower_1_temperature
+  min_moisture: 20
+  max_moisture: 60
+  min_battery: 17
+  min_conductivity: 500
+  min_temperature: 15
+office_plant:
+  sensors:
+    moisture: sensor.flower_2_moisture
+    brightness: sensor.flower_2_light_intensity
+    conductivity: sensor.flower_2_conductivity
+    battery: sensor.flower_2_battery
+    temperature: sensor.flower_2_temperature
+  min_moisture: 20
+  max_moisture: 60
+  min_battery: 17
+  min_conductivity: 500
+  min_temperature: 15
+kitchen_plant:
+  sensors:
+    moisture: sensor.flower_4_moisture
+    brightness: sensor.flower_4_light_intensity
+    conductivity: sensor.flower_4_conductivity
+    battery: sensor.flower_4_battery
+    temperature: sensor.flower_4_temperature
+  min_moisture: 20
+  max_moisture: 60
+  min_battery: 17
+  min_conductivity: 500
+  min_temperature: 15
+kids_plant:
+  sensors:
+    moisture: sensor.flower_3_moisture
+    brightness: sensor.flower_3_light_intensity
+    conductivity: sensor.flower_3_conductivity
+    battery: sensor.flower_3_battery
+    temperature: sensor.flower_3_temperature
+  min_moisture: 20
+  max_moisture: 60
+  min_battery: 17
+  min_conductivity: 500
+  min_temperature: 15

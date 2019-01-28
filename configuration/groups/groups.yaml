@@ -29,10 +29,10 @@ travis:
   name: Travis status
   entities:
   - script.update_config
-  - sensor.nizm0homeassistantconfig_last_build_duration
-  - sensor.nizm0homeassistantconfig_last_build_id
-  - sensor.nizm0homeassistantconfig_last_build_state
-  - sensor.nizm0homeassistantconfig_state
+  - sensor.nizm0_home_assistant_config_last_build_duration
+  - sensor.nizm0_home_assistant_config_last_build_id
+  - sensor.nizm0_home_assistant_config_last_build_state
+  - sensor.nizm0_home_assistant_config_state
 
 office_camera_control:
   name: Office Camera Control
