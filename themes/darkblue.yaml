@@ -1,10 +1,10 @@
-darkorange:
-  primary-color: "#ff9800"
-  light-primary-color: "#ffc947"
-  dark-primary-color: "#c66900"
+darkblue:
+  primary-color: "#396FB6"
+  light-primary-color: "#77a0d4"
+  dark-primary-color: "#3539ce"
   text-primary-color: "#ffffff"
   primary-background-color: "#37464f"
-  sidebar-text_-_background: "#62717b"
+  sidebar-text_-_background: "#3c4348"
   paper-card-background-color: "#263137"
   paper-card-header-color: "var(--text-primary-color)"
   secondary-background-color: "var(--primary-background-color)"
