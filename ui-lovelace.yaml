@@ -11,7 +11,23 @@ resources:
     url: /local/plant-card.js
 title: Home
 views:
-  - cards:
+  - badges:
+      - device_tracker.nizmo_phone
+      - device_tracker.google_maps_104688658658376260645
+      - device_tracker.gosia_phone
+      - device_tracker.google_maps_109218123589188227395
+      - device_tracker.portex
+      - device_tracker.nizmo_surface
+      - device_tracker.mac_bls
+      - device_tracker.gosia_laptop
+      - device_tracker.samsung_camera
+      - binary_sensor.office_motion_sensor
+      - binary_sensor.corridor_motion_sensor
+      - binary_sensor.home_door_sensor
+      - sensor.nizm0_today_at_work
+      - sensor.mold_indicator
+      - sensor.letsencrypt
+    cards:
       - card:
           show_state: false
           title: People at home
@@ -54,13 +70,16 @@ views:
               left: 14%
               top: 86%
             type: state-icon
+            tap_action:
+              action: more-info
           - entity: sensor.office_temperature
             icon: 'mdi:office'
             style:
               color: white
               left: 36%
               top: 82%
-            tap_action: more-info
+            tap_action:
+              action: more-info
             type: icon
           - entity: sensor.office_temperature
             style:
@@ -74,7 +93,8 @@ views:
               color: white
               left: 50%
               top: 82%
-            tap_action: more-info
+            tap_action:
+              action: more-info
             type: icon
           - entity: sensor.bedroom_temperature
             style:
@@ -88,13 +108,16 @@ views:
               color: white
               left: 64%
               top: 82%
-            tap_action: more-info
+            tap_action:
+              action: more-info
             type: icon
           - entity: sensor.kids_temperature
             style:
               color: white
               left: 64%
               top: 95%
+            tap_action:
+              action: more-info
             type: state-label
           - entity: sensor.kitchen_temperature
             icon: 'mdi:kettle'
@@ -102,13 +125,16 @@ views:
               color: white
               left: 78%
               top: 82%
-            tap_action: more-info
+            tap_action:
+              action: more-info
             type: icon
           - entity: sensor.kitchen_temperature
             style:
               color: white
               left: 78%
               top: 95%
+            tap_action:
+              action: more-info
             type: state-label
           - entity: sensor.bathroom_temperature
             icon: 'mdi:shower'
@@ -116,21 +142,47 @@ views:
               color: white
               left: 92%
               top: 82%
-            tap_action: more-info
+            tap_action:
+              action: more-info
             type: icon
           - entity: sensor.bathroom_temperature
             style:
               color: white
               left: 92%
               top: 95%
+            tap_action:
+              action: more-info
             type: state-label
         id: 5be18d329c42452788a3d18a74965da3
         image: /local/images/house-element.jpg
         type: picture-elements
       - entity: weather.dark_sky
         type: weather-forecast
-      - type: iframe
-        url: 'https://embed.windy.com/embed2.html'
+      - aspect_ratio: 90%
+        type: iframe
+        url: 'https://embed.windy.com/embed2.html?rain,51.106,17.117,10'
+      - card:
+          show_state: false
+          title: Turned on lights
+          type: glance
+        entities:
+          - input_boolean.kids_light
+          - light.bathroom_top_light
+          - light.bedroom_main_lightght
+          - light.christmas_tree_test
+          - light.corridor_gateway_light
+          - light.directional_light
+          - light.general_light
+          - light.hallway_top_light
+          - light.kids_top_light
+          - light.kitchen_top_light
+          - light.top_light
+          - light.tv_ambilights
+        show_header_toggle: false
+        state_filter:
+          - 'on'
+        title: All lights
+        type: entity-filter
       - elements:
           - icon: 'mdi:bell-ring'
             style:
@@ -244,28 +296,6 @@ views:
         type: picture-elements
       - card:
           show_state: false
-          title: Turned on lights
-          type: glance
-        entities:
-          - input_boolean.kids_light
-          - light.bathroom_top_light
-          - light.bedroom_main_lightght
-          - light.christmas_tree_test
-          - light.corridor_gateway_light
-          - light.directional_light
-          - light.general_light
-          - light.hallway_top_light
-          - light.kids_top_light
-          - light.kitchen_top_light
-          - light.top_light
-          - light.tv_ambilights
-        show_header_toggle: false
-        state_filter:
-          - 'on'
-        title: All lights
-        type: entity-filter
-      - card:
-          show_state: false
           title: Turned off lights
           type: glance
         entities:
@@ -288,23 +318,31 @@ views:
         type: entity-filter
       - entities:
           - entity: light.bedroom_main_light
+            secondary_info: last-changed
           - entity: light.directional_light
+            secondary_info: last-changed
           - entity: light.general_light
+            secondary_info: last-changed
           - entity: light.top_light
+            secondary_info: last-changed
           - entity: light.christmas_tree
+            secondary_info: last-changed
           - entity: binary_sensor.office_motion_sensor
+            secondary_info: last-changed
           - entity: sensor.office_temperature
+            secondary_info: last-changed
           - entity: sensor.office_humidity
+            secondary_info: last-changed
           - entity: sensor.office_pressure
+            secondary_info: last-changed
         show_header_toggle: true
         title: Office
         type: entities
       - entities:
-          - light.bedroom_main_light
-          - binary_sensor.bathroom_water_leak_sensor
-          - sensor.bedroom_temperature
-          - sensor.bedroom_humidity
-          - sensor.bedroom_pressure
+          - entity: light.bedroom_main_light
+          - entity: sensor.bedroom_temperature
+          - entity: sensor.bedroom_humidity
+          - entity: sensor.bedroom_pressure
         show_header_toggle: true
         title: Bedroom
         type: entities
@@ -351,9 +389,12 @@ views:
         type: entities
       - entities:
           - entity: light.corridor_gateway_light
+            secondary_info: last-changed
           - entity: light.hallway_top_light
           - entity: binary_sensor.corridor_motion_sensor
+            secondary_info: last-changed
           - entity: sensor.office_gateway_illumination
+            secondary_info: last-changed
         show_header_toggle: true
         title: Hallway
         type: entities
@@ -364,73 +405,6 @@ views:
         show_header_toggle: true
         title: System stats
         type: entities
-      - entities:
-          - device_tracker.google_maps_104688658658376260645
-          - device_tracker.google_maps_109218123589188227395
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Family tracking
-        type: history-graph
-      - entities:
-          - sensor.bedroom_temperature
-          - sensor.office_temperature
-          - sensor.kitchen_temperature
-          - sensor.bathroom_temperature
-          - sensor.kids_temperature
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Temperature in rooms
-        type: history-graph
-      - entities:
-          - sensor.bedroom_pressure
-          - sensor.office_pressure
-          - sensor.kitchen_pressure
-          - sensor.bathroom_pressure
-          - sensor.kids_pressure
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Pressure in rooms
-        type: history-graph
-      - entities:
-          - binary_sensor.corridor_motion_sensor
-          - binary_sensor.office_motion_sensor
-        hours_to_show: 24
-        refresh_interval: 0
-        title: Motions in home
-        type: history-graph
-      - entities:
-          - binary_sensor.home_door_sensor
-          - binary_sensor.office_balcon_window_sensor
-        hours_to_show: 24
-        id: fdb8a51288564507bd6b720348fb656c
-        refresh_interval: 0
-        title: Dors in home
-        type: history-graph
-      - entities:
-          - sensor.bedroom_humidity
-          - sensor.office_humidity
-          - sensor.kitchen_humidity
-          - sensor.bathroom_humidity
-          - sensor.kids_humidity
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Humidity in rooms
-        type: history-graph
-      - entities:
-          - sensor.flower_1_temperature
-          - sensor.flower_2_temperature
-          - sensor.flower_3_temperature
-          - sensor.flower_4_temperature
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Flower Temperature
-        type: history-graph
-      - entities:
-          - binary_sensor.kitchen_left_window_sensor
-        hours_to_show: 24
-        refresh_interval: 0
-        title: Windows in home
-        type: history-graph
       - entities:
           - entity: media_player.office_speaker
           - entity: media_player.pc_gpmdp
@@ -455,86 +429,37 @@ views:
             show_source: true
             type: 'custom:mini-media-player'
         type: vertical-stack
-      - entities:
-          - 'moisture:sensor.flower_1_moisture'
-          - 'intensity:sensor.flower_1_light_intensity'
-          - 'conductivity:sensor.flower_1_conductivity'
-          - 'battery:sensor.flower_1_battery'
-          - 'temperature:sensor.flower_1_temperature'
-        image: images/calathea-zebrina.jpg
-        title: Flower outside
-        type: 'custom:plant-card'
-      - entities:
-          - 'moisture:sensor.flower_2_moisture'
-          - 'intensity:sensor.flower_2_light_intensity'
-          - 'conductivity:sensor.flower_2_conductivity'
-          - 'battery:sensor.flower_2_battery'
-          - 'temperature:sensor.flower_2_temperature'
-        image: images/calathea-zebrina.jpg
-        title: Flower inside office
-        type: 'custom:plant-card'
-      - entities:
-          - 'moisture:sensor.flower_3_moisture'
-          - 'intensity:sensor.flower_3_light_intensity'
-          - 'conductivity:sensor.flower_3_conductivity'
-          - 'battery:sensor.flower_3_battery'
-          - 'temperature:sensor.flower_3_temperature'
-        image: images/calathea-zebrina.jpg
-        title: Flower inside kids room
-        type: 'custom:plant-card'
-      - entities:
-          - 'moisture:sensor.flower_4_moisture'
-          - 'intensity:sensor.flower_4_light_intensity'
-          - 'conductivity:sensor.flower_4_conductivity'
-          - 'battery:sensor.flower_4_battery'
-          - 'temperature:sensor.flower_4_temperature'
-        image: images/calathea-zebrina.jpg
-        title: Flower inside kitchen
-        type: 'custom:plant-card'
-      - type: shopping-list
-    badges:
-      - device_tracker.nizmo_phone
-      - device_tracker.google_maps_104688658658376260645
-      - device_tracker.gosia_phone
-      - device_tracker.google_maps_109218123589188227395
-      - device_tracker.portex
-      - device_tracker.nizmo_surface
-      - device_tracker.mac_bls
-      - device_tracker.gosia_laptop
-      - device_tracker.samsung_camera
-      - binary_sensor.office_motion_sensor
-      - binary_sensor.corridor_motion_sensor
-      - binary_sensor.home_door_sensor
-      - sensor.nizm0_today_at_work
+      - title: Shoping list
+        type: shopping-list
     icon: 'mdi:home'
     id: 0
     title: Home
   - cards:
       - cards:
-          - type: entity-button
-            tap_action:
-              action: toggle
+          - entity: light.general_light
             hold_action:
               action: more-info
-            entity: light.general_light
-          - type: entity-button
             tap_action:
               action: toggle
+            type: entity-button
+          - entity: light.directional_light
             hold_action:
               action: more-info
-            entity: light.directional_light
-          - type: entity-button
             tap_action:
               action: toggle
+            type: entity-button
+          - entity: light.top_light
             hold_action:
               action: more-info
-            entity: light.top_light
-          - type: entity-button
             tap_action:
               action: toggle
+            type: entity-button
+          - entity: light.tv_ambilights
             hold_action:
               action: more-info
-            entity: light.tv_ambilights
+            tap_action:
+              action: toggle
+            type: entity-button
         type: horizontal-stack
       - entities:
           - binary_sensor.office_balcon_window_sensor
@@ -587,10 +512,10 @@ views:
   - cards:
       - entity: light.bedroom_main_light
         type: light
-      - type: sensor
+      - detail: 2
         entity: sensor.bedroom_temperature
         graph: line
-        detail: 2
+        type: sensor
       - entity: sensor.bedroom_temperature
         max: 40
         min: 0
@@ -601,10 +526,10 @@ views:
           yellow: 25
         theme: default
         type: gauge
-      - type: sensor
+      - detail: 2
         entity: sensor.bedroom_humidity
-        detail: 2
         graph: line
+        type: sensor
       - entity: sensor.office_humidity
         max: 100
         min: 0
@@ -615,24 +540,24 @@ views:
           yellow: 50
         theme: default
         type: gauge
-      - type: sensor
+      - detail: 2
         entity: sensor.bedroom_pressure
-        detail: 2
         graph: line
+        type: sensor
     icon: 'mdi:bed-empty'
     id: 2
     title: Bedroom
   - cards:
-      - type: entity-button
-        tap_action:
-          action: toggle
+      - entity: light.bathroom_top_light
         hold_action:
           action: more-info
-        entity: light.bathroom_top_light
-      - type: sensor
+        tap_action:
+          action: toggle
+        type: entity-button
+      - detail: 2
         entity: sensor.bathroom_humidity
         graph: line
-        detail: 2
+        type: sensor
       - entity: sensor.bathroom_temperature
         max: 40
         min: 0
@@ -644,10 +569,10 @@ views:
         theme: default
         type: gauge
         unit: C
-      - type: sensor
+      - detail: 2
         entity: sensor.bathroom_pressure
-        detail: 2
         graph: line
+        type: sensor
       - entity: sensor.bathroom_humidity
         max: 100
         min: 0
@@ -659,24 +584,24 @@ views:
         theme: default
         type: gauge
         unit: '%'
-      - type: sensor
+      - detail: 2
         entity: sensor.bathroom_temperature
         graph: line
-        detail: 2
+        type: sensor
     icon: 'mdi:shower'
     id: 3
     title: Bathroom
   - cards:
-      - type: entity-button
-        tap_action:
-          action: toggle
+      - entity: light.kitchen_top_light
         hold_action:
           action: more-info
-        entity: light.kitchen_top_light
-      - type: sensor
+        tap_action:
+          action: toggle
+        type: entity-button
+      - detail: 2
         entity: sensor.kitchen_temperature
-        detail: 2
         graph: line
+        type: sensor
       - entities:
           - binary_sensor.kitchen_left_window_sensor
         id: 6634ec0cd04045c78ed3cefb5f3ac3e6
@@ -692,10 +617,10 @@ views:
         theme: default
         type: gauge
         unit: C
-      - type: sensor
+      - detail: 2
         entity: sensor.kitchen_humidity
-        detail: 2
         graph: line
+        type: sensor
       - entity: sensor.kitchen_humidity
         max: 100
         min: 0
@@ -707,39 +632,39 @@ views:
         theme: default
         type: gauge
         unit: '%'
-      - type: sensor
+      - detail: 2
         entity: sensor.kitchen_pressure
-        detail: 2
         graph: line
+        type: sensor
     icon: 'mdi:kettle'
     id: 4
     title: Kithen
   - cards:
-      - type: entity-button
-        tap_action:
-          action: toggle
+      - entity: light.kids_top_light
         hold_action:
           action: more-info
-        entity: light.kids_top_light
-      - type: sensor
-        entity: sensor.kitchen_temperature
+        tap_action:
+          action: toggle
+        type: entity-button
+      - detail: 2
+        entity: sensor.kids_temperature
         graph: line
-        detail: 2
+        type: sensor
       - entity: sensor.kids_temperature
         max: 40
         min: 0
         name: Temperature
         severity:
-          green: 18
+          green: 19
           red: 30
           yellow: 25
         theme: default
         type: gauge
         unit: C
-      - type: sensor
+      - detail: 2
         entity: sensor.kids_humidity
         graph: line
-        detail: 2
+        type: sensor
       - entity: sensor.kids_humidity
         max: 100
         min: 0
@@ -751,10 +676,10 @@ views:
         theme: default
         type: gauge
         unit: '%'
-      - type: sensor
+      - detail: 2
         entity: sensor.kids_pressure
         graph: line
-        detail: 2
+        type: sensor
     icon: 'mdi:human-child'
     id: 5
     title: Kids room
@@ -777,11 +702,20 @@ views:
     title: Hallway
   - cards:
       - entities:
-          - device_tracker.google_maps_104688658658376260645
-          - device_tracker.google_maps_109218123589188227395
-        type: entities
+          - entity: device_tracker.google_maps_104688658658376260645
+          - entity: device_tracker.nizmo_phone
+          - entity: device_tracker.google_maps_109218123589188227395
+          - entity: device_tracker.gosia_phone
         show_header_toggle: false
         theme: default
+        type: entities
+      - entities:
+          - device_tracker.google_maps_104688658658376260645
+          - device_tracker.google_maps_109218123589188227395
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Family tracking
+        type: history-graph
     icon: 'mdi:home-heart'
     id: 7
     title: Family
@@ -852,10 +786,123 @@ views:
         refresh_interval: 0
         title: Windows in home
         type: history-graph
+      - entities:
+          - binary_sensor.corridor_motion_sensor
+          - binary_sensor.office_motion_sensor
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Motions in home
+        type: history-graph
+      - entities:
+          - binary_sensor.kitchen_left_window_sensor
+        hours_to_show: 24
+        refresh_interval: 0
+        title: Windows in home
+        type: history-graph
     icon: 'mdi:settings'
     id: 8
     title: Stats
-  - cards: []
-    badges: []
-    title: Testings
+  - badges: []
+    cards:
+      - entity: plant.kids_plant
+        type: plant-status
+      - entity: plant.office_plant
+        type: plant-status
+      - entity: plant.kitchen_plant
+        type: plant-status
+      - entity: plant.outside_plant
+        type: plant-status
+      - entities:
+          - sensor.flower_1_temperature
+          - sensor.flower_2_temperature
+          - sensor.flower_3_temperature
+          - sensor.flower_4_temperature
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Flower Temperature
+        type: history-graph
+      - entities:
+          - sensor.flower_1_conductivity
+          - sensor.flower_2_conductivity
+          - sensor.flower_3_conductivity
+          - sensor.flower_4_conductivity
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Flower conductivity
+        type: history-graph
+      - entities:
+          - 'moisture:sensor.flower_1_moisture'
+          - 'intensity:sensor.flower_1_light_intensity'
+          - 'conductivity:sensor.flower_1_conductivity'
+          - 'battery:sensor.flower_1_battery'
+          - 'temperature:sensor.flower_1_temperature'
+        image: images/calathea-zebrina.jpg
+        title: Flower outside
+        type: 'custom:plant-card'
+      - entities:
+          - 'moisture:sensor.flower_3_moisture'
+          - 'intensity:sensor.flower_3_light_intensity'
+          - 'conductivity:sensor.flower_3_conductivity'
+          - 'battery:sensor.flower_3_battery'
+          - 'temperature:sensor.flower_3_temperature'
+        image: images/calathea-zebrina.jpg
+        title: Flower inside kids room
+        type: 'custom:plant-card'
+      - entities:
+          - 'moisture:sensor.flower_2_moisture'
+          - 'intensity:sensor.flower_2_light_intensity'
+          - 'conductivity:sensor.flower_2_conductivity'
+          - 'battery:sensor.flower_2_battery'
+          - 'temperature:sensor.flower_2_temperature'
+        image: images/calathea-zebrina.jpg
+        title: Flower inside office
+        type: 'custom:plant-card'
+      - entities:
+          - 'moisture:sensor.flower_4_moisture'
+          - 'intensity:sensor.flower_4_light_intensity'
+          - 'conductivity:sensor.flower_4_conductivity'
+          - 'battery:sensor.flower_4_battery'
+          - 'temperature:sensor.flower_4_temperature'
+        image: images/calathea-zebrina.jpg
+        title: Flower inside kitchen
+        type: 'custom:plant-card'
+      - image: /local/images/calathea-zebrina.jpg
+        elements:
+          - style:
+              top: 7%
+              '--ha-label-badge-font-size': 1em
+              left: 2%
+              transform: none
+            type: state-badge
+            entity: sensor.flower_2_moisture
+          - style:
+              top: 7%
+              '--ha-label-badge-font-size': 1em
+              left: 17%
+              transform: none
+            type: state-badge
+            entity: sensor.flower_3_moisture
+          - style:
+              top: 7%
+              '--ha-label-badge-font-size': 1em
+              left: 32%
+              transform: none
+            type: state-badge
+            entity: sensor.flower_4_moisture
+          - style:
+              top: 7%
+              '--ha-label-badge-font-size': 1em
+              left: 47%
+              transform: none
+            type: state-badge
+            entity: sensor.flower_1_moisture
+          - style:
+              top: 12%
+              '--ha-label-badge-font-size': 1em
+              left: 92%
+            type: state-label
+            entity: sensor.flower_3_temperature
+        type: picture-elements
+    icon: 'mdi:flower'
     theme: Backend-selected
+    title: Flowers
