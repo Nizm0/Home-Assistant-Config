@@ -35,6 +35,7 @@
 #     entity_id: media_player.pc_gpmdp
 
 
+# Aqara cube actions
 # free_fall
 # move
 # rotate

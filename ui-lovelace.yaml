@@ -49,6 +49,18 @@ views:
           - home
         title: all devices
         type: entity-filter
+      - type: entities
+        entities:
+          - entity: binary_sensor.corridor_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.office_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.home_door_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.office_balcon_window_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.kitchen_left_window_sensor
+            secondary_info: last-changed
       - card:
           entities: []
           title: Low Battery Devices
@@ -166,18 +178,39 @@ views:
           title: Turned on lights
           type: glance
         entities:
-          - input_boolean.kids_light
-          - light.bathroom_top_light
-          - light.bedroom_main_lightght
-          - light.christmas_tree_test
-          - light.corridor_gateway_light
-          - light.directional_light
-          - light.general_light
-          - light.hallway_top_light
-          - light.kids_top_light
-          - light.kitchen_top_light
-          - light.top_light
-          - light.tv_ambilights
+          - entity: light.bathroom_top_light
+            tap_action:
+              action: toggle
+          - entity: light.bedroom_main_lightght
+            tap_action:
+              action: toggle
+          - entity: light.christmas_tree_test
+            tap_action:
+              action: toggle
+          - entity: light.corridor_gateway_light
+            tap_action:
+              action: toggle
+          - entity: light.directional_light
+            tap_action:
+              action: toggle
+          - entity: light.general_light
+            tap_action:
+              action: toggle
+          - entity: light.hallway_top_light
+            tap_action:
+              action: toggle
+          - entity: light.kids_top_light
+            tap_action:
+              action: toggle
+          - entity: light.kitchen_top_light
+            tap_action:
+              action: toggle
+          - entity: light.top_light
+            tap_action:
+              action: toggle
+          - entity: light.tv_ambilights
+            tap_action:
+              action: toggle
         show_header_toggle: false
         state_filter:
           - 'on'
@@ -299,18 +332,39 @@ views:
           title: Turned off lights
           type: glance
         entities:
-          - input_boolean.kids_light
-          - light.bathroom_top_light
-          - light.bedroom_main_lightght
-          - light.christmas_tree_test
-          - light.corridor_gateway_light
-          - light.directional_light
-          - light.general_light
-          - light.hallway_top_light
-          - light.kids_top_light
-          - light.kitchen_top_light
-          - light.top_light
-          - light.tv_ambilights
+          - entity: light.bathroom_top_light
+            tap_action:
+              action: toggle
+          - entity: light.bedroom_main_lightght
+            tap_action:
+              action: toggle
+          - entity: light.christmas_tree_test
+            tap_action:
+              action: toggle
+          - entity: light.corridor_gateway_light
+            tap_action:
+              action: toggle
+          - entity: light.directional_light
+            tap_action:
+              action: toggle
+          - entity: light.general_light
+            tap_action:
+              action: toggle
+          - entity: light.hallway_top_light
+            tap_action:
+              action: toggle
+          - entity: light.kids_top_light
+            tap_action:
+              action: toggle
+          - entity: light.kitchen_top_light
+            tap_action:
+              action: toggle
+          - entity: light.top_light
+            tap_action:
+              action: toggle
+          - entity: light.tv_ambilights
+            tap_action:
+              action: toggle
         show_header_toggle: false
         state_filter:
           - 'off'
@@ -340,50 +394,72 @@ views:
         type: entities
       - entities:
           - entity: light.bedroom_main_light
+            secondary_info: last-changed
           - entity: sensor.bedroom_temperature
+            secondary_info: last-changed
           - entity: sensor.bedroom_humidity
+            secondary_info: last-changed
           - entity: sensor.bedroom_pressure
+            secondary_info: last-changed
         show_header_toggle: true
         title: Bedroom
         type: entities
       - entities:
-          - light.kitchen_top_light
-          - sensor.kitchen_temperature
-          - sensor.kitchen_humidity
-          - sensor.kitchen_pressure
+          - entity: light.kitchen_top_light
+            secondary_info: last-changed
+          - entity: sensor.kitchen_temperature
+            secondary_info: last-changed
+          - entity: sensor.kitchen_humidity
+            secondary_info: last-changed
+          - entity: sensor.kitchen_pressure
+            secondary_info: last-changed
         show_header_toggle: true
         title: Kitchen
         type: entities
       - entities:
-          - light.bathroom_top_light
-          - binary_sensor.bathroom_water_leak_sensor
-          - sensor.bathroom_temperature
-          - sensor.bathroom_humidity
-          - sensor.bathroom_pressure
+          - entity: light.bathroom_top_light
+            secondary_info: last-changed
+          - entity: binary_sensor.bathroom_water_leak_sensor
+            secondary_info: last-changed
+          - entity: sensor.bathroom_temperature
+            secondary_info: last-changed
+          - entity: sensor.bathroom_humidity
+            secondary_info: last-changed
+          - entity: sensor.bathroom_pressure
+            secondary_info: last-changed
         show_header_toggle: true
         title: Bathroom
         type: entities
       - entities:
-          - light.kids_top_light
-          - sensor.kids_temperature
-          - sensor.kids_humidity
-          - sensor.kids_pressure
-        id: 17b22abc60a84a80abdf3e22d01925fa
+          - entity: light.kids_top_light
+            secondary_info: last-changed
+          - entity: sensor.kids_temperature
+            secondary_info: last-changed
+          - entity: sensor.kids_humidity
+            secondary_info: last-changed
+          - entity: sensor.kids_pressure
+            secondary_info: last-changed
         show_header_toggle: true
         title: Kids room
         type: entities
       - card:
-          entities: []
-          title: 17track
-          type: glance
+          card:
+            type: entities
+            title: Tracking
+            show_header_toggle: false
+          show_empty: false
         filter:
           include:
-            - entity_id: '*seventeentrack_package_*'
+            - entity_id: sensor.*seventeentrack_package_*
+              options:
+                secondary_info: last-changed
         show_empty: false
         type: 'custom:monster-card'
       - entities:
-          - sun.sun
-          - sensor.moon
+          - entity: sun.sun
+            secondary_info: last-changed
+          - entity: sensor.moon
+            secondary_info: last-changed
         show_header_toggle: true
         title: Environment
         type: entities
@@ -806,12 +882,16 @@ views:
     cards:
       - entity: plant.kids_plant
         type: plant-status
+        name: Kids plant
       - entity: plant.office_plant
         type: plant-status
+        name: Office plant
       - entity: plant.kitchen_plant
         type: plant-status
+        name: Kitchen plant
       - entity: plant.outside_plant
         type: plant-status
+        name: Outside plant
       - entities:
           - sensor.flower_1_temperature
           - sensor.flower_2_temperature
