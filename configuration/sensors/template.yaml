@@ -58,6 +58,32 @@
       # device_class: battery
       # unit_of_measurement: '%'
 
+- platform: template
+  sensors:
+    in_bed_bayesian_probability:
+      entity_id: binary_sensor.in_bed
+      value_template: "{{states.binary_sensor.in_bed.attributes.probability * 100}}"
+      unit_of_measurement: '%'
+
+- platform: template
+  sensors:
+    template_last_motion:
+      friendly_name: 'Last Motion'
+      value_template: >
+        {% set sensors = [states.binary_sensor.office_motion_sensor, states.binary_sensor.corridor_motion_sensor] %}
+        {% for sensor in sensors %}
+          {% if as_timestamp(sensor.last_changed) == as_timestamp(sensors | map(attribute='last_changed') | max) %}
+            {{ sensor.name }}
+          {% endif %}
+        {% endfor %}
+
+- platform: template
+  sensors:
+    motion_last30:
+      value_template: '{{(as_timestamp(now())-as_timestamp(states.variable.last_motion.last_changed)) < 1800 }}'
+      friendly_name: Motion in Last 30min
+      # device_class: motion
+
 # - platform: template
 #   sensors:
 #     bedroom_battery_level:
