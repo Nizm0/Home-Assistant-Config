@@ -15,6 +15,7 @@ dark_theme:
   paper-listbox-background-color: "#424242" # Listbox background colour
   paper-listbox-color: "#FFFFFF" # Listbox text colour
   paper-grey-200: "#616161" # Listbox selected item background colour
+  paper-green-400: "#9cde9f" # Plugin icon installed
 
   # Switches #
   paper-toggle-button-checked-ink-color: "#1ABA92"
