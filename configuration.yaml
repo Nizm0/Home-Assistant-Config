@@ -28,7 +28,7 @@ http:
   - 172.19.0.0/24
   - 192.168.1.0/24
   - 192.168.2.0/24
-
+system_health:
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.
@@ -58,7 +58,7 @@ tts:
   - platform: google
 
 # android_ip_webcam: !include configuration/android_ip_webcam.yaml
-automation: !include configuration/automation.yaml
+automation: !include automations.yaml
 automation old: !include_dir_merge_list configuration/automations/
 # camera:
 # - platform: ffmpeg

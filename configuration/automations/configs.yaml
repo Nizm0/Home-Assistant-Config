@@ -12,22 +12,6 @@
           Info about update:
             {{ trigger.to_state.state }}
         title: Travis compiled succesfully
-
-# - alias: Change max temp greater than min temp
-#   id: change_max_temp_greater_than_min_temp
-#   trigger:
-#     - platform: state
-#       entity_id: input_number.temp_max, input_number.temp_min
-#   condition:
-#     - condition: state
-#       entity_id: input_number.temp_max
-#       state: '{{ input_number.temp_min.state}}'
-#   action:
-#     - service: input_number.set_value
-#       data_template:
-#         entity_id: input_number.temp_max
-#         value: '{{ input_number.temp_min.state }} | float) + 1}}'
-
 - alias: Notify if new devices
   id: notify_if_new_devices
   trigger:
@@ -158,3 +142,22 @@
     #       {% endfor %}
     #       {%- endfor %}
     #       {% endmacro %}
+- id: '1546595642051'
+  alias: SD card warning
+  trigger:
+  - above: '50'
+    entity_id: sensor.disk_use_percent_home
+    platform: numeric_state
+  condition: []
+  action:
+  - data:
+      title: SD Card usage is bigger than 50%
+    service: notify.push_to_chrome
+- id: '1549924461285'
+  alias: Hangout reconnect at 5
+  trigger:
+  - at: 05:00
+    platform: time
+  condition: []
+  action:
+  - service: hangouts.reconnect
