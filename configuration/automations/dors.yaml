@@ -7,6 +7,20 @@
   action:
     - service: homeassistant.turn_on
       entity_id: script.home_doors_has_been_opened
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          Home presence is: {{ states.group.all_devices.state }}
+        title: Someone opened home doors
+        data:
+          actions:
+            - action: open
+              icon: "/static/icons/favicon-192x192.png"
+              title: Open Home Assistant
+            - action: open_door
+              title: Open door
+          data:
+            tag: 'home-door-notification'
 
 
 #### HOME DOOR CLOSED
@@ -23,3 +37,24 @@
   action:
     - service: homeassistant.turn_on
       entity_id: script.home_doors_has_been_closed
+- alias: Home door closed notification
+  id: home_door_closed_notification
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.home_door_sensor
+      to: 'off'
+  action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          Doors was open for: {{ trigger.for }} seconds {{ trigger.from_state.attributes.last_changed }}
+        title: Dors are now closed
+        data:
+          actions:
+            - action: open
+              icon: "/static/icons/favicon-192x192.png"
+              title: Open Home Assistant
+            - action: open_door
+              title: Open door
+          data:
+            tag: 'home-door-notification'

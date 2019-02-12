@@ -17,6 +17,15 @@
       message: >
         Vacuum has started and now is {{ trigger.to_state.state }}
       title: Vacuum start working
+      data:
+        actions:
+          - action: open
+            icon: "/static/icons/favicon-192x192.png"
+            title: Open Home Assistant
+          - action: open_door
+            title: Open door
+        data:
+          tag: vacuum-notification
 
 - alias: Vacuum end cleaning finisheda and docked
   id: vacuum_end_cleaning_finisheda_and_docked
@@ -36,6 +45,8 @@
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
       title: Vacuum finished working
+    data:
+      tag: vacuum-notification
 
 - alias: Vacuum have encounter problem
   id: vacuum_have_encounter_problem

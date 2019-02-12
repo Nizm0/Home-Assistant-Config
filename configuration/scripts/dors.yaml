@@ -11,11 +11,11 @@ home_doors_has_been_opened:
     # - service: script.turn_on
     #   data: 
     #     entity_id: script.corridor_light_timer
-    - service: notify.push_to_chrome
-      data_template:
-        message: >
-          New value is: 'open'
-        title: Someone opened home doors
+    # - service: notify.push_to_chrome
+    #   data_template:
+    #     message: >
+    #       New value is: 'open'
+    #     title: Someone opened home doors
 
 home_doors_has_been_closed:
   sequence:

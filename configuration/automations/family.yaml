@@ -1,4 +1,4 @@
-- id: michal_is_out_from_home
+- id: michal_is_out_from_work
   alias: Michał is out from Work
   trigger: 
     - platform: zone
@@ -40,7 +40,7 @@
         New value is: {{ trigger.to_state.state }}
       title: Michał entered the house
 
-- id: michal_is_out_from_home
+- id: gosia_is_out_from_home
   alias: Gosia entered the house
   trigger: 
     - platform: zone
@@ -66,6 +66,10 @@
     - platform: numeric_state
       entity_id: sensor.nizm0_today_at_work
       above: 8
+  condition:
+    - condition: state
+      entity_id: device_tracker.google_maps_104688658658376260645
+      state: work
   action:
     - service: notify.push_to_chrome
       data_template:

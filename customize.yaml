@@ -27,7 +27,7 @@ device_tracker.esp_8344fe:
   hidden: yes
 device_tracker.brother_printer:
   hidden: yes
-device_tracker.broadlink:
+device_tracker.broadlink_mini:
   hidden: yes
 device_tracker.yeelinklightcolor2_miio87148988:
   hidden: yes
@@ -57,8 +57,8 @@ history_graph.flower_moisture:
   hidden: yes
 # history_graph.flower_temperature:
   # hidden: yes
-history_graph.gearbest_price_history:
-  hidden: yes
+# history_graph.gearbest_price_history:
+#   hidden: yes
 
 # binary_sensor.corridor_motion_sensor:
 # binary_sensor.office_motion_sensor:

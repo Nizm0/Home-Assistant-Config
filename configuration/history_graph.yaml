@@ -75,22 +75,22 @@ windows:
   name: Windows in home
   entities:
   - binary_sensor.kitchen_left_window_sensor
-pricess:
-  name: GearBest price history
-  entities:
-  - sensor.broadlink_rm_pro
-  - sensor.xiaomi_360_degree_camera
-  - sensor.xiaomi_aqara_smart_wireless_switch
-  # - sensor.xiaomi_aqara_door_window_sensor
-  # - sensor.xiaomi_aqara_human_body_sensor
-  - sensor.xiaomi_aqara_water_sensor
-  - sensor.xiaomi_bedside_lamp
-  - sensor.xiaomi_smart_button
-  # - sensor.xiaomi_yeelight_white
-  # - sensor.yeelight_smart_light_strip
-  # - sensor.xiaomi_door_window_sensor
-  hours_to_show: 120
-  refresh: 3600
+# pricess:
+#   name: GearBest price history
+#   entities:
+#   - sensor.broadlink_rm_pro
+#   - sensor.xiaomi_360_degree_camera
+#   - sensor.xiaomi_aqara_smart_wireless_switch
+#   # - sensor.xiaomi_aqara_door_window_sensor
+#   # - sensor.xiaomi_aqara_human_body_sensor
+#   - sensor.xiaomi_aqara_water_sensor
+#   - sensor.xiaomi_bedside_lamp
+#   - sensor.xiaomi_smart_button
+#   # - sensor.xiaomi_yeelight_white
+#   # - sensor.yeelight_smart_light_strip
+#   # - sensor.xiaomi_door_window_sensor
+#   hours_to_show: 120
+#   refresh: 3600
 rooms_presure:
   name: Presure in rooms
   entities:

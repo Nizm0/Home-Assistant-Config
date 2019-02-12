@@ -78,4 +78,4 @@ stats_view:
     - history_graph.flower_light_intensity
     - history_graph.flower_moisture
     - history_graph.flower_temperature
-    - history_graph.gearbest_price_history
+    # - history_graph.gearbest_price_history

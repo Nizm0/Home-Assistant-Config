@@ -15,6 +15,11 @@
   password: !secret google_maps_password
   max_gps_accuracy: 100
 
+
+- platform: bluetooth_tracker
+  request_rssi: true
+# - platform: bluetooth_le_tracker
+#   track_new_devices: False
 # - platform: ping
 #   interval_seconds: 60
 #   hosts:
