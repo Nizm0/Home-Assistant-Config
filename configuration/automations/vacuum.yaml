@@ -45,8 +45,8 @@
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
       title: Vacuum finished working
-    data:
-      tag: vacuum-notification
+      data:
+        tag: vacuum-notification
 
 - alias: Vacuum have encounter problem
   id: vacuum_have_encounter_problem
