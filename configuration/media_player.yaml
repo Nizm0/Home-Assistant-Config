@@ -14,8 +14,9 @@
 #   ircodes_ini: 'broadlink_media_codes/philips.ini'
 #   ping_host: 192.168.1.46
 
-# - platform: philips_2016
-#   name: Philips TV
-#   host: 192.168.1.130
-#   username: !secret philips_user
-#   password: !secret philips_pass
+- platform: philips_2016
+  name: Philips TV
+  host: 192.168.1.130
+  mac: 3C:A0:67:E0:3E:E1
+  username: !secret philips_user
+  password: !secret philips_pass
