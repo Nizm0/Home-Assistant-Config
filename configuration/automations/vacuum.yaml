@@ -12,11 +12,6 @@
       message: >
         Vacuum has started and now is {{ trigger.to_state.state }}
       title: Vacuum start working
-  - service: notify.pushbullet_nizmo
-    data_template:
-      message: >
-        Vacuum has started and now is {{ trigger.to_state.state }}
-      title: Vacuum start working
       data:
         actions:
           - action: open
@@ -25,6 +20,11 @@
           - action: open_door
             title: Open door
         tag: vacuum-notification
+  - service: notify.pushbullet_nizmo
+    data_template:
+      message: >
+        Vacuum has started and now is {{ trigger.to_state.state }}
+      title: Vacuum start working
 
 - alias: Vacuum end cleaning finisheda and docked
   id: vacuum_end_cleaning_finisheda_and_docked
@@ -39,13 +39,13 @@
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
       title: Vacuum stopt working
+      data:
+        tag: vacuum-notification
   - service: notify.pushbullet_nizmo
     data_template:
       message: >
         Vacuum has stoped and now is {{ trigger.to_state.state }}
       title: Vacuum finished working
-      data:
-        tag: vacuum-notification
 
 - alias: Vacuum have encounter problem
   id: vacuum_have_encounter_problem
@@ -60,13 +60,13 @@
       message: >
         Vacuum has encounter {{ trigger.to_state.state }} and stoped
       title: The vacuum cleaner found a problem
+      data:
+        tag: vacuum-notification
   - service: notify.pushbullet_nizmo
     data_template:
       message: >
         Vacuum has encounter {{ trigger.to_state.state }} and stoped
       title: The vacuum cleaner found a problem
-      data:
-        tag: vacuum-notification
 
 - alias: Weekday Vacuum
   id: weekday_vacuum
