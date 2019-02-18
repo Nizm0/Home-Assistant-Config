@@ -1,0 +1,3 @@
+# doors_manager:
+#   module: doors
+#   class: DoorsManager

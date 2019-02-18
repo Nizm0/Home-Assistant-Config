@@ -1,0 +1,3 @@
+windows_manager:
+  module: windows
+  class: WindowsActions

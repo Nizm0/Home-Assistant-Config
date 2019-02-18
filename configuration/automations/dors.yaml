@@ -2,7 +2,7 @@
   id: home_door_opened
   trigger:
     - platform: state
-      entity_id: binary_sensor.home_door_sensor, binary_sensor.kitchen_left_window_sensor
+      entity_id: binary_sensor.home_door_sensor
       to: 'on'
   action:
     - service: homeassistant.turn_on
@@ -47,7 +47,7 @@
   id: home_door_closed_notification
   trigger:
     - platform: state
-      entity_id: binary_sensor.home_door_sensor, binary_sensor.kitchen_left_window_sensor
+      entity_id: binary_sensor.home_door_sensor
       to: 'off'
   action:
     - service: notify.push_to_chrome
