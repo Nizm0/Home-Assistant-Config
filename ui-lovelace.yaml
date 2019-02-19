@@ -1,30 +1,26 @@
 resources:
-  - type: js
-    url: /local/custom_ui/dark-sky-weather-card.js?
   - type: module
-    url: /local/custom_ui/mini-media-player-bundle.js?v=0.9.2
+    url: /local/custom_ui/mini-media-player-bundle.js?v=1.0.1
   - type: js
     url: /local/custom-lovelace/monster-card/monster-card.js?v=1
   - type: module
     url: /local/custom-lovelace/thermostat-card/thermostat-card.js?v=1
   - type: js
     url: /local/plant-card.js
+  - url: /local/custom_ui/mini-graph-card-bundle.js?v=0.3.0
+    type: module
 title: Home
 views:
   - badges:
-      - device_tracker.nizmo_phone
       - device_tracker.google_maps_104688658658376260645
-      - device_tracker.gosia_phone
       - device_tracker.google_maps_109218123589188227395
       - device_tracker.portex
+      - device_tracker.bozena_phone
       - device_tracker.nizmo_surface
       - device_tracker.mac_bls
       - device_tracker.gosia_laptop
-      - device_tracker.samsung_camera
-      - binary_sensor.office_motion_sensor
-      - binary_sensor.corridor_motion_sensor
-      - binary_sensor.home_door_sensor
       - sensor.nizm0_today_at_work
+      - sensor.nizm0_week_work
       - sensor.mold_indicator
       - sensor.letsencrypt
     cards:
@@ -33,10 +29,8 @@ views:
           title: People at home
           type: glance
         entities:
-          - device_tracker.nizmo_phone
-          - device_tracker.google_maps_104688658658376260645
-          - device_tracker.gosia_phone
-          - device_tracker.google_maps_109218123589188227395
+          - sensor.michal_presence
+          - sensor.gosia_presence
           - device_tracker.babcia_teresa
           - device_tracker.portex
           - device_tracker.bozena_phone
@@ -47,10 +41,10 @@ views:
         show_header_toggle: true
         state_filter:
           - home
+          - Home
         title: all devices
         type: entity-filter
-      - type: entities
-        entities:
+      - entities:
           - entity: binary_sensor.corridor_motion_sensor
             secondary_info: last-changed
           - entity: binary_sensor.office_motion_sensor
@@ -61,6 +55,7 @@ views:
             secondary_info: last-changed
           - entity: binary_sensor.kitchen_left_window_sensor
             secondary_info: last-changed
+        type: entities
       - card:
           entities: []
           title: Low Battery Devices
@@ -81,9 +76,9 @@ views:
               color: white
               left: 14%
               top: 86%
-            type: state-icon
             tap_action:
               action: more-info
+            type: state-icon
           - entity: sensor.office_temperature
             icon: 'mdi:office'
             style:
@@ -181,10 +176,10 @@ views:
           - entity: light.bathroom_top_light
             tap_action:
               action: toggle
-          - entity: light.bedroom_main_lightght
+          - entity: light.bedroom_main_light
             tap_action:
               action: toggle
-          - entity: light.christmas_tree_test
+          - entity: light.christmas_tree
             tap_action:
               action: toggle
           - entity: light.corridor_gateway_light
@@ -335,10 +330,10 @@ views:
           - entity: light.bathroom_top_light
             tap_action:
               action: toggle
-          - entity: light.bedroom_main_lightght
+          - entity: light.bedroom_main_light
             tap_action:
               action: toggle
-          - entity: light.christmas_tree_test
+          - entity: light.christmas_tree
             tap_action:
               action: toggle
           - entity: light.corridor_gateway_light
@@ -444,9 +439,9 @@ views:
         type: entities
       - card:
           card:
-            type: entities
-            title: Tracking
             show_header_toggle: false
+            title: Tracking
+            type: entities
           show_empty: false
         filter:
           include:
@@ -509,6 +504,8 @@ views:
         type: shopping-list
     icon: 'mdi:home'
     id: 0
+    panel: false
+    path: ''
     title: Home
   - cards:
       - cards:
@@ -606,7 +603,7 @@ views:
         entity: sensor.bedroom_humidity
         graph: line
         type: sensor
-      - entity: sensor.office_humidity
+      - entity: sensor.bedroom_humidity
         max: 100
         min: 0
         name: Humidity
@@ -624,32 +621,32 @@ views:
     id: 2
     title: Bedroom
   - cards:
-      - entity: light.bathroom_top_light
+      - entity: light.kids_top_light
         hold_action:
           action: more-info
         tap_action:
           action: toggle
         type: entity-button
       - detail: 2
-        entity: sensor.bathroom_humidity
+        entity: sensor.kids_temperature
         graph: line
         type: sensor
-      - entity: sensor.bathroom_temperature
+      - entity: sensor.kids_temperature
         max: 40
         min: 0
         name: Temperature
         severity:
-          green: 18
+          green: 19
           red: 30
           yellow: 25
         theme: default
         type: gauge
         unit: C
       - detail: 2
-        entity: sensor.bathroom_pressure
+        entity: sensor.kids_humidity
         graph: line
         type: sensor
-      - entity: sensor.bathroom_humidity
+      - entity: sensor.kids_humidity
         max: 100
         min: 0
         name: Humidity
@@ -661,12 +658,12 @@ views:
         type: gauge
         unit: '%'
       - detail: 2
-        entity: sensor.bathroom_temperature
+        entity: sensor.kids_pressure
         graph: line
         type: sensor
-    icon: 'mdi:shower'
-    id: 3
-    title: Bathroom
+    icon: 'mdi:human-child'
+    id: 5
+    title: Kids room
   - cards:
       - entity: light.kitchen_top_light
         hold_action:
@@ -716,32 +713,32 @@ views:
     id: 4
     title: Kithen
   - cards:
-      - entity: light.kids_top_light
+      - entity: light.bathroom_top_light
         hold_action:
           action: more-info
         tap_action:
           action: toggle
         type: entity-button
       - detail: 2
-        entity: sensor.kids_temperature
+        entity: sensor.bathroom_humidity
         graph: line
         type: sensor
-      - entity: sensor.kids_temperature
+      - entity: sensor.bathroom_temperature
         max: 40
         min: 0
         name: Temperature
         severity:
-          green: 19
+          green: 18
           red: 30
           yellow: 25
         theme: default
         type: gauge
         unit: C
       - detail: 2
-        entity: sensor.kids_humidity
+        entity: sensor.bathroom_pressure
         graph: line
         type: sensor
-      - entity: sensor.kids_humidity
+      - entity: sensor.bathroom_humidity
         max: 100
         min: 0
         name: Humidity
@@ -753,12 +750,12 @@ views:
         type: gauge
         unit: '%'
       - detail: 2
-        entity: sensor.kids_pressure
+        entity: sensor.bathroom_temperature
         graph: line
         type: sensor
-    icon: 'mdi:human-child'
-    id: 5
-    title: Kids room
+    icon: 'mdi:shower'
+    id: 3
+    title: Bathroom
   - cards:
       - cards:
           - entity: light.hallway_top_light
@@ -778,10 +775,22 @@ views:
     title: Hallway
   - cards:
       - entities:
+          - entity: sensor.michal_presence
+            secondary_info: last-changed
+          - entity: sensor.gosia_presence
+            secondary_info: last-changed
+          - entity: device_tracker.oneplus_3_bt
+            secondary_info: last-changed
           - entity: device_tracker.google_maps_104688658658376260645
+            secondary_info: last-changed
           - entity: device_tracker.nizmo_phone
+            secondary_info: last-changed
           - entity: device_tracker.google_maps_109218123589188227395
+            secondary_info: last-changed
           - entity: device_tracker.gosia_phone
+            secondary_info: last-changed
+          - entity: input_select.home_preset
+            secondary_info: last-changed
         show_header_toggle: false
         theme: default
         type: entities
@@ -792,6 +801,16 @@ views:
         refresh_interval: 60
         title: Family tracking
         type: history-graph
+      - entities:
+          - entity: input_number.temp_max
+          - entity: input_number.temp_min
+          - entity: input_datetime.both_date_and_time
+          - entity: input_number.slider1
+        type: entities
+      - entities:
+          - entity: device_tracker.bozena_phone
+          - entity: device_tracker.portex
+        type: entities
     icon: 'mdi:home-heart'
     id: 7
     title: Family
@@ -881,17 +900,17 @@ views:
   - badges: []
     cards:
       - entity: plant.kids_plant
-        type: plant-status
         name: Kids plant
+        type: plant-status
       - entity: plant.office_plant
-        type: plant-status
         name: Office plant
+        type: plant-status
       - entity: plant.kitchen_plant
-        type: plant-status
         name: Kitchen plant
-      - entity: plant.outside_plant
         type: plant-status
+      - entity: plant.outside_plant
         name: Outside plant
+        type: plant-status
       - entities:
           - sensor.flower_1_temperature
           - sensor.flower_2_temperature
@@ -946,43 +965,65 @@ views:
         image: images/calathea-zebrina.jpg
         title: Flower inside kitchen
         type: 'custom:plant-card'
-      - image: /local/images/calathea-zebrina.jpg
-        elements:
-          - style:
-              top: 7%
+      - elements:
+          - entity: sensor.flower_2_moisture
+            style:
               '--ha-label-badge-font-size': 1em
               left: 2%
+              top: 7%
               transform: none
             type: state-badge
-            entity: sensor.flower_2_moisture
-          - style:
-              top: 7%
+          - entity: sensor.flower_3_moisture
+            style:
               '--ha-label-badge-font-size': 1em
               left: 17%
+              top: 7%
               transform: none
             type: state-badge
-            entity: sensor.flower_3_moisture
-          - style:
-              top: 7%
+          - entity: sensor.flower_4_moisture
+            style:
               '--ha-label-badge-font-size': 1em
               left: 32%
+              top: 7%
               transform: none
             type: state-badge
-            entity: sensor.flower_4_moisture
-          - style:
-              top: 7%
+          - entity: sensor.flower_1_moisture
+            style:
               '--ha-label-badge-font-size': 1em
               left: 47%
+              top: 7%
               transform: none
             type: state-badge
-            entity: sensor.flower_1_moisture
-          - style:
-              top: 12%
+          - entity: sensor.flower_3_temperature
+            style:
               '--ha-label-badge-font-size': 1em
               left: 92%
+              top: 12%
             type: state-label
-            entity: sensor.flower_3_temperature
+        image: /local/images/calathea-zebrina.jpg
         type: picture-elements
     icon: 'mdi:flower'
     theme: Backend-selected
     title: Flowers
+  - badges:
+      - binary_sensor.in_bed
+      - sensor.in_bed_bayesian_probability
+      - sensor.motion_last30
+      - sensor.template_last_motion
+    cards:
+      - entities:
+          - entity: binary_sensor.corridor_motion_sensor
+          - entity: binary_sensor.office_motion_sensor
+          - entity: media_player.philips_tv
+          - entity: group.all_devices
+          - entity: binary_sensor.desctop_pc
+          - entity: sun.sun
+        type: entities
+    icon: 'mdi:test-tube'
+    theme: darkred
+    title: Testing area
+  - badges: []
+    cards: []
+    icon: 'mdi:map'
+    path: null
+    title: Map

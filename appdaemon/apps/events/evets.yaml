@@ -1,0 +1,3 @@
+Events_actions:
+  module: events
+  class: Events

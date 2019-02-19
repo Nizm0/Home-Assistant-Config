@@ -24,8 +24,8 @@
         Current location: {{ state_attr('device_tracker.google_maps_104688658658376260645', 'address') }}
       title: Michał is out form work
 
-- id: michal_is_out_from_home
-  alias: Michał entered the house
+- id: michal_entered_the_home
+  alias: Michał entered the home
   trigger: 
     - platform: zone
       entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
@@ -37,17 +37,17 @@
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
-      title: Michał entered the house
+      title: Michał entered the home
       data:
         tag: nizmo-location-info
   - service: notify.hangouts
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
-      title: Michał entered the house
+      title: Michał entered the home
 
-- id: gosia_is_out_from_home
-  alias: Gosia entered the house
+- id: gosia_entered_the_home
+  alias: Gosia entered the home
   trigger: 
     - platform: zone
       entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
@@ -59,12 +59,12 @@
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
-      title: Gosia entered the house
+      title: Gosia entered the home
   - service: notify.hangouts
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
-      title: Gosia entered the house
+      title: Gosia entered the home
 
 - id: 589437twnoe86ogw6pw
   alias: Time to go home
@@ -82,5 +82,5 @@
         message: >
           New value is: {{ trigger.to_state.state }}
         title: Michał it's time to leave
-      data:
-        tag: nizmo-location-info
+        data:
+          tag: nizmo-location-info
