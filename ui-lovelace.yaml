@@ -1,29 +1,89 @@
 resources:
-  - type: module
-    url: /local/custom_ui/mini-media-player-bundle.js?v=1.0.1
-  - type: js
-    url: /local/custom-lovelace/monster-card/monster-card.js?v=1
-  - type: module
-    url: /local/custom-lovelace/thermostat-card/thermostat-card.js?v=1
-  - type: js
-    url: /local/plant-card.js
-  - url: /local/custom_ui/mini-graph-card-bundle.js?v=0.3.0
+  - url: /customcards/card-tools.js
+    type: js
+  - url: https://unpkg.com/moment@2.22.2/moment.js
+    type: js
+  - url: https://fonts.googleapis.com/css?family=Roboto+Condensed
+    type: css
+    
+  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.min.js
     type: module
+  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/weather-card.min.js
+    type: module
+
+  - url: /customcards/alarm_control_panel-card.js
+    type: js
+  - url: /customcards/custom-lovelace/auto-entities.js
+    type: js
+  - url: /customcards/custom-lovelace/bignumber-card.js
+    type: js
+  - url: /customcards/custom-lovelace/button-card.js
+    type: module
+  - url: /customcards/custom-lovelace/calendar-card.js
+    type: module
+  - url: /customcards/custom-lovelace/card-modder.js
+    type: js
+  - url: /customcards/custom-lovelace/compact-custom-header/compact-custom-header.js
+    type: module
+  - url: /customcards/custom-lovelace/dual-gauge-card.js
+    type: js
+  - url: /customcards/custom-lovelace/entity-attributes-card.js
+    type: js
+  - url: /customcards/custom-lovelace/fold-entity-row.js
+    type: js
+  - url: /customcards/custom-lovelace/home-setter.js
+    type: js
+  - url: /customcards/custom-lovelace/krisinfo-card.js
+    type: js
+  - url: /customcards/custom-lovelace/layout-card.js
+    type: js
+  - url: /customcards/custom-lovelace/light-card.js
+    type: js
+  - url: /customcards/custom-lovelace/mini-graph-card-bundle.js
+    type: module
+  - url: /customcards/custom-lovelace/mini-media-player.js
+    type: module
+  - url: /customcards/custom-lovelace/monster-card.js
+    type: js
+  - url: /customcards/custom-lovelace/plan-coordinates.js
+    type: js
+  - url: /customcards/custom-lovelace/popup-card.js
+    type: js
+  - url: /customcards/custom-lovelace/secondaryinfo-entity-row.js
+    type: js
+  - url: /customcards/custom-lovelace/slider-entity-row.js
+    type: js
+  - url: /customcards/custom-lovelace/slideshow-card.js
+    type: js
+  - url: /customcards/custom-lovelace/state-attribute-element.js
+    type: js
+  - url: /customcards/custom-lovelace/state-element.js
+    type: js
+  - url: /customcards/custom-lovelace/state-switch.js
+    type: js
+  - url: /customcards/custom-lovelace/text-element.js
+    type: js
+  - url: /customcards/custom-lovelace/toggle-lock-entity-row.js
+    type: js
+  - url: /customcards/custom-lovelace/tracker-card.js
+    type: js
+  - url: /customcards/custom-lovelace/upcoming-media-card.js
+    type: js
+  - url: /customcards/custom-lovelace/useful-markdown-card.js
+    type: js
+  - url: /customcards/custom-lovelace/username-element.js
+    type: js
+  - url: /customcards/custom-lovelace/vertical-stack-in-card.js
+    type: js
+  - url: /customcards/custom-lovelace/mini-media-player-bundle.js
+    type: module
+  - url: /customcards/custom-lovelace/plant-card.js
+    type: js
 title: Home
 views:
-  - badges:
-      - device_tracker.google_maps_104688658658376260645
-      - device_tracker.google_maps_109218123589188227395
-      - device_tracker.portex
-      - device_tracker.bozena_phone
-      - device_tracker.nizmo_surface
-      - device_tracker.mac_bls
-      - device_tracker.gosia_laptop
-      - sensor.nizm0_today_at_work
-      - sensor.nizm0_week_work
-      - sensor.mold_indicator
-      - sensor.letsencrypt
-    cards:
+  - cards:
+      - entity: weather.dark_sky
+        type: weather-forecast
       - card:
           show_state: false
           title: People at home
@@ -44,6 +104,25 @@ views:
           - Home
         title: all devices
         type: entity-filter
+      - aspect_ratio: 90%
+        type: iframe
+        url: 'https://embed.windy.com/embed2.html?rain,51.088,17.030,11'
+    badges: []
+    title: New main page
+    icon: 'mdi:information-outline'
+  - badges:
+      - device_tracker.google_maps_104688658658376260645
+      - device_tracker.google_maps_109218123589188227395
+      - device_tracker.portex
+      - device_tracker.bozena_phone
+      - device_tracker.nizmo_surface
+      - device_tracker.mac_bls
+      - device_tracker.gosia_laptop
+      - sensor.nizm0_today_at_work
+      - sensor.nizm0_week_work
+      - sensor.mold_indicator
+      - sensor.letsencrypt
+    cards:
       - entities:
           - entity: binary_sensor.corridor_motion_sensor
             secondary_info: last-changed
@@ -163,11 +242,6 @@ views:
         id: 5be18d329c42452788a3d18a74965da3
         image: /local/images/house-element.jpg
         type: picture-elements
-      - entity: weather.dark_sky
-        type: weather-forecast
-      - aspect_ratio: 90%
-        type: iframe
-        url: 'https://embed.windy.com/embed2.html?rain,51.106,17.117,10'
       - card:
           show_state: false
           title: Turned on lights
