@@ -25,10 +25,11 @@ class Events(hass.Hass):
   def chose_action(self, event_name, data, kwargs):
     event_action = data["action"]
     if event_action == "open_door":
-      self.log("Push notification clicked {}", event_action)
+      self.log("Push notification clicked {}".format(event_action))
       self.light_on(self)
+      self.run_in(self.light_off, 10)
     elif event_action == "open":
-      self.log("Push notification clicked {}", event_action)
+      self.log("Push notification clicked {}".format(event_action))
     # switcher={
     #   "open_door":light_on
     # }

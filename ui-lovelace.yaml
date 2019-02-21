@@ -206,6 +206,9 @@ views:
           - entity: light.tv_ambilights
             tap_action:
               action: toggle
+          - entity: light.bedroom_main_light_2
+            tap_action:
+              action: toggle
         show_header_toggle: false
         state_filter:
           - 'on'
@@ -358,6 +361,9 @@ views:
             tap_action:
               action: toggle
           - entity: light.tv_ambilights
+            tap_action:
+              action: toggle
+          - entity: light.bedroom_main_light_2
             tap_action:
               action: toggle
         show_header_toggle: false
@@ -617,6 +623,12 @@ views:
         entity: sensor.bedroom_pressure
         graph: line
         type: sensor
+      - type: 'custom:mini-graph-card'
+        name: SERVER
+        icon: 'mdi:server'
+        entities:
+          - entity: sensor.bedroom_temperature
+          - entity: sensor.bedroom_humidity
     icon: 'mdi:bed-empty'
     id: 2
     title: Bedroom
@@ -1019,6 +1031,14 @@ views:
           - entity: binary_sensor.desctop_pc
           - entity: sun.sun
         type: entities
+      - type: 'custom:mini-graph-card'
+        name: Temperature
+        entities:
+          - entity: sensor.office_temperature
+          - entity: sensor.bedroom_temperature
+          - entity: sensor.kids_temperature
+          - entity: sensor.kitchen_temperature
+          - entity: sensor.bathroom_temperature
     icon: 'mdi:test-tube'
     theme: darkred
     title: Testing area

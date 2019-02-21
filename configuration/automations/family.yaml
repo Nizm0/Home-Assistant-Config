@@ -1,12 +1,12 @@
 - id: michal_is_out_from_work
   alias: Michał is out from Work
   trigger: 
-    - platform: zone
-      entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
-      zone: zone.work
-      event: leave
-      # for:
-      #   minutes: 2
+  - platform: zone
+    entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
+    zone: zone.work
+    event: leave
+    # for:
+    #   minutes: 2
   condition:
   action: 
   - service: notify.push_to_chrome
@@ -27,10 +27,10 @@
 - id: michal_entered_the_home
   alias: Michał entered the home
   trigger: 
-    - platform: zone
-      entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
-      zone: zone.home
-      event: enter
+  - platform: zone
+    entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
+    zone: zone.home
+    event: enter
   condition:
   action: 
   - service: notify.push_to_chrome
@@ -49,10 +49,10 @@
 - id: gosia_entered_the_home
   alias: Gosia entered the home
   trigger: 
-    - platform: zone
-      entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
-      zone: zone.home
-      event: enter
+  - platform: zone
+    entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
+    zone: zone.home
+    event: enter
   condition:
   action: 
   - service: notify.push_to_chrome
@@ -69,18 +69,18 @@
 - id: 589437twnoe86ogw6pw
   alias: Time to go home
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.nizm0_today_at_work
-      above: 8
+  - platform: numeric_state
+    entity_id: sensor.nizm0_today_at_work
+    above: 8
   condition:
-    - condition: state
-      entity_id: device_tracker.google_maps_104688658658376260645
-      state: work
+  - condition: zone
+    entity_id: device_tracker.google_maps_104688658658376260645
+    zone: zone.work
   action:
-    - service: notify.push_to_chrome
-      data_template:
-        message: >
-          New value is: {{ trigger.to_state.state }}
-        title: Michał it's time to leave
-        data:
-          tag: nizmo-location-info
+  - service: notify.push_to_chrome
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Michał it's time to leave
+      data:
+        tag: nizmo-location-info
