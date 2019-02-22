@@ -16,3 +16,5 @@
       data_template:
         message: "Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demaded params"
         title: "Problem with Teperature in {{ trigger.to_state.attributes.friendly_name }}"
+        data:
+          tag: 'room_{{trigger.to_state.attributes.friendly_name}}_temp'

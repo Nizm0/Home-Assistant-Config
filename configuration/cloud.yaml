@@ -2,6 +2,7 @@ google_actions:
   filter:
     include_domains:
     # - switch
+    - sensor
     - light
     - vacuum
     # - group

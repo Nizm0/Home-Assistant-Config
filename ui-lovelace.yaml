@@ -1,87 +1,89 @@
 resources:
-  - url: /customcards/card-tools.js
-    type: js
-  - url: https://unpkg.com/moment@2.22.2/moment.js
-    type: js
-  - url: https://fonts.googleapis.com/css?family=Roboto+Condensed
-    type: css
-    
-  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.min.js
-    type: module
-  - url: https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/weather-card.min.js
-    type: module
-
-  - url: /customcards/alarm_control_panel-card.js
-    type: js
-  - url: /customcards/custom-lovelace/auto-entities.js
-    type: js
-  - url: /customcards/custom-lovelace/bignumber-card.js
-    type: js
-  - url: /customcards/custom-lovelace/button-card.js
-    type: module
-  - url: /customcards/custom-lovelace/calendar-card.js
-    type: module
-  - url: /customcards/custom-lovelace/card-modder.js
-    type: js
-  - url: /customcards/custom-lovelace/compact-custom-header/compact-custom-header.js
-    type: module
-  - url: /customcards/custom-lovelace/dual-gauge-card.js
-    type: js
-  - url: /customcards/custom-lovelace/entity-attributes-card.js
-    type: js
-  - url: /customcards/custom-lovelace/fold-entity-row.js
-    type: js
-  - url: /customcards/custom-lovelace/home-setter.js
-    type: js
-  - url: /customcards/custom-lovelace/krisinfo-card.js
-    type: js
-  - url: /customcards/custom-lovelace/layout-card.js
-    type: js
-  - url: /customcards/custom-lovelace/light-card.js
-    type: js
-  - url: /customcards/custom-lovelace/mini-graph-card-bundle.js
-    type: module
-  - url: /customcards/custom-lovelace/mini-media-player.js
-    type: module
-  - url: /customcards/custom-lovelace/monster-card.js
-    type: js
-  - url: /customcards/custom-lovelace/plan-coordinates.js
-    type: js
-  - url: /customcards/custom-lovelace/popup-card.js
-    type: js
-  - url: /customcards/custom-lovelace/secondaryinfo-entity-row.js
-    type: js
-  - url: /customcards/custom-lovelace/slider-entity-row.js
-    type: js
-  - url: /customcards/custom-lovelace/slideshow-card.js
-    type: js
-  - url: /customcards/custom-lovelace/state-attribute-element.js
-    type: js
-  - url: /customcards/custom-lovelace/state-element.js
-    type: js
-  - url: /customcards/custom-lovelace/state-switch.js
-    type: js
-  - url: /customcards/custom-lovelace/text-element.js
-    type: js
-  - url: /customcards/custom-lovelace/toggle-lock-entity-row.js
-    type: js
-  - url: /customcards/custom-lovelace/tracker-card.js
-    type: js
-  - url: /customcards/custom-lovelace/upcoming-media-card.js
-    type: js
-  - url: /customcards/custom-lovelace/useful-markdown-card.js
-    type: js
-  - url: /customcards/custom-lovelace/username-element.js
-    type: js
-  - url: /customcards/custom-lovelace/vertical-stack-in-card.js
-    type: js
-  - url: /customcards/custom-lovelace/mini-media-player-bundle.js
-    type: module
-  - url: /customcards/custom-lovelace/plant-card.js
-    type: js
+  - type: js
+    url: /customcards/card-tools.js
+  - type: js
+    url: 'https://unpkg.com/moment@2.22.2/moment.js'
+  - type: css
+    url: 'https://fonts.googleapis.com/css?family=Roboto+Condensed'
+  - type: module
+    url: >-
+      https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.min.js
+  - type: module
+    url: >-
+      https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/weather-card.min.js
+  - type: js
+    url: /customcards/alarm_control_panel-card.js
+  - type: js
+    url: /customcards/custom-lovelace/auto-entities.js
+  - type: js
+    url: /customcards/custom-lovelace/bignumber-card.js
+  - type: module
+    url: /customcards/custom-lovelace/button-card.js
+  - type: module
+    url: /customcards/custom-lovelace/calendar-card.js
+  - type: js
+    url: /customcards/custom-lovelace/card-modder.js
+  - type: module
+    url: >-
+      /customcards/custom-lovelace/compact-custom-header/compact-custom-header.js
+  - type: js
+    url: /customcards/custom-lovelace/dual-gauge-card.js
+  - type: js
+    url: /customcards/custom-lovelace/entity-attributes-card.js
+  - type: js
+    url: /customcards/custom-lovelace/fold-entity-row.js
+  - type: js
+    url: /customcards/custom-lovelace/home-setter.js
+  - type: js
+    url: /customcards/custom-lovelace/krisinfo-card.js
+  - type: js
+    url: /customcards/custom-lovelace/layout-card.js
+  - type: js
+    url: /customcards/custom-lovelace/light-card.js
+  - type: module
+    url: /customcards/custom-lovelace/mini-graph-card-bundle.js
+  - type: module
+    url: /customcards/custom-lovelace/mini-media-player.js
+  - type: js
+    url: /customcards/custom-lovelace/monster-card.js
+  - type: js
+    url: /customcards/custom-lovelace/plan-coordinates.js
+  - type: js
+    url: /customcards/custom-lovelace/popup-card.js
+  - type: js
+    url: /customcards/custom-lovelace/secondaryinfo-entity-row.js
+  - type: js
+    url: /customcards/custom-lovelace/slider-entity-row.js
+  - type: js
+    url: /customcards/custom-lovelace/slideshow-card.js
+  - type: js
+    url: /customcards/custom-lovelace/state-attribute-element.js
+  - type: js
+    url: /customcards/custom-lovelace/state-element.js
+  - type: js
+    url: /customcards/custom-lovelace/state-switch.js
+  - type: js
+    url: /customcards/custom-lovelace/text-element.js
+  - type: js
+    url: /customcards/custom-lovelace/toggle-lock-entity-row.js
+  - type: js
+    url: /customcards/custom-lovelace/tracker-card.js
+  - type: js
+    url: /customcards/custom-lovelace/upcoming-media-card.js
+  - type: js
+    url: /customcards/custom-lovelace/useful-markdown-card.js
+  - type: js
+    url: /customcards/custom-lovelace/username-element.js
+  - type: js
+    url: /customcards/custom-lovelace/vertical-stack-in-card.js
+  - type: module
+    url: /customcards/custom-lovelace/mini-media-player-bundle.js
+  - type: js
+    url: /customcards/custom-lovelace/plant-card.js
 title: Home
 views:
-  - cards:
+  - badges: []
+    cards:
       - entity: weather.dark_sky
         type: weather-forecast
       - card:
@@ -89,8 +91,8 @@ views:
           title: People at home
           type: glance
         entities:
-          - sensor.michal_presence
-          - sensor.gosia_presence
+          - person.michal
+          - person.gosia
           - device_tracker.babcia_teresa
           - device_tracker.portex
           - device_tracker.bozena_phone
@@ -107,9 +109,8 @@ views:
       - aspect_ratio: 90%
         type: iframe
         url: 'https://embed.windy.com/embed2.html?rain,51.088,17.030,11'
-    badges: []
-    title: New main page
     icon: 'mdi:information-outline'
+    title: New main page
   - badges:
       - device_tracker.google_maps_104688658658376260645
       - device_tracker.google_maps_109218123589188227395
@@ -283,6 +284,12 @@ views:
           - entity: light.bedroom_main_light_2
             tap_action:
               action: toggle
+          - entity: light.hue_color_lamp_1
+            tap_action:
+              action: toggle
+          - entity: light.hue_color_lamp_2
+            tap_action:
+              action: toggle
         show_header_toggle: false
         state_filter:
           - 'on'
@@ -438,6 +445,12 @@ views:
             tap_action:
               action: toggle
           - entity: light.bedroom_main_light_2
+            tap_action:
+              action: toggle
+          - entity: light.hue_color_lamp_1
+            tap_action:
+              action: toggle
+          - entity: light.hue_color_lamp_2
             tap_action:
               action: toggle
         show_header_toggle: false
@@ -697,12 +710,11 @@ views:
         entity: sensor.bedroom_pressure
         graph: line
         type: sensor
-      - type: 'custom:mini-graph-card'
-        name: SERVER
-        icon: 'mdi:server'
-        entities:
+      - entities:
           - entity: sensor.bedroom_temperature
           - entity: sensor.bedroom_humidity
+        icon: 'mdi:server'
+        type: 'custom:mini-graph-card'
     icon: 'mdi:bed-empty'
     id: 2
     title: Bedroom
@@ -861,9 +873,9 @@ views:
     title: Hallway
   - cards:
       - entities:
-          - entity: sensor.michal_presence
+          - entity: person.michal
             secondary_info: last-changed
-          - entity: sensor.gosia_presence
+          - entity: person.gosia
             secondary_info: last-changed
           - entity: device_tracker.oneplus_3_bt
             secondary_info: last-changed
@@ -1105,14 +1117,14 @@ views:
           - entity: binary_sensor.desctop_pc
           - entity: sun.sun
         type: entities
-      - type: 'custom:mini-graph-card'
-        name: Temperature
-        entities:
+      - entities:
           - entity: sensor.office_temperature
           - entity: sensor.bedroom_temperature
           - entity: sensor.kids_temperature
           - entity: sensor.kitchen_temperature
           - entity: sensor.bathroom_temperature
+        name: Temperature
+        type: 'custom:mini-graph-card'
     icon: 'mdi:test-tube'
     theme: darkred
     title: Testing area

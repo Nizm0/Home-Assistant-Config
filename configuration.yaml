@@ -29,6 +29,7 @@ http:
   - 192.168.1.0/24
   - 192.168.2.0/24
 system_health:
+person:
 # Checks for available updates
 # Note: This component will send some information about your system to
 # the developers to assist with development of Home Assistant.
