@@ -1,6 +1,6 @@
 resources:
   - type: js
-    url: /customcards/card-tools.js
+    url: /customcards/custom-lovelace/card-tools.js
   - type: js
     url: 'https://unpkg.com/moment@2.22.2/moment.js'
   - type: css
@@ -11,8 +11,6 @@ resources:
   - type: module
     url: >-
       https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/weather-card.min.js
-  - type: js
-    url: /customcards/alarm_control_panel-card.js
   - type: js
     url: /customcards/custom-lovelace/auto-entities.js
   - type: js
@@ -66,8 +64,8 @@ resources:
     url: /customcards/custom-lovelace/text-element.js
   - type: js
     url: /customcards/custom-lovelace/toggle-lock-entity-row.js
-  - type: js
-    url: /customcards/custom-lovelace/tracker-card.js
+  - url: /customcards/custom-lovelace/tracker-card.js?track=true
+    type: module
   - type: js
     url: /customcards/custom-lovelace/upcoming-media-card.js
   - type: js
@@ -879,6 +877,8 @@ views:
             secondary_info: last-changed
           - entity: device_tracker.oneplus_3_bt
             secondary_info: last-changed
+          - entity: device_tracker.gosia_g6_bt
+            secondary_info: last-changed
           - entity: device_tracker.google_maps_104688658658376260645
             secondary_info: last-changed
           - entity: device_tracker.nizmo_phone
@@ -992,6 +992,7 @@ views:
         refresh_interval: 0
         title: Windows in home
         type: history-graph
+      - type: 'custom:tracker-card'
     icon: 'mdi:settings'
     id: 8
     title: Stats
