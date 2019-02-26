@@ -22,6 +22,9 @@ known_devices.yaml
 *.pyc
 *.cookies
 
+compiled
+__*
+esphome
 appdaemon/custom_widgets
 deps
 node-red

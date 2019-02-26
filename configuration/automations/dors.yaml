@@ -11,14 +11,19 @@
       data_template: 
         message: >
           {% if is_state("group.all_devices", "not_home") and is_state("input_select.home_preset", "empty") -%}
-            message: Nobody is in home
-            icon: mdi:alert
+            Nobody is in home
           {%- else -%}
-            message: "Home presence is: {{ states.group.all_devices.state }}"
-            icon: mdi:alert
+            "In home:"
+            {% if is_state("person.michal", "home") -%}
+              {{state_attr("person.michal", "friendly_name")}}
+            {%- endif %}
+            {% if is_state("person.gosia", "home") -%}
+              {{state_attr("person.gosia", "friendly_name")}}
+            {%- endif %}
           {%- endif %}
         title: Someone opened home doors
         data:
+          icon: mdi:alert
           actions:
             - action: open
               icon: "/static/icons/favicon-192x192.png"

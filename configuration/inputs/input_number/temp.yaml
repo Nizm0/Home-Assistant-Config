@@ -1,0 +1,20 @@
+temp_min:
+  name: Min temp
+  # initial: 20
+  min: 1
+  max: 30
+  step: 1
+  mode: box
+temp_max:
+  name: Max temp
+  # initial: 30
+  min: 20
+  max: 50
+  step: 1
+  mode: box
+slider1:
+  name: Numeric Input lider
+  initial: 30
+  min: 0
+  max: 100
+  step: 1

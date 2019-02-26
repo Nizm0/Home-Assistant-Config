@@ -1,66 +1,159 @@
 homeassistant:
-  # auth_providers:
-  #   - type: homeassistant
-    # - type: legacy_api_password
-  # Name of the location where Home Assistant is running
   name: Home
-  # Location required to calculate the time the sun rises and sets
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
-  # metric for Metric, imperial for Imperial
   unit_system: metric
-  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: Europe/Warsaw
-  # Customization file
   customize: !include customize.yaml
 api:
 config:
 http:
-  # api_password: !secret http_password
-  ssl_certificate: !secret ssl_cert
-  ssl_key: !secret ssl_key
-  base_url: !secret base_url
-  # login_attempts_threshold: 5
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
   trusted_networks:
-  - 127.0.0.1
-  - 165.225.84.96
-  - 172.19.0.0/24
-  - 192.168.1.0/24
-  - 192.168.2.0/24
+    - 127.0.0.1
+    - 192.168.1.0/24
 system_health:
 person:
-# Checks for available updates
-# Note: This component will send some information about your system to
-# the developers to assist with development of Home Assistant.
-# For more information, please see:
-# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
 updater:
-  # Optional, allows Home Assistant developers to focus on popular components.
-  # include_used_components: true
-
-# Discover some devices automatically
 discovery:
   ignore:
     - yeelight
+automation: !include automations.yaml
+automation old: !include_dir_merge_list configuration/automations/
+cloud: !include configuration/cloud.yaml
+group: !include_dir_merge_named configuration/groups/
 
-# Allows you to issue voice commands from the frontend in enabled browsers
+# ########################################
+# ###                GUI               ###
+# ########################################
 conversation:
-
-
-# Enables a map showing the location of tracked devices
+frontend:
+  themes: !include_dir_merge_named themes/
 map:
 
-# Track the sun
-sun:
+panel_iframe:
+  ide:
+    title: IDE
+    icon: mdi:code-braces
+    url: https://has.nizmo.eu:8321
+  tasmoadmin:
+    title: Tasmo Admin
+    icon: mdi:lightbulb-on
+    url: https://has.nizmo.eu:9541/devices
+  # nodered:
+  #   title: Node-RED
+  #   icon: mdi:shuffle-variant
+  #   url: https://has.nizmo.eu:1880
+  grafana:
+    title: Grafana
+    icon: mdi:chart-timeline
+    url: https://has.nizmo.eu:3000
 
-# Text to speech
+custom_updater:
+  track:
+  - cards
+  - components
+  card_urls: 
+    - https://raw.githubusercontent.com/kuuji/button-card/0.0.2/tracker.json
+    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
+    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
+  # component_urls:
+  # python_script_urls:
+
+history_graph: !include configuration/history_graph.yaml
+
+# ########################################
+# ###              LOGGING             ###
+# ########################################
+logger:   
+  default: error
+  logs:
+    # homeassistant.components.device_tracker: debug
+    # google_maps: debug
+    ifttt.trigger: debug
+# View all events in a logbook
+logbook:
+
+history: !include configuration/history.yaml
+recorder:
+  purge_interval: 2
+  purge_keep_days: 5
+  # include:
+  #   domains:
+  #     - sensor
+  #     - switch
+  #     - media_player
+  # exclude:
+  #   domains:
+  #   - device_tracker
+  #   entities:
+  #    - sensor.last_boot
+  #    - sensor.date
+
+# ########################################
+# ###              ENTITIES             ###
+# ########################################
+
+input_boolean: !include configuration/input_boolean.yaml
+light: !include_dir_merge_list configuration/light
+plant: !include configuration/plants.yaml
+
+script: !include_dir_merge_named configuration/scripts/
+sensor: !include_dir_merge_list configuration/sensors/
+switch: !include_dir_merge_list configuration/switch
+device_tracker: !include configuration/device_tracker.yaml
+media_player: !include configuration/media_player.yaml
+zone: !include configuration/zone.yaml
+weather:
+- platform: darksky
+  api_key: !secret darksky_api_key
+  mode: hourly
+
+input_select: !include_dir_merge_named configuration/inputs/input_select
+input_number: !include_dir_merge_named configuration/inputs/input_number
+input_datetime: !include_dir_merge_named configuration/inputs/input_datetime
+
+# ########################################
+# ###             SERVICES             ###
+# ########################################
+sun:
+shopping_list:
+notify: !include_dir_merge_list configuration/notify/
+ifttt:
+  key: !secret ifttt_key
+
+python_script:
+
+ffmpeg:
+
 tts:
   - platform: google
 
-# android_ip_webcam: !include configuration/android_ip_webcam.yaml
-automation: !include automations.yaml
-automation old: !include_dir_merge_list configuration/automations/
+shell_command:
+  get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
+
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+  - key: !secret xiaomi_getway1_key
+    mac: !secret xiaomi_getway1_mac
+    host: !secret xiaomi_getway1_ip
+
+vacuum:
+- platform: xiaomi_miio
+  host: 192.168.1.150
+  name: Rockrobo
+  token: !secret xiaomi_rockrobo_key
+
+binary_sensor: !include configuration/binary_sensor.yaml
+# fan:
+#   - platform: xiaomi_miio
+#     host: 192.168.1.9
+#     token: !secret xiaomi_airpurifierr_key
+
 # camera:
 # - platform: ffmpeg
 #   input: FFMPEG_SUPPORTED_INPUT
@@ -84,146 +177,5 @@ calendar:
       # include_projects:
       #   - Mathematical Structures II
       #   - Calculus II
-cloud: !include configuration/cloud.yaml
 
-custom_updater:
-  # track:
-  # - cards
-  # - components
-  # - components
-  card_urls: 
-    - https://raw.githubusercontent.com/kuuji/button-card/0.0.2/tracker.json
-    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
-    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
-    - https://raw.githubusercontent.com/kalkih/mini-graph-card/master/tracker.json
-  # component_urls:
-  # python_script_urls:
-
-device_tracker: !include configuration/device_tracker.yaml
-frontend:
-  themes: !include_dir_merge_named themes/
-group: !include_dir_merge_named configuration/groups/
-
-### Logger ###
-history: !include configuration/history.yaml
-recorder:
-  purge_keep_days: 10
-  # include:
-  #   domains:
-  #     - sensor
-  #     - switch
-  #     - media_player
-  # exclude:
-  #   domains:
-  #   - device_tracker
-  #   entities:
-  #    - sensor.last_boot
-  #    - sensor.date
-history_graph: !include configuration/history_graph.yaml
-logger:   
-  default: error
-  logs:
-    # homeassistant.components.device_tracker: debug
-    # google_maps: debug
-    ifttt.trigger: debug
-# View all events in a logbook
-logbook:
-
-ifttt:
-  key: !secret ifttt_key
-input_boolean: !include configuration/input_boolean.yaml
-light: !include_dir_merge_list configuration/light
-media_player: !include configuration/media_player.yaml
-plant: !include configuration/plants.yaml
-
-# mqtt:
-#   broker: core-mosquitto
-#   username: !secret mosquitto_username
-#   password: !secret mosquitto_password
-#   discovery: true
-notify: !include_dir_merge_list configuration/notify/
-script: !include_dir_merge_named configuration/scripts/
-sensor: !include_dir_merge_list configuration/sensors/
-shell_command:
-  get_latest_config: bash /home/hass/.homeassistant/bash/pullconfig.sh
-shopping_list:
-switch: !include_dir_merge_list configuration/switch
-weather:
-- platform: darksky
-  api_key: !secret darksky_api_key
-  mode: hourly
-zone: !include configuration/zone.yaml
-
-# fan:
-#   - platform: xiaomi_miio
-#     host: 192.168.1.9
-#     token: !secret xiaomi_airpurifierr_key
-xiaomi_aqara:
-  discovery_retry: 5
-  gateways:
-  - key: !secret xiaomi_getway1_key
-    mac: !secret xiaomi_getway1_mac
-    host: !secret xiaomi_getway1_ip
-
-vacuum:
-- platform: xiaomi_miio
-  host: 192.168.1.150
-  name: Rockrobo
-  token: !secret xiaomi_rockrobo_key
-
-binary_sensor: !include configuration/binary_sensor.yaml
-
-
-panel_iframe:
-  ide:
-    title: IDE
-    icon: mdi:code-braces
-    url: https://has.nizmo.eu:8321
-  tasmoadmin:
-    title: Tasmo Admin
-    icon: mdi:lightbulb-on
-    url: https://has.nizmo.eu:9541/devices
-  # nodered:
-  #   title: Node-RED
-  #   icon: mdi:shuffle-variant
-  #   url: https://has.nizmo.eu:1880
-  grafana:
-    title: Grafana
-    icon: mdi:chart-timeline
-    url: https://has.nizmo.eu:3000
-
-
-input_select:
-  home_preset:
-    options:
-    - Empty
-    - Visitors
-    - Alone
-    initial: Empty
-input_number:
-  temp_min:
-    name: Min temp
-    # initial: 20
-    min: 1
-    max: 30
-    step: 1
-    mode: box
-  temp_max:
-    name: Max temp
-    # initial: 30
-    min: 20
-    max: 50
-    step: 1
-    mode: box
-  slider1:
-    name: Numeric Input lider
-    initial: 30
-    min: 0
-    max: 100
-    step: 1
-input_datetime:
-  both_date_and_time:
-    name: Alarm Clock
-    has_date: true
-    has_time: true
-    # initial: '{{datetime.datetime.now().strftime('%Y-%m-%d %H:%M'))}}'
+# android_ip_webcam: !include configuration/android_ip_webcam.yaml
