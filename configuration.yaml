@@ -179,3 +179,23 @@ calendar:
       #   - Calculus II
 
 # android_ip_webcam: !include configuration/android_ip_webcam.yaml
+
+proximity:
+  home_michal:
+    zone: home
+    devices:
+      - device_tracker.google_maps_104688658658376260645
+    tolerance: 50
+    unit_of_measurement: km
+  work_michal:
+    zone: work
+    devices:
+      - device_tracker.google_maps_104688658658376260645
+    tolerance: 50
+    unit_of_measurement: km
+  home_gosia:
+    zone: home
+    devices:
+      - device_tracker.google_maps_109218123589188227395
+    tolerance: 50
+    unit_of_measurement: km

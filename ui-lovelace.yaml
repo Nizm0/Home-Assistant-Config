@@ -1,6 +1,6 @@
 resources:
   - type: js
-    url: /customcards/custom-lovelace/card-tools.js
+    url: /customcards/card-tools.js?track=true
   - type: js
     url: 'https://unpkg.com/moment@2.22.2/moment.js'
   - type: css
@@ -64,8 +64,8 @@ resources:
     url: /customcards/custom-lovelace/text-element.js
   - type: js
     url: /customcards/custom-lovelace/toggle-lock-entity-row.js
-  - url: /customcards/custom-lovelace/tracker-card.js?track=true
-    type: module
+  - type: module
+    url: /customcards/custom-lovelace/tracker-card.js?track=true
   - type: js
     url: /customcards/custom-lovelace/upcoming-media-card.js
   - type: js
@@ -107,6 +107,26 @@ views:
       - aspect_ratio: 90%
         type: iframe
         url: 'https://embed.windy.com/embed2.html?rain,51.088,17.030,11'
+      - type: 'custom:swipe-card'
+        cards:
+          - type: 'custom:mini-graph-card'
+            title: Temperatures 48h
+            hours_to_show: 48
+            entities:
+              - sensor.office_temperature
+              - sensor.bedroom_temperature
+              - sensor.kids_temperature
+              - sensor.kitchen_temperature
+              - sensor.bathroom_temperature
+          - type: 'custom:mini-graph-card'
+            title: Humidity 48h
+            hours_to_show: 48
+            entities:
+              - sensor.office_humidity
+              - sensor.bedroom_humidity
+              - sensor.kids_humidity
+              - sensor.kitchen_humidity
+              - sensor.bathroom_humidity
     icon: 'mdi:information-outline'
     title: New main page
   - badges:
@@ -809,12 +829,20 @@ views:
     id: 4
     title: Kithen
   - cards:
-      - entity: light.bathroom_top_light
-        hold_action:
-          action: more-info
-        tap_action:
-          action: toggle
-        type: entity-button
+      - cards:
+          - entity: light.bathroom_top_light
+            hold_action:
+              action: more-info
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: binary_sensor.bathroom_water_leak_sensor
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
+        type: horizontal-stack
       - detail: 2
         entity: sensor.bathroom_humidity
         graph: line
@@ -909,8 +937,49 @@ views:
           - entity: device_tracker.bozena_phone
           - entity: device_tracker.portex
         type: entities
+      - entities:
+          - person.michal
+          - person.gosia
+        type: entities
     icon: 'mdi:home-heart'
     id: 7
+    popup_cards:
+      person.michal:
+        card:
+          entities:
+            - person.michal
+            - entity: device_tracker.google_maps_104688658658376260645
+              icon: 'mdi:map-marker-circle'
+              name: Michał presence
+              secondary_info: last-changed
+            - entity: device_tracker.nizmo_phone
+              icon: 'mdi:wifi'
+              name: Michał Wifi
+              secondary_info: last-changed
+            - entity: device_tracker.oneplus_3_bt
+              icon: 'mdi:bluetooth'
+              name: Michał bt
+              secondary_info: last-changed
+          type: entities
+        title: Michal
+      person.gosia:
+        card:
+          entities:
+            - person.gosia
+            - entity: device_tracker.google_maps_109218123589188227395
+              icon: 'mdi:map-marker-circle'
+              name: Gosai presence
+              secondary_info: last-changed
+            - entity: device_tracker.gosia_phone
+              icon: 'mdi:wifi'
+              name: Gosia Wifi
+              secondary_info: last-changed
+            - entity: device_tracker.gosia_g6_bt
+              icon: 'mdi:bluetooth'
+              name: Gosia bt
+              secondary_info: last-changed
+          type: entities
+        title: Michal
     title: Family
   - cards:
       - entities:
