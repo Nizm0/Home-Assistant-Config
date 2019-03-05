@@ -82,51 +82,45 @@ title: Home
 views:
   - badges: []
     cards:
+      - type: horizontal-stack
+        cards:
+          - type: picture-entity
+            entity: person.michal
+            image: /local/images/home/michal.jpg
+            show_name: false
+            tap_action:
+              action: more-info
+          - type: picture-entity
+            entity: person.gosia
+            image: /local/images/home/gosia.jpg
+            show_name: false
+            tap_action:
+              action: more-info
       - entity: weather.dark_sky
         type: weather-forecast
-      - card:
-          show_state: false
-          title: People at home
-          type: glance
-        entities:
-          - person.michal
-          - person.gosia
-          - device_tracker.babcia_teresa
-          - device_tracker.portex
-          - device_tracker.bozena_phone
-          - device_tracker.nizm0_surface
-          - device_tracker.mac_bls
-          - device_tracker.gosia_laptop
-          - device_tracker.samsung_camera
-        show_header_toggle: true
-        state_filter:
-          - home
-          - Home
-        title: all devices
-        type: entity-filter
       - aspect_ratio: 90%
         type: iframe
         url: 'https://embed.windy.com/embed2.html?rain,51.088,17.030,11'
-      - type: 'custom:swipe-card'
-        cards:
-          - type: 'custom:mini-graph-card'
-            title: Temperatures 48h
-            hours_to_show: 48
-            entities:
+      - cards:
+          - entities:
               - sensor.office_temperature
               - sensor.bedroom_temperature
               - sensor.kids_temperature
               - sensor.kitchen_temperature
               - sensor.bathroom_temperature
-          - type: 'custom:mini-graph-card'
-            title: Humidity 48h
             hours_to_show: 48
-            entities:
+            title: Temperatures 48h
+            type: 'custom:mini-graph-card'
+          - entities:
               - sensor.office_humidity
               - sensor.bedroom_humidity
               - sensor.kids_humidity
               - sensor.kitchen_humidity
               - sensor.bathroom_humidity
+            hours_to_show: 48
+            title: Humidity 48h
+            type: 'custom:mini-graph-card'
+        type: 'custom:swipe-card'
     icon: 'mdi:information-outline'
     title: New main page
   - badges:
@@ -941,27 +935,29 @@ views:
           - person.michal
           - person.gosia
         type: entities
+      - card:
+          show_state: false
+          title: People at home
+          type: glance
+        entities:
+          - person.michal
+          - person.gosia
+          - device_tracker.babcia_teresa
+          - device_tracker.portex
+          - device_tracker.bozena_phone
+          - device_tracker.nizm0_surface
+          - device_tracker.mac_bls
+          - device_tracker.gosia_laptop
+          - device_tracker.samsung_camera
+        show_header_toggle: true
+        state_filter:
+          - home
+          - Home
+        title: all devices
+        type: entity-filter
     icon: 'mdi:home-heart'
     id: 7
     popup_cards:
-      person.michal:
-        card:
-          entities:
-            - person.michal
-            - entity: device_tracker.google_maps_104688658658376260645
-              icon: 'mdi:map-marker-circle'
-              name: Michał presence
-              secondary_info: last-changed
-            - entity: device_tracker.nizmo_phone
-              icon: 'mdi:wifi'
-              name: Michał Wifi
-              secondary_info: last-changed
-            - entity: device_tracker.oneplus_3_bt
-              icon: 'mdi:bluetooth'
-              name: Michał bt
-              secondary_info: last-changed
-          type: entities
-        title: Michal
       person.gosia:
         card:
           entities:
@@ -977,6 +973,24 @@ views:
             - entity: device_tracker.gosia_g6_bt
               icon: 'mdi:bluetooth'
               name: Gosia bt
+              secondary_info: last-changed
+          type: entities
+        title: Michal
+      person.michal:
+        card:
+          entities:
+            - person.michal
+            - entity: device_tracker.google_maps_104688658658376260645
+              icon: 'mdi:map-marker-circle'
+              name: Michał presence
+              secondary_info: last-changed
+            - entity: device_tracker.nizmo_phone
+              icon: 'mdi:wifi'
+              name: Michał Wifi
+              secondary_info: last-changed
+            - entity: device_tracker.oneplus_3_bt
+              icon: 'mdi:bluetooth'
+              name: Michał bt
               secondary_info: last-changed
           type: entities
         title: Michal
