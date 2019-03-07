@@ -1,43 +1,53 @@
-include:
-  domains:
-    - device_tracker
+# include:
+#   domains:
+#     - device_tracker
     # - sensor
+  # entities:
+  #   - sensor.bedroom_temperature
+  #   - sensor.office_temperature
+  #   - sensor.kitchen_temperature
+  #   - sensor.bathroom_temperature
+  #   - sensor.kids_temperature
+  #   - sensor.bedroom_humidity
+  #   - sensor.office_humidity
+  #   - sensor.kitchen_humidity
+  #   - sensor.bathroom_humidity
+  #   - sensor.kids_humidity
+  #   - sensor.bedroom_pressure
+  #   - sensor.office_pressure
+  #   - sensor.kitchen_pressure
+  #   - sensor.bathroom_pressure
+  #   - sensor.kids_pressure
+  #   - sensor.office_gateway_illumination
+  #   ### Lights
+  #   - light.corridor_gateway_light
+  #   ### Raspberry stats
+  #   - sensor.processor_use
+  #   - sensor.memory_free
+  #   - sensor.disk_use_percent_home
+  #   ### Motion sensors
+  #   - binary_sensor.corridor_motion_sensor
+  #   - binary_sensor.office_motion_sensor
+  #   ### Dor Windows sensors
+  #   - binary_sensor.home_door_sensor
+  #   - binary_sensor.office_balcon_window_sensor
+  #   - binary_sensor.kitchen_left_window_sensor
+exclude:
+  domains:
+    - automation
+    - alert
+    - camera
+    - media_player
+    - sun
+    - calendar
+    # - sensor
+    - group
+    # - switch
+    - script
   entities:
-    - sensor.bedroom_temperature
-    - sensor.office_temperature
-    - sensor.kitchen_temperature
-    - sensor.bathroom_temperature
-    - sensor.kids_temperature
-    - sensor.bedroom_humidity
-    - sensor.office_humidity
-    - sensor.kitchen_humidity
-    - sensor.bathroom_humidity
-    - sensor.kids_humidity
-    - sensor.bedroom_pressure
-    - sensor.office_pressure
-    - sensor.kitchen_pressure
-    - sensor.bathroom_pressure
-    - sensor.kids_pressure
-    - sensor.office_gateway_illumination
-    ### Lights
-    - light.corridor_gateway_light
-    ### Raspberry stats
     - sensor.processor_use
     - sensor.memory_free
     - sensor.disk_use_percent_home
-    ### Motion sensors
-    - binary_sensor.corridor_motion_sensor
-    - binary_sensor.office_motion_sensor
-    ### Dor Windows sensors
-    - binary_sensor.home_door_sensor
-    - binary_sensor.office_balcon_window_sensor
-    - binary_sensor.kitchen_left_window_sensor
-exclude:
-  domains:
-    # - sensor
-    - switch
-    - sun
-  entities:
     - sensor.weather_cloudiness
     - sensor.weather_dewpoint_temperature
     - sensor.weather_fog

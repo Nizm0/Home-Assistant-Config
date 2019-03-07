@@ -47,6 +47,8 @@
 
 - platform: darksky
   api_key: !secret darksky_api_key
+  forecast:
+  - 1
   monitored_conditions:
   - summary
 #  - minutely_summary

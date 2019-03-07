@@ -18,6 +18,7 @@
 
 - platform: bluetooth_tracker
   request_rssi: true
+#   device_id: 0
 # - platform: bluetooth_le_tracker
 #   track_new_devices: False
 # - platform: ping

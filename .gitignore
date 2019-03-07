@@ -5,6 +5,7 @@
 !*.dash
 !.gitignore
 
+*gmail*
 ip_bans.yaml
 .shopping_list.json
 secrets.yaml

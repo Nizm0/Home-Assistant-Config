@@ -11,9 +11,9 @@ config:
 http:
   ip_ban_enabled: true
   login_attempts_threshold: 5
-  trusted_networks:
-    - 127.0.0.1
-    - 192.168.1.0/24
+  # trusted_networks:
+  #   - 127.0.0.1
+  #   - 192.168.1.0/24
 system_health:
 person:
 updater:
@@ -76,6 +76,14 @@ logger:
     ifttt.trigger: debug
 # View all events in a logbook
 logbook:
+  exclude:
+    domains:
+    - alert
+    - camera
+    - media_player
+    - sun
+    - calendar
+    - group
 
 history: !include configuration/history.yaml
 recorder:
