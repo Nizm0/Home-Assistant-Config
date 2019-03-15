@@ -33,8 +33,8 @@ google_actions:
     media_player.philips_tv:
       name: TV
       aliases:
-      - Office tv
-      room: Office
+      - Living room tv
+      room: Living room
     script.start_vacuum:
       name: Clean flat
       aliases:
@@ -42,12 +42,12 @@ google_actions:
       # - Vacuum
       - Clean flor
       - Roborock
-      room: Office
+      room: Living room
     script.stop_vacuum:
       name: Stop cleaning
       aliases:
       - Cancel vacuum
-      room: Office
+      room: Living room
 # entity_config:
 #   switch.kitchen:
 #     name: Custom Name for Google Assistant

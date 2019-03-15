@@ -35,8 +35,8 @@
 #  radius: 500
   show_on_map: false
 - platform: mold_indicator
-  indoor_temp_sensor: sensor.office_temperature
-  indoor_humidity_sensor: sensor.office_humidity
+  indoor_temp_sensor: sensor.living_room_temperature
+  indoor_humidity_sensor: sensor.living_room_humidity
   outdoor_temp_sensor: sensor.dark_sky_temperature
   # outdoor_temp_sensor: sensor.flower_2_temperature
   calibration_factor: 1.0

@@ -103,7 +103,7 @@ views:
         url: 'https://embed.windy.com/embed2.html?rain,51.109,17.036,11'
       - cards:
           - entities:
-              - sensor.office_temperature
+              - sensor.living_room_temperature
               - sensor.bedroom_temperature
               - sensor.kids_temperature
               - sensor.kitchen_temperature
@@ -112,7 +112,7 @@ views:
             title: Temperatures 48h
             type: 'custom:mini-graph-card'
           - entities:
-              - sensor.office_humidity
+              - sensor.living_room_humidity
               - sensor.bedroom_humidity
               - sensor.kids_humidity
               - sensor.kitchen_humidity
@@ -139,13 +139,13 @@ views:
       - entities:
           - entity: binary_sensor.corridor_motion_sensor
             secondary_info: last-changed
-          - entity: binary_sensor.office_motion_sensor
+          - entity: binary_sensor.living_room_motion_sensor
             secondary_info: last-changed
           - entity: binary_sensor.kitchen_motion_sensor
             secondary_info: last-changed
           - entity: binary_sensor.home_door_sensor
             secondary_info: last-changed
-          - entity: binary_sensor.office_balcon_window_sensor
+          - entity: binary_sensor.living_room_balcon_window_sensor
             secondary_info: last-changed
           - entity: binary_sensor.kitchen_left_window_sensor
             secondary_info: last-changed
@@ -173,7 +173,7 @@ views:
             tap_action:
               action: more-info
             type: state-icon
-          - entity: sensor.office_temperature
+          - entity: sensor.living_room_temperature
             icon: 'mdi:office'
             style:
               color: white
@@ -182,7 +182,7 @@ views:
             tap_action:
               action: more-info
             type: icon
-          - entity: sensor.office_temperature
+          - entity: sensor.living_room_temperature
             style:
               color: white
               left: 36%
@@ -483,16 +483,16 @@ views:
             secondary_info: last-changed
           - entity: light.christmas_tree
             secondary_info: last-changed
-          - entity: binary_sensor.office_motion_sensor
+          - entity: binary_sensor.living_room_motion_sensor
             secondary_info: last-changed
-          - entity: sensor.office_temperature
+          - entity: sensor.living_room_temperature
             secondary_info: last-changed
-          - entity: sensor.office_humidity
+          - entity: sensor.living_room_humidity
             secondary_info: last-changed
-          - entity: sensor.office_pressure
+          - entity: sensor.living_room_pressure
             secondary_info: last-changed
         show_header_toggle: true
-        title: Office
+        title: Living room
         type: entities
       - entities:
           - entity: light.bedroom_main_light
@@ -571,7 +571,7 @@ views:
           - entity: light.hallway_top_light
           - entity: binary_sensor.corridor_motion_sensor
             secondary_info: last-changed
-          - entity: sensor.office_gateway_illumination
+          - entity: sensor.living_room_gateway_illumination
             secondary_info: last-changed
         show_header_toggle: true
         title: Hallway
@@ -584,14 +584,14 @@ views:
         title: System stats
         type: entities
       - entities:
-          - entity: media_player.office_speaker
+          - entity: media_player.living_room_speaker
           - entity: media_player.pc_gpmdp
-          - entity: media_player.office_tv_cast
+          - entity: media_player.living_room_tv_cast
           - entity: media_player.philips_tv
         type: entities
       - cards:
           - artwork_border: true
-            entity: media_player.office_speaker
+            entity: media_player.living_room_speaker
             show_source: true
             type: 'custom:mini-media-player'
           - artwork_border: true
@@ -599,7 +599,7 @@ views:
             show_source: true
             type: 'custom:mini-media-player'
           - artwork_border: true
-            entity: media_player.office_tv_cast
+            entity: media_player.living_room_tv_cast
             show_source: true
             type: 'custom:mini-media-player'
           - artwork_border: true
@@ -642,10 +642,10 @@ views:
             type: entity-button
         type: horizontal-stack
       - entities:
-          - binary_sensor.office_balcon_window_sensor
-          - binary_sensor.office_motion_sensor
+          - binary_sensor.living_room_balcon_window_sensor
+          - binary_sensor.living_room_motion_sensor
         type: entities
-      - entity: sensor.office_temperature
+      - entity: sensor.living_room_temperature
         max: 100
         min: 0
         name: Temperature
@@ -656,12 +656,12 @@ views:
         theme: default
         type: gauge
       - entities:
-          - entity: media_player.office_speaker
+          - entity: media_player.living_room_speaker
           - entity: media_player.pc_gpmdp
-          - entity: media_player.office_tv_cast
+          - entity: media_player.living_room_tv_cast
           - entity: media_player.philips_tv
         type: entities
-      - entity: sensor.office_humidity
+      - entity: sensor.living_room_humidity
         max: 100
         min: 0
         name: Humidity
@@ -672,23 +672,23 @@ views:
         theme: default
         type: gauge
       - detail: 2
-        entity: sensor.office_temperature
+        entity: sensor.living_room_temperature
         graph: line
         name: Temperature
         type: sensor
       - detail: 2
-        entity: sensor.office_humidity
+        entity: sensor.living_room_humidity
         graph: line
         name: Humidify
         type: sensor
       - detail: 2
-        entity: sensor.office_pressure
+        entity: sensor.living_room_pressure
         graph: line
         name: Presure
         type: sensor
     icon: 'mdi:office'
     id: 1
-    title: Office
+    title: Living room
   - cards:
       - entity: light.bedroom_main_light
         type: light
@@ -893,7 +893,7 @@ views:
       - entities:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.home_door_sensor
-          - sensor.office_gateway_illumination
+          - sensor.living_room_gateway_illumination
         type: entities
     icon: 'mdi:stairs'
     id: 6
@@ -1038,7 +1038,7 @@ views:
         type: entities
       - entities:
           - sensor.bedroom_temperature
-          - sensor.office_temperature
+          - sensor.living_room_temperature
           - sensor.kitchen_temperature
           - sensor.bathroom_temperature
           - sensor.kids_temperature
@@ -1048,7 +1048,7 @@ views:
         type: history-graph
       - entities:
           - sensor.bedroom_humidity
-          - sensor.office_humidity
+          - sensor.living_room_humidity
           - sensor.kitchen_humidity
           - sensor.bathroom_humidity
           - sensor.kids_humidity
@@ -1058,7 +1058,7 @@ views:
         type: history-graph
       - entities:
           - sensor.bedroom_pressure
-          - sensor.office_pressure
+          - sensor.living_room_pressure
           - sensor.kitchen_pressure
           - sensor.bathroom_pressure
           - sensor.kids_pressure
@@ -1068,14 +1068,14 @@ views:
         type: history-graph
       - entities:
           - binary_sensor.home_door_sensor
-          - binary_sensor.office_balcon_window_sensor
+          - binary_sensor.living_room_balcon_window_sensor
         hours_to_show: 24
         refresh_interval: 0
         title: Dors in home
         type: history-graph
       - entities:
           - binary_sensor.corridor_motion_sensor
-          - binary_sensor.office_motion_sensor
+          - binary_sensor.living_room_motion_sensor
           - binary_sensor.kitchen_motion_sensor
         hours_to_show: 24
         refresh_interval: 0
@@ -1096,8 +1096,8 @@ views:
       - entity: plant.kids_plant
         name: Kids plant
         type: plant-status
-      - entity: plant.office_plant
-        name: Office plant
+      - entity: plant.living_room_plant
+        name: Living room plant
         type: plant-status
       - entity: plant.kitchen_plant
         name: Kitchen plant
@@ -1207,14 +1207,14 @@ views:
     cards:
       - entities:
           - entity: binary_sensor.corridor_motion_sensor
-          - entity: binary_sensor.office_motion_sensor
+          - entity: binary_sensor.living_room_motion_sensor
           - entity: media_player.philips_tv
           - entity: group.all_devices
           - entity: binary_sensor.desctop_pc
           - entity: sun.sun
         type: entities
       - entities:
-          - entity: sensor.office_temperature
+          - entity: sensor.living_room_temperature
           - entity: sensor.bedroom_temperature
           - entity: sensor.kids_temperature
           - entity: sensor.kitchen_temperature

@@ -11,9 +11,9 @@ device_tracker.nizm0_surface:
   hidden: yes
 device_tracker.gosia_laptop:
   hidden: yes
-device_tracker.office_tv:
+device_tracker.living_room_tv:
   hidden: yes
-device_tracker.office_speaker:
+device_tracker.living_room_speaker:
   hidden: yes
 device_tracker.huawei_camera:
   hidden: yes
@@ -35,7 +35,7 @@ device_tracker.rockrobo:
   hidden: yes
 switch.kids_light:
   friendly_name: Kids light
-binary_sensor.office_switch:
+binary_sensor.living_room_switch:
   hidden: yes
 binary_sensor.bedroom_switch:
   hidden: yes
@@ -61,10 +61,10 @@ history_graph.flower_moisture:
 #   hidden: yes
 
 # binary_sensor.corridor_motion_sensor:
-# binary_sensor.office_motion_sensor:
+# binary_sensor.living_room_motion_sensor:
 binary_sensor.home_door_sensor:
   device_class: door
-binary_sensor.office_balcon_window_sensor:
+binary_sensor.living_room_balcon_window_sensor:
   device_class: door
   # icon: mdi:glassdoor
 binary_sensor.kitchen_left_window_sensor:

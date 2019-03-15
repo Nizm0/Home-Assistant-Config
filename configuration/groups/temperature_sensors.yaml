@@ -1,11 +1,11 @@
 ### Temparature Sensors
-# office_sensors:
-#   name: Office
+# living_room_sensors:
+#   name: Living room
 #   entities:
-#   - sensor.office_temperature
-#   - sensor.office_humidity
-#   - sensor.office_pressure
-#   - sensor.office_gateway_illumination
+#   - sensor.living_room_temperature
+#   - sensor.living_room_humidity
+#   - sensor.living_room_pressure
+#   - sensor.living_room_gateway_illumination
 # bedroom_sensors:
 #   name: Bedroom
 #   entities:

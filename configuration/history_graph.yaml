@@ -11,7 +11,7 @@ room_temp:
   name: Temperature in rooms
   entities:
   - sensor.bedroom_temperature
-  - sensor.office_temperature
+  - sensor.living_room_temperature
   - sensor.kitchen_temperature
   - sensor.bathroom_temperature
   - sensor.kids_temperature
@@ -21,7 +21,7 @@ room_humidity:
   name: Humidity in rooms
   entities:
   - sensor.bedroom_humidity
-  - sensor.office_humidity
+  - sensor.living_room_humidity
   - sensor.kitchen_humidity
   - sensor.bathroom_humidity
   - sensor.kids_humidity
@@ -65,12 +65,12 @@ motions:
   name: Motions in home
   entities:
   - binary_sensor.corridor_motion_sensor
-  - binary_sensor.office_motion_sensor
+  - binary_sensor.living_room_motion_sensor
 dors:
   name: Dors in home
   entities:
   - binary_sensor.home_door_sensor
-  - binary_sensor.office_balcon_window_sensor
+  - binary_sensor.living_room_balcon_window_sensor
 windows:
   name: Windows in home
   entities:
@@ -95,7 +95,7 @@ rooms_presure:
   name: Presure in rooms
   entities:
   - sensor.bedroom_pressure
-  - sensor.office_pressure
+  - sensor.living_room_pressure
   - sensor.kitchen_pressure
   - sensor.bathroom_pressure
   - sensor.kids_pressure

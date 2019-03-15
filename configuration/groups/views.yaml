@@ -3,24 +3,24 @@
 #   view: yes
 #   icon: mdi:home
 #   entities:
-#     - group.office
+#     - group.living_room
 #     - device_tracker.nizmo_phone
-office_view:
+living_room_view:
   view: yes
-  name: Office
+  name: Living room
   # icon: mdi.briefcase
   entities:
-    - camera.office_camera
-    - group.office_camera_control
-    - group.office
-    - group.office_sensors
-    # - group.office_camera_senors
+    - camera.living_room_camera
+    - group.living_room_camera_control
+    - group.living_room
+    - group.living_room_sensors
+    # - group.living_room_camera_senors
     - media_player.pc_gpmdp
     - media_player.philips_tv
-    - media_player.office_speaker
-    - media_player.office_tv_cast
+    - media_player.living_room_speaker
+    - media_player.living_room_tv_cast
     - vacuum.rockrobo
-    - binary_sensor.office_balcon_window_sensor
+    - binary_sensor.living_room_balcon_window_sensor
 bedroom_view:
   view: yes
   name: Bedroom

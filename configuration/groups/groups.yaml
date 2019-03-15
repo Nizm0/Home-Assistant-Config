@@ -34,28 +34,28 @@ travis:
   - sensor.nizm0_home_assistant_config_last_build_state
   - sensor.nizm0_home_assistant_config_state
 
-office_camera_control:
-  name: Office Camera Control
+living_room_camera_control:
+  name: Living room Camera Control
   entities:
-  - sensor.office_camera_audio_connections
-  - sensor.office_camera_battery_level
-  - sensor.office_camera_battery_temperature
-  - sensor.office_camera_battery_voltage
-  - sensor.office_camera_light_level
-  - sensor.office_camera_motion
-  - sensor.office_camera_pressure
-  - sensor.office_camera_proximity
-  - sensor.office_camera_sound
-  - sensor.office_camera_video_connections
-  - switch.office_camera_exposure_lock
-  - switch.office_camera_focus
-  # - switch.office_camera_frontfacing_camera
-  # - switch.office_camera_gps_active
-  # - switch.office_camera_night_vision
-  - switch.office_camera_overlay
-  - switch.office_camera_torch
-  - switch.office_camera_video_recording
-  - switch.office_camera_white_balance_lock
+  - sensor.living_room_camera_audio_connections
+  - sensor.living_room_camera_battery_level
+  - sensor.living_room_camera_battery_temperature
+  - sensor.living_room_camera_battery_voltage
+  - sensor.living_room_camera_light_level
+  - sensor.living_room_camera_motion
+  - sensor.living_room_camera_pressure
+  - sensor.living_room_camera_proximity
+  - sensor.living_room_camera_sound
+  - sensor.living_room_camera_video_connections
+  - switch.living_room_camera_exposure_lock
+  - switch.living_room_camera_focus
+  # - switch.living_room_camera_frontfacing_camera
+  # - switch.living_room_camera_gps_active
+  # - switch.living_room_camera_night_vision
+  - switch.living_room_camera_overlay
+  - switch.living_room_camera_torch
+  - switch.living_room_camera_video_recording
+  - switch.living_room_camera_white_balance_lock
   
 kitchen_camera_control:
   name: Kitchen Camera Control
@@ -134,16 +134,16 @@ AirQuality:
 #   entities:
 #     - automation.battery_alert
 
-# office_camera_control:
-#   name: Office Camera Sensors
+# living_room_camera_control:
+#   name: Living room Camera Sensors
 #   entities:
-#     - sensor.office_camera_audio_connections
-    # - sensor.office_camera_battery_level
-    # - sensor.office_camera_battery_temperature
-    # - sensor.office_camera_battery_voltage
-    # - sensor.office_camera_light_level
-    # - sensor.office_camera_motion
-    # - sensor.office_camera_pressure
-    # - sensor.office_camera_proximity
-    # - sensor.office_camera_sound
-    # - sensor.office_camera_video_connections
+#     - sensor.living_room_camera_audio_connections
+    # - sensor.living_room_camera_battery_level
+    # - sensor.living_room_camera_battery_temperature
+    # - sensor.living_room_camera_battery_voltage
+    # - sensor.living_room_camera_light_level
+    # - sensor.living_room_camera_motion
+    # - sensor.living_room_camera_pressure
+    # - sensor.living_room_camera_proximity
+    # - sensor.living_room_camera_sound
+    # - sensor.living_room_camera_video_connections

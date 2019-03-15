@@ -6,7 +6,7 @@
   - event: sunset
     platform: sun
   action:
-    # - service: notify.office_tv
+    # - service: notify.living_room_tv
     #   data:
     #     data:
     #       color: gray

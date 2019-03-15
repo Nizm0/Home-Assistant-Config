@@ -4,7 +4,7 @@
     platform: state
     entity_id:
     - sensor.bedroom_temperature
-    - sensor.office_temperature
+    - sensor.living_room_temperature
     - sensor.kitchen_temperature
     - sensor.bathroom_temperature
     - sensor.kids_temperature

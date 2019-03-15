@@ -8,15 +8,15 @@ clock:
 
 light_level:
   widget_type: sensor
-  title: Office brightness
+  title: Living room brightness
   units: "lux"
   precision: 0
   shorten: 1
-  entity: sensor.office_gateway_illumination
+  entity: sensor.living_room_gateway_illumination
 
 corridor_gateway_light:
   widget_type: light_with_brightness
-  title: Office gateway
+  title: Living room gateway
   entity: light.corridor_gateway_light
   on_attributes:
     brightness: 100
@@ -46,7 +46,7 @@ bedroom_light_white:
 slider:
   widget_type: input_slider
   title: test lihgt slider
-  entity: sensor.office_gateway_illumination
+  entity: sensor.living_room_gateway_illumination
   units: "%"
 
 corridor_sensor:

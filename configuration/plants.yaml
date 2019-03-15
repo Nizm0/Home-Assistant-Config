@@ -10,7 +10,7 @@ outside_plant:
   min_battery: 17
   min_conductivity: 500
   min_temperature: 15
-office_plant:
+living_room_plant:
   sensors:
     moisture: sensor.xiaomi_miflora_moisture_2
     brightness: sensor.xiaomi_miflora_illuminance_2

@@ -1,9 +1,9 @@
 ### D1 Mini
 - platform: mqtt
   name: General light
-  state_topic: "stat/d1mini-office/POWER1"
-  command_topic: "cmnd/d1mini-office/POWER1"
-  availability_topic: "tele/d1mini-office/LWT"
+  state_topic: "stat/d1mini-living-room/POWER1"
+  command_topic: "cmnd/d1mini-living-room/POWER1"
+  availability_topic: "tele/d1mini-living-room/LWT"
   payload_available: "Online"
   payload_not_available: "Offline"
   payload_on: "ON"
@@ -15,29 +15,25 @@
   retain: false
 - platform: mqtt
   name: Directional light
-  state_topic: "stat/d1mini-office/POWER2"
-  command_topic: "cmnd/d1mini-office/POWER2"
-  availability_topic: "tele/d1mini-office/LWT"
+  state_topic: "stat/d1mini-living-room/POWER2"
+  command_topic: "cmnd/d1mini-living-room/POWER2"
+  availability_topic: "tele/d1mini-living-room/LWT"
   payload_available: "Online"
   payload_not_available: "Offline"
   payload_on: "ON"
   payload_off: "OFF"
-  # state_on: "ON"
-  # state_off: "OFF"
   optimistic: false
   qos: 0
   retain: false
 - platform: mqtt
   name: Top light
-  state_topic: "stat/d1mini-office/POWER4"
-  command_topic: "cmnd/d1mini-office/POWER4"
-  availability_topic: "tele/d1mini-office/LWT"
+  state_topic: "stat/d1mini-living-room/POWER4"
+  command_topic: "cmnd/d1mini-living-room/POWER4"
+  availability_topic: "tele/d1mini-living-room/LWT"
   payload_available: "Online"
   payload_not_available: "Offline"
   payload_on: "ON"
   payload_off: "OFF"
-  # state_on: "ON"
-  # state_off: "OFF"
   optimistic: false
   qos: 0
   retain: false
@@ -47,13 +43,8 @@
   name: Kitchen top light
   state_topic: "shellies/shelly1-4A5B11/relay/0"
   command_topic: "shellies/shelly1-4A5B11/relay/0/command"
-  # availability_topic: "tele/d1mini-office/LWT"
-  # payload_available: "Online"
-  # payload_not_available: "Offline"
   payload_on: "on"
   payload_off: "off"
-  # state_on: "ON"
-  # state_off: "OFF"
   optimistic: false
   qos: 2
   retain: false
@@ -66,8 +57,6 @@
   payload_not_available: "Offline"
   payload_on: "ON"
   payload_off: "OFF"
-  # state_on: "ON"
-  # state_off: "OFF"
   optimistic: false
   qos: 0
   retain: false
@@ -80,8 +69,6 @@
   payload_not_available: "Offline"
   payload_on: "ON"
   payload_off: "OFF"
-  # state_on: "ON"
-  # state_off: "OFF"
   optimistic: false
   qos: 0
   retain: false
@@ -94,8 +81,6 @@
   payload_not_available: "Offline"
   payload_on: "ON"
   payload_off: "OFF"
-  # state_on: "ON"
-  # state_off: "OFF"
   optimistic: false
   qos: 0
   retain: false

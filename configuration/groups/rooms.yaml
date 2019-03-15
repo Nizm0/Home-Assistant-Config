@@ -42,14 +42,14 @@ bedroom:
   - sensor.bedroom_humidity
   - sensor.bedroom_pressure
 
-office:
-  name: Office
+living_room:
+  name: Living room
   entities:
   - light.general_light
   - light.directional_light
   - light.top_light
   - light.tv_ambilights
-  - sensor.office_temperature
-  - sensor.office_humidity
-  - sensor.office_pressure
-  - sensor.office_gateway_illumination
+  - sensor.living_room_temperature
+  - sensor.living_room_humidity
+  - sensor.living_room_pressure
+  - sensor.living_room_gateway_illumination

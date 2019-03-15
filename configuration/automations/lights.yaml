@@ -1,6 +1,6 @@
-### Office
-- alias: Office top light turned on
-  id: office_top_light_turned_on
+### Living room
+- alias: Living room top light turned on
+  id: living_room_top_light_turned_on
   trigger:
   - platform: state
     entity_id: light.top_light
@@ -22,8 +22,8 @@
   - service: homeassistant.turn_off
     entity_id: light.general_light
 
-- alias: Office light 1 and 2 turned on
-  id: office_light_1_and_2_turned_on
+- alias: Living room light 1 and 2 turned on
+  id: living_room_light_1_and_2_turned_on
   trigger:
   - platform: state
     entity_id: light.directional_light, light.general_light

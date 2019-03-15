@@ -1,5 +1,5 @@
 # - host: 192.168.1.161
-#   name: Office camera
+#   name: Living room camera
 #   port: 8080
 #   sensors:
 #     - audio_connections
