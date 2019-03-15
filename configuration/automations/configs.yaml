@@ -1,4 +1,5 @@
 - alias: Update config if travis build is successfull
+  initial_state: off
   id: update_config_if_travis_build_is_successfull
   trigger:
     platform: state

@@ -1,9 +1,13 @@
 customElements.whenDefined('card-tools').then(() => {
+let cardTools = customElements.get('card-tools');
 class UsefulMarkdownCard extends cardTools.LitElement {
 
   async setConfig(config) {
     this._config = config;
-    this.cardConfig = {type: "markdown", ...config};
+    this.cardConfig = Object.assign({
+      type: "markdown",
+    },
+      config);
     this.cardConfig.type = "markdown";
     this.update_content();
     window.addEventListener("location-changed", () => this.update_content() );
@@ -17,6 +21,7 @@ class UsefulMarkdownCard extends cardTools.LitElement {
 
   getCardSize()
   {
+    if(!this.card) return 1;
     return this.card.getCardSize ? this.card.getCardSize() : 1;
   }
 

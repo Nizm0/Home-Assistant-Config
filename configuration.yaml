@@ -37,19 +37,23 @@ panel_iframe:
   ide:
     title: IDE
     icon: mdi:code-braces
-    url: https://has.nizmo.eu:8321
+    url: !secret ide_url
   tasmoadmin:
     title: Tasmo Admin
     icon: mdi:lightbulb-on
-    url: https://has.nizmo.eu:9541/devices
+    url: !secret tasmoadmin_url
+  esphome:
+    title: ESPHome
+    icon: mdi:home-plus
+    url: !secret esphome_url
   # nodered:
   #   title: Node-RED
   #   icon: mdi:shuffle-variant
   #   url: https://has.nizmo.eu:1880
-  grafana:
-    title: Grafana
-    icon: mdi:chart-timeline
-    url: https://has.nizmo.eu:3000
+  # grafana:
+  #   title: Grafana
+  #   icon: mdi:chart-timeline
+  #   url: https://has.nizmo.eu:3000
 
 custom_updater:
   track:
@@ -207,3 +211,17 @@ proximity:
       - device_tracker.google_maps_109218123589188227395
     tolerance: 50
     unit_of_measurement: km
+
+camera:
+  - platform: generic
+    name: camera-pjp
+    still_image_url: http://m.its.wroc.pl/image/image_gallery?img_id=362059&x=0.22850074050046076
+  - platform: generic
+    name: camera-legionow
+    still_image_url: http://m.its.wroc.pl/image/image_gallery?img_id=362047&x=0.9662034875555394
+  - platform: generic
+    name: camera-kosciuszki
+    still_image_url: http://m.its.wroc.pl/image/image_gallery?img_id=362197&x=0.656598218350303
+  - platform: generic
+    name: camera-strzegomski
+    still_image_url: http://m.its.wroc.pl/image/image_gallery?img_id=362143&x=0.9027558406472534

@@ -82,25 +82,25 @@ title: Home
 views:
   - badges: []
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: picture-entity
-            entity: person.michal
+      - cards:
+          - entity: person.michal
             image: /local/images/home/michal.jpg
             show_name: false
             tap_action:
               action: more-info
-          - type: picture-entity
-            entity: person.gosia
+            type: picture-entity
+          - entity: person.gosia
             image: /local/images/home/gosia.jpg
             show_name: false
             tap_action:
               action: more-info
+            type: picture-entity
+        type: horizontal-stack
       - entity: weather.dark_sky
         type: weather-forecast
-      - aspect_ratio: 90%
+      - aspect_ratio: 60%
         type: iframe
-        url: 'https://embed.windy.com/embed2.html?rain,51.088,17.030,11'
+        url: 'https://embed.windy.com/embed2.html?rain,51.109,17.036,11'
       - cards:
           - entities:
               - sensor.office_temperature
@@ -140,6 +140,8 @@ views:
           - entity: binary_sensor.corridor_motion_sensor
             secondary_info: last-changed
           - entity: binary_sensor.office_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.kitchen_motion_sensor
             secondary_info: last-changed
           - entity: binary_sensor.home_door_sensor
             secondary_info: last-changed
@@ -787,7 +789,8 @@ views:
         type: sensor
       - entities:
           - binary_sensor.kitchen_left_window_sensor
-        id: 6634ec0cd04045c78ed3cefb5f3ac3e6
+          - binary_sensor.kitchen_motion_sensor
+          - sensor.kitchen_illumination
         type: entities
       - entity: sensor.kitchen_temperature
         max: 40
@@ -817,6 +820,10 @@ views:
         unit: '%'
       - detail: 2
         entity: sensor.kitchen_pressure
+        graph: line
+        type: sensor
+      - detail: 2
+        entity: sensor.kitchen_illumination
         graph: line
         type: sensor
     icon: 'mdi:kettle'
@@ -996,6 +1003,23 @@ views:
         title: Michal
     title: Family
   - cards:
+      - entity: camera.camera_pjp
+        show_state: false
+        type: picture-entity
+      - entity: camera.camera_strzegomski
+        show_state: false
+        type: picture-entity
+      - entity: camera.camera_legionow
+        show_state: false
+        type: picture-entity
+      - entity: camera.camera_kosciuszki
+        show_state: false
+        type: picture-entity
+    badges: []
+    icon: 'mdi:camera'
+    path: null
+    title: Camera
+  - cards:
       - entities:
           - sensor.processor_use
           - sensor.memory_free
@@ -1043,13 +1067,6 @@ views:
         title: Presure in rooms
         type: history-graph
       - entities:
-          - binary_sensor.corridor_motion_sensor
-          - binary_sensor.office_motion_sensor
-        hours_to_show: 24
-        refresh_interval: 0
-        title: Motions in home
-        type: history-graph
-      - entities:
           - binary_sensor.home_door_sensor
           - binary_sensor.office_balcon_window_sensor
         hours_to_show: 24
@@ -1057,14 +1074,9 @@ views:
         title: Dors in home
         type: history-graph
       - entities:
-          - binary_sensor.kitchen_left_window_sensor
-        hours_to_show: 24
-        refresh_interval: 0
-        title: Windows in home
-        type: history-graph
-      - entities:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.office_motion_sensor
+          - binary_sensor.kitchen_motion_sensor
         hours_to_show: 24
         refresh_interval: 0
         title: Motions in home
@@ -1094,89 +1106,89 @@ views:
         name: Outside plant
         type: plant-status
       - entities:
-          - sensor.flower_1_temperature
-          - sensor.flower_2_temperature
-          - sensor.flower_3_temperature
-          - sensor.flower_4_temperature
+          - sensor.xiaomi_miflora_temperature_1
+          - sensor.xiaomi_miflora_temperature_2
+          - sensor.xiaomi_miflora_temperature_3
+          - sensor.xiaomi_miflora_temperature_4
         hours_to_show: 120
         refresh_interval: 60
         title: Flower Temperature
         type: history-graph
       - entities:
-          - sensor.flower_1_conductivity
-          - sensor.flower_2_conductivity
-          - sensor.flower_3_conductivity
-          - sensor.flower_4_conductivity
+          - sensor.xiaomi_miflora_soil_conductivity_1
+          - sensor.xiaomi_miflora_soil_conductivity_2
+          - sensor.xiaomi_miflora_soil_conductivity_3
+          - sensor.xiaomi_miflora_soil_conductivity_4
         hours_to_show: 120
         refresh_interval: 60
         title: Flower conductivity
         type: history-graph
       - entities:
-          - 'moisture:sensor.flower_1_moisture'
-          - 'intensity:sensor.flower_1_light_intensity'
-          - 'conductivity:sensor.flower_1_conductivity'
-          - 'battery:sensor.flower_1_battery'
-          - 'temperature:sensor.flower_1_temperature'
+          - 'moisture:sensor.xiaomi_miflora_moisture_1'
+          - 'intensity:sensor.xiaomi_miflora_illuminance_1'
+          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_1'
+          - 'battery:sensor.xiaomi_miflora_battery_level_1'
+          - 'temperature:sensor.xiaomi_miflora_temperature_1'
         image: images/calathea-zebrina.jpg
         title: Flower outside
         type: 'custom:plant-card'
       - entities:
-          - 'moisture:sensor.flower_3_moisture'
-          - 'intensity:sensor.flower_3_light_intensity'
-          - 'conductivity:sensor.flower_3_conductivity'
-          - 'battery:sensor.flower_3_battery'
-          - 'temperature:sensor.flower_3_temperature'
+          - 'moisture:sensor.xiaomi_miflora_moisture_3'
+          - 'intensity:sensor.xiaomi_miflora_illuminance_3'
+          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_3'
+          - 'battery:sensor.xiaomi_miflora_battery_level_3'
+          - 'temperature:sensor.xiaomi_miflora_temperature_3'
         image: images/calathea-zebrina.jpg
         title: Flower inside kids room
         type: 'custom:plant-card'
       - entities:
-          - 'moisture:sensor.flower_2_moisture'
-          - 'intensity:sensor.flower_2_light_intensity'
-          - 'conductivity:sensor.flower_2_conductivity'
-          - 'battery:sensor.flower_2_battery'
-          - 'temperature:sensor.flower_2_temperature'
+          - 'moisture:sensor.xiaomi_miflora_moisture_2'
+          - 'intensity:sensor.xiaomi_miflora_illuminance_2'
+          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_2'
+          - 'battery:sensor.xiaomi_miflora_battery_level_2'
+          - 'temperature:sensor.xiaomi_miflora_temperature_2'
         image: images/calathea-zebrina.jpg
         title: Flower inside office
         type: 'custom:plant-card'
       - entities:
-          - 'moisture:sensor.flower_4_moisture'
-          - 'intensity:sensor.flower_4_light_intensity'
-          - 'conductivity:sensor.flower_4_conductivity'
-          - 'battery:sensor.flower_4_battery'
-          - 'temperature:sensor.flower_4_temperature'
+          - 'moisture:sensor.xiaomi_miflora_moisture_4'
+          - 'intensity:sensor.xiaomi_miflora_illuminance_4'
+          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_4'
+          - 'battery:sensor.xiaomi_miflora_battery_level_4'
+          - 'temperature:sensor.xiaomi_miflora_temperature_4'
         image: images/calathea-zebrina.jpg
         title: Flower inside kitchen
         type: 'custom:plant-card'
       - elements:
-          - entity: sensor.flower_2_moisture
+          - entity: sensor.xiaomi_miflora_moisture_2
             style:
               '--ha-label-badge-font-size': 1em
               left: 2%
               top: 7%
               transform: none
             type: state-badge
-          - entity: sensor.flower_3_moisture
+          - entity: sensor.xiaomi_miflora_moisture_3
             style:
               '--ha-label-badge-font-size': 1em
               left: 17%
               top: 7%
               transform: none
             type: state-badge
-          - entity: sensor.flower_4_moisture
+          - entity: sensor.xiaomi_miflora_moisture_4
             style:
               '--ha-label-badge-font-size': 1em
               left: 32%
               top: 7%
               transform: none
             type: state-badge
-          - entity: sensor.flower_1_moisture
+          - entity: sensor.xiaomi_miflora_moisture_1
             style:
               '--ha-label-badge-font-size': 1em
               left: 47%
               top: 7%
               transform: none
             type: state-badge
-          - entity: sensor.flower_3_temperature
+          - entity: sensor.xiaomi_miflora_temperature_3
             style:
               '--ha-label-badge-font-size': 1em
               left: 92%
@@ -1212,8 +1224,3 @@ views:
     icon: 'mdi:test-tube'
     theme: darkred
     title: Testing area
-  - badges: []
-    cards: []
-    icon: 'mdi:map'
-    path: null
-    title: Map
