@@ -29,5 +29,6 @@ __*
 esphome
 appdaemon/custom_widgets
 deps
+notebooks
 node-red
 tts

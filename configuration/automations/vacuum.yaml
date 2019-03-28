@@ -104,7 +104,7 @@
     data_template:
       content: "Clean sensors in vacuum rockrobo"
       priority: 2
-      due_today: true
+      due_date_string: 'today'
 
 - alias: Vacuum monitoring system for filters
   id: vacuum_monitoring_system_for_filters
@@ -116,7 +116,7 @@
     data_template:
       content: "Replace filter in vacuum rockrobo"
       priority: 2
-      due_today: true
+      due_date_string: 'today'
 
 - alias: Vacuum monitoring system for brushes
   id: vacuum_monitoring_system_for_brushes
@@ -130,4 +130,4 @@
     data_template:
       content: "Replace side or main brush in vacuum rockrobo"
       priority: 2
-      due_today: true
+      due_date_string: 'today'

@@ -1,5 +1,5 @@
 customElements.whenDefined('card-tools').then(() => {
-class AutoEntities extends cardTools.litElement() {
+class AutoEntities extends cardTools.LitElement {
 
   setConfig(config) {
     if(!config || !config.card)
@@ -9,15 +9,18 @@ class AutoEntities extends cardTools.litElement() {
     this.data = {};
 
     this.entities = this.get_entities() || [];
-    this.card = cardTools.createCard({entities: this.entities, ...config.card});
+    this.card = cardTools.createCard(Object.assign({entities: this.entities}, config.card));
   }
 
 
   match(pattern, str){
     if (typeof(str) === "string" && typeof(pattern) === "string") {
       if((pattern.startsWith('/') && pattern.endsWith('/')) || pattern.indexOf('*') !== -1) {
-        if(pattern[0] !== '/')
-          pattern = `/${pattern.replace(/\*/g, '.*')}/`;
+        if(pattern[0] !== '/') {
+          pattern = pattern.replace(/\./g, '\.');
+          pattern = pattern.replace(/\*/g, '.*');
+          pattern = `/^${pattern}$/`;
+        }
         var regex = new RegExp(pattern.substr(1).slice(0,-1));
         return regex.test(str);
       }
@@ -134,7 +137,7 @@ class AutoEntities extends cardTools.litElement() {
           const add = this.match_filter(this._hass, Object.keys(this._hass.states), f);
           let toAdd = [];
           add.forEach((i) => {
-            toAdd.push({entity: Object.keys(this._hass.states)[i], ...f.options});
+            toAdd.push(Object.assign({entity: Object.keys(this._hass.states)[i]}, f.options));
           });
           toAdd.sort((a,b) => {
             if (a.entity < b.entity) return -1;
@@ -163,8 +166,8 @@ class AutoEntities extends cardTools.litElement() {
   }
   render() {
     if(this.entities.length === 0 && this._config.show_empty === false)
-      return cardTools.litHtml()``;
-    return cardTools.litHtml()`
+      return cardTools.LitHtml``;
+    return cardTools.LitHtml`
       <div id="root">${this.card}</div>
     `;
   }
@@ -203,7 +206,7 @@ class AutoEntities extends cardTools.litElement() {
       const newEntities = this.entities.map((e) => e.entity);
 
       if(!this._compare_arrays(oldEntities, newEntities)) {
-        this.card.setConfig({entities: this.entities, ...this._config.card});
+        this.card.setConfig(Object.assign({entities: this.entities}, this._config.card));
         this.requestUpdate();
       }
     });

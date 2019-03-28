@@ -84,6 +84,17 @@
       friendly_name: Motion in Last 30min
       # device_class: motion
 
+- platform: template
+  sensors:
+    taking_bath:
+      friendly_name: Taking bath
+      value_template: > 
+        {% if states('sensor.bathroom_humidity') | float > 50 %}
+          true
+        {%- else -%}
+          false
+        {%- endif %}
+
 # - platform: template
 #   sensors:
 #     bedroom_battery_level:
