@@ -1,18 +1,3 @@
-- platform: yeelight
-  devices:
-    192.168.1.121:
-      name: Bedroom Main Light
-      transition: 10
-      use_music_mode: true #(defaults to False)
-      save_on_change: true #(defaults to True)
-- platform: yeelight
-  devices:
-    192.168.1.120:
-      name: Bedroom Main Light 2
-      transition: 10
-      use_music_mode: true #(defaults to False)
-      save_on_change: true #(defaults to True)
-
 - platform: ambilights
   name: Tv Ambilights
   host: 192.168.1.130

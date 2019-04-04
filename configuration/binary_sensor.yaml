@@ -56,3 +56,11 @@
   host: 192.168.1.200
   count: 4
   scan_interval: 60
+- platform: template
+  sensors:
+    taking_bath:
+      friendly_name: Taking bath
+      device_class: occupancy
+      value_template: >-
+        {{ states('sensor.bathroom_humidity')|float > 50 
+           and states('sensor.bathroom_temperature')|float > 23 }}

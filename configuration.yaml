@@ -15,6 +15,7 @@ http:
   #   - 127.0.0.1
   #   - 192.168.1.0/24
 system_health:
+websocket_api:
 person:
 updater:
 discovery:
@@ -46,6 +47,10 @@ panel_iframe:
     title: ESPHome
     icon: mdi:home-plus
     url: !secret esphome_url
+  vscode:
+    title: Visual Studio Code
+    icon: mdi:visual-studio-code
+    url: !secret code_url
   # nodered:
   #   title: Node-RED
   #   icon: mdi:shuffle-variant
@@ -111,6 +116,7 @@ recorder:
 
 input_boolean: !include configuration/input_boolean.yaml
 light: !include_dir_merge_list configuration/light
+yeelight: !include_dir_merge_list configuration/yeelight
 plant: !include configuration/plants.yaml
 
 script: !include_dir_merge_named configuration/scripts/

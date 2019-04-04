@@ -16,8 +16,6 @@
         {%- endfor -%}
         {%- endfor -%}
 
-- platform: template
-  sensors:
     vacuum_battery:
       entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Battery"
@@ -25,32 +23,27 @@
       device_class: battery
       unit_of_measurement: '%'
 
-- platform: template
-  sensors:
     vacuum_main_brush:
       entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Main Brush left"
       value_template: "{{ states.vacuum.rockrobo.attributes.main_brush_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
-- platform: template
-  sensors:
+
     vacuum_side_brush:
       entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Side Brush left"
       value_template: "{{ states.vacuum.rockrobo.attributes.side_brush_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
-- platform: template
-  sensors:
+
     vacuum_filter:
       entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Filter left"
       value_template: "{{ states.vacuum.rockrobo.attributes.filter_left }}"
       # device_class: battery
       # unit_of_measurement: '%'
-- platform: template
-  sensors:
+
     vacuum_sensors:
       entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Sensor dirty left"
@@ -58,15 +51,11 @@
       # device_class: battery
       # unit_of_measurement: '%'
 
-- platform: template
-  sensors:
     in_bed_bayesian_probability:
       entity_id: binary_sensor.in_bed
       value_template: "{{states.binary_sensor.in_bed.attributes.probability * 100}}"
       unit_of_measurement: '%'
 
-- platform: template
-  sensors:
     template_last_motion:
       friendly_name: 'Last Motion'
       value_template: >
@@ -77,15 +66,11 @@
           {% endif %}
         {% endfor %}
 
-- platform: template
-  sensors:
     motion_last30:
       value_template: '{{(as_timestamp(now())-as_timestamp(states.variable.last_motion.last_changed)) < 1800 }}'
       friendly_name: Motion in Last 30min
       # device_class: motion
 
-- platform: template
-  sensors:
     taking_bath:
       friendly_name: Taking bath
       value_template: > 

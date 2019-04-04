@@ -6,7 +6,6 @@
     - type: memory_free
     - type: processor_use
   # - type: since_last_boot
-- platform: api_streams
 # - platform: command_line
 #   name: SSL cert expiry
 #   unit_of_measurement: days
