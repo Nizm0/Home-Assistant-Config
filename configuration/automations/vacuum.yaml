@@ -76,9 +76,9 @@
   condition:
     condition: and
     conditions:
-    - condition: state
-      entity_id: binary_sensor.workday_sensor
-      state: 'on'
+    # - condition: state
+    #   entity_id: binary_sensor.workday_sensor
+    #   state: 'on'
     - condition: state
       entity_id: group.all_devices
       state: 'not_home'

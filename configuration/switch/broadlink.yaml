@@ -1,6 +1,6 @@
-- platform: broadlink
-  host: 192.168.1.112
-  mac: 78:0F:77:00:6A:7D
+# - platform: broadlink
+#   host: 192.168.1.112
+#   mac: 78:0F:77:00:6A:7D
   # switches:
   #   tv_philips:
   #     friendly_name: Philips TV Power

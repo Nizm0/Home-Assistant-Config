@@ -26,9 +26,9 @@ from requests.adapters import HTTPAdapter
 import urllib3
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-REQUIREMENTS = ['wakeonlan==1.1.6']
-
 _LOGGER = logging.getLogger(__name__)
+
+CONF_FAV_ONLY = 'favorite_channels_only'
 
 MIN_TIME_BETWEEN_UPDATES = timedelta(seconds=5)
 
@@ -51,7 +51,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Required(CONF_MAC, default=DEFAULT_MAC): cv.string,
     vol.Required(CONF_USERNAME, default=DEFAULT_USER): cv.string,
     vol.Required(CONF_PASSWORD, default=DEFAULT_PASS): cv.string,
-    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string
+    vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+    vol.Optional(CONF_FAV_ONLY, default=False): cv.boolean
 })
 
 # pylint: disable=unused-argument
@@ -62,7 +63,8 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     mac = config.get(CONF_MAC)
     user = config.get(CONF_USERNAME)
     password = config.get(CONF_PASSWORD)
-    tvapi = PhilipsTVBase(host, user, password)
+    favorite_only = config.get(CONF_FAV_ONLY)
+    tvapi = PhilipsTVBase(host, user, password, favorite_only)
     add_devices([PhilipsTV(tvapi, name, mac)])
 
 class PhilipsTV(MediaPlayerDevice):
@@ -256,7 +258,7 @@ class PhilipsTV(MediaPlayerDevice):
             self._state = STATE_OFF
 
 class PhilipsTVBase(object):
-    def __init__(self, host, user, password):
+    def __init__(self, host, user, password, favorite_only):
         self._host = host
         self._user = user
         self._password = password
@@ -267,6 +269,7 @@ class PhilipsTVBase(object):
         self.max_volume = 60
         self.volume = 0
         self.muted = False
+        self.favorite_only = favorite_only
         self.applications = {}
         self.app_source_list = []
         self.classNameToApp = {}
@@ -314,7 +317,10 @@ class PhilipsTVBase(object):
     def update(self):
         self.getState()
         self.getApplications()
-        self.getChannels()
+        if self.favorite_only:
+            self.getFavoriteChannels()
+        else:
+            self.getChannels()
         self.getAudiodata()
         self.getChannel()
 
@@ -361,6 +367,22 @@ class PhilipsTVBase(object):
         if r:
             self.channels = dict(sorted({chn['name']:chn for chn in r['Channel']}.items(), key=lambda a: a[0].upper()))
             self.channel_source_list = ['📺 ' + channelName for channelName in self.channels.keys()]
+
+    # Filtering out favorite channels here
+    def getFavoriteChannels(self):
+        r = self._getReq('channeldb/tv/channelLists/all')
+        favoriteRes = self._getReq('channeldb/tv/favoriteLists/1')
+        if r:
+            self.channels = dict(sorted({chn['name']:chn for chn in r['Channel']}.items(), key=lambda a: a[0].upper()))
+        allchannels = dict({chn['ccid']:chn for chn in r['Channel']}.items())
+        favchannels = dict({chn['ccid']:chn for chn in favoriteRes['channels']}.items())
+        favoriteChannels = favoriteRes.pop('channels')
+        ccids = ([Channel['ccid'] for Channel in favoriteChannels])
+        favchannel = {key: allchannels[key] for key in ccids}
+        self.channel_source_list = []
+        for favchannel_ccid, favchannel_ccinfo in favchannel.items():
+            self.channel_source_list.append('📺 ' + favchannel_ccinfo['name'])
+        self.channel_source_list.sort()
 
     def getApplications(self):
         r = self._getReq('applications')

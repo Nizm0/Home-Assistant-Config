@@ -14,6 +14,7 @@ known_devices.yaml
 .cloud
 .storage
 .vscode
+.Trash-0
 *.uuid
 *.db*
 *.log

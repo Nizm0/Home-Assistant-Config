@@ -1,0 +1,3 @@
+vacuum_manager:
+  module: vacuum
+  class: VacuumActions
