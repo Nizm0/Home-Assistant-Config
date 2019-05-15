@@ -1,5 +1,6 @@
 - alias: Notify on sun change
   id: notify_on_sun_change
+  initial_state: 'true'
   trigger:
   - event: sunrise
     platform: sun

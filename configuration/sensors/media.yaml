@@ -1,0 +1,4 @@
+- platform: twitch
+  client_id: YOUR_TWITCH_CLIENT_ID
+  channels:
+    - frenck

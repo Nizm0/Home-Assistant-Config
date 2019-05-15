@@ -1,6 +1,7 @@
 #### MOTION BEGUN
 - alias: Corridor motion detected
   id: corridor_motion_detected
+  initial_state: 'true'
   trigger:
   - platform: state
     entity_id: binary_sensor.corridor_motion_sensor
@@ -31,6 +32,7 @@
 
 - alias: Motion detected in empty home
   id: motion_detected_in_empty_home
+  initial_state: 'true'
   trigger:
   - platform: state
     entity_id: binary_sensor.corridor_motion_sensor, binary_sensor.living_room_motion_sensor, binary_sensor.kitchen_motion_sensor
@@ -57,6 +59,7 @@
 #### MOTION OVER
 - alias: Corridor motion over
   id: corridor_motion_over
+  initial_state: 'true'
   trigger:
   - platform: state
     entity_id: binary_sensor.corridor_motion_sensor

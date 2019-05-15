@@ -1,5 +1,6 @@
 - alias: Notify when temperature is to hight or to low
   id: notify_when_temperature_is_to_hight_or_to_low
+  initial_state: 'true'
   trigger:
     platform: state
     entity_id:

@@ -35,10 +35,6 @@ frontend:
 map:
 
 panel_iframe:
-  #ide:
-  #  title: IDE
-  #  icon: mdi:code-braces
-  #  url: !secret ide_url
   tasmoadmin:
     title: Tasmo Admin
     icon: mdi:lightbulb-on
@@ -47,23 +43,18 @@ panel_iframe:
     title: ESPHome
     icon: mdi:home-plus
     url: !secret esphome_url
-  # vscode:
-  #   title: Visual Studio Code
-  #   icon: mdi:visual-studio-code
-  #   url: !secret code_url
-  # nodered:
-  #   title: Node-RED
-  #   icon: mdi:shuffle-variant
-  #   url: https://has.nizmo.eu:1880
+  octoprint:
+    title: Octoprint
+    icon: mdi:printer-3d
+    url: !secret octoprint_url
+  nginx:
+    title: Nginx
+    icon: mdi:router-wireless
+    url: !secret nginx_url
   # grafana:
   #   title: Grafana
   #   icon: mdi:chart-timeline
   #   url: https://has.nizmo.eu:3000
-weblink:
-  entities:
-    - name: vscode
-      icon: mdi:visual-studio-code
-      url: !secret code_url
 
 custom_updater:
   component_urls:
@@ -96,19 +87,21 @@ logbook:
 
 history: !include configuration/history.yaml
 recorder:
-  purge_interval: 2
+  exclude:
+    domains:
+      - automation
+      - weblink
+      - updater
+      - group
+      - input_boolean
+      - input_datetime
+      - input_number
+      - input_select
+      - media_player
+      - weather
+      - zone
+  purge_interval: 7
   purge_keep_days: 5
-  # include:
-  #   domains:
-  #     - sensor
-  #     - switch
-  #     - media_player
-  # exclude:
-  #   domains:
-  #   - device_tracker
-  #   entities:
-  #    - sensor.last_boot
-  #    - sensor.date
 
 # ########################################
 # ###              ENTITIES             ###

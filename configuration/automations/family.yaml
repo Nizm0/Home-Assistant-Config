@@ -1,5 +1,6 @@
 - id: michal_is_out_from_work
   alias: Michał is out from Work
+  initial_state: 'true'
   trigger: 
   - platform: zone
     entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
@@ -26,6 +27,7 @@
 
 - id: michal_entered_the_home
   alias: Michał entered the home
+  initial_state: 'true'
   trigger: 
   - platform: zone
     entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
@@ -48,6 +50,7 @@
 
 - id: gosia_entered_the_home
   alias: Gosia entered the home
+  initial_state: 'true'
   trigger: 
   - platform: zone
     entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
@@ -68,6 +71,7 @@
 
 - id: 589437twnoe86ogw6pw
   alias: Time to go home
+  initial_state: 'true'
   trigger:
   - platform: numeric_state
     entity_id: sensor.nizm0_today_at_work

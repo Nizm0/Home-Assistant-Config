@@ -1,6 +1,7 @@
 ### Living room
 - alias: Living room top light turned on
   id: living_room_top_light_turned_on
+  initial_state: 'true'
   trigger:
   - platform: state
     entity_id: light.top_light
@@ -24,6 +25,7 @@
 
 - alias: Living room light 1 and 2 turned on
   id: living_room_light_1_and_2_turned_on
+  initial_state: 'true'
   trigger:
   - platform: state
     entity_id: light.directional_light, light.general_light
@@ -41,6 +43,7 @@
 ### Bedroom
 - alias: Turn on bedroom main light to red 10%
   id: turn_on_bedroom_main_light_to_red_10%
+  initial_state: 'false'
   trigger:
     platform: event
     event_type: xiaomi_aqara.click
@@ -75,6 +78,7 @@
       entity_id: light.bedroom_main_light
 - alias: Turn on bedroom main light to wite 100%
   id: turn_on_bedroom_main_light_to_wite_100%
+  initial_state: 'false'
   trigger:
     platform: event
     event_type: xiaomi_aqara.click

@@ -1,5 +1,6 @@
 - alias: Home door opened
   id: home_door_opened
+  initial_state: 'true'
   trigger:
     - platform: state
       entity_id: binary_sensor.home_door_sensor
@@ -36,6 +37,7 @@
 #### HOME DOOR CLOSED
 - alias: Home door closed
   id: home_door_closed
+  initial_state: 'true'
   trigger:
     - platform: state
       entity_id: binary_sensor.home_door_sensor
@@ -50,6 +52,7 @@
 
 - alias: Home door closed notification
   id: home_door_closed_notification
+  initial_state: 'true'
   trigger:
     - platform: state
       entity_id: binary_sensor.home_door_sensor
