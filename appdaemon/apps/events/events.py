@@ -1,12 +1,15 @@
 import appdaemon.plugins.hass.hassapi as hass
+from vacuum import VacuumActions
+from base import Base
 
 from datetime import datetime, timedelta
 
-class Events(hass.Hass):
+class Events(Base):
 
 # html5_notification.clicked
   def initialize(self):
-    self.listen_event(self.chose_action, "html5_notification.clicked", action = "open_door")
+    self.listen_event(self.chose_action, "html5_notification.clicked") #, action = "open_door"
+    # self.log("Push notification clicked {}".format(event_action))
 
   # def generic_event(self, event_name, data, kwargs):
   #   event_action = data["action"]
@@ -24,12 +27,16 @@ class Events(hass.Hass):
 
   def chose_action(self, event_name, data, kwargs):
     event_action = data["action"]
+    # self.log("Push notification clicked (action) {}".format(event_action))
     if event_action == "open_door":
       self.log("Push notification clicked {}".format(event_action))
       self.light_on(self)
       self.run_in(self.light_off, 10)
     elif event_action == "open":
       self.log("Push notification clicked {}".format(event_action))
+    elif event_action == "start_vacuum":
+      self.log("Push notification clicked {event_action}")
+      VacuumActions.start_vacuum(self)
     # switcher={
     #   "open_door":light_on
     # }

@@ -1,19 +1,43 @@
 import appdaemon.plugins.hass.hassapi as hass
+import datetime
+from base import Base
+# from datetime import time, timedelta, tzinfo
+# from datetime import time
 
-from datetime import datetime, timedelta
-
-class VacuumActions(hass.Hass):
+class VacuumActions(Base):
 
   def initialize(self):
-    self.listen_state(self.light_on, "binary_sensor.kitchen_left_window_sensor", new = "on")
-    self.listen_state(self.light_off, "binary_sensor.kitchen_left_window_sensor", new = "off")
+    input_time = datetime.time.fromisoformat(self.get_state("input_datetime.vacuum_day_time"))
+    self.log(input_time)
+    time = datetime.time(15, 00)
+    # Schedule a daily callback that will call run_daily()
+    self.run_daily(self.run_daily_callback, time)
 
-  def open(self, entity, attribute, old, new, kwargs):
-    self.turn_on("light.bedroom_main_light")
-    self.run_in(self.light_off, 60)
+  # Our callback function will be called by the scheduler every day
+  def run_daily_callback(self, kwargs):
+    ready = self.get_state("input_boolean.ready_to_vacuum")
+    data =  {
+              "vibrate": "200, 100, 200, 100, 200, 100, 200",
+              # "importance": "hight",
+              "renotify": "true",
+              # "timestamp": time,
+              # "priority": 0,
+              "actions": [
+                {
+                  "action": "start_vacuum",
+                  "icon": "/static/icons/favicon-192x192.png",
+                  "title": "Start Vacuum"
+                },
+                {
+                  "action": "cancel",
+                  "title": "Cancel"
+                }],
+              "tag": "home-vacuum-automation"
+            }
+    if ready != "on":
+      self.call_service("notify/push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data = data)
+      # self.notify(name="notify.push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data=data)
 
-  def light_on(self, entity, attribute, old, new, kwargs):
-    self.turn_on("light.bedroom_main_light")
-
-  def light_off(self, entity, attribute, old, new, kwargs):
-    self.turn_off("light.bedroom_main_light")
+  def start_vacuum(self):
+    self.log("vacuum/start for {}".format("vacuum.rockrobo"))
+    self.call_service("vacuum/start", entity_id="vacuum.rockrobo")

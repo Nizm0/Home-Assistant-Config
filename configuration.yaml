@@ -2,15 +2,15 @@ homeassistant:
   name: Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  elevation: !secret home_elevation
+  elevation: 116 #!secret home_elevation
   unit_system: metric
   time_zone: Europe/Warsaw
   customize: !include customize.yaml
 api:
 config:
 http:
-  ip_ban_enabled: true
-  login_attempts_threshold: 5
+  # ip_ban_enabled: true
+  # login_attempts_threshold: 5
   # trusted_networks:
   #   - 127.0.0.1
   #   - 192.168.1.0/24
@@ -24,7 +24,7 @@ discovery:
 automation: !include automations.yaml
 automation old: !include_dir_merge_list configuration/automations/
 cloud: !include configuration/cloud.yaml
-group: !include_dir_merge_named configuration/groups/
+# group: !include_dir_merge_named configuration/groups/
 
 # ########################################
 # ###                GUI               ###
@@ -39,10 +39,10 @@ panel_iframe:
     title: Tasmo Admin
     icon: mdi:lightbulb-on
     url: !secret tasmoadmin_url
-  esphome:
-    title: ESPHome
-    icon: mdi:home-plus
-    url: !secret esphome_url
+  # esphome:
+  #   title: ESPHome
+  #   icon: mdi:home-plus
+  #   url: !secret esphome_url
   octoprint:
     title: Octoprint
     icon: mdi:printer-3d
@@ -57,13 +57,16 @@ panel_iframe:
   #   url: https://has.nizmo.eu:3000
 
 custom_updater:
+  show_installable: true
   component_urls:
     - https://raw.githubusercontent.com/nstrelow/ha_philips_2016/master/custom_components.json
-  track:
-  - cards
-  - components
+  # track:
+  #   - cards
+  #   - components
+  card_urls:
+    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
 
-history_graph: !include configuration/history_graph.yaml
+# history_graph: !include configuration/history_graph.yaml
 
 # ########################################
 # ###              LOGGING             ###

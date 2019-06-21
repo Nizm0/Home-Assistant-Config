@@ -1,6 +1,9 @@
 - platform: workday
   country: PL
   workdays: [mon, tue, wed, thu, fri]
+- platform: meteoalarm
+  country: 'PL'
+  province: 'Wrocław'
 - platform: bayesian
   name: In bed
   prior: 0.1
@@ -62,8 +65,8 @@
       friendly_name: Taking bath
       device_class: occupancy
       value_template: >-
-        {{ states('sensor.bathroom_humidity')|float > 50 
-           and states('sensor.bathroom_temperature')|float > 23 }}
+        {{ states('sensor.bathroom_humidity')|float > states('sensor.average_house_humidity')|float + 10 
+          and states('sensor.bathroom_temperature')|float > states('sensor.average_house_temperature')|float + 1 }}
 # - platform: octoprint
 #   monitored_conditions:
 #     - Printing

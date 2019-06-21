@@ -24,6 +24,7 @@ known_devices.yaml
 *.pyc
 *.cookies
 www/images/home
+www/floorplan
 
 compiled
 __*

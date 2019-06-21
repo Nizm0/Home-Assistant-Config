@@ -1,0 +1,25 @@
+- platform: min_max
+  name: average_house_humidity
+  type: mean
+  entity_ids:
+    - sensor.bedroom_humidity
+    - sensor.living_room_humidity
+    - sensor.kids_humidity
+    - sensor.kitchen_humidity
+- platform: min_max
+  name: average_house_temperature
+  type: mean
+  entity_ids:
+    - sensor.bedroom_temperature
+    - sensor.living_room_temperature
+    - sensor.kids_temperature
+    - sensor.kitchen_temperature
+- platform: min_max
+  name: Max temperature in home
+  type: max
+  entity_ids:
+    - sensor.bedroom_temperature
+    - sensor.bathroom_temperature
+    - sensor.living_room_temperature
+    - sensor.kids_temperature
+    - sensor.kitchen_temperature

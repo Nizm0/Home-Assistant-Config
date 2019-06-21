@@ -40,9 +40,9 @@
   # outdoor_temp_sensor: sensor.flower_2_temperature
   calibration_factor: 1.0
 
-- platform: seventeentrack
-  username: !secret 17_track_user
-  password: !secret 17_track_pass
+# - platform: seventeentrack
+#   username: !secret 17_track_user
+#   password: !secret 17_track_pass
 
 - platform: darksky
   api_key: !secret darksky_api_key

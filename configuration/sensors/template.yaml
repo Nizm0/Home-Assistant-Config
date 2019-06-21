@@ -3,7 +3,7 @@
     predicted_print_end_time:
       friendly_name: Ender 3 Predicted End Time
       value_template: >
-        {% if is_state("binary_sensor.ender_3_printing", on) and state("sensor.ender_3_time_remaining") > 0  %}
+        {% if is_state("binary_sensor.ender_3_printing", "on") and states("sensor.ender_3_time_remaining") > "0"  %}
         {{ (as_timestamp(now()) + states.sensor.ender_3_time_remaining.state | float) | timestamp_local }}
         {%- else -%}
         ---NAN---
@@ -86,6 +86,18 @@
           true
         {%- else -%}
           false
+        {%- endif %}
+
+    max_recorded_temp:
+      friendly_name: Max recorded temperature
+      device_class: temperature
+      entity_id: sensor.max_temperature_in_home
+      unit_of_measurement: '°C'
+      value_template: >
+        {% if states.sensor.max_recorded_temp.state | float > states.sensor.max_temperature_in_home.state | float -%}
+          {{states.sensor.max_recorded_temp.state | float}}
+        {%- else -%}
+          {{states.sensor.max_temperature_in_home.state | float}}
         {%- endif %}
 
 # - platform: template

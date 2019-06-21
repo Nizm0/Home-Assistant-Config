@@ -103,7 +103,7 @@
   initial_state: 'true'
   trigger:
   - platform: template
-    value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', '5') %}true{% endif %}"
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', 5) %}true{% endif %}"
   action:
   - service: calendar.todoist_new_task
     data_template:
@@ -116,7 +116,7 @@
   initial_state: 'true'
   trigger:
   - platform: template
-    value_template: "{% if is_state_attr('vacuum.rockrobo', 'filter_left', '10') %}true{% endif %}"
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'filter_left', 10) %}true{% endif %}"
   action:
   - service: calendar.todoist_new_task
     data_template:
@@ -129,9 +129,9 @@
   initial_state: 'true'
   trigger:
   - platform: template
-    value_template: "{% if is_state_attr('vacuum.rockrobo', 'side_brush_left', '10') %}true{% endif %}"
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'side_brush_left', 10) %}true{% endif %}"
   - platform: template
-    value_template: "{% if is_state_attr('vacuum.rockrobo', 'main_brush_left', '10') %}true{% endif %}"
+    value_template: "{% if is_state_attr('vacuum.rockrobo', 'main_brush_left', 10) %}true{% endif %}"
   action:
   - service: calendar.todoist_new_task
     data_template:
