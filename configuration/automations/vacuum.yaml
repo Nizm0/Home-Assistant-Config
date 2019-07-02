@@ -11,15 +11,15 @@
   - service: notify.push_to_chrome
     data_template:
       message: >
-        Vacuum has started and now is {{ trigger.to_state.state }}
+        Vacuum has started and now is {{ trigger.to_state.state }} is it intended?
       title: Vacuum start working
       data:
         actions:
-          - action: open
+          - action: stop_vacuum
             icon: "/static/icons/favicon-192x192.png"
-            title: Open Home Assistant
-          - action: open_door
-            title: Open door
+            title: Stop vacuum
+          - action: cancel
+            title: Cancel
         tag: vacuum-notification
   - service: notify.pushbullet_nizmo
     data_template:

@@ -18,3 +18,7 @@ slider1:
   min: 0
   max: 100
   step: 1
+max_temp_recorded:
+  name: Max recorded temparature in home
+  max: 50
+  min: 20

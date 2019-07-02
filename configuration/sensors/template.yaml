@@ -24,6 +24,11 @@
         {%- endfor -%}
         {%- endfor -%}
 
+    solar_angle:
+      friendly_name: "Sun angle"
+      unit_of_measurement: 'degrees'
+      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
+
     vacuum_battery:
       entity_id: vacuum.rockrobo
       friendly_name: "Vacuum - Battery"
@@ -67,7 +72,7 @@
     template_last_motion:
       friendly_name: 'Last Motion'
       value_template: >
-        {% set sensors = [states.binary_sensor.living_room_motion_sensor, states.binary_sensor.corridor_motion_sensor] %}
+        {% set sensors = [states.binary_sensor.living_room_motion_sensor, states.binary_sensor.corridor_motion_sensor, states.binary_sensor.kitchen_motion_sensor] %}
         {% for sensor in sensors %}
           {% if as_timestamp(sensor.last_changed) == as_timestamp(sensors | map(attribute='last_changed') | max) %}
             {{ sensor.name }}
@@ -96,6 +101,8 @@
       value_template: >
         {% if states.sensor.max_recorded_temp.state | float > states.sensor.max_temperature_in_home.state | float -%}
           {{states.sensor.max_recorded_temp.state | float}}
+        {%- elif states.sensor.max_recorded_temp.state == 'unknown' -%}
+          {{34.2}}
         {%- else -%}
           {{states.sensor.max_temperature_in_home.state | float}}
         {%- endif %}

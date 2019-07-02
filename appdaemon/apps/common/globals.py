@@ -2,7 +2,7 @@ from enum import Enum
 
 # Global variables
 
-ios_isa = 'push_to_chrome_nizm0_oneplus3'
+android_michal = 'push_to_chrome_nizm0_oneplus3'
 notify_michal = "notify/push_to_chrome_nizm0_oneplus3"
 
 michal = "person.michal"
