@@ -55,16 +55,8 @@ panel_iframe:
   #   title: Grafana
   #   icon: mdi:chart-timeline
   #   url: https://has.nizmo.eu:3000
-
-custom_updater:
-  show_installable: true
-  component_urls:
-    - https://raw.githubusercontent.com/nstrelow/ha_philips_2016/master/custom_components.json
-  # track:
-  #   - cards
-  #   - components
-  card_urls:
-    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
+hacs:
+  token: 24b8da7bc29af01daf6a55547831d5a0176b6532
 
 # history_graph: !include configuration/history_graph.yaml
 

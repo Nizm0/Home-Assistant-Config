@@ -23,13 +23,16 @@ known_devices.yaml
 *.save
 *.pyc
 *.cookies
+appdaemon/custom_widgets
 www/images/home
 www/floorplan
+www/custom-lovelace
+www/comunity
 
+custom_components
 compiled
 __*
 esphome
-appdaemon/custom_widgets
 deps
 notebooks
 node-red
