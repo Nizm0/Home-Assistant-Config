@@ -27,10 +27,9 @@ appdaemon/custom_widgets
 www/images/home
 www/floorplan
 www/custom-lovelace
-www/comunity
-
+www/community
 custom_components
-compiled
+
 __*
 esphome
 deps

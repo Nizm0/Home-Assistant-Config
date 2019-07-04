@@ -56,7 +56,10 @@ panel_iframe:
   #   icon: mdi:chart-timeline
   #   url: https://has.nizmo.eu:3000
 hacs:
-  token: 24b8da7bc29af01daf6a55547831d5a0176b6532
+  token: !secret hacs_key
+  appdaemon: true
+  python_script: true
+  theme: true
 
 # history_graph: !include configuration/history_graph.yaml
 
@@ -73,8 +76,10 @@ browser_mod:
   devices:
     6ba3b971-a97393f3:
       name: home-pc
-    d2fc860c-16379d23:
+    9af82299-0901b5ff:
       name: work
+    d86b2fcd-d890ee26:
+      name: OnePlus3
 # View all events in a logbook
 logbook:
   exclude:
