@@ -10,6 +10,7 @@ ip_bans.yaml
 .shopping_list.json
 secrets.yaml
 known_devices.yaml
+appdaemon.yaml
 .HA_VERSION
 .cloud
 .storage
