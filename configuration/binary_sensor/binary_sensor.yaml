@@ -71,3 +71,6 @@
 #   monitored_conditions:
 #     - Printing
 #     - Printing Error
+- platform: impk
+  monitored_conditions:
+    - news

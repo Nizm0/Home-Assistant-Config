@@ -16,7 +16,7 @@ DEFAULT_DEVICE = 'default'
 DEFAULT_HOST = '127.0.0.1'
 DEFAULT_USER = 'user'
 DEFAULT_PASS = 'pass'
-DEFAULT_NAME = 'TV Ambilight'
+DEFAULT_NAME = 'TV Ambilights'
 BASE_URL = 'https://{0}:1926/6/{1}' # for older philps tv's, try changing this to 'http://{0}:1925/1/{1}'
 DEFAULT_HUE = 360
 DEFAULT_SATURATION = 0
@@ -127,6 +127,12 @@ class Ambilight(Light):
             "colorDelta":{"hue":0,"saturation":0,"brightness":0},"speed":255}} )
 
         elif ATTR_BRIGHTNESS in kwargs:
+            # use this section instead if you cannot change the brightness without the bulb changing colour
+            # (brightness commands are limited to integer values 1:10)
+            #convertedBrightness = int(10*(kwargs[ATTR_BRIGHTNESS])/255)
+            #self._postReq('menuitems/settings/update', "values": [{"value": {"Nodeid": 2131230769, "Controllable": "true", "Available": "true", "string_id": "Brightness", "data": {"value": convertedBrightness}}}]} )
+            # and comment out all of the following
+            
             convertedBrightness = kwargs[ATTR_BRIGHTNESS]
             self._postReq('ambilight/currentconfiguration',{"styleName":"FOLLOW_COLOR","isExpert":True,"algorithm":"MANUAL_HUE",
             "colorSettings":{"color":{"hue":int(self._hs[0]*(255/360)),"saturation":int(self._hs[1]*(255/100)),

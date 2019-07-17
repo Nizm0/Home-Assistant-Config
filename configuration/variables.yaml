@@ -1,6 +1,10 @@
+
 last_motion:
-  value: 'unknown'
+  value: 'Not set'
   restore: true
+  attributes:
+    icon: mdi:map-marker
+    friendly_name: 'Last Motion'
 max_temperature_recorded:
   restore: true
   attributes:

@@ -10,6 +10,7 @@ ip_bans.yaml
 .shopping_list.json
 secrets.yaml
 known_devices.yaml
+appdaemon.yaml
 .HA_VERSION
 .cloud
 .storage
@@ -23,13 +24,15 @@ known_devices.yaml
 *.save
 *.pyc
 *.cookies
+appdaemon/custom_widgets
 www/images/home
 www/floorplan
+www/custom-lovelace
+www/community
+custom_components
 
-compiled
 __*
 esphome
-appdaemon/custom_widgets
 deps
 notebooks
 node-red

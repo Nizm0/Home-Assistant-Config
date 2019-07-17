@@ -1,0 +1,22 @@
+# - platform: sql
+#   db_url: mysql://user:password@localhost/hass
+#   queries:
+#     - name: DB size
+#       query: 'SELECT table_schema "database", Round(Sum(data_length + index_length) / 1024, 1) "value" FROM information_schema.tables WHERE table_schema="hass" GROUP BY table_schema;'
+#       column: 'value'
+#       unit_of_measurement: kB
+# - platform: command_line
+#   name: HA DB Size
+#   command: “ls -sh /config/home-assistant_v2.db | cut -f1 -d ’ '”
+# - platform: filesize
+#   file_paths:
+#     - /config/home-assistant_v2.db
+# - platform: attributes
+#   friendly_name: "Last changed"
+#   attribute: last_triggered
+#   icon: 'mdi:clock'
+#   time_format: '%e %B - %H:%M:%S'
+#   entities:
+#     - binary_sensor.corridor_motion_sensor
+#     - binary_sensor.kitchen_motion_sensor
+#     - binary_sensor.living_room_motion_sensor

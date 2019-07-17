@@ -1,0 +1,7 @@
+- platform: rozkladzik
+  city: 'wroclaw'
+  stops:
+    - id: 4507
+      name: 'Home'
+    - id: 1515
+      name: 'Work'

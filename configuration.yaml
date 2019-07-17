@@ -55,16 +55,11 @@ panel_iframe:
   #   title: Grafana
   #   icon: mdi:chart-timeline
   #   url: https://has.nizmo.eu:3000
-
-custom_updater:
-  show_installable: true
-  component_urls:
-    - https://raw.githubusercontent.com/nstrelow/ha_philips_2016/master/custom_components.json
-  # track:
-  #   - cards
-  #   - components
-  card_urls:
-    - https://raw.githubusercontent.com/kalkih/mini-media-player/master/tracker.json
+hacs:
+  token: !secret hacs_key
+  appdaemon: true
+  python_script: true
+  theme: true
 
 # history_graph: !include configuration/history_graph.yaml
 
@@ -79,10 +74,14 @@ logger:
     ifttt.trigger: debug
 browser_mod:
   devices:
-    6ba3b971-a97393f3:
-      name: home-pc
-    d2fc860c-16379d23:
-      name: work
+    a04bd448-beda43c5:
+      name: Chrome_PC
+    9af82299-0901b5ff:
+      name: Chrome_Work
+    d86b2fcd-d890ee26:
+      name: Chrome_OnePlus3
+    601a98ca-4ca18723:
+     name: Surface_1_Pro
 # View all events in a logbook
 logbook:
   exclude:
@@ -109,7 +108,7 @@ recorder:
       # - media_player
       - weather
       - zone
-  purge_interval: 7
+  purge_interval: 2
   purge_keep_days: 5
 
 # ########################################
@@ -171,20 +170,12 @@ vacuum:
   name: Rockrobo
   token: !secret xiaomi_rockrobo_key
 
-binary_sensor: !include configuration/binary_sensor.yaml
+binary_sensor: !include_dir_merge_list configuration/binary_sensor
 # fan:
 #   - platform: xiaomi_miio
 #     host: 192.168.1.9
 #     token: !secret xiaomi_airpurifierr_key
 
-# camera:
-# - platform: ffmpeg
-#   input: FFMPEG_SUPPORTED_INPUT
-# - platform: xiaomi
-#   name: Camera
-#   host: '192.168.1.135'
-#   model: 'yi'
-#   password: '5547'
 calendar:
   - platform: todoist
     token: !secret todois_api_key
@@ -224,6 +215,12 @@ proximity:
     unit_of_measurement: km
 
 camera:
+  - platform: mqtt
+    name: "My Computer - Screen 0"
+    topic: "iotlink/workgroup/nizmo-pc/windows-monitor/stats/display/0/screen"
+  - platform: mqtt
+    name: "My Computer - Screen 1"
+    topic: "iotlink/workgroup/nizmo-pc/windows-monitor/stats/display/1/screen"
   - platform: generic
     name: camera-pjp
     still_image_url: http://m.its.wroc.pl/image/image_gallery?img_id=362059&x=0.22850074050046076
@@ -240,6 +237,13 @@ camera:
     name: Ender 3
     still_image_url: http://192.168.1.103/webcam/?action=snapshot
     mjpeg_url: http://192.168.1.103/webcam/?action=stream
+# - platform: ffmpeg
+#   input: FFMPEG_SUPPORTED_INPUT
+# - platform: xiaomi
+#   name: Camera
+#   host: '192.168.1.135'
+#   model: 'yi'
+#   password: '5547'
 
 octoprint:
   - host: '192.168.1.103'
