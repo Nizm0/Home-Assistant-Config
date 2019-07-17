@@ -3,7 +3,7 @@ outside_plant:
     moisture: sensor.xiaomi_miflora_moisture_1
     brightness: sensor.xiaomi_miflora_illuminance_1
     conductivity: sensor.xiaomi_miflora_soil_conductivity_1
-    battery: sensor.xiaomi_miflora_battery_level_1
+    # battery: sensor.xiaomi_miflora_battery_level_1
     temperature: sensor.xiaomi_miflora_temperature_1
   min_moisture: 20
   max_moisture: 60
@@ -15,7 +15,7 @@ living_room_plant:
     moisture: sensor.xiaomi_miflora_moisture_2
     brightness: sensor.xiaomi_miflora_illuminance_2
     conductivity: sensor.xiaomi_miflora_soil_conductivity_2
-    battery: sensor.xiaomi_miflora_battery_level_2
+    # battery: sensor.xiaomi_miflora_battery_level_2
     temperature: sensor.xiaomi_miflora_temperature_2
   min_moisture: 20
   max_moisture: 60
@@ -27,7 +27,7 @@ kitchen_plant:
     moisture: sensor.xiaomi_miflora_moisture_3
     brightness: sensor.xiaomi_miflora_illuminance_3
     conductivity: sensor.xiaomi_miflora_soil_conductivity_3
-    battery: sensor.xiaomi_miflora_battery_level_3
+    # battery: sensor.xiaomi_miflora_battery_level_3
     temperature: sensor.xiaomi_miflora_temperature_3
   min_moisture: 20
   max_moisture: 60
@@ -39,8 +39,20 @@ kids_plant:
     moisture: sensor.xiaomi_miflora_moisture_4
     brightness: sensor.xiaomi_miflora_illuminance_4
     conductivity: sensor.xiaomi_miflora_soil_conductivity_4
-    battery: sensor.xiaomi_miflora_battery_level_4
+    # battery: sensor.xiaomi_miflora_battery_level_4
     temperature: sensor.xiaomi_miflora_temperature_4
+  min_moisture: 20
+  max_moisture: 60
+  min_battery: 17
+  min_conductivity: 500
+  min_temperature: 15
+fifth_plant:
+  sensors:
+    moisture: sensor.xiaomi_miflora_moisture_5
+    brightness: sensor.xiaomi_miflora_illuminance_5
+    conductivity: sensor.xiaomi_miflora_soil_conductivity_5
+    # battery: sensor.xiaomi_miflora_battery_level_5
+    temperature: sensor.xiaomi_miflora_temperature_5
   min_moisture: 20
   max_moisture: 60
   min_battery: 17

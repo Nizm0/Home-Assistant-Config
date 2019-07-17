@@ -74,12 +74,14 @@ logger:
     ifttt.trigger: debug
 browser_mod:
   devices:
-    a04bd448_beda43c5:
+    a04bd448-beda43c5:
       name: Chrome_PC
     9af82299-0901b5ff:
       name: Chrome_Work
     d86b2fcd-d890ee26:
       name: Chrome_OnePlus3
+    601a98ca-4ca18723:
+     name: Surface_1_Pro
 # View all events in a logbook
 logbook:
   exclude:

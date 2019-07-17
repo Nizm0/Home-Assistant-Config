@@ -1,26 +1,26 @@
-- alias: Vacuum start cleaning
-  id: vacuum_start_cleaning
-  initial_state: 'true'
-  trigger:
-  - platform: state
-  #   value_template: "{% if is_state('vacuum.rockrobo.status', 'cleaning') %}true{% endif %}"
-    entity_id: vacuum.rockrobo
-    from: 'docked'
-    to: 'cleaning' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has started and now is {{ trigger.to_state.state }} is it intended?
-      title: Vacuum start working
-      data:
-        actions:
-          - action: stop_vacuum
-            icon: "/static/icons/favicon-192x192.png"
-            title: Stop vacuum
-          - action: cancel
-            title: Cancel
-        tag: vacuum-notification
+# - alias: Vacuum start cleaning
+#   id: vacuum_start_cleaning
+#   initial_state: 'true'
+#   trigger:
+#   - platform: state
+#   #   value_template: "{% if is_state('vacuum.rockrobo.status', 'cleaning') %}true{% endif %}"
+#     entity_id: vacuum.rockrobo
+#     from: 'docked'
+#     to: 'cleaning' # cleaning, returning, idle, blocked, error, docked
+#   action:
+#   - service: notify.push_to_chrome
+#     data_template:
+#       message: >
+#         Vacuum has started and now is {{ trigger.to_state.state }} is it intended?
+#       title: Vacuum start working
+#       data:
+#         actions:
+#           - action: stop_vacuum
+#             icon: "/static/icons/favicon-192x192.png"
+#             title: Stop vacuum
+#           - action: cancel
+#             title: Cancel
+#         tag: vacuum-notification
   # - service: notify.pushbullet_nizmo
   #   data_template:
   #     message: >
