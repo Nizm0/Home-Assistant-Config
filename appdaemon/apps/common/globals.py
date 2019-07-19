@@ -40,6 +40,23 @@ PEOPLE = {
     }
 }
 
+Actions = {
+    'start_vacuum': {
+        "action": "start_vacuum",
+        "icon": "/static/icons/favicon-192x192.png",
+        "title": "Start Vacuum"
+    },
+    'stop_vacuum': {
+        "action": "stop_vacuum",
+        "icon": "/static/icons/favicon-192x192.png",
+        "title": "Stop Vacuum"
+    },
+    'cancel': {
+        "action": "cancel",
+        "title": "Cancel"
+    }
+}
+
 
 # class GlobalEvents(Enum):
 #     # Events

@@ -2,7 +2,7 @@ import appdaemon.plugins.hass.hassapi as hass
 import datetime
 from base import Base
 import globals
-from globals import HouseModes, PEOPLE
+from globals import Actions
 # from datetime import time, timedelta, tzinfo
 # from datetime import time
 
@@ -13,6 +13,7 @@ class VacuumActions(Base):
     # input_time = datetime.time.fromisoformat(self.get_state("input_datetime.vacuum_day_time"))
     # input_time = datetime.time(15, 00)
     # Schedule a daily callback that will call run_daily()
+    self.tag = "home-vacuum-automation"
     self.counter = 0
     self.notify = ["notify/push_to_chrome_nizm0_oneplus3"]
     self.set_vacuum_timer(self, "input_datetime.vacuum_day_time", '', self.get_state("input_datetime.vacuum_day_time"), '')
@@ -37,12 +38,12 @@ class VacuumActions(Base):
         self.log("Vacuum new state: {}".format(new))
       elif new == "cleaning":
         self.log("Vacuum new state: {}".format(new))
-        message = "Vacuum has started and now is {} is it intended?".format(new)
-        notify_on_start(self, title, self.notify, message)
+        message = "Vacuum is and now {}, is it intended?".format(new)
+        self.notify_on_start(self, title, self.notify, message)
       elif new == "docked":
         self.log("Vacuum new state: {}".format(new))
-      elif new == "error":
-        self.log("Vacuum new state: {}".format(new))
+      # elif new == "error":
+      #   self.log("Vacuum new state: {}".format(new))
       elif new == "idle":
         self.log("Vacuum new state: {}".format(new))
       elif new == "pause":
@@ -60,12 +61,36 @@ class VacuumActions(Base):
     home_preset = self.get_state("input_select.home_preset")
     title = "Roborock"
     message = ""
+    # data =  self.prepare_data_for_notify(self, action, self.tag)
     # notify = ["notify/push_to_chrome_nizm0_oneplus3"]
 
-    if self.get_state("vacuum.rockrobo") in ["docked", "idle", "pause"]:
+    if self.get_state("vacuum.rockrobo") not in ["cleaning", "error", "returning"]:
       if ready != "on":
         message = "Flor is not ready to cleanup? Did you forget about that?"
+        # actions = {"start_vacuum", "cancel"}
+        # # actions.append(Actions["start_vacuum"])
+        # # actions.append(Actions["cancel"])
+        # self.log("Print Actions")
+        # self.log(actions)
+        data = {
+          "vibrate": "200, 100, 200, 100, 200, 100, 200",
+          # "importance": "hight",
+          "renotify": "true",
+          # "timestamp": time,
+          "priority": "high",
+          "actions": [{
+                      "action": "start_vacuum",
+                      "icon": "/static/icons/favicon-192x192.png",
+                      "title": "Start Vacuum"
+                    },
+                    {
+                      "action": "cancel",
+                      "title": "Cancel"
+                    }],
+          "tag": "home-vacuum-automation"
+        }
         for sender in self.notify:
+          # data = self.prepare_data_for_notify(self, actions, self.tag)
           self.call_service(sender, title = title, message = message, data = data)
           self.log("Message {} sended to {}".format(title, sender))
         # self.notify(name="notify.push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data=data)
@@ -89,23 +114,38 @@ class VacuumActions(Base):
     self.run_in(self.start_vacuum, seconds)
 
   def notify_on_start(self, sender, title, message):
-    data =  {
-          "vibrate": "200, 100, 200, 100, 200, 100, 200",
-          # "importance": "hight",
-          "renotify": "true",
-          # "timestamp": time,
-          "priority": "high",
-          "actions": [
-            {
-              "action": "start_vacuum",
-              "icon": "/static/icons/favicon-192x192.png",
-              "title": "Start Vacuum"
-            },
-            {
-              "action": "cancel",
-              "title": "Cancel"
-            }],
-          "tag": "home-vacuum-automation"
-        }
+    data = {
+      "vibrate": "200, 100, 200, 100, 200, 100, 200",
+      # "importance": "hight",
+      "renotify": "true",
+      # "timestamp": time,
+      "priority": "high",
+      "actions": [{
+                  "action": "stop_vacuum",
+                  "icon": "/static/icons/favicon-192x192.png",
+                  "title": "Stop Vacuum"
+                },
+                {
+                  "action": "cancel",
+                  "title": "Cancel"
+                }],
+      "tag": "home-vacuum-automation"
+    }
     for sender in self.notify:
       self.call_service(sender, title = title, message = message, data = data)
+
+  def prepare_data_for_notify(self, actions, tag):
+    data = {
+      "vibrate": "200, 100, 200, 100, 200, 100, 200",
+      # "importance": "hight",
+      "renotify": "true",
+      # "timestamp": time,
+      "priority": "high",
+      "actions": Actions[actions[1]],
+      # "tag": tag
+    }
+    # data.append(actions)
+    data.append(tag)
+    self.log("Print data")
+    self.log(data)
+    return data
