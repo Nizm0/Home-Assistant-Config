@@ -26,3 +26,13 @@
       message: Printer just finished his work
       title: Printing finished
     service: notify.push_to_chrome
+- id: '1564488873082'
+  alias: Quick restart on exit
+  trigger:
+  - entity_id: group.all_devices
+    for: 5min
+    platform: state
+    to: not_home
+  condition: []
+  action:
+  - service: hassio.host_reboot

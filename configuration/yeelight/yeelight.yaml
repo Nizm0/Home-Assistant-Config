@@ -1,19 +1,30 @@
 devices:
   192.168.1.121:
     name: Bedroom Main Light
-    transition: 10
-    use_music_mode: true #(defaults to False)
+    transition: 1000
+    use_music_mode: false #(defaults to False)
     save_on_change: true #(defaults to True)
   192.168.1.120:
     name: Bedroom Main Light 2
-    transition: 10
-    use_music_mode: true #(defaults to False)
+    transition: 1000
+    use_music_mode: false #(defaults to False)
     save_on_change: true #(defaults to True)
-  custom_effects:
-    - name: 'Fire Flicker'
-      flow_params:
-        count: 0
-        transitions:
-          - TemperatureTransition: [1900, 1000, 80]
-          - TemperatureTransition: [1900, 2000, 60]
-          - SleepTransition:       [1000]
+custom_effects:
+  - name: 'Fire Flicker'
+    flow_params:
+      count: 0
+      transitions:
+        - TemperatureTransition: [1900, 1000, 80]
+        - TemperatureTransition: [1900, 2000, 60]
+        - SleepTransition:       [1000]
+  - name: 'Sunrise'
+    flow_params:
+      count: 1
+      action: stay
+      transitions:
+        - RGBTransition: [255, 0, 0, 50, 1]
+        - TemperatureTransition: [1700, 180000, 10]
+        - TemperatureTransition: [2700, 180000, 11]
+        - TemperatureTransition: [3700, 180000, 12]
+        - TemperatureTransition: [4700, 180000, 13]
+        - TemperatureTransition: [6500, 180000, 100]

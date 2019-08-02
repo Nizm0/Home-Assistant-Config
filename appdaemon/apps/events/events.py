@@ -50,6 +50,9 @@ class Events(Base):
     elif event_action == "stop_vacuum":
       self.log("Push notification clicked {}".format(event_action))
       VacuumActions.stop_vacuum(self)
+    elif event_action == "cancel":
+      self.log("Push notification clicked {}".format(event_action))
+      VacuumActions.cancel_timer(self)
     # switcher={
     #   "open_door":light_on
     # }

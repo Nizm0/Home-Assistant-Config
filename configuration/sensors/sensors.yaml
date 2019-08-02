@@ -24,15 +24,15 @@
 - platform: cert_expiry
   host: has.nizmo.eu
   name: LetsEncrypt
-- platform: airvisual
-  api_key: !secret airvisual_api_key
-  monitored_conditions:
-    - us
-    - cn
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-#  radius: 500
-  show_on_map: false
+# - platform: airvisual
+#   api_key: !secret airvisual_api_key
+#   monitored_conditions:
+#     - us
+#     - cn
+#   latitude: !secret home_latitude
+#   longitude: !secret home_longitude
+# #  radius: 500
+#   show_on_map: false
 - platform: mold_indicator
   indoor_temp_sensor: sensor.living_room_temperature
   indoor_humidity_sensor: sensor.living_room_humidity

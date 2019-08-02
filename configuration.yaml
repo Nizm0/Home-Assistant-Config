@@ -116,7 +116,7 @@ recorder:
 # ########################################
 
 light: !include_dir_merge_list configuration/light
-yeelight: !include_dir_merge_list configuration/yeelight
+yeelight: !include_dir_merge_named configuration/yeelight
 plant: !include configuration/plants.yaml
 
 script: !include_dir_merge_named configuration/scripts/
@@ -258,3 +258,18 @@ octoprint:
         - 'Temperatures'
         - 'Time Elapsed'
         - 'Time Remaining'
+
+shelly:
+  discovery: false
+  version: true
+  sensors:
+    - all
+  devices:
+    - id: 608C82
+      name: Ender 3 power
+      sensors:
+         - power
+         - device_temp
+    - id: 4A5B11
+      name: Kitchen top light
+      light_switch: true

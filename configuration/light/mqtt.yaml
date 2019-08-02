@@ -39,15 +39,15 @@
   retain: false
 
 ### Shelsies
-- platform: mqtt
-  name: Kitchen top light
-  state_topic: "shellies/shelly1-4A5B11/relay/0"
-  command_topic: "shellies/shelly1-4A5B11/relay/0/command"
-  payload_on: "on"
-  payload_off: "off"
-  optimistic: false
-  qos: 2
-  retain: false
+# - platform: mqtt
+#   name: Kitchen top light
+#   state_topic: "shellies/shelly1-4A5B11/relay/0"
+#   command_topic: "shellies/shelly1-4A5B11/relay/0/command"
+#   payload_on: "on"
+#   payload_off: "off"
+#   optimistic: false
+#   qos: 2
+#   retain: false
 - platform: mqtt
   name: Hallway top light
   state_topic: "stat/shelly1-hallway/POWER"
