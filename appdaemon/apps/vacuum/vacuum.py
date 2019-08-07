@@ -93,7 +93,7 @@ class VacuumActions(Base):
           self.log("Message {} sended to {}".format(title, sender))
         # self.notify(name="notify.push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data=data)
       elif ocupancy == 'not_home' and home_preset == 'Empty':
-        self.start_vacuum()
+        self.start_vacuum(kwargs)
         self.log("Vacuum started")
       else:
         message = "Flor is ready to cleanup, but I can see someone is in home. I will start vacuum in 5 min."
@@ -118,19 +118,19 @@ class VacuumActions(Base):
         self.vacuum_timer_handle = self.run_in(self.start_vacuum, 300)
 
 
-  def start_vacuum(self):
+  def start_vacuum(self, kwargs):
     self.log("vacuum/start for {}".format("vacuum.rockrobo"))
     self.call_service("vacuum/start", entity_id="vacuum.rockrobo")
-  def stop_vacuum(self):
+  def stop_vacuum(self, kwargs):
     self.log("vacuum/stop for {}".format("vacuum.rockrobo"))
     self.call_service("vacuum/stop", entity_id="vacuum.rockrobo")
-  def pause_vacuum(self):
+  def pause_vacuum(self, kwargs):
     self.log("vacuum/stop for {}".format("vacuum.rockrobo"))
     self.call_service("vacuum/pause", entity_id="vacuum.rockrobo")
   def dock_vacuum(self, kwargs):
     self.log("vacuum/dock for {}".format("vacuum.rockrobo"))
     self.call_service("vacuum/return_to_base", entity_id="vacuum.rockrobo")
-  def cancel_timer(self, kwargs):
+  def cancel_timer(self):
     if self.vacuum_timer_handle is not None:
       self.cancel_timer(self.vacuum_timer_handle)
 

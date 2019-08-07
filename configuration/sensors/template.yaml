@@ -86,8 +86,9 @@
 
     taking_bath:
       friendly_name: Taking bath
+      # entity_id: semsor.taking_bath
       value_template: > 
-        {% if states('sensor.bathroom_humidity') | float > 50 %}
+        {% if states('sensor.bathroom_humidity') | float > states('sensor.average_house_humidity') | float +5 %}
           true
         {%- else -%}
           false

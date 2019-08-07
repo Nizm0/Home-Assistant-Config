@@ -22,6 +22,8 @@
         message: >
           We have {{ trigger.event }}
         title: Sun is changin state
+        data:
+          tag: sun-state-change
     # - service: notify.push_to_chrome
     #   data_template:
     #     message: >

@@ -46,10 +46,10 @@ class Events(Base):
       self.log("Push notification clicked {}".format(event_action))
     elif event_action == "start_vacuum":
       self.log("Push notification clicked {}".format(event_action))
-      VacuumActions.start_vacuum(self)
+      VacuumActions.start_vacuum(self, kwargs)
     elif event_action == "stop_vacuum":
       self.log("Push notification clicked {}".format(event_action))
-      VacuumActions.stop_vacuum(self)
+      VacuumActions.stop_vacuum(self, kwargs)
     elif event_action == "cancel":
       self.log("Push notification clicked {}".format(event_action))
       VacuumActions.cancel_timer(self)

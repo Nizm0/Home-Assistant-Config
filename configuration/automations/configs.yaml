@@ -13,6 +13,8 @@
           Info about update:
             {{ trigger.to_state.state }}
         title: Travis compiled succesfully
+        data:
+          tag: 'travis-builded-info'
 - alias: Notify if new devices
   id: notify_if_new_devices
   initial_state: 'true'
@@ -45,6 +47,8 @@
           {{trigger.event.data.entity_id}}
           {{trigger.event.data.source_type}}
         title: New device tracked
+        data:
+          tag: 'new-device-{{trigger.event.data.host_name}}'
     # - service: notify.home_assistant
     #   data_template:
     #     message: >
@@ -156,6 +160,8 @@
   action:
   - data:
       title: SD Card usage is bigger than 50%
+      data:
+        tag: 'sd-card-warnig-info'
     service: notify.push_to_chrome
 - id: '1549924461285'
   alias: Hangout reconnect at 5
