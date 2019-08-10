@@ -130,6 +130,7 @@ class VacuumActions(Base):
   def dock_vacuum(self, kwargs):
     self.log("vacuum/dock for {}".format("vacuum.rockrobo"))
     self.call_service("vacuum/return_to_base", entity_id="vacuum.rockrobo")
+    self.turn_off("input_boolean.ready_to_vacuum")
   def cancel_timer(self):
     if self.vacuum_timer_handle is not None:
       self.cancel_timer(self.vacuum_timer_handle)
@@ -167,11 +168,13 @@ class VacuumActions(Base):
       "renotify": "true",
       # "timestamp": time,
       "priority": "high",
-      "actions": Actions[actions[1]],
+      "actions": []
       # "tag": tag
     }
     # data.append(actions)
     data.append(tag)
+    data[actions].appsend(Actions[actions[1]])
+    data[actions].appsend(Actions[actions[2]])
     self.log("Print data")
     self.log(data)
     return data

@@ -58,7 +58,7 @@
     event: enter
   condition:
   action: 
-  - service: notify.push_to_chrome
+  - service: notify.push_to_chrome_nizm0_oneplus3
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
@@ -83,7 +83,7 @@
     entity_id: device_tracker.google_maps_104688658658376260645
     zone: zone.work
   action:
-  - service: notify.push_to_chrome
+  - service: notify.push_to_chrome_nizm0_oneplus3
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}

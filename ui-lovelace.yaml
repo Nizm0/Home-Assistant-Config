@@ -1,171 +1,176 @@
+cch:
+  clock_am_pm: false
+  clock_format: '24'
+  exceptions:
+    - conditions:
+        user: Gosia
+      config:
+        clock_format: '24'
+        hide_tabs: '1, 9, 11 to 13'
+        menu: hide
+        notifications: show
+        options: show
+        sidebar_closed: true
+        voice: clock
+  hide_help: true
+  swipe: true
+  swipe_animate: fade
+  voice: clock
 resources:
   - type: js
-    url: /customcards/card-tools.js?track=true
+    url: /community_plugin/card-tools.js?track=true
   - type: js
     url: 'https://unpkg.com/moment@2.22.2/moment.js'
   - type: css
     url: 'https://fonts.googleapis.com/css?family=Roboto+Condensed'
   - type: module
-    url: >-
-      https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/swipe-card/swipe-card.min.js
+    url: /community_plugin/swipe-card/swipe-card.js
   - type: module
     url: >-
       https://cdn.jsdelivr.net/gh/bramkragten/custom-ui@master/weather-card/weather-card.min.js
   - type: module
-    url: /customcards/custom-lovelace/battery-entity.js
+    url: /community_plugin/battery-entity.js
   - type: js
-    url: /customcards/custom-lovelace/auto-entities.js
-  - type: js
-    url: /customcards/custom-lovelace/bignumber-card.js
+    url: /community_plugin/auto-entities.js
   - type: module
-    url: /customcards/custom-lovelace/button-card.js
+    url: /community_plugin/banner-card/banner-card.js
+  - type: js
+    url: /community_plugin/bar-card/bar-card.js
+  - type: js
+    url: /community_plugin/bignumber-card/bignumber-card.js
   - type: module
-    url: /customcards/custom-lovelace/calendar-card.js
-  - type: js
-    url: /customcards/custom-lovelace/card-modder.js
+    url: /community_plugin/button-card/button-card.js
   - type: module
-    url: >-
-      /customcards/custom-lovelace/compact-custom-header/compact-custom-header.js
-  - type: js
-    url: /customcards/custom-lovelace/dual-gauge-card.js
-  - type: js
-    url: /customcards/custom-lovelace/entity-attributes-card.js
-  - type: js
-    url: /customcards/custom-lovelace/fold-entity-row.js
-  - type: js
-    url: /customcards/custom-lovelace/home-setter.js
-  - type: js
-    url: /customcards/custom-lovelace/krisinfo-card.js
-  - type: js
-    url: /customcards/custom-lovelace/layout-card.js
-  - type: js
-    url: /customcards/custom-lovelace/light-card.js
+    url: /community_plugin/lovelace-card-mod/card-mod.js
   - type: module
-    url: /customcards/custom-lovelace/mini-graph-card-bundle.js
+    url: /community_plugin/compact-custom-header/compact-custom-header.js
+  - type: js
+    url: /community_plugin/html_card/html-card.js
+  - type: js
+    url: /community_plugin/lovelace-home-feed-card/home-feed-card.js
   - type: module
-    url: /customcards/custom-lovelace/mini-media-player.js
-  - type: js
-    url: /customcards/custom-lovelace/monster-card.js
-  - type: js
-    url: /customcards/custom-lovelace/plan-coordinates.js
-  - type: js
-    url: /customcards/custom-lovelace/popup-card.js
-  - type: js
-    url: /customcards/custom-lovelace/secondaryinfo-entity-row.js
-  - type: js
-    url: /customcards/custom-lovelace/slider-entity-row.js
-  - type: js
-    url: /customcards/custom-lovelace/slideshow-card.js
-  - type: js
-    url: /customcards/custom-lovelace/state-attribute-element.js
-  - type: js
-    url: /customcards/custom-lovelace/state-element.js
-  - type: js
-    url: /customcards/custom-lovelace/state-switch.js
-  - type: js
-    url: /customcards/custom-lovelace/text-element.js
-  - type: js
-    url: /customcards/custom-lovelace/toggle-lock-entity-row.js
+    url: /community_plugin/mini-graph-card/mini-graph-card.js
   - type: module
-    url: /customcards/custom-lovelace/tracker-card.js?track=true
+    url: /community_plugin/mini-media-player/mini-media-player.js
   - type: js
-    url: /customcards/custom-lovelace/upcoming-media-card.js
+    url: /community_plugin/monster-card/monster-card.js
   - type: js
-    url: /customcards/custom-lovelace/useful-markdown-card.js
+    url: /community_plugin/popup-card.js
   - type: js
-    url: /customcards/custom-lovelace/username-element.js
+    url: /community_plugin/secondaryinfo-entity-row/secondaryinfo-entity-row.js
   - type: js
-    url: /customcards/custom-lovelace/vertical-stack-in-card.js
+    url: /community_plugin/vertical-stack-in-card/vertical-stack-in-card.js
+  - type: js
+    url: /community_plugin/miflora-card/miflora-card.js
+  - type: js
+    url: /community_plugin/plant-card.js
+  - type: js
+    url: /community_plugin/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
   - type: module
-    url: /customcards/custom-lovelace/mini-media-player-bundle.js
-  - type: js
-    url: /customcards/custom-lovelace/plant-card.js
+    url: /community_plugin/xiaomi_vacuum_map_card/xiaomi-vacuum-map-card.js
 title: Home
 views:
   - badges: []
     cards:
       - cards:
-          - entity: person.michal
-            image: /local/images/home/michal.jpg
-            show_name: false
-            tap_action:
-              action: more-info
-            type: picture-entity
-          - entity: person.gosia
-            image: /local/images/home/gosia.jpg
-            show_name: false
-            tap_action:
-              action: more-info
-            type: picture-entity
-        type: horizontal-stack
+          - cards:
+              - entity: person.michal
+                image: /local/images/home/michal.jpg
+                show_name: false
+                tap_action:
+                  action: more-info
+                type: picture-entity
+              - entity: person.gosia
+                image: /local/images/home/gosia.jpg
+                show_name: false
+                tap_action:
+                  action: more-info
+                type: picture-entity
+            type: horizontal-stack
+          - cards:
+              - entity: vacuum.rockrobo
+                hold_action:
+                  action: call-service
+                  service: switch.toggle
+                  service_data:
+                    entity_id: vacuum.rockrobo
+                show_icon: true
+                show_name: true
+                state_image:
+                  cleaning: /local/images/vacuum.jpeg
+                  docked: /local/images/vacuum_docked_gray.jpeg
+                  error: /local/images/vacuum_dark.jpeg
+                  idle: /local/images/vacuum_dark.jpeg
+                  paused: /local/images/vacuum_dark.jpeg
+                  returning: /local/images/vacuum.jpeg
+                tap_action:
+                  action: more-info
+                type: picture-entity
+              - entity: input_boolean.ready_to_vacuum
+                hold_action:
+                  action: call-service
+                  service: vacuum.start_pause
+                  service_data:
+                    entity_id: vacuum.rockrobo
+                state_image:
+                  'off': /local/images/vacuum_dark.jpeg
+                  'on': /local/images/vacuum.jpeg
+                tap_action:
+                  action: toggle
+                type: picture-entity
+            type: horizontal-stack
+          - buttons: true
+            entity: vacuum.rockrobo
+            image: /local/images/vacuum-small.png
+            labels:
+              battery: Battery
+              filter: Filter
+              main_brush: Main Brush
+              mode: Mode
+              sensor: Sensors
+              side_brush: Side Brush
+              status: Status
+            name: Rockrobo
+            type: 'custom:xiaomi-vacuum-card'
+        type: 'custom:vertical-stack-in-card'
       - entity: weather.dark_sky
         type: weather-forecast
-      - aspect_ratio: 60%
-        type: iframe
-        url: 'https://embed.windy.com/embed2.html?rain,51.109,17.036,11'
       - cards:
-          - entities:
+          - animate: true
+            entities:
               - sensor.living_room_temperature
               - sensor.bedroom_temperature
               - sensor.kids_temperature
               - sensor.kitchen_temperature
               - sensor.bathroom_temperature
+            height: 100
+            hour24: true
             hours_to_show: 48
+            location_icon: left
+            location_state: center
+            show:
+              extrema: true
+              fill: false
             title: Temperatures 48h
             type: 'custom:mini-graph-card'
-          - entities:
+          - animate: true
+            entities:
               - sensor.living_room_humidity
               - sensor.bedroom_humidity
               - sensor.kids_humidity
               - sensor.kitchen_humidity
               - sensor.bathroom_humidity
+            height: 100
+            hour24: true
             hours_to_show: 48
+            location_icon: left
+            location_state: center
+            show:
+              extrema: true
+              fill: false
             title: Humidity 48h
             type: 'custom:mini-graph-card'
         type: 'custom:swipe-card'
-    icon: 'mdi:information-outline'
-    title: New main page
-  - badges:
-      - device_tracker.google_maps_104688658658376260645
-      - device_tracker.google_maps_109218123589188227395
-      - device_tracker.portex
-      - device_tracker.bozena_phone
-      - device_tracker.nizmo_surface
-      - device_tracker.mac_bls
-      - device_tracker.gosia_laptop
-      - sensor.nizm0_today_at_work
-      - sensor.nizm0_week_work
-      - sensor.mold_indicator
-      - sensor.letsencrypt
-    cards:
-      - entities:
-          - entity: binary_sensor.corridor_motion_sensor
-            secondary_info: last-changed
-          - entity: binary_sensor.living_room_motion_sensor
-            secondary_info: last-changed
-          - entity: binary_sensor.kitchen_motion_sensor
-            secondary_info: last-changed
-          - entity: binary_sensor.home_door_sensor
-            secondary_info: last-changed
-          - entity: binary_sensor.living_room_balcon_window_sensor
-            secondary_info: last-changed
-          - entity: binary_sensor.kitchen_left_window_sensor
-            secondary_info: last-changed
-        type: entities
-      - card:
-          entities: []
-          title: Low Battery Devices
-          type: glance
-        filter:
-          include:
-            - entity_id: '*battery_level*'
-              state: < 25
-            - attributes:
-                battery: < 25
-            - attributes:
-                battery_level: < 25
-        show_empty: false
-        type: 'custom:monster-card'
       - elements:
           - entity: binary_sensor.home_door_sensor
             style:
@@ -259,6 +264,139 @@ views:
         id: 5be18d329c42452788a3d18a74965da3
         image: /local/images/house-element.jpg
         type: picture-elements
+      - aspect_ratio: 60%
+        type: iframe
+        url: >-
+          https://embed.windy.com/embed2.html?lat=51.109&lon=17.036&zoom=11&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=51.109&detailLon=17.036&metricWind=default&metricTemp=default&radarRange=-1
+      - base_position:
+          x: 301
+          'y': 860
+        entity: vacuum.rockrobo
+        map_image: /community_plugin/xiaomi_vacuum_map_card/home.png
+        reference_point:
+          x: 390
+          'y': 772
+        type: 'custom:xiaomi-vacuum-map-card'
+        zones:
+          - - - 22158
+              - 24989
+              - 26658
+              - 29639
+          - - - 22054
+              - 30111
+              - 25354
+              - 32461
+          - - - 26713
+              - 30072
+              - 31213
+              - 32222
+          - - - 26742
+              - 32255
+              - 31292
+              - 35255
+          - - - 25275
+              - 33279
+              - 27125
+              - 35129
+          - - - 22470
+              - 32189
+              - 26870
+              - 33689
+            - - 25403
+              - 29586
+              - 26803
+              - 32336
+    icon: 'mdi:information-outline'
+    popup_cards:
+      person.gosia:
+        card:
+          entities:
+            - person.gosia
+            - entity: device_tracker.google_maps_109218123589188227395
+              icon: 'mdi:map-marker-circle'
+              name: Gosai presence
+              secondary_info: >-
+                Battery: [[
+                device_tracker.google_maps_109218123589188227395.attributes.battery_level
+                ]]%
+              type: 'custom:secondaryinfo-entity-row'
+            - entity: device_tracker.gosia_galaxy_s9
+              icon: 'mdi:wifi'
+              name: Gosia Wifi
+              secondary_info: last-changed
+            - entity: device_tracker.gosia_g6_bt
+              icon: 'mdi:bluetooth'
+              name: Gosia bt
+              secondary_info: last-changed
+          type: entities
+        title: Michal
+      person.michal:
+        card:
+          entities:
+            - person.michal
+            - entity: device_tracker.google_maps_104688658658376260645
+              icon: 'mdi:map-marker-circle'
+              name: Michał presence
+              secondary_info: >-
+                Battery: [[
+                device_tracker.google_maps_104688658658376260645.attributes.battery_level
+                ]]%
+              type: 'custom:secondaryinfo-entity-row'
+            - entity: device_tracker.nizmo_phone
+              icon: 'mdi:wifi'
+              name: Michał Wifi
+              secondary_info: last-changed
+            - entity: device_tracker.oneplus_3_bt
+              icon: 'mdi:bluetooth'
+              name: Michał bt
+              secondary_info: last-changed
+          type: entities
+        title: Michal
+    title: New main page
+  - badges:
+      - device_tracker.google_maps_104688658658376260645
+      - device_tracker.google_maps_109218123589188227395
+      - device_tracker.portex
+      - device_tracker.bozena_phone
+      - device_tracker.nizmo_surface
+      - device_tracker.mac_bls
+      - device_tracker.gosia_laptop
+      - sensor.nizm0_today_at_work
+      - sensor.nizm0_week_work
+      - sensor.mold_indicator
+      - sensor.letsencrypt
+      - sensor.hacs
+    cards:
+      - entities:
+          - entity: binary_sensor.corridor_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.living_room_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.kitchen_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.bathroom_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.home_door_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.living_room_balcony_window_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.kitchen_left_window_sensor
+            secondary_info: last-changed
+        type: entities
+      - card:
+          entities: []
+          title: Low Battery Devices
+          type: glance
+        filter:
+          include:
+            - entity_id: '*battery_level*'
+              state: < 25
+            - attributes:
+                battery: < 25
+            - attributes:
+                battery_level: < 25
+        show_empty: false
+        type: 'custom:monster-card'
       - card:
           show_state: false
           title: Turned on lights
@@ -311,117 +449,6 @@ views:
           - 'on'
         title: All lights
         type: entity-filter
-      - elements:
-          - icon: 'mdi:bell-ring'
-            style:
-              '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 80%
-              top: 80%
-            tap_action:
-              action: call-service
-              service: vacuum.locate
-              service_data:
-                entity_id: vacuum.rockrobo
-            type: icon
-          - entity: input_boolean.ready_to_vacuum
-            style:
-              left: 10%
-              top: 80%
-            type: state-icon
-          - icon: 'mdi:home'
-            style:
-              '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 65%
-              top: 80%
-            tap_action:
-              action: call-service
-              service: vacuum.return_to_base
-              service_data:
-                entity_id: vacuum.rockrobo
-            type: icon
-          - icon: 'mdi:play'
-            style:
-              '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 50%
-              top: 80%
-            tap_action:
-              action: call-service
-              service: vacuum.start
-              service_data:
-                entity_id: vacuum.rockrobo
-            type: icon
-          - icon: 'mdi:pause'
-            style:
-              '--paper-item-icon-color': 'rgb(115, 122, 130)'
-              left: 35%
-              top: 80%
-            tap_action:
-              action: call-service
-              service: vacuum.pause
-              service_data:
-                entity_id: vacuum.rockrobo
-            type: icon
-          - icon: 'mdi:stop'
-            style:
-              '--paper-item-icon-color': 'rgb(155, 122, 130)'
-              left: 20%
-              top: 80%
-            tap_action:
-              action: call-service
-              service: vacuum.stop
-              service_data:
-                entity_id: vacuum.rockrobo
-            type: icon
-          - entity: vacuum.rockrobo
-            style:
-              background-color: 'rgb(54, 65, 78)'
-              border-color: 'rgb(34, 154, 210)'
-              border-left-style: solid
-              color: 'rgb(255, 255, 255)'
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              left: 5%
-              opacity: 0.8
-              pointer-events: none
-              text-shadow: 1px 1px black
-              top: 10%
-              transform: 'translate(0%,-50%)'
-            type: state-label
-          - entity: sensor.vacuum_battery
-            style:
-              background-color: 'rgb(54, 65, 78)'
-              border-color: 'rgb(34, 154, 210)'
-              border-right-style: solid
-              color: 'rgb(255, 255, 255)'
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              opacity: 0.8
-              pointer-events: none
-              right: 5%
-              text-shadow: 1px 1px black
-              top: 10%
-              transform: 'translate(0%,-50%)'
-            type: state-label
-          - entity: sensor.vacuum_sensors
-            style:
-              background-color: 'rgb(54, 65, 78)'
-              border-color: 'rgb(34, 154, 210)'
-              border-right-style: solid
-              color: 'rgb(255, 255, 255)'
-              font-family: Trebuchet MS
-              font-size: 90%
-              font-weight: bold
-              opacity: 0.8
-              pointer-events: none
-              right: 5%
-              text-shadow: 1px 1px black
-              top: 24%
-              transform: 'translate(0%,-50%)'
-            type: state-label
-        image: /local/images/vacuum_card.jpg
-        type: picture-elements
       - card:
           show_state: false
           title: Turned off lights
@@ -499,6 +526,8 @@ views:
       - entities:
           - entity: light.bedroom_main_light
             secondary_info: last-changed
+          - entity: light.bedroom_main_light_2
+            secondary_info: last-changed
           - entity: sensor.bedroom_temperature
             secondary_info: last-changed
           - entity: sensor.bedroom_humidity
@@ -527,6 +556,10 @@ views:
       - entities:
           - entity: light.bathroom_top_light
             secondary_info: last-changed
+          - entity: binary_sensor.bathroom_motion_sensor
+            secondary_info: last-changed
+          - entity: binary_sensor.taking_bath
+            secondary_info: last-changed
           - entity: binary_sensor.bathroom_water_leak_sensor
             secondary_info: last-changed
           - entity: sensor.bathroom_temperature
@@ -550,19 +583,6 @@ views:
         show_header_toggle: true
         title: Kids room
         type: entities
-      - card:
-          card:
-            show_header_toggle: false
-            title: Tracking
-            type: entities
-          show_empty: false
-        filter:
-          include:
-            - entity_id: sensor.*seventeentrack_package_*
-              options:
-                secondary_info: last-changed
-        show_empty: false
-        type: 'custom:monster-card'
       - entities:
           - entity: sun.sun
             secondary_info: last-changed
@@ -574,13 +594,13 @@ views:
       - entities:
           - entity: light.corridor_gateway_light
             secondary_info: last-changed
-          - entity: light.hallway_top_light
+          - entity: light.corridor_top_light
           - entity: binary_sensor.corridor_motion_sensor
             secondary_info: last-changed
-          - entity: sensor.living_room_gateway_illumination
+          - entity: sensor.corridor_illumination
             secondary_info: last-changed
         show_header_toggle: true
-        title: Hallway
+        title: Corridor
         type: entities
       - entities:
           - sensor.processor_use
@@ -596,25 +616,38 @@ views:
           - entity: media_player.philips_tv
         type: entities
       - cards:
-          - artwork_border: true
+          - artwork: cover
+            artwork_border: true
             entity: media_player.living_room_speaker
             show_source: true
             type: 'custom:mini-media-player'
-          - artwork_border: true
+          - artwork: cover
+            artwork_border: true
             entity: media_player.pc_gpmdp
             show_source: true
             type: 'custom:mini-media-player'
-          - artwork_border: true
+          - artwork: cover
+            artwork_border: true
             entity: media_player.living_room_tv_cast
             show_source: true
             type: 'custom:mini-media-player'
-          - artwork_border: true
+          - artwork: cover
+            artwork_border: true
             entity: media_player.philips_tv
             show_source: true
             type: 'custom:mini-media-player'
-        type: vertical-stack
+        type: 'custom:vertical-stack-in-card'
       - title: Shoping list
         type: shopping-list
+      - card:
+          entities: []
+          title: Dark Sky
+          type: glance
+        filter:
+          include:
+            - entity_id: '*dark_sky*'
+        show_empty: false
+        type: 'custom:monster-card'
     icon: 'mdi:home'
     id: 0
     panel: false
@@ -622,34 +655,38 @@ views:
     title: Home
   - cards:
       - cards:
-          - entity: light.general_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.directional_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.top_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.tv_ambilights
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            type: entity-button
-        type: horizontal-stack
+          - cards:
+              - entity: light.general_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: light.directional_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                type: entity-button
+            type: horizontal-stack
+          - cards:
+              - entity: light.top_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: light.tv_ambilights
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                type: entity-button
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - entities:
-          - binary_sensor.living_room_balcon_window_sensor
-          - binary_sensor.living_room_motion_sensor
+          - entity: binary_sensor.living_room_balcony_window_sensor
+          - entity: binary_sensor.living_room_motion_sensor
         type: entities
       - entity: sensor.living_room_temperature
         max: 100
@@ -677,11 +714,31 @@ views:
           yellow: 50
         theme: default
         type: gauge
-      - detail: 2
-        entity: sensor.living_room_temperature
-        graph: line
-        name: Temperature
-        type: sensor
+      - animate: true
+        color_thresholds:
+          - color: '#0000ff'
+            value: 15
+          - color: '#00ff00'
+            value: 21
+          - color: '#ffb347'
+            value: 26
+          - color: '#ff0000'
+            value: 30
+          - color: '#FF00FF'
+            value: 35
+        entities:
+          - sensor.living_room_temperature
+        height: 75
+        hour24: true
+        hours_to_show: 48
+        line_color: var(--primary-color)
+        location_icon: left
+        location_state: center
+        show:
+          extrema: true
+          fill: fade
+        title: Temperature
+        type: 'custom:mini-graph-card'
       - detail: 2
         entity: sensor.living_room_humidity
         graph: line
@@ -692,16 +749,47 @@ views:
         graph: line
         name: Presure
         type: sensor
+      - entity: plant.living_room_plant
+        name: Living room plant
+        type: plant-status
+      - animate: true
+        color_thresholds:
+          - color: '#0000ff'
+            value: 17
+          - color: '#00ff00'
+            value: 22
+          - color: '#ffb347'
+            value: 26
+          - color: '#ff0000'
+            value: 30
+          - color: '#FF00FF'
+            value: 35
+        entities:
+          - sensor.xiaomi_miflora_temperature_4
+          - sensor.xiaomi_miflora_temperature_3
+        height: 75
+        hour24: true
+        hours_to_show: 48
+        line_color: var(--primary-color)
+        location_icon: left
+        location_state: center
+        show:
+          extrema: true
+          fill: fade
+        title: Temperature
+        type: 'custom:mini-graph-card'
     icon: 'mdi:office'
     id: 1
     title: Living room
   - cards:
-      - entity: light.bedroom_main_light
-        type: light
-      - detail: 2
-        entity: sensor.bedroom_temperature
-        graph: line
-        type: sensor
+      - cards:
+          - cards:
+              - entity: light.bedroom_main_light
+                type: light
+              - entity: light.bedroom_main_light_2
+                type: light
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - entity: sensor.bedroom_temperature
         max: 40
         min: 0
@@ -713,7 +801,7 @@ views:
         theme: default
         type: gauge
       - detail: 2
-        entity: sensor.bedroom_humidity
+        entity: sensor.bedroom_temperature
         graph: line
         type: sensor
       - entity: sensor.bedroom_humidity
@@ -726,6 +814,10 @@ views:
           yellow: 50
         theme: default
         type: gauge
+      - detail: 2
+        entity: sensor.bedroom_humidity
+        graph: line
+        type: sensor
       - detail: 2
         entity: sensor.bedroom_pressure
         graph: line
@@ -745,10 +837,6 @@ views:
         tap_action:
           action: toggle
         type: entity-button
-      - detail: 2
-        entity: sensor.kids_temperature
-        graph: line
-        type: sensor
       - entity: sensor.kids_temperature
         max: 40
         min: 0
@@ -761,7 +849,7 @@ views:
         type: gauge
         unit: C
       - detail: 2
-        entity: sensor.kids_humidity
+        entity: sensor.kids_temperature
         graph: line
         type: sensor
       - entity: sensor.kids_humidity
@@ -776,6 +864,10 @@ views:
         type: gauge
         unit: '%'
       - detail: 2
+        entity: sensor.kids_humidity
+        graph: line
+        type: sensor
+      - detail: 2
         entity: sensor.kids_pressure
         graph: line
         type: sensor
@@ -783,12 +875,37 @@ views:
     id: 5
     title: Kids room
   - cards:
-      - entity: light.kitchen_top_light
-        hold_action:
-          action: more-info
-        tap_action:
-          action: toggle
-        type: entity-button
+      - cards:
+          - cards:
+              - entity: light.kitchen_top_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: binary_sensor.kitchen_motion_sensor
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+            type: horizontal-stack
+          - cards:
+              - entity: sensor.kitchen_illumination
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+              - entity: binary_sensor.kitchen_left_window_sensor
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+            type: horizontal-stack
+        layout: horizontal
+        type: 'custom:vertical-stack-in-card'
       - detail: 2
         entity: sensor.kitchen_temperature
         graph: line
@@ -837,23 +954,42 @@ views:
     title: Kithen
   - cards:
       - cards:
-          - entity: light.bathroom_top_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: binary_sensor.bathroom_water_leak_sensor
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
-            type: entity-button
-        type: horizontal-stack
-      - detail: 2
-        entity: sensor.bathroom_humidity
-        graph: line
-        type: sensor
+          - cards:
+              - entity: light.bathroom_top_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: binary_sensor.bathroom_motion_sensor
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+            type: horizontal-stack
+          - cards:
+              - entity: binary_sensor.bathroom_water_leak_sensor
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+              - entity: sensor.taking_bath
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+              - entity: binary_sensor.taking_bath
+                hold_action:
+                  action: none
+                tap_action:
+                  action: more-info
+                type: entity-button
+            type: horizontal-stack
+        layout: horizontal
+        type: 'custom:vertical-stack-in-card'
       - entity: sensor.bathroom_temperature
         max: 40
         min: 0
@@ -866,7 +1002,7 @@ views:
         type: gauge
         unit: C
       - detail: 2
-        entity: sensor.bathroom_pressure
+        entity: sensor.bathroom_temperature
         graph: line
         type: sensor
       - entity: sensor.bathroom_humidity
@@ -881,7 +1017,11 @@ views:
         type: gauge
         unit: '%'
       - detail: 2
-        entity: sensor.bathroom_temperature
+        entity: sensor.bathroom_humidity
+        graph: line
+        type: sensor
+      - detail: 2
+        entity: sensor.bathroom_pressure
         graph: line
         type: sensor
     icon: 'mdi:shower'
@@ -889,23 +1029,27 @@ views:
     title: Bathroom
   - cards:
       - cards:
-          - entity: light.hallway_top_light
-            hold_action: more-info
-            tap_action: toggle
-            type: entity-button
-          - entity: light.corridor_gateway_light
-            type: light
-        type: horizontal-stack
+          - cards:
+              - entity: light.corridor_top_light
+                hold_action: more-info
+                tap_action: toggle
+                type: entity-button
+              - entity: light.corridor_gateway_light
+                type: light
+            type: horizontal-stack
+        type: 'custom:vertical-stack-in-card'
       - entities:
-          - binary_sensor.corridor_motion_sensor
-          - binary_sensor.home_door_sensor
-          - sensor.living_room_gateway_illumination
+          - entity: binary_sensor.corridor_motion_sensor
+          - entity: binary_sensor.home_door_sensor
+          - entity: sensor.corridor_illumination
         type: entities
     icon: 'mdi:stairs'
     id: 6
     title: Hallway
   - cards:
       - entities:
+          - entity: group.all_devices
+            secondary_info: last-changed
           - entity: person.michal
             secondary_info: last-changed
           - entity: person.gosia
@@ -920,7 +1064,7 @@ views:
             secondary_info: last-changed
           - entity: device_tracker.google_maps_109218123589188227395
             secondary_info: last-changed
-          - entity: device_tracker.gosia_phone
+          - entity: device_tracker.gosia_galaxy_s9
             secondary_info: last-changed
           - entity: input_select.home_preset
             secondary_info: last-changed
@@ -939,6 +1083,7 @@ views:
           - entity: input_number.temp_min
           - entity: input_datetime.both_date_and_time
           - entity: input_number.slider1
+          - entity: input_datetime.vacuum_day_time
         type: entities
       - entities:
           - entity: device_tracker.bozena_phone
@@ -979,7 +1124,7 @@ views:
               icon: 'mdi:map-marker-circle'
               name: Gosai presence
               secondary_info: last-changed
-            - entity: device_tracker.gosia_phone
+            - entity: device_tracker.gosia_galaxy_s9
               icon: 'mdi:wifi'
               name: Gosia Wifi
               secondary_info: last-changed
@@ -1025,6 +1170,169 @@ views:
     icon: 'mdi:camera'
     path: null
     title: Camera
+  - badges: []
+    cards:
+      - entity: plant.kids_plant
+        name: Outside tomato
+        type: plant-status
+      - entity: plant.living_room_plant
+        name: Living room plant
+        type: plant-status
+      - entity: plant.kitchen_plant
+        name: Outside cucumber
+        type: plant-status
+      - entity: plant.outside_plant
+        name: unnown
+        type: plant-status
+      - entity: plant.fifth_plant
+        name: fifth
+        type: plant-status
+      - entities:
+          - sensor.xiaomi_miflora_moisture_1
+          - sensor.xiaomi_miflora_moisture_2
+          - sensor.xiaomi_miflora_moisture_3
+          - sensor.xiaomi_miflora_moisture_4
+          - sensor.xiaomi_miflora_moisture_5
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Flower Moisture
+        type: history-graph
+      - entities:
+          - sensor.xiaomi_miflora_temperature_1
+          - sensor.xiaomi_miflora_temperature_2
+          - sensor.xiaomi_miflora_temperature_3
+          - sensor.xiaomi_miflora_temperature_4
+          - sensor.xiaomi_miflora_temperature_5
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Flower Temperature
+        type: history-graph
+      - entities:
+          - sensor.xiaomi_miflora_soil_conductivity_1
+          - sensor.xiaomi_miflora_soil_conductivity_2
+          - sensor.xiaomi_miflora_soil_conductivity_3
+          - sensor.xiaomi_miflora_soil_conductivity_4
+          - sensor.xiaomi_miflora_soil_conductivity_5
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Flower conductivity
+        type: history-graph
+    icon: 'mdi:flower'
+    theme: Backend-selected
+    title: Flowers
+  - badges:
+      - binary_sensor.in_bed
+      - sensor.in_bed_bayesian_probability
+      - sensor.motion_last30
+      - sensor.template_last_motion
+      - sensor.average_house_temperature
+      - sensor.average_house_humidity
+      - sensor.max_temperature_in_home
+      - sensor.max_recorded_temp
+    cards:
+      - entities:
+          - entity: variable.last_motion
+          - entity: binary_sensor.corridor_motion_sensor
+          - entity: binary_sensor.living_room_motion_sensor
+          - entity: binary_sensor.bathroom_motion_sensor
+          - entity: media_player.philips_tv
+          - entity: group.all_devices
+          - entity: binary_sensor.desctop_pc
+          - entity: sun.sun
+          - entity: sensor.taking_bath
+          - entity: binary_sensor.taking_bath
+          - entity: binary_sensor.router
+          - entity: binary_sensor.server
+          - entity: binary_sensor.remote_ui
+        type: entities
+      - entity: camera.ender_3
+        show_state: false
+        type: picture-entity
+      - entities:
+          - entity: binary_sensor.vibration_5
+        show_header_toggle: false
+        title: Vibration
+        type: entities
+      - entities:
+          - entity: switch.ender_3_power
+          - entity: sensor.ender_3_power_consumtion
+          - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
+          - entity: binary_sensor.ender_3_printing
+          - entity: binary_sensor.ender_3_printing_error
+          - entity: sensor.ender_3_target_bed_temp
+          - entity: sensor.ender_3_actual_bed_temp
+          - entity: sensor.ender_3_target_tool0_temp
+          - entity: sensor.ender_3_actual_tool0_temp
+          - entity: sensor.ender_3_current_state
+          - entity: sensor.ender_3_job_percentage
+          - entity: sensor.ender_3_time_elapsed
+          - entity: sensor.ender_3_time_remaining
+          - entity: sensor.predicted_print_end_time
+        show_header_toggle: false
+        title: Octoprint
+        type: entities
+      - entities:
+          - entity: sensor.vacuum_battery
+            type: 'custom:battery-entity'
+        type: entities
+      - entity: switch.wake_up_pc
+        hold_action:
+          action: more-info
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - card:
+          entities: []
+          title: AdGuard
+          type: entities
+        filter:
+          include:
+            - entity_id: '*adguard*'
+        show_empty: false
+        type: 'custom:monster-card'
+      - type: 'custom:browser-player'
+      - card:
+          entities: []
+          show_header_toggle: false
+          title: PC monitoring
+          type: entities
+        filter:
+          include:
+            - entity_id: '*my_computer*'
+        show_empty: false
+        type: 'custom:monster-card'
+      - content: |
+          <big><center>News</center></big>
+          [[ binary_sensor.impk_news.attributes.html ]]
+          <big><center>Departures Work</center></big>
+          [[ sensor.rozkladzik_wroclaw_1515.attributes.html ]]
+          <big><center>Departures Home</center></big>
+          [[ sensor.rozkladzik_wroclaw_4507.attributes.html ]]
+        title: Rozkładzik
+        type: 'custom:html-card'
+      - entities:
+          - entity: sensor.tauron_amiplus_consumption_daily
+          - entity: sensor.tauron_amiplus_consumption_monthly
+          - entity: sensor.tauron_amiplus_consumption_yearly
+          - entity: sensor.tauron_amiplus_zone
+        show_header_toggle: false
+        title: Tauron
+        type: entities
+      - entities:
+          - entity: switch.server_shelf_switch
+          - entity: sensor.server_shelf_current
+          - entity: sensor.server_shelf_power
+          - entity: sensor.server_shelf_voltage
+          - entity: sensor.server_shelf_uptime
+          - entity: sensor.server_shelf_wifi_signal
+        show_header_toggle: false
+        title: Server shelf
+        type: entities
+    icon: 'mdi:test-tube'
+    theme: darkred
+    title: Testing area
   - cards:
       - entities:
           - sensor.processor_use
@@ -1083,6 +1391,7 @@ views:
           - binary_sensor.corridor_motion_sensor
           - binary_sensor.living_room_motion_sensor
           - binary_sensor.kitchen_motion_sensor
+          - binary_sensor.bathroom_motion_sensor
         hours_to_show: 24
         refresh_interval: 0
         title: Motions in home
@@ -1093,147 +1402,36 @@ views:
         refresh_interval: 0
         title: Windows in home
         type: history-graph
-      - type: 'custom:tracker-card'
+      - card:
+          entities: []
+          title: Tured off Automations
+          type: entities
+        filter:
+          include:
+            - entity_id: '*automation*'
+              state: 'off'
+        show_empty: false
+        show_header_toggle: true
+        type: 'custom:monster-card'
     icon: 'mdi:settings'
     id: 8
     title: Stats
   - badges: []
     cards:
-      - entity: plant.kids_plant
-        name: Kids plant
-        type: plant-status
-      - entity: plant.living_room_plant
-        name: Living room plant
-        type: plant-status
-      - entity: plant.kitchen_plant
-        name: Kitchen plant
-        type: plant-status
-      - entity: plant.outside_plant
-        name: Outside plant
-        type: plant-status
-      - entities:
-          - sensor.xiaomi_miflora_temperature_1
-          - sensor.xiaomi_miflora_temperature_2
-          - sensor.xiaomi_miflora_temperature_3
-          - sensor.xiaomi_miflora_temperature_4
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Flower Temperature
-        type: history-graph
-      - entities:
-          - sensor.xiaomi_miflora_soil_conductivity_1
-          - sensor.xiaomi_miflora_soil_conductivity_2
-          - sensor.xiaomi_miflora_soil_conductivity_3
-          - sensor.xiaomi_miflora_soil_conductivity_4
-        hours_to_show: 120
-        refresh_interval: 60
-        title: Flower conductivity
-        type: history-graph
-      - entities:
-          - 'moisture:sensor.xiaomi_miflora_moisture_1'
-          - 'intensity:sensor.xiaomi_miflora_illuminance_1'
-          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_1'
-          - 'battery:sensor.xiaomi_miflora_battery_level_1'
-          - 'temperature:sensor.xiaomi_miflora_temperature_1'
-        image: images/calathea-zebrina.jpg
-        title: Flower outside
-        type: 'custom:plant-card'
-      - entities:
-          - 'moisture:sensor.xiaomi_miflora_moisture_3'
-          - 'intensity:sensor.xiaomi_miflora_illuminance_3'
-          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_3'
-          - 'battery:sensor.xiaomi_miflora_battery_level_3'
-          - 'temperature:sensor.xiaomi_miflora_temperature_3'
-        image: images/calathea-zebrina.jpg
-        title: Flower inside kids room
-        type: 'custom:plant-card'
-      - entities:
-          - 'moisture:sensor.xiaomi_miflora_moisture_2'
-          - 'intensity:sensor.xiaomi_miflora_illuminance_2'
-          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_2'
-          - 'battery:sensor.xiaomi_miflora_battery_level_2'
-          - 'temperature:sensor.xiaomi_miflora_temperature_2'
-        image: images/calathea-zebrina.jpg
-        title: Flower inside living room
-        type: 'custom:plant-card'
-      - entities:
-          - 'moisture:sensor.xiaomi_miflora_moisture_4'
-          - 'intensity:sensor.xiaomi_miflora_illuminance_4'
-          - 'conductivity:sensor.xiaomi_miflora_soil_conductivity_4'
-          - 'battery:sensor.xiaomi_miflora_battery_level_4'
-          - 'temperature:sensor.xiaomi_miflora_temperature_4'
-        image: images/calathea-zebrina.jpg
-        title: Flower inside kitchen
-        type: 'custom:plant-card'
-      - elements:
-          - entity: sensor.xiaomi_miflora_moisture_2
-            style:
-              '--ha-label-badge-font-size': 1em
-              left: 2%
-              top: 7%
-              transform: none
-            type: state-badge
-          - entity: sensor.xiaomi_miflora_moisture_3
-            style:
-              '--ha-label-badge-font-size': 1em
-              left: 17%
-              top: 7%
-              transform: none
-            type: state-badge
-          - entity: sensor.xiaomi_miflora_moisture_4
-            style:
-              '--ha-label-badge-font-size': 1em
-              left: 32%
-              top: 7%
-              transform: none
-            type: state-badge
-          - entity: sensor.xiaomi_miflora_moisture_1
-            style:
-              '--ha-label-badge-font-size': 1em
-              left: 47%
-              top: 7%
-              transform: none
-            type: state-badge
-          - entity: sensor.xiaomi_miflora_temperature_3
-            style:
-              '--ha-label-badge-font-size': 1em
-              left: 92%
-              top: 12%
-            type: state-label
-        image: /local/images/calathea-zebrina.jpg
-        type: picture-elements
-    icon: 'mdi:flower'
-    theme: Backend-selected
-    title: Flowers
-  - badges:
-      - binary_sensor.in_bed
-      - sensor.in_bed_bayesian_probability
-      - sensor.motion_last30
-      - sensor.template_last_motion
-    cards:
-      - entities:
-          - entity: binary_sensor.corridor_motion_sensor
-          - entity: binary_sensor.living_room_motion_sensor
-          - entity: media_player.philips_tv
-          - entity: group.all_devices
-          - entity: binary_sensor.desctop_pc
-          - entity: sun.sun
-          - entity: input_boolean.taking_bath
-        type: entities
-      - entities:
-          - entity: binary_sensor.vibration_158d0002afd746
-          - entity: sensor.bed_activity_158d0002afd746
-          - entity: sensor.coordination_158d0002afd746
-          - entity: sensor.tilt_angle_158d0002afd746
-        show_header_toggle: false
-        title: Vibration
-        type: entities
-      - entities:
-          - entity: sensor.vacuum_battery
-            type: 'custom:battery-entity'
-          - entity: sensor.xiaomi_miflora_battery_level_1
-            type: 'custom:battery-entity'
-        type: entities
-    icon: 'mdi:test-tube'
-    theme: darkred
-    title: Testing area
+      - config:
+          image: /local/floorplan/examples/simple/simple.svg?v=1.1.14
+          rules:
+            - entities:
+                - binary_sensor.main_bedroom
+                - binary_sensor.living_area
+                - binary_sensor.double_garage
+              states:
+                - class: binary-sensor-off
+                  state: 'off'
+                - class: binary-sensor-on
+                  state: 'on'
+          stylesheet: /local/floorplan/examples/simple/simple.css?v=1.1.14
+        title: Simple Floorplan
+        type: 'custom:floorplan-card'
+    icon: 'mdi:floor-plan'
+    title: Floreplan

@@ -1,0 +1,5 @@
+deconz_helper:
+  module: deconz_helper
+  class: DeconzHelper
+  switch_1_id: smart_switch_1
+  switch_2_id: smart_switch_2

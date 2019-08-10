@@ -12,7 +12,7 @@
 
 - platform: google_maps
   username: !secret google_maps_login
-  password: !secret google_maps_password
+#   password: !secret google_maps_password
   max_gps_accuracy: 100
 
 

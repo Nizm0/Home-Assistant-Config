@@ -20,7 +20,7 @@
 #             title: Stop vacuum
 #           - action: cancel
 #             title: Cancel
-#         tag: vacuum-notification
+#         tag: home-vacuum-automation
   # - service: notify.pushbullet_nizmo
   #   data_template:
   #     message: >
@@ -42,7 +42,7 @@
         Vacuum has stoped and now is {{ trigger.to_state.state }}
       title: Vacuum stopt working
       data:
-        tag: vacuum-notification
+        tag: home-vacuum-automation
   # - service: notify.pushbullet_nizmo
   #   data_template:
   #     message: >
@@ -64,7 +64,7 @@
         Vacuum has encounter {{ trigger.to_state.state }} and stoped
       title: The vacuum cleaner found a problem
       data:
-        tag: vacuum-notification
+        tag: home-vacuum-automation
   # - service: notify.pushbullet_nizmo
   #   data_template:
   #     message: >

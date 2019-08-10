@@ -29,7 +29,7 @@ class Events(Base):
 
   def chose_action_event_closed(self, event_name, data, kwargs):
     event_tag = data["tag"]
-    self.log("Push notification closed: {}".format(event_tag))
+    self.log("Push notification closed: {}, {}".format(event_tag, data["sender"]))
 
   def chose_action_event_received(self, event_name, data, kwargs):
     event_tag = data["tag"]
