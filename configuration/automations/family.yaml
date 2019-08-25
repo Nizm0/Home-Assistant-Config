@@ -40,13 +40,32 @@
       message: >
         New value is: {{ trigger.to_state.state }}
       title: Michał entered the home
-      data:
-        tag: nizmo-location-info
   - service: notify.hangouts
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
       title: Michał entered the home
+      data:
+        tag: nizmo-location-info
+
+- id: portex_entered_the_home
+  alias: Krzychu entered the home
+  initial_state: 'true'
+  trigger: 
+  - platform: zone
+    entity_id: device_tracker.portex
+    zone: zone.home
+    event: enter
+  condition:
+  action: 
+  - service: notify.push_to_chrome_nizm0_oneplus3
+    data_template:
+      message: >
+        New value is: {{ trigger.to_state.state }}
+      title: Michał entered the home
+      data:
+        title: Michał entered the home
+        tag: portex_notification
 
 - id: gosia_entered_the_home
   alias: Gosia entered the home
@@ -63,13 +82,13 @@
       message: >
         New value is: {{ trigger.to_state.state }}
       title: Gosia entered the home
-      data:
-        tag: gosia-location-info
   - service: notify.hangouts
     data_template:
       message: >
         New value is: {{ trigger.to_state.state }}
       title: Gosia entered the home
+      data:
+        tag: gosia-location-info
 
 - id: 589437twnoe86ogw6pw
   alias: Time to go home

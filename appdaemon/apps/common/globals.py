@@ -31,12 +31,12 @@ PEOPLE = {
     'Michal': {
         'device_tracker': 'person.michal',
         'proximity': 'proximity.home_michal',
-        'notifier': 'push_to_chrome_nizm0_oneplus3'
+        'notifier': 'notify/push_to_chrome_nizm0_oneplus3'
     },
     'Gosia': {
         'device_tracker': 'person.gosia',
         'proximity': 'proximity.home_gosia',
-        'notifier': 'push_to_chrome_gosia_s8'
+        'notifier': 'notify/push_to_chrome_gosia_s8'
     }
 }
 

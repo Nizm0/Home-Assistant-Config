@@ -29,29 +29,29 @@ class Events(Base):
 
   def chose_action_event_closed(self, event_name, data, kwargs):
     event_tag = data["tag"]
-    self.log("Push notification closed: {}, {}".format(event_tag, data["sender"]))
+    self.log("Push notification closed: {}, {}".format(event_tag, data))
 
   def chose_action_event_received(self, event_name, data, kwargs):
     event_tag = data["tag"]
-    self.log("Push notification received: {}".format(event_tag))
+    self.log("Push notification received: {}, {}".format(event_tag, data))
 
   def chose_action_event_clicked(self, event_name, data, kwargs):
     event_action = data["action"]
     # self.log("Push notification clicked (action) {event_action}")
     if event_action == "open_door":
-      self.log("Push notification clicked {}".format(event_action))
+      self.log("Push notification clicked {}, {}".format(event_action, data))
       self.light_on(self)
       self.run_in(self.light_off, 10)
     elif event_action == "open":
-      self.log("Push notification clicked {}".format(event_action))
+      self.log("Push notification clicked {}, {}".format(event_action, data))
     elif event_action == "start_vacuum":
-      self.log("Push notification clicked {}".format(event_action))
+      self.log("Push notification clicked {}, {}".format(event_action, data))
       VacuumActions.start_vacuum(self, kwargs)
     elif event_action == "stop_vacuum":
-      self.log("Push notification clicked {}".format(event_action))
+      self.log("Push notification clicked {}, {}".format(event_action, data))
       VacuumActions.stop_vacuum(self, kwargs)
     elif event_action == "cancel":
-      self.log("Push notification clicked {}".format(event_action))
+      self.log("Push notification clicked {}, {}".format(event_action, data))
       VacuumActions.cancel_timer(self)
     # switcher={
     #   "open_door":light_on

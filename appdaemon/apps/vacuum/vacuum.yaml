@@ -1,4 +1,7 @@
 vacuum_manager:
   module: vacuum
   class: VacuumActions
+  tag: home-vacuum-automation
+  notifiers:
+    - notify/push_to_chrome_nizm0_oneplus3
   # dependencies: globals

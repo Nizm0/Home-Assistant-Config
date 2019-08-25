@@ -2,14 +2,13 @@ import appdaemon.plugins.hass.hassapi as hass
 import datetime
 from datetime import datetime
 
-class DeconzHelper(hass.Hass):
+class DeviceTracker(hass.Hass):
 
   def initialize(self) -> None:
-    self.listen_event(self.event_received, "deconz_event")
-    for sensor in self.args["motions"]:
-      # self._check_entity(entity=sensor, namespace=sensor.split('.')[0])
-      self.listen_state(self.motion_listener, sensor)
-      self.log(f"State listener set for {sensor}")
+    trackers = self.get_trackers()
+    for tracker in trackers:
+      self.log("{} is {}".format(tracker, self.get_tracker_state(tracker)))
+      
 
   def event_received(self, event_name, data, kwargs):
     if data != {}:

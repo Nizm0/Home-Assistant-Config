@@ -9,10 +9,10 @@ class VacuumActions(Base):
 
 
   def initialize(self):
-    self.tag = "home-vacuum-automation"
+    self.tag = self.args["tag"]
     self.counter = 0
     self.vacuum_timer_handle = None
-    self.notify = ["notify/push_to_chrome_nizm0_oneplus3"]
+    self.notifiers = self.args["notifiers"]
     self.set_vacuum_timer(self, "input_datetime.vacuum_day_time", '', self.get_state("input_datetime.vacuum_day_time"), '')
     self.listen_state(self.change_vacuum_timer, "input_datetime.vacuum_day_time")
     self.listen_state(self.vacuum_state_handle, "vacuum.rockrobo")
@@ -33,6 +33,7 @@ class VacuumActions(Base):
       title = "Roborock"
       if new == "error":
         self.log("Vacuum new state: {}".format(new))
+        self.notify_on_error(title=title, message=f"Vacuum encouner an problem")
       elif new == "cleaning":
         self.cancel_timer()
         self.log(f"Vacuum new state: {new}")
@@ -41,6 +42,7 @@ class VacuumActions(Base):
       elif new == "docked":
         self.cancel_timer()
         self.log("Vacuum new state: {}".format(new))
+        self.notify_on_dock(title=title, message=f"Vacuum has finished his work")
       elif new == "idle":
         self.log("Vacuum new state: {}".format(new))
         self.vacuum_timer_handle = self.run_in(self.dock_vacuum, 300)
@@ -87,11 +89,11 @@ class VacuumActions(Base):
                     }],
           "tag": "home-vacuum-automation"
         }
-        for sender in self.notify:
+        for sender in self.notifiers:
           # data = self.prepare_data_for_notify(actions, self.tag)
           self.call_service(sender, title = title, message = message, data = data)
           self.log("Message {} sended to {}".format(title, sender))
-        # self.notify(name="notify.push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data=data)
+        # self.notifiers(name="notify.push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data=data)
       elif ocupancy == 'not_home' and home_preset == 'Empty':
         self.start_vacuum(kwargs)
         self.log("Vacuum started")
@@ -112,7 +114,7 @@ class VacuumActions(Base):
                     }],
           "tag": "home-vacuum-automation"
         }
-        for sender in self.notify:
+        for sender in self.notifiers:
           self.call_service(sender, title = title, message = message, data = data)
           self.log("Message {} sended to {}".format(title, sender))
         self.vacuum_timer_handle = self.run_in(self.start_vacuum, 300)
@@ -140,6 +142,14 @@ class VacuumActions(Base):
     self.run_in(self.pause_vacuum, 1)
     self.run_in(self.start_vacuum, seconds)
 
+  def notify_on_error(self, title, message):
+    data = prepare_data_for_notify(actions=[], tag=self.tag)
+    self.notify_on_change(title=title, message=message, data=data)
+
+  def notify_on_dock(self, title,message):
+    data = self.prepare_data_for_notify(actions=[], tag=self.tag)
+    self.notify_on_change(title=title, message=message, data=data)
+
   def notify_on_start(self, title, message):
     data = {
       "vibrate": "200, 100, 200, 100, 200, 100, 200",
@@ -158,8 +168,16 @@ class VacuumActions(Base):
                 }],
       "tag": "home-vacuum-automation"
     }
-    for sender in self.notify:
+    for sender in self.notifiers:
       self.call_service(sender, title = title, message = message, data = data)
+
+  def notify_on_change(self, title, message, data):
+    try:
+      for sender in self.notifiers:
+        self.call_service(sender, title = title, message = message, data = data)
+    except:
+      self.log(f"Some data are mising sender={sender} title={title} message={message} data={data}")
+      return
 
   def prepare_data_for_notify(self, actions, tag):
     data = {
@@ -168,13 +186,13 @@ class VacuumActions(Base):
       "renotify": "true",
       # "timestamp": time,
       "priority": "high",
-      "actions": []
-      # "tag": tag
+      "actions": actions,
+      "tag": tag
     }
-    # data.append(actions)
-    data.append(tag)
-    data[actions].appsend(Actions[actions[1]])
-    data[actions].appsend(Actions[actions[2]])
+    # # data.append(actions)
+    # data.append(tag)
+    # data[actions].appsend(Actions[actions[1]])
+    # data[actions].appsend(Actions[actions[2]])
     self.log("Print data")
     self.log(data)
     return data

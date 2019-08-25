@@ -35,7 +35,7 @@
   initial_state: 'true'
   trigger:
   - platform: state
-    entity_id: binary_sensor.corridor_motion_sensor, binary_sensor.living_room_motion_sensor, binary_sensor.kitchen_motion_sensor
+    entity_id: binary_sensor.corridor_motion_sensor, binary_sensor.living_room_motion_sensor, binary_sensor.kitchen_motion_sensor, binary_sensor.bathroom_motion_sensor
     to: 'on'
   # - platform: state
   #   entity_id: binary_sensor.living_room_motion_sensor
