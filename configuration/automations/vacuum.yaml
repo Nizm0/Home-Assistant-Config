@@ -27,44 +27,44 @@
   #       Vacuum has started and now is {{ trigger.to_state.state }}
   #     title: Vacuum start working
 
-- alias: Vacuum end cleaning finisheda and docked
-  id: vacuum_end_cleaning_finisheda_and_docked
-  initial_state: 'true'
-  trigger:
-  - platform: state
-    entity_id: vacuum.rockrobo
-    from: 'returning'
-    to: 'docked' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has stoped and now is {{ trigger.to_state.state }}
-      title: Vacuum stopt working
-      data:
-        tag: home-vacuum-automation
+# - alias: Vacuum end cleaning finisheda and docked
+#   id: vacuum_end_cleaning_finisheda_and_docked
+#   initial_state: 'true'
+#   trigger:
+#   - platform: state
+#     entity_id: vacuum.rockrobo
+#     from: 'returning'
+#     to: 'docked' # cleaning, returning, idle, blocked, error, docked
+#   action:
+#   - service: notify.push_to_chrome
+#     data_template:
+#       message: >
+#         Vacuum has stoped and now is {{ trigger.to_state.state }}
+#       title: Vacuum stopt working
+#       data:
+#         tag: home-vacuum-automation
   # - service: notify.pushbullet_nizmo
   #   data_template:
   #     message: >
   #       Vacuum has stoped and now is {{ trigger.to_state.state }}
   #     title: Vacuum finished working
 
-- alias: Vacuum have encounter problem
-  id: vacuum_have_encounter_problem
-  initial_state: 'true'
-  trigger:
-  - platform: state
-    entity_id: vacuum.rockrobo
-    from: 'cleaning'
-    to: 'error' # cleaning, returning, idle, blocked, error, docked
-  action:
-  - service: notify.push_to_chrome
-    data_template:
-      message: >
-        Vacuum has encounter {{ trigger.to_state.state }} and stoped
-      title: The vacuum cleaner found a problem
-      data:
-        tag: home-vacuum-automation
+# - alias: Vacuum have encounter problem
+#   id: vacuum_have_encounter_problem
+#   initial_state: 'true'
+#   trigger:
+#   - platform: state
+#     entity_id: vacuum.rockrobo
+#     from: 'cleaning'
+#     to: 'error' # cleaning, returning, idle, blocked, error, docked
+#   action:
+#   - service: notify.push_to_chrome
+#     data_template:
+#       message: >
+#         Vacuum has encounter {{ trigger.to_state.state }} and stoped
+#       title: The vacuum cleaner found a problem
+#       data:
+#         tag: home-vacuum-automation
   # - service: notify.pushbullet_nizmo
   #   data_template:
   #     message: >

@@ -37,6 +37,7 @@ class Events(Base):
 
   def chose_action_event_clicked(self, event_name, data, kwargs):
     event_action = data["action"]
+    event_tag = data["tag"]
     # self.log("Push notification clicked (action) {event_action}")
     if event_action == "open_door":
       self.log("Push notification clicked {}, {}".format(event_action, data))
@@ -52,9 +53,16 @@ class Events(Base):
       VacuumActions.stop_vacuum(self, kwargs)
     elif event_action == "cancel":
       self.log("Push notification clicked {}, {}".format(event_action, data))
-      VacuumActions.cancel_timer(self)
+      VacuumActions.cancel_vacuum_timer()
+      self.dismiss_by_tag(event_tag)
+    elif event_action == "pospone":
+      self.log("Push notification clicked {}, {}".format(event_action, data))
+      VacuumActions.postpone_vacuum_timer(3600)
     # switcher={
     #   "open_door":light_on
     # }
     # func = switcher.get(action, lambda :"Invalid")
     # return func()
+
+  def dismiss_by_tag(self, tag):
+    self.call_service("notify.html5_dismiss", data={"tag": tag})

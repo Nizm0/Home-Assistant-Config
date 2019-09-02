@@ -14,6 +14,7 @@
   username: !secret google_maps_login
 #   password: !secret google_maps_password
   max_gps_accuracy: 100
+  scan_interval: 180
 
 
 - platform: bluetooth_tracker

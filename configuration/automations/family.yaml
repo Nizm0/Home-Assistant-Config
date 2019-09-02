@@ -30,7 +30,7 @@
   initial_state: 'true'
   trigger: 
   - platform: zone
-    entity_id: device_tracker.google_maps_104688658658376260645 #Nizm0
+    entity_id: person.michal # device_tracker.google_maps_104688658658376260645 #Nizm0
     zone: zone.home
     event: enter
   condition:
@@ -72,7 +72,7 @@
   initial_state: 'true'
   trigger: 
   - platform: zone
-    entity_id: device_tracker.google_maps_109218123589188227395 #Gosia
+    entity_id: person.gosia # device_tracker.google_maps_109218123589188227395 #Gosia
     zone: zone.home
     event: enter
   condition:

@@ -75,8 +75,9 @@ logger:
   default: error
   logs:
     # homeassistant.components.device_tracker: debug
-    # google_maps: debug
+    google_maps: debug
     ifttt.trigger: debug
+
 browser_mod:
   devices:
     a04bd448-beda43c5:
@@ -146,7 +147,7 @@ variable: !include configuration/variables.yaml
 # ###             SERVICES             ###
 # ########################################
 sun:
-shopping_list:
+# shopping_list:
 notify: !include_dir_merge_list configuration/notify/
 ifttt:
   key: !secret ifttt_key
@@ -254,7 +255,7 @@ octoprint:
   - host: '192.168.1.103'
     api_key: 'F358BB5FF92A4E1384FD9B127EFC0289'
     name: Ender 3
-    number_of_tools: 2
+    number_of_tools: 1
     bed: true
     sensors:
       monitored_conditions:
@@ -278,3 +279,17 @@ shelly:
     - id: 4A5B11
       name: Kitchen top light
       light_switch: true
+
+luftdaten:
+  sensor_id: 2303
+  show_on_map: false
+  sensors:
+    monitored_conditions:
+      - P1
+      - P2
+      # - temperature
+      # - humidity
+      # - pressure
+air_quality:
+  - platform: opensensemap
+    station_id: 5902649c5ba9e50011fc57b8

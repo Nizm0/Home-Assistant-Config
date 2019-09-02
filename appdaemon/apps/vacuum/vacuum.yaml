@@ -2,6 +2,11 @@ vacuum_manager:
   module: vacuum
   class: VacuumActions
   tag: home-vacuum-automation
+  vacuum_time_entity: input_datetime.vacuum_day_time
+  vacuum_entity: vacuum.rockrobo
+  ready_to_vacuum: input_boolean.ready_to_vacuum
+  ocupancy: group.all_devices #"not_home"
+  home_preset_select: input_select.home_preset #"Empty"
   notifiers:
     - notify/push_to_chrome_nizm0_oneplus3
   # dependencies: globals

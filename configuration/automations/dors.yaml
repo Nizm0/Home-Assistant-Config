@@ -41,6 +41,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.home_door_sensor
+      from: 'on'
       to: 'off'
   condition:
     - condition: state
@@ -56,6 +57,7 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.home_door_sensor
+      from: 'on'
       to: 'off'
   action:
     - service: notify.push_to_chrome

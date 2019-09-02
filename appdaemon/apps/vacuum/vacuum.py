@@ -7,15 +7,20 @@ from globals import Actions
 
 class VacuumActions(Base):
 
-
   def initialize(self):
+    self.title = "Roborock"
     self.tag = self.args["tag"]
+    self.vacuum_entity = self.args["vacuum_entity"]
+    self.vacuum_time_entity = self.args["vacuum_time_entity"]
+    self.ready_to_vacuum = self.args["ready_to_vacuum"]
+    self.ocupancy = self.args["ocupancy"]
+    self.home_preset_select = self.args["home_preset_select"]
     self.counter = 0
     self.vacuum_timer_handle = None
     self.notifiers = self.args["notifiers"]
-    self.set_vacuum_timer(self, "input_datetime.vacuum_day_time", '', self.get_state("input_datetime.vacuum_day_time"), '')
-    self.listen_state(self.change_vacuum_timer, "input_datetime.vacuum_day_time")
-    self.listen_state(self.vacuum_state_handle, "vacuum.rockrobo")
+    self.set_vacuum_timer(self, self.vacuum_time_entity, '', self.get_state(self.vacuum_time_entity), '')
+    self.listen_state(self.change_vacuum_timer, self.vacuum_time_entity)
+    self.listen_state(self.vacuum_state_handle, self.vacuum_entity)
 
   def set_vacuum_timer(self, entity, attribute, old, new, kwargs):
     self.input_time = datetime.time.fromisoformat(new)
@@ -24,159 +29,128 @@ class VacuumActions(Base):
     self.log("Reinitialize run daily for {} time with {}".format(self.counter ,self.input_time))
 
   def change_vacuum_timer(self, entity, attribute, old, new, kwargs):
-    self.cancel_timer(self.vacuum_daily)
+    self.cancel_vacuum_timer()
     self.log("Cancel previous timer at {}".format(old))
-    self.set_vacuum_timer(self, "input_datetime.vacuum_day_time", '', new, '')
+    self.set_vacuum_timer(self, entity, '', new, '')
 
   def vacuum_state_handle(self, entity, attribute, old, new, kwargs):
     if (old != new):
-      title = "Roborock"
       if new == "error":
         self.log("Vacuum new state: {}".format(new))
-        self.notify_on_error(title=title, message=f"Vacuum encouner an problem")
+        self.notify_on_change(title=self.title, message=f"Vacuum encouner an problem", actions=[])
       elif new == "cleaning":
-        self.cancel_timer()
+        self.cancel_vacuum_timer()
         self.log(f"Vacuum new state: {new}")
         message = f"Vacuum is now {new}, is it intended?"
-        self.notify_on_start(title, message)
+        self.notify_on_change(title=self.title, message=message, actions=["stop_vacuum", "cancel"])
       elif new == "docked":
-        self.cancel_timer()
+        self.cancel_vacuum_timer()
         self.log("Vacuum new state: {}".format(new))
-        self.notify_on_dock(title=title, message=f"Vacuum has finished his work")
+        self.notify_on_change(title=self.title, message=f"Vacuum has finished his work", actions=[])
       elif new == "idle":
         self.log("Vacuum new state: {}".format(new))
         self.vacuum_timer_handle = self.run_in(self.dock_vacuum, 300)
       elif new == "pause":
         self.log("Vacuum new state: {}".format(new))
       elif new == "returning":
-        self.cancel_timer()
+        self.cancel_vacuum_timer()
         self.log("Vacuum new state: {}".format(new))
       else:
         self.log("Vacuum new state: {}".format(new))
 
   def run_daily_callback(self, kwargs):
     self.log("Run daily vacuum")
-    ready = self.get_state("input_boolean.ready_to_vacuum")
-    ocupancy = self.get_state("group.all_devices")
-    home_preset = self.get_state("input_select.home_preset")
-    title = "Roborock"
+    ready = self.get_state(self.ready_to_vacuum)
+    ocupancy = self.get_state(self.ocupancy)
+    home_preset = self.get_state(self.home_preset_select)
     message = ""
-    # data =  self.prepare_data_for_notify(self, action, self.tag)
-    # notify = ["notify/push_to_chrome_nizm0_oneplus3"]
-
-    if self.get_state("vacuum.rockrobo") not in ["cleaning", "error", "returning"]:
+    if self.get_state(self.vacuum_entity) not in ["cleaning", "error", "returning"]:
+      actions = []#{Actions["start_vacuum"], Actions["cancel"]}
       if ready != "on":
         message = "Flor is not ready to cleanup? Did you forget about that?"
-        # actions = {"start_vacuum", "cancel"}
-        # # actions.append(Actions["start_vacuum"])
-        # # actions.append(Actions["cancel"])
-        # self.log("Print Actions")
-        # self.log(actions)
-        data = {
-          "vibrate": "200, 100, 200, 100, 200, 100, 200",
-          # "importance": "hight",
-          "renotify": "true",
-          # "timestamp": time,
-          "priority": "high",
-          "actions": [{
-                      "action": "start_vacuum",
-                      "icon": "/static/icons/favicon-192x192.png",
-                      "title": "Start Vacuum"
-                    },
-                    {
-                      "action": "cancel",
-                      "title": "Cancel"
-                    }],
-          "tag": "home-vacuum-automation"
-        }
-        for sender in self.notifiers:
-          # data = self.prepare_data_for_notify(actions, self.tag)
-          self.call_service(sender, title = title, message = message, data = data)
-          self.log("Message {} sended to {}".format(title, sender))
-        # self.notifiers(name="notify.push_to_chrome_nizm0_oneplus3", title = "Hello", message = "Hello World from appDeamon", data=data)
+        self.notify_on_change(self.title, message, actions=["start_vacuum", "cancel"])
+        # actions.append(Actions["start_vacuum"])
+        # actions.append(Actions["cancel"])
+        # self.log(f"Actions {actions}")
+        # data = self.prepare_data_for_notify(actions, self.tag)
+        # for sender in self.notifiers:
+        #   self.call_service(sender, title=self.title, message = message, data = data)
+        #   self.log(f"Message {self.title} sended to {sender}")
       elif ocupancy == 'not_home' and home_preset == 'Empty':
         self.start_vacuum(kwargs)
         self.log("Vacuum started")
       else:
         message = "Flor is ready to cleanup, but I can see someone is in home. I will start vacuum in 5 min."
-        data = {
-          "vibrate": "200, 100, 200, 100, 200, 100, 200",
-          "renotify": "true",
-          "priority": "high",
-          "actions": [{
-                      "action": "start_vacuum",
-                      "icon": "/static/icons/favicon-192x192.png",
-                      "title": "Start Vacuum"
-                    },
-                    {
-                      "action": "cancel",
-                      "title": "Cancel"
-                    }],
-          "tag": "home-vacuum-automation"
-        }
-        for sender in self.notifiers:
-          self.call_service(sender, title = title, message = message, data = data)
-          self.log("Message {} sended to {}".format(title, sender))
+        self.notify_on_change(self.title, message, actions=["pospone", "cancel"])
+        # actions.append(Actions["start_vacuum"])
+        # actions.append(Actions["cancel"])
+        # data = self.prepare_data_for_notify(actions, self.tag)
+        # for sender in self.notifiers:
+        #   self.call_service(sender, title=self.title, message=message, data=data)
+        #   self.log(f"Message {self.title} sended to {sender}")
         self.vacuum_timer_handle = self.run_in(self.start_vacuum, 300)
 
+  def vacuum_action(self, service, vacuum, kwargs):
+    self.log(f"{service} for {vacuum}")
+    self.call_service(service, entity_id=vacuum)
 
   def start_vacuum(self, kwargs):
-    self.log("vacuum/start for {}".format("vacuum.rockrobo"))
-    self.call_service("vacuum/start", entity_id="vacuum.rockrobo")
+    self.vacuum_action("vacuum/start", self.vacuum_entity)
+    # self.log("vacuum/start for {}".format("vacuum.rockrobo"))
+    # self.call_service("vacuum/start", entity_id="vacuum.rockrobo")
+    self.cancel_vacuum_timer()
   def stop_vacuum(self, kwargs):
-    self.log("vacuum/stop for {}".format("vacuum.rockrobo"))
-    self.call_service("vacuum/stop", entity_id="vacuum.rockrobo")
+    self.vacuum_action("vacuum/stop", self.vacuum_entity)
+    # self.log("vacuum/stop for {}".format("vacuum.rockrobo"))
+    # self.call_service("vacuum/stop", entity_id="vacuum.rockrobo")
   def pause_vacuum(self, kwargs):
-    self.log("vacuum/stop for {}".format("vacuum.rockrobo"))
-    self.call_service("vacuum/pause", entity_id="vacuum.rockrobo")
+    self.vacuum_action("vacuum/pause", self.vacuum_entity)
+    # self.log("vacuum/stop for {}".format("vacuum.rockrobo"))
+    # self.call_service("vacuum/pause", entity_id="vacuum.rockrobo")
   def dock_vacuum(self, kwargs):
-    self.log("vacuum/dock for {}".format("vacuum.rockrobo"))
-    self.call_service("vacuum/return_to_base", entity_id="vacuum.rockrobo")
-    self.turn_off("input_boolean.ready_to_vacuum")
-  def cancel_timer(self):
+    self.vacuum_action("vacuum/return_to_base", self.vacuum_entity)
+    # self.log("vacuum/dock for {}".format("vacuum.rockrobo"))
+    # self.call_service("vacuum/return_to_base", entity_id="vacuum.rockrobo")
+    self.turn_off(self.ready_to_vacuum)
+  def pause_vacuum_for(self, seconds):
+    self.vacuum_action("vacuum/pause", self.vacuum_entity)
+    self.run_in(self.start_vacuum, seconds)
+
+  def cancel_vacuum_timer(self):
     if self.vacuum_timer_handle is not None:
       self.cancel_timer(self.vacuum_timer_handle)
 
-  def pause_vacuum_for(self, seconds):
-    self.log("vacuum/pause for {}".format(seconds))
-    self.run_in(self.pause_vacuum, 1)
-    self.run_in(self.start_vacuum, seconds)
+  def postpone_vacuum_timer(self, sec):
+    if self.vacuum_timer_handle is not None:
+      self.cancel_timer(self.vacuum_timer_handle)
+    self.vacuum_timer_handle = self.run_in(self.start_vacuum, sec)
 
-  def notify_on_error(self, title, message):
-    data = prepare_data_for_notify(actions=[], tag=self.tag)
-    self.notify_on_change(title=title, message=message, data=data)
+  # def notify_on_error(self, title, message):
+  #   data = self.prepare_data_for_notify(actions=[], tag=self.tag)
+  #   self.notify_on_change(title=title, message=message, data=data)
 
-  def notify_on_dock(self, title,message):
-    data = self.prepare_data_for_notify(actions=[], tag=self.tag)
-    self.notify_on_change(title=title, message=message, data=data)
+  # def notify_on_dock(self, title, message):
+  #   data = self.prepare_data_for_notify(actions=[], tag=self.tag)
+  #   self.notify_on_change(title=title, message=message, data=data)
 
-  def notify_on_start(self, title, message):
-    data = {
-      "vibrate": "200, 100, 200, 100, 200, 100, 200",
-      # "importance": "hight",
-      "renotify": "true",
-      # "timestamp": time,
-      "priority": "high",
-      "actions": [{
-                  "action": "stop_vacuum",
-                  "icon": "/static/icons/favicon-192x192.png",
-                  "title": "Stop Vacuum"
-                },
-                {
-                  "action": "cancel",
-                  "title": "Cancel"
-                }],
-      "tag": "home-vacuum-automation"
-    }
-    for sender in self.notifiers:
-      self.call_service(sender, title = title, message = message, data = data)
+  # def notify_on_start(self, title, message):
+  #   actions = []#[Actions["start_vacuum"], Actions["cancel"]]
+  #   actions.append(Actions["stop_vacuum"])
+  #   actions.append(Actions["cancel"])
+  #   data = self.prepare_data_for_notify(actions=actions, tag=self.tag)
+  #   for sender in self.notifiers:
+  #     self.call_service(sender, title=title, message=message, data=data)
 
-  def notify_on_change(self, title, message, data):
+  def notify_on_change(self, title, message, actions):
+    a = []
     try:
+      for action in actions:
+        a.append(Actons[action])
+      data = self.prepare_data_for_notify(actions=actions, tag=self.tag)
       for sender in self.notifiers:
-        self.call_service(sender, title = title, message = message, data = data)
+        self.call_service(sender, title=title, message=message, data=data)
     except:
-      self.log(f"Some data are mising sender={sender} title={title} message={message} data={data}")
+      self.log(f"Some data are mising sender={sender} title={title} message={message} actions={actions}")
       return
 
   def prepare_data_for_notify(self, actions, tag):
@@ -189,10 +163,6 @@ class VacuumActions(Base):
       "actions": actions,
       "tag": tag
     }
-    # # data.append(actions)
-    # data.append(tag)
-    # data[actions].appsend(Actions[actions[1]])
-    # data[actions].appsend(Actions[actions[2]])
     self.log("Print data")
     self.log(data)
     return data
