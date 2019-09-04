@@ -7,10 +7,13 @@ from globals import Actions
 
 class VacuumActions(Base):
 
+  # title = "Roborock"
+  vacuum_entity = ""
+
   def initialize(self):
     self.title = "Roborock"
     self.tag = self.args["tag"]
-    self.vacuum_entity = self.args["vacuum_entity"]
+    vacuum_entity = self.args["vacuum_entity"]
     self.vacuum_time_entity = self.args["vacuum_time_entity"]
     self.ready_to_vacuum = self.args["ready_to_vacuum"]
     self.ocupancy = self.args["ocupancy"]
@@ -20,7 +23,7 @@ class VacuumActions(Base):
     self.notifiers = self.args["notifiers"]
     self.set_vacuum_timer(self, self.vacuum_time_entity, '', self.get_state(self.vacuum_time_entity), '')
     self.listen_state(self.change_vacuum_timer, self.vacuum_time_entity)
-    self.listen_state(self.vacuum_state_handle, self.vacuum_entity)
+    self.listen_state(self.vacuum_state_handle, vacuum_entity)
 
   def set_vacuum_timer(self, entity, attribute, old, new, kwargs):
     self.input_time = datetime.time.fromisoformat(new)
@@ -69,7 +72,7 @@ class VacuumActions(Base):
     ocupancy = self.get_state(self.ocupancy)
     home_preset = self.get_state(self.home_preset_select)
     message = ""
-    if self.get_state(self.vacuum_entity) not in ["cleaning", "error", "returning"]:
+    if self.get_state(vacuum_entity) not in ["cleaning", "error", "returning"]:
       actions = []#{Actions["start_vacuum"], Actions["cancel"]}
       if ready != "on":
         message = "Flor is not ready to cleanup? Did you forget about that?"
@@ -89,17 +92,26 @@ class VacuumActions(Base):
     self.call_service(service, entity_id=vacuum)
 
   def start_vacuum(self, kwargs):
-    self.vacuum_action("vacuum/start", self.vacuum_entity)
+    # self.vacuum_action("vacuum/start", vacuum_entity)
+    self.call_service("vacuum/start", entity_id="vacuum.rockrobo")
     self.cancel_vacuum_timer()
   def stop_vacuum(self, kwargs):
-    self.vacuum_action("vacuum/stop", self.vacuum_entity)
+    # self.vacuum_action("vacuum/stop", vacuum_entity)
+    self.call_service("vacuum/stop", entity_id="vacuum.rockrobo")
   def pause_vacuum(self, kwargs):
-    self.vacuum_action("vacuum/pause", self.vacuum_entity)
+    # self.vacuum_action("vacuum/pause", vacuum_entity)
+    self.call_service("vacuum/pause", entity_id="vacuum.rockrobo")
   def dock_vacuum(self, kwargs):
-    self.vacuum_action("vacuum/return_to_base", self.vacuum_entity)
+    # self.vacuum_action("vacuum/return_to_base", vacuum_entity)
+    self.call_service("vacuum/return_to_base", entity_id="vacuum.rockrobo")
   def pause_vacuum_for(self, seconds):
-    self.vacuum_action("vacuum/pause", self.vacuum_entity)
+    # self.vacuum_action("vacuum/pause", vacuum_entity)
+    self.call_service("vacuum/pause", entity_id="vacuum.rockrobo")
     self.run_in(self.start_vacuum, seconds)
+
+  # def dock_vacuum_ext(self):
+  #   self.vacuum_action("vacuum/return_to_base", vacuum_entity)
+  #   # self.call_service("vacuum/return_to_base", entity_id=vacuum_entity)
 
   def cancel_vacuum_timer(self):
     if self.vacuum_timer_handle is not None:
@@ -110,29 +122,29 @@ class VacuumActions(Base):
       self.cancel_timer(self.vacuum_timer_handle)
     self.vacuum_timer_handle = self.run_in(self.start_vacuum, sec)
     start = self.time() + "01:00:00"
-    self.notify_on_change(self.title, f"Vacuuming postponed to {start}", ["start_vacuum", "cancel"])
+    self.notify_on_change(self.title, f"Vacuuming postponed to {start}", ["start_vacuum", "return_vacuum"])
 
   def notify_on_change(self, title, message, actions):
-    a = []
     # try:
-    for action in actions:
-      a.append(Actions[action])
     data = self.prepare_data_for_notify(actions=actions, tag=self.tag)
     for sender in self.notifiers:
       self.call_service(sender, title=title, message=message, data=data)
-      self.log(f"Message \"{message}\" sent to {sender}")
+      self.log(f"Message \"{message}\" sent to {sender} with data={data}")
     # except:
     #   self.log(f"Some data are mising sender={self.notifiers} title={title} message={message} actions={actions}")
     #   return
 
   def prepare_data_for_notify(self, actions, tag):
+    a = []
+    for action in actions:
+      a.append(Actions[action])
     data = {
       "vibrate": "200, 100, 200, 100, 200, 100, 200",
       # "importance": "hight",
       "renotify": "true",
       # "timestamp": time,
       "priority": "high",
-      "actions": actions,
+      "actions": a,
       "tag": tag
     }
     # self.log("Print data")

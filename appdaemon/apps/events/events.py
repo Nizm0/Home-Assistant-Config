@@ -29,37 +29,37 @@ class Events(Base):
 
   def chose_action_event_closed(self, event_name, data, kwargs):
     event_tag = data["tag"]
-    self.log("Push notification closed: {}, {}".format(event_tag, data))
+    self.log(f"Push notification closed: {event_tag}, {data}")
 
   def chose_action_event_received(self, event_name, data, kwargs):
     event_tag = data["tag"]
-    self.log("Push notification received: {}, {}".format(event_tag, data))
+    self.log(f"Push notification received: {event_tag}, {data}")
 
   def chose_action_event_clicked(self, event_name, data, kwargs):
     event_action = data["action"]
     event_tag = data["tag"]
     # self.log("Push notification clicked (action) {event_action}")
     if event_action == "open_door":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
       self.light_on(self)
       self.run_in(self.light_off, 10)
     elif event_action == "open":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
     elif event_action == "start_vacuum":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
       VacuumActions.start_vacuum(self, kwargs)
     elif event_action == "stop_vacuum":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
       VacuumActions.stop_vacuum(self, kwargs)
     elif event_action == "return_vacuum":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
       VacuumActions.dock_vacuum(self, kwargs)
     elif event_action == "cancel":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
       VacuumActions.cancel_vacuum_timer()
       self.dismiss_by_tag(event_tag)
     elif event_action == "pospone":
-      self.log("Push notification clicked {}, {}".format(event_action, data))
+      self.log(f"Push notification clicked {event_action}, {data}")
       VacuumActions.postpone_vacuum_timer(3600)
     # switcher={
     #   "open_door":light_on

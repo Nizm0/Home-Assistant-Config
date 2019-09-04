@@ -43,17 +43,17 @@ PEOPLE = {
 Actions = {
     'start_vacuum': {
         "action": "start_vacuum",
-        "icon": "/static/icons/favicon-192x192.png",
+        # "icon": "/static/icons/favicon-192x192.png",
         "title": "Start Vacuum"
     },
     'stop_vacuum': {
         "action": "stop_vacuum",
-        "icon": "/static/icons/favicon-192x192.png",
+        # "icon": "/static/icons/favicon-192x192.png",
         "title": "Stop Vacuum"
     },
     'return_vacuum': {
         "action": "return_vacuum",
-        "icon": "/static/icons/favicon-192x192.png",
+        # "icon": "/static/icons/favicon-192x192.png",
         "title": "Return Vacuum"
     },
     'pospone': {
