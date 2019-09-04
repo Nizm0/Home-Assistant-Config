@@ -51,6 +51,11 @@ Actions = {
         "icon": "/static/icons/favicon-192x192.png",
         "title": "Stop Vacuum"
     },
+    'return_vacuum': {
+        "action": "return_vacuum",
+        "icon": "/static/icons/favicon-192x192.png",
+        "title": "Return Vacuum"
+    },
     'pospone': {
         "action": "pospone",
         "title": "Pospone fo 1h"
