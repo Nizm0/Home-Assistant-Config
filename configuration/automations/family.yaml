@@ -23,16 +23,16 @@
     data_template:
       message: >
         Current location: {{ state_attr('device_tracker.google_maps_104688658658376260645', 'address') }}
-      title: Michał is out form work
+      title: Michał is out from work
 
 - id: michal_entered_the_home
   alias: Michał entered the home
   initial_state: 'true'
   trigger: 
-  - platform: zone
+  - platform: state
     entity_id: person.michal # device_tracker.google_maps_104688658658376260645 #Nizm0
-    zone: zone.home
-    event: enter
+    to: home
+    # event: enter
   condition:
   action: 
   - service: notify.push_to_chrome
@@ -71,10 +71,10 @@
   alias: Gosia entered the home
   initial_state: 'true'
   trigger: 
-  - platform: zone
+  - platform: state
     entity_id: person.gosia # device_tracker.google_maps_109218123589188227395 #Gosia
-    zone: zone.home
-    event: enter
+    to: home
+    # event: enter
   condition:
   action: 
   - service: notify.push_to_chrome_nizm0_oneplus3
