@@ -1,6 +1,9 @@
 deconz_helper:
   module: deconz_helper
   class: DeconzHelper
-  switch_1_id: smart_switch_1
-  switch_2_id: smart_switch_2
+  switch:
+    - smart_switch_1
+    - smart_switch_2
+  cube:
+    - mi_magic_cube
   motions: ["binary_sensor.bathroom_motion_sensor","binary_sensor.kitchen_motion_sensor", "binary_sensor.living_room_motion_sensor", "binary_sensor.corridor_motion_sensor"]
