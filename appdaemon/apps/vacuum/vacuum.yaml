@@ -9,4 +9,5 @@ vacuum_manager:
   home_preset_select: input_select.home_preset #"Empty"
   notifiers:
     - notify/push_to_chrome_nizm0_oneplus3
+    # - notify/mobile_app_nizm0_s_oneplus_a3003
   # dependencies: globals
