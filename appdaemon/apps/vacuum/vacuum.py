@@ -20,9 +20,11 @@ class VacuumActions(Base):
     self.ready_to_vacuum = self.args["ready_to_vacuum"]
     self.ocupancy = self.args["ocupancy"]
     self.home_preset_select = self.args["home_preset_select"]
+    self.notifiers = self.args["notifiers"]
     self.counter = 0
     self.vacuum_timer_handler = None
-    self.notifiers = self.args["notifiers"]
+    self.ready_to_cleaning = False
+    self.surface_cleaned_since_last_cleaning = 0 # TODO create sensor in HAS
     self.set_vacuum_timer(self, self.vacuum_time_entity, '', self.get_state(self.vacuum_time_entity), '')
     self.listen_state(self.change_vacuum_timer, self.vacuum_time_entity)
     self.listen_state(self.vacuum_state_handle, self.vacuum_entity)
@@ -37,18 +39,7 @@ class VacuumActions(Base):
   def change_vacuum_timer(self, entity, attribute, old, new, kwargs):
     self.cancel_vacuum_timer(self.vacuum_timer_handler)
     self.log(f"Cancel previous timer at {old}")
-    self.set_vacuum_timer(self, entity, '', new, '')
-    # vacuumjs = self.get_state(self.vacuum_entity, attribute="all")
-    # self.log(f"VACUUM ENTITY AS JSON {vacuumjs}")
-    # self.vacuum = self.json2obj(vacuumjs)
-    # self.log(f"VACUUM ENTITY AS OBJECT {self.vacuum}")
-    # dump_actions = json.dumps(Actions)
-    # self.log(f"dump actions {dump_actions}")
-    # self.log(f"dump actions {dump_actions.start_vacuum}")
-    # vacuum = self.get_state(self.vacuum_entity, attribute="all")
-    # cleaned_area = vacuum["attributes"]["cleaned_area"]
-    # cleaning_time = vacuum["attributes"]["cleaning_time"]
-    # self.log(f"Vacuum has finished his work, cleaned {cleaned_area} m\u00b2 in {cleaning_time} min")
+    self.set_vacuum_timer(entity, attribute, old, new, kwargs)
 
   def run_daily_callback(self, kwargs):
     self.log("Run daily vacuum")
@@ -75,6 +66,7 @@ class VacuumActions(Base):
   def vacuum_state_handle(self, entity, attribute, old, new, kwargs):
     self.vacuum = self.get_state(self.vacuum_entity, attribute="all")
     # self.log(f"VACUUM ENTITY AS OBJECT {self.vacuum}")
+    message = ""
     if (old != new):
       if new == "error":
         self.log(f"Vacuum new state: {new} and attribute {attribute}")
@@ -84,23 +76,29 @@ class VacuumActions(Base):
         self.cancel_vacuum_timer(self.vacuum_timer_handler)
         message = f"Vacuum is now {new}, is it intended?"
         self.notify_on_change(title=self.title, message=message, actions=[Actions["stop_vacuum"], Actions["cancel"]])
+      elif new == "returning":
+        self.log(f"Vacuum new state: {new} and attribute {attribute}")
+        self.cancel_vacuum_timer(self.vacuum_timer_handler)
+        if old == "cleaning":
+          cleaned_area = self.vacuum["attributes"]["cleaned_area"]
+          cleaning_time = self.vacuum["attributes"]["cleaning_time"]
+          message = f"Vacuum has finished his work, cleaned {cleaned_area} m\u00b2 in {cleaning_time} min"
+          self.notify_on_change(title=self.title, message=message, actions=[])
+          self.turn_off(self.ready_to_vacuum)
+          self.surface_cleaned_since_last_cleaning =+ cleaned_area
+          if self.surface_cleaned_since_last_cleaning > 100:
+            self.ready_to_cleaning = True
       elif new == "docked":
         self.log(f"Vacuum new state: {new} and attribute {attribute}")
         self.cancel_vacuum_timer(self.vacuum_timer_handler)
-        cleaned_area = self.vacuum["attributes"]["cleaned_area"]
-        cleaning_time = self.vacuum["attributes"]["cleaning_time"]
-        message = f"Vacuum has finished his work, cleaned {cleaned_area} m\u00b2 in {cleaning_time} min"
-        self.notify_on_change(title=self.title, message=message, actions=[])
-        self.turn_off(self.ready_to_vacuum)
+        # message == message + " and docked."
+        # self.notify_on_change(title=self.title, message=message, actions=[])
       elif new == "idle":
         self.log(f"Vacuum new state: {new} and attribute {attribute}")
         self.vacuum_timer_handler = self.run_in(self.dock_vacuum, 300)
       elif new == "paused":
         self.log(f"Vacuum new state: {new} and attribute {attribute}")
         self.notify_on_change(title=self.title, message="The vacuum cleaner has been suspended", actions=[Actions["start_vacuum"], Actions["return_vacuum"]])
-      elif new == "returning":
-        self.log(f"Vacuum new state: {new} and attribute {attribute}")
-        self.cancel_vacuum_timer(self.vacuum_timer_handler)
       else:
         self.log(f"Vacuum new state: {new} and attribute {attribute}")
 
@@ -120,6 +118,12 @@ class VacuumActions(Base):
       self.log(f"Push notification clicked {event_action}, {data}")
       self.dismiss_by_tag(event_tag)
       self.dock_vacuum()
+    elif event_action == "send_to_clinup":
+      self.log(f"Push notification clicked {event_action}, {data}")
+      self.dismiss_by_tag(event_tag)
+      clinup_location = self.args["clinup_location"]
+      if clinup_location != None:
+        self.go_to(clinup_location)
     elif event_action == "cancel":
       self.log(f"Push notification clicked {event_action}, {data}")
       self.dismiss_by_tag(event_tag)
@@ -129,22 +133,24 @@ class VacuumActions(Base):
       self.dismiss_by_tag(event_tag)
       self.postpone_vacuum_timer(3600)
 
-  def vacuum_action(self, service, vacuum):
-    self.log(f"{service} for {vacuum}")
-    self.call_service(service, entity_id=vacuum)
+  def vacuum_action(self, service, **kwargs):
+    self.log(f"{service} for {kwargs}")
+    self.call_service(service, **kwargs)
 
   def start_vacuum(self):
-    self.vacuum_action("vacuum/start", self.vacuum_entity)
+    self.vacuum_action("vacuum/start", entity_id=self.vacuum_entity)
     self.cancel_vacuum_timer(self.vacuum_timer_handler)
   def stop_vacuum(self):
-    self.vacuum_action("vacuum/stop", self.vacuum_entity)
+    self.vacuum_action("vacuum/stop", entity_id=self.vacuum_entity)
   def pause_vacuum(self, kwargs):
-    self.vacuum_action("vacuum/pause", self.vacuum_entity)
+    self.vacuum_action("vacuum/pause", entity_id=self.vacuum_entity)
   def dock_vacuum(self, kwargs):
-    self.vacuum_action("vacuum/return_to_base", self.vacuum_entity)
+    self.vacuum_action("vacuum/return_to_base", entity_id=self.vacuum_entity)
   def pause_vacuum_for(self, seconds):
     self.pause_vacuum()
     self.run_in(self.start_vacuum, seconds)
+  def go_to(self, pos):
+    self.vacuum_action("vacuum/send_command", entity_id=self.vacuum_entity, command="app_goto_target", params=pos)
 
   def cancel_vacuum_timer(self, vacuum_timer):
     if vacuum_timer is not None:
@@ -201,6 +207,11 @@ Actions = {
         "action": "return_vacuum",
         # "icon": "/static/icons/favicon-192x192.png",
         "title": "Return Vacuum"
+    },
+    'send_clinup': {
+        "action": "send_to_clinup",
+        # "icon": "/static/icons/favicon-192x192.png",
+        "title": "Send to clinup"
     },
     'pospone': {
         "action": "pospone",

@@ -115,7 +115,7 @@ recorder:
       - weather
       - zone
   purge_interval: 1
-  purge_keep_days: 5
+  purge_keep_days: 7
 
 # ########################################
 # ###              ENTITIES             ###

@@ -10,4 +10,5 @@ vacuum_manager:
   notifiers:
     - notify/push_to_chrome_nizm0_oneplus3
     # - notify/mobile_app_nizm0_s_oneplus_a3003
+  clinup_location: [24250,30650]
   # dependencies: globals

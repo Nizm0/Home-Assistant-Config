@@ -29,9 +29,9 @@ www/images/home
 www/floorplan
 www/custom-lovelace
 www/community
-custom_components
 
 __*
+custom_components
 esphome
 deps
 notebooks

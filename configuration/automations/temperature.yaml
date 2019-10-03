@@ -11,7 +11,7 @@
     - sensor.kids_temperature
   condition:
     - condition: template
-      value_template: '{{ (trigger.to_state.state > states.input_number.temp_max.state or trigger.to_state.state < states.input_number.temp_min.state) and trigger.to_state.state != "unavailable"}}'
+      value_template: '{{ (trigger.to_state.state > states.input_number.temp_max.state or trigger.to_state.state < states.input_number.temp_min.state) and trigger.to_state.state != "unavailable" and trigger.to_state.state > 0}}'
   action:
     - service: notify.push_to_chrome
       data_template:
