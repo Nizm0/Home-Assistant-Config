@@ -3,4 +3,8 @@ shelly:
   version: true
   sensors:
     - all
+<<<<<<< HEAD
   devices: !include_dir_list ../entities/shelly
+=======
+  devices: !include_dir_merge_list ../entities/shelly
+>>>>>>> Unfinished, part 1
