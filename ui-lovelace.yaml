@@ -1,12 +1,12 @@
 cch:
   clock_am_pm: false
-  clock_format: '24'
+  clock_format: "24"
   exceptions:
     - conditions:
         user: Gosia
       config:
-        clock_format: '24'
-        hide_tabs: '1, 9, 11 to 13'
+        clock_format: "24"
+        hide_tabs: "1, 9, 11 to 13"
         menu: hide
         notifications: show
         options: show
@@ -20,9 +20,9 @@ resources:
   - type: js
     url: /community_plugin/card-tools.js?track=true
   - type: js
-    url: 'https://unpkg.com/moment@2.22.2/moment.js'
+    url: "https://unpkg.com/moment@2.22.2/moment.js"
   - type: css
-    url: 'https://fonts.googleapis.com/css?family=Roboto+Condensed'
+    url: "https://fonts.googleapis.com/css?family=Roboto+Condensed"
   - type: module
     url: /community_plugin/swipe-card/swipe-card.js
   - type: module
@@ -39,6 +39,10 @@ resources:
   - type: js
     url: /community_plugin/bignumber-card/bignumber-card.js
   - type: module
+    url: /community_plugin/config-template-card/config-template-card.js
+  - type: js
+    url: /community_plugin/lovelace-card-templater/lovelace-card-templater.js
+  - type: module
     url: /community_plugin/button-card/button-card.js
   - type: module
     url: /community_plugin/lovelace-card-mod/card-mod.js
@@ -47,13 +51,19 @@ resources:
   - type: js
     url: /community_plugin/html_card/html-card.js
   - type: js
-    url: /community_plugin/lovelace-home-feed-card/home-feed-card.js
+    url: /community_plugin/lovelace-home-feed-card/lovelace-home-feed-card.js
+  - type: module
+    url: /community_plugin/lovelace-flower-card/flower-card.js
+  - type: js
+    url: /community_plugin/lovelace-state-switch/state-switch.js
   - type: module
     url: /community_plugin/mini-graph-card/mini-graph-card.js
   - type: module
     url: /community_plugin/mini-media-player/mini-media-player.js
   - type: js
     url: /community_plugin/monster-card/monster-card.js
+  - type: js
+    url: /community_plugin/lovelace-more-info-card/more-info-card.js
   - type: js
     url: /community_plugin/popup-card.js
   - type: js
@@ -64,10 +74,13 @@ resources:
     url: /community_plugin/miflora-card/miflora-card.js
   - type: js
     url: /community_plugin/plant-card.js
+  - type: module
+    url: /community_plugin/unused-card/unused-card.js
   - type: js
     url: /community_plugin/lovelace-xiaomi-vacuum-card/xiaomi-vacuum-card.js
   - type: module
-    url: /community_plugin/xiaomi_vacuum_map_card/xiaomi-vacuum-map-card.js
+    url: >-
+      /community_plugin/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
 title: Home
 views:
   - badges: []
@@ -113,8 +126,8 @@ views:
                   service_data:
                     entity_id: vacuum.rockrobo
                 state_image:
-                  'off': /local/images/vacuum_dark.jpeg
-                  'on': /local/images/vacuum.jpeg
+                  "off": /local/images/vacuum_dark.jpeg
+                  "on": /local/images/vacuum.jpeg
                 tap_action:
                   action: toggle
                 type: picture-entity
@@ -131,8 +144,8 @@ views:
               side_brush: Side Brush
               status: Status
             name: Rockrobo
-            type: 'custom:xiaomi-vacuum-card'
-        type: 'custom:vertical-stack-in-card'
+            type: "custom:xiaomi-vacuum-card"
+        type: "custom:vertical-stack-in-card"
       - entity: weather.dark_sky
         type: weather-forecast
       - cards:
@@ -152,7 +165,7 @@ views:
               extrema: true
               fill: false
             title: Temperatures 48h
-            type: 'custom:mini-graph-card'
+            type: "custom:mini-graph-card"
           - animate: true
             entities:
               - sensor.living_room_humidity
@@ -169,8 +182,8 @@ views:
               extrema: true
               fill: false
             title: Humidity 48h
-            type: 'custom:mini-graph-card'
-        type: 'custom:swipe-card'
+            type: "custom:mini-graph-card"
+        type: "custom:swipe-card"
       - elements:
           - entity: binary_sensor.home_door_sensor
             style:
@@ -181,7 +194,7 @@ views:
               action: more-info
             type: state-icon
           - entity: sensor.living_room_temperature
-            icon: 'mdi:office'
+            icon: "mdi:office"
             style:
               color: white
               left: 36%
@@ -196,7 +209,7 @@ views:
               top: 95%
             type: state-label
           - entity: sensor.bedroom_temperature
-            icon: 'mdi:hotel'
+            icon: "mdi:hotel"
             style:
               color: white
               left: 50%
@@ -211,7 +224,7 @@ views:
               top: 95%
             type: state-label
           - entity: sensor.kids_temperature
-            icon: 'mdi:human-child'
+            icon: "mdi:human-child"
             style:
               color: white
               left: 64%
@@ -228,7 +241,7 @@ views:
               action: more-info
             type: state-label
           - entity: sensor.kitchen_temperature
-            icon: 'mdi:kettle'
+            icon: "mdi:kettle"
             style:
               color: white
               left: 78%
@@ -245,7 +258,7 @@ views:
               action: more-info
             type: state-label
           - entity: sensor.bathroom_temperature
-            icon: 'mdi:shower'
+            icon: "mdi:shower"
             style:
               color: white
               left: 92%
@@ -268,15 +281,29 @@ views:
         type: iframe
         url: >-
           https://embed.windy.com/embed2.html?lat=51.109&lon=17.036&zoom=11&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=51.109&detailLon=17.036&metricWind=default&metricTemp=default&radarRange=-1
-      - base_position:
-          x: 301
-          'y': 860
+      - calibration_points:
+          - map:
+              x: 301
+              "y": 860
+            vacuum:
+              x: 25500
+              "y": 25500
+          - map:
+              x: 390
+              "y": 772
+            vacuum:
+              x: 26500
+              "y": 26500
+          - map:
+              x: 301
+              "y": 772
+            vacuum:
+              x: 25500
+              "y": 26500
+        default_mode: predefined_zones
         entity: vacuum.rockrobo
-        map_image: /community_plugin/xiaomi_vacuum_map_card/home.png
-        reference_point:
-          x: 390
-          'y': 772
-        type: 'custom:xiaomi-vacuum-map-card'
+        map_image: /community_plugin/xiaomi-vacuum-map-card-mine/home.png
+        type: "custom:xiaomi-vacuum-map-card"
         zones:
           - - - 22158
               - 24989
@@ -306,26 +333,31 @@ views:
               - 29586
               - 26803
               - 32336
-    icon: 'mdi:information-outline'
+      - dark_mode: false
+        entities:
+          - entity: device_tracker.google_maps_104688658658376260645
+          - entity: device_tracker.google_maps_109218123589188227395
+        type: map
+    icon: "mdi:information-outline"
     popup_cards:
       person.gosia:
         card:
           entities:
             - person.gosia
             - entity: device_tracker.google_maps_109218123589188227395
-              icon: 'mdi:map-marker-circle'
+              icon: "mdi:map-marker-circle"
               name: Gosai presence
               secondary_info: >-
                 Battery: [[
                 device_tracker.google_maps_109218123589188227395.attributes.battery_level
                 ]]%
-              type: 'custom:secondaryinfo-entity-row'
+              type: "custom:secondaryinfo-entity-row"
             - entity: device_tracker.gosia_galaxy_s9
-              icon: 'mdi:wifi'
+              icon: "mdi:wifi"
               name: Gosia Wifi
               secondary_info: last-changed
             - entity: device_tracker.gosia_g6_bt
-              icon: 'mdi:bluetooth'
+              icon: "mdi:bluetooth"
               name: Gosia bt
               secondary_info: last-changed
           type: entities
@@ -335,19 +367,19 @@ views:
           entities:
             - person.michal
             - entity: device_tracker.google_maps_104688658658376260645
-              icon: 'mdi:map-marker-circle'
+              icon: "mdi:map-marker-circle"
               name: Michał presence
               secondary_info: >-
                 Battery: [[
                 device_tracker.google_maps_104688658658376260645.attributes.battery_level
                 ]]%
-              type: 'custom:secondaryinfo-entity-row'
+              type: "custom:secondaryinfo-entity-row"
             - entity: device_tracker.nizmo_phone
-              icon: 'mdi:wifi'
+              icon: "mdi:wifi"
               name: Michał Wifi
               secondary_info: last-changed
             - entity: device_tracker.oneplus_3_bt
-              icon: 'mdi:bluetooth'
+              icon: "mdi:bluetooth"
               name: Michał bt
               secondary_info: last-changed
           type: entities
@@ -359,8 +391,8 @@ views:
       - device_tracker.portex
       - device_tracker.bozena_phone
       - device_tracker.nizmo_surface
-      - device_tracker.mac_bls
       - device_tracker.gosia_laptop
+      - sensor.tv_is_on
       - sensor.nizm0_today_at_work
       - sensor.nizm0_week_work
       - sensor.mold_indicator
@@ -389,14 +421,14 @@ views:
           type: glance
         filter:
           include:
-            - entity_id: '*battery_level*'
+            - entity_id: "*battery_level*"
               state: < 25
             - attributes:
                 battery: < 25
             - attributes:
                 battery_level: < 25
         show_empty: false
-        type: 'custom:monster-card'
+        type: "custom:monster-card"
       - card:
           show_state: false
           title: Turned on lights
@@ -446,7 +478,7 @@ views:
               action: toggle
         show_header_toggle: false
         state_filter:
-          - 'on'
+          - "on"
         title: All lights
         type: entity-filter
       - card:
@@ -498,12 +530,10 @@ views:
               action: toggle
         show_header_toggle: false
         state_filter:
-          - 'off'
+          - "off"
         title: All lights
         type: entity-filter
       - entities:
-          - entity: light.bedroom_main_light
-            secondary_info: last-changed
           - entity: light.directional_light
             secondary_info: last-changed
           - entity: light.general_light
@@ -538,7 +568,7 @@ views:
         title: Bedroom
         type: entities
       - entities:
-          - entity: light.kitchen_top_light
+          - entity: light.shelly_shsw_1_4a5b11
             secondary_info: last-changed
           - entity: binary_sensor.kitchen_motion_sensor
             secondary_info: last-changed
@@ -560,7 +590,7 @@ views:
             secondary_info: last-changed
           - entity: binary_sensor.taking_bath
             secondary_info: last-changed
-          - entity: binary_sensor.bathroom_water_leak_sensor
+          - entity: binary_sensor.bathroom_water_leak
             secondary_info: last-changed
           - entity: sensor.bathroom_temperature
             secondary_info: last-changed
@@ -599,6 +629,12 @@ views:
             secondary_info: last-changed
           - entity: sensor.corridor_illumination
             secondary_info: last-changed
+          - entity: sensor.corridor_temperature
+            secondary_info: last-changed
+          - entity: sensor.corridor_humidity
+            secondary_info: last-changed
+          - entity: sensor.corridor_pressure
+            secondary_info: last-changed
         show_header_toggle: true
         title: Corridor
         type: entities
@@ -620,40 +656,39 @@ views:
             artwork_border: true
             entity: media_player.living_room_speaker
             show_source: true
-            type: 'custom:mini-media-player'
+            type: "custom:mini-media-player"
           - artwork: cover
             artwork_border: true
             entity: media_player.pc_gpmdp
             show_source: true
-            type: 'custom:mini-media-player'
+            type: "custom:mini-media-player"
           - artwork: cover
             artwork_border: true
             entity: media_player.living_room_tv_cast
             show_source: true
-            type: 'custom:mini-media-player'
+            type: "custom:mini-media-player"
           - artwork: cover
             artwork_border: true
             entity: media_player.philips_tv
             show_source: true
-            type: 'custom:mini-media-player'
-        type: 'custom:vertical-stack-in-card'
-      - title: Shoping list
-        type: shopping-list
+            type: "custom:mini-media-player"
+        type: "custom:vertical-stack-in-card"
       - card:
           entities: []
           title: Dark Sky
           type: glance
         filter:
           include:
-            - entity_id: '*dark_sky*'
+            - entity_id: "*dark_sky*"
         show_empty: false
-        type: 'custom:monster-card'
-    icon: 'mdi:home'
+        type: "custom:monster-card"
+    icon: "mdi:home"
     id: 0
     panel: false
-    path: ''
+    path: ""
     title: Home
-  - cards:
+  - badges: []
+    cards:
       - cards:
           - cards:
               - entity: light.general_light
@@ -683,7 +718,7 @@ views:
                   action: toggle
                 type: entity-button
             type: horizontal-stack
-        type: 'custom:vertical-stack-in-card'
+        type: "custom:vertical-stack-in-card"
       - entities:
           - entity: binary_sensor.living_room_balcony_window_sensor
           - entity: binary_sensor.living_room_motion_sensor
@@ -716,15 +751,15 @@ views:
         type: gauge
       - animate: true
         color_thresholds:
-          - color: '#0000ff'
+          - color: "#0000ff"
             value: 15
-          - color: '#00ff00'
+          - color: "#00ff00"
             value: 21
-          - color: '#ffb347'
+          - color: "#ffb347"
             value: 26
-          - color: '#ff0000'
+          - color: "#ff0000"
             value: 30
-          - color: '#FF00FF'
+          - color: "#FF00FF"
             value: 35
         entities:
           - sensor.living_room_temperature
@@ -738,7 +773,7 @@ views:
           extrema: true
           fill: fade
         title: Temperature
-        type: 'custom:mini-graph-card'
+        type: "custom:mini-graph-card"
       - detail: 2
         entity: sensor.living_room_humidity
         graph: line
@@ -754,15 +789,15 @@ views:
         type: plant-status
       - animate: true
         color_thresholds:
-          - color: '#0000ff'
+          - color: "#0000ff"
             value: 17
-          - color: '#00ff00'
+          - color: "#00ff00"
             value: 22
-          - color: '#ffb347'
+          - color: "#ffb347"
             value: 26
-          - color: '#ff0000'
+          - color: "#ff0000"
             value: 30
-          - color: '#FF00FF'
+          - color: "#FF00FF"
             value: 35
         entities:
           - sensor.xiaomi_miflora_temperature_4
@@ -777,8 +812,8 @@ views:
           extrema: true
           fill: fade
         title: Temperature
-        type: 'custom:mini-graph-card'
-    icon: 'mdi:office'
+        type: "custom:mini-graph-card"
+    icon: "mdi:sofa"
     id: 1
     title: Living room
   - cards:
@@ -789,7 +824,7 @@ views:
               - entity: light.bedroom_main_light_2
                 type: light
             type: horizontal-stack
-        type: 'custom:vertical-stack-in-card'
+        type: "custom:vertical-stack-in-card"
       - entity: sensor.bedroom_temperature
         max: 40
         min: 0
@@ -825,9 +860,8 @@ views:
       - entities:
           - entity: sensor.bedroom_temperature
           - entity: sensor.bedroom_humidity
-        icon: 'mdi:server'
-        type: 'custom:mini-graph-card'
-    icon: 'mdi:bed-empty'
+        type: "custom:mini-graph-card"
+    icon: "mdi:bed-empty"
     id: 2
     title: Bedroom
   - cards:
@@ -862,7 +896,7 @@ views:
           yellow: 50
         theme: default
         type: gauge
-        unit: '%'
+        unit: "%"
       - detail: 2
         entity: sensor.kids_humidity
         graph: line
@@ -871,13 +905,14 @@ views:
         entity: sensor.kids_pressure
         graph: line
         type: sensor
-    icon: 'mdi:human-child'
+    icon: "mdi:human-child"
     id: 5
     title: Kids room
-  - cards:
+  - badges: []
+    cards:
       - cards:
           - cards:
-              - entity: light.kitchen_top_light
+              - entity: light.shelly_shsw_1_4a5b11
                 hold_action:
                   action: more-info
                 tap_action:
@@ -905,7 +940,7 @@ views:
                 type: entity-button
             type: horizontal-stack
         layout: horizontal
-        type: 'custom:vertical-stack-in-card'
+        type: "custom:vertical-stack-in-card"
       - detail: 2
         entity: sensor.kitchen_temperature
         graph: line
@@ -940,7 +975,7 @@ views:
           yellow: 50
         theme: default
         type: gauge
-        unit: '%'
+        unit: "%"
       - detail: 2
         entity: sensor.kitchen_pressure
         graph: line
@@ -949,7 +984,7 @@ views:
         entity: sensor.kitchen_illumination
         graph: line
         type: sensor
-    icon: 'mdi:kettle'
+    icon: "mdi:silverware-fork-knife"
     id: 4
     title: Kithen
   - cards:
@@ -969,7 +1004,7 @@ views:
                 type: entity-button
             type: horizontal-stack
           - cards:
-              - entity: binary_sensor.bathroom_water_leak_sensor
+              - entity: binary_sensor.bathroom_water_leak
                 hold_action:
                   action: none
                 tap_action:
@@ -989,7 +1024,7 @@ views:
                 type: entity-button
             type: horizontal-stack
         layout: horizontal
-        type: 'custom:vertical-stack-in-card'
+        type: "custom:vertical-stack-in-card"
       - entity: sensor.bathroom_temperature
         max: 40
         min: 0
@@ -1015,7 +1050,7 @@ views:
           yellow: 50
         theme: default
         type: gauge
-        unit: '%'
+        unit: "%"
       - detail: 2
         entity: sensor.bathroom_humidity
         graph: line
@@ -1024,7 +1059,7 @@ views:
         entity: sensor.bathroom_pressure
         graph: line
         type: sensor
-    icon: 'mdi:shower'
+    icon: "mdi:shower"
     id: 3
     title: Bathroom
   - cards:
@@ -1037,13 +1072,13 @@ views:
               - entity: light.corridor_gateway_light
                 type: light
             type: horizontal-stack
-        type: 'custom:vertical-stack-in-card'
+        type: "custom:vertical-stack-in-card"
       - entities:
           - entity: binary_sensor.corridor_motion_sensor
           - entity: binary_sensor.home_door_sensor
           - entity: sensor.corridor_illumination
         type: entities
-    icon: 'mdi:stairs'
+    icon: "mdi:stairs"
     id: 6
     title: Hallway
   - cards:
@@ -1053,10 +1088,6 @@ views:
           - entity: person.michal
             secondary_info: last-changed
           - entity: person.gosia
-            secondary_info: last-changed
-          - entity: device_tracker.oneplus_3_bt
-            secondary_info: last-changed
-          - entity: device_tracker.gosia_g6_bt
             secondary_info: last-changed
           - entity: device_tracker.google_maps_104688658658376260645
             secondary_info: last-changed
@@ -1088,6 +1119,7 @@ views:
       - entities:
           - entity: device_tracker.bozena_phone
           - entity: device_tracker.portex
+          - entity: device_tracker.babcia_teresa
         type: entities
       - entities:
           - person.michal
@@ -1113,7 +1145,18 @@ views:
           - Home
         title: all devices
         type: entity-filter
-    icon: 'mdi:home-heart'
+      - entities:
+          - entity: sensor.nizm0_oneplus_3_alarm_sensor
+          - entity: sensor.galaxy_s9_alarm_sensor
+        type: entities
+      - entities:
+          - entity: sensor.nizm0_oneplus_3_alarm_sensor
+          - entity: sensor.galaxy_s9_alarm_sensor
+        hours_to_show: 120
+        refresh_interval: 60
+        title: Family tracking
+        type: history-graph
+    icon: "mdi:home-heart"
     id: 7
     popup_cards:
       person.gosia:
@@ -1121,15 +1164,15 @@ views:
           entities:
             - person.gosia
             - entity: device_tracker.google_maps_109218123589188227395
-              icon: 'mdi:map-marker-circle'
+              icon: "mdi:map-marker-circle"
               name: Gosai presence
               secondary_info: last-changed
             - entity: device_tracker.gosia_galaxy_s9
-              icon: 'mdi:wifi'
+              icon: "mdi:wifi"
               name: Gosia Wifi
               secondary_info: last-changed
             - entity: device_tracker.gosia_g6_bt
-              icon: 'mdi:bluetooth'
+              icon: "mdi:bluetooth"
               name: Gosia bt
               secondary_info: last-changed
           type: entities
@@ -1139,15 +1182,15 @@ views:
           entities:
             - person.michal
             - entity: device_tracker.google_maps_104688658658376260645
-              icon: 'mdi:map-marker-circle'
+              icon: "mdi:map-marker-circle"
               name: Michał presence
               secondary_info: last-changed
             - entity: device_tracker.nizmo_phone
-              icon: 'mdi:wifi'
+              icon: "mdi:wifi"
               name: Michał Wifi
               secondary_info: last-changed
             - entity: device_tracker.oneplus_3_bt
-              icon: 'mdi:bluetooth'
+              icon: "mdi:bluetooth"
               name: Michał bt
               secondary_info: last-changed
           type: entities
@@ -1167,25 +1210,25 @@ views:
       - entity: camera.camera_kosciuszki
         show_state: false
         type: picture-entity
-    icon: 'mdi:camera'
+    icon: "mdi:camera"
     path: null
     title: Camera
   - badges: []
     cards:
       - entity: plant.kids_plant
-        name: Outside tomato
+        name: "Outside tomato #4"
         type: plant-status
       - entity: plant.living_room_plant
-        name: Living room plant
+        name: "Living room plant #2"
         type: plant-status
       - entity: plant.kitchen_plant
-        name: Outside cucumber
+        name: "Outside cucumber #3"
         type: plant-status
       - entity: plant.outside_plant
-        name: unnown
+        name: "unnown #1"
         type: plant-status
       - entity: plant.fifth_plant
-        name: fifth
+        name: "fifth #5"
         type: plant-status
       - entities:
           - sensor.xiaomi_miflora_moisture_1
@@ -1193,7 +1236,8 @@ views:
           - sensor.xiaomi_miflora_moisture_3
           - sensor.xiaomi_miflora_moisture_4
           - sensor.xiaomi_miflora_moisture_5
-        hours_to_show: 120
+          - sensor.xiaomi_miflora_moisture_6
+        hours_to_show: 168
         refresh_interval: 60
         title: Flower Moisture
         type: history-graph
@@ -1203,7 +1247,8 @@ views:
           - sensor.xiaomi_miflora_temperature_3
           - sensor.xiaomi_miflora_temperature_4
           - sensor.xiaomi_miflora_temperature_5
-        hours_to_show: 120
+          - sensor.xiaomi_miflora_temperature_6
+        hours_to_show: 168
         refresh_interval: 60
         title: Flower Temperature
         type: history-graph
@@ -1213,11 +1258,15 @@ views:
           - sensor.xiaomi_miflora_soil_conductivity_3
           - sensor.xiaomi_miflora_soil_conductivity_4
           - sensor.xiaomi_miflora_soil_conductivity_5
-        hours_to_show: 120
+          - sensor.xiaomi_miflora_soil_conductivity_6
+        hours_to_show: 168
         refresh_interval: 60
         title: Flower conductivity
         type: history-graph
-    icon: 'mdi:flower'
+      - entity: plant.sixth_plant
+        name: "sixth #6"
+        type: plant-status
+    icon: "mdi:flower"
     theme: Backend-selected
     title: Flowers
   - badges:
@@ -1254,8 +1303,8 @@ views:
         title: Vibration
         type: entities
       - entities:
-          - entity: switch.ender_3_power
-          - entity: sensor.ender_3_power_consumtion
+          - entity: switch.ender_3_switch
+          - entity: sensor.shelly_shsw_pm_608c82_consumption
           - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
           - entity: binary_sensor.ender_3_printing
           - entity: binary_sensor.ender_3_printing_error
@@ -1273,7 +1322,7 @@ views:
         type: entities
       - entities:
           - entity: sensor.vacuum_battery
-            type: 'custom:battery-entity'
+            type: "custom:battery-entity"
         type: entities
       - entity: switch.wake_up_pc
         hold_action:
@@ -1283,26 +1332,7 @@ views:
         tap_action:
           action: toggle
         type: entity-button
-      - card:
-          entities: []
-          title: AdGuard
-          type: entities
-        filter:
-          include:
-            - entity_id: '*adguard*'
-        show_empty: false
-        type: 'custom:monster-card'
-      - type: 'custom:browser-player'
-      - card:
-          entities: []
-          show_header_toggle: false
-          title: PC monitoring
-          type: entities
-        filter:
-          include:
-            - entity_id: '*my_computer*'
-        show_empty: false
-        type: 'custom:monster-card'
+      - type: "custom:browser-player"
       - content: |
           <big><center>News</center></big>
           [[ binary_sensor.impk_news.attributes.html ]]
@@ -1311,7 +1341,7 @@ views:
           <big><center>Departures Home</center></big>
           [[ sensor.rozkladzik_wroclaw_4507.attributes.html ]]
         title: Rozkładzik
-        type: 'custom:html-card'
+        type: "custom:html-card"
       - entities:
           - entity: sensor.tauron_amiplus_consumption_daily
           - entity: sensor.tauron_amiplus_consumption_monthly
@@ -1330,7 +1360,39 @@ views:
         show_header_toggle: false
         title: Server shelf
         type: entities
-    icon: 'mdi:test-tube'
+      - entities:
+          - hide_if_unavailable: true
+            name: Lights
+            type: cast
+            view: lights
+        type: entities
+      - entities:
+          - sensor.adguard_average_processing_speed
+          - sensor.adguard_dns_queries
+          - sensor.adguard_dns_queries_blocked
+          - sensor.adguard_dns_queries_blocked_ratio
+          - sensor.adguard_parental_control_blocked
+          - sensor.adguard_rules_count
+          - sensor.adguard_safe_browsing_blocked
+          - switch.adguard_filtering
+          - switch.adguard_parental_control
+          - switch.adguard_protection
+          - switch.adguard_query_log
+          - switch.adguard_safe_browsing
+          - switch.adguard_safe_search
+        show_header_toggle: false
+        title: AddGuard
+        type: entities
+      - entities:
+          - content_template: "Update available for {{display_name}} to {{available version}}"
+            entity: sensor.hacs
+            icon: "mdi:update"
+            list_attribute: repositories
+            multiple_items: true
+        id_filter: ^home_feed_.*
+        title: Home Feed
+        type: "custom:home-feed-card"
+    icon: "mdi:test-tube"
     theme: darkred
     title: Testing area
   - cards:
@@ -1408,12 +1470,52 @@ views:
           type: entities
         filter:
           include:
-            - entity_id: '*automation*'
-              state: 'off'
+            - entity_id: "*automation*"
+              state: "off"
         show_empty: false
         show_header_toggle: true
-        type: 'custom:monster-card'
-    icon: 'mdi:settings'
+        type: "custom:monster-card"
+      - entities:
+          - binary_sensor.my_computer_connected
+          - camera.my_computer_screen_0
+          - camera.my_computer_screen_1
+          - script.my_computer_displays_off
+          - script.my_computer_displays_on
+          - script.my_computer_hibernate
+          - script.my_computer_lock
+          - script.my_computer_logoff
+          - script.my_computer_notify
+          - script.my_computer_reboot
+          - script.my_computer_refresh
+          - script.my_computer_run_chrome
+          - script.my_computer_shutdown
+          - script.my_computer_suspend
+          - script.my_computer_vol_max
+          - script.my_computer_vol_mute
+          - script.my_computer_wake
+          - sensor.my_computer_cpu_usage
+          - sensor.my_computer_current_user
+          - sensor.my_computer_hdd_label_c
+          - sensor.my_computer_hdd_label_d
+          - sensor.my_computer_hdd_total_free_space_c
+          - sensor.my_computer_hdd_total_free_space_d
+          - sensor.my_computer_hdd_usage_c
+          - sensor.my_computer_hdd_usage_d
+          - sensor.my_computer_idle_time
+          - sensor.my_computer_network_ipv4
+          - sensor.my_computer_network_ipv6
+          - sensor.my_computer_network_speed
+          - sensor.my_computer_network_wired
+          - sensor.my_computer_ram_available
+          - sensor.my_computer_ram_total
+          - sensor.my_computer_ram_usage
+          - sensor.my_computer_ram_used
+          - switch.my_computer
+        show_header_toggle: false
+        title: My Computer
+        type: entities
+      - type: "custom:unused-card"
+    icon: "mdi:settings"
     id: 8
     title: Stats
   - badges: []
@@ -1427,11 +1529,11 @@ views:
                 - binary_sensor.double_garage
               states:
                 - class: binary-sensor-off
-                  state: 'off'
+                  state: "off"
                 - class: binary-sensor-on
-                  state: 'on'
+                  state: "on"
           stylesheet: /local/floorplan/examples/simple/simple.css?v=1.1.14
         title: Simple Floorplan
-        type: 'custom:floorplan-card'
-    icon: 'mdi:floor-plan'
+        type: "custom:floorplan-card"
+    icon: "mdi:floor-plan"
     title: Floreplan
