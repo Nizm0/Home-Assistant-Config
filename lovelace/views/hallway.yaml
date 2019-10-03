@@ -1,0 +1,19 @@
+icon: "mdi:stairs"
+id: 6
+title: Hallway
+cards:
+  - cards:
+      - cards:
+          - entity: light.corridor_top_light
+            hold_action: more-info
+            tap_action: toggle
+            type: entity-button
+          - entity: light.corridor_gateway_light
+            type: light
+        type: horizontal-stack
+    type: "custom:vertical-stack-in-card"
+  - entities:
+      - entity: binary_sensor.corridor_motion_sensor
+      - entity: binary_sensor.home_door_sensor
+      - entity: sensor.corridor_illumination
+    type: entities

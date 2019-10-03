@@ -1,0 +1,75 @@
+icon: "mdi:shower"
+id: 3
+title: Bathroom
+cards:
+  - cards:
+      - cards:
+          - entity: light.bathroom_top_light
+            hold_action:
+              action: more-info
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: binary_sensor.bathroom_motion_sensor
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
+        type: horizontal-stack
+      - cards:
+          - entity: binary_sensor.bathroom_water_leak
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
+          - entity: sensor.taking_bath
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
+          - entity: binary_sensor.taking_bath
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
+        type: horizontal-stack
+    layout: horizontal
+    type: "custom:vertical-stack-in-card"
+  - entity: sensor.bathroom_temperature
+    max: 40
+    min: 0
+    name: Temperature
+    severity:
+      green: 18
+      red: 30
+      yellow: 25
+    theme: default
+    type: gauge
+    unit: C
+  - detail: 2
+    entity: sensor.bathroom_temperature
+    graph: line
+    type: sensor
+  - entity: sensor.bathroom_humidity
+    max: 100
+    min: 0
+    name: Humidity
+    severity:
+      green: 30
+      red: 60
+      yellow: 50
+    theme: default
+    type: gauge
+    unit: "%"
+  - detail: 2
+    entity: sensor.bathroom_humidity
+    graph: line
+    type: sensor
+  - detail: 2
+    entity: sensor.bathroom_pressure
+    graph: line
+    type: sensor
