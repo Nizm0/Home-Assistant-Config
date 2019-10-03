@@ -1,0 +1,5 @@
+id: 608C82
+name: Ender 3 power
+sensors:
+  - power
+  - device_temp

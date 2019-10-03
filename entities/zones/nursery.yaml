@@ -1,0 +1,4 @@
+name: Nursery
+latitude: !secret nursery_latitude
+longitude: !secret nursery_longitude
+radius: 150

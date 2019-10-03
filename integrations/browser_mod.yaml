@@ -1,0 +1,4 @@
+# Custom component
+
+browser_mod:
+  devices: !include_dir_merge_named ../entities/browser_mod

@@ -1,0 +1,7 @@
+platform: philips_android_tv
+name: Philips TV
+favorite_channels_only: true
+host: 192.168.1.130
+mac: 3C:A0:67:E0:3E:E1
+username: !secret philips_user
+password: !secret philips_pass

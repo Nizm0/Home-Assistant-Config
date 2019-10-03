@@ -1,0 +1,3 @@
+platform: impk
+monitored_conditions:
+  - news

@@ -1,0 +1,6 @@
+home_michal:
+  zone: home
+  devices:
+    - device_tracker.google_maps_104688658658376260645
+  tolerance: 50
+  unit_of_measurement: km

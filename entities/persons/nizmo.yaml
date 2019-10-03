@@ -1,0 +1,7 @@
+---
+name: Nizm0
+id: nizmo
+# user_id: !secret user_id_frenck
+device_trackers:
+  - device_tracker.google_maps_104688658658376260645
+  - device_tracker.nizmo_phone

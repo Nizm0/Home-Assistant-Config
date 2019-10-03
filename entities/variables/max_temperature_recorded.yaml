@@ -1,0 +1,7 @@
+max_temperature_recorded:
+  restore: true
+  attributes:
+    friendly_name: 'Max temperature recorded'
+    when: ''
+    where: ''
+    # icon: mdi:alarm

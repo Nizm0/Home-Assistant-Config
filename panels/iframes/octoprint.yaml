@@ -1,0 +1,4 @@
+octoprint:
+  title: Ender 3 Octoprint
+  icon: mdi:printer-3d
+  url: !secret octoprint_url
