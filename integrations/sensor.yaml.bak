@@ -1,0 +1,22 @@
+---
+# Sensors are gathering information about states and conditions.
+#
+# This loads up my sensor configurations
+#
+# https://www.home-assistant.io/components/sensor/
+#
+# sensor: !include_dir_list ../entities/sensors
+
+luftdaten:
+  sensor_id: 2303
+  show_on_map: false
+  sensors:
+    monitored_conditions:
+      - P1
+      - P2
+      # - temperature
+      # - humidity
+      # - pressure
+air_quality:
+  - platform: opensensemap
+    station_id: 5902649c5ba9e50011fc57b8

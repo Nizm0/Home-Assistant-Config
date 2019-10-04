@@ -1,0 +1,35 @@
+input_boolean:
+  ready_to_vacuum:
+    name: Flor is ready to vacuum
+    icon: mdi:robot-vacuum
+    # initial: off
+    # restore_state:
+
+input_datetime:
+  vacuum_day_time:
+    name: Vacuum date time
+    has_date: false
+    has_time: true
+    # initial: '15:00'
+
+switch:
+  - platform: template
+    switches:
+      rockrobo_switch:
+        entity_id: vacuum.rockrobo
+        value_template: "{{ is_state('vacuum.rockrobo', 'cleaning') }}"
+        turn_on:
+          service: vacuum.start
+          data:
+            entity_id: vacuum.rockrobo
+        turn_off:
+          service: vacuum.stop
+          data:
+            entity_id: vacuum.rockrobo
+
+
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.1.150
+    name: Rockrobo
+    token: !secret xiaomi_rockrobo_key

@@ -1,0 +1,21 @@
+switch:
+  - platform: mqtt
+    state_topic: "tele/RF_Bridge/RESULT"
+    command_topic: "cmnd/RF_Bridge/RfCode"
+    name: RF Switch 2
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: "#0515C3"
+    payload_off: "#0515CC"
+    qos: 1
+    retain: false
+    optimistic: true
+  - platform: mqtt
+    state_topic: "tele/RF_Bridge/RESULT"
+    command_topic: "cmnd/RF_Bridge/RfCode"
+    name: RF Switch 3
+    value_template: '{{value_json.RfReceived.Data}}'
+    payload_on: "#051500"
+    payload_off: "#05170C"
+    qos: 1
+    retain: false
+    optimistic: true
