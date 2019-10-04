@@ -1,0 +1,12 @@
+sensor:
+  - platform: twitch
+    client_id: 1on3wj2sxs344bdsgb164rjx5sysef
+    channels:
+      - frenck
+      - DrZzs
+      - dziarowski1
+  - platform: discord_game
+    token: !secret secretDiscordBotToken
+    members:
+    - Thaeliaris#9947
+    - Nizm0#9673

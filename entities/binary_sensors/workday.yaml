@@ -8,7 +8,7 @@
 #
 platform: workday
 name: workday
-country: NL
+country: PL
 workdays:
   - mon
   - tue
