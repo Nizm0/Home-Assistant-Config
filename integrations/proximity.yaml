@@ -1,1 +1,1 @@
-proximity: !include_dir_merge_list ../entities/proximity
+proximity: !include_dir_merge_named ../entities/proximity
