@@ -16,13 +16,13 @@ homeassistant:
   # Load packages
   packages: !include_dir_named integrations
 
-browser_mod:
-  devices:
-    a04bd448-beda43c5:
-      name: Chrome_PC
-    4e83d973-e8c99618:
-      name: Chrome_Work
-    d86b2fcd-d890ee26:
-      name: Chrome_OnePlus3
-    601a98ca-4ca18723:
-     name: Surface_1_Pro
+# browser_mod:
+#   devices:
+#     a04bd448-beda43c5:
+#       name: Chrome_PC
+#     4e83d973-e8c99618:
+#       name: Chrome_Work
+#     d86b2fcd-d890ee26:
+#       name: Chrome_OnePlus3
+#     601a98ca-4ca18723:
+#      name: Surface_1_Pro
