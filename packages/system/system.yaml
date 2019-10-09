@@ -1,5 +1,5 @@
 sensor:
-  ---
+  #---
   # The time and date (time_date) sensor platform.
   # Has the time in various formats, the date, or both.
   #
@@ -16,7 +16,7 @@ sensor:
       - 'time_date'
       - 'time_utc'
       - 'beat'
-  ---
+  #---
   # The version sensor platform is displaying the
   # current version.
   #
@@ -24,7 +24,7 @@ sensor:
   #
   - platform: version
     name: version_current
-  ---
+  #---
   # The version sensor platform is displaying the
   # available version online.
   #
