@@ -26,7 +26,7 @@ google54d9d9f0104cb9cd.html
 *.save
 *.pyc
 *.cookies
-*.delete 
+*.delete
 appdaemon/custom_widgets
 www/images/home
 www/floorplan
