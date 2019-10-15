@@ -66,3 +66,56 @@ binary_sensor:
     host: 192.168.1.200
     count: 4
     scan_interval: 60
+
+automation:
+  - alias: Notify if new devices
+    id: notify_if_new_devices
+    initial_state: 'true'
+    trigger:
+      - platform: event
+        event_type: device_tracker_new_device
+    action:
+      - service: notify.pushbullet_nizmo
+        data_template:
+          message: >
+            New device:
+            {{trigger.event.data.host_name}}
+            ({{trigger.event.data.entity_id}})
+            {{trigger.event.data.source_type}}
+          title: New device tracked
+          # target: device/oneplus 3
+      - service: persistent_notification.create
+        data_template:
+          message: >
+            New device:
+            {{trigger.event.data.host_name}}
+            ({{trigger.event.data.entity_id}})
+            {{trigger.event.data.source_type}}
+          title: New device tracked
+      - service: notify.push_to_chrome_nizm0_oneplus3
+        data_template:
+          message: >
+            New device:
+            {{trigger.event.data.host_name}}
+            {{trigger.event.data.entity_id}}
+            {{trigger.event.data.source_type}}
+          title: New device tracked
+          data:
+            tag: 'new-device-{{trigger.event.data.host_name}}'
+      # - service: notify.home_assistant
+      #   data_template:
+      #     message: >
+      #       New device:
+      #       {{trigger.event.data.host_name}}
+      #       ({{trigger.event.data.entity_id}})
+      #     title: New device 
+
+  - id: '1549924461285'
+    alias: Hangout reconnect at 5
+    initial_state: 'true'
+    trigger:
+    - at: 05:00
+      platform: time
+    condition: []
+    action:
+    - service: hangouts.reconnect
