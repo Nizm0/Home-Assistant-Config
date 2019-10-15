@@ -1,0 +1,41 @@
+automation:
+  - alias: Living room top light turned on
+    id: living_room_top_light_turned_on
+    initial_state: 'true'
+    trigger:
+    - platform: state
+      entity_id: light.top_light
+      to: 'on'
+      for:
+        seconds: 3
+    condition:
+      condition: or
+      conditions:
+      - condition: state
+        entity_id: light.directional_light
+        state: 'on'
+      - condition: state
+        entity_id: light.general_light
+        state: 'on'
+    action:
+    - service: homeassistant.turn_off
+      entity_id: light.directional_light
+    - service: homeassistant.turn_off
+      entity_id: light.general_light
+
+  - alias: Living room light 1 and 2 turned on
+    id: living_room_light_1_and_2_turned_on
+    initial_state: 'true'
+    trigger:
+    - platform: state
+      entity_id: light.directional_light, light.general_light
+      to: 'on'
+      for:
+        seconds: 3
+    condition:
+    - condition: state
+      entity_id: light.top_light
+      state: 'on'
+    action:
+    - service: homeassistant.turn_off
+      entity_id: light.top_light

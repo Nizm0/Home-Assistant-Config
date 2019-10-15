@@ -7,6 +7,13 @@
   - event: sunset
     platform: sun
   action:
+    - service: notify.push_to_chrome
+      data_template:
+        message: >
+          We have {{ trigger.event }}
+        title: Sun is changin state
+        data:
+          tag: sun-state-change
     # - service: notify.living_room_tv
     #   data:
     #     data:
@@ -17,13 +24,6 @@
     #       transparency: 75%
     #     message: '{{states.sun.sun.state}}'
     #     title: Sun is going to
-    - service: notify.push_to_chrome
-      data_template:
-        message: >
-          We have {{ trigger.event }}
-        title: Sun is changin state
-        data:
-          tag: sun-state-change
     # - service: notify.push_to_chrome
     #   data_template:
     #     message: >

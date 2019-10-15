@@ -9,7 +9,7 @@
     # for:
     #   minutes: 2
   condition:
-  action: 
+  action:
   - service: notify.push_to_chrome
     data_template:
       message: >
