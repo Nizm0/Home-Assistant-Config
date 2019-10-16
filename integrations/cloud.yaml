@@ -11,7 +11,7 @@ cloud:
 
     # Entity specific configuration for Google Assistant.
     # These are loaded from a separate directory.
-    entity_config: !include_dir_merge_named ../../assistants/google
+    entity_config: !include_dir_merge_named ../assistants/google
 
     # Filters for entities to include/exclude from Google Assistant.
     # These are loaded from a separate directory.

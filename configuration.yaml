@@ -14,7 +14,7 @@
 #
 homeassistant:
   # Load packages
-  packages: !include_dir_named packages/integrations
+  packages: !include_dir_named integrations
 
 # browser_mod:
 #   devices:
