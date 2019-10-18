@@ -6,6 +6,7 @@ darkorange:
   primary-background-color: "#37464f"
   sidebar-text_-_background: "#62717b"
   paper-card-background-color: "#263137"
+  card-background-color: "var(--paper-card-background-color)"
   paper-card-header-color: "var(--text-primary-color)"
   secondary-background-color: "var(--primary-background-color)"
   primary-text-color: "var(--text-primary-color)"

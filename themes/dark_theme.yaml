@@ -4,6 +4,7 @@ dark_theme:
   primary-background-color: "#303030" # Primary background colour (dialogs, e.t.c)
   secondary-background-color: "#303030" # Secondary background colour (main UI background)
   paper-card-background-color: "#424242" # Card background colour
+  card-background-color: "var(--paper-card-background-color)"
   paper-item-icon-color: "#1ABA92" # Icon colour
   primary-text-color: "#FFFFFF" # Primary text colour
   secondary-text-color: "#389638" #"rgba(255, 255, 255, 0.7)" # Secondary text colour

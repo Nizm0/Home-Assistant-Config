@@ -5,6 +5,7 @@ darkred:
   divider-color: "rgba(255, 255, 255, 0.12)"
   light-primary-color: "#e06c6c"
   paper-card-background-color: "#1d1d1d"
+  card-background-color: "var(--paper-card-background-color)"
   paper-grey-200: "#191919"
   paper-item-icon-color: "#d3d3d3"
   paper-listbox-background-color: "#202020"
