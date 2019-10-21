@@ -6,4 +6,4 @@ deconz_helper:
     - smart_switch_2
   cube:
     - mi_magic_cube
-  motions: ["binary_sensor.bathroom_motion_sensor","binary_sensor.kitchen_motion_sensor", "binary_sensor.living_room_motion_sensor", "binary_sensor.corridor_motion_sensor"]
+  motions: ["binary_sensor.bathroom_motion_sensor","binary_sensor.kitchen_motion_sensor", "binary_sensor.living_room_motion_sensor", "binary_sensor.hallway_motion_sensor"]

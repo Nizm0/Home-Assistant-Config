@@ -1,7 +1,7 @@
-corridor_light_timer:
+hallway_light_timer:
   sequence:
     - delay:
         seconds: 1
     - service: light.turn_off
       data:
-        entity_id: light.corridor_gateway_light
+        entity_id: light.hallway_gateway_light

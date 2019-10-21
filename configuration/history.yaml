@@ -20,13 +20,13 @@
   #   - sensor.kids_pressure
   #   - sensor.living_room_gateway_illumination
   #   ### Lights
-  #   - light.corridor_gateway_light
+  #   - light.hallway_gateway_light
   #   ### Raspberry stats
   #   - sensor.processor_use
   #   - sensor.memory_free
   #   - sensor.disk_use_percent_home
   #   ### Motion sensors
-  #   - binary_sensor.corridor_motion_sensor
+  #   - binary_sensor.hallway_motion_sensor
   #   - binary_sensor.living_room_motion_sensor
   #   ### Dor Windows sensors
   #   - binary_sensor.home_door_sensor

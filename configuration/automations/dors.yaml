@@ -45,7 +45,11 @@
       to: 'off'
   condition:
     - condition: state
+<<<<<<< HEAD
       entity_id: binary_sensor.corridor_motion_sensor
+=======
+      entity_id: binary_sensor.hallway_motion_sensor
+>>>>>>> New system and Git
       state: 'off'
   action:
     - service: homeassistant.turn_on

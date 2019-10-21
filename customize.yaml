@@ -60,7 +60,7 @@ history_graph.flower_moisture:
 # history_graph.gearbest_price_history:
 #   hidden: yes
 
-# binary_sensor.corridor_motion_sensor:
+# binary_sensor.hallway_motion_sensor:
 # binary_sensor.living_room_motion_sensor:
 binary_sensor.home_door_sensor:
   device_class: door

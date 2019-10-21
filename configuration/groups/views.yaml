@@ -47,11 +47,11 @@ kids_room_view:
     - group.kids
     - group.kids_room_switch
     - group.kids_room_sensors
-corridor_view:
+hallway_view:
   view: yes
-  name: Corridor
+  name: Hallway
   entities:
-    - binary_sensor.corridor_motion_sensor
+    - binary_sensor.hallway_motion_sensor
     - binary_sensor.home_door_sensor
 family_view:
   name: Family

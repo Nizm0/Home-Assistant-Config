@@ -17,6 +17,6 @@
 #   icon: 'mdi:clock'
 #   time_format: '%e %B - %H:%M:%S'
 #   entities:
-#     - binary_sensor.corridor_motion_sensor
+#     - binary_sensor.hallway_motion_sensor
 #     - binary_sensor.kitchen_motion_sensor
 #     - binary_sensor.living_room_motion_sensor

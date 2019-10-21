@@ -400,7 +400,7 @@ views:
       - sensor.hacs
     cards:
       - entities:
-          - entity: binary_sensor.corridor_motion_sensor
+          - entity: binary_sensor.hallway_motion_sensor
             secondary_info: last-changed
           - entity: binary_sensor.living_room_motion_sensor
             secondary_info: last-changed
@@ -443,7 +443,7 @@ views:
           - entity: light.christmas_tree
             tap_action:
               action: toggle
-          - entity: light.corridor_gateway_light
+          - entity: light.hallway_gateway_light
             tap_action:
               action: toggle
           - entity: light.directional_light
@@ -495,7 +495,7 @@ views:
           - entity: light.christmas_tree
             tap_action:
               action: toggle
-          - entity: light.corridor_gateway_light
+          - entity: light.hallway_gateway_light
             tap_action:
               action: toggle
           - entity: light.directional_light
@@ -622,21 +622,21 @@ views:
         title: Environment
         type: entities
       - entities:
-          - entity: light.corridor_gateway_light
+          - entity: light.hallway_gateway_light
             secondary_info: last-changed
-          - entity: light.corridor_top_light
-          - entity: binary_sensor.corridor_motion_sensor
+          - entity: light.hallway_top_light
+          - entity: binary_sensor.hallway_motion_sensor
             secondary_info: last-changed
-          - entity: sensor.corridor_illumination
+          - entity: sensor.hallway_illumination
             secondary_info: last-changed
-          - entity: sensor.corridor_temperature
+          - entity: sensor.hallway_temperature
             secondary_info: last-changed
-          - entity: sensor.corridor_humidity
+          - entity: sensor.hallway_humidity
             secondary_info: last-changed
-          - entity: sensor.corridor_pressure
+          - entity: sensor.hallway_pressure
             secondary_info: last-changed
         show_header_toggle: true
-        title: Corridor
+        title: hallway
         type: entities
       - entities:
           - sensor.processor_use
@@ -1065,18 +1065,18 @@ views:
   - cards:
       - cards:
           - cards:
-              - entity: light.corridor_top_light
+              - entity: light.hallway_top_light
                 hold_action: more-info
                 tap_action: toggle
                 type: entity-button
-              - entity: light.corridor_gateway_light
+              - entity: light.hallway_gateway_light
                 type: light
             type: horizontal-stack
         type: "custom:vertical-stack-in-card"
       - entities:
-          - entity: binary_sensor.corridor_motion_sensor
+          - entity: binary_sensor.hallway_motion_sensor
           - entity: binary_sensor.home_door_sensor
-          - entity: sensor.corridor_illumination
+          - entity: sensor.hallway_illumination
         type: entities
     icon: "mdi:stairs"
     id: 6
@@ -1281,7 +1281,7 @@ views:
     cards:
       - entities:
           - entity: variable.last_motion
-          - entity: binary_sensor.corridor_motion_sensor
+          - entity: binary_sensor.hallway_motion_sensor
           - entity: binary_sensor.living_room_motion_sensor
           - entity: binary_sensor.bathroom_motion_sensor
           - entity: media_player.philips_tv
@@ -1450,7 +1450,7 @@ views:
         title: Dors in home
         type: history-graph
       - entities:
-          - binary_sensor.corridor_motion_sensor
+          - binary_sensor.hallway_motion_sensor
           - binary_sensor.living_room_motion_sensor
           - binary_sensor.kitchen_motion_sensor
           - binary_sensor.bathroom_motion_sensor

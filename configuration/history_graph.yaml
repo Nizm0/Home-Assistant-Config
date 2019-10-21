@@ -64,7 +64,7 @@ flower_moisture:
 motions:
   name: Motions in home
   entities:
-  - binary_sensor.corridor_motion_sensor
+  - binary_sensor.hallway_motion_sensor
   - binary_sensor.living_room_motion_sensor
 dors:
   name: Dors in home

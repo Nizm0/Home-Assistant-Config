@@ -14,10 +14,10 @@ light_level:
   shorten: 1
   entity: sensor.living_room_gateway_illumination
 
-corridor_gateway_light:
+hallway_gateway_light:
   widget_type: light_with_brightness
   title: Living room gateway
-  entity: light.corridor_gateway_light
+  entity: light.hallway_gateway_light
   on_attributes:
     brightness: 100
     # rgb_color: 128, 34, 56
@@ -49,10 +49,10 @@ slider:
   entity: sensor.living_room_gateway_illumination
   units: "%"
 
-corridor_sensor:
+hallway_sensor:
   widget_type: binary_sensor
-  title: Corridor motion sensor
-  entity: binary_sensor.corridor_motion_sensor
+  title: hallway motion sensor
+  entity: binary_sensor.hallway_motion_sensor
   icon_on: mdi-walk
   icon_off: mdi-human-male
 
@@ -64,5 +64,5 @@ main_door_sensor:
   icon_off: mdi-door-closed
 
 layout:
-  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizmo_phone, device_tracker.gosia_phone, corridor_sensor, main_door_sensor
-  - corridor_gateway_light, kids_light, group.all_lights, bedroom_light_red, bedroom_light_white, slider(2x1)
+  - clock(2x1), light_level, sensor.weather_temperature, device_tracker.nizmo_phone, device_tracker.gosia_phone, hallway_sensor, main_door_sensor
+  - hallway_gateway_light, kids_light, group.all_lights, bedroom_light_red, bedroom_light_white, slider(2x1)
