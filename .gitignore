@@ -4,6 +4,7 @@
 !*.sh
 !*.dash
 !.gitignore
+!esphome/*.yaml
 
 *gmail*
 ip_bans.yaml
@@ -32,7 +33,7 @@ www/community
 
 __*
 custom_components
-esphome
+esphome/*/
 deps
 notebooks
 node-red
