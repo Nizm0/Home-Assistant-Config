@@ -1,8 +1,0 @@
-{
-  "domain": "philips_ambilight",
-  "name": "Philips Ambilights",
-  "documentation": "https://github.com/jomwells/ambilights",
-  "dependencies": [],
-  "codeowners": ["@jomwells","@hutchinsane"],
-  "requirements": []
-}

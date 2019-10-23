@@ -25,6 +25,7 @@ appdaemon.yaml
 *.save
 *.pyc
 *.cookies
+*.delete
 appdaemon/custom_widgets
 www/images/home
 www/floorplan
