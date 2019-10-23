@@ -1,8 +1,0 @@
-{
-  "domain": "rozkladzik",
-  "name": "Rozkładzik",
-  "documentation": "https://github.com/PiotrMachowski/Home-Assistant-custom-components-Rozkladzik",
-  "dependencies": [],
-  "codeowners": ["PiotrMachowski"],
-  "requirements": ["requests"]
-}
