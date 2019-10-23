@@ -1,0 +1,9 @@
+input_boolean.ready_to_vacuum:
+  templates:
+    # icon_color: "if (state === 'on') return rgb(251, 210, 41); else return rgb(54, 95, 140);"
+    # icon: >
+    #   <if (state === 'on') return 'mdi:bell';
+    #   return 'mdi:bell-off';
+    icon_color: >
+      if (state === 'on') return 'rgb(251, 210, 41)';
+      return 'rgb(54, 95, 140)';
