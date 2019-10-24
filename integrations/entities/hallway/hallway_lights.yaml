@@ -1,6 +1,6 @@
 light:
   - platform: mqtt
-    name: Corridor top light
+    name: Hallway top light
     state_topic: "stat/shelly1-hallway/POWER"
     command_topic: "cmnd/shelly1-hallway/POWER"
     availability_topic: "tele/shelly1-hallway/LWT"

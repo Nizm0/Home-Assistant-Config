@@ -1,3 +1,4 @@
+---
 platform: mqtt
 name: Bathroom top light
 state_topic: "stat/shelly1-bathroom/POWER"

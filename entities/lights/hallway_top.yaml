@@ -1,3 +1,4 @@
+---
 platform: mqtt
 name: Hallway top light
 state_topic: "stat/shelly1-hallway/POWER"

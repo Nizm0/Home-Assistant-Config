@@ -1,3 +1,25 @@
+binary_sensor:
+  - platform: mqtt
+    name: "My Computer - Connected"
+    state_topic: "iotlink/workgroup/nizmo-pc/lwt"
+    value_template: "{{ value }}"
+    payload_on: "ON"
+    payload_off: "OFF"
+    device_class: "connectivity"
+    qos: 1
+
+switch:
+  - platform: template
+    switches:
+      my_computer:
+        friendly_name: "My Computer"
+        value_template: "{{ is_state('binary_sensor.my_computer_connected', 'on') }}"
+        turn_on:
+          service: script.my_computer_wake
+        turn_off:
+          service: script.my_computer_shutdown
+        icon_template: mdi:laptop
+
 sensor:
   - platform: mqtt
     name: "My Computer - Current User"
@@ -230,24 +252,114 @@ sensor:
     payload_not_available: "OFF"
     qos: 1
 
-binary_sensor:
-  - platform: mqtt
-    name: "My Computer - Connected"
-    state_topic: "iotlink/workgroup/nizmo-pc/lwt"
-    value_template: "{{ value }}"
-    payload_on: "ON"
-    payload_off: "OFF"
-    device_class: "connectivity"
-    qos: 1
+script:
+  my_computer_wake:
+    alias: "My Computer - Wake"
+    sequence:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: "70:85:C2:63:9F:11"
 
-switch:
-  - platform: template
-    switches:
-      my_computer:
-        friendly_name: "My Computer"
-        value_template: "{{ is_state('binary_sensor.my_computer_connected', 'on') }}"
-        turn_on:
-          service: script.my_computer_wake
-        turn_off:
-          service: script.my_computer_shutdown
-        icon_template: mdi:laptop
+  my_computer_shutdown:
+    alias: "My Computer - Shutdown"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/shutdown"
+          payload: ""
+
+  my_computer_suspend:
+    alias: "My Computer - Suspend"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/suspend"
+          payload: ""
+
+  my_computer_hibernate:
+    alias: "My Computer - Hibernate"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/hibernate"
+          payload: ""
+
+  my_computer_reboot:
+    alias: "My Computer - Reboot"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/reboot"
+          payload: ""
+
+  my_computer_lock:
+    alias: "My Computer - Lock"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/lock"
+          payload: ""
+
+  my_computer_logoff:
+    alias: "My Computer - Logoff"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/logoff"
+          payload: ""
+
+  my_computer_vol_mute:
+    alias: "My Computer - Toggle Mute"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/volume/mute"
+          payload: ""
+
+  my_computer_vol_max:
+    alias: "My Computer - Vol Max"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/volume/set"
+          payload: "100"
+
+  my_computer_displays_on:
+    alias: "My Computer - Displays ON"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/displays/on"
+          payload: ""
+
+  my_computer_displays_off:
+    alias: "My Computer - Displays OFF"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/displays/off"
+          payload: ""
+
+  my_computer_refresh:
+    alias: "My Computer - Refresh"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/refresh"
+          payload: ""
+
+  my_computer_notify:
+    alias: "My Computer - Notify"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/notify"
+          payload: '{ "title": "My Notification Title", "message": "This is an example of notification using IOT Link", "launchParams": "toast://open/https://iotlink.gitlab.io" }'
+
+  my_computer_run_chrome:
+    alias: "My Computer - Run Chrome"
+    sequence:
+      - service: mqtt.publish
+        data:
+          topic: "iotlink/workgroup/nizmo-pc/commands/run"
+          payload: '{ "command": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe", "args": "https://iotlink.gitlab.io", "path": "C:\\Program Files (x86)\\Google\\Chrome\\Application", "user": "", "visible": true, "fallback": true }'
