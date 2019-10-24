@@ -1,0 +1,4 @@
+platform: google_maps
+username: !secret google_maps_login
+max_gps_accuracy: 100
+scan_interval: 180

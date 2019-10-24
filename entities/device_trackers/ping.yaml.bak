@@ -1,0 +1,7 @@
+platform: ping
+interval_seconds: 60
+hosts:
+  nizmo_pc: 192.168.1.100
+  # server: 192.168.1.200
+  # router: 192.168.1.1
+count: 4

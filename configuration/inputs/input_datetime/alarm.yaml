@@ -1,5 +1,0 @@
-both_date_and_time:
-  name: Alarm Clock
-  has_date: true
-  has_time: true
-  # initial: '{{datetime.datetime.now().strftime('%Y-%m-%d %H:%M'))}}'

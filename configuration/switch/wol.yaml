@@ -1,3 +1,0 @@
-- platform: wake_on_lan
-  name: Wake up PC
-  mac_address: "04:92:26:C3:A4:C9"
