@@ -568,7 +568,7 @@ views:
         title: Bedroom
         type: entities
       - entities:
-          - entity: light.shelly_shsw_1_4a5b11
+          - entity: light.kitchen_top_light
             secondary_info: last-changed
           - entity: binary_sensor.kitchen_motion_sensor
             secondary_info: last-changed
@@ -912,7 +912,7 @@ views:
     cards:
       - cards:
           - cards:
-              - entity: light.shelly_shsw_1_4a5b11
+              - entity: light.kitchen_top_light
                 hold_action:
                   action: more-info
                 tap_action:
@@ -1298,7 +1298,7 @@ views:
         show_state: false
         type: picture-entity
       - entities:
-          - entity: binary_sensor.vibration_5
+          - entity: binary_sensor.washer_vibration
         show_header_toggle: false
         title: Vibration
         type: entities
@@ -1459,7 +1459,8 @@ views:
         title: Motions in home
         type: history-graph
       - entities:
-          - binary_sensor.kitchen_left_window_sensor
+          - entity: binary_sensor.living_room_balcony_window_sensor
+          - entity: binary_sensor.kitchen_left_window_sensor
         hours_to_show: 24
         refresh_interval: 0
         title: Windows in home
