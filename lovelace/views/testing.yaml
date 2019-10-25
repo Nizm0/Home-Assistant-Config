@@ -1,0 +1,126 @@
+badges:
+  - binary_sensor.in_bed
+  - sensor.in_bed_bayesian_probability
+  - sensor.motion_last30
+  - sensor.template_last_motion
+  - sensor.average_house_temperature
+  - sensor.average_house_humidity
+  - sensor.max_temperature_in_home
+  - sensor.max_recorded_temp
+title: Testing area
+icon: mdi:test-tube
+theme: darked
+cards:
+  - entities:
+      - entity: variable.last_motion
+      - entity: binary_sensor.corridor_motion_sensor
+      - entity: binary_sensor.living_room_motion_sensor
+      - entity: binary_sensor.bathroom_motion_sensor
+      - entity: media_player.philips_tv
+      - entity: group.all_devices
+      - entity: binary_sensor.desctop_pc
+      - entity: sun.sun
+      - entity: sensor.taking_bath
+      - entity: binary_sensor.taking_bath
+      - entity: binary_sensor.router
+      - entity: binary_sensor.server
+      - entity: binary_sensor.remote_ui
+    type: entities
+  - entity: camera.ender_3
+    show_state: false
+    type: picture-entity
+  - entities:
+      - entity: binary_sensor.washer_vibration
+    show_header_toggle: false
+    title: Vibration
+    type: entities
+  - entities:
+      - entity: switch.ender_3_switch
+      - entity: sensor.shelly_shsw_pm_608c82_consumption
+      - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
+      - entity: binary_sensor.ender_3_printing
+      - entity: binary_sensor.ender_3_printing_error
+      - entity: sensor.ender_3_target_bed_temp
+      - entity: sensor.ender_3_actual_bed_temp
+      - entity: sensor.ender_3_target_tool0_temp
+      - entity: sensor.ender_3_actual_tool0_temp
+      - entity: sensor.ender_3_current_state
+      - entity: sensor.ender_3_job_percentage
+      - entity: sensor.ender_3_time_elapsed
+      - entity: sensor.ender_3_time_remaining
+      - entity: sensor.predicted_print_end_time
+    show_header_toggle: false
+    title: Octoprint
+    type: entities
+  - entities:
+      - entity: sensor.vacuum_battery
+        type: "custom:battery-entity"
+    type: entities
+  - entity: switch.wake_up_pc
+    hold_action:
+      action: more-info
+    show_icon: true
+    show_name: true
+    tap_action:
+      action: toggle
+    type: entity-button
+  - type: "custom:browser-player"
+  - content: |
+      <big><center>News</center></big>
+      [[ binary_sensor.impk_news.attributes.html ]]
+      <big><center>Departures Work</center></big>
+      [[ sensor.rozkladzik_wroclaw_1515.attributes.html ]]
+      <big><center>Departures Home</center></big>
+      [[ sensor.rozkladzik_wroclaw_4507.attributes.html ]]
+    title: Rozkładzik
+    type: "custom:html-card"
+  - entities:
+      - entity: sensor.tauron_amiplus_consumption_daily
+      - entity: sensor.tauron_amiplus_consumption_monthly
+      - entity: sensor.tauron_amiplus_consumption_yearly
+      - entity: sensor.tauron_amiplus_zone
+    show_header_toggle: false
+    title: Tauron
+    type: entities
+  - entities:
+      - entity: switch.server_shelf_switch
+      - entity: sensor.server_shelf_current
+      - entity: sensor.server_shelf_power
+      - entity: sensor.server_shelf_voltage
+      - entity: sensor.server_shelf_uptime
+      - entity: sensor.server_shelf_wifi_signal
+    show_header_toggle: false
+    title: Server shelf
+    type: entities
+  - entities:
+      - hide_if_unavailable: true
+        name: Lights
+        type: cast
+        view: lights
+    type: entities
+  - entities:
+      - sensor.adguard_average_processing_speed
+      - sensor.adguard_dns_queries
+      - sensor.adguard_dns_queries_blocked
+      - sensor.adguard_dns_queries_blocked_ratio
+      - sensor.adguard_parental_control_blocked
+      - sensor.adguard_rules_count
+      - sensor.adguard_safe_browsing_blocked
+      - switch.adguard_filtering
+      - switch.adguard_parental_control
+      - switch.adguard_protection
+      - switch.adguard_query_log
+      - switch.adguard_safe_browsing
+      - switch.adguard_safe_search
+    show_header_toggle: false
+    title: AddGuard
+    type: entities
+  - entities:
+      - content_template: "Update available for {{display_name}} to {{available version}}"
+        entity: sensor.hacs
+        icon: "mdi:update"
+        list_attribute: repositories
+        multiple_items: true
+    id_filter: ^home_feed_.*
+    title: Home Feed
+    type: "custom:home-feed-card"

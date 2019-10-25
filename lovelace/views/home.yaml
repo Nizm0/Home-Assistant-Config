@@ -1,0 +1,302 @@
+badges:
+  - device_tracker.google_maps_104688658658376260645
+  - device_tracker.google_maps_109218123589188227395
+  - device_tracker.portex
+  - device_tracker.bozena_phone
+  - device_tracker.nizmo_surface
+  - device_tracker.gosia_laptop
+  - sensor.tv_is_on
+  - sensor.nizm0_today_at_work
+  - sensor.nizm0_week_work
+  - sensor.mold_indicator
+  - sensor.letsencrypt
+  - sensor.hacs
+icon: "mdi:home"
+id: 0
+panel: false
+path: ""
+title: Home
+cards:
+  - entities:
+      - entity: binary_sensor.corridor_motion_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.living_room_motion_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.kitchen_motion_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.bathroom_motion_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.home_door_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.living_room_balcony_window_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.kitchen_left_window_sensor
+        secondary_info: last-changed
+    type: entities
+  - card:
+      entities: []
+      title: Low Battery Devices
+      type: glance
+    filter:
+      include:
+        - entity_id: "*battery_level*"
+          state: < 25
+        - attributes:
+            battery: < 25
+        - attributes:
+            battery_level: < 25
+    show_empty: false
+    type: "custom:monster-card"
+  - card:
+      show_state: false
+      title: Turned on lights
+      type: glance
+    entities:
+      - entity: light.bathroom_top_light
+        tap_action:
+          action: toggle
+      - entity: light.bedroom_main_light
+        tap_action:
+          action: toggle
+      - entity: light.christmas_tree
+        tap_action:
+          action: toggle
+      - entity: light.corridor_gateway_light
+        tap_action:
+          action: toggle
+      - entity: light.directional_light
+        tap_action:
+          action: toggle
+      - entity: light.general_light
+        tap_action:
+          action: toggle
+      - entity: light.hallway_top_light
+        tap_action:
+          action: toggle
+      - entity: light.kids_top_light
+        tap_action:
+          action: toggle
+      - entity: light.kitchen_top_light
+        tap_action:
+          action: toggle
+      - entity: light.top_light
+        tap_action:
+          action: toggle
+      - entity: light.tv_ambilights
+        tap_action:
+          action: toggle
+      - entity: light.bedroom_main_light_2
+        tap_action:
+          action: toggle
+      - entity: light.hue_color_lamp_1
+        tap_action:
+          action: toggle
+      - entity: light.hue_color_lamp_2
+        tap_action:
+          action: toggle
+    show_header_toggle: false
+    state_filter:
+      - "on"
+    title: All lights
+    type: entity-filter
+  - card:
+      show_state: false
+      title: Turned off lights
+      type: glance
+    entities:
+      - entity: light.bathroom_top_light
+        tap_action:
+          action: toggle
+      - entity: light.bedroom_main_light
+        tap_action:
+          action: toggle
+      - entity: light.christmas_tree
+        tap_action:
+          action: toggle
+      - entity: light.corridor_gateway_light
+        tap_action:
+          action: toggle
+      - entity: light.directional_light
+        tap_action:
+          action: toggle
+      - entity: light.general_light
+        tap_action:
+          action: toggle
+      - entity: light.hallway_top_light
+        tap_action:
+          action: toggle
+      - entity: light.kids_top_light
+        tap_action:
+          action: toggle
+      - entity: light.kitchen_top_light
+        tap_action:
+          action: toggle
+      - entity: light.top_light
+        tap_action:
+          action: toggle
+      - entity: light.tv_ambilights
+        tap_action:
+          action: toggle
+      - entity: light.bedroom_main_light_2
+        tap_action:
+          action: toggle
+      - entity: light.hue_color_lamp_1
+        tap_action:
+          action: toggle
+      - entity: light.hue_color_lamp_2
+        tap_action:
+          action: toggle
+    show_header_toggle: false
+    state_filter:
+      - "off"
+    title: All lights
+    type: entity-filter
+  - entities:
+      - entity: light.directional_light
+        secondary_info: last-changed
+      - entity: light.general_light
+        secondary_info: last-changed
+      - entity: light.top_light
+        secondary_info: last-changed
+      - entity: light.christmas_tree
+        secondary_info: last-changed
+      - entity: binary_sensor.living_room_motion_sensor
+        secondary_info: last-changed
+      - entity: sensor.living_room_temperature
+        secondary_info: last-changed
+      - entity: sensor.living_room_humidity
+        secondary_info: last-changed
+      - entity: sensor.living_room_pressure
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Living room
+    type: entities
+  - entities:
+      - entity: light.bedroom_main_light
+        secondary_info: last-changed
+      - entity: light.bedroom_main_light_2
+        secondary_info: last-changed
+      - entity: sensor.bedroom_temperature
+        secondary_info: last-changed
+      - entity: sensor.bedroom_humidity
+        secondary_info: last-changed
+      - entity: sensor.bedroom_pressure
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Bedroom
+    type: entities
+  - entities:
+      - entity: light.kitchen_top_light
+        secondary_info: last-changed
+      - entity: binary_sensor.kitchen_motion_sensor
+        secondary_info: last-changed
+      - entity: sensor.kitchen_temperature
+        secondary_info: last-changed
+      - entity: sensor.kitchen_humidity
+        secondary_info: last-changed
+      - entity: sensor.kitchen_pressure
+        secondary_info: last-changed
+      - entity: sensor.kitchen_illumination
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Kitchen
+    type: entities
+  - entities:
+      - entity: light.bathroom_top_light
+        secondary_info: last-changed
+      - entity: binary_sensor.bathroom_motion_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.taking_bath
+        secondary_info: last-changed
+      - entity: binary_sensor.bathroom_water_leak
+        secondary_info: last-changed
+      - entity: sensor.bathroom_temperature
+        secondary_info: last-changed
+      - entity: sensor.bathroom_humidity
+        secondary_info: last-changed
+      - entity: sensor.bathroom_pressure
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Bathroom
+    type: entities
+  - entities:
+      - entity: light.kids_top_light
+        secondary_info: last-changed
+      - entity: sensor.kids_temperature
+        secondary_info: last-changed
+      - entity: sensor.kids_humidity
+        secondary_info: last-changed
+      - entity: sensor.kids_pressure
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Kids room
+    type: entities
+  - entities:
+      - entity: sun.sun
+        secondary_info: last-changed
+      - entity: sensor.moon
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Environment
+    type: entities
+  - entities:
+      - entity: light.corridor_gateway_light
+        secondary_info: last-changed
+      - entity: light.corridor_top_light
+      - entity: binary_sensor.corridor_motion_sensor
+        secondary_info: last-changed
+      - entity: sensor.corridor_illumination
+        secondary_info: last-changed
+      - entity: sensor.corridor_temperature
+        secondary_info: last-changed
+      - entity: sensor.corridor_humidity
+        secondary_info: last-changed
+      - entity: sensor.corridor_pressure
+        secondary_info: last-changed
+    show_header_toggle: true
+    title: Corridor
+    type: entities
+  - entities:
+      - sensor.processor_use
+      - sensor.memory_free
+      - sensor.disk_use_percent_home
+    show_header_toggle: true
+    title: System stats
+    type: entities
+  - entities:
+      - entity: media_player.living_room_speaker
+      - entity: media_player.pc_gpmdp
+      - entity: media_player.living_room_tv_cast
+      - entity: media_player.philips_tv
+    type: entities
+  - cards:
+      - artwork: cover
+        artwork_border: true
+        entity: media_player.living_room_speaker
+        show_source: true
+        type: "custom:mini-media-player"
+      - artwork: cover
+        artwork_border: true
+        entity: media_player.pc_gpmdp
+        show_source: true
+        type: "custom:mini-media-player"
+      - artwork: cover
+        artwork_border: true
+        entity: media_player.living_room_tv_cast
+        show_source: true
+        type: "custom:mini-media-player"
+      - artwork: cover
+        artwork_border: true
+        entity: media_player.philips_tv
+        show_source: true
+        type: "custom:mini-media-player"
+    type: "custom:vertical-stack-in-card"
+  - card:
+      entities: []
+      title: Dark Sky
+      type: glance
+    filter:
+      include:
+        - entity_id: "*dark_sky*"
+    show_empty: false
+    type: "custom:monster-card"
