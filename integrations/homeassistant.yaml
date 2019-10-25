@@ -16,11 +16,3 @@ homeassistant:
   customize_glob: !include_dir_merge_named ../customizations/globs
 
   # packages: !include_dir_named ../packages
-
-  name: Home
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-  elevation: 116 #!secret home_elevation
-  unit_system: metric
-  time_zone: Europe/Warsaw
-  # customize: !include customize.yaml
