@@ -46,7 +46,7 @@ automation:
         to: 'off'
     condition:
       - condition: state
-        entity_id: binary_sensor.corridor_motion_sensor
+        entity_id: binary_sensor.hallway_motion_sensor
         state: 'off'
     action:
       - service: homeassistant.turn_on

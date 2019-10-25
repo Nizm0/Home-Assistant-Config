@@ -3,7 +3,7 @@ name: In bed
 prior: 0.1
 probability_threshold: 0.8
 observations:
-  # - entity_id: 'binary_sensor.corridor_motion_sensor'
+  # - entity_id: 'binary_sensor.hallway_motion_sensor'
   #   prob_given_true: 0.8
   #   prob_given_false: 0.3
   #   platform: 'state'

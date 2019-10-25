@@ -56,7 +56,7 @@ cards:
     title: Dors in home
     type: history-graph
   - entities:
-      - binary_sensor.corridor_motion_sensor
+      - binary_sensor.hallway_motion_sensor
       - binary_sensor.living_room_motion_sensor
       - binary_sensor.kitchen_motion_sensor
       - binary_sensor.bathroom_motion_sensor

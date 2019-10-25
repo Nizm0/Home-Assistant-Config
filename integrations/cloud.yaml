@@ -26,20 +26,20 @@ cloud:
         - script.start_vacuum
         - script.stop_vacuum
         # - input_boolean.kids_light
-        # - light.corridor_gateway_light
+        # - light.hallway_gateway_light
   # entity_config:
   #   input_boolean.kids_light:
   #     name: Kids Light
   #     aliases:
   #     - Kids light
   #     room: Kids
-  #   light.corridor_gateway_light:
+  #   light.hallway_gateway_light:
   #     name: Gateway Light
   #     aliases:
-  #     # - light.corridor_gateway_light
+  #     # - light.hallway_gateway_light
   #     - Gateway Light
-  #     - Coridor light
-  #     room: Corridor
+  #     - Hallway light
+  #     room: Hallway
   #   light.bedroom_main_light:
   #     name: Bedroom main light
   #     aliases:

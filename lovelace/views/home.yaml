@@ -18,7 +18,7 @@ path: ""
 title: Home
 cards:
   - entities:
-      - entity: binary_sensor.corridor_motion_sensor
+      - entity: binary_sensor.hallway_motion_sensor
         secondary_info: last-changed
       - entity: binary_sensor.living_room_motion_sensor
         secondary_info: last-changed
@@ -61,7 +61,7 @@ cards:
       - entity: light.christmas_tree
         tap_action:
           action: toggle
-      - entity: light.corridor_gateway_light
+      - entity: light.hallway_gateway_light
         tap_action:
           action: toggle
       - entity: light.directional_light
@@ -113,7 +113,7 @@ cards:
       - entity: light.christmas_tree
         tap_action:
           action: toggle
-      - entity: light.corridor_gateway_light
+      - entity: light.hallway_gateway_light
         tap_action:
           action: toggle
       - entity: light.directional_light
@@ -240,21 +240,21 @@ cards:
     title: Environment
     type: entities
   - entities:
-      - entity: light.corridor_gateway_light
+      - entity: light.hallway_gateway_light
         secondary_info: last-changed
-      - entity: light.corridor_top_light
-      - entity: binary_sensor.corridor_motion_sensor
+      - entity: light.hallway_top_light
+      - entity: binary_sensor.hallway_motion_sensor
         secondary_info: last-changed
-      - entity: sensor.corridor_illumination
+      - entity: sensor.hallway_illumination
         secondary_info: last-changed
-      - entity: sensor.corridor_temperature
+      - entity: sensor.hallway_temperature
         secondary_info: last-changed
-      - entity: sensor.corridor_humidity
+      - entity: sensor.hallway_humidity
         secondary_info: last-changed
-      - entity: sensor.corridor_pressure
+      - entity: sensor.hallway_pressure
         secondary_info: last-changed
     show_header_toggle: true
-    title: Corridor
+    title: Hallway
     type: entities
   - entities:
       - sensor.processor_use
