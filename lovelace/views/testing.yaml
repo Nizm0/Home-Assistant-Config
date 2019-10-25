@@ -30,7 +30,7 @@ cards:
     show_state: false
     type: picture-entity
   - entities:
-      - entity: binary_sensor.vibration_5
+      - entity: binary_sensor.washer_vibration
     show_header_toggle: false
     title: Vibration
     type: entities

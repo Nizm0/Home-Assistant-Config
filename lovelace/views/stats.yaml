@@ -65,7 +65,8 @@ cards:
     title: Motions in home
     type: history-graph
   - entities:
-      - binary_sensor.kitchen_left_window_sensor
+          - entity: binary_sensor.living_room_balcony_window_sensor
+          - entity: binary_sensor.kitchen_left_window_sensor
     hours_to_show: 24
     refresh_interval: 0
     title: Windows in home

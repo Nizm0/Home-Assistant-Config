@@ -5,7 +5,7 @@ badges: []
 cards:
   - cards:
       - cards:
-          - entity: light.shelly_shsw_1_4a5b11
+          - entity: light.kitchen_top_light
             hold_action:
               action: more-info
             tap_action:
