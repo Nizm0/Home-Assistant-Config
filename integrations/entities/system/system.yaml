@@ -55,7 +55,13 @@ sensor:
       - type: disk_use_percent
         arg: /home
       - type: memory_free
+      - type: memory_use_percent
       - type: processor_use
+      - type: last_boot
+
+  - platform: uptime
+    name: HassOS Uptime
+    unit_of_measurement: hours
 
 binary_sensor:
   - platform: ping
