@@ -1,0 +1,65 @@
+light:
+  - platform: mqtt
+    name: Hallway top light
+    state_topic: "stat/shelly1-hallway/POWER"
+    command_topic: "cmnd/shelly1-hallway/POWER"
+    availability_topic: "tele/shelly1-hallway/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+    qos: 0
+    retain: false
+
+automation:
+  #### MOTION BEGUN
+  - alias: Hallway motion detected
+    id: hallway_motion_detected
+    initial_state: 'true'
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_motion_sensor
+      to: 'on'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.home_door_sensor
+        state: 'off'
+      # - condition: numeric_state
+      #   entity_id: sensor.living_room_gateway_illumination
+      #   below: 600
+      # - condition: state
+      #   entity_id: light.hallway_top_light
+      #   state: 'off'
+      - condition: or
+        conditions:
+        - condition: sun
+          after: sunset
+          after_offset: '00:30:00'
+        - condition: sun
+          before: sunrise
+          before_offset: '-00:30:00'
+    action:
+    - service: homeassistant.turn_on
+      entity_id: script.hallway_motion_detected
+
+  #### MOTION OVER
+  - alias: Hallway motion over
+    id: hallway_motion_over
+    initial_state: 'true'
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.hallway_motion_sensor
+      to: 'off'
+    # - platform: state
+    #   entity_id: binary_sensor.living_room_motion_sensor
+    #   to: 'off'
+    condition:
+    - condition: state
+      entity_id: binary_sensor.home_door_sensor
+      state: 'off'
+    action:
+    - service: homeassistant.turn_on
+      entity_id: script.hallway_motion_over

@@ -1,0 +1,6 @@
+home_gosia:
+  zone: home
+  devices:
+    - device_tracker.google_maps_109218123589188227395
+  tolerance: 50
+  unit_of_measurement: km

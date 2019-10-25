@@ -1,0 +1,6 @@
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+  - key: !secret xiaomi_getway1_key
+    mac: !secret xiaomi_getway1_mac
+    host: !secret xiaomi_getway1_ip

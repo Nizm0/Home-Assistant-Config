@@ -1,0 +1,12 @@
+outside_plant:
+  sensors:
+    moisture: sensor.xiaomi_miflora_moisture_1
+    brightness: sensor.xiaomi_miflora_illuminance_1
+    conductivity: sensor.xiaomi_miflora_soil_conductivity_1
+    # battery: sensor.xiaomi_miflora_battery_level_1
+    temperature: sensor.xiaomi_miflora_temperature_1
+  min_moisture: 20
+  max_moisture: 60
+  min_battery: 17
+  min_conductivity: 500
+  min_temperature: 15

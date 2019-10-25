@@ -1,0 +1,23 @@
+automation:
+  - id: gosia_entered_the_home
+    alias: Gosia entered the home
+    initial_state: 'true'
+    trigger: 
+    - platform: state
+      entity_id: person.gosia # device_tracker.google_maps_109218123589188227395 #Gosia
+      to: home
+      # event: enter
+    condition:
+    action: 
+    - service: notify.push_to_chrome_nizm0_oneplus3
+      data_template:
+        message: >
+          New value is: {{ trigger.to_state.state }}
+        title: Gosia entered the home
+    - service: notify.hangouts
+      data_template:
+        message: >
+          New value is: {{ trigger.to_state.state }}
+        title: Gosia entered the home
+        data:
+          tag: gosia-location-info

@@ -1,0 +1,134 @@
+sensor:
+  #---
+  # The time and date (time_date) sensor platform.
+  # Has the time in various formats, the date, or both.
+  #
+  # This is usefull for displaying and automation purposes.
+  #
+  # https://www.home-assistant.io/components/time_date/
+  #
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
+      - 'date_time'
+      - 'date_time_iso'
+      - 'time_date'
+      - 'time_utc'
+      - 'beat'
+  #---
+  # The version sensor platform is displaying the
+  # current version.
+  #
+  # https://www.home-assistant.io/components/sensor.version/
+  #
+  - platform: version
+    name: version_current
+  #---
+  # The version sensor platform is displaying the
+  # available version online.
+  #
+  # https://www.home-assistant.io/components/sensor.version/
+  #
+  - platform: version
+    name: version_available
+    source: hassio
+    image: qemux86-64
+
+  - platform: travisci
+    api_key: !secret travisapi
+    scan_interval: 3600
+    repository: Home-Assistant-Config
+    branch: hassio
+    monitored_conditions: 
+      - last_build_state
+      - last_build_id
+      - last_build_duration
+      - state
+
+  - platform: cert_expiry
+    host: has.nizmo.eu
+    name: LetsEncrypt
+
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_free
+      - type: memory_use_percent
+      - type: processor_use
+      - type: last_boot
+
+  - platform: uptime
+    name: HassOS Uptime
+    unit_of_measurement: hours
+
+binary_sensor:
+  - platform: ping
+    name: Desctop PC
+    host: 192.168.1.100
+    count: 4
+    scan_interval: 60
+  - platform: ping
+    name: Router
+    host: 192.168.1.1
+    count: 4
+    scan_interval: 60
+  - platform: ping
+    name: Server
+    host: 192.168.1.200
+    count: 4
+    scan_interval: 60
+
+automation:
+  - alias: Notify if new devices
+    id: notify_if_new_devices
+    initial_state: 'true'
+    trigger:
+      - platform: event
+        event_type: device_tracker_new_device
+    action:
+      - service: notify.pushbullet_nizmo
+        data_template:
+          message: >
+            New device:
+            {{trigger.event.data.host_name}}
+            ({{trigger.event.data.entity_id}})
+            {{trigger.event.data.source_type}}
+          title: New device tracked
+          # target: device/oneplus 3
+      - service: persistent_notification.create
+        data_template:
+          message: >
+            New device:
+            {{trigger.event.data.host_name}}
+            ({{trigger.event.data.entity_id}})
+            {{trigger.event.data.source_type}}
+          title: New device tracked
+      - service: notify.push_to_chrome_nizm0_oneplus3
+        data_template:
+          message: >
+            New device:
+            {{trigger.event.data.host_name}}
+            {{trigger.event.data.entity_id}}
+            {{trigger.event.data.source_type}}
+          title: New device tracked
+          data:
+            tag: 'new-device-{{trigger.event.data.host_name}}'
+      # - service: notify.home_assistant
+      #   data_template:
+      #     message: >
+      #       New device:
+      #       {{trigger.event.data.host_name}}
+      #       ({{trigger.event.data.entity_id}})
+      #     title: New device 
+
+  - id: '1549924461285'
+    alias: Hangout reconnect at 5
+    initial_state: 'true'
+    trigger:
+    - at: 05:00
+      platform: time
+    condition: []
+    action:
+    - service: hangouts.reconnect

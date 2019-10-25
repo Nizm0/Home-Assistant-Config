@@ -1,5 +1,0 @@
-- platform: discord_game
-  token: !secret secretDiscordBotToken
-  members:
-  - Thaeliaris#9947
-  - Nizm0#9673

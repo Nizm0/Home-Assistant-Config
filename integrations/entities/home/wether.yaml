@@ -1,0 +1,82 @@
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+    - 1
+    monitored_conditions:
+    - summary
+  #  - minutely_summary
+    - hourly_summary
+    - daily_summary
+  #  - icon
+  #  - nearest_storm_distance
+  #  - nearest_storm_bearing
+    - precip_type
+    - precip_intensity
+    - precip_probability
+    - temperature
+    - apparent_temperature
+    - dew_point
+    - wind_speed
+    - wind_bearing
+    - cloud_cover
+    - humidity
+    - pressure
+    - visibility
+    - ozone
+  # - platform: darksky
+  #   api_key: !secret darksky_api_key
+  #   forecast:
+  #   - 1
+  #   - 2
+  #   - 3
+  #   - 4
+  #   - 5
+  #   monitored_conditions:
+  #     - icon
+  #     - summary
+  #     - nearest_storm_distance
+  #     - nearest_storm_bearing
+  #     - humidity
+  #     - temperature
+  #     - temperature_high
+  #     - temperature_low
+  #     - apparent_temperature
+  #     - apparent_temperature_high
+  #     - apparent_temperature_low
+  #     - wind_speed
+  #     - wind_bearing
+  #     - precip_type
+  #     - precip_probability
+  #     - precip_accumulation
+  #     - precip_intensity
+  #     - precip_intensity_max
+  #     - uv_index
+  #     - daily_summary
+  #     - pressure
+  #     - visibility
+  #   update_interval:
+  #     minutes: 5
+
+  # - platform: yr
+  #   name: Weather
+  #   forecast: 1
+  #   monitored_conditions:
+  #   - temperature
+  #   - symbol
+  #   - precipitation
+  #   - windSpeed
+  #   - pressure
+  #   - windDirection
+  #   - humidity
+  #   - fog
+  #   - cloudiness
+  #   - lowClouds
+  #   - mediumClouds
+  #   - highClouds
+  #   - dewpointTemperature
+
+weather:
+- platform: darksky
+  api_key: !secret darksky_api_key
+  mode: hourly

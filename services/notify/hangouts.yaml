@@ -1,0 +1,4 @@
+name: hangouts
+platform: hangouts
+default_conversations:
+  - id: UgwLFucuyD1KYDehqHp4AaABAQ

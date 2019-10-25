@@ -1,0 +1,4 @@
+name: MP
+latitude: !secret michal_parents_latitude
+longitude: !secret michal_parents_longitude
+radius: 100

@@ -1,0 +1,3 @@
+platform: mqtt
+name: "My Pc - Screen 1"
+topic: "iotlink/workgroup/nizmo-pc/windows-monitor/stats/display/1/screen"

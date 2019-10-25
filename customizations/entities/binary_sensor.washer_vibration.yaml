@@ -1,0 +1,2 @@
+binary_sensor.washer_vibration:
+  device_class: vibration

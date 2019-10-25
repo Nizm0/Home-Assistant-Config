@@ -1,0 +1,5 @@
+platform: html5
+name: push_to_chrome
+vapid_pub_key: !secret google_push_public_key
+vapid_prv_key: !secret google_push_priv_key
+vapid_email: !secret email

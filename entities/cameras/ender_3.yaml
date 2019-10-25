@@ -1,0 +1,4 @@
+platform: mjpeg
+name: Ender 3
+still_image_url: http://192.168.1.103/webcam/?action=snapshot
+mjpeg_url: http://192.168.1.103/webcam/?action=stream

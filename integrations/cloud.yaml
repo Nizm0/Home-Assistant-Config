@@ -1,0 +1,79 @@
+---
+# The Home Assistant Cloud allows you to quickly integrate your local
+# Home Assistant with various cloud services like Amazon Alexa and Google Home.
+#
+# https://www.home-assistant.io/components/cloud/
+#
+cloud:
+
+  # Customize the Google Assistant integration with the Naby Casa Cloud
+  google_actions:
+
+    # Entity specific configuration for Google Assistant.
+    # These are loaded from a separate directory.
+    entity_config: !include_dir_merge_named ../assistants/google
+
+    # Filters for entities to include/exclude from Google Assistant.
+    # These are loaded from a separate directory.
+    filter:
+      include_domains:
+        # - switch
+        - sensor
+        - light
+        - vacuum
+        # - group
+      include_entities:
+        - script.start_vacuum
+        - script.stop_vacuum
+        # - input_boolean.kids_light
+        # - light.corridor_gateway_light
+  # entity_config:
+  #   input_boolean.kids_light:
+  #     name: Kids Light
+  #     aliases:
+  #     - Kids light
+  #     room: Kids
+  #   light.corridor_gateway_light:
+  #     name: Gateway Light
+  #     aliases:
+  #     # - light.corridor_gateway_light
+  #     - Gateway Light
+  #     - Coridor light
+  #     room: Corridor
+  #   light.bedroom_main_light:
+  #     name: Bedroom main light
+  #     aliases:
+  #     # - light.bedroom_mail_light
+  #     - Bedroom lights
+  #     room: Bedroom
+  #   media_player.philips_tv:
+  #     name: TV
+  #     aliases:
+  #     - Living room tv
+  #     room: Living room
+  #   script.start_vacuum:
+  #     name: Clean flat
+  #     aliases:
+  #     - Clean flat
+  #     # - Vacuum
+  #     - Clean flor
+  #     - Roborock
+  #     room: Living room
+  #   script.stop_vacuum:
+  #     name: Stop cleaning
+  #     aliases:
+  #     - Cancel vacuum
+  #     room: Living room
+
+
+
+
+# entity_config:
+#   switch.kitchen:
+#     name: Custom Name for Google Assistant
+#     aliases:
+#     - bright lights
+#     - entry lights
+#   light.living_room:
+#     expose: false
+#     room: living room

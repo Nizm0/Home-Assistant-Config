@@ -1,0 +1,18 @@
+octoprint: !include_dir_list ../entities/octoprints
+
+automation:
+  - id: '1555699464312'
+    alias: _octoprint finish
+    trigger:
+    - entity_id: binary_sensor.ender_3_printing
+      from: 'on'
+      platform: state
+      to: 'off'
+    condition: []
+    action:
+    - data:
+        data:
+          tag: Octoprint_tag
+        message: Printer just finished his work
+        title: Printing finished
+      service: notify.push_to_chrome_nizm0_oneplus3

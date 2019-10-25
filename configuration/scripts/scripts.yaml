@@ -1,4 +1,0 @@
-update_config:
-    sequence:
-      - service: shell_command.get_latest_config
-      - service: homeassistant.restart

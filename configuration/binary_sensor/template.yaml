@@ -1,7 +1,0 @@
-- platform: template
-  sensors:
-    taking_bath:
-      friendly_name: Taking bath
-      device_class: occupancy
-      value_template: >-
-        {{ (states('sensor.bathroom_humidity')|float > states('sensor.average_house_humidity')|float + 10) and states('binary_sensor.bathroom_motion_sensor') == on}}

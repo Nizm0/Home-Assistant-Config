@@ -1,0 +1,4 @@
+name: GP
+latitude: !secret gosia_parents_latitude
+longitude: !secret gosia_parents_longitude
+radius: 100
