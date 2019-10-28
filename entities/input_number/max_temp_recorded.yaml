@@ -1,4 +1,0 @@
-max_temp_recorded:
-  name: Max recorded temparature in home
-  max: 50
-  min: 20

@@ -1,7 +1,0 @@
-temp_max:
-  name: Max temp
-  # initial: 30
-  min: 20
-  max: 50
-  step: 1
-  mode: box

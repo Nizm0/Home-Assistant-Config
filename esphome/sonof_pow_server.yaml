@@ -12,9 +12,16 @@ esphome:
   on_boot:
     priority: 100 # Highest priority, ensures light turns on without delay.
     then:
-      - switch.turn_off: fakebutton
-      - delay: 10s
-      - switch.turn_on: fakebutton
+      - if:
+          condition:
+            not:
+              api.connected:
+          then:
+            - switch.turn_off: fakebutton
+            - delay: 10s
+            - switch.turn_on: fakebutton
+          else:
+            - switch.turn_on: fakebutton
 
 wifi:
   ssid: $ssid

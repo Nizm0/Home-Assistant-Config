@@ -1,5 +1,0 @@
-vacuum_day_time:
-  name: Vacuum date time
-  has_date: false
-  has_time: true
-  # initial: '15:00'

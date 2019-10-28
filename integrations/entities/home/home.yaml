@@ -15,13 +15,13 @@ sensor:
     # outdoor_temp_sensor: sensor.flower_2_temperature
     calibration_factor: 1.0
 
-luftdaten:
-  sensor_id: 2303
-  show_on_map: false
-  sensors:
-    monitored_conditions:
-      - P1
-      - P2
+# luftdaten:
+#   sensor_id: 2303
+#   show_on_map: false
+#   sensors:
+#     monitored_conditions:
+#       - P1
+#       - P2
       # - temperature
       # - humidity
       # - pressure

@@ -1,5 +1,0 @@
-ready_to_vacuum:
-  name: Flor is ready to vacuum
-  icon: mdi:robot-vacuum
-  # initial: off
-  # restore_state:

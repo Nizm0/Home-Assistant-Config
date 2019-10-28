@@ -63,3 +63,68 @@ automation:
     action:
     - service: homeassistant.turn_on
       entity_id: script.hallway_motion_over
+
+script:
+  home_doors_has_been_opened:
+    sequence:
+      - service: script.turn_off
+        data:
+          entity_id: script.hallway_light_timer
+      - service: light.turn_on
+        data:
+          entity_id: light.hallway_gateway_light
+          color_name: red
+          brightness_pct: 100
+      # - service: script.turn_on
+      #   data: 
+      #     entity_id: script.hallway_light_timer
+      # - service: notify.push_to_chrome
+      #   data_template:
+      #     message: >
+      #       New value is: 'open'
+      #     title: Someone opened home doors
+
+  home_doors_has_been_closed:
+    sequence:
+      - service: script.turn_off
+        data:
+          entity_id: script.hallway_light_timer
+      - service: script.turn_on
+        data:
+          entity_id: script.hallway_light_timer
+
+  hallway_motion_detected:
+    sequence:
+      - service: script.turn_off
+        data:
+          entity_id: script.hallway_light_timer
+      - service: light.turn_on
+        data:
+          entity_id: light.hallway_gateway_light
+          color_name: red
+          brightness_pct: 100
+      # - service: script.turn_on
+      #   data: 
+      #     entity_id: script.hallway_light_timer
+      # - service: notify.push_to_chrome
+      #   data_template:
+      #     message: >
+      #       New value is:
+      #         'on'
+      #     title: somone wolking in coriridor
+  hallway_motion_over:
+    sequence:
+      - service: script.turn_off
+        data:
+          entity_id: script.hallway_light_timer
+      - service: script.turn_on
+        data:
+          entity_id: script.hallway_light_timer
+
+  hallway_light_timer:
+    sequence:
+      - delay:
+          seconds: 1
+      - service: light.turn_off
+        data:
+          entity_id: light.hallway_gateway_light
