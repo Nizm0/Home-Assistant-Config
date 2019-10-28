@@ -1,51 +1,6 @@
 badges: []
 title: New main page
 icon: "mdi:information-outline"
-popup_cards:
-  person.gosia:
-    card:
-      entities:
-        - person.gosia
-        - entity: device_tracker.google_maps_109218123589188227395
-          icon: "mdi:map-marker-circle"
-          name: Gosai presence
-          secondary_info: >-
-            Battery: [[
-            device_tracker.google_maps_109218123589188227395.attributes.battery_level
-            ]]%
-          type: "custom:secondaryinfo-entity-row"
-        - entity: device_tracker.gosia_galaxy_s9
-          icon: "mdi:wifi"
-          name: Gosia Wifi
-          secondary_info: last-changed
-        - entity: device_tracker.gosia_g6_bt
-          icon: "mdi:bluetooth"
-          name: Gosia bt
-          secondary_info: last-changed
-      type: entities
-    title: Michal
-  person.michal:
-    card:
-      entities:
-        - person.michal
-        - entity: device_tracker.google_maps_104688658658376260645
-          icon: "mdi:map-marker-circle"
-          name: Michał presence
-          secondary_info: >-
-            Battery: [[
-            device_tracker.google_maps_104688658658376260645.attributes.battery_level
-            ]]%
-          type: "custom:secondaryinfo-entity-row"
-        - entity: device_tracker.nizmo_phone
-          icon: "mdi:wifi"
-          name: Michał Wifi
-          secondary_info: last-changed
-        - entity: device_tracker.oneplus_3_bt
-          icon: "mdi:bluetooth"
-          name: Michał bt
-          secondary_info: last-changed
-      type: entities
-    title: Michal
 cards:
   - cards:
       - cards:
@@ -109,7 +64,7 @@ cards:
         type: "custom:xiaomi-vacuum-card"
     type: "custom:vertical-stack-in-card"
   - entity: weather.dark_sky
-    type: weather-forecast
+    type: custom:weather-card
   - cards:
       - animate: true
         entities:

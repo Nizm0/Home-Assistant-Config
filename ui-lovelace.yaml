@@ -15,5 +15,5 @@ views:
   - !include lovelace/views/camera.yaml
   - !include lovelace/views/flowers.yaml
   - !include lovelace/views/testing.yaml
-  - !include lovelace/views/settings.yaml
+  - !include lovelace/views/stats.yaml
   - !include lovelace/views/floreplan.yaml

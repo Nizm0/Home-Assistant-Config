@@ -9,15 +9,44 @@ cards:
     show_header_toggle: false
     title: System stats
     type: entities
-  - entities:
-      - entity: script.update_config
-      - entity: sensor.nizm0_home_assistant_config_last_build_duration
-      - entity: sensor.nizm0_home_assistant_config_last_build_id
-      - entity: sensor.nizm0_home_assistant_config_last_build_state
-      - entity: sensor.nizm0_home_assistant_config_state
-    show_header_toggle: false
-    title: Travis status
-    type: entities
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:bar-card
+        entity: sensor.disk_use_percent_home
+        severity:
+          - value: 33
+            color: '#40bf40'
+          - value: 66
+            color: '#bf9540'
+          - value: 100
+            color: '#bf4040'
+      - type: custom:bar-card
+        entity: sensor.memory_use_percent
+        severity:
+          - value: 33
+            color: '#40bf40'
+          - value: 66
+            color: '#bf9540'
+          - value: 100
+            color: '#bf4040'
+      - type: custom:bar-card
+        entity: sensor.processor_use
+        severity:
+          - value: 33
+            color: '#40bf40'
+          - value: 66
+            color: '#bf9540'
+          - value: 100
+            color: '#bf4040'
+  # - entities:
+  #     - entity: script.update_config
+  #     - entity: sensor.nizm0_home_assistant_config_last_build_duration
+  #     - entity: sensor.nizm0_home_assistant_config_last_build_id
+  #     - entity: sensor.nizm0_home_assistant_config_last_build_state
+  #     - entity: sensor.nizm0_home_assistant_config_state
+  #   show_header_toggle: false
+  #   title: Travis status
+  #   type: entities
   - entities:
       - sensor.bedroom_temperature
       - sensor.living_room_temperature
