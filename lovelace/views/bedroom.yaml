@@ -2,47 +2,82 @@ icon: "mdi:bed-empty"
 id: 2
 title: Bedroom
 cards:
-  - cards:
-      - cards:
+  - type: "custom:vertical-stack-in-card"
+    layout: horizontal
+    cards:
+      - type: horizontal-stack
+        cards:
           - entity: light.bedroom_main_light
             type: light
           - entity: light.bedroom_main_light_2
             type: light
-        type: horizontal-stack
-    type: "custom:vertical-stack-in-card"
-  - entity: sensor.bedroom_temperature
-    max: 40
-    min: 0
-    name: Temperature
-    severity:
-      green: 18
-      red: 30
-      yellow: 25
-    theme: default
-    type: gauge
-  - detail: 2
-    entity: sensor.bedroom_temperature
-    graph: line
-    type: sensor
-  - entity: sensor.bedroom_humidity
-    max: 100
-    min: 0
-    name: Humidity
-    severity:
-      green: 30
-      red: 60
-      yellow: 50
-    theme: default
-    type: gauge
-  - detail: 2
-    entity: sensor.bedroom_humidity
-    graph: line
-    type: sensor
-  - detail: 2
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.bedroom_temperature
+            type: gauge
+            max: 40
+            min: 0
+            name: Temperature
+            severity:
+              green: 18
+              red: 30
+              yellow: 25
+            theme: default
+          - entity: sensor.bedroom_humidity
+            type: gauge
+            max: 100
+            min: 0
+            name: Humidity
+            severity:
+              green: 30
+              red: 60
+              yellow: 50
+            theme: default
+  - title: Temperature
+    type: "custom:mini-graph-card"
+    entities:
+      - sensor.bedroom_temperature
+    color_thresholds:
+      - color: "#0000ff"
+        value: 15
+      - color: "#00ff00"
+        value: 21
+      - color: "#ffb347"
+        value: 26
+      - color: "#ff0000"
+        value: 30
+      - color: "#FF00FF"
+        value: 35
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - title: Humidity
+    type: "custom:mini-graph-card"
+    entities:
+      - sensor.bedroom_humidity
+    color_thresholds:
+      - color: "#00ff00"
+        value: 30
+      - color: "#ffb347"
+        value: 50
+      - color: "#ff0000"
+        value: 60
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - type: sensor
+    detail: 2
     entity: sensor.bedroom_pressure
     graph: line
-    type: sensor
-  - entities:
-      - entity: sensor.bedroom_temperature
-      - entity: sensor.bedroom_humidity
-    type: "custom:mini-graph-card"

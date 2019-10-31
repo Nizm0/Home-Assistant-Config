@@ -35,16 +35,16 @@ sensor:
     source: hassio
     image: qemux86-64
 
-  - platform: travisci
-    api_key: !secret travisapi
-    scan_interval: 3600
-    repository: Home-Assistant-Config
-    branch: hassio
-    monitored_conditions: 
-      - last_build_state
-      - last_build_id
-      - last_build_duration
-      - state
+  # - platform: travisci
+  #   api_key: !secret travisapi
+  #   scan_interval: 3600
+  #   repository: Home-Assistant-Config
+  #   branch: hassio
+  #   monitored_conditions: 
+  #     - last_build_state
+  #     - last_build_id
+  #     - last_build_duration
+  #     - state
 
   - platform: cert_expiry
     host: has.nizmo.eu

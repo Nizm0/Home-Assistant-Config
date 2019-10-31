@@ -3,22 +3,24 @@ icon: "mdi:sofa"
 id: 1
 title: Living room
 cards:
-  - cards:
-      - cards:
+  - type: "custom:vertical-stack-in-card"
+    cards:
+      - type: horizontal-stack
+        cards:
           - entity: light.general_light
+            type: entity-button
             hold_action:
               action: more-info
             tap_action:
               action: toggle
-            type: entity-button
           - entity: light.directional_light
+            type: entity-button
             hold_action:
               action: more-info
             tap_action:
               action: toggle
-            type: entity-button
-        type: horizontal-stack
-      - cards:
+      - type: horizontal-stack
+        cards:
           - entity: light.top_light
             hold_action:
               action: more-info
@@ -31,39 +33,43 @@ cards:
             tap_action:
               action: toggle
             type: entity-button
-        type: horizontal-stack
-    type: "custom:vertical-stack-in-card"
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.living_room_temperature
+            max: 40
+            min: 0
+            name: Temperature
+            severity:
+              green: 18
+              red: 30
+              yellow: 25
+            theme: default
+            type: gauge
+          - entity: sensor.living_room_humidity
+            max: 100
+            min: 0
+            name: Humidity
+            severity:
+              green: 30
+              red: 60
+              yellow: 50
+            theme: default
+            type: gauge
   - entities:
       - entity: binary_sensor.living_room_balcony_window_sensor
       - entity: binary_sensor.living_room_motion_sensor
     type: entities
-  - entity: sensor.living_room_temperature
-    max: 100
-    min: 0
-    name: Temperature
-    severity:
-      green: 18
-      red: 30
-      yellow: 25
-    theme: default
-    type: gauge
   - entities:
       - entity: media_player.living_room_speaker
       - entity: media_player.pc_gpmdp
       - entity: media_player.living_room_tv_cast
       - entity: media_player.philips_tv
     type: entities
-  - entity: sensor.living_room_humidity
-    max: 100
-    min: 0
-    name: Humidity
-    severity:
-      green: 30
-      red: 60
-      yellow: 50
-    theme: default
-    type: gauge
-  - animate: true
+  - title: Temperature
+    type: "custom:mini-graph-card"
+    # animate: true
+    entities:
+      - sensor.living_room_temperature
     color_thresholds:
       - color: "#0000ff"
         value: 15
@@ -75,8 +81,6 @@ cards:
         value: 30
       - color: "#FF00FF"
         value: 35
-    entities:
-      - sensor.living_room_temperature
     height: 75
     hour24: true
     hours_to_show: 48
@@ -86,13 +90,26 @@ cards:
     show:
       extrema: true
       fill: fade
-    title: Temperature
+  - title: Humidity
     type: "custom:mini-graph-card"
-  - detail: 2
-    entity: sensor.living_room_humidity
-    graph: line
-    name: Humidify
-    type: sensor
+    entities:
+      - sensor.living_room_humidity
+    color_thresholds:
+      - color: "#00ff00"
+        value: 30
+      - color: "#ffb347"
+        value: 50
+      - color: "#ff0000"
+        value: 60
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
   - detail: 2
     entity: sensor.living_room_pressure
     graph: line

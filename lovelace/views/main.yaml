@@ -2,7 +2,8 @@ badges: []
 title: New main page
 icon: "mdi:information-outline"
 cards:
-  - cards:
+  - type: "custom:vertical-stack-in-card"
+    cards:
       - cards:
           - entity: person.michal
             image: /local/images/home/michal.jpg
@@ -62,11 +63,13 @@ cards:
           status: Status
         name: Rockrobo
         type: "custom:xiaomi-vacuum-card"
-    type: "custom:vertical-stack-in-card"
   - entity: weather.dark_sky
     type: custom:weather-card
-  - cards:
-      - animate: true
+  - type: "custom:swipe-card"
+    cards:
+      - type: "custom:mini-graph-card"
+        title: Temperatures 48h
+        animate: true
         entities:
           - sensor.living_room_temperature
           - sensor.bedroom_temperature
@@ -81,9 +84,9 @@ cards:
         show:
           extrema: true
           fill: false
-        title: Temperatures 48h
-        type: "custom:mini-graph-card"
-      - animate: true
+      - type: "custom:mini-graph-card"
+        title: Humidity 48h
+        animate: true
         entities:
           - sensor.living_room_humidity
           - sensor.bedroom_humidity
@@ -98,102 +101,225 @@ cards:
         show:
           extrema: true
           fill: false
-        title: Humidity 48h
-        type: "custom:mini-graph-card"
-    type: "custom:swipe-card"
-  - elements:
-      - entity: binary_sensor.home_door_sensor
-        style:
-          color: white
-          left: 14%
-          top: 86%
-        tap_action:
-          action: more-info
-        type: state-icon
-      - entity: sensor.living_room_temperature
-        icon: "mdi:office"
-        style:
-          color: white
-          left: 36%
-          top: 82%
-        tap_action:
-          action: more-info
-        type: icon
-      - entity: sensor.living_room_temperature
-        style:
-          color: white
-          left: 36%
-          top: 95%
-        type: state-label
-      - entity: sensor.bedroom_temperature
-        icon: "mdi:hotel"
-        style:
-          color: white
-          left: 50%
-          top: 82%
-        tap_action:
-          action: more-info
-        type: icon
-      - entity: sensor.bedroom_temperature
-        style:
-          color: white
-          left: 50%
-          top: 95%
-        type: state-label
-      - entity: sensor.kids_temperature
-        icon: "mdi:human-child"
-        style:
-          color: white
-          left: 64%
-          top: 82%
-        tap_action:
-          action: more-info
-        type: icon
-      - entity: sensor.kids_temperature
-        style:
-          color: white
-          left: 64%
-          top: 95%
-        tap_action:
-          action: more-info
-        type: state-label
-      - entity: sensor.kitchen_temperature
-        icon: "mdi:kettle"
-        style:
-          color: white
-          left: 78%
-          top: 82%
-        tap_action:
-          action: more-info
-        type: icon
-      - entity: sensor.kitchen_temperature
-        style:
-          color: white
-          left: 78%
-          top: 95%
-        tap_action:
-          action: more-info
-        type: state-label
-      - entity: sensor.bathroom_temperature
-        icon: "mdi:shower"
-        style:
-          color: white
-          left: 92%
-          top: 82%
-        tap_action:
-          action: more-info
-        type: icon
-      - entity: sensor.bathroom_temperature
-        style:
-          color: white
-          left: 92%
-          top: 95%
-        tap_action:
-          action: more-info
-        type: state-label
-    id: 5be18d329c42452788a3d18a74965da3
-    image: /local/images/house-element.jpg
-    type: picture-elements
+  - type: "custom:swipe-card"
+    cards:
+      - type: "custom:vertical-stack-in-card"
+        title: Temperature
+        cards:
+          - type: horizontal-stack
+            cards:
+              - entity: sensor.living_room_temperature
+                max: 40
+                min: 0
+                name: Living room
+                severity:
+                  green: 18
+                  red: 30
+                  yellow: 25
+                theme: default
+                type: gauge
+          - type: horizontal-stack
+            cards:
+              - entity: sensor.bedroom_temperature
+                type: gauge
+                max: 40
+                min: 0
+                name: Bedroom
+                severity:
+                  green: 18
+                  red: 30
+                  yellow: 25
+                theme: default
+              - entity: sensor.kids_temperature
+                max: 40
+                min: 0
+                name: Kids
+                severity:
+                  green: 19
+                  red: 30
+                  yellow: 25
+                theme: default
+                type: gauge
+                unit: C
+          - type: horizontal-stack
+            cards:
+              - entity: sensor.kitchen_temperature
+                max: 40
+                min: 0
+                name: Kitchen
+                severity:
+                  green: 18
+                  red: 30
+                  yellow: 25
+                theme: default
+                type: gauge
+                unit: C
+              - type: gauge
+                entity: sensor.bathroom_temperature
+                theme: default
+                unit: C
+                max: 40
+                min: 0
+                name: Bathroom
+                severity:
+                  green: 18
+                  red: 30
+                  yellow: 25
+      - type: "custom:vertical-stack-in-card"
+        title: Humidity
+        cards:
+          - type: horizontal-stack
+            cards:
+              - entity: sensor.living_room_humidity
+                max: 100
+                min: 0
+                name: Living room
+                severity:
+                  green: 30
+                  red: 60
+                  yellow: 50
+                theme: default
+                type: gauge
+          - type: horizontal-stack
+            cards:
+              - entity: sensor.bedroom_humidity
+                type: gauge
+                max: 100
+                min: 0
+                name: Bedroom
+                severity:
+                  green: 30
+                  red: 60
+                  yellow: 50
+                theme: default
+              - entity: sensor.kids_humidity
+                max: 100
+                min: 0
+                name: Kids
+                severity:
+                  green: 30
+                  red: 60
+                  yellow: 50
+                theme: default
+                type: gauge
+                unit: "%"
+          - type: horizontal-stack
+            cards:
+              - entity: sensor.kitchen_humidity
+                max: 100
+                min: 0
+                name: kitchen
+                severity:
+                  green: 30
+                  red: 60
+                  yellow: 50
+                theme: default
+                type: gauge
+                unit: "%"
+              - entity: sensor.bathroom_humidity
+                type: gauge
+                theme: default
+                unit: "%"
+                max: 100
+                min: 0
+                name: Bathroom
+                severity:
+                  green: 30
+                  red: 60
+                  yellow: 50
+  # - type: picture-elements
+  #   # id: 5be18d329c42452788a3d18a74965da3
+  #   image: /local/images/house-element.jpg
+  #   elements:
+  #     - entity: binary_sensor.home_door_sensor
+  #       style:
+  #         color: white
+  #         left: 14%
+  #         top: 86%
+  #       tap_action:
+  #         action: more-info
+  #       type: state-icon
+  #     - entity: sensor.living_room_temperature
+  #       icon: "mdi:office"
+  #       style:
+  #         color: white
+  #         left: 36%
+  #         top: 82%
+  #       tap_action:
+  #         action: more-info
+  #       type: icon
+  #     - entity: sensor.living_room_temperature
+  #       style:
+  #         color: white
+  #         left: 36%
+  #         top: 95%
+  #       type: state-label
+  #     - entity: sensor.bedroom_temperature
+  #       icon: "mdi:hotel"
+  #       style:
+  #         color: white
+  #         left: 50%
+  #         top: 82%
+  #       tap_action:
+  #         action: more-info
+  #       type: icon
+  #     - entity: sensor.bedroom_temperature
+  #       style:
+  #         color: white
+  #         left: 50%
+  #         top: 95%
+  #       type: state-label
+  #     - entity: sensor.kids_temperature
+  #       icon: "mdi:human-child"
+  #       style:
+  #         color: white
+  #         left: 64%
+  #         top: 82%
+  #       tap_action:
+  #         action: more-info
+  #       type: icon
+  #     - entity: sensor.kids_temperature
+  #       style:
+  #         color: white
+  #         left: 64%
+  #         top: 95%
+  #       tap_action:
+  #         action: more-info
+  #       type: state-label
+  #     - entity: sensor.kitchen_temperature
+  #       icon: "mdi:kettle"
+  #       style:
+  #         color: white
+  #         left: 78%
+  #         top: 82%
+  #       tap_action:
+  #         action: more-info
+  #       type: icon
+  #     - entity: sensor.kitchen_temperature
+  #       style:
+  #         color: white
+  #         left: 78%
+  #         top: 95%
+  #       tap_action:
+  #         action: more-info
+  #       type: state-label
+  #     - entity: sensor.bathroom_temperature
+  #       icon: "mdi:shower"
+  #       style:
+  #         color: white
+  #         left: 92%
+  #         top: 82%
+  #       tap_action:
+  #         action: more-info
+  #       type: icon
+  #     - entity: sensor.bathroom_temperature
+  #       style:
+  #         color: white
+  #         left: 92%
+  #         top: 95%
+  #       tap_action:
+  #         action: more-info
+  #       type: state-label
   - aspect_ratio: 60%
     type: iframe
     url: >-

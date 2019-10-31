@@ -17,7 +17,8 @@ panel: false
 path: ""
 title: Home
 cards:
-  - entities:
+  - type: entities
+    entities:
       - entity: binary_sensor.hallway_motion_sensor
         secondary_info: last-changed
       - entity: binary_sensor.living_room_motion_sensor
@@ -32,8 +33,9 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.kitchen_left_window_sensor
         secondary_info: last-changed
-    type: entities
-  - card:
+  - type: "custom:monster-card"
+    show_empty: false
+    card:
       entities: []
       title: Low Battery Devices
       type: glance
@@ -45,9 +47,12 @@ cards:
             battery: < 25
         - attributes:
             battery_level: < 25
-    show_empty: false
-    type: "custom:monster-card"
-  - card:
+  - title: All lights
+    type: entity-filter
+    show_header_toggle: true
+    state_filter:
+      - "on"
+    card:
       show_state: false
       title: Turned on lights
       type: glance
@@ -94,12 +99,12 @@ cards:
       - entity: light.hue_color_lamp_2
         tap_action:
           action: toggle
+  - title: All lights
+    type: entity-filter
     show_header_toggle: false
     state_filter:
-      - "on"
-    title: All lights
-    type: entity-filter
-  - card:
+      - "off"
+    card:
       show_state: false
       title: Turned off lights
       type: glance
@@ -146,12 +151,10 @@ cards:
       - entity: light.hue_color_lamp_2
         tap_action:
           action: toggle
-    show_header_toggle: false
-    state_filter:
-      - "off"
-    title: All lights
-    type: entity-filter
-  - entities:
+  - title: Living room
+    type: entities
+    show_header_toggle: true
+    entities:
       - entity: light.directional_light
         secondary_info: last-changed
       - entity: light.general_light
@@ -168,10 +171,10 @@ cards:
         secondary_info: last-changed
       - entity: sensor.living_room_pressure
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Living room
+  - title: Bedroom
     type: entities
-  - entities:
+    show_header_toggle: true
+    entities:
       - entity: light.bedroom_main_light
         secondary_info: last-changed
       - entity: light.bedroom_main_light_2
@@ -182,10 +185,10 @@ cards:
         secondary_info: last-changed
       - entity: sensor.bedroom_pressure
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Bedroom
+  - title: Kitchen
     type: entities
-  - entities:
+    show_header_toggle: true
+    entities:
       - entity: light.kitchen_top_light
         secondary_info: last-changed
       - entity: binary_sensor.kitchen_motion_sensor
@@ -198,10 +201,10 @@ cards:
         secondary_info: last-changed
       - entity: sensor.kitchen_illumination
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Kitchen
+  - title: Bathroom
     type: entities
-  - entities:
+    show_header_toggle: true
+    entities:
       - entity: light.bathroom_top_light
         secondary_info: last-changed
       - entity: binary_sensor.bathroom_motion_sensor
@@ -216,10 +219,10 @@ cards:
         secondary_info: last-changed
       - entity: sensor.bathroom_pressure
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Bathroom
+  - title: Kids room
     type: entities
-  - entities:
+    show_header_toggle: true
+    entities:
       - entity: light.kids_top_light
         secondary_info: last-changed
       - entity: sensor.kids_temperature
@@ -228,18 +231,18 @@ cards:
         secondary_info: last-changed
       - entity: sensor.kids_pressure
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Kids room
+  - title: Environment
     type: entities
-  - entities:
+    show_header_toggle: true
+    entities:
       - entity: sun.sun
         secondary_info: last-changed
       - entity: sensor.moon
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Environment
+  - title: Hallway
     type: entities
-  - entities:
+    show_header_toggle: true
+    entities:
       - entity: light.hallway_gateway_light
         secondary_info: last-changed
       - entity: light.hallway_top_light
@@ -253,23 +256,21 @@ cards:
         secondary_info: last-changed
       - entity: sensor.hallway_pressure
         secondary_info: last-changed
-    show_header_toggle: true
-    title: Hallway
-    type: entities
-  - entities:
-      - sensor.processor_use
-      - sensor.memory_free
-      - sensor.disk_use_percent_home
-    show_header_toggle: true
-    title: System stats
-    type: entities
-  - entities:
-      - entity: media_player.living_room_speaker
-      - entity: media_player.pc_gpmdp
-      - entity: media_player.living_room_tv_cast
-      - entity: media_player.philips_tv
-    type: entities
-  - cards:
+  # - entities:
+  #     - sensor.processor_use
+  #     - sensor.memory_free
+  #     - sensor.disk_use_percent_home
+  #   show_header_toggle: true
+  #   title: System stats
+  #   type: entities
+  # - entities:
+  #     - entity: media_player.living_room_speaker
+  #     - entity: media_player.pc_gpmdp
+  #     - entity: media_player.living_room_tv_cast
+  #     - entity: media_player.philips_tv
+  #   type: entities
+  - type: "custom:vertical-stack-in-card"
+    cards:
       - artwork: cover
         artwork_border: true
         entity: media_player.living_room_speaker
@@ -290,13 +291,12 @@ cards:
         entity: media_player.philips_tv
         show_source: true
         type: "custom:mini-media-player"
-    type: "custom:vertical-stack-in-card"
-  - card:
-      entities: []
-      title: Dark Sky
-      type: glance
-    filter:
-      include:
-        - entity_id: "*dark_sky*"
-    show_empty: false
-    type: "custom:monster-card"
+  # - card:
+  #     entities: []
+  #     title: Dark Sky
+  #     type: glance
+  #   filter:
+  #     include:
+  #       - entity_id: "*dark_sky*"
+  #   show_empty: false
+  #   type: "custom:monster-card"

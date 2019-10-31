@@ -3,8 +3,11 @@ id: 4
 title: Kitchen
 badges: []
 cards:
-  - cards:
-      - cards:
+  - type: "custom:vertical-stack-in-card"
+    layout: horizontal
+    cards:
+      - type: horizontal-stack
+        cards:
           - entity: light.kitchen_top_light
             hold_action:
               action: more-info
@@ -17,58 +20,95 @@ cards:
             tap_action:
               action: more-info
             type: entity-button
-        type: horizontal-stack
-      - cards:
-          - entity: sensor.kitchen_illumination
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
-            type: entity-button
+      - type: horizontal-stack
+        cards:
+          - type: custom:mini-graph-card
+            entities: 
+              - sensor.kitchen_illumination
+            align_icon: left
+            align_state: center
+            show:
+              fill: false
           - entity: binary_sensor.kitchen_left_window_sensor
             hold_action:
               action: none
             tap_action:
               action: more-info
             type: entity-button
-        type: horizontal-stack
-    layout: horizontal
-    type: "custom:vertical-stack-in-card"
-  - detail: 2
-    entity: sensor.kitchen_temperature
-    graph: line
-    type: sensor
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.kitchen_temperature
+            max: 40
+            min: 0
+            name: Temperature
+            severity:
+              green: 18
+              red: 30
+              yellow: 25
+            theme: default
+            type: gauge
+            unit: C
+          - entity: sensor.kitchen_humidity
+            max: 100
+            min: 0
+            name: Humidity
+            severity:
+              green: 30
+              red: 60
+              yellow: 50
+            theme: default
+            type: gauge
+            unit: "%"
+  - title: Temperature
+    type: "custom:mini-graph-card"
+    # animate: true
+    entities:
+      - sensor.kitchen_temperature
+    color_thresholds:
+      - color: "#0000ff"
+        value: 15
+      - color: "#00ff00"
+        value: 21
+      - color: "#ffb347"
+        value: 26
+      - color: "#ff0000"
+        value: 30
+      - color: "#FF00FF"
+        value: 35
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
   - entities:
       - binary_sensor.kitchen_left_window_sensor
       - binary_sensor.kitchen_motion_sensor
       - sensor.kitchen_illumination
     type: entities
-  - entity: sensor.kitchen_temperature
-    max: 40
-    min: 0
-    name: Temperature
-    severity:
-      green: 18
-      red: 30
-      yellow: 25
-    theme: default
-    type: gauge
-    unit: C
-  - detail: 2
-    entity: sensor.kitchen_humidity
-    graph: line
-    type: sensor
-  - entity: sensor.kitchen_humidity
-    max: 100
-    min: 0
-    name: Humidity
-    severity:
-      green: 30
-      red: 60
-      yellow: 50
-    theme: default
-    type: gauge
-    unit: "%"
+  - title: Humidity
+    type: "custom:mini-graph-card"
+    entities:
+      - sensor.kitchen_humidity
+    color_thresholds:
+      - color: "#00ff00"
+        value: 30
+      - color: "#ffb347"
+        value: 50
+      - color: "#ff0000"
+        value: 60
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
   - detail: 2
     entity: sensor.kitchen_pressure
     graph: line

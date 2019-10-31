@@ -2,8 +2,11 @@ icon: "mdi:shower"
 id: 3
 title: Bathroom
 cards:
-  - cards:
-      - cards:
+  - layout: horizontal
+    type: "custom:vertical-stack-in-card"
+    cards:
+      - type: horizontal-stack
+        cards:
           - entity: light.bathroom_top_light
             hold_action:
               action: more-info
@@ -16,8 +19,14 @@ cards:
             tap_action:
               action: more-info
             type: entity-button
-        type: horizontal-stack
-      - cards:
+          - entity: binary_sensor.washer_vibration
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
+      - type: horizontal-stack
+        cards:
           - entity: binary_sensor.bathroom_water_leak
             hold_action:
               action: none
@@ -36,39 +45,75 @@ cards:
             tap_action:
               action: more-info
             type: entity-button
-        type: horizontal-stack
-    layout: horizontal
-    type: "custom:vertical-stack-in-card"
-  - entity: sensor.bathroom_temperature
-    max: 40
-    min: 0
-    name: Temperature
-    severity:
-      green: 18
-      red: 30
-      yellow: 25
-    theme: default
-    type: gauge
-    unit: C
-  - detail: 2
-    entity: sensor.bathroom_temperature
-    graph: line
-    type: sensor
-  - entity: sensor.bathroom_humidity
-    max: 100
-    min: 0
-    name: Humidity
-    severity:
-      green: 30
-      red: 60
-      yellow: 50
-    theme: default
-    type: gauge
-    unit: "%"
-  - detail: 2
-    entity: sensor.bathroom_humidity
-    graph: line
-    type: sensor
+      - type: horizontal-stack
+        cards:
+          - type: gauge
+            entity: sensor.bathroom_temperature
+            theme: default
+            unit: C
+            max: 40
+            min: 0
+            name: Temperature
+            severity:
+              green: 18
+              red: 30
+              yellow: 25
+          - entity: sensor.bathroom_humidity
+            type: gauge
+            theme: default
+            unit: "%"
+            max: 100
+            min: 0
+            name: Humidity
+            severity:
+              green: 30
+              red: 60
+              yellow: 50
+  - title: Temperature
+    type: "custom:mini-graph-card"
+    # animate: true
+    entities:
+      - sensor.bathroom_temperature
+    color_thresholds:
+      - color: "#0000ff"
+        value: 15
+      - color: "#00ff00"
+        value: 21
+      - color: "#ffb347"
+        value: 26
+      - color: "#ff0000"
+        value: 30
+      - color: "#FF00FF"
+        value: 35
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - title: Humidity
+    type: "custom:mini-graph-card"
+    entities:
+      - sensor.bathroom_humidity
+    color_thresholds:
+      - color: "#00ff00"
+        value: 30
+      - color: "#ffb347"
+        value: 50
+      - color: "#ff0000"
+        value: 60
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
   - detail: 2
     entity: sensor.bathroom_pressure
     graph: line

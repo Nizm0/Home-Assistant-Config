@@ -2,18 +2,95 @@ icon: "mdi:stairs"
 id: 6
 title: Hallway
 cards:
-  - cards:
-      - cards:
+  - type: "custom:vertical-stack-in-card"
+    cards:
+      - type: horizontal-stack
+        cards:
           - entity: light.hallway_top_light
             hold_action: more-info
             tap_action: toggle
             type: entity-button
           - entity: light.hallway_gateway_light
             type: light
-        type: horizontal-stack
-    type: "custom:vertical-stack-in-card"
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.hallway_temperature
+            max: 40
+            min: 0
+            name: Temperature
+            severity:
+              green: 18
+              red: 30
+              yellow: 25
+            theme: default
+            type: gauge
+            unit: C
+          - entity: sensor.hallway_humidity
+            max: 100
+            min: 0
+            name: Humidity
+            severity:
+              green: 30
+              red: 60
+              yellow: 50
+            theme: default
+            type: gauge
+            unit: "%"
   - entities:
       - entity: binary_sensor.hallway_motion_sensor
       - entity: binary_sensor.home_door_sensor
       - entity: sensor.hallway_illumination
     type: entities
+  - title: Temperature
+    type: "custom:mini-graph-card"
+    # animate: true
+    entities:
+      - sensor.hallway_temperature
+    color_thresholds:
+      - color: "#0000ff"
+        value: 15
+      - color: "#00ff00"
+        value: 21
+      - color: "#ffb347"
+        value: 26
+      - color: "#ff0000"
+        value: 30
+      - color: "#FF00FF"
+        value: 35
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - title: Humidity
+    type: "custom:mini-graph-card"
+    entities:
+      - sensor.hallway_humidity
+    color_thresholds:
+      - color: "#00ff00"
+        value: 30
+      - color: "#ffb347"
+        value: 50
+      - color: "#ff0000"
+        value: 60
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - detail: 2
+    entity: sensor.hallway_pressure
+    graph: line
+    type: sensor
+  - detail: 2
+    entity: sensor.hallway_illumination
+    graph: line
+    type: sensor

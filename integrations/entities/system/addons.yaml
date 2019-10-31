@@ -1,0 +1,23 @@
+switch:
+  - platform: template
+    switches:
+      appdaemon:
+        value_template: "{{ is_state('sensor.appdaemon_status', 'started') }}"
+        turn_on:
+          service: hassio.addon_start
+          data:
+            addon: a0d7b954_appdaemon3
+        turn_off:
+          service: hassio.addon_stop
+          data:
+            addon: a0d7b954_appdaemon3
+
+sensor:
+  - platform: rest
+    resource: !secret rest_appdaemon_info_link
+    name: AppDaemon Status
+    value_template: '{{ value_json.data.state }}'
+    scan_interval: 5
+    headers:
+      Authorization: !secret local_rest_api_token
+      Content-Type: application/json

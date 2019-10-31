@@ -2,42 +2,86 @@ icon: "mdi:human-child"
 id: 5
 title: Kids room
 cards:
-  - entity: light.kids_top_light
-    hold_action:
-      action: more-info
-    tap_action:
-      action: toggle
-    type: entity-button
-  - entity: sensor.kids_temperature
-    max: 40
-    min: 0
-    name: Temperature
-    severity:
-      green: 19
-      red: 30
-      yellow: 25
-    theme: default
-    type: gauge
-    unit: C
-  - detail: 2
-    entity: sensor.kids_temperature
-    graph: line
-    type: sensor
-  - entity: sensor.kids_humidity
-    max: 100
-    min: 0
-    name: Humidity
-    severity:
-      green: 30
-      red: 60
-      yellow: 50
-    theme: default
-    type: gauge
-    unit: "%"
-  - detail: 2
-    entity: sensor.kids_humidity
-    graph: line
-    type: sensor
+  - type: "custom:vertical-stack-in-card"
+    layout: horizontal
+    cards:
+      - type: horizontal-stack
+        cards:
+          - entity: light.kids_top_light
+            hold_action:
+              action: more-info
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.kids_temperature
+            max: 40
+            min: 0
+            name: Temperature
+            severity:
+              green: 19
+              red: 30
+              yellow: 25
+            theme: default
+            type: gauge
+            unit: C
+          - entity: sensor.kids_humidity
+            max: 100
+            min: 0
+            name: Humidity
+            severity:
+              green: 30
+              red: 60
+              yellow: 50
+            theme: default
+            type: gauge
+            unit: "%"
+  - title: Temperature
+    type: "custom:mini-graph-card"
+    # animate: true
+    entities:
+      - sensor.kids_temperature
+    color_thresholds:
+      - color: "#0000ff"
+        value: 15
+      - color: "#00ff00"
+        value: 21
+      - color: "#ffb347"
+        value: 26
+      - color: "#ff0000"
+        value: 30
+      - color: "#FF00FF"
+        value: 35
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - title: Humidity
+    type: "custom:mini-graph-card"
+    entities:
+      - sensor.kids_humidity
+    color_thresholds:
+      - color: "#00ff00"
+        value: 30
+      - color: "#ffb347"
+        value: 50
+      - color: "#ff0000"
+        value: 60
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
   - detail: 2
     entity: sensor.kids_pressure
     graph: line
