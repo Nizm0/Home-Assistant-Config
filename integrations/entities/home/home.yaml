@@ -1,12 +1,12 @@
 sensor:
   - platform: moon
-  - platform: rozkladzik
-    city: 'wroclaw'
-    stops:
-      - id: 4507
-        name: 'Home'
-      - id: 1515
-        name: 'Work'
+  # - platform: rozkladzik
+  #   city: 'wroclaw'
+  #   stops:
+  #     - id: 4507
+  #       name: 'Home'
+  #     - id: 1515
+  #       name: 'Work'
 
   - platform: mold_indicator
     indoor_temp_sensor: sensor.living_room_temperature
@@ -29,29 +29,21 @@ air_quality:
   - platform: opensensemap
     station_id: 5902649c5ba9e50011fc57b8
 
-  # - platform: airvisual
-  #   api_key: !secret airvisual_api_key
-  #   monitored_conditions:
-  #     - us
-  #     - cn
-  #   latitude: !secret home_latitude
-  #   longitude: !secret home_longitude
-  # #  radius: 500
-  #   show_on_map: false
+  - platform: airvisual
+    api_key: !secret airvisual_api_key
+    monitored_conditions:
+      - us
+      # - cn
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+  #  radius: 500
+    show_on_map: false
 
 binary_sensor:
-  - platform: workday
-    name: Workday
-    country: PL
-    workdays:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-  - platform: impk
-    monitored_conditions:
-      - news
+
+  # - platform: impk
+  #   monitored_conditions:
+  #     - news
   - platform: template
     sensors:
       taking_bath:

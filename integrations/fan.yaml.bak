@@ -1,0 +1,12 @@
+---
+# Home Assistant can monitor air purtifier. 
+#
+# This configuration loads up my mi air purtifier
+#
+# https://www.home-assistant.io/integrations/fan.xiaomi_miio/
+
+fan:
+  - platform: xiaomi_miio
+    host: 192.168.1.151
+    token: !secret xiaomi_airpurifierr_key
+    # model: zhimi.airpurifier.v3

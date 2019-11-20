@@ -84,6 +84,7 @@ cards:
         show:
           extrema: true
           fill: false
+          title: true
       - type: "custom:mini-graph-card"
         title: Humidity 48h
         animate: true
@@ -101,6 +102,25 @@ cards:
         show:
           extrema: true
           fill: false
+          title: true
+      - type: "custom:mini-graph-card"
+        title: Prsure 48h
+        animate: true
+        entities:
+          - sensor.living_room_pressure
+          - sensor.bedroom_pressure
+          - sensor.kids_pressure
+          - sensor.kitchen_pressure
+          - sensor.bathroom_pressure
+        height: 100
+        hour24: true
+        hours_to_show: 48
+        location_icon: left
+        location_state: center
+        show:
+          extrema: true
+          fill: false
+          title: true
   - type: "custom:swipe-card"
     cards:
       - type: "custom:vertical-stack-in-card"
@@ -109,15 +129,16 @@ cards:
           - type: horizontal-stack
             cards:
               - entity: sensor.living_room_temperature
+                type: gauge
+                name: Living room
                 max: 40
                 min: 0
-                name: Living room
                 severity:
                   green: 18
                   red: 30
                   yellow: 25
                 theme: default
-                type: gauge
+              - type: custom:gap-card
           - type: horizontal-stack
             cards:
               - entity: sensor.bedroom_temperature
@@ -131,28 +152,28 @@ cards:
                   yellow: 25
                 theme: default
               - entity: sensor.kids_temperature
+                type: gauge
+                name: Kids
+                theme: default
+                unit: C
                 max: 40
                 min: 0
-                name: Kids
                 severity:
                   green: 19
                   red: 30
                   yellow: 25
-                theme: default
-                type: gauge
-                unit: C
           - type: horizontal-stack
             cards:
               - entity: sensor.kitchen_temperature
+                type: gauge
+                name: Kitchen
                 max: 40
                 min: 0
-                name: Kitchen
                 severity:
                   green: 18
                   red: 30
                   yellow: 25
                 theme: default
-                type: gauge
                 unit: C
               - type: gauge
                 entity: sensor.bathroom_temperature
@@ -171,6 +192,7 @@ cards:
           - type: horizontal-stack
             cards:
               - entity: sensor.living_room_humidity
+                type: gauge
                 max: 100
                 min: 0
                 name: Living room
@@ -179,7 +201,7 @@ cards:
                   red: 60
                   yellow: 50
                 theme: default
-                type: gauge
+              - type: custom:gap-card
           - type: horizontal-stack
             cards:
               - entity: sensor.bedroom_humidity
@@ -193,6 +215,7 @@ cards:
                   yellow: 50
                 theme: default
               - entity: sensor.kids_humidity
+                type: gauge
                 max: 100
                 min: 0
                 name: Kids
@@ -201,11 +224,11 @@ cards:
                   red: 60
                   yellow: 50
                 theme: default
-                type: gauge
                 unit: "%"
           - type: horizontal-stack
             cards:
               - entity: sensor.kitchen_humidity
+                type: gauge
                 max: 100
                 min: 0
                 name: kitchen
@@ -214,7 +237,6 @@ cards:
                   red: 60
                   yellow: 50
                 theme: default
-                type: gauge
                 unit: "%"
               - entity: sensor.bathroom_humidity
                 type: gauge

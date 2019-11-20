@@ -11,7 +11,18 @@ title: Testing area
 icon: mdi:test-tube
 theme: darked
 cards:
+  # - type: custom:air-visual-card
+  #   air_pollution_level: sensor.us_air_pollution_level
+  #   air_quality_index: sensor.us_air_quality_index
+  #   main_pollutant: sensor.us_main_pollutant
+  #   temp: weather.dark_sky
+  #   city: 'Home'
+  - type: custom:button-card
+    entity: fan.xiaomi_miio_device
+    tap_action:
+      action: more-info
   - entities:
+      # - entity: fan.xiaomi_miio_device
       - entity: variable.last_motion
       - entity: binary_sensor.hallway_motion_sensor
       - entity: binary_sensor.living_room_motion_sensor
@@ -115,15 +126,15 @@ cards:
             - attributes:
                 battery: "<=100"
   - type: "custom:browser-player"
-  - content: |
-      <big><center>News</center></big>
-      [[ binary_sensor.impk_news.attributes.html ]]
-      <big><center>Departures Work</center></big>
-      [[ sensor.rozkladzik_wroclaw_1515.attributes.html ]]
-      <big><center>Departures Home</center></big>
-      [[ sensor.rozkladzik_wroclaw_4507.attributes.html ]]
-    title: Rozkładzik
-    type: "custom:html-card"
+  # - type: "custom:html-card"
+  #   title: Rozkładzik
+  #   content: |
+  #     <big><center>News</center></big>
+  #     [[ binary_sensor.impk_news.attributes.html ]]
+  #     <big><center>Departures Work</center></big>
+  #     [[ sensor.rozkladzik_wroclaw_1515.attributes.html ]]
+  #     <big><center>Departures Home</center></big>
+  #     [[ sensor.rozkladzik_wroclaw_4507.attributes.html ]]
   - entities:
       - entity: sensor.tauron_amiplus_consumption_daily
       - entity: sensor.tauron_amiplus_consumption_monthly
@@ -151,12 +162,13 @@ cards:
     show_header_toggle: false
     title: Server shelf
     type: entities
-  - entities:
-      - hide_if_unavailable: true
-        name: Lights
-        type: cast
-        view: lights
-    type: entities
+
+  # - entities:
+  #     - hide_if_unavailable: true
+  #       name: Lights
+  #       type: cast
+  #       view: lights
+  #   type: entities
   # - entities:
   #     - sensor.adguard_average_processing_speed
   #     - sensor.adguard_dns_queries
@@ -174,6 +186,7 @@ cards:
   #   show_header_toggle: false
   #   title: AddGuard
   #   type: entities
+
   - entities:
       - content_template: "Update available for {{display_name}} to {{available version}}"
         entity: sensor.hacs

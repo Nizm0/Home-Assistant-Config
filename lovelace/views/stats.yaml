@@ -100,17 +100,16 @@ cards:
     refresh_interval: 0
     title: Windows in home
     type: history-graph
-  - card:
-      entities: []
+  - type: custom:auto-entities
+    card:
       title: Tured off Automations
       type: entities
     filter:
       include:
-        - entity_id: "*automation*"
+        - entity_id: "automation.*"
           state: "off"
     show_empty: false
     show_header_toggle: true
-    type: "custom:monster-card"
   - entities:
       - binary_sensor.my_computer_connected
       - camera.my_computer_screen_0

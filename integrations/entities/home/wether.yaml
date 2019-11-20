@@ -4,10 +4,10 @@ sensor:
     forecast:
     - 1
     monitored_conditions:
-    - summary
+    # - summary
   #  - minutely_summary
     - hourly_summary
-    - daily_summary
+    # - daily_summary
   #  - icon
   #  - nearest_storm_distance
   #  - nearest_storm_bearing
@@ -15,8 +15,8 @@ sensor:
     - precip_intensity
     - precip_probability
     - temperature
-    - apparent_temperature
-    - dew_point
+    # - apparent_temperature
+    # - dew_point
     - wind_speed
     - wind_bearing
     - cloud_cover
@@ -79,4 +79,4 @@ sensor:
 weather:
 - platform: darksky
   api_key: !secret darksky_api_key
-  mode: hourly
+  mode: daily

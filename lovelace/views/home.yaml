@@ -33,10 +33,9 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.kitchen_left_window_sensor
         secondary_info: last-changed
-  - type: "custom:monster-card"
+  - type: custom:auto-entities
     show_empty: false
     card:
-      entities: []
       title: Low Battery Devices
       type: glance
     filter:
@@ -299,4 +298,4 @@ cards:
   #     include:
   #       - entity_id: "*dark_sky*"
   #   show_empty: false
-  #   type: "custom:monster-card"
+  #   type: custom:auto-entities
