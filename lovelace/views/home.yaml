@@ -11,6 +11,8 @@ badges:
   - sensor.mold_indicator
   - sensor.letsencrypt
   - sensor.hacs
+  - binary_sensor.car_wash
+  - input_number.vacuum_cleaned_area
 icon: "mdi:home"
 id: 0
 panel: false

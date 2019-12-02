@@ -4,7 +4,8 @@ icon: "mdi:information-outline"
 cards:
   - type: "custom:vertical-stack-in-card"
     cards:
-      - cards:
+      - type: horizontal-stack
+        cards:
           - entity: person.michal
             image: /local/images/home/michal.jpg
             show_name: false
@@ -17,8 +18,8 @@ cards:
             tap_action:
               action: more-info
             type: picture-entity
-        type: horizontal-stack
-      - cards:
+      - type: horizontal-stack
+        cards:
           - entity: vacuum.rockrobo
             hold_action:
               action: call-service
@@ -49,7 +50,6 @@ cards:
             tap_action:
               action: toggle
             type: picture-entity
-        type: horizontal-stack
       - buttons: true
         entity: vacuum.rockrobo
         image: /local/images/vacuum-small.png
@@ -63,13 +63,21 @@ cards:
           status: Status
         name: Rockrobo
         type: "custom:xiaomi-vacuum-card"
-  - entity: weather.dark_sky
-    type: custom:weather-card
+  - type: "custom:vertical-stack-in-card"
+    cards:
+      - type: custom:air-visual-card
+        air_pollution_level: sensor.u_s_air_pollution_level
+        air_quality_index: sensor.u_s_air_quality_index
+        main_pollutant: sensor.u_s_main_pollutant
+        temp: weather.dark_sky
+        city: 'Home'
+      - entity: weather.dark_sky
+        type: custom:weather-card
   - type: "custom:swipe-card"
     cards:
       - type: "custom:mini-graph-card"
         title: Temperatures 48h
-        animate: true
+        animate: false
         entities:
           - sensor.living_room_temperature
           - sensor.bedroom_temperature
@@ -87,7 +95,7 @@ cards:
           title: true
       - type: "custom:mini-graph-card"
         title: Humidity 48h
-        animate: true
+        animate: false
         entities:
           - sensor.living_room_humidity
           - sensor.bedroom_humidity

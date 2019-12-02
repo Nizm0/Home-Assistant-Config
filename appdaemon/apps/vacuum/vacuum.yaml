@@ -5,10 +5,13 @@ vacuum_manager:
   vacuum_time_entity: input_datetime.vacuum_day_time
   vacuum_entity: vacuum.rockrobo
   ready_to_vacuum: input_boolean.ready_to_vacuum
+  cleaned_area: input_number.vacuum_cleaned_area
   ocupancy: group.all_devices #"not_home"
   home_preset_select: input_select.home_preset #"Empty"
   notifiers:
     - notify/push_to_chrome_nizm0_oneplus3
     # - notify/mobile_app_nizm0_s_oneplus_a3003
-  clinup_location: [24250,30650]
+  emptying_location: [24250,30650]
+  area_befor_eptying: 90
   # dependencies: globals
+  switch: smart_switch

@@ -1,4 +1,4 @@
 events_actions:
   module: events
   class: Events
-  dependencies: vacuum_manager
+  # dependencies: vacuum_manager

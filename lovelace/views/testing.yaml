@@ -11,17 +11,12 @@ title: Testing area
 icon: mdi:test-tube
 theme: darked
 cards:
-  # - type: custom:air-visual-card
-  #   air_pollution_level: sensor.us_air_pollution_level
-  #   air_quality_index: sensor.us_air_quality_index
-  #   main_pollutant: sensor.us_main_pollutant
-  #   temp: weather.dark_sky
-  #   city: 'Home'
   - type: custom:button-card
     entity: fan.xiaomi_miio_device
     tap_action:
       action: more-info
-  - entities:
+  - type: entities
+    entities:
       # - entity: fan.xiaomi_miio_device
       - entity: variable.last_motion
       - entity: binary_sensor.hallway_motion_sensor
@@ -36,12 +31,22 @@ cards:
       - entity: binary_sensor.router
       - entity: binary_sensor.server
       - entity: binary_sensor.remote_ui
-    type: entities
-  - entities:
+  - type: entities
+    entities:
+      - input_boolean.ready_to_vacuum
+      - input_boolean.ready_to_emptying_vacuum
+      - input_datetime.vacuum_day_time
+      - input_number.vacuum_cleaned_area
+      - sensor.vacuum_battery
+      - sensor.vacuum_filter
+      - sensor.vacuum_main_brush
+      - sensor.vacuum_sensors
+      - sensor.vacuum_side_brush
+  - type: entities
+    entities:
       - entity: binary_sensor.washer_vibration
     show_header_toggle: false
     title: Vibration
-    type: entities
   - type: "custom:vertical-stack-in-card"
     cards:
       - entity: camera.ender_3
@@ -135,15 +140,16 @@ cards:
   #     [[ sensor.rozkladzik_wroclaw_1515.attributes.html ]]
   #     <big><center>Departures Home</center></big>
   #     [[ sensor.rozkladzik_wroclaw_4507.attributes.html ]]
-  - entities:
+  - type: entities
+    entities:
       - entity: sensor.tauron_amiplus_consumption_daily
       - entity: sensor.tauron_amiplus_consumption_monthly
       - entity: sensor.tauron_amiplus_consumption_yearly
       - entity: sensor.tauron_amiplus_zone
     show_header_toggle: false
     title: Tauron
-    type: entities
-  - entities:
+  - type: entities
+    entities:
       - type: "custom:restriction-card"
         card:
           entity: switch.server_shelf_switch
@@ -161,7 +167,6 @@ cards:
       - entity: sensor.server_shelf_wifi_signal
     show_header_toggle: false
     title: Server shelf
-    type: entities
 
   # - entities:
   #     - hide_if_unavailable: true
@@ -187,7 +192,8 @@ cards:
   #   title: AddGuard
   #   type: entities
 
-  - entities:
+  - type: "custom:home-feed-card"
+    entities:
       - content_template: "Update available for {{display_name}} to {{available version}}"
         entity: sensor.hacs
         icon: "mdi:update"
@@ -195,4 +201,3 @@ cards:
         multiple_items: true
     id_filter: ^home_feed_.*
     title: Home Feed
-    type: "custom:home-feed-card"

@@ -114,7 +114,7 @@ binary_sensor:
     # on_release:
     #   then:
     #     - light.toggle: light4
- 
+
 light:
   - platform: binary
     name: General Light

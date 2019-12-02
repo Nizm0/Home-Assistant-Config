@@ -1,5 +1,6 @@
 sensor:
   - platform: moon
+  - platform: season
   # - platform: rozkladzik
   #   city: 'wroclaw'
   #   stops:
@@ -15,6 +16,17 @@ sensor:
     # outdoor_temp_sensor: sensor.flower_2_temperature
     calibration_factor: 1.0
 
+  - platform: airvisual
+    api_key: !secret airvisual_api_key
+    monitored_conditions:
+      - us
+      # - cn
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+  #  radius: 500
+    show_on_map: false
+    
+
 # luftdaten:
 #   sensor_id: 2303
 #   show_on_map: false
@@ -29,21 +41,20 @@ air_quality:
   - platform: opensensemap
     station_id: 5902649c5ba9e50011fc57b8
 
-  - platform: airvisual
-    api_key: !secret airvisual_api_key
-    monitored_conditions:
-      - us
-      # - cn
-    latitude: !secret home_latitude
-    longitude: !secret home_longitude
-  #  radius: 500
-    show_on_map: false
-
 binary_sensor:
-
+  # - platform: tod
+  #   name: Early Morning
+  #   after: sunrise
+  #   after_offset: '-02:00'
+  #   before: '07:00'
+  # - platform: tod
+  #   name: Late Morning
+  #   after: '10:00'
+  #   before: '12:00'
   # - platform: impk
   #   monitored_conditions:
   #     - news
+
   - platform: template
     sensors:
       taking_bath:

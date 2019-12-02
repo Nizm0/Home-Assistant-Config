@@ -10,6 +10,9 @@ input_boolean:
     icon: mdi:robot-vacuum
     # initial: off
     # restore_state:
+  ready_to_emptying_vacuum:
+    name: Vacuum needs emptying
+    icon: mdi:delete-circle
 
 input_datetime:
   vacuum_day_time:
@@ -17,6 +20,51 @@ input_datetime:
     has_date: false
     has_time: true
     # initial: '15:00'
+
+input_number:
+  vacuum_cleaned_area:
+    name: Cleared area between emptying
+    mode: box
+    min: 0
+    max: 200
+
+sensor:
+  - platform: template
+    sensors:
+      vacuum_battery:
+        entity_id: vacuum.rockrobo
+        friendly_name: "Vacuum - Battery"
+        value_template: "{{ states.vacuum.rockrobo.attributes.battery_level }}"
+        device_class: battery
+        unit_of_measurement: '%'
+
+      vacuum_main_brush:
+        entity_id: vacuum.rockrobo
+        friendly_name: "Vacuum - Main Brush left"
+        value_template: "{{ states.vacuum.rockrobo.attributes.main_brush_left }}"
+        # device_class: battery
+        # unit_of_measurement: '%'
+
+      vacuum_side_brush:
+        entity_id: vacuum.rockrobo
+        friendly_name: "Vacuum - Side Brush left"
+        value_template: "{{ states.vacuum.rockrobo.attributes.side_brush_left }}"
+        # device_class: battery
+        # unit_of_measurement: '%'
+
+      vacuum_filter:
+        entity_id: vacuum.rockrobo
+        friendly_name: "Vacuum - Filter left"
+        value_template: "{{ states.vacuum.rockrobo.attributes.filter_left }}"
+        # device_class: battery
+        # unit_of_measurement: '%'
+
+      vacuum_sensors:
+        entity_id: vacuum.rockrobo
+        friendly_name: "Vacuum - Sensor dirty left"
+        value_template: "{{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
+        # device_class: battery
+        # unit_of_measurement: '%'
 
 switch:
   - platform: template
