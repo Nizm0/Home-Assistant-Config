@@ -20,12 +20,12 @@ class DeconzHelper(hass.Hass):
       event_received = datetime.now()
       self.log("fDeconz event received from {event_id}. Event was: {event_data}")
       # self.set_state("sensor.deconz_event", state = event_id, attributes = {"event_data": event_data, "event_received": str(event_received)})
-      if data["id"] in self.args['switch']:
+      if event_id in self.args['switch']:
         self.event_button(event_name, data, kwargs)
-      elif data["id"] in self.args['cube']:
+      elif event_id in self.args['cube']:
         self.event_qube(event_name, data, kwargs)
       else:
-        self.log('Unknown device')
+        self.log(f'Unknown device {event_id}')
     else:
       self.log('Data is empty')
 

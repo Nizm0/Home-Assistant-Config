@@ -14,10 +14,10 @@ automation:
         message: >
           New value is: {{ trigger.to_state.state }}
         title: Gosia entered the home
+        data:
+          tag: gosia-location-info
     - service: notify.hangouts
       data_template:
         message: >
           New value is: {{ trigger.to_state.state }}
         title: Gosia entered the home
-        data:
-          tag: gosia-location-info

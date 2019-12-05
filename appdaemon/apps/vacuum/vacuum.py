@@ -1,6 +1,7 @@
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
 import json
+# from datetime import datetime
 from collections import namedtuple
 from base import Base
 import globals
@@ -36,11 +37,12 @@ class VacuumActions(Base):
     self.listen_state(self.change_run_daily, self.vacuum_time_entity)
     self.listen_state(self.vacuum_state_handle, self.vacuum_entity)
     self.listen_event(self.action_event_clicked, "html5_notification.clicked", tag=self.tag)
-    self.listen_event(self.event_received, "deconz_event")
+    if self.args["switch"] is not None:
+      self.listen_event(self.event_received, "deconz_event")
 
   def cleaned_area_changed(self, entity, attribute, old, new, kwargs):
-    self.cleaned_area = new
-    if(self.cleaned_area > self.args["area_befor_eptying"]):
+    self.cleaned_area = int(float(new))
+    if(self.cleaned_area > self.args["area_befor_emptying"]):
       self.ready_for_emptying = True
 
   def send_vacuum_for_emtying(self, entity, attribute, old, new, kwargs):
@@ -49,10 +51,11 @@ class VacuumActions(Base):
     self.waiting_for_emptying = True
     # self.cancel_vacuum_timer(self.vacuum_timer_handler)
 
-  def vacuum_emptied(self, kwargs):
-    self.dock_vacuum(kwargs)
+  def vacuum_emptied(self):
+    self.log('Vacuum emptied, returnig to dock')
     self.waiting_for_emptying = False
     self.set_value(self.cleaned_area_entity, value=0)
+    self.dock_vacuum(None)
 
   def set_run_daily(self, entity, attribute, old, new, kwargs):
     self.input_time = datetime.time.fromisoformat(new)
@@ -80,6 +83,8 @@ class VacuumActions(Base):
         self.notify_on_change(self.title, message, actions=[Actions["start_vacuum"], Actions["cancel"]])
         self.log("Flor is not ready, wainting for response.")
       elif ocupancy == 'not_home' and home_preset == 'Empty':
+        message = "Started dayly Cleanup"
+        self.notify_on_change(self.title, message, actions=[Actions["return_vacuum"]])
         self.start_vacuum()
         self.log("Vacuum started")
       else:
@@ -114,7 +119,7 @@ class VacuumActions(Base):
           self.set_value(self.cleaned_area_entity, value=self.cleaned_area)
           message = f"Vacuum has finished his work, cleaned {cleaned_area} m\u00b2 in {cleaning_time} min."
           actions = []
-          if self.cleaned_area > self.args["area_befor_eptying"]:
+          if self.cleaned_area > int(float(self.args["area_befor_emptying"])):
             message = message + f" You have nod emptied me that long, I'm almost full."
             actions = [Actions["send_for_emptying"], Actions["send_wen_in_home"]]
             self.ready_for_emptying = True
@@ -153,7 +158,7 @@ class VacuumActions(Base):
     elif event_action == "return_vacuum":
       self.log(f"Push notification clicked {event_action}, {data}")
       self.dismiss_by_tag(event_tag)
-      self.dock_vacuum()
+      self.dock_vacuum(kwargs)
     elif event_action == "send_for_emptying":
       self.log(f"Push notification clicked {event_action}, {data}")
       self.dismiss_by_tag(event_tag)
@@ -189,7 +194,7 @@ class VacuumActions(Base):
     self.cancel_vacuum_timer(self.vacuum_timer_handler)
   def stop_vacuum(self):
     self.vacuum_action("vacuum/stop", entity_id=self.vacuum_entity)
-  def pause_vacuum(self, kwargs):
+  def pause_vacuum(self):
     self.vacuum_action("vacuum/pause", entity_id=self.vacuum_entity)
   def dock_vacuum(self, kwargs):
     if not self.waiting_for_emptying:
@@ -246,47 +251,47 @@ class VacuumActions(Base):
     if data != {}:
       event_data = data["event"]
       event_id = data["id"]
-      event_received = datetime.now()
+      event_received = datetime.datetime.now()
       self.log("fDeconz event received from {event_id}. Event was: {event_data}")
-      # self.set_state("sensor.deconz_event", state = event_id, attributes = {"event_data": event_data, "event_received": str(event_received)})
-      if data["id"] in self.args['switch']:
+      self.set_state("sensor.deconz_event", state = event_id, attributes = {"event_data": event_data, "event_received": str(event_received)})
+      if event_id in self.args['switch']:
         self.event_button(event_name, data, kwargs)
       else:
-        self.log('Unknown device')
+        self.log(f'Usuported device {event_id}')
     else:
       self.log('Data is empty')
 
   def event_button(self, event_name, data, kwargs):
     event_data = data["event"]
     button = data['id']
-    event_received = datetime.now()
+    event_received = datetime.datetime.now()
     # self.log(event_data)
     # if event_data == 1000: #down
-    # self.log(f'Button {button} down, date {event_received}')
+    self.log(f'Button {button} down, date {event_received}')
     if button == self.args["switch"]:
       if event_data == 1002: #releas
-        self.log(f'Button {button} release, date {event_received}')
+        self.log(f'Button {button} release, I\'m ready to cleanup')
         self.turn_on(self.ready_to_vacuum_entity)
       # elif event_data == 1001: #long down
-      #   self.log(f'Button {button} long click down, date {event_received}')
+        self.log(f'Button {button} long click down, date {event_received}')
       elif event_data == 1003: #long release
         if not self.waiting_for_emptying:
-          self.send_vacuum_for_emtying(None, None, None, None)
-          self.log(f'Button {button} long click release, date {event_received}.\n Vacuum waiting for emtying.')
+          self.send_vacuum_for_emtying(None, None, None, None, kwargs)
+          self.log(f'Button {button} long click release.\n Vacuum waiting for emtying.')
         else:
-          self.vacuum_emptied(kwargs)
+          self.vacuum_emptied()
           self.log(f'Button {button} long click release, date {event_received}.\n Vacuum emptyed, returnig to base.')
       elif event_data == 1004: #double click
-        self.log(f'Button {button} double click, date {event_received}')
+        self.log(f'Button {button} double click, starting cleanup immediately')
         vacuum_state = self.get_state(self.vacuum_entity)
         if vacuum_state in ["cleaning"]:
-          self.dock_vacuum()
+          self.dock_vacuum(kwargs)
         elif vacuum_state in ["docked", "idle", "paused"]:
           self.start_vacuum()
       elif event_data > 1004 and event_data < 1010: #multi click
-        self.log(f'Button {button} multi click, date {event_received}')
+        self.log(f'Button {button} multi click, panik butto!! Stop and returnikg to dock')
         if vacuum_state not in ["error"]:
-          self.dock_vacuum()
+          self.dock_vacuum(kwargs)
       else:
         self.log(f'Button event {event_data} not suported, date {event_received}')
 
@@ -307,7 +312,7 @@ Actions = {
         # "icon": "/static/icons/favicon-192x192.png",
         "title": "Return Vacuum"
     },
-    'send_clinup': {
+    'send_for_emptying': {
         "action": "send_for_emptying",
         # "icon": "/static/icons/favicon-192x192.png",
         "title": "Send for emptying"

@@ -2,7 +2,7 @@ deconz_helper:
   module: deconz_helper
   class: DeconzHelper
   switch:
-    - smart_switch_1
+    - smart_switch
     - smart_switch_2
   cube:
     - mi_magic_cube
