@@ -162,7 +162,7 @@ class VacuumActions(Base):
     elif event_action == "send_for_emptying":
       self.log(f"Push notification clicked {event_action}, {data}")
       self.dismiss_by_tag(event_tag)
-      self.send_vacuum_for_emtying(None, None, None, None)
+      self.send_vacuum_for_emtying(None, None, None, None, kwargs)
       # clinup_location = self.args["clinup_location"]
       # if clinup_location != None:
       #   self.go_to(clinup_location)
@@ -177,7 +177,7 @@ class VacuumActions(Base):
     # elif event_action == "send_now":
     #   self.log(f"Push notification clicked {event_action}, {data}")
     #   self.dismiss_by_tag(event_tag)
-    #   self.send_vacuum_for_emtying(None, None, None, None)
+    #   self.send_vacuum_for_emtying(None, None, None, None, kwargs)
       # self.postpone_vacuum_timer(3600)
     elif event_action == "send_wen_in_home":
       self.log(f"Push notification clicked {event_action}, {data}")

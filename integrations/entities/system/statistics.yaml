@@ -64,8 +64,12 @@ sensor:
     username: !secret tauron_amiplus.username
     password: !secret tauron_amiplus.password
     energy_meter_id: !secret tauron_amiplus.energy_meter_id
+    check_generation: true
     monitored_variables:
       - zone
       - consumption_daily
       - consumption_monthly
       - consumption_yearly
+      - generation_daily
+      - generation_monthly
+      - generation_yearly
