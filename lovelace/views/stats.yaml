@@ -2,13 +2,19 @@ icon: "mdi:settings"
 id: 8
 title: Stats
 cards:
-  - entities:
+  - type: entities
+    entities:
       - sensor.processor_use
       - sensor.memory_free
       - sensor.disk_use_percent_home
+      - binary_sensor.pve_hassos_running
+      - binary_sensor.pve_hassosdev_running
+      # - type: entity
+      #   entity: binary_sensor.pve_hassos_running
+      # - type: entity
+      #   entity: binary_sensor.pve_hassosdev_running
     show_header_toggle: false
     title: System stats
-    type: entities
   - type: custom:vertical-stack-in-card
     cards:
       - type: custom:bar-card
@@ -47,7 +53,8 @@ cards:
   #   show_header_toggle: false
   #   title: Travis status
   #   type: entities
-  - entities:
+  - type: history-graph
+    entities:
       - sensor.bedroom_temperature
       - sensor.living_room_temperature
       - sensor.kitchen_temperature
@@ -56,8 +63,8 @@ cards:
     hours_to_show: 120
     refresh_interval: 60
     title: Temperature in rooms
-    type: history-graph
-  - entities:
+  - type: history-graph
+    entities:
       - sensor.bedroom_humidity
       - sensor.living_room_humidity
       - sensor.kitchen_humidity
@@ -66,8 +73,8 @@ cards:
     hours_to_show: 120
     refresh_interval: 60
     title: Humidity in rooms
-    type: history-graph
-  - entities:
+  - type: history-graph
+    entities:
       - sensor.bedroom_pressure
       - sensor.living_room_pressure
       - sensor.kitchen_pressure
@@ -76,15 +83,15 @@ cards:
     hours_to_show: 120
     refresh_interval: 60
     title: Presure in rooms
-    type: history-graph
-  - entities:
+  - type: history-graph
+    entities:
       - binary_sensor.home_door_sensor
       - binary_sensor.living_room_balcon_window_sensor
     hours_to_show: 24
     refresh_interval: 0
     title: Dors in home
-    type: history-graph
-  - entities:
+  - type: history-graph
+    entities:
       - binary_sensor.hallway_motion_sensor
       - binary_sensor.living_room_motion_sensor
       - binary_sensor.kitchen_motion_sensor
@@ -92,14 +99,13 @@ cards:
     hours_to_show: 24
     refresh_interval: 0
     title: Motions in home
-    type: history-graph
-  - entities:
+  - type: history-graph
+    entities:
           - entity: binary_sensor.living_room_balcony_window_sensor
           - entity: binary_sensor.kitchen_left_window_sensor
     hours_to_show: 24
     refresh_interval: 0
     title: Windows in home
-    type: history-graph
   - type: custom:auto-entities
     card:
       title: Tured off Automations
@@ -110,7 +116,8 @@ cards:
           state: "off"
     show_empty: false
     show_header_toggle: true
-  - entities:
+  - type: entities
+    entities:
       - binary_sensor.my_computer_connected
       - camera.my_computer_screen_0
       - camera.my_computer_screen_1
@@ -148,5 +155,13 @@ cards:
       - switch.my_computer
     show_header_toggle: false
     title: My Computer
-    type: entities
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: history-graph
+        entities:
+          - sensor.speedtest_ping
+      - type: history-graph
+        entities:
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
   - type: "custom:unused-card"

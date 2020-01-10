@@ -1,6 +1,7 @@
 light:
   - platform: mqtt
     name: Bathroom top light
+    # friendly_name: Top light
     state_topic: "stat/shelly1-bathroom/POWER"
     command_topic: "cmnd/shelly1-bathroom/POWER"
     availability_topic: "tele/shelly1-bathroom/LWT"

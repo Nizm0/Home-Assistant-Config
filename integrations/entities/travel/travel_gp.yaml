@@ -1,0 +1,13 @@
+sensor:
+  - platform: waze_travel_time
+    name: GP to Home
+    origin: zone.gp
+    destination: zone.home
+    region: 'EU'
+    vehicle_type: 'car'
+  - platform: waze_travel_time
+    name: GP to nursery
+    origin: zone.gp
+    destination: zone.nursery
+    region: 'EU'
+    vehicle_type: 'car'

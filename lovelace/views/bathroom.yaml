@@ -33,12 +33,12 @@ cards:
             tap_action:
               action: more-info
             type: entity-button
-          - entity: sensor.taking_bath
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
-            type: entity-button
+          # - entity: sensor.taking_bath
+          #   hold_action:
+          #     action: none
+          #   tap_action:
+          #     action: more-info
+          #   type: entity-button
           - entity: binary_sensor.taking_bath
             hold_action:
               action: none

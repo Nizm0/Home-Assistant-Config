@@ -3,9 +3,9 @@ icon: "mdi:home-heart"
 id: 7
 cards:
   - entities:
-      - entity: group.all_devices
+      - entity: group.family
         secondary_info: last-changed
-      - entity: person.michal
+      - entity: person.nizm0
         secondary_info: last-changed
       - entity: person.gosia
         secondary_info: last-changed
@@ -42,7 +42,7 @@ cards:
       - entity: device_tracker.babcia_teresa
     type: entities
   - entities:
-      - person.michal
+      - person.nizm0
       - person.gosia
     type: entities
   - card:
@@ -50,7 +50,7 @@ cards:
       title: People at home
       type: glance
     entities:
-      - person.michal
+      - person.nizm0
       - person.gosia
       - device_tracker.babcia_teresa
       - device_tracker.portex
@@ -76,40 +76,47 @@ cards:
     refresh_interval: 60
     title: Family tracking
     type: history-graph
-popup_cards:
-  person.gosia:
-    card:
-      entities:
-        - person.gosia
-        - entity: device_tracker.google_maps_109218123589188227395
-          icon: "mdi:map-marker-circle"
-          name: Gosai presence
-          secondary_info: last-changed
-        - entity: device_tracker.gosia_galaxy_s9
-          icon: "mdi:wifi"
-          name: Gosia Wifi
-          secondary_info: last-changed
-        - entity: device_tracker.gosia_g6_bt
-          icon: "mdi:bluetooth"
-          name: Gosia bt
-          secondary_info: last-changed
-      type: entities
-    title: Michal
-  person.michal:
-    card:
-      entities:
-        - person.michal
-        - entity: device_tracker.google_maps_104688658658376260645
-          icon: "mdi:map-marker-circle"
-          name: Michał presence
-          secondary_info: last-changed
-        - entity: device_tracker.nizmo_phone
-          icon: "mdi:wifi"
-          name: Michał Wifi
-          secondary_info: last-changed
-        - entity: device_tracker.oneplus_3_bt
-          icon: "mdi:bluetooth"
-          name: Michał bt
-          secondary_info: last-changed
-      type: entities
-    title: Michal
+  - type: entities
+    title: Travel time
+    show_header_toggle: false
+    entities:
+      - sensor.home_to_nursery
+      - sensor.gp_to_home
+      - sensor.gp_to_nursery
+# popup_cards:
+#   person.gosia:
+#     card:
+#       entities:
+#         - person.gosia
+#         - entity: device_tracker.google_maps_109218123589188227395
+#           icon: "mdi:map-marker-circle"
+#           name: Gosai presence
+#           secondary_info: last-changed
+#         - entity: device_tracker.gosia_galaxy_s9
+#           icon: "mdi:wifi"
+#           name: Gosia Wifi
+#           secondary_info: last-changed
+#         - entity: device_tracker.gosia_g6_bt
+#           icon: "mdi:bluetooth"
+#           name: Gosia bt
+#           secondary_info: last-changed
+#       type: entities
+#     title: Michal
+#   person.nizm0:
+#     card:
+#       entities:
+#         - person.nizm0
+#         - entity: device_tracker.google_maps_104688658658376260645
+#           icon: "mdi:map-marker-circle"
+#           name: Michał presence
+#           secondary_info: last-changed
+#         - entity: device_tracker.nizmo_phone
+#           icon: "mdi:wifi"
+#           name: Michał Wifi
+#           secondary_info: last-changed
+#         - entity: device_tracker.oneplus_3_bt
+#           icon: "mdi:bluetooth"
+#           name: Michał bt
+#           secondary_info: last-changed
+#       type: entities
+#     title: Michal

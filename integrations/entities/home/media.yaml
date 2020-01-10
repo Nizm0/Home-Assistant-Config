@@ -1,6 +1,6 @@
 sensor:
   - platform: twitch
-    client_id: 1on3wj2sxs344bdsgb164rjx5sysef
+    client_id: !secret twitchId
     channels:
       - frenck
       - DrZzs
@@ -10,3 +10,9 @@ sensor:
     members:
     - Thaeliaris#9947
     - Nizm0#9673
+  - platform: steam_online
+    api_key: !secret steamWebApiKey
+    accounts:
+      - 76561197992255354 #nizmoo
+      - 76561197988099383 #norion84
+      - 76561198010872379 #portex

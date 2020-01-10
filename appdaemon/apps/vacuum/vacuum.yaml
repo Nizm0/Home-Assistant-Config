@@ -6,7 +6,7 @@ vacuum_manager:
   vacuum_entity: vacuum.rockrobo
   ready_to_vacuum: input_boolean.ready_to_vacuum
   cleaned_area: input_number.vacuum_cleaned_area
-  ocupancy: group.all_devices #"not_home"
+  ocupancy: group.family #"not_home"
   home_preset_select: input_select.home_preset #"Empty"
   notifiers:
     - notify/push_to_chrome_nizm0_oneplus3

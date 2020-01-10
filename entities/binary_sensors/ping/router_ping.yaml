@@ -1,5 +1,0 @@
-platform: ping
-name: Router
-host: 192.168.1.1
-count: 4
-scan_interval: 60

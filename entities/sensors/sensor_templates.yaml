@@ -4,7 +4,7 @@
 # https://www.home-assistant.io/integrations/template
 #
 platform: template
-sensors:
+sensors: #!include_dir_merge_named templates
   predicted_print_end_time:
     friendly_name: Ender 3 Predicted End Time
     value_template: >
@@ -84,20 +84,20 @@ sensors:
         {% endif %}
       {% endfor %}
 
-  motion_last30:
-    value_template: '{{(as_timestamp(now())-as_timestamp(states.variable.last_motion.last_changed)) < 1800 }}'
-    friendly_name: Motion in Last 30min
+  # motion_last30:
+  #   value_template: '{{(as_timestamp(now())-as_timestamp(states.sensor.template_last_motion.last_changed)) < 1800 }}'
+  #   friendly_name: Motion in Last 30min
     # device_class: motion
 
-  taking_bath:
-    friendly_name: Taking bath
-    # entity_id: semsor.taking_bath
-    value_template: > 
-      {% if states('sensor.bathroom_humidity') | float > states('sensor.average_house_humidity') | float +5 %}
-        true
-      {%- else -%}
-        false
-      {%- endif %}
+  # taking_bath:
+  #   friendly_name: Taking bath
+  #   # entity_id: semsor.taking_bath
+  #   value_template: > 
+  #     {% if states('sensor.bathroom_humidity') | float > states('sensor.average_house_humidity') | float +5 %}
+  #       true
+  #     {%- else -%}
+  #       false
+  #     {%- endif %}
 
   max_recorded_temp:
     friendly_name: Max recorded temperature

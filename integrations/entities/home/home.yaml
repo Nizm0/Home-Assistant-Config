@@ -55,13 +55,13 @@ binary_sensor:
   #   monitored_conditions:
   #     - news
 
-  - platform: template
-    sensors:
-      taking_bath:
-        friendly_name: Taking bath
-        device_class: occupancy
-        value_template: >-
-          {{ (states('sensor.bathroom_humidity')|float > states('sensor.average_house_humidity')|float + 10) and states('binary_sensor.bathroom_motion_sensor') == on}}
+  # - platform: template
+  #   sensors:
+  #     taking_bath:
+  #       friendly_name: Taking bath
+  #       device_class: occupancy
+  #       value_template: >-
+  #         {{ (states('sensor.bathroom_humidity')|float > states('sensor.average_house_humidity')|float + 10) and states('binary_sensor.bathroom_motion_sensor') == on}}
   - platform: bayesian
     name: In bed
     prior: 0.1
@@ -87,7 +87,7 @@ binary_sensor:
         prob_given_false: 0.2
         platform: 'state'
         to_state: 'off'
-      - entity_id: group.all_devices  # device_tracker.google_maps_104688658658376260645
+      - entity_id: group.family  # device_tracker.google_maps_104688658658376260645
         prob_given_true: 0.7
         prob_given_false: 0.2
         platform: 'state'
@@ -197,7 +197,7 @@ automation:
       condition: and
       conditions:
       - condition: state
-        entity_id: group.all_devices
+        entity_id: group.family
         state: 'not_home'
       - condition: state
         entity_id: input_select.home_preset

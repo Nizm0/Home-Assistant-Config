@@ -1,5 +1,0 @@
-platform: ping
-name: Server
-host: 192.168.1.200
-count: 4
-scan_interval: 60

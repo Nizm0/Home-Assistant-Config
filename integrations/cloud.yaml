@@ -6,64 +6,64 @@
 #
 cloud:
 
-  # Customize the Google Assistant integration with the Naby Casa Cloud
-  google_actions:
+  # # Customize the Google Assistant integration with the Naby Casa Cloud
+  # google_actions:
 
-    # Entity specific configuration for Google Assistant.
-    # These are loaded from a separate directory.
-    entity_config: !include_dir_merge_named ../assistants/google
+  #   # Entity specific configuration for Google Assistant.
+  #   # These are loaded from a separate directory.
+  #   entity_config: !include_dir_merge_named ../assistants/google
 
-    # Filters for entities to include/exclude from Google Assistant.
-    # These are loaded from a separate directory.
-    filter:
-      include_domains:
-        # - switch
-        - sensor
-        - light
-        - vacuum
-        # - group
-      include_entities:
-        - script.start_vacuum
-        - script.stop_vacuum
-        # - input_boolean.kids_light
-        # - light.hallway_gateway_light
-  # entity_config:
-  #   input_boolean.kids_light:
-  #     name: Kids Light
-  #     aliases:
-  #     - Kids light
-  #     room: Kids
-  #   light.hallway_gateway_light:
-  #     name: Gateway Light
-  #     aliases:
-  #     # - light.hallway_gateway_light
-  #     - Gateway Light
-  #     - Hallway light
-  #     room: Hallway
-  #   light.bedroom_main_light:
-  #     name: Bedroom main light
-  #     aliases:
-  #     # - light.bedroom_mail_light
-  #     - Bedroom lights
-  #     room: Bedroom
-  #   media_player.philips_tv:
-  #     name: TV
-  #     aliases:
-  #     - Living room tv
-  #     room: Living room
-  #   script.start_vacuum:
-  #     name: Clean flat
-  #     aliases:
-  #     - Clean flat
-  #     # - Vacuum
-  #     - Clean flor
-  #     - Roborock
-  #     room: Living room
-  #   script.stop_vacuum:
-  #     name: Stop cleaning
-  #     aliases:
-  #     - Cancel vacuum
-  #     room: Living room
+  #   # Filters for entities to include/exclude from Google Assistant.
+  #   # These are loaded from a separate directory.
+  #   filter:
+  #     include_domains:
+  #       # - switch
+  #       - sensor
+  #       - light
+  #       - vacuum
+  #       # - group
+  #     include_entities:
+  #       - script.start_vacuum
+  #       - script.stop_vacuum
+  #       # - input_boolean.kids_light
+  #       # - light.hallway_gateway_light
+  # # entity_config:
+  # #   input_boolean.kids_light:
+  # #     name: Kids Light
+  # #     aliases:
+  # #     - Kids light
+  # #     room: Kids
+  # #   light.hallway_gateway_light:
+  # #     name: Gateway Light
+  # #     aliases:
+  # #     # - light.hallway_gateway_light
+  # #     - Gateway Light
+  # #     - Hallway light
+  # #     room: Hallway
+  # #   light.bedroom_main_light:
+  # #     name: Bedroom main light
+  # #     aliases:
+  # #     # - light.bedroom_mail_light
+  # #     - Bedroom lights
+  # #     room: Bedroom
+  # #   media_player.philips_tv:
+  # #     name: TV
+  # #     aliases:
+  # #     - Living room tv
+  # #     room: Living room
+  # #   script.start_vacuum:
+  # #     name: Clean flat
+  # #     aliases:
+  # #     - Clean flat
+  # #     # - Vacuum
+  # #     - Clean flor
+  # #     - Roborock
+  # #     room: Living room
+  # #   script.stop_vacuum:
+  # #     name: Stop cleaning
+  # #     aliases:
+  # #     - Cancel vacuum
+  # #     room: Living room
 
 
 

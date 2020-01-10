@@ -1,8 +1,11 @@
 badges:
   - binary_sensor.in_bed
   - sensor.in_bed_bayesian_probability
-  - sensor.motion_last30
+  # - sensor.motion_last30
+  - binary_sensor.motion_last30
   - sensor.template_last_motion
+  # - sensor.taking_bath
+  - binary_sensor.taking_bath
   - sensor.average_house_temperature
   - sensor.average_house_humidity
   - sensor.max_temperature_in_home
@@ -22,11 +25,11 @@ cards:
       - entity: binary_sensor.hallway_motion_sensor
       - entity: binary_sensor.living_room_motion_sensor
       - entity: binary_sensor.bathroom_motion_sensor
-      - entity: media_player.philips_tv
-      - entity: group.all_devices
+      - entity: binary_sensor.kitchen_motion_sensor
+      - entity: group.family
       - entity: binary_sensor.desctop_pc
       - entity: sun.sun
-      - entity: sensor.taking_bath
+      # - entity: sensor.taking_bath
       - entity: binary_sensor.taking_bath
       - entity: binary_sensor.router
       - entity: binary_sensor.server
@@ -52,6 +55,12 @@ cards:
       - entity: camera.ender_3
         show_state: false
         type: picture-entity
+      - type: history-graph
+        entities:
+          - sensor.ender_3_target_bed_temp
+          - sensor.ender_3_actual_bed_temp
+          - sensor.ender_3_target_tool0_temp
+          - sensor.ender_3_actual_tool0_temp
       - type: entities
         title: Octoprint Ender 3
         show_header_toggle: false
@@ -73,10 +82,10 @@ cards:
           - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
           - entity: binary_sensor.ender_3_printing
           - entity: binary_sensor.ender_3_printing_error
-          - entity: sensor.ender_3_target_bed_temp
-          - entity: sensor.ender_3_actual_bed_temp
-          - entity: sensor.ender_3_target_tool0_temp
-          - entity: sensor.ender_3_actual_tool0_temp
+          # - entity: sensor.ender_3_target_bed_temp
+          # - entity: sensor.ender_3_actual_bed_temp
+          # - entity: sensor.ender_3_target_tool0_temp
+          # - entity: sensor.ender_3_actual_tool0_temp
           - entity: sensor.ender_3_current_state
           - entity: sensor.ender_3_job_percentage
           - entity: sensor.ender_3_time_elapsed
@@ -200,4 +209,4 @@ cards:
         list_attribute: repositories
         multiple_items: true
     id_filter: ^home_feed_.*
-    title: Home Feed
+    title: Hacs Updatets

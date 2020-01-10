@@ -1,3 +1,4 @@
 id: 4A5B11
 name: Kitchen top light
 light_switch: true
+sensors: [ switch ]

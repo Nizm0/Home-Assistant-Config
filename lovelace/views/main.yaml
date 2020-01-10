@@ -6,7 +6,7 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: person.michal
+          - entity: person.nizm0
             image: /local/images/home/michal.jpg
             show_name: false
             tap_action:

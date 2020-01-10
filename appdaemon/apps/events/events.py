@@ -18,14 +18,14 @@ class Events(Base):
   #   event_target = data["target"]
   #   event_received = datetime.now()
   #   self.log("You have pushed {}. From device: {}".format(event_action, event_target))
-  #   self.turn_on("light.bedroom_main_light")
+  #   self.turn_on("light.hue_color_lamp_2")
   #   self.run_in(self.light_off, 10)
 
   def light_on(self, kwargs):
-    self.turn_on("light.bedroom_main_light")
+    self.turn_on("light.hue_color_lamp_2")
 
   def light_off(self, kwargs):
-    self.turn_off("light.bedroom_main_light")
+    self.turn_off("light.hue_color_lamp_2")
 
   def chose_action_event_closed(self, event_name, data, kwargs):
     event_tag = data["tag"]
@@ -74,4 +74,4 @@ class Events(Base):
     # return func()
 
   def dismiss_by_tag(self, tag):
-    self.call_service("notify/html5_dismiss", data={"tag": tag})
+    self.call_service("html5/dismiss", data={"tag": tag})

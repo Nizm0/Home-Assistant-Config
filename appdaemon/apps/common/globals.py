@@ -5,7 +5,7 @@ from enum import Enum
 android_michal = 'push_to_chrome_nizm0_oneplus3'
 notify_michal = "notify/push_to_chrome_nizm0_oneplus3"
 
-michal = "person.michal"
+michal = "person.nizm0"
 gosia = "person.gosia"
 
 alarm = "alarm_control_panel.house"
@@ -29,7 +29,7 @@ presence_state["extended_away"] = "Extended away"
 
 PEOPLE = {
     'Michal': {
-        'device_tracker': 'person.michal',
+        'device_tracker': 'person.nizm0',
         'proximity': 'proximity.home_michal',
         'notifier': 'notify/push_to_chrome_nizm0_oneplus3'
     },
