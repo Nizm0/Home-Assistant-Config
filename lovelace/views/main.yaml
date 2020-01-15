@@ -354,7 +354,8 @@ cards:
     type: iframe
     url: >-
       https://embed.windy.com/embed2.html?lat=51.109&lon=17.036&zoom=11&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=51.109&detailLon=17.036&metricWind=default&metricTemp=default&radarRange=-1
-  - calibration_points:
+  - type: "custom:xiaomi-vacuum-map-card"
+    calibration_points:
       - map:
           x: 301
           "y": 860
@@ -376,7 +377,6 @@ cards:
     default_mode: predefined_zones
     entity: vacuum.rockrobo
     map_image: /community_plugin/xiaomi-vacuum-map-card-mine/home.png
-    type: "custom:xiaomi-vacuum-map-card"
     zones:
       - - - 22158
           - 24989
@@ -406,8 +406,10 @@ cards:
           - 29586
           - 26803
           - 32336
-  - dark_mode: false
+  - type: map
+    title: Map
+    aspect_ratio: 60%
+    dark_mode: false
     entities:
       - entity: device_tracker.google_maps_104688658658376260645
       - entity: device_tracker.google_maps_109218123589188227395
-    type: map

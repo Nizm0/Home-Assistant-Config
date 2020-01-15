@@ -19,6 +19,8 @@ cards:
         secondary_info: last-changed
       - entity: input_select.home_preset
         secondary_info: last-changed
+      - entity: device_tracker.f6_67_40_d4_f8_00
+        secondary_info: last-changed
     show_header_toggle: false
     theme: default
     type: entities
@@ -45,26 +47,28 @@ cards:
       - person.nizm0
       - person.gosia
     type: entities
-  - card:
+  - type: entity-filter
+    # title: all devices
+    card:
       show_state: false
       title: People at home
       type: glance
     entities:
       - person.nizm0
       - person.gosia
-      - device_tracker.babcia_teresa
+      - device_tracker.lg_g6_phone
+      - device_tracker.lenovo_tablet
+      - device_tracker.f6_67_40_d4_f8_00
       - device_tracker.portex
+      - device_tracker.p20_pro_ania
       - device_tracker.bozena_phone
-      - device_tracker.nizm0_surface
-      - device_tracker.mac_bls
+      - device_tracker.nizmo_surface
       - device_tracker.gosia_laptop
       - device_tracker.samsung_camera
-    show_header_toggle: true
+    # show_header_toggle: true
     state_filter:
       - home
       - Home
-    title: all devices
-    type: entity-filter
   - entities:
       - entity: sensor.nizm0_oneplus_3_alarm_sensor
       - entity: sensor.galaxy_s9_alarm_sensor

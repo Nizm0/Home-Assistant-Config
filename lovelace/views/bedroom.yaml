@@ -11,9 +11,12 @@ cards:
             type: light
           - entity: light.bedroom_main_light_2
             type: light
-          - type: custom:gap-card
-            # height: 
-            # size: 
+          - entity: binary_sensor.bedroom_motion_sensor
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
       - type: horizontal-stack
         cards:
           - entity: sensor.bedroom_temperature
@@ -36,6 +39,9 @@ cards:
               red: 60
               yellow: 50
             theme: default
+          # - type: custom:gap-card
+            # height: 
+            # size: 
   - title: Temperature
     type: "custom:mini-graph-card"
     entities:

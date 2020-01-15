@@ -13,7 +13,12 @@ cards:
             tap_action:
               action: toggle
             type: entity-button
-          - type: custom:gap-card
+          - entity: binary_sensor.kids_motion_sensor
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+            type: entity-button
       - type: horizontal-stack
         cards:
           - entity: sensor.kids_temperature

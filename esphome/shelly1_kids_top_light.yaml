@@ -1,5 +1,5 @@
 substitutions:
-  hostname: 'd1mini_kids_top_light'
+  hostname: 'shelly1_kids_top_light'
   reboot_time: 10min
   ssid: !secret wifi_ssid
   password: !secret wifi_password
@@ -24,15 +24,15 @@ web_server:
 
 switch:
   - platform: restart
-    name: "Reboot Living Room Swith"
-    id: living_room_swith_restart
+    name: "Reboot Kids Top Light"
+    id: kids_top_ligts_restart
 
 binary_sensor:
   - platform: gpio
     pin: 
-      number: GPIO14
-      mode: INPUT_PULLUP
-      inverted: True
+      number: GPIO5
+      mode: INPUT
+      inverted: False
     name: Kids Light Swith
     internal: true
     on_state:
@@ -49,16 +49,16 @@ binary_sensor:
         - ON for at most 0.5s
         - OFF for at least 0.2s
       then:
-        - switch.turn_on: living_room_swith_restart
+        - switch.turn_on: kids_top_ligts_restart
 
 light:
   - platform: binary
-    name: General Light
+    name: Top Light
     id: light1
     output: relay1
     restore_mode: RESTORE_DEFAULT_ON
 
 output:
   - platform: gpio
-    pin: GPIO12
+    pin: GPIO4
     id: relay1

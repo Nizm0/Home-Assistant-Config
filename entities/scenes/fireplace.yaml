@@ -1,0 +1,9 @@
+- name: Fireplace
+  entities:
+    light.directional_light: off
+    light.general_light: off
+    light.top_light: on
+    # media_player.living_room_tv_cast:
+    #   state: on
+    #   source: HDMI 1
+    #   state: on

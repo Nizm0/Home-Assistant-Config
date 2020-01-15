@@ -102,3 +102,4 @@ light:
     name: "Server Shelf Blue LED"
     output: pow_blue_led
     id: led
+    internal: true

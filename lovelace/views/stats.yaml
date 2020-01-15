@@ -164,4 +164,53 @@ cards:
         entities:
           - sensor.speedtest_download
           - sensor.speedtest_upload
+  - type: "custom:vertical-stack-in-card"
+    title: Brother mfc_j200 Ink Level
+    cards:
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.mfc_j200_black_ink_remaining
+            type: gauge
+            max: 100
+            min: 0
+            name: Black
+            severity:
+              green: 60
+              red: 0
+              yellow: 25
+            theme: default
+          - entity: sensor.mfc_j200_magenta_ink_remaining
+            type: gauge
+            name: Magenta
+            theme: default
+            unit: C
+            max: 100
+            min: 0
+            severity:
+              green: 60
+              red: 0
+              yellow: 25
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.mfc_j200_yellow_ink_remaining
+            type: gauge
+            name: Yellow
+            max: 100
+            min: 0
+            severity:
+              green: 60
+              red: 0
+              yellow: 25
+            theme: default
+            unit: C
+          - entity: sensor.mfc_j200_cyan_ink_remaining
+            type: gauge
+            name: Cyan
+            max: 100
+            min: 0
+            severity:
+              green: 60
+              red: 0
+              yellow: 25
+            theme: default
   - type: "custom:unused-card"

@@ -28,7 +28,7 @@ cards:
             align_icon: left
             align_state: center
             show:
-              fill: false
+              fill: true
           - entity: binary_sensor.kitchen_left_window_sensor
             hold_action:
               action: none

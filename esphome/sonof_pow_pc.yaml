@@ -99,3 +99,4 @@ light:
 #    name: "PC Blue LED"
     output: pow_blue_led
     id: led
+    internal: true

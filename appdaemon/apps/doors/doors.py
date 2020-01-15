@@ -1,5 +1,4 @@
 import appdaemon.plugins.hass.hassapi as hass
-import appdaemon.appapi as appapi
 import re
 from datetime import datetime, timedelta
 

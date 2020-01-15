@@ -1,0 +1,26 @@
+header_text: '{{ time }}'
+button_text:
+  options: '{{ hours24LZ }}:{{ minutesLZ }}<br>{{ dayNumLZ }}.{{ monthNumLZ }}'
+compact_mode: true
+hide_config: true
+hide_help: true
+exceptions:
+  - conditions:
+      user: Gosia
+    config:
+      hide_tabs:
+        - 1
+        - 9
+        - 11 to 13
+  - conditions:
+      user: Tablet
+    config:
+      hide_unused: true
+      hide_tabs:
+        - 1
+        - 9
+        - 11 to 13
+  - conditions:
+      query_string: kiosk
+    config:
+      kiosk_mode: true

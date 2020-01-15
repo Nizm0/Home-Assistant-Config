@@ -26,6 +26,10 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.living_room_motion_sensor
         secondary_info: last-changed
+      - entity: binary_sensor.kids_motion_sensor
+        secondary_info: last-changed
+      - entity: binary_sensor.bedroom_motion_sensor
+        secondary_info: last-changed
       - entity: binary_sensor.kitchen_motion_sensor
         secondary_info: last-changed
       - entity: binary_sensor.bathroom_motion_sensor
@@ -49,110 +53,145 @@ cards:
             battery: < 25
         - attributes:
             battery_level: < 25
-  - title: All lights
-    type: entity-filter
-    show_header_toggle: true
-    state_filter:
-      - "on"
+  - type: custom:auto-entities
+    show_empty: false
     card:
-      show_state: false
-      title: Turned on lights
       type: glance
-    entities:
-      - entity: light.bathroom_top_light
-        tap_action:
-          action: toggle
-      - entity: light.bedroom_main_light
-        tap_action:
-          action: toggle
-      - entity: light.christmas_tree
-        tap_action:
-          action: toggle
-      - entity: light.hallway_gateway_light
-        tap_action:
-          action: toggle
-      - entity: light.directional_light
-        tap_action:
-          action: toggle
-      - entity: light.general_light
-        tap_action:
-          action: toggle
-      - entity: light.hallway_top_light
-        tap_action:
-          action: toggle
-      - entity: light.kids_top_light
-        tap_action:
-          action: toggle
-      - entity: light.kitchen_top_light
-        tap_action:
-          action: toggle
-      - entity: light.top_light
-        tap_action:
-          action: toggle
-      - entity: light.tv_ambilights
-        tap_action:
-          action: toggle
-      - entity: light.bedroom_main_light_2
-        tap_action:
-          action: toggle
-      - entity: light.hue_color_lamp_1
-        tap_action:
-          action: toggle
-      - entity: light.hue_color_lamp_2
-        tap_action:
-          action: toggle
-  - title: All lights
-    type: entity-filter
-    show_header_toggle: false
-    state_filter:
-      - "off"
+      title: Lights on
+      show_state: false
+      show_header_toggle: false
+    filter:
+      include:
+        - domain: light
+          options:
+            tap_action:
+              action: toggle
+      exclude:
+        - state: "off"
+        - state: "unavailable"
+        # - domain: light
+        - attributes:
+            type: "browser_mod"
+  - type: custom:auto-entities
+    show_empty: false
     card:
-      show_state: false
-      title: Turned off lights
       type: glance
-    entities:
-      - entity: light.bathroom_top_light
-        tap_action:
-          action: toggle
-      - entity: light.bedroom_main_light
-        tap_action:
-          action: toggle
-      - entity: light.christmas_tree
-        tap_action:
-          action: toggle
-      - entity: light.hallway_gateway_light
-        tap_action:
-          action: toggle
-      - entity: light.directional_light
-        tap_action:
-          action: toggle
-      - entity: light.general_light
-        tap_action:
-          action: toggle
-      - entity: light.hallway_top_light
-        tap_action:
-          action: toggle
-      - entity: light.kids_top_light
-        tap_action:
-          action: toggle
-      - entity: light.kitchen_top_light
-        tap_action:
-          action: toggle
-      - entity: light.top_light
-        tap_action:
-          action: toggle
-      - entity: light.tv_ambilights
-        tap_action:
-          action: toggle
-      - entity: light.bedroom_main_light_2
-        tap_action:
-          action: toggle
-      - entity: light.hue_color_lamp_1
-        tap_action:
-          action: toggle
-      - entity: light.hue_color_lamp_2
-        tap_action:
-          action: toggle
+      title: Lights off
+      show_state: false
+      show_header_toggle: false
+    filter:
+      include:
+        - domain: light
+          options:
+            tap_action:
+              action: toggle
+      exclude:
+      - state: "on"
+      - state: "unavailable"
+  # - type: entity-filter
+  #   # title: All lights
+  #   # show_header_toggle: true
+  #   state_filter:
+  #     - "on"
+  #   card:
+  #     show_state: false
+  #     title: Turned on lights
+  #     type: glance
+  #   entities:
+  #     - entity: light.bathroom_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.bedroom_main_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.christmas_tree
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hallway_gateway_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.directional_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.general_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hallway_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.kids_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.kitchen_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.tv_ambilights
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.bedroom_main_light_2
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hue_color_lamp_1
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hue_color_lamp_2
+  #       tap_action:
+  #         action: toggle
+  # - type: entity-filter
+  #   # title: All lights
+  #   # show_header_toggle: false
+  #   state_filter:
+  #     - "off"
+  #   card:
+  #     show_state: false
+  #     title: Turned off lights
+  #     type: glance
+  #   entities:
+  #     - entity: light.bathroom_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.bedroom_main_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.christmas_tree
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hallway_gateway_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.directional_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.general_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hallway_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.kids_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.kitchen_top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.top_light
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.tv_ambilights
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.bedroom_main_light_2
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hue_color_lamp_1
+  #       tap_action:
+  #         action: toggle
+  #     - entity: light.hue_color_lamp_2
+  #       tap_action:
+  #         action: toggle
   - title: Living room
     type: entities
     show_header_toggle: true
@@ -180,6 +219,8 @@ cards:
       - entity: light.bedroom_main_light
         secondary_info: last-changed
       - entity: light.bedroom_main_light_2
+        secondary_info: last-changed
+      - entity: binary_sensor.bedroom_motion_sensor
         secondary_info: last-changed
       - entity: sensor.bedroom_temperature
         secondary_info: last-changed
@@ -226,6 +267,8 @@ cards:
     show_header_toggle: true
     entities:
       - entity: light.kids_top_light
+        secondary_info: last-changed
+      - entity: binary_sensor.kids_motion_sensor
         secondary_info: last-changed
       - entity: sensor.kids_temperature
         secondary_info: last-changed

@@ -9,9 +9,9 @@ sensors: #!include_dir_merge_named templates
     friendly_name: Ender 3 Predicted End Time
     value_template: >
       {% if is_state("binary_sensor.ender_3_printing", "on") and states("sensor.ender_3_time_remaining") > "0"  %}
-      {{ (as_timestamp(now()) + states.sensor.ender_3_time_remaining.state | float) | timestamp_local }}
+        {{ (as_timestamp(now()) + states.sensor.ender_3_time_remaining.state | float) | timestamp_local }}
       {%- else -%}
-      ---NAN---
+        ---NAN---
       {%- endif %}
   battery_status:
     friendly_name: "Battery Status"
@@ -21,12 +21,12 @@ sensors: #!include_dir_merge_named templates
       {%- set threshold = 20 -%}
       {%- set domains = ['light', 'switch', 'sensor', 'zwave', 'lock'] -%}
       {%- for domain in domains -%}
-      {%- for item in states[domain] if ((item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) or ("battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown"))) -%}
-      {%- if (item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) -%}
-      {{ item.name }} ({{ item.attributes['battery_level'] }}){%- if not loop.last %}, {% endif -%}{% endif -%}
-      {%- if "battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown") -%}
-      {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
-      {%- endfor -%}
+        {%- for item in states[domain] if ((item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) or ("battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown"))) -%}
+          {%- if (item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) -%}
+          {{ item.name }} ({{ item.attributes['battery_level'] }}){%- if not loop.last %}, {% endif -%}{% endif -%}
+            {%- if "battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown") -%}
+            {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
+        {%- endfor -%}
       {%- endfor -%}
 
   solar_angle:
@@ -77,12 +77,16 @@ sensors: #!include_dir_merge_named templates
   template_last_motion:
     friendly_name: 'Last Motion'
     value_template: >
-      {% set sensors = [states.binary_sensor.living_room_motion_sensor, states.binary_sensor.hallway_motion_sensor, states.binary_sensor.kitchen_motion_sensor] %}
+      {% set sensors = [states.binary_sensor.living_room_motion_sensor, states.binary_sensor.hallway_motion_sensor, states.binary_sensor.kitchen_motion_sensor, states.binary_sensor.bathroom_motion_sensor, states.binary_sensor.kids_motion_sensor, states.binary_sensor.bedroom_motion_sensor] %}
       {% for sensor in sensors %}
         {% if as_timestamp(sensor.last_changed) == as_timestamp(sensors | map(attribute='last_changed') | max) %}
           {{ sensor.name }}
         {% endif %}
       {% endfor %}
+
+    # {% for state in states.binary_sensor if ('motion' in state.entity_id) and ('sensor' in state.entity_id.split('.')[1])-%}
+    #   {{state.entity_id}}
+    # {%- endfor %}
 
   # motion_last30:
   #   value_template: '{{(as_timestamp(now())-as_timestamp(states.sensor.template_last_motion.last_changed)) < 1800 }}'
