@@ -87,6 +87,13 @@ sensors: #!include_dir_merge_named templates
     # {% for state in states.binary_sensor if ('motion' in state.entity_id) and ('sensor' in state.entity_id.split('.')[1])-%}
     #   {{state.entity_id}}
     # {%- endfor %}
+    
+  # last_motionv2:
+  #   friendly_name: Last motionv2
+  #   value_template: '{% if states.group.motion_check.last_updated is undefined %}{{"00:00:00"}}{% else %}{{ ((as_timestamp(states.sensor.date_time.last_updated)-as_timestamp(states.group.motion_indoors.last_updated))|int) }}{% endif %}'
+  #   entity_id:
+  #     - sensor.date_time
+  #   unit_of_measurement: 's'
 
   # motion_last30:
   #   value_template: '{{(as_timestamp(now())-as_timestamp(states.sensor.template_last_motion.last_changed)) < 1800 }}'

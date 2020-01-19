@@ -6,6 +6,8 @@ cards:
   - entity: camera.camera_pjp
     show_state: false
     type: picture-entity
+    state_filter:
+      - null
   - entity: camera.camera_strzegomski
     show_state: false
     type: picture-entity

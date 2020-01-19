@@ -12,7 +12,7 @@ wifi:
   ssid: $ssid
   password: $password
   fast_connect: True
-  reboot_timeout: $reboot_time
+  # reboot_timeout: $reboot_time
 
 # Enable logging
 logger:
@@ -30,10 +30,13 @@ ota:
 esp32_ble_tracker:
 #   scan_interval: 300s
 
-# binary_sensor:
-#   - platform: esp32_ble_tracker
-#     mac_address: C0:EE:FB:DB:B5:BA
-#     name: "Nizm0 OnePlus3"
+binary_sensor:
+  - platform: ble_presence
+    mac_address: ED:94:E5:68:23:4A
+    name: "Nizm0 miBand4"
+  - platform: ble_presence
+    mac_address: C0:EE:FB:DB:B5:BA
+    name: "Nizm0 OnePlus3"
 
 sensor:
   # - platform: ble_rssi
@@ -49,8 +52,8 @@ sensor:
       name: "Xiaomi MiFlora Illuminance 1"
     conductivity:
       name: "Xiaomi MiFlora Soil Conductivity 1"
-    # battery_level:
-    #   name: "Xiaomi MiFlora Battery Level 1"
+    battery_level:
+      name: "Xiaomi MiFlora Battery Level 1"
   - platform: xiaomi_hhccjcy01
     mac_address: C4:7C:8D:66:CC:34
     temperature:
@@ -61,8 +64,8 @@ sensor:
       name: "Xiaomi MiFlora Illuminance 2"
     conductivity:
       name: "Xiaomi MiFlora Soil Conductivity 2"
-    # battery_level:
-    #   name: "Xiaomi MiFlora Battery Level 2"
+    battery_level:
+      name: "Xiaomi MiFlora Battery Level 2"
   - platform: xiaomi_hhccjcy01
     mac_address: C4:7C:8D:66:CC:36
     temperature:
@@ -73,8 +76,8 @@ sensor:
       name: "Xiaomi MiFlora Illuminance 3"
     conductivity:
       name: "Xiaomi MiFlora Soil Conductivity 3"
-    # battery_level:
-    #   name: "Xiaomi MiFlora Battery Level 3"
+    battery_level:
+      name: "Xiaomi MiFlora Battery Level 3"
   - platform: xiaomi_hhccjcy01
     mac_address: C4:7C:8D:66:DF:7C
     temperature:
@@ -85,8 +88,8 @@ sensor:
       name: "Xiaomi MiFlora Illuminance 4"
     conductivity:
       name: "Xiaomi MiFlora Soil Conductivity 4"
-    # battery_level:
-    #   name: "Xiaomi MiFlora Battery Level 4"
+    battery_level:
+      name: "Xiaomi MiFlora Battery Level 4"
   - platform: xiaomi_hhccjcy01
     mac_address: C4:7C:8D:6B:0B:6D
     temperature:
@@ -97,8 +100,8 @@ sensor:
       name: "Xiaomi MiFlora Illuminance 5"
     conductivity:
       name: "Xiaomi MiFlora Soil Conductivity 5"
-    # battery_level:
-    #   name: "Xiaomi MiFlora Battery Level 5"
+    battery_level:
+      name: "Xiaomi MiFlora Battery Level 5"
   - platform: xiaomi_hhccjcy01
     mac_address: C4:7C:8D:6B:29:E3
     temperature:
@@ -109,5 +112,5 @@ sensor:
       name: "Xiaomi MiFlora Illuminance 6"
     conductivity:
       name: "Xiaomi MiFlora Soil Conductivity 6"
-    # battery_level:
-    #   name: "Xiaomi MiFlora Battery Level 6"
+    battery_level:
+      name: "Xiaomi MiFlora Battery Level 6"

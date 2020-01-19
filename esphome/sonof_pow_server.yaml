@@ -12,6 +12,7 @@ esphome:
   on_boot:
     priority: 100 # Highest priority, ensures light turns on without delay.
     then:
+      - delay: 120s
       - if:
           condition:
             not:
@@ -82,13 +83,14 @@ switch:
     turn_off_action:
       - switch.turn_off: relay
       - light.turn_off: led
-      - delay: 10s
+      - delay: 15s
       - switch.toggle: fakebutton
-    # - switch.turn_on: relay
-    # - light.turn_on: led
+      # - switch.turn_on: relay
+      # - light.turn_on: led
   - platform: gpio
     id: relay
     pin: GPIO12
+    restore_mode: ALWAYS_ON
 
 output:
   - platform: esp8266_pwm

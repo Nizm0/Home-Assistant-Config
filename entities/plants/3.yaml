@@ -1,9 +1,9 @@
-kitchen_plant:
+third_plant:
   sensors:
     moisture: sensor.xiaomi_miflora_moisture_3
     brightness: sensor.xiaomi_miflora_illuminance_3
     conductivity: sensor.xiaomi_miflora_soil_conductivity_3
-    # battery: sensor.xiaomi_miflora_battery_level_3
+    battery: sensor.xiaomi_miflora_battery_level_3
     temperature: sensor.xiaomi_miflora_temperature_3
   min_moisture: 20
   max_moisture: 60

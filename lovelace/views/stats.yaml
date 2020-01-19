@@ -118,41 +118,55 @@ cards:
     show_header_toggle: true
   - type: entities
     entities:
-      - binary_sensor.my_computer_connected
-      - camera.my_computer_screen_0
-      - camera.my_computer_screen_1
-      - script.my_computer_displays_off
-      - script.my_computer_displays_on
-      - script.my_computer_hibernate
-      - script.my_computer_lock
-      - script.my_computer_logoff
-      - script.my_computer_notify
-      - script.my_computer_reboot
-      - script.my_computer_refresh
-      - script.my_computer_run_chrome
-      - script.my_computer_shutdown
-      - script.my_computer_suspend
-      - script.my_computer_vol_max
-      - script.my_computer_vol_mute
-      - script.my_computer_wake
-      - sensor.my_computer_cpu_usage
-      - sensor.my_computer_current_user
-      - sensor.my_computer_hdd_label_c
-      - sensor.my_computer_hdd_label_d
-      - sensor.my_computer_hdd_total_free_space_c
-      - sensor.my_computer_hdd_total_free_space_d
-      - sensor.my_computer_hdd_usage_c
-      - sensor.my_computer_hdd_usage_d
-      - sensor.my_computer_idle_time
-      - sensor.my_computer_network_ipv4
-      - sensor.my_computer_network_ipv6
-      - sensor.my_computer_network_speed
-      - sensor.my_computer_network_wired
-      - sensor.my_computer_ram_available
-      - sensor.my_computer_ram_total
-      - sensor.my_computer_ram_usage
-      - sensor.my_computer_ram_used
-      - switch.my_computer
+      # - binary_sensor.nizmo_pc_connected
+      - camera.nizmo_pc_screen_0
+      - camera.nizmo_pc_screen_1
+      # - script.nizmo_pc_displays_off
+      # - script.nizmo_pc_displays_on
+      # - script.nizmo_pc_hibernate
+      # - script.nizmo_pc_lock
+      # - script.nizmo_pc_logoff
+      # - script.nizmo_pc_notify
+      # - script.nizmo_pc_reboot
+      # - script.nizmo_pc_refresh
+      # - script.nizmo_pc_run_chrome
+      # - script.nizmo_pc_shutdown
+      # - script.nizmo_pc_suspend
+      # - script.nizmo_pc_vol_max
+      # - script.nizmo_pc_vol_mute
+      # - script.nizmo_pc_wake
+      - sensor.nizmo_pc_cpu_usage
+      - sensor.nizmo_pc_current_username
+      - sensor.nizmo_pc_media_volume
+      - binary_sensor.nizmo_pc_media_playing
+      - binary_sensor.nizmo_pc_volume_muted
+      - binary_sensor.nizmo_pc_power_status
+      # - sensor.nizmo_pc_storage_label_c
+      # - sensor.nizmo_pc_storage_label_d
+      - sensor.nizmo_pc_storage_c_total_free_space
+      - sensor.nizmo_pc_storage_c_total_storage
+      - sensor.nizmo_pc_storage_c_usage
+      - sensor.nizmo_pc_storage_d_total_free_space
+      - sensor.nizmo_pc_storage_d_total_storage
+      - sensor.nizmo_pc_storage_d_usage
+      - sensor.nizmo_pc_storage_e_total_free_space
+      - sensor.nizmo_pc_storage_e_total_storage
+      - sensor.nizmo_pc_storage_e_usage
+      - sensor.nizmo_pc_storage_g_total_free_space
+      - sensor.nizmo_pc_storage_g_total_storage
+      - sensor.nizmo_pc_storage_g_usage
+      - sensor.nizmo_pc_system_idle_time
+      - sensor.nizmo_pc_network_0_ipv4
+      - sensor.nizmo_pc_network_0_ipv6
+      - sensor.nizmo_pc_network_0_speed
+      - sensor.nizmo_pc_network_0_bps_sent
+      - sensor.nizmo_pc_network_0_bps_received
+      - binary_sensor.nizmo_pc_network_0_wired
+      - sensor.nizmo_pc_memory_available
+      - sensor.nizmo_pc_memory_total
+      - sensor.nizmo_pc_memory_usage
+      - sensor.nizmo_pc_memory_used
+      # - switch.nizmo_pc
     show_header_toggle: false
     title: My Computer
   - type: custom:vertical-stack-in-card

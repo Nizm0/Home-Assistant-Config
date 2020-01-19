@@ -407,9 +407,16 @@ cards:
           - 26803
           - 32336
   - type: map
-    title: Map
+    # title: Map
     aspect_ratio: 60%
     dark_mode: false
+    geo_location_sources:
+      - all
     entities:
       - entity: device_tracker.google_maps_104688658658376260645
       - entity: device_tracker.google_maps_109218123589188227395
+  - entity: camera.front_dor_fish_eye
+    show_state: true
+    type: picture-entity
+    state_filter:
+      - null
