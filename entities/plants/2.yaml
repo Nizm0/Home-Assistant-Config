@@ -3,8 +3,8 @@ second_plant:
     moisture: sensor.xiaomi_miflora_moisture_2
     brightness: sensor.xiaomi_miflora_illuminance_2
     conductivity: sensor.xiaomi_miflora_soil_conductivity_2
-    battery: sensor.xiaomi_miflora_battery_level_2
     temperature: sensor.xiaomi_miflora_temperature_2
+    # battery: sensor.xiaomi_miflora_battery_level_2
   min_moisture: 20
   max_moisture: 60
   min_battery: 17

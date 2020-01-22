@@ -37,6 +37,7 @@ www/community
 __*
 custom_components
 esphome/*/
+themes
 deps
 notebooks
 node-red

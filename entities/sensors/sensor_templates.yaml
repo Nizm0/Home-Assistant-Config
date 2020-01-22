@@ -8,7 +8,7 @@ sensors: #!include_dir_merge_named templates
   predicted_print_end_time:
     friendly_name: Ender 3 Predicted End Time
     value_template: >
-      {% if is_state("binary_sensor.ender_3_printing", "on") and states("sensor.ender_3_time_remaining") > "0"  %}
+      {% if is_state("binary_sensor.ender_3_printing", "on") and states("sensor.ender_3_time_remaining") | int > 0 %}
         {{ (as_timestamp(now()) + states.sensor.ender_3_time_remaining.state | float) | timestamp_local }}
       {%- else -%}
         ---NAN---

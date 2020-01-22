@@ -10,7 +10,7 @@ esphome:
   board: esp-wrover-kit
 
   on_boot:
-    priority: 100
+    priority: -10
     # ...
     then:
       - light.turn_on: status_led
@@ -29,8 +29,8 @@ api:
   reboot_timeout: 0s
 ota:
 logger:
-web_server:
-  port: 80
+# web_server:
+#   port: 80
 
 # ESP32-CAM
 esp32_camera:
@@ -45,7 +45,7 @@ esp32_camera:
   href_pin: GPIO23
   pixel_clock_pin: GPIO22
   power_down_pin: GPIO32
-  # vertical_flip: true
+  vertical_flip: true
   brightness: 0
 
   name: OctoPi camera

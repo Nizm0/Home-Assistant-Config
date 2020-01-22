@@ -3,17 +3,17 @@ resources: !include_dir_list lovelace/resources
 title: Home
 views:
   # - !include lovelace/views/dashboard.yaml
-  - !include lovelace/views/main.yaml
-  - !include lovelace/views/home.yaml
-  - !include lovelace/views/living_room.yaml
-  - !include lovelace/views/bedroom.yaml
-  - !include lovelace/views/kids.yaml
-  - !include lovelace/views/kitchen.yaml
-  - !include lovelace/views/bathroom.yaml
-  - !include lovelace/views/hallway.yaml
-  - !include lovelace/views/family.yaml
-  - !include lovelace/views/camera.yaml
-  - !include lovelace/views/flowers.yaml
-  - !include lovelace/views/testing.yaml
-  - !include lovelace/views/stats.yaml
-  - !include lovelace/views/floreplan.yaml
+  - !include lovelace/views/00_main.yaml
+  - !include lovelace/views/10_home.yaml
+  - !include lovelace/views/20_living_room.yaml
+  - !include lovelace/views/30_bedroom.yaml
+  - !include lovelace/views/40_kids.yaml
+  - !include lovelace/views/50_kitchen.yaml
+  - !include lovelace/views/60_bathroom.yaml
+  - !include lovelace/views/70_hallway.yaml
+  - !include lovelace/views/80_family.yaml
+  - !include lovelace/views/90_camera.yaml
+  - !include lovelace/views/95_flowers.yaml
+  - !include lovelace/views/100_testing.yaml
+  - !include lovelace/views/105_stats.yaml
+  - !include lovelace/views/120_floreplan.yaml
