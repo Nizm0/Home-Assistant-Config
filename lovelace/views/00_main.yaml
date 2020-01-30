@@ -6,21 +6,38 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: person.nizm0
+          # - type: custom:button-card
+          #   entity: person.nizm0
+          #   # style:
+          #   show_entity_picture: true
+          #   entity_picture: /local/images/home/michal.jpg
+          #   show_name: false
+          #   tap_action:
+          #     action: more-info
+          # - type: custom:button-card
+          #   entity: person.gosia
+          #   image: /local/images/home/gosia.jpg
+          #   show_name: false
+          #   tap_action:
+          #     action: more-info
+          - type: picture-entity
+            entity: person.nizm0
             image: /local/images/home/michal.jpg
             show_name: false
             tap_action:
               action: more-info
-            type: picture-entity
-          - entity: person.gosia
+          - type: picture-entity
+            entity: person.gosia
             image: /local/images/home/gosia.jpg
             show_name: false
             tap_action:
               action: more-info
-            type: picture-entity
       - type: horizontal-stack
         cards:
-          - entity: vacuum.rockrobo
+          - type: picture-entity
+            entity: vacuum.rockrobo
+            tap_action:
+              action: more-info
             hold_action:
               action: call-service
               service: switch.toggle
@@ -35,34 +52,34 @@ cards:
               idle: /local/images/vacuum_dark.jpeg
               paused: /local/images/vacuum_dark.jpeg
               returning: /local/images/vacuum.jpeg
+          - type: picture-entity
+            entity: input_boolean.ready_to_vacuum
             tap_action:
               action: more-info
-            type: picture-entity
-          - entity: input_boolean.ready_to_vacuum
             hold_action:
+              action: toggle
+            double_tap_action:
               action: call-service
-              service: vacuum.start_pause
+              service: input_number.set_value
               service_data:
-                entity_id: vacuum.rockrobo
+                entity_id: input_number.vacuum_cleaned_area
+                value: 0
             state_image:
               "off": /local/images/vacuum_dark.jpeg
               "on": /local/images/vacuum.jpeg
-            tap_action:
-              action: toggle
-            type: picture-entity
-      - buttons: true
+      - type: custom:xiaomi-vacuum-card
         entity: vacuum.rockrobo
-        image: /local/images/vacuum-small.png
-        labels:
-          battery: Battery
-          filter: Filter
-          main_brush: Main Brush
-          mode: Mode
-          sensor: Sensors
-          side_brush: Side Brush
-          status: Status
-        name: Rockrobo
-        type: "custom:xiaomi-vacuum-card"
+        name: false
+        # buttons: true
+        image: local/images/vacuum_small.png
+        # labels:
+        #   battery: Battery
+        #   filter: Filter
+        #   main_brush: Main Brush
+        #   mode: Mode
+        #   sensor: Sensors
+        #   side_brush: Side Brush
+        #   status: Status
   - type: "custom:vertical-stack-in-card"
     cards:
       - type: custom:air-visual-card
@@ -71,8 +88,8 @@ cards:
         main_pollutant: sensor.u_s_main_pollutant
         temp: weather.dark_sky
         city: 'Home'
-      - entity: weather.dark_sky
-        type: custom:weather-card
+      - type: custom:weather-card
+        entity: weather.dark_sky
   - type: "custom:swipe-card"
     cards:
       - type: "custom:mini-graph-card"
@@ -84,6 +101,13 @@ cards:
           - sensor.kids_temperature
           - sensor.kitchen_temperature
           - sensor.bathroom_temperature
+          # - color: gray
+          #   entity: sun.sun
+          #   name: Night
+          #   show_line: false
+          #   show_points: false
+          #   show_legend: false
+          #   y_axis: secondary
         height: 100
         hour24: true
         hours_to_show: 48
@@ -212,8 +236,8 @@ cards:
               - type: custom:gap-card
           - type: horizontal-stack
             cards:
-              - entity: sensor.bedroom_humidity
-                type: gauge
+              - type: gauge
+                entity: sensor.bedroom_humidity
                 max: 100
                 min: 0
                 name: Bedroom
@@ -222,8 +246,8 @@ cards:
                   red: 60
                   yellow: 50
                 theme: default
-              - entity: sensor.kids_humidity
-                type: gauge
+              - type: gauge
+                entity: sensor.kids_humidity
                 max: 100
                 min: 0
                 name: Kids
@@ -257,155 +281,40 @@ cards:
                   green: 30
                   red: 60
                   yellow: 50
-  # - type: picture-elements
-  #   # id: 5be18d329c42452788a3d18a74965da3
-  #   image: /local/images/house-element.jpg
-  #   elements:
-  #     - entity: binary_sensor.home_door_sensor
-  #       style:
-  #         color: white
-  #         left: 14%
-  #         top: 86%
-  #       tap_action:
-  #         action: more-info
-  #       type: state-icon
-  #     - entity: sensor.living_room_temperature
-  #       icon: "mdi:office"
-  #       style:
-  #         color: white
-  #         left: 36%
-  #         top: 82%
-  #       tap_action:
-  #         action: more-info
-  #       type: icon
-  #     - entity: sensor.living_room_temperature
-  #       style:
-  #         color: white
-  #         left: 36%
-  #         top: 95%
-  #       type: state-label
-  #     - entity: sensor.bedroom_temperature
-  #       icon: "mdi:hotel"
-  #       style:
-  #         color: white
-  #         left: 50%
-  #         top: 82%
-  #       tap_action:
-  #         action: more-info
-  #       type: icon
-  #     - entity: sensor.bedroom_temperature
-  #       style:
-  #         color: white
-  #         left: 50%
-  #         top: 95%
-  #       type: state-label
-  #     - entity: sensor.kids_temperature
-  #       icon: "mdi:human-child"
-  #       style:
-  #         color: white
-  #         left: 64%
-  #         top: 82%
-  #       tap_action:
-  #         action: more-info
-  #       type: icon
-  #     - entity: sensor.kids_temperature
-  #       style:
-  #         color: white
-  #         left: 64%
-  #         top: 95%
-  #       tap_action:
-  #         action: more-info
-  #       type: state-label
-  #     - entity: sensor.kitchen_temperature
-  #       icon: "mdi:kettle"
-  #       style:
-  #         color: white
-  #         left: 78%
-  #         top: 82%
-  #       tap_action:
-  #         action: more-info
-  #       type: icon
-  #     - entity: sensor.kitchen_temperature
-  #       style:
-  #         color: white
-  #         left: 78%
-  #         top: 95%
-  #       tap_action:
-  #         action: more-info
-  #       type: state-label
-  #     - entity: sensor.bathroom_temperature
-  #       icon: "mdi:shower"
-  #       style:
-  #         color: white
-  #         left: 92%
-  #         top: 82%
-  #       tap_action:
-  #         action: more-info
-  #       type: icon
-  #     - entity: sensor.bathroom_temperature
-  #       style:
-  #         color: white
-  #         left: 92%
-  #         top: 95%
-  #       tap_action:
-  #         action: more-info
-  #       type: state-label
-  - aspect_ratio: 60%
-    type: iframe
+  - type: iframe
+    aspect_ratio: 60%
     url: >-
       https://embed.windy.com/embed2.html?lat=51.109&lon=17.036&zoom=11&level=surface&overlay=wind&menu=&message=&marker=&calendar=&pressure=&type=map&location=coordinates&detail=&detailLat=51.109&detailLon=17.036&metricWind=default&metricTemp=default&radarRange=-1
   - type: "custom:xiaomi-vacuum-map-card"
     calibration_points:
       - map:
           x: 301
-          "y": 860
+          y: 860
         vacuum:
           x: 25500
-          "y": 25500
+          y: 25500
       - map:
           x: 390
-          "y": 772
+          y: 772
         vacuum:
           x: 26500
-          "y": 26500
+          y: 26500
       - map:
           x: 301
-          "y": 772
+          y: 772
         vacuum:
           x: 25500
-          "y": 26500
+          y: 26500
     default_mode: predefined_zones
     entity: vacuum.rockrobo
     map_image: /community_plugin/xiaomi-vacuum-map-card-mine/home.png
     zones:
-      - - - 22158
-          - 24989
-          - 26658
-          - 29639
-      - - - 22054
-          - 30111
-          - 25354
-          - 32461
-      - - - 26713
-          - 30072
-          - 31213
-          - 32222
-      - - - 26742
-          - 32255
-          - 31292
-          - 35255
-      - - - 25275
-          - 33279
-          - 27125
-          - 35129
-      - - - 22470
-          - 32189
-          - 26870
-          - 33689
-        - - 25403
-          - 29586
-          - 26803
-          - 32336
+      - [[22308, 25089, 26658, 29639]]
+      - [[22154, 29811, 25354, 32461]]
+      - [[26713, 29772, 31213, 32222]]
+      - [[26742, 32255, 31192, 35255]]
+      - [[25275, 33279, 27125, 35129]]
+      - [[22470, 32189, 26870, 33689], [25403, 29586, 26803, 32336]]
   - type: map
     # title: Map
     aspect_ratio: 60%
@@ -415,8 +324,8 @@ cards:
     entities:
       - entity: device_tracker.google_maps_104688658658376260645
       - entity: device_tracker.google_maps_109218123589188227395
-  - entity: camera.front_dor_fish_eye
-    show_state: true
-    type: picture-entity
-    state_filter:
-      - null
+  # - entity: camera.front_dor_fish_eye
+  #   show_state: true
+  #   type: picture-entity
+  #   state_filter:
+  #     - null

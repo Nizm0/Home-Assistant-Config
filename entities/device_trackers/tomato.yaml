@@ -5,5 +5,5 @@ password:  !secret tomato_password
 http_id: !secret tomato_http_id
 interval_seconds: 10
 new_device_defaults:
-  track_new_devices: False
-  hide_if_away: False
+  track_new_devices: true
+  # hide_if_away: False

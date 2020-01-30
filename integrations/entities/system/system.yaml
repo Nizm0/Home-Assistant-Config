@@ -104,6 +104,7 @@ automation:
       - service: notify.pushbullet_nizmo
         data_template:
           message: >
+            ({{states('sensor.date_time_iso')}})
             New device:
             {{trigger.event.data.host_name}}
             ({{trigger.event.data.entity_id}})
@@ -113,6 +114,7 @@ automation:
       - service: persistent_notification.create
         data_template:
           message: >
+            ({{states('sensor.date_time_iso')}})
             New device:
             {{trigger.event.data.host_name}}
             ({{trigger.event.data.entity_id}})
@@ -121,6 +123,7 @@ automation:
       - service: notify.push_to_chrome_nizm0_oneplus3
         data_template:
           message: >
+            ({{states('sensor.date_time_iso')}})
             New device:
             {{trigger.event.data.host_name}}
             {{trigger.event.data.entity_id}}
@@ -145,3 +148,19 @@ automation:
     condition: []
     action:
     - service: hangouts.reconnect
+
+  - alias: Notify on Hass start
+    initial_state: 'true'
+    trigger:
+      - event: start
+        platform: homeassistant
+    condition: []
+    action:
+      - service: notify.push_to_chrome_nizm0_oneplus3
+        data_template:
+          message: >
+            ({{states('sensor.date_time_iso')}})
+            Hass IO have just started
+          title: Hass IO
+          data:
+            tag: 'hass-os-notify'

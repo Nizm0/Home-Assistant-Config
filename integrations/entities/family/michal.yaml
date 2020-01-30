@@ -14,6 +14,7 @@ automation:
       - service: notify.push_to_chrome
         data_template:
           message: >
+            ({{ states('sensor.date_time_iso') }})
             Current location: {{ state_attr('device_tracker.google_maps_104688658658376260645', 'address') }}
           title: Michał is out form work
           data:
@@ -38,6 +39,7 @@ automation:
       - service: notify.push_to_chrome
         data_template:
           message: >
+            ({{ states('sensor.date_time_iso') }})
             New value is: {{ trigger.to_state.state }}
           title: Michał entered the home
           data:

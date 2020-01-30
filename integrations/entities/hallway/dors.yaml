@@ -12,6 +12,7 @@ automation:
       - service: notify.push_to_chrome
         data_template: 
           message: >
+            ({{states('sensor.date_time_iso')}})
             {% if is_state("group.family", "not_home") and is_state("input_select.home_preset", "empty") -%}
               Nobody is in home
             {%- else -%}
@@ -64,6 +65,7 @@ automation:
       - service: notify.push_to_chrome
         data_template:
           message: >
+            ({{states('sensor.date_time_iso')}})
             Doors was open for: {{ trigger.from_state.attributes['Open since'] }} seconds 
           title: Dors are now closed
           data:

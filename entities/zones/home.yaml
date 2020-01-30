@@ -7,9 +7,9 @@
 name: Home
 latitude: !secret home_latitude
 longitude: !secret home_longitude
-elevation: !secret home_elevation
-unit_system: metric
+# elevation: !secret home_elevation
+# unit_system: metric
 passive: false
-time_zone: Europe/Warsaw
+# time_zone: Europe/Warsaw
 icon: mdi:home
 # customize: !include customize.yaml

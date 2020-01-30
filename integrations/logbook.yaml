@@ -14,3 +14,11 @@ logbook:
     - sun
     - calendar
     - group
+    entities:
+    - sensor.date
+    - sensor.time
+    - sensor.date_time
+    - sensor.date_time_iso
+    - sensor.time_date
+    - sensor.time_utc
+    - sensor.internet_time

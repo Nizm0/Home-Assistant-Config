@@ -19,8 +19,6 @@ cards:
               action: more-info
             tap_action:
               action: toggle
-      - type: horizontal-stack
-        cards:
           - entity: light.top_light
             type: entity-button
             hold_action:
@@ -28,6 +26,8 @@ cards:
             tap_action:
               action: toggle
             icon: mdi:led-strip-variant
+      - type: horizontal-stack
+        cards:
           - entity: light.tv_ambilights
             type: entity-button
             hold_action:
@@ -35,6 +35,7 @@ cards:
             tap_action:
               action: toggle
             icon: mdi:spotlight
+          - type: custom:gap-card
           - type: entity-button
             entity: light.christmas_tree
             hold_action:
@@ -42,15 +43,21 @@ cards:
             tap_action:
               action: toggle
             icon: mdi:pine-tree
-      # - type: horizontal-stack
-      #   cards:
-      #     - type: entity-button
-      #       entity: light.christmas_tree
-      #       hold_action:
-      #         action: more-info
-      #       tap_action:
-      #         action: toggle
-      #     - type: custom:gap-card
+      - type: horizontal-stack
+        cards:
+          - entity: binary_sensor.living_room_balcony_window_sensor
+            type: entity-button
+            hold_action:
+              action: more-info
+            tap_action:
+              action: toggle
+          - type: custom:gap-card
+          - entity: binary_sensor.living_room_motion_sensor
+            type: entity-button
+            hold_action:
+              action: more-info
+            tap_action:
+              action: toggle
       - type: horizontal-stack
         cards:
           - entity: sensor.living_room_temperature
@@ -73,10 +80,6 @@ cards:
               red: 60
               yellow: 50
             theme: default
-  - type: entities
-    entities:
-      - entity: binary_sensor.living_room_balcony_window_sensor
-      - entity: binary_sensor.living_room_motion_sensor
   - type: "custom:vertical-stack-in-card"
     cards:
       - artwork: cover
@@ -169,9 +172,30 @@ cards:
     entity: sensor.living_room_pressure
     graph: line
     name: Presure
-  - type: plant-status
-    entity: plant.living_room_plant
-    name: Living room plant
+  - type: "custom:vertical-stack-in-card"
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: plant-status
+            entity: plant.first_plant
+            name: First
+          - type: plant-status
+            entity: plant.second_plant
+            name: Second
+      - type: horizontal-stack
+        cards:
+          - type: plant-status
+            entity: plant.fourth_plant
+            name: Fourth
+          - type: plant-status
+            entity: plant.fifth_plant
+            name: Fifth
+      - type: horizontal-stack
+        cards:
+          - type: plant-status
+            entity: plant.sixth_plant
+            name: Sixth
+          - type: custom:gap-card
   - title: Temperature
     type: "custom:mini-graph-card"
     animate: true

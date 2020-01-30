@@ -7,46 +7,57 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: light.bathroom_top_light
+          - type: entity-button
+            entity: light.bathroom_top_light
             hold_action:
               action: more-info
             tap_action:
               action: toggle
-            type: entity-button
-          - entity: binary_sensor.bathroom_motion_sensor
+          - type: entity-button
+            entity: binary_sensor.bathroom_motion_sensor
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
-          - entity: binary_sensor.washer_vibration
+          - type: entity-button
+            entity: binary_sensor.washer_vibration
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
       - type: horizontal-stack
         cards:
-          - entity: binary_sensor.bathroom_water_leak
+          - type: entity-button
+            entity: binary_sensor.bathroom_water_leak
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
-          # - entity: sensor.taking_bath
-          #   hold_action:
-          #     action: none
-          #   tap_action:
-          #     action: more-info
-          #   type: entity-button
-          - entity: binary_sensor.taking_bath
+          - type: entity-button
+            entity: sensor.bathroom_illumination
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
+          - type: entity-button
+            entity: binary_sensor.taking_bath
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
       - type: horizontal-stack
         cards:
+          - type: custom:mini-graph-card
+            entities: 
+              - sensor.bathroom_illumination
+            hour24: true
+            points_per_hour: 5
+            align_icon: state
+            align_state: right
+            show:
+              fill: true
+              # icon: false
+              name: false
           - type: gauge
             entity: sensor.bathroom_temperature
             theme: default
@@ -58,8 +69,8 @@ cards:
               green: 18
               red: 30
               yellow: 25
-          - entity: sensor.bathroom_humidity
-            type: gauge
+          - type: gauge
+            entity: sensor.bathroom_humidity
             theme: default
             unit: "%"
             max: 100
@@ -69,8 +80,8 @@ cards:
               green: 30
               red: 60
               yellow: 50
-  - title: Temperature
-    type: "custom:mini-graph-card"
+  - type: "custom:mini-graph-card"
+    title: Temperature
     # animate: true
     entities:
       - sensor.bathroom_temperature
@@ -94,8 +105,8 @@ cards:
     show:
       extrema: true
       fill: fade
-  - title: Humidity
-    type: "custom:mini-graph-card"
+  - type: "custom:mini-graph-card"
+    title: Humidity
     entities:
       - sensor.bathroom_humidity
     color_thresholds:
@@ -114,7 +125,7 @@ cards:
     show:
       extrema: true
       fill: fade
-  - detail: 2
+  - type: sensor
+    detail: 2
     entity: sensor.bathroom_pressure
     graph: line
-    type: sensor

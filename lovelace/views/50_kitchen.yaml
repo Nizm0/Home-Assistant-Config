@@ -8,36 +8,41 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: light.kitchen_top_light
+          - type: entity-button
+            entity: light.kitchen_top_light
             hold_action:
               action: more-info
             tap_action:
               action: toggle
-            type: entity-button
-          - entity: binary_sensor.kitchen_motion_sensor
+          - type: entity-button
+            entity: binary_sensor.kitchen_motion_sensor
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
       - type: horizontal-stack
         cards:
           - type: custom:mini-graph-card
             entities: 
               - sensor.kitchen_illumination
-            align_icon: left
-            align_state: center
+            hour24: true
+            points_per_hour: 5
+            align_icon: state
+            align_state: right
             show:
               fill: true
-          - entity: binary_sensor.kitchen_left_window_sensor
+              # icon: false
+              name: false
+          - type: entity-button
+            entity: binary_sensor.kitchen_left_window_sensor
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
       - type: horizontal-stack
         cards:
-          - entity: sensor.kitchen_temperature
+          - type: gauge
+            entity: sensor.kitchen_temperature
             max: 40
             min: 0
             name: Temperature
@@ -46,9 +51,9 @@ cards:
               red: 30
               yellow: 25
             theme: default
-            type: gauge
             unit: C
-          - entity: sensor.kitchen_humidity
+          - type: gauge
+            entity: sensor.kitchen_humidity
             max: 100
             min: 0
             name: Humidity
@@ -57,7 +62,6 @@ cards:
               red: 60
               yellow: 50
             theme: default
-            type: gauge
             unit: "%"
   - title: Temperature
     type: "custom:mini-graph-card"

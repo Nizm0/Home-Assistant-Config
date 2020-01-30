@@ -21,6 +21,17 @@ cards:
             type: entity-button
       - type: horizontal-stack
         cards:
+          - type: custom:mini-graph-card
+            entities: 
+              - sensor.kids_illumination
+            hour24: true
+            points_per_hour: 5
+            align_icon: state
+            align_state: right
+            show:
+              fill: true
+              # icon: false
+              name: false
           - entity: sensor.kids_temperature
             max: 40
             min: 0

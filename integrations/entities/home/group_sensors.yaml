@@ -1,0 +1,67 @@
+script:
+  create_group_all_motion_sensors:
+    sequence:
+      - service: group.set
+        data_template:
+          object_id: "all_sensors_motion"
+          entities: >
+            {{ states.binary_sensor | selectattr('attributes.device_class','eq','motion') | map(attribute='entity_id') | join(", ") }}
+  create_group_all_windows_sensors:
+    sequence:
+      - service: group.set
+        data_template:
+          object_id: "all_sensors_windows"
+          entities: >
+            {{ states.binary_sensor | selectattr('attributes.device_class','eq','window') | map(attribute='entity_id') | join(", ") }}
+  create_group_all_doors_sensors:
+    sequence:
+      - service: group.set
+        data_template:
+          object_id: "all_sensors_doors"
+          entities: >
+            {{ states.binary_sensor | selectattr('attributes.device_class','eq','door') | map(attribute='entity_id') | join(", ") }}
+  create_group_all_temperature_sensors:
+    sequence:
+      - service: group.set
+        data_template:
+          object_id: "all_sensors_temperature"
+          entities: >
+            {{ states.sensor | selectattr('attributes.device_class','eq','temperature') | map(attribute='entity_id') | join(", ") }}
+  create_group_all_humidity_sensors:
+    sequence:
+      - service: group.set
+        data_template:
+          object_id: "all_sensors_humidity"
+          entities: >
+            {{ states.sensor | selectattr('attributes.device_class','eq','humidity') | map(attribute='entity_id') | join(", ") }}
+
+automation:
+  - alias: Startup Stuff - Notifications
+    # id: cea3ed9689054b0dasdadadsasdw
+    trigger:
+      - event: start
+        platform: homeassistant
+    action:
+      # - data:
+      #     message: HomeAssistant is up
+      #   service: telegram_bot.send_message
+      - service: script.turn_on
+        # alias: Create All Groups
+        entity_id:
+          - script.create_group_all_motion_sensors
+          - script.create_group_all_windows_sensors
+          - script.create_group_all_doors_sensors
+          - script.create_group_all_temperature_sensors
+          - script.create_group_all_humidity_sensors
+
+binary_sensor:
+  - platform: template
+    sensors:
+      all_motion_sensors_off:
+        friendly_name: "No Motion"
+        value_template: "{{ is_state('group.all_sensors_motion', 'on') }}"
+        device_class: safety
+      all_doors_closed:
+        friendly_name: "All Doors Closed"
+        value_template: "{{ is_state('group.all_sensors_opening', 'on') }}"
+        device_class: safety

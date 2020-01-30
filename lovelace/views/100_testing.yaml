@@ -21,21 +21,38 @@ cards:
   - type: entities
     entities:
       # - entity: fan.xiaomi_miio_device
+      - entity: sensor.template_last_motion
+        secondary_info: last-changed
       - entity: variable.last_motion
+        secondary_info: last-changed
       - entity: binary_sensor.hallway_motion_sensor
+        secondary_info: last-changed
       - entity: binary_sensor.living_room_motion_sensor
+        secondary_info: last-changed
       - entity: binary_sensor.bathroom_motion_sensor
+        secondary_info: last-changed
       - entity: binary_sensor.kitchen_motion_sensor
+        secondary_info: last-changed
       - entity: binary_sensor.kids_motion_sensor
+        secondary_info: last-changed
       - entity: binary_sensor.bedroom_motion_sensor
+        secondary_info: last-changed
       - entity: group.family
+        secondary_info: last-changed
       - entity: binary_sensor.desctop_pc
+        secondary_info: last-changed
       - entity: sun.sun
+        secondary_info: last-changed
       # - entity: sensor.taking_bath
+      #   secondary_info: last-changed
       - entity: binary_sensor.taking_bath
+        secondary_info: last-changed
       - entity: binary_sensor.router
+        secondary_info: last-changed
       - entity: binary_sensor.server
+        secondary_info: last-changed
       - entity: binary_sensor.remote_ui
+        secondary_info: last-changed
   - type: entities
     entities:
       - input_boolean.ready_to_vacuum

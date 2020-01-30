@@ -19,6 +19,17 @@ cards:
             type: entity-button
       - type: horizontal-stack
         cards:
+          - type: custom:mini-graph-card
+            entities: 
+              - sensor.bedroom_illumination
+            hour24: true
+            points_per_hour: 5
+            align_icon: state
+            align_state: right
+            show:
+              fill: true
+              # icon: false
+              name: false
           - entity: sensor.bedroom_temperature
             type: gauge
             max: 40

@@ -6,15 +6,16 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: light.hallway_top_light
+          - type: entity-button
+            entity: light.hallway_top_light
             hold_action: more-info
             tap_action: toggle
-            type: entity-button
-          - entity: light.hallway_gateway_light
-            type: light
+          - type: light
+            entity: light.hallway_gateway_light
       - type: horizontal-stack
         cards:
-          - entity: sensor.hallway_temperature
+          - type: gauge
+            entity: sensor.hallway_temperature
             max: 40
             min: 0
             name: Temperature
@@ -23,9 +24,9 @@ cards:
               red: 30
               yellow: 25
             theme: default
-            type: gauge
             unit: C
-          - entity: sensor.hallway_humidity
+          - type: gauge
+            entity: sensor.hallway_humidity
             max: 100
             min: 0
             name: Humidity
@@ -34,7 +35,6 @@ cards:
               red: 60
               yellow: 50
             theme: default
-            type: gauge
             unit: "%"
   - entities:
       - entity: binary_sensor.hallway_motion_sensor
@@ -86,11 +86,11 @@ cards:
     show:
       extrema: true
       fill: fade
-  - detail: 2
+  - type: sensor
+    detail: 2
     entity: sensor.hallway_pressure
     graph: line
-    type: sensor
-  - detail: 2
+  - type: sensor
+    detail: 2
     entity: sensor.hallway_illumination
     graph: line
-    type: sensor

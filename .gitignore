@@ -29,16 +29,17 @@ google54d9d9f0104cb9cd.html
 *.cookies
 *.delete
 appdaemon/custom_widgets
+www/community
+www/custom-lovelace
 www/images/home
 www/floorplan
-www/custom-lovelace
-www/community
+www/lovelace-flower-card/data/Images
 
 __*
 custom_components
 esphome/*/
-themes
 deps
 notebooks
 node-red
+themes
 tts
