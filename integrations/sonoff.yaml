@@ -1,0 +1,7 @@
+---
+# https://github.com/AlexxIT/SonoffLAN
+
+sonoff:
+  username: !secret email
+  password: !secret sonoff_pass
+  reload: always

@@ -1,0 +1,18 @@
+automation:
+  - alias: Sonof Camera record
+    initial_state: 'true'
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.living_room_motion_sensor
+      to: 'on'
+    action:
+    # - service: camera.record
+    #   data_template:
+    #     entity_id: camera.sonoff_gk_200mp2_b_mjpg
+    #     filename: /config/www/records/recorder_{{ entity_id }}.mp4
+    #     duration: 30
+    #     lookback: 2
+    - service: camera.snapshot
+      data_template:
+        entity_id: camera.sonoff_gk_200mp2_b
+        filename: /config/www/records/snapshot_{{ entity_id }}.jpg

@@ -1,26 +1,44 @@
-header_text: '{{ time }}'
-button_text:
-  options: '{{ hours24LZ }}:{{ minutesLZ }}<br>{{ dayNumLZ }}.{{ monthNumLZ }}'
+header_text: '{{ hours24LZ }}:{{ minutesLZ }} {{ dayNumLZ }}.{{ monthNumLZ }}'
+# button_text:
+#   options: '{{ hours24LZ }}:{{ minutesLZ }}<br>{{ dayNumLZ }}.{{ monthNumLZ }}'
 compact_mode: true
+hide_header: false
+# split_mode: true
+# footer_mode: true
 hide_config: true
 hide_help: true
+# options_hide: true
+
 exceptions:
   - conditions:
       user: Gosia
     config:
+      hide_config: true
+      hide_help: true
       hide_tabs:
         - 1
-        - 9
-        - 11 to 13
+        - 10 to 14
   - conditions:
       user: Tablet
     config:
+      hide_config: true
+      hide_help: true
       hide_unused: true
       hide_tabs:
         - 1
-        - 9
-        - 11 to 13
+        - 10 to 14
   - conditions:
       query_string: kiosk
     config:
       kiosk_mode: true
+  - conditions:
+      user_agent: Mobile
+    config:
+      # button_icons:
+        # menu: mdi:skull
+        # options: mdi:death-star-variant
+      menu_hide: true
+      # voice_hide: true
+      options_hide: true
+      # hide_config: true
+      # hide_help: true

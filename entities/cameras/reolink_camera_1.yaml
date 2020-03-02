@@ -1,0 +1,3 @@
+platform: ffmpeg
+name: Reolink Camera 1
+input: !secret camera_reolink_1_rtsp

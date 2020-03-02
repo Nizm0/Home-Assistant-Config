@@ -19,6 +19,14 @@ cards:
         secondary_info: last-changed
       - entity: input_select.home_preset
         secondary_info: last-changed
+      - entity: device_tracker.portex
+        secondary_info: last-changed
+      - entity: device_tracker.bozena_phone
+        secondary_info: last-changed
+      - entity: device_tracker.nizmo_surface
+        secondary_info: last-changed
+      - entity: device_tracker.gosia_laptop
+        secondary_info: last-changed
       - entity: device_tracker.f6_67_40_d4_f8_00
         secondary_info: last-changed
     show_header_toggle: false

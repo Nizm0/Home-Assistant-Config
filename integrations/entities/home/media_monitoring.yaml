@@ -1,0 +1,18 @@
+sensor:
+  - platform: twitch
+    client_id: !secret twitchId
+    channels:
+      - frenck
+      - DrZzs
+      - dziarowski1
+  - platform: discord_game
+    token: !secret secretDiscordBotToken
+    members:
+    - Thaeliaris#9947
+    - Nizm0#9673
+  - platform: steam_online
+    api_key: !secret steamWebApiKey
+    accounts:
+      - 76561197992255354 #nizmoo
+      - 76561197988099383 #norion84
+      - 76561198010872379 #portex

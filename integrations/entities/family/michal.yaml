@@ -30,10 +30,10 @@ automation:
     alias: Michał entered the home
     initial_state: "true"
     trigger:
-      - platform: state
+      - platform: zone
         entity_id: person.nizm0 # device_tracker.google_maps_104688658658376260645 #Nizm0
-        to: home
-        # event: enter
+        zone: zone.home
+        event: enter
     condition:
     action:
       - service: notify.push_to_chrome

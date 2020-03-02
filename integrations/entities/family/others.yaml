@@ -12,8 +12,9 @@ automation:
     - service: notify.push_to_chrome_nizm0_oneplus3
       data_template:
         message: >
+          ({{states('sensor.date_time_iso')}})
           New value is: {{ trigger.to_state.state }}
-        title: Michał entered the home
+        title: Portex entered the home
         data:
-          title: Michał entered the home
+          title: Portex entered the home
           tag: portex_notification

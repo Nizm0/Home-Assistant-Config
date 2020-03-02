@@ -26,6 +26,10 @@ sensor:
     #  radius: 500
     show_on_map: false
 
+  - platform: meteoalarm_m
+    id: 'PL0264-Wroclaw'
+    name: alert
+    scan_interval: 3600
 # luftdaten:
 #   sensor_id: 2303
 #   show_on_map: false

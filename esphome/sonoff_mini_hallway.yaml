@@ -1,0 +1,74 @@
+substitutions:
+  hostname: 'sonoff_hallway_light'
+  reboot_time: 10min
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+esphome:
+  name: $hostname
+  platform: ESP8266
+  board: esp01_1m
+  board_flash_mode: dout
+
+wifi:
+  ssid: $ssid
+  password: $password
+  fast_connect: True
+  reboot_timeout: $reboot_time
+api:
+  reboot_timeout: $reboot_time
+ota:
+logger:
+web_server:
+  port: 80
+
+switch:
+  - platform: restart
+    name: "Reboot Hallway Light"
+    id: hallway_ligts_restart
+
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO4
+      mode: INPUT
+      inverted: False
+    name: Hallway Light Swith
+    internal: true
+    on_state:
+      then:
+        - light.toggle: light1
+    on_multi_click:
+    - timing:
+        - ON for at most 0.5s
+        - OFF for at most 0.5s
+        - ON for at most 0.5s
+        - OFF for at most 0.5s
+        - ON for at most 0.5s
+        - OFF for at most 0.5s
+        - ON for at most 0.5s
+        - OFF for at least 0.2s
+      then:
+        - switch.turn_on: hallway_ligts_restart
+
+light:
+  - platform: binary
+    name: Top Light
+    id: light1
+    output: relay1
+    restore_mode: RESTORE_DEFAULT_ON
+  - platform: monochromatic
+    name: "Sonof LED"
+    output: pow_blue_led
+    id: led
+    internal: true
+
+output:
+  - platform: gpio
+    pin: GPIO12
+    id: relay1
+  - platform: esp8266_pwm
+    id: pow_blue_led
+    pin:
+      number: GPIO13
+      inverted: True

@@ -28,6 +28,20 @@ sensor:
     start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
     end: '{{ now() }}'
   - platform: history_stats
+    name: TV is idle(app runing)
+    entity_id: media_player.philips_tv
+    state: 'idle'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+  - platform: history_stats
+    name: Netflix is on
+    entity_id: sensor.philips_tv_media_title
+    state: 'Netflix'
+    type: time
+    start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
+    end: '{{ now() }}'
+  - platform: history_stats
     name: PS4 is on
     entity_id: media_player.playstation_4
     state: 'on'
@@ -35,6 +49,21 @@ sensor:
     start: '{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}'
     end: '{{ now() }}'
     
+  - platform: template
+    sensors:
+      philips_tv_media_title:
+        friendly_name: "Philips TV Media Title"
+        value_template: "{{ state_attr('media_player.philips_tv', 'media_title') }}"
+
+  - platform: history_stats
+    name: Wasmachine Vibrations
+    entity_id: binary_sensor.washer_vibration
+    state: 'on'
+    type: 'count'
+    end: '{{ now() }}'
+    duration:
+      minutes: 10
+
   # - platform: statistics
   #   entity_id: device_tracker.nizmo_phone
   # - platform: statistics

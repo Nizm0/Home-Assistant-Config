@@ -3,10 +3,10 @@ automation:
     alias: Gosia entered the home
     initial_state: 'true'
     trigger: 
-    - platform: state
+    - platform: zone
       entity_id: person.gosia # device_tracker.google_maps_109218123589188227395 #Gosia
-      to: home
-      # event: enter
+      zone: zone.home
+      event: enter
     condition:
     action: 
     - service: notify.push_to_chrome_nizm0_oneplus3

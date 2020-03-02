@@ -1,49 +1,7 @@
-icon: "mdi:settings"
+icon: mdi:chart-areaspline
 id: 8
 title: Stats
 cards:
-  - type: entities
-    entities:
-      - sensor.processor_use
-      - sensor.memory_free
-      - sensor.disk_use_percent_home
-      - binary_sensor.pve_hassos_running
-      - binary_sensor.pve_hassosdev_running
-      # - type: entity
-      #   entity: binary_sensor.pve_hassos_running
-      # - type: entity
-      #   entity: binary_sensor.pve_hassosdev_running
-    show_header_toggle: false
-    title: System stats
-  - type: custom:vertical-stack-in-card
-    cards:
-      - type: custom:bar-card
-        entity: sensor.disk_use_percent_home
-        severity:
-          - value: 33
-            color: '#40bf40'
-          - value: 66
-            color: '#bf9540'
-          - value: 100
-            color: '#bf4040'
-      - type: custom:bar-card
-        entity: sensor.memory_use_percent
-        severity:
-          - value: 33
-            color: '#40bf40'
-          - value: 66
-            color: '#bf9540'
-          - value: 100
-            color: '#bf4040'
-      - type: custom:bar-card
-        entity: sensor.processor_use
-        severity:
-          - value: 33
-            color: '#40bf40'
-          - value: 66
-            color: '#bf9540'
-          - value: 100
-            color: '#bf4040'
   # - entities:
   #     - entity: script.update_config
   #     - entity: sensor.nizm0_home_assistant_config_last_build_duration
@@ -92,10 +50,14 @@ cards:
     title: Dors in home
   - type: history-graph
     entities:
+      - sensor.template_last_motion
       - binary_sensor.hallway_motion_sensor
       - binary_sensor.living_room_motion_sensor
       - binary_sensor.kitchen_motion_sensor
       - binary_sensor.bathroom_motion_sensor
+      - binary_sensor.bedroom_motion_sensor
+      - binary_sensor.reolink_camera_1_motion
+      - script.create_group_all_motion_sensors
     hours_to_show: 24
     refresh_interval: 0
     title: Motions in home
@@ -116,59 +78,6 @@ cards:
           state: "off"
     show_empty: false
     show_header_toggle: true
-  - type: entities
-    entities:
-      # - binary_sensor.nizmo_pc_connected
-      - camera.nizmo_pc_screen_0
-      - camera.nizmo_pc_screen_1
-      # - script.nizmo_pc_displays_off
-      # - script.nizmo_pc_displays_on
-      # - script.nizmo_pc_hibernate
-      # - script.nizmo_pc_lock
-      # - script.nizmo_pc_logoff
-      # - script.nizmo_pc_notify
-      # - script.nizmo_pc_reboot
-      # - script.nizmo_pc_refresh
-      # - script.nizmo_pc_run_chrome
-      # - script.nizmo_pc_shutdown
-      # - script.nizmo_pc_suspend
-      # - script.nizmo_pc_vol_max
-      # - script.nizmo_pc_vol_mute
-      # - script.nizmo_pc_wake
-      - sensor.nizmo_pc_cpu_usage
-      - sensor.nizmo_pc_current_username
-      - sensor.nizmo_pc_media_volume
-      - binary_sensor.nizmo_pc_media_playing
-      - binary_sensor.nizmo_pc_volume_muted
-      - binary_sensor.nizmo_pc_power_status
-      # - sensor.nizmo_pc_storage_label_c
-      # - sensor.nizmo_pc_storage_label_d
-      - sensor.nizmo_pc_storage_c_total_free_space
-      - sensor.nizmo_pc_storage_c_total_storage
-      - sensor.nizmo_pc_storage_c_usage
-      - sensor.nizmo_pc_storage_d_total_free_space
-      - sensor.nizmo_pc_storage_d_total_storage
-      - sensor.nizmo_pc_storage_d_usage
-      - sensor.nizmo_pc_storage_e_total_free_space
-      - sensor.nizmo_pc_storage_e_total_storage
-      - sensor.nizmo_pc_storage_e_usage
-      - sensor.nizmo_pc_storage_g_total_free_space
-      - sensor.nizmo_pc_storage_g_total_storage
-      - sensor.nizmo_pc_storage_g_usage
-      - sensor.nizmo_pc_system_idle_time
-      - sensor.nizmo_pc_network_0_ipv4
-      - sensor.nizmo_pc_network_0_ipv6
-      - sensor.nizmo_pc_network_0_speed
-      - sensor.nizmo_pc_network_0_bps_sent
-      - sensor.nizmo_pc_network_0_bps_received
-      - binary_sensor.nizmo_pc_network_0_wired
-      - sensor.nizmo_pc_memory_available
-      - sensor.nizmo_pc_memory_total
-      - sensor.nizmo_pc_memory_usage
-      - sensor.nizmo_pc_memory_used
-      # - switch.nizmo_pc
-    show_header_toggle: false
-    title: My Computer
   - type: custom:vertical-stack-in-card
     cards:
       - type: history-graph
@@ -178,72 +87,4 @@ cards:
         entities:
           - sensor.speedtest_download
           - sensor.speedtest_upload
-  - type: custom:bar-card
-    # title: Broadlink MFC J200
-    unit_of_measurement: "%"
-    title_position: inside
-    icon_position : inside
-    columns: 4
-    height: 200px
-    min: 1
-    max: 100
-    target: 20
-    width: 100%
-    padding: 0px
-    direction: up
-    entities:
-      - entity: sensor.mfc_j200_black_ink_remaining
-        title: Black
-        color: black
-        background_style:
-          background: '#515151'
-          opacity: 1
-          filter: brightness(0.3)
-        severity:
-          - value: 15
-            color: red
-          - value: 100
-            color: black
-      - entity: sensor.mfc_j200_magenta_ink_remaining
-        title: Magenta
-        color: magenta
-        background_style:
-          background: magenta
-          opacity: 1
-          filter: brightness(0.3)
-        severity:
-          - value: 15
-            color: red
-          - value: 100
-            color: magenta
-      - entity: sensor.mfc_j200_yellow_ink_remaining
-        title: Yellow
-        color: yellow
-        background_style:
-          background: yellow
-          opacity: 1
-          filter: brightness(0.3)
-        severity:
-          - value: 15
-            color: red
-          - value: 100
-            color: '#F7F96C'
-      - entity: sensor.mfc_j200_cyan_ink_remaining
-        title: Cyan
-        color: cyan
-        background_style:
-          background: cyan
-          opacity: 1
-          filter: brightness(0.3)
-        severity:
-          - value: 15
-            color: red
-          - value: 100
-            color: cyan
-    # severity:
-    #   - value: 15
-    #     color: red #var(--bar-red)
-        # color: var(--label-badge-red)
-        # value_style:
-        #   color: red
   - type: "custom:unused-card"

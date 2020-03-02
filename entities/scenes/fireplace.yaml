@@ -1,4 +1,5 @@
 - name: Fireplace
+  id: iu23y6wseghs8o
   entities:
     light.directional_light: off
     light.general_light: off

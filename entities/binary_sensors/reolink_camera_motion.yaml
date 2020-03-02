@@ -1,0 +1,4 @@
+platform: ffmpeg_motion
+name: Reolink Camera 1 Motion
+input: !secret camera_reolink_1_rtsp
+extra_arguments: -filter:v "crop=100:100:12:34"

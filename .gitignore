@@ -8,8 +8,9 @@
 
 *gmail*
 ip_bans.yaml
-.shopping_list.json
 .ps4-games.json
+.shopping_list.json
+.sonoff.json
 secrets.yaml
 known_devices.yaml
 appdaemon.yaml
@@ -34,6 +35,7 @@ www/custom-lovelace
 www/images/home
 www/floorplan
 www/lovelace-flower-card/data/Images
+www/records
 
 __*
 custom_components

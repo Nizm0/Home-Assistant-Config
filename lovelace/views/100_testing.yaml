@@ -19,11 +19,14 @@ cards:
   #   tap_action:
   #     action: more-info
   - type: entities
+    state_color: true
     entities:
       # - entity: fan.xiaomi_miio_device
+      - entity: group.all_sensors_motion
+        secondary_info: last-changed
       - entity: sensor.template_last_motion
         secondary_info: last-changed
-      - entity: variable.last_motion
+      - entity: binary_sensor.motion_last30
         secondary_info: last-changed
       - entity: binary_sensor.hallway_motion_sensor
         secondary_info: last-changed
@@ -39,13 +42,14 @@ cards:
         secondary_info: last-changed
       - entity: group.family
         secondary_info: last-changed
-      - entity: binary_sensor.desctop_pc
-        secondary_info: last-changed
       - entity: sun.sun
         secondary_info: last-changed
-      # - entity: sensor.taking_bath
-      #   secondary_info: last-changed
       - entity: binary_sensor.taking_bath
+        secondary_info: last-changed
+  - type: entities
+    state_color: true
+    entities:
+      - entity: binary_sensor.desctop_pc
         secondary_info: last-changed
       - entity: binary_sensor.router
         secondary_info: last-changed
@@ -67,19 +71,42 @@ cards:
   - type: entities
     entities:
       - entity: binary_sensor.washer_vibration
+      - entity: sensor.wasmachine_vibrations
     show_header_toggle: false
     title: Vibration
-  - type: "custom:vertical-stack-in-card"
+  - type: custom:vertical-stack-in-card
     cards:
       - entity: camera.ender_3
         show_state: false
         type: picture-entity
-      - type: history-graph
+      - type: custom:mini-graph-card
+        points_per_hour: 5
+        height: 100
+        update_interval: 5
+        # show_legend: false
         entities:
-          - sensor.ender_3_target_bed_temp
-          - sensor.ender_3_actual_bed_temp
-          - sensor.ender_3_target_tool0_temp
-          - sensor.ender_3_actual_tool0_temp
+          - entity: sensor.ender_3_target_bed_temp
+          - entity: sensor.ender_3_actual_bed_temp
+          - entity: sensor.ender_3_target_tool0_temp
+          - entity: sensor.ender_3_actual_tool0_temp
+        hour24: true
+        hours_to_show: 12
+        show:
+          extrema: false
+          fill: true
+          name: false
+          state: false
+          icon: false
+          points: false
+          labels: true
+          labels_secondary: true
+          legend: false
+      # - type: history-graph
+      #   entities:
+      #     - sensor.ender_3_target_bed_temp
+      #     - sensor.ender_3_actual_bed_temp
+      #     - sensor.ender_3_target_tool0_temp
+      #     - sensor.ender_3_actual_tool0_temp
       - type: entities
         title: Octoprint Ender 3
         show_header_toggle: false
@@ -97,14 +124,15 @@ cards:
               #     - user: Nizm0
             row: true
             action: double_tap
-          - entity: sensor.shelly_shsw_pm_608c82_consumption
+          - entity: sensor.shelly_shsw_pm_608c82_current_consumption
+          - entity: sensor.shelly_shsw_pm_608c82_total_consumption_attr
           - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
           - entity: binary_sensor.ender_3_printing
           - entity: binary_sensor.ender_3_printing_error
-          # - entity: sensor.ender_3_target_bed_temp
-          # - entity: sensor.ender_3_actual_bed_temp
-          # - entity: sensor.ender_3_target_tool0_temp
-          # - entity: sensor.ender_3_actual_tool0_temp
+          - entity: sensor.ender_3_target_bed_temp
+          - entity: sensor.ender_3_actual_bed_temp
+          - entity: sensor.ender_3_target_tool0_temp
+          - entity: sensor.ender_3_actual_tool0_temp
           - entity: sensor.ender_3_current_state
           - entity: sensor.ender_3_job_percentage
           - entity: sensor.ender_3_time_elapsed
@@ -176,25 +204,6 @@ cards:
       - entity: sensor.tauron_amiplus_zone
     show_header_toggle: false
     title: Tauron
-  - type: entities
-    entities:
-      - type: "custom:restriction-card"
-        card:
-          entity: switch.server_shelf_switch
-        restrictions:
-          confirm:
-          pin:
-            code: 1234
-        row: true
-        action: double_tap
-      # - entity: switch.server_shelf_switch
-      - entity: sensor.server_shelf_current
-      - entity: sensor.server_shelf_power
-      - entity: sensor.server_shelf_voltage
-      - entity: sensor.server_shelf_uptime
-      - entity: sensor.server_shelf_wifi_signal
-    show_header_toggle: false
-    title: Server shelf
 
   # - entities:
   #     - hide_if_unavailable: true
@@ -229,3 +238,41 @@ cards:
         multiple_items: true
     id_filter: ^home_feed_.*
     title: Hacs Updatets
+  - type: conditional
+    conditions:
+      - entity: sensor.alert
+        state_not: '0'
+    card:
+      type: custom:flex-table-card
+      title: today
+      entities:
+        include: sensor.w_alert
+      columns:
+        - attr_as_list: today
+          modify: x.code.concat(' ', x.event)
+          name: event
+        - attr_as_list: today
+          modify: x.txt
+          name: description
+        - attr_as_list: today
+          modify: x.end
+          name: expire
+  - type: conditional
+    conditions:
+      - entity: sensor.alert
+        state_not: '0'
+    card:
+      type: custom:flex-table-card
+      title: tomorrow
+      entities:
+        include: sensor.w_alert
+      columns:
+        - attr_as_list: tomorrow
+          modify: x.code.concat(' ', x.event)
+          name: event
+        - attr_as_list: tomorrow
+          modify: x.txt
+          name: description
+        - attr_as_list: tomorrow
+          modify: x.end
+          name: expire

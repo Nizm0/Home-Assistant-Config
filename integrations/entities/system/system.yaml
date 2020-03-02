@@ -64,7 +64,7 @@ sensor:
     unit_of_measurement: hours
 
 proxmoxve:
-  - host: 192.168.1.200
+  - host: !secret proxmox_local_ip
     username: !secret proxmoxLogin
     password: !secret proxmoxPassword
     verify_ssl: false
@@ -84,12 +84,12 @@ binary_sensor:
     scan_interval: 60
   - platform: ping
     name: Router
-    host: 192.168.1.1
+    host: !secret router_local_ip
     count: 4
     scan_interval: 60
   - platform: ping
     name: Server
-    host: 192.168.1.200
+    host: !secret server_local_ip
     count: 4
     scan_interval: 60
 
@@ -160,7 +160,13 @@ automation:
         data_template:
           message: >
             ({{states('sensor.date_time_iso')}})
-            Hass IO have just started
+            {% if states("sensor.local_ip") == "192.168.1.101" %}
+            HassIO have just started
+            {% elif states("sensor.local_ip") == "192.168.1.102" %}
+            HassDEV have just started
+            {% else %}
+            Unknown Hass have just started
+            {% endif %}
           title: Hass IO
           data:
             tag: 'hass-os-notify'

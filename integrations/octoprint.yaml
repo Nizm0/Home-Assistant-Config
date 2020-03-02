@@ -16,3 +16,11 @@ automation:
         message: ({{states('sensor.date_time_iso')}}) Printer just finished his work
         title: Printing finished
       service: notify.push_to_chrome_nizm0_oneplus3
+    - delay: 0:10
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.ender_3_printing
+          state: 'off'
+    - service: switch.turn_off
+      entity_id: switch.ender_3_switch

@@ -1,0 +1,3 @@
+platform: ffmpeg
+name: SONOFF GK-200MP2-B rtsp
+input: !secret camera_sonof_1_rtsp

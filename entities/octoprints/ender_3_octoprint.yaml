@@ -1,4 +1,4 @@
-host: '192.168.1.103'
+host: !secret octoprint_local_ip # octopi.local #
 api_key: !secret octoprint_api_key
 name: Ender 3
 number_of_tools: 1

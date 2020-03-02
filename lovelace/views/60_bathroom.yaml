@@ -9,18 +9,21 @@ cards:
         cards:
           - type: entity-button
             entity: light.bathroom_top_light
+            state_color: true
             hold_action:
               action: more-info
             tap_action:
               action: toggle
           - type: entity-button
             entity: binary_sensor.bathroom_motion_sensor
+            state_color: true
             hold_action:
               action: none
             tap_action:
               action: more-info
           - type: entity-button
             entity: binary_sensor.washer_vibration
+            state_color: true
             hold_action:
               action: none
             tap_action:
@@ -29,18 +32,21 @@ cards:
         cards:
           - type: entity-button
             entity: binary_sensor.bathroom_water_leak
+            state_color: true
             hold_action:
               action: none
             tap_action:
               action: more-info
           - type: entity-button
             entity: sensor.bathroom_illumination
+            state_color: true
             hold_action:
               action: none
             tap_action:
               action: more-info
           - type: entity-button
             entity: binary_sensor.taking_bath
+            state_color: true
             hold_action:
               action: none
             tap_action:

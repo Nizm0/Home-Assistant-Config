@@ -1,0 +1,33 @@
+logger:
+  default: warning
+  logs:
+    # Log level for TOMATO
+    homeassistant.components.tomato: critical
+
+    # Log level from STEAM
+    homeassistant.components.steam_online: critical
+
+    # # log level for HA core
+    # homeassistant.core: fatal
+
+    # # log level for MQTT integration
+    # homeassistant.components.mqtt: warning
+
+    # # log level for all python scripts
+    # homeassistant.components.python_script: warning
+
+    # # individual log level for this python script
+    # homeassistant.components.python_script.my_new_script.py: debug
+
+    # # log level for SmartThings lights
+    # homeassistant.components.smartthings.light: info
+
+    # # log level for a custom component
+    # custom_components.my_integration: debug
+
+    # # log level for the `aiohttp` Python package
+    # aiohttp: error
+
+    # # log level for both 'glances_api' and 'glances' integration
+    # homeassistant.components.glances: fatal
+    # glances_api: fatal

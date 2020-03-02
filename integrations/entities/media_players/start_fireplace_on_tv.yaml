@@ -9,7 +9,7 @@ automation:
           event: 1002
     action:
       - data:
-          media_content_id: https://www.youtube.com/watch?v=RDfjXj5EGqI
+          media_content_id: https://www.youtube.com/watch?v=Ux8xAuQBdkk
           media_content_type: video/youtube
         entity_id:
           - media_player.living_room_tv_cast

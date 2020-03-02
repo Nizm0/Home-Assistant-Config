@@ -7,18 +7,20 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: light.kids_top_light
+          - type: entity-button
+            entity: light.kids_top_light
+            state_color: true
             hold_action:
               action: more-info
             tap_action:
               action: toggle
-            type: entity-button
-          - entity: binary_sensor.kids_motion_sensor
+          - type: entity-button
+            entity: binary_sensor.kids_motion_sensor
+            state_color: true
             hold_action:
               action: none
             tap_action:
               action: more-info
-            type: entity-button
       - type: horizontal-stack
         cards:
           - type: custom:mini-graph-card

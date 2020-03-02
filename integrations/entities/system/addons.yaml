@@ -6,11 +6,11 @@ switch:
         turn_on:
           service: hassio.addon_start
           data:
-            addon: a0d7b954_appdaemon3
+            addon: a0d7b954_appdaemon
         turn_off:
           service: hassio.addon_stop
           data:
-            addon: a0d7b954_appdaemon3
+            addon: a0d7b954_appdaemon
 
 sensor:
   - platform: rest

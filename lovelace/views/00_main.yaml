@@ -2,7 +2,7 @@ badges: []
 title: New main page
 icon: "mdi:information-outline"
 cards:
-  - type: "custom:vertical-stack-in-card"
+  - type: custom:vertical-stack-in-card
     cards:
       - type: horizontal-stack
         cards:
@@ -20,18 +20,38 @@ cards:
           #   show_name: false
           #   tap_action:
           #     action: more-info
-          - type: picture-entity
+          - type: picture-glance
             entity: person.nizm0
             image: /local/images/home/michal.jpg
-            show_name: false
+            # show_name: false
             tap_action:
               action: more-info
-          - type: picture-entity
+            entities: 
+              - entity: person.nizm0
+                show_state: true
+              - entity: sensor.oneplus3_battery_level
+                show_state: true
+              - entity: sensor.oneplus3_wifi_connection
+            state_filter:
+              "Home": brightness(100%) saturate(1.2)
+              "Work": brightness(50%) hue-rotate(45deg)
+              "not_home": brightness(50%)
+          - type: picture-glance
             entity: person.gosia
             image: /local/images/home/gosia.jpg
             show_name: false
             tap_action:
               action: more-info
+            entities: 
+              - entity: person.gosia
+                show_state: true
+              - entity: sensor.samsung_battery_level
+                show_state: true
+              - entity: sensor.samsung_wifi_connection
+            state_filter:
+              "Home": brightness(100%) saturate(1.2)
+              "GP": brightness(50%) hue-rotate(45deg)
+              "not_home": brightness(50%)
       - type: horizontal-stack
         cards:
           - type: picture-entity
@@ -40,7 +60,7 @@ cards:
               action: more-info
             hold_action:
               action: call-service
-              service: switch.toggle
+              service: vacuum.start
               service_data:
                 entity_id: vacuum.rockrobo
             show_icon: true
@@ -56,9 +76,9 @@ cards:
             entity: input_boolean.ready_to_vacuum
             tap_action:
               action: more-info
-            hold_action:
-              action: toggle
             double_tap_action:
+              action: toggle
+            hold_action:
               action: call-service
               service: input_number.set_value
               service_data:
@@ -80,7 +100,7 @@ cards:
         #   sensor: Sensors
         #   side_brush: Side Brush
         #   status: Status
-  - type: "custom:vertical-stack-in-card"
+  - type: custom:vertical-stack-in-card
     cards:
       - type: custom:air-visual-card
         air_pollution_level: sensor.u_s_air_pollution_level
@@ -88,11 +108,15 @@ cards:
         main_pollutant: sensor.u_s_main_pollutant
         temp: weather.dark_sky
         city: 'Home'
-      - type: custom:weather-card
-        entity: weather.dark_sky
-  - type: "custom:swipe-card"
+      - type: custom:swipe-card
+        cards:
+          - type: custom:weather-card
+            entity: weather.dark_sky
+          - type: custom:weather-card
+            entity: weather.home
+  - type: custom:swipe-card
     cards:
-      - type: "custom:mini-graph-card"
+      - type: custom:mini-graph-card
         title: Temperatures 48h
         animate: false
         entities:
@@ -111,13 +135,13 @@ cards:
         height: 100
         hour24: true
         hours_to_show: 48
-        location_icon: left
-        location_state: center
+        align_icon: left
+        align_state: center
         show:
           extrema: true
-          fill: false
+          fill: true
           title: true
-      - type: "custom:mini-graph-card"
+      - type: custom:mini-graph-card
         title: Humidity 48h
         animate: false
         entities:
@@ -129,13 +153,13 @@ cards:
         height: 100
         hour24: true
         hours_to_show: 48
-        location_icon: left
-        location_state: center
+        align_icon: left
+        align_state: center
         show:
           extrema: true
-          fill: false
+          fill: true
           title: true
-      - type: "custom:mini-graph-card"
+      - type: custom:mini-graph-card
         title: Prsure 48h
         animate: true
         entities:
@@ -147,15 +171,15 @@ cards:
         height: 100
         hour24: true
         hours_to_show: 48
-        location_icon: left
-        location_state: center
+        align_icon: left
+        align_state: center
         show:
           extrema: true
-          fill: false
+          fill: true
           title: true
-  - type: "custom:swipe-card"
+  - type: custom:swipe-card
     cards:
-      - type: "custom:vertical-stack-in-card"
+      - type: custom:vertical-stack-in-card
         title: Temperature
         cards:
           - type: horizontal-stack
@@ -171,8 +195,6 @@ cards:
                   yellow: 25
                 theme: default
               - type: custom:gap-card
-          - type: horizontal-stack
-            cards:
               - entity: sensor.bedroom_temperature
                 type: gauge
                 max: 40
@@ -183,6 +205,8 @@ cards:
                   red: 30
                   yellow: 25
                 theme: default
+          - type: horizontal-stack
+            cards:
               - entity: sensor.kids_temperature
                 type: gauge
                 name: Kids
@@ -194,8 +218,8 @@ cards:
                   green: 19
                   red: 30
                   yellow: 25
-          - type: horizontal-stack
-            cards:
+          # - type: horizontal-stack
+          #   cards:
               - entity: sensor.kitchen_temperature
                 type: gauge
                 name: Kitchen
@@ -218,7 +242,7 @@ cards:
                   green: 18
                   red: 30
                   yellow: 25
-      - type: "custom:vertical-stack-in-card"
+      - type: custom:vertical-stack-in-card
         title: Humidity
         cards:
           - type: horizontal-stack
@@ -234,8 +258,6 @@ cards:
                   yellow: 50
                 theme: default
               - type: custom:gap-card
-          - type: horizontal-stack
-            cards:
               - type: gauge
                 entity: sensor.bedroom_humidity
                 max: 100
@@ -246,6 +268,8 @@ cards:
                   red: 60
                   yellow: 50
                 theme: default
+          - type: horizontal-stack
+            cards:
               - type: gauge
                 entity: sensor.kids_humidity
                 max: 100
@@ -257,8 +281,8 @@ cards:
                   yellow: 50
                 theme: default
                 unit: "%"
-          - type: horizontal-stack
-            cards:
+          # - type: horizontal-stack
+          #   cards:
               - entity: sensor.kitchen_humidity
                 type: gauge
                 max: 100
