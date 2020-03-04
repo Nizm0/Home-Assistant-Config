@@ -26,7 +26,7 @@ cards:
             # show_name: false
             tap_action:
               action: more-info
-            entities: 
+            entities:
               - entity: person.nizm0
                 show_state: true
               - entity: sensor.oneplus3_battery_level
@@ -114,69 +114,6 @@ cards:
             entity: weather.dark_sky
           - type: custom:weather-card
             entity: weather.home
-  - type: custom:swipe-card
-    cards:
-      - type: custom:mini-graph-card
-        title: Temperatures 48h
-        animate: false
-        entities:
-          - sensor.living_room_temperature
-          - sensor.bedroom_temperature
-          - sensor.kids_temperature
-          - sensor.kitchen_temperature
-          - sensor.bathroom_temperature
-          # - color: gray
-          #   entity: sun.sun
-          #   name: Night
-          #   show_line: false
-          #   show_points: false
-          #   show_legend: false
-          #   y_axis: secondary
-        height: 100
-        hour24: true
-        hours_to_show: 48
-        align_icon: left
-        align_state: center
-        show:
-          extrema: true
-          fill: true
-          title: true
-      - type: custom:mini-graph-card
-        title: Humidity 48h
-        animate: false
-        entities:
-          - sensor.living_room_humidity
-          - sensor.bedroom_humidity
-          - sensor.kids_humidity
-          - sensor.kitchen_humidity
-          - sensor.bathroom_humidity
-        height: 100
-        hour24: true
-        hours_to_show: 48
-        align_icon: left
-        align_state: center
-        show:
-          extrema: true
-          fill: true
-          title: true
-      - type: custom:mini-graph-card
-        title: Prsure 48h
-        animate: true
-        entities:
-          - sensor.living_room_pressure
-          - sensor.bedroom_pressure
-          - sensor.kids_pressure
-          - sensor.kitchen_pressure
-          - sensor.bathroom_pressure
-        height: 100
-        hour24: true
-        hours_to_show: 48
-        align_icon: left
-        align_state: center
-        show:
-          extrema: true
-          fill: true
-          title: true
   - type: custom:swipe-card
     cards:
       - type: custom:vertical-stack-in-card
@@ -353,3 +290,21 @@ cards:
   #   type: picture-entity
   #   state_filter:
   #     - null
+  - type: glance
+    title: Worldwide
+    show_icon: true
+    show_name: true
+    show_state: true
+    entities:
+      - entity: sensor.worldwide_coronavirus_confirmed
+        icon: 'mdi:emoticon-neutral-outline'
+        name: Confirmed
+      - entity: sensor.worldwide_coronavirus_current
+        icon: 'mdi:emoticon-frown-outline'
+        name: Current
+      - entity: sensor.worldwide_coronavirus_recovered
+        icon: 'mdi:emoticon-happy-outline'
+        name: Recovered
+      - entity: sensor.worldwide_coronavirus_deaths
+        icon: 'mdi:emoticon-dead-outline'
+        name: Deaths

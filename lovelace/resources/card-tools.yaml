@@ -1,2 +1,2 @@
-type: js
-url: /community_plugin/lovelace-card-tools/card-tools.js
+url: /hacsfiles/lovelace-card-tools/card-tools.js
+type: module

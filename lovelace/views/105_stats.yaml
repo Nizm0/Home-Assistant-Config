@@ -11,44 +11,112 @@ cards:
   #   show_header_toggle: false
   #   title: Travis status
   #   type: entities
+  - type: custom:swipe-card
+    cards:
+      - type: custom:mini-graph-card
+        title: Temperatures 48h
+        animate: false
+        entities:
+          - sensor.living_room_temperature
+          - sensor.bedroom_temperature
+          - sensor.kids_temperature
+          - sensor.kitchen_temperature
+          - sensor.bathroom_temperature
+          # - color: gray
+          #   entity: sun.sun
+          #   name: Night
+          #   show_line: false
+          #   show_points: false
+          #   show_legend: false
+          #   y_axis: secondary
+        height: 100
+        hour24: true
+        hours_to_show: 48
+        align_icon: left
+        align_state: center
+        show:
+          extrema: true
+          fill: true
+          title: true
+      - type: history-graph
+        title: Temperature in rooms
+        entities:
+          - sensor.bedroom_temperature
+          - sensor.living_room_temperature
+          - sensor.kitchen_temperature
+          - sensor.bathroom_temperature
+          - sensor.kids_temperature
+        hours_to_show: 120
+        refresh_interval: 60
+  - type: custom:swipe-card
+    cards:
+      - type: custom:mini-graph-card
+        title: Humidity 48h
+        animate: false
+        entities:
+          - sensor.living_room_humidity
+          - sensor.bedroom_humidity
+          - sensor.kids_humidity
+          - sensor.kitchen_humidity
+          - sensor.bathroom_humidity
+        height: 100
+        hour24: true
+        hours_to_show: 48
+        align_icon: left
+        align_state: center
+        show:
+          extrema: true
+          fill: true
+          title: true
+      - type: history-graph
+        title: Humidity in rooms
+        entities:
+          - sensor.bedroom_humidity
+          - sensor.living_room_humidity
+          - sensor.kitchen_humidity
+          - sensor.bathroom_humidity
+          - sensor.kids_humidity
+        hours_to_show: 120
+        refresh_interval: 60
+  - type: custom:swipe-card
+    cards:
+      - type: custom:mini-graph-card
+        title: Prsure 48h
+        animate: true
+        entities:
+          - sensor.living_room_pressure
+          - sensor.bedroom_pressure
+          - sensor.kids_pressure
+          - sensor.kitchen_pressure
+          - sensor.bathroom_pressure
+        height: 100
+        hour24: true
+        hours_to_show: 48
+        align_icon: left
+        align_state: center
+        show:
+          extrema: true
+          fill: true
+          title: true
+      - type: history-graph
+        title: Presure in rooms
+        entities:
+          - sensor.bedroom_pressure
+          - sensor.living_room_pressure
+          - sensor.kitchen_pressure
+          - sensor.bathroom_pressure
+          - sensor.kids_pressure
+        hours_to_show: 120
+        refresh_interval: 60
   - type: history-graph
-    entities:
-      - sensor.bedroom_temperature
-      - sensor.living_room_temperature
-      - sensor.kitchen_temperature
-      - sensor.bathroom_temperature
-      - sensor.kids_temperature
-    hours_to_show: 120
-    refresh_interval: 60
-    title: Temperature in rooms
-  - type: history-graph
-    entities:
-      - sensor.bedroom_humidity
-      - sensor.living_room_humidity
-      - sensor.kitchen_humidity
-      - sensor.bathroom_humidity
-      - sensor.kids_humidity
-    hours_to_show: 120
-    refresh_interval: 60
-    title: Humidity in rooms
-  - type: history-graph
-    entities:
-      - sensor.bedroom_pressure
-      - sensor.living_room_pressure
-      - sensor.kitchen_pressure
-      - sensor.bathroom_pressure
-      - sensor.kids_pressure
-    hours_to_show: 120
-    refresh_interval: 60
-    title: Presure in rooms
-  - type: history-graph
+    title: Dors in home
     entities:
       - binary_sensor.home_door_sensor
       - binary_sensor.living_room_balcon_window_sensor
     hours_to_show: 24
     refresh_interval: 0
-    title: Dors in home
   - type: history-graph
+    title: Motions in home
     entities:
       - sensor.template_last_motion
       - binary_sensor.hallway_motion_sensor
@@ -60,14 +128,13 @@ cards:
       - script.create_group_all_motion_sensors
     hours_to_show: 24
     refresh_interval: 0
-    title: Motions in home
   - type: history-graph
+    title: Windows in home
     entities:
-          - entity: binary_sensor.living_room_balcony_window_sensor
-          - entity: binary_sensor.kitchen_left_window_sensor
+      - entity: binary_sensor.living_room_balcony_window_sensor
+      - entity: binary_sensor.kitchen_left_window_sensor
     hours_to_show: 24
     refresh_interval: 0
-    title: Windows in home
   - type: custom:auto-entities
     card:
       title: Tured off Automations

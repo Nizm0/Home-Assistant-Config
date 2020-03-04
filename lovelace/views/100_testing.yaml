@@ -111,7 +111,7 @@ cards:
         title: Octoprint Ender 3
         show_header_toggle: false
         entities:
-          - type: "custom:restriction-card"
+          - type: custom:restriction-card
             card:
               entity: switch.ender_3_switch
             restrictions:
@@ -124,21 +124,26 @@ cards:
               #     - user: Nizm0
             row: true
             action: double_tap
-          - entity: sensor.shelly_shsw_pm_608c82_current_consumption
-          - entity: sensor.shelly_shsw_pm_608c82_total_consumption_attr
-          - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
-          - entity: binary_sensor.ender_3_printing
-          - entity: binary_sensor.ender_3_printing_error
-          - entity: sensor.ender_3_target_bed_temp
-          - entity: sensor.ender_3_actual_bed_temp
-          - entity: sensor.ender_3_target_tool0_temp
-          - entity: sensor.ender_3_actual_tool0_temp
-          - entity: sensor.ender_3_current_state
-          - entity: sensor.ender_3_job_percentage
-          - entity: sensor.ender_3_time_elapsed
-          - entity: sensor.ender_3_time_remaining
-          - entity: sensor.predicted_print_end_time
-  - type: "custom:vertical-stack-in-card"
+          - type: custom:fold-entity-row
+            head: 
+              type: section
+              label: Ender 3
+            entities:
+              - entity: sensor.shelly_shsw_pm_608c82_current_consumption
+              - entity: sensor.shelly_shsw_pm_608c82_total_consumption_attr
+              - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
+              - entity: binary_sensor.ender_3_printing
+              - entity: binary_sensor.ender_3_printing_error
+              - entity: sensor.ender_3_target_bed_temp
+              - entity: sensor.ender_3_actual_bed_temp
+              - entity: sensor.ender_3_target_tool0_temp
+              - entity: sensor.ender_3_actual_tool0_temp
+              - entity: sensor.ender_3_current_state
+              - entity: sensor.ender_3_job_percentage
+              - entity: sensor.ender_3_time_elapsed
+              - entity: sensor.ender_3_time_remaining
+              - entity: sensor.predicted_print_end_time
+  - type: custom:vertical-stack-in-card
     cards:
       - type: custom:auto-entities
         card:
@@ -186,7 +191,7 @@ cards:
                 battery_level: "<=100"
             - attributes:
                 battery: "<=100"
-  - type: "custom:browser-player"
+  - type: custom:browser-player
   # - type: "custom:html-card"
   #   title: Rozkładzik
   #   content: |
@@ -229,11 +234,11 @@ cards:
   #   title: AddGuard
   #   type: entities
 
-  - type: "custom:home-feed-card"
+  - type: custom:home-feed-card
     entities:
       - content_template: "Update available for {{display_name}} to {{available version}}"
         entity: sensor.hacs
-        icon: "mdi:update"
+        icon: mdi:update
         list_attribute: repositories
         multiple_items: true
     id_filter: ^home_feed_.*
@@ -246,7 +251,7 @@ cards:
       type: custom:flex-table-card
       title: today
       entities:
-        include: sensor.w_alert
+        include: sensor.alert
       columns:
         - attr_as_list: today
           modify: x.code.concat(' ', x.event)
@@ -265,7 +270,7 @@ cards:
       type: custom:flex-table-card
       title: tomorrow
       entities:
-        include: sensor.w_alert
+        include: sensor.alert
       columns:
         - attr_as_list: tomorrow
           modify: x.code.concat(' ', x.event)
@@ -276,3 +281,8 @@ cards:
         - attr_as_list: tomorrow
           modify: x.end
           name: expire
+  - type: custom:mini-media-player
+    entity: media_player.gmusic_player
+    artwork: cover
+    artwork_border: true
+    show_source: true

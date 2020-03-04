@@ -1,2 +1,2 @@
-type: js
-url: /community_plugin/html_card/html-card.js
+url: /hacsfiles/lovelace-html-card/html-card.js
+type: module
