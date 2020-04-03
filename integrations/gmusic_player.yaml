@@ -29,6 +29,8 @@ input_select:
 
 script:
   gmusic_sync_media:
+    # friendly_name: "Sync Music"
+    icon: mdi:sync
     alias: gmusic_player.sync_media
     description: 'Update song list from Google Music'
     sequence:
@@ -102,14 +104,14 @@ homeassistant:
 
     sensor.gmusic_receiver:
       friendly_name: "Google Music Receiver"
-      hidden: true
+      # hidden: true
 
     script.gmusic_sync_media:
       friendly_name: "Sync Music"
-      icon: mdi:sync
+    #   # icon: mdi:sync
       
-    script.gmusic_play_media:
-      hidden: true
+    # script.gmusic_play_media:
+    #   # hidden: true
       
 ## This group may only be visable when using the "states UI"
 # group:

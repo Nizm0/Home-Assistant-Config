@@ -46,9 +46,9 @@ sensor:
   #     - last_build_duration
   #     - state
 
-  - platform: cert_expiry
-    host: has.nizmo.eu
-    name: LetsEncrypt
+  # - platform: cert_expiry
+  #   host: has.nizmo.eu
+  #   name: LetsEncrypt
 
   - platform: systemmonitor
     resources:
@@ -62,6 +62,8 @@ sensor:
   - platform: uptime
     name: HassOS Uptime
     unit_of_measurement: hours
+  
+  - platform: websocket_api
 
 proxmoxve:
   - host: !secret proxmox_local_ip

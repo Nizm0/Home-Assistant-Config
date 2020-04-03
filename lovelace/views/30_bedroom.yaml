@@ -1,5 +1,6 @@
 icon: "mdi:bed-empty"
 id: 2
+path: bedroom
 title: Bedroom
 cards:
   - type: "custom:vertical-stack-in-card"

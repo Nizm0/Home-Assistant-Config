@@ -1,0 +1,303 @@
+title: Tab
+icon: mdi:monitor-dashboard
+panel: true
+# background: "right/auto linear-gradient(23deg, rgba(211,211,211,1) 0%, rgba(223,223,223,1) 34%, rgba(255,255,255,1) 100%)"
+path: nest-dash
+cards:
+  - type: vertical-stack
+    cards:
+      - type: custom:nest-layout-card
+        layout: horizontal
+        max_width: [500px, 100%]
+        column_num: 2
+        max_columns: 2
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                cards:
+                  - type: custom:button-card
+                    template: nest_picture_button
+                    entity: person.nizm0
+                    # entity_picture: !secret stefan_image
+                  # - type: custom:decluttering-card
+                  #   template: nest_button
+                  #   variables:
+                  #     - entity: alarm_control_panel.house
+                  #     - state:
+                  #         - value: 'armed_away'
+                  #           icon: mdi:shield-lock
+                  #           color: rgb(152,251,152)
+                  #         - value: 'armed_home'
+                  #           icon: mdi:shield-home
+                  #           color: rgb(251, 210, 41)
+                  #         - value: 'triggered'
+                  #           icon: mdi:shield-alert
+                  #           color: rgb(255, 0, 0)
+                  #           styles:
+                  #             icon:
+                  #               - animation: blink 2s ease infinite
+                  #         - value: 'disarmed'
+                  #           icon: mdi:shield-off
+                  #           color: rgb(169,169,169)
+                  #         - value: 'pending'
+                  #           icon: mdi:shield-half-full
+                  #           color: rgb(169,169,169)
+                  #           styles:
+                  #             icon:
+                  #               - animation: blink 2s ease infinite
+                  - type: custom:button-card
+                    template: nest_picture_button
+                    entity: person.gosia
+                    # entity_picture: !secret isa_image
+                    # styles:
+                    #   grid:
+                    #     - position: relative
+                    #   custom_fields:
+                    #     notification:
+                    #       - background-color: >
+                    #           [[[
+                    #             if (states['sensor.isabellas_iphone_x_battery_level'].state > 50)
+                    #               return "#87c087";
+                    #             return "#FF8000";
+                    #           ]]]
+                    #       - border-radius: 50%
+                    #       - position: absolute
+                    #       - left: 60%
+                    #       - top: 0
+                    #       - height: 20px
+                    #       - width: 20px
+                    #       - font-size: 8px
+                    #       - line-height: 20px
+                    #       - color: white
+                    # custom_fields:
+                    #   notification: >
+                    #     [[[ return states['sensor.isabellas_iphone_x_battery_level'].state ]]]
+              - type: markdown
+                content: >
+                    # [[ sensor.time.state ]]
+                    
+                    ### [[ sensor.date.state ]]
+                style: |
+                  ha-card {
+                    margin-top: 50px;
+                    # margin-bottom: 330px;
+                    background-color: rgba(0, 0, 0, 0);
+                    font-family: 'Open Sans', sans-serif;
+                    font-size: 200%;
+                    -webkit-box-shadow: none;
+                    -moz-box-shadow: none;
+                    box-shadow: none;
+                    text-align: center;
+                  }
+                  h1, h3 {
+                    font-weight: 300 !important;
+                  }
+              # - type: custom:mod-card
+              #   style: |
+              #     ha-card {
+              #       height: 300px;
+              #       overflow: hidden;
+              #       font-size: !important 150%;
+              #     }
+              #   card:
+              #     !include notifications/dashboard_notifications.yaml
+
+              - type: custom:weather-card
+                entity: weather.dark_sky
+          - type: vertical-stack
+            cards: 
+              - type: horizontal-stack
+                cards:
+                  - type: custom:vertical-stack-in-card
+                    cards:
+                      - type: horizontal-stack
+                        cards:
+                          - type: picture-entity
+                            entity: vacuum.rockrobo
+                            tap_action:
+                              action: more-info
+                            hold_action:
+                              action: call-service
+                              service: vacuum.start
+                              service_data:
+                                entity_id: vacuum.rockrobo
+                            show_icon: true
+                            show_name: true
+                            state_image:
+                              cleaning: /local/images/vacuum.jpeg
+                              docked: /local/images/vacuum_docked_gray.jpeg
+                              error: /local/images/vacuum_dark.jpeg
+                              idle: /local/images/vacuum_dark.jpeg
+                              paused: /local/images/vacuum_dark.jpeg
+                              returning: /local/images/vacuum.jpeg
+                          - type: picture-entity
+                            entity: input_boolean.ready_to_vacuum
+                            double_tap_action:
+                              action: more-info
+                            tap_action:
+                              action: toggle
+                            hold_action:
+                              action: call-service
+                              service: input_number.set_value
+                              service_data:
+                                entity_id: input_number.vacuum_cleaned_area
+                                value: 0
+                            state_image:
+                              "off": /local/images/vacuum_dark.jpeg
+                              "on": /local/images/vacuum.jpeg
+                      - type: custom:xiaomi-vacuum-card
+                        entity: vacuum.rockrobo
+                        name: false
+                        # buttons: true
+                        image: local/images/vacuum_small.png
+                        # labels:
+                        #   battery: Battery
+                        #   filter: Filter
+                        #   main_brush: Main Brush
+                        #   mode: Mode
+                        #   sensor: Sensors
+                        #   side_brush: Side Brush
+                        #   status: Status
+                  - type: custom:vertical-stack-in-card
+                    cards:
+                      - type: custom:air-visual-card
+                        air_pollution_level: sensor.u_s_air_pollution_level
+                        air_quality_index: sensor.u_s_air_quality_index
+                        main_pollutant: sensor.u_s_main_pollutant
+                        temp: weather.dark_sky
+                        city: "Home"
+                      - type: custom:swipe-card
+                        cards:
+                          - type: custom:weather-card
+                            entity: weather.dark_sky
+                          - type: custom:weather-card
+                            entity: weather.home
+                      - type: custom:swipe-card
+                        cards:
+                          - type: custom:vertical-stack-in-card
+                            # title: Temperature
+                            cards:
+                              - type: horizontal-stack
+                                cards:
+                                  - entity: sensor.living_room_temperature
+                                    type: gauge
+                                    name: Living room
+                                    max: 40
+                                    min: 0
+                                    severity:
+                                      green: 18
+                                      red: 30
+                                      yellow: 25
+                                    theme: default
+                                  - type: custom:gap-card
+                                  - entity: sensor.bedroom_temperature
+                                    type: gauge
+                                    max: 40
+                                    min: 0
+                                    name: Bedroom
+                                    severity:
+                                      green: 18
+                                      red: 30
+                                      yellow: 25
+                                    theme: default
+                              - type: horizontal-stack
+                                cards:
+                                  - entity: sensor.kids_temperature
+                                    type: gauge
+                                    name: Kids
+                                    theme: default
+                                    unit: C
+                                    max: 40
+                                    min: 0
+                                    severity:
+                                      green: 19
+                                      red: 30
+                                      yellow: 25
+                                  # - type: horizontal-stack
+                                  #   cards:
+                                  - entity: sensor.kitchen_temperature
+                                    type: gauge
+                                    name: Kitchen
+                                    max: 40
+                                    min: 0
+                                    severity:
+                                      green: 18
+                                      red: 30
+                                      yellow: 25
+                                    theme: default
+                                    unit: C
+                                  - type: gauge
+                                    entity: sensor.bathroom_temperature
+                                    theme: default
+                                    unit: C
+                                    max: 40
+                                    min: 0
+                                    name: Bathroom
+                                    severity:
+                                      green: 18
+                                      red: 30
+                                      yellow: 25
+                              - type: custom:vertical-stack-in-card
+                                # title: Humidity
+                                cards:
+                                  - type: horizontal-stack
+                                    cards:
+                                      - entity: sensor.living_room_humidity
+                                        type: gauge
+                                        max: 100
+                                        min: 0
+                                        name: Living room
+                                        severity:
+                                          green: 30
+                                          red: 60
+                                          yellow: 50
+                                        theme: default
+                                      - type: custom:gap-card
+                                      - type: gauge
+                                        entity: sensor.bedroom_humidity
+                                        max: 100
+                                        min: 0
+                                        name: Bedroom
+                                        severity:
+                                          green: 30
+                                          red: 60
+                                          yellow: 50
+                                        theme: default
+                                  - type: horizontal-stack
+                                    cards:
+                                      - type: gauge
+                                        entity: sensor.kids_humidity
+                                        max: 100
+                                        min: 0
+                                        name: Kids
+                                        severity:
+                                          green: 30
+                                          red: 60
+                                          yellow: 50
+                                        theme: default
+                                        unit: "%"
+                                      # - type: horizontal-stack
+                                      #   cards:
+                                      - entity: sensor.kitchen_humidity
+                                        type: gauge
+                                        max: 100
+                                        min: 0
+                                        name: kitchen
+                                        severity:
+                                          green: 30
+                                          red: 60
+                                          yellow: 50
+                                        theme: default
+                                        unit: "%"
+                                      - entity: sensor.bathroom_humidity
+                                        type: gauge
+                                        theme: default
+                                        unit: "%"
+                                        max: 100
+                                        min: 0
+                                        name: Bathroom
+                                        severity:
+                                          green: 30
+                                          red: 60
+                                          yellow: 50

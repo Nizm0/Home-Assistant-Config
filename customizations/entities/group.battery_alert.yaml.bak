@@ -1,4 +1,0 @@
-group.battery_alert:
-  <<: *customize
-  friendly_name: "Battery Alert"
-  icon: mdi:steam

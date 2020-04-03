@@ -14,5 +14,5 @@ automation:
     #     lookback: 2
     - service: camera.snapshot
       data_template:
-        entity_id: camera.sonoff_gk_200mp2_b
+        entity_id: camera.sonoff_gk_200mp2_b_rtsp
         filename: /config/www/records/snapshot_{{ entity_id }}.jpg

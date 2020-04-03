@@ -1,5 +1,6 @@
 icon: "mdi:human-child"
 id: 5
+path: kids
 title: Kids room
 cards:
   - type: "custom:vertical-stack-in-card"

@@ -1,6 +1,7 @@
 title: Family
 icon: "mdi:home-heart"
 id: 7
+path: family
 cards:
   - entities:
       - entity: group.family
@@ -16,6 +17,10 @@ cards:
       - entity: device_tracker.google_maps_109218123589188227395
         secondary_info: last-changed
       - entity: device_tracker.gosia_galaxy_s9
+        secondary_info: last-changed
+      - entity: device_tracker.sm_g965f
+        secondary_info: last-changed
+      - entity: device_tracker.oneplus_a3003
         secondary_info: last-changed
       - entity: input_select.home_preset
         secondary_info: last-changed
@@ -79,11 +84,11 @@ cards:
       - Home
   - entities:
       - entity: sensor.nizm0_ariela_alarm_sensor
-      - entity: sensor.galaxy_s9_alarm_sensor
+      # - entity: sensor.galaxy_s9_alarm_sensor
     type: entities
   - entities:
       - entity: sensor.nizm0_ariela_alarm_sensor
-      - entity: sensor.galaxy_s9_alarm_sensor
+      # - entity: sensor.galaxy_s9_alarm_sensor
     hours_to_show: 120
     refresh_interval: 60
     title: Family tracking

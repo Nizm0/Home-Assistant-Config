@@ -1,3 +1,0 @@
-automation.battery_alert:
-  <<: *customize
-  friendly_name: "Battery Alert"

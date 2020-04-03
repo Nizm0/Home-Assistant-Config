@@ -1,5 +1,6 @@
 icon: "mdi:stairs"
 id: 6
+path: hallway
 title: Hallway
 cards:
   - type: "custom:vertical-stack-in-card"

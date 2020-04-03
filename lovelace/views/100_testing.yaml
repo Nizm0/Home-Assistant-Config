@@ -10,6 +10,7 @@ badges:
   - sensor.average_house_humidity
   - sensor.max_temperature_in_home
   - sensor.max_recorded_temp
+path: testing-area
 title: Testing area
 icon: mdi:test-tube
 theme: darked
@@ -76,31 +77,46 @@ cards:
     title: Vibration
   - type: custom:vertical-stack-in-card
     cards:
-      - entity: camera.ender_3
-        show_state: false
-        type: picture-entity
-      - type: custom:mini-graph-card
-        points_per_hour: 5
-        height: 100
-        update_interval: 5
-        # show_legend: false
-        entities:
-          - entity: sensor.ender_3_target_bed_temp
-          - entity: sensor.ender_3_actual_bed_temp
-          - entity: sensor.ender_3_target_tool0_temp
-          - entity: sensor.ender_3_actual_tool0_temp
-        hour24: true
-        hours_to_show: 12
-        show:
-          extrema: false
-          fill: true
-          name: false
-          state: false
-          icon: false
-          points: false
-          labels: true
-          labels_secondary: true
-          legend: false
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.ender_3_printing
+            state: on
+          # - entity: binary_sensor.ender_3_printing_error
+          #   state: on
+        card:
+          - entity: camera.ender_3
+            show_state: false
+            type: picture-entity
+      
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.ender_3_printing
+            state: on
+          # - entity: binary_sensor.ender_3_printing_error
+          #   state: on
+        card:
+          - type: custom:mini-graph-card
+            points_per_hour: 5
+            height: 100
+            update_interval: 5
+            # show_legend: false
+            entities:
+              - entity: sensor.ender_3_target_bed_temp
+              - entity: sensor.ender_3_actual_bed_temp
+              - entity: sensor.ender_3_target_tool0_temp
+              - entity: sensor.ender_3_actual_tool0_temp
+            hour24: true
+            hours_to_show: 12
+            show:
+              extrema: false
+              fill: true
+              name: false
+              state: false
+              icon: false
+              points: false
+              labels: true
+              labels_secondary: true
+              legend: false
       # - type: history-graph
       #   entities:
       #     - sensor.ender_3_target_bed_temp
@@ -281,8 +297,18 @@ cards:
         - attr_as_list: tomorrow
           modify: x.end
           name: expire
-  - type: custom:mini-media-player
-    entity: media_player.gmusic_player
-    artwork: cover
-    artwork_border: true
-    show_source: true
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:mini-media-player
+        entity: media_player.gmusic_player
+        artwork: cover
+        artwork_border: true
+        show_source: true
+
+
+      - type: entities
+        entities:
+          - entity: input_select.gmusic_player_source
+          - entity: input_select.gmusic_player_playlist
+          - entity: input_select.gmusic_player_station
+          - entity: input_select.gmusic_player_speakers

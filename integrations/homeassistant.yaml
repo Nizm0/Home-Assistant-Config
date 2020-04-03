@@ -16,3 +16,17 @@ homeassistant:
   customize_glob: !include_dir_merge_named ../customizations/globs
 
   # packages: !include_dir_named ../packages
+  
+  # whitelist_external_dirs:
+  #   - /config
+
+  # https://www.home-assistant.io/docs/authentication/providers/#trusted-networks
+  # auth_providers:
+  #   - type: trusted_networks
+  #     trusted_networks:
+  #       - 192.168.1.0/24
+  #       - 172.17.0.0/16
+  #       - 172.30.32.0/23
+  #       - 127.0.0.1
+  #       - fd00::/8
+  #   - type: homeassistant

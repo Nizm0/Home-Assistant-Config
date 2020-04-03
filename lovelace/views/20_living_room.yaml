@@ -1,260 +1,275 @@
 badges: []
 icon: mdi:sofa
 id: 1
+path: living-room
 title: Living room
+panel: true
 cards:
-  - type: custom:vertical-stack-in-card
+  - type: custom:layout-card
+    min_columns: 1
+    max_columns: 4
+    # layout: horizontal
     cards:
-      - type: horizontal-stack
+      - type: custom:vertical-stack-in-card
         cards:
-          - type: entity-button
-            state_color: true
-            entity: light.general_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-          - type: entity-button
-            state_color: true
-            entity: light.directional_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-          - type: entity-button
-            state_color: true
-            entity: light.top_light
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                state_color: true
+                entity: light.general_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+              - type: entity-button
+                state_color: true
+                entity: light.directional_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+              - type: entity-button
+                state_color: true
+                entity: light.top_light
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                icon: mdi:led-strip-variant
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                state_color: true
+                entity: light.tv_ambilights
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                icon: mdi:spotlight
+              - type: light
+                entity: light.living_room
+              - type: light
+                entity: light.desctop_lamp
+          - type: horizontal-stack
+            cards:
+              - type: entity-button
+                state_color: true
+                entity: binary_sensor.living_room_balcony_window_sensor
+                hold_action:
+                  action: more-info
+                # tap_action:
+                #   action: toggle
+              # - type: custom:gap-card
+              - type: entity-button
+                state_color: true
+                entity: light.christmas_tree
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                icon: mdi:pine-tree
+              - type: entity-button
+                state_color: true
+                entity: binary_sensor.living_room_motion_sensor
+                hold_action:
+                  action: more-info
+                # tap_action:
+                #   action: toggle
+          - type: horizontal-stack
+            cards:
+              - type: gauge
+                entity: sensor.living_room_temperature
+                max: 40
+                min: 0
+                name: Temperature
+                severity:
+                  green: 18
+                  red: 30
+                  yellow: 25
+                theme: default
+              - type: gauge
+                entity: sensor.living_room_humidity
+                max: 100
+                min: 0
+                name: Humidity
+                severity:
+                  green: 30
+                  red: 60
+                  yellow: 50
+                theme: default
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mini-media-player
+            artwork: cover
+            artwork_border: true
+            entity: media_player.living_room_speaker
+            show_source: true
+          - type: custom:mini-media-player
+            artwork: cover
+            artwork_border: true
+            entity: media_player.pc_gpmdp
+            show_source: true
+          - type: custom:mini-media-player
+            artwork: cover
+            artwork_border: true
+            entity: media_player.living_room_tv_cast
+            show_source: true
+          - type: custom:mini-media-player
+            artwork: cover
+            artwork_border: true
+            entity: media_player.philips_tv
+            show_source: true
+          - type: custom:mini-media-player
+            artwork: cover
+            artwork_border: true
+            entity: media_player.playstation_4
+            show_source: true
+          - type: custom:mini-media-player
+            artwork: cover
+            artwork_border: true
+            entity: media_player.chrome_home_pc
+            show_source: true
+      # - type: entities
+      #   entities:
+      #     - entity: media_player.living_room_speaker
+      #     - entity: media_player.pc_gpmdp
+      #     - entity: media_player.living_room_tv_cast
+      #     - entity: media_player.philips_tv
+      #     - entity: media_player.playstation_4
+      # - type: custom:mini-media-player
+      #   entity: media_player.playstation_4
+      #   # icon: mdi:spotify
+      #   artwork: cover
+      #   hide:
+      #     volume: true
+      #     source: true
+      #     power_state: false
+      - type: custom:mini-graph-card
+        title: Temperature
+        entities:
+          - sensor.living_room_temperature
+        color_thresholds:
+          - color: "#0000ff"
+            value: 15
+          - color: "#00ff00"
+            value: 21
+          - color: "#ffb347"
+            value: 26
+          - color: "#ff0000"
+            value: 30
+          - color: "#FF00FF"
+            value: 35
+        height: 75
+        hour24: true
+        hours_to_show: 48
+        line_color: var(--primary-color)
+        location_icon: left
+        location_state: center
+        show:
+          extrema: true
+          fill: fade
+      - type: custom:mini-graph-card
+        title: Humidity
+        entities:
+          - sensor.living_room_humidity
+        color_thresholds:
+          - color: "#00ff00"
+            value: 30
+          - color: "#ffb347"
+            value: 50
+          - color: "#ff0000"
+            value: 60
+        height: 75
+        hour24: true
+        hours_to_show: 48
+        line_color: var(--primary-color)
+        location_icon: left
+        location_state: center
+        show:
+          extrema: true
+          fill: fade
+      - type: sensor
+        detail: 2
+        entity: sensor.living_room_pressure
+        graph: line
+        name: Presure
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: plant-status
+                entity: plant.first_plant
+                name: First
+              - type: plant-status
+                entity: plant.second_plant
+                name: Second
+          - type: horizontal-stack
+            cards:
+              - type: plant-status
+                entity: plant.fourth_plant
+                name: Fourth
+              - type: plant-status
+                entity: plant.fifth_plant
+                name: Fifth
+          - type: horizontal-stack
+            cards:
+              - type: plant-status
+                entity: plant.sixth_plant
+                name: Sixth
+              - type: custom:gap-card
+      - type: custom:mini-graph-card
+        title: Temperature
+        # animate: true
+        color_thresholds:
+          - color: "#0000ff"
+            value: 17
+          - color: "#00ff00"
+            value: 22
+          - color: "#ffb347"
+            value: 26
+          - color: "#ff0000"
+            value: 30
+          - color: "#FF00FF"
+            value: 35
+        entities:
+          - sensor.miflora_temperature_4
+          - sensor.miflora_temperature_3
+        height: 75
+        hour24: true
+        hours_to_show: 48
+        line_color: var(--primary-color)
+        location_icon: left
+        location_state: center
+        show:
+          extrema: true
+          fill: fade
+      # - entity: camera.sonoff_gk_200mp2_b_rtsp
+      #   show_state: true
+      #   type: picture-entity
+      #   state_filter:
+      #     - null
+      # - entity: camera.sonoff_gk_200mp2_b_mjpg
+      #   show_state: true
+      #   type: picture-entity
+      #   state_filter:
+      #     - null
+      - type: picture-glance
+        camera_image: camera.reolink_camera_1
+        camera_view: live
+        entities:
+          - entity: binary_sensor.reolink_camera_1_motion
+          - entity: sensor.living_room_temperature
+            show_state: true
+          - entity: binary_sensor.living_room_balcony_window_sensor
+          - entity: light.directional_light
+          - entity: light.general_light
+          - entity: light.top_light
             icon: mdi:led-strip-variant
-      - type: horizontal-stack
-        cards:
-          - type: entity-button
-            state_color: true
-            entity: light.tv_ambilights
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            icon: mdi:spotlight
-          - type: custom:gap-card
-          - type: entity-button
-            state_color: true
-            entity: light.christmas_tree
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-            icon: mdi:pine-tree
-      - type: horizontal-stack
-        cards:
-          - type: entity-button
-            state_color: true
-            entity: binary_sensor.living_room_balcony_window_sensor
-            hold_action:
-              action: more-info
-            # tap_action:
-            #   action: toggle
-          - type: custom:gap-card
-          - type: entity-button
-            state_color: true
-            entity: binary_sensor.living_room_motion_sensor
-            hold_action:
-              action: more-info
-            # tap_action:
-            #   action: toggle
-      - type: horizontal-stack
-        cards:
-          - type: gauge
-            entity: sensor.living_room_temperature
-            max: 40
-            min: 0
-            name: Temperature
-            severity:
-              green: 18
-              red: 30
-              yellow: 25
-            theme: default
-          - type: gauge
-            entity: sensor.living_room_humidity
-            max: 100
-            min: 0
-            name: Humidity
-            severity:
-              green: 30
-              red: 60
-              yellow: 50
-            theme: default
-  - type: custom:vertical-stack-in-card
-    cards:
-      - type: custom:mini-media-player
-        artwork: cover
-        artwork_border: true
-        entity: media_player.living_room_speaker
-        show_source: true
-      - type: custom:mini-media-player
-        artwork: cover
-        artwork_border: true
-        entity: media_player.pc_gpmdp
-        show_source: true
-      - type: custom:mini-media-player
-        artwork: cover
-        artwork_border: true
-        entity: media_player.living_room_tv_cast
-        show_source: true
-      - type: custom:mini-media-player
-        artwork: cover
-        artwork_border: true
-        entity: media_player.philips_tv
-        show_source: true
-      - type: custom:mini-media-player
-        artwork: cover
-        artwork_border: true
-        entity: media_player.playstation_4
-        show_source: true
-  # - type: entities
-  #   entities:
-  #     - entity: media_player.living_room_speaker
-  #     - entity: media_player.pc_gpmdp
-  #     - entity: media_player.living_room_tv_cast
-  #     - entity: media_player.philips_tv
-  #     - entity: media_player.playstation_4
-  # - type: custom:mini-media-player
-  #   entity: media_player.playstation_4
-  #   # icon: mdi:spotify
-  #   artwork: cover
-  #   hide:
-  #     volume: true
-  #     source: true
-  #     power_state: false
-  - type: custom:mini-graph-card
-    title: Temperature
-    entities:
-      - sensor.living_room_temperature
-    color_thresholds:
-      - color: "#0000ff"
-        value: 15
-      - color: "#00ff00"
-        value: 21
-      - color: "#ffb347"
-        value: 26
-      - color: "#ff0000"
-        value: 30
-      - color: "#FF00FF"
-        value: 35
-    height: 75
-    hour24: true
-    hours_to_show: 48
-    line_color: var(--primary-color)
-    location_icon: left
-    location_state: center
-    show:
-      extrema: true
-      fill: fade
-  - type: custom:mini-graph-card
-    title: Humidity
-    entities:
-      - sensor.living_room_humidity
-    color_thresholds:
-      - color: "#00ff00"
-        value: 30
-      - color: "#ffb347"
-        value: 50
-      - color: "#ff0000"
-        value: 60
-    height: 75
-    hour24: true
-    hours_to_show: 48
-    line_color: var(--primary-color)
-    location_icon: left
-    location_state: center
-    show:
-      extrema: true
-      fill: fade
-  - type: sensor
-    detail: 2
-    entity: sensor.living_room_pressure
-    graph: line
-    name: Presure
-  - type: custom:vertical-stack-in-card
-    cards:
-      - type: horizontal-stack
-        cards:
-          - type: plant-status
-            entity: plant.first_plant
-            name: First
-          - type: plant-status
-            entity: plant.second_plant
-            name: Second
-      - type: horizontal-stack
-        cards:
-          - type: plant-status
-            entity: plant.fourth_plant
-            name: Fourth
-          - type: plant-status
-            entity: plant.fifth_plant
-            name: Fifth
-      - type: horizontal-stack
-        cards:
-          - type: plant-status
-            entity: plant.sixth_plant
-            name: Sixth
-          - type: custom:gap-card
-  - type: custom:mini-graph-card
-    title: Temperature
-    # animate: true
-    color_thresholds:
-      - color: "#0000ff"
-        value: 17
-      - color: "#00ff00"
-        value: 22
-      - color: "#ffb347"
-        value: 26
-      - color: "#ff0000"
-        value: 30
-      - color: "#FF00FF"
-        value: 35
-    entities:
-      - sensor.xiaomi_miflora_temperature_4
-      - sensor.xiaomi_miflora_temperature_3
-    height: 75
-    hour24: true
-    hours_to_show: 48
-    line_color: var(--primary-color)
-    location_icon: left
-    location_state: center
-    show:
-      extrema: true
-      fill: fade
-  # - entity: camera.sonoff_gk_200mp2_b_rtsp
-  #   show_state: true
-  #   type: picture-entity
-  #   state_filter:
-  #     - null
-  # - entity: camera.sonoff_gk_200mp2_b_mjpg
-  #   show_state: true
-  #   type: picture-entity
-  #   state_filter:
-  #     - null
-  - type: picture-glance
-    camera_image: camera.reolink_camera_1
-    camera_view: live
-    entities:
-      - entity: binary_sensor.reolink_camera_1_motion
-      - entity: sensor.living_room_temperature
+        # show_state: true
+        # state_filter:
+        #   - null
+      - type: picture-entity
+        entity: camera.sonoff_gk_200mp2_b_rtsp
         show_state: true
-      - entity: binary_sensor.living_room_balcony_window_sensor
-      - entity: light.directional_light
-      - entity: light.general_light
-      - entity: light.top_light
-        icon: mdi:led-strip-variant
-    # show_state: true
-    # state_filter:
-    #   - null
-  - type: picture-entity
-    entity: camera.sonoff_gk_200mp2_b_rtsp
-    show_state: true
-    state_filter:
-      - null
+        state_filter:
+          - null

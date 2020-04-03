@@ -1,6 +1,0 @@
-platform: onvif
-name: Reolink onvif
-host: !secret camera_reolink_1_local_ip
-username: admin
-password: !secret http_password
-port: 8000

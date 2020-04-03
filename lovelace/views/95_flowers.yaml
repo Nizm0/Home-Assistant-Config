@@ -1,5 +1,6 @@
 icon: "mdi:flower"
 theme: Backend-selected
+path: flowers
 title: Flowers
 badges: []
 cards:
@@ -23,34 +24,34 @@ cards:
     name: "sixth #6"
   - type: history-graph
     entities:
-      - sensor.xiaomi_miflora_moisture_1
-      - sensor.xiaomi_miflora_moisture_2
-      - sensor.xiaomi_miflora_moisture_3
-      - sensor.xiaomi_miflora_moisture_4
-      - sensor.xiaomi_miflora_moisture_5
-      - sensor.xiaomi_miflora_moisture_6
+      - sensor.miflora_moisture_1
+      - sensor.miflora_moisture_2
+      - sensor.miflora_moisture_3
+      - sensor.miflora_moisture_4
+      - sensor.miflora_moisture_5
+      - sensor.miflora_moisture_6
     hours_to_show: 168
     refresh_interval: 60
     title: Flower Moisture
   - type: history-graph
     entities:
-      - sensor.xiaomi_miflora_temperature_1
-      - sensor.xiaomi_miflora_temperature_2
-      - sensor.xiaomi_miflora_temperature_3
-      - sensor.xiaomi_miflora_temperature_4
-      - sensor.xiaomi_miflora_temperature_5
-      - sensor.xiaomi_miflora_temperature_6
+      - sensor.miflora_temperature_1
+      - sensor.miflora_temperature_2
+      - sensor.miflora_temperature_3
+      - sensor.miflora_temperature_4
+      - sensor.miflora_temperature_5
+      - sensor.miflora_temperature_6
     hours_to_show: 168
     refresh_interval: 60
     title: Flower Temperature
   - type: history-graph
     entities:
-      - sensor.xiaomi_miflora_soil_conductivity_1
-      - sensor.xiaomi_miflora_soil_conductivity_2
-      - sensor.xiaomi_miflora_soil_conductivity_3
-      - sensor.xiaomi_miflora_soil_conductivity_4
-      - sensor.xiaomi_miflora_soil_conductivity_5
-      - sensor.xiaomi_miflora_soil_conductivity_6
+      - sensor.miflora_soil_conductivity_1
+      - sensor.miflora_soil_conductivity_2
+      - sensor.miflora_soil_conductivity_3
+      - sensor.miflora_soil_conductivity_4
+      - sensor.miflora_soil_conductivity_5
+      - sensor.miflora_soil_conductivity_6
     hours_to_show: 168
     refresh_interval: 60
     title: Flower conductivity

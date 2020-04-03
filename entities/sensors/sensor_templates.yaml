@@ -13,6 +13,7 @@ sensors: #!include_dir_merge_named templates
       {%- else -%}
         ---NAN---
       {%- endif %}
+
   battery_status:
     friendly_name: "Battery Status"
     entity_id:
@@ -154,3 +155,11 @@ sensors: #!include_dir_merge_named templates
 #                       {% else %}
 #                           mdi:battery-charging-wireless-outline
 #                       {% endif %}'
+  air_quality_pm_maslice_25:
+    friendly_name: Air Quality PM Maslice 2.5
+    unit_of_measurement: 'particles'
+    value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_2_5') }}"
+  air_quality_pm_maslice_10:
+    friendly_name: Air Quality PM Maslice 10
+    unit_of_measurement: 'particles'
+    value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_10') }}"

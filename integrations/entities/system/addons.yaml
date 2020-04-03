@@ -12,6 +12,8 @@ switch:
           data:
             addon: a0d7b954_appdaemon
 
+
+### https://www.home-assistant.io/integrations/rest/
 sensor:
   - platform: rest
     resource: !secret rest_appdaemon_info_link
@@ -21,3 +23,67 @@ sensor:
     headers:
       Authorization: !secret local_rest_api_token
       Content-Type: application/json
+    json_attributes_path: '$.data'
+    json_attributes:
+      - ip_address
+      - version
+  - platform: rest
+    resource: !secret rest_nginx_info_link
+    name: NGINX Manager Status
+    value_template: '{{ value_json.data.state }}'
+    scan_interval: 5
+    headers:
+      Authorization: !secret local_rest_api_token
+      Content-Type: application/json
+    json_attributes_path: '$.data'
+    json_attributes:
+      - ip_address
+      - version
+  - platform: rest
+    resource: !secret rest_esphome_info_link
+    name: ESPHome Status
+    value_template: '{{ value_json.data.state }}'
+    scan_interval: 5
+    headers:
+      Authorization: !secret local_rest_api_token
+      Content-Type: application/json
+    json_attributes_path: '$.data'
+    json_attributes:
+      - ip_address
+      - version
+  - platform: rest
+    resource: !secret rest_samba_info_link
+    name: Samba Status
+    value_template: '{{ value_json.data.state }}'
+    scan_interval: 5
+    headers:
+      Authorization: !secret local_rest_api_token
+      Content-Type: application/json
+    json_attributes_path: '$.data'
+    json_attributes:
+      - ip_address
+      - version
+  - platform: rest
+    resource: !secret rest_mariadb_info_link
+    name: MariaDB Status
+    value_template: '{{ value_json.data.state }}'
+    scan_interval: 5
+    headers:
+      Authorization: !secret local_rest_api_token
+      Content-Type: application/json
+    json_attributes_path: '$.data'
+    json_attributes:
+      - ip_address
+      - version
+  - platform: rest
+    resource: !secret rest_google_backup_info_link
+    name: Google Backup Status
+    value_template: '{{ value_json.data.state }}'
+    scan_interval: 5
+    headers:
+      Authorization: !secret local_rest_api_token
+      Content-Type: application/json
+    json_attributes_path: '$.data'
+    json_attributes:
+      - ip_address
+      - version

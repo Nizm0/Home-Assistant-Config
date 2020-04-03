@@ -1,5 +1,6 @@
 icon: "mdi:shower"
 id: 3
+path: bathroom
 title: Bathroom
 cards:
   - layout: horizontal

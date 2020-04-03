@@ -1,1 +1,36 @@
-[]
+- id: '1584744623104'
+  alias: Decrease Living Room brightness
+  description: ''
+  trigger:
+  - device_id: d73bbd2c276743ccad09ffa03908f1d0
+    domain: deconz
+    platform: device
+    subtype: dim_down
+    type: remote_button_short_press
+  condition: []
+  action:
+  - device_id: 15a7dd19261a492083929bbfeaa572b3
+    domain: light
+    entity_id: light.living_room
+    type: brightness_decrease
+- id: '1584744721754'
+  alias: Increase Living Room brightness
+  description: ''
+  trigger:
+  - device_id: d73bbd2c276743ccad09ffa03908f1d0
+    domain: deconz
+    platform: device
+    subtype: dim_up
+    type: remote_button_short_press
+  condition: []
+  action:
+  - device_id: 15a7dd19261a492083929bbfeaa572b3
+    domain: light
+    entity_id: light.living_room
+    type: brightness_increase
+  - condition: state
+    entity_id: light.directional_light
+    state: 'off'
+  - data: {}
+    entity_id: light.directional_light
+    service: light.turn_on

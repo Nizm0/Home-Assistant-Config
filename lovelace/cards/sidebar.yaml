@@ -1,0 +1,25 @@
+digitalClock: true
+# clock: true
+hideTopMenu: false
+style: |
+  :host {
+      --sidebar-background: transparent!important;
+      --sidebar-text-color: #EEE;
+      --face-color: #333;
+      --face-border-color: #EEE;
+      --clock-hands-color: #FFF;
+      --clock-seconds-hand-color: #FF4B3E;
+      --clock-middle-background: transparent!important;
+      --clock-middle-border: #EEE;
+  }
+width:
+  mobile: 0
+  tablet: 15
+  desktop: 15
+template: |
+  <li>
+    {% if now().hour < 5 %} Good Night! {{’\U0001F634’}}
+    {% elif now().hour < 12 %} Good Morning! {{’\u2615\uFE0F’}}
+    {% elif now().hour < 18 %} Good Afternoon! {{’\U0001F44B\U0001F3FB’}}
+    {% else %} Good Evening! {{’\U0001F44B\U0001F3FB’}}{% endif %}
+  </li>

@@ -1,0 +1,21 @@
+sensor:
+  - platform: template
+    sensors:
+      covid_19_percentage_recovered:
+          friendly_name: Covid 19 Percent Recovered
+          value_template: '{{ ((float(states.sensor.worldwide_coronavirus_recovered.state) / float(states.sensor.worldwide_coronavirus_confirmed.state)) * 100) | round(1) }}'
+          unit_of_measurement: "%" 
+
+  - platform: template
+    sensors:
+      covid_19_percentage_infected:
+          friendly_name: Covid 19 Percent Infected
+          value_template: '{{ ((float(states.sensor.worldwide_coronavirus_current.state) / float(states.sensor.worldwide_coronavirus_confirmed.state)) * 100) | round(1) }}'
+          unit_of_measurement: "%" 
+
+  - platform: template
+    sensors:
+      covid_19_percentage_deceased:
+          friendly_name: Covid 19 Percent Deceased
+          value_template: '{{ ((float(states.sensor.worldwide_coronavirus_deaths.state) / float(states.sensor.worldwide_coronavirus_confirmed.state)) * 100) | round(1) }}'
+          unit_of_measurement: "%"

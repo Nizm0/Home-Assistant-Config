@@ -16,20 +16,21 @@ sensor:
     # outdoor_temp_sensor: sensor.flower_2_temperature
     calibration_factor: 1.0
 
-  - platform: airvisual
-    api_key: !secret airvisual_api_key
-    monitored_conditions:
-      - us
-      # - cn
-    latitude: !secret home_latitude
-    longitude: !secret home_longitude
-    #  radius: 500
-    show_on_map: false
+  # - platform: airvisual
+  #   api_key: !secret airvisual_api_key
+  #   monitored_conditions:
+  #     - us
+  #     # - cn
+  #   latitude: !secret home_latitude
+  #   longitude: !secret home_longitude
+  #   #  radius: 500
+  #   show_on_map: false
 
   - platform: meteoalarm_m
     id: 'PL0264-Wroclaw'
     name: alert
     scan_interval: 3600
+
 # luftdaten:
 #   sensor_id: 2303
 #   show_on_map: false
@@ -165,14 +166,14 @@ automation:
     action:
       - service: notify.push_to_chrome
         data_template:
-          message: ({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demaded params
-          title: Problem with Teperature in {{ trigger.to_state.attributes.friendly_name }}
+          message: ({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params
+          title: Problem with Temperature in {{ trigger.to_state.attributes.friendly_name }}
           data:
             tag: room_{{trigger.to_state.attributes.friendly_name}}_temp
       # - service: persistent_notification.create
       #   data_template:
-      #     message: "({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demaded params"
-      #     title: "Problem with Teperature in {{ trigger.to_state.attributes.friendly_name }}"
+      #     message: "({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params"
+      #     title: "Problem with Temperature in {{ trigger.to_state.attributes.friendly_name }}"
   - alias: Notify on sun change
     id: notify_on_sun_change
     initial_state: "true"
@@ -186,7 +187,7 @@ automation:
         data_template:
           message: >
             We have {{ trigger.event }}
-          title: Sun is changin state
+          title: Sun is changing state
           data:
             tag: sun-state-change
 
@@ -217,6 +218,6 @@ automation:
     action:
       - service: notify.push_to_chrome_nizm0_oneplus3
         data_template:
-          title: Somone wolking in empty home
+          title: Someone walking in empty home
           message: >
-            ({{ states('sensor.date_time_iso') }}) Motiot detected in: {{ trigger.to_state.attributes.friendly_name }}
+            ({{ states('sensor.date_time_iso') }}) Motion detected in: {{ trigger.to_state.attributes.friendly_name }}

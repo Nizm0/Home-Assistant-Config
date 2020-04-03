@@ -7,6 +7,6 @@
 #
 sensor: !include_dir_list ../entities/sensors
 
-air_quality:
-  - platform: opensensemap
-    station_id: 5902649c5ba9e50011fc57b8
+# air_quality:
+#   - platform: opensensemap
+#     station_id: 5902649c5ba9e50011fc57b8

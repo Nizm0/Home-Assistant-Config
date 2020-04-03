@@ -1,5 +1,6 @@
 icon: mdi:chart-areaspline
 id: 8
+path: stats
 title: Stats
 cards:
   # - entities:
@@ -154,4 +155,4 @@ cards:
         entities:
           - sensor.speedtest_download
           - sensor.speedtest_upload
-  - type: "custom:unused-card"
+  - type: custom:unused-card

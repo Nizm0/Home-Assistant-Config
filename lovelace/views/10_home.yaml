@@ -12,14 +12,14 @@ badges:
   - sensor.nizm0_today_at_work
   - sensor.nizm0_week_work
   - sensor.mold_indicator
-  - sensor.letsencrypt
+  # - sensor.letsencrypt
   - sensor.hacs
   - binary_sensor.car_wash
   - input_number.vacuum_cleaned_area
 icon: "mdi:home"
 id: 0
 panel: false
-path: ""
+path: home
 title: Home
 cards:
   - type: entities

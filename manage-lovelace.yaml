@@ -1,0 +1,23 @@
+custom_header: !include lovelace/cards/custom_header.yaml
+# resources: !include_dir_list lovelace/resources
+# sidebar: !include lovelace/cards/sidebar.yaml
+button_card_templates: !include lovelace/templates/button_card_templates.yaml
+
+title: Manage
+views:
+  # - !include lovelace/views/dashboard.yaml
+  - !include lovelace/views/10_home.yaml
+  # - !include lovelace/views/20_living_room.yaml
+  # - !include lovelace/views/30_bedroom.yaml
+  # - !include lovelace/views/40_kids.yaml
+  # - !include lovelace/views/50_kitchen.yaml
+  # - !include lovelace/views/60_bathroom.yaml
+  # - !include lovelace/views/70_hallway.yaml
+  # - !include lovelace/views/80_family.yaml
+  # - !include lovelace/views/95_flowers.yaml
+  # - !include lovelace/views/90_camera.yaml
+  - !include lovelace/views/100_testing.yaml
+  - !include lovelace/views/104_manage.yaml
+  - !include lovelace/views/105_stats.yaml
+  # - !include lovelace/views/120_floreplan.yaml
+  - !include lovelace/views/01_tablet.yaml

@@ -1,10 +1,10 @@
 sixth_plant:
   sensors:
-    moisture: sensor.xiaomi_miflora_moisture_6
-    brightness: sensor.xiaomi_miflora_illuminance_6
-    conductivity: sensor.xiaomi_miflora_soil_conductivity_6
-    temperature: sensor.xiaomi_miflora_temperature_6
-    # battery: sensor.xiaomi_miflora_battery_level_6
+    moisture: sensor.miflora_moisture_6
+    brightness: sensor.miflora_illuminance_6
+    conductivity: sensor.miflora_soil_conductivity_6
+    temperature: sensor.miflora_temperature_6
+    # battery: sensor.miflora_battery_level_6
   min_moisture: 20
   max_moisture: 60
   min_battery: 17
