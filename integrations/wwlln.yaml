@@ -1,0 +1,8 @@
+---
+### The wwlln integration displays lightning strike information from the World Wide Lightning Location Network (WWLLN).
+### https://www.home-assistant.io/integrations/wwlln/
+
+wwlln:
+  radius: 100
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude

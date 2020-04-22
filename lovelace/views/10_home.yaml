@@ -97,11 +97,11 @@ cards:
     type: entities
     show_header_toggle: true
     entities:
-      - entity: light.directional_light
+      - entity: light.living_room_directional_light
         secondary_info: last-changed
-      - entity: light.general_light
+      - entity: light.living_room_general_light
         secondary_info: last-changed
-      - entity: light.top_light
+      - entity: light.living_room_top_light
         secondary_info: last-changed
       - entity: light.christmas_tree
         secondary_info: last-changed

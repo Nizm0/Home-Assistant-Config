@@ -24,10 +24,10 @@ web_server:
 
 sensor:
   - platform: wifi_signal
-    name: "Server Shelf WiFi Signal"
+    name: "SHelly1 Kids WiFi Signal"
     update_interval: 60s
   - platform: uptime
-    name: "Server Shelf Uptime"
+    name: "SHelly1 Kids Uptime"
 switch:
   - platform: restart
     name: "Reboot Kids Top Light"

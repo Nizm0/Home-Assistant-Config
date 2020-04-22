@@ -6,17 +6,54 @@ icon: mdi:settings
 cards:
   - type: entities
     title: System stats
-    entities:
-      - sensor.processor_use
-      - sensor.memory_free
-      - sensor.disk_use_percent_home
-      - binary_sensor.pve_hassos_running
-      - binary_sensor.pve_hassosdev_running
-      # - type: entity
-      #   entity: binary_sensor.pve_hassos_running
-      # - type: entity
-      #   entity: binary_sensor.pve_hassosdev_running
+    state_color: true
     show_header_toggle: false
+    entities:
+      - entity: sensor.processor_use
+        secondary_info: last-changed
+      - entity: sensor.memory_free
+        secondary_info: last-changed
+      - entity: sensor.disk_use_percent_home
+        secondary_info: last-changed
+      - entity: binary_sensor.pve_hassos_running
+        secondary_info: last-changed
+      - entity: binary_sensor.pve_hassosbeta_running
+        secondary_info: last-changed
+      - entity: binary_sensor.pve_hassosdev_running
+        secondary_info: last-changed
+      - entity: binary_sensor.pve_ubuntuserver_running
+        secondary_info: last-changed
+      - entity: binary_sensor.desctop_pc
+        secondary_info: last-changed
+      - entity: binary_sensor.router
+        secondary_info: last-changed
+      - entity: binary_sensor.server
+        secondary_info: last-changed
+      - entity: binary_sensor.remote_ui
+        secondary_info: last-changed
+  - type: entities
+    title: My Title
+    entities:
+      - entity: sensor.appdaemon_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: switch.appdaemon
+        secondary_info: last-changed
+      - entity: sensor.nginx_manager_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: sensor.esphome_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: sensor.samba_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: sensor.mariadb_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: sensor.google_backup_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
   - type: custom:vertical-stack-in-card
     cards:
       - type: custom:bar-card
@@ -186,3 +223,32 @@ cards:
         # color: var(--label-badge-red)
         # value_style:
         #   color: red
+  - type: custom:mini-graph-card
+    title: Speed Test
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+    height: 75
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade
+  - type: custom:mini-graph-card
+    title: Connected Clients
+    entities:
+      - sensor.connected_clients
+    height: 75
+    points_per_hour: 60
+    update_interval: 5
+    hour24: true
+    hours_to_show: 48
+    line_color: var(--primary-color)
+    location_icon: left
+    location_state: center
+    show:
+      extrema: true
+      fill: fade

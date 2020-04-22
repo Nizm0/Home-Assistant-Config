@@ -125,6 +125,13 @@ sensors: #!include_dir_merge_named templates
         {{states.sensor.max_temperature_in_home.state | float}}
       {%- endif %}
 
+  humidifier_water_level:
+    friendly_name: Humidifier water level
+    # device_class: level
+    unit_of_measurement: 'mm'
+    entity_id: fan.air_humidifier
+    value_template: "{{state_attr('fan.air_humidifier', 'depth')}}"
+
 # - platform: template
 #   sensors:
 #     bedroom_battery_level:

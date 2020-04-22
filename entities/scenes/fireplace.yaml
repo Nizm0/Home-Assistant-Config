@@ -1,9 +1,9 @@
 - name: Fireplace
   id: iu23y6wseghs8o
   entities:
-    light.directional_light: off
-    light.general_light: off
-    light.top_light: on
+    light.living_room_directional_light: off
+    light.living_room_general_light: off
+    light.living_room_top_light: on
     # media_player.living_room_tv_cast:
     #   state: on
     #   source: HDMI 1

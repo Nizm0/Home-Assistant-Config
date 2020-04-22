@@ -1,10 +1,11 @@
 substitutions:
+  hostname: 'esp32_ble_tracker'
   reboot_time: 5min
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
 esphome:
-  name: esp32_ble_tracker
+  name: $hostname
   platform: ESP32
   board: nodemcu-32s
 
@@ -40,10 +41,10 @@ binary_sensor:
     
 sensor:
   - platform: wifi_signal
-    name: "Server Shelf WiFi Signal"
+    name: "Ble Tracker WiFi Signal"
     update_interval: 60s
   - platform: uptime
-    name: "Server Shelf Uptime"
+    name: "Ble Tracker Uptime"
   # - platform: ble_rssi
   #   mac_address: C4:7C:8D:66:CC:49
   #   name: "BLE Google Home Mini RSSI value"

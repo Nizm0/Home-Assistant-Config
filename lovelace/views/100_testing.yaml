@@ -47,17 +47,17 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.taking_bath
         secondary_info: last-changed
-  - type: entities
-    state_color: true
-    entities:
-      - entity: binary_sensor.desctop_pc
-        secondary_info: last-changed
-      - entity: binary_sensor.router
-        secondary_info: last-changed
-      - entity: binary_sensor.server
-        secondary_info: last-changed
-      - entity: binary_sensor.remote_ui
-        secondary_info: last-changed
+  # - type: entities
+  #   state_color: true
+  #   entities:
+  #     - entity: binary_sensor.desctop_pc
+  #       secondary_info: last-changed
+  #     - entity: binary_sensor.router
+  #       secondary_info: last-changed
+  #     - entity: binary_sensor.server
+  #       secondary_info: last-changed
+  #     - entity: binary_sensor.remote_ui
+  #       secondary_info: last-changed
   - type: entities
     entities:
       - input_boolean.ready_to_vacuum
@@ -80,56 +80,49 @@ cards:
       - type: conditional
         conditions:
           - entity: binary_sensor.ender_3_printing
-            state: on
+            state: "on"
           # - entity: binary_sensor.ender_3_printing_error
           #   state: on
         card:
-          - entity: camera.ender_3
-            show_state: false
-            type: picture-entity
-      
+          type: picture-entity
+          entity: camera.ender_3
+          show_state: false
       - type: conditional
         conditions:
           - entity: binary_sensor.ender_3_printing
-            state: on
+            state: "on"
           # - entity: binary_sensor.ender_3_printing_error
           #   state: on
         card:
-          - type: custom:mini-graph-card
-            points_per_hour: 5
-            height: 100
-            update_interval: 5
-            # show_legend: false
-            entities:
-              - entity: sensor.ender_3_target_bed_temp
-              - entity: sensor.ender_3_actual_bed_temp
-              - entity: sensor.ender_3_target_tool0_temp
-              - entity: sensor.ender_3_actual_tool0_temp
-            hour24: true
-            hours_to_show: 12
-            show:
-              extrema: false
-              fill: true
-              name: false
-              state: false
-              icon: false
-              points: false
-              labels: true
-              labels_secondary: true
-              legend: false
-      # - type: history-graph
-      #   entities:
-      #     - sensor.ender_3_target_bed_temp
-      #     - sensor.ender_3_actual_bed_temp
-      #     - sensor.ender_3_target_tool0_temp
-      #     - sensor.ender_3_actual_tool0_temp
+          type: custom:mini-graph-card
+          points_per_hour: 5
+          update_interval: 5
+          height: 100
+          # show_legend: false
+          entities:
+            - entity: sensor.ender_3_target_bed_temp
+            - entity: sensor.ender_3_actual_bed_temp
+            - entity: sensor.ender_3_target_tool0_temp
+            - entity: sensor.ender_3_actual_tool0_temp
+          hour24: true
+          hours_to_show: 12
+          show:
+            extrema: false
+            fill: true
+            name: false
+            state: false
+            icon: false
+            points: false
+            labels: true
+            labels_secondary: true
+            legend: false
       - type: entities
         title: Octoprint Ender 3
         show_header_toggle: false
         entities:
           - type: custom:restriction-card
             card:
-              entity: switch.ender_3_switch
+              entity: switch.shelly_ender_3_switch
             restrictions:
               confirm:
                 exemptions:
@@ -146,8 +139,8 @@ cards:
               label: Ender 3
             entities:
               - entity: sensor.shelly_shsw_pm_608c82_current_consumption
-              - entity: sensor.shelly_shsw_pm_608c82_total_consumption_attr
-              - entity: sensor.shelly_shsw_pm_608c82_device_temp_attr
+              - entity: sensor.shelly_shsw_pm_608c82_device_temp
+              - entity: sensor.shelly_shsw_pm_608c82_total_consumption
               - entity: binary_sensor.ender_3_printing
               - entity: binary_sensor.ender_3_printing_error
               - entity: sensor.ender_3_target_bed_temp
@@ -165,42 +158,44 @@ cards:
         card:
           type: custom:bar-card
           severity:
-            - value: 50
-              color: '#bf4040'
-            - value: 75
-              color: '#bf9540'
-            - value: 100
-              color: '#40bf40'
-          title_position: inside
+            - color: Red
+              from: 0
+              to: 25
+            - color: Orange
+              from: 26
+              to: 50
+            - color: Green
+              from: 51
+              to: 100
+          positions:
+            icon: "off"
+            title: inside
           columns: 3
-          padding: 2px
-          align: left
-          title_style:
-            font-size: 16px
-          value_style:
-            font-size: 8px
         filter:
           include:
             - entity_id: "*_battery*"
+          exclude:
+            - entity_id: "*_battery_state"
+            - state: "unknown"
+            - state: "unavailable"
       - type: custom:auto-entities
         card:
           type: custom:bar-card
           severity:
-            - value: 50
-              color: '#bf4040'
-            - value: 75
-              color: '#bf9540'
-            - value: 100
-              color: '#40bf40'
-          title_position: inside
+            - color: Red
+              from: 0
+              to: 25
+            - color: Orange
+              from: 26
+              to: 50
+            - color: Green
+              from: 51
+              to: 100
+          positions:
+            icon: "off"
+            title: inside
           attribute: battery_level
           columns: 3
-          padding: 2px
-          align: left
-          title_style:
-            font-size: 16px
-          value_style:
-            font-size: 8px
         filter:
           include:
             - attributes:

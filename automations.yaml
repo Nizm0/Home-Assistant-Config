@@ -29,8 +29,27 @@
     entity_id: light.living_room
     type: brightness_increase
   - condition: state
-    entity_id: light.directional_light
+    entity_id: light.living_room_directional_light
     state: 'off'
   - data: {}
-    entity_id: light.directional_light
+    entity_id: light.living_room_directional_light
     service: light.turn_on
+- id: '1587510128209'
+  alias: Drzzs on line
+  description: ''
+  trigger:
+  - entity_id: sensor.drzzs
+    from: offline
+    platform: state
+    to: streaming
+  condition:
+  - condition: device
+    device_id: 3df8ca33c46a4292a5a78441f5c0e28f
+    domain: device_tracker
+    entity_id: device_tracker.oneplus_a3003
+    type: is_home
+  action:
+  - data:
+      entity_id: media_player.living_room_speaker
+      message: Drzzs is now online
+    service: tts.cloud_say

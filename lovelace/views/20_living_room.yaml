@@ -16,21 +16,21 @@ cards:
             cards:
               - type: entity-button
                 state_color: true
-                entity: light.general_light
+                entity: light.living_room_general_light
                 hold_action:
                   action: more-info
                 tap_action:
                   action: toggle
               - type: entity-button
                 state_color: true
-                entity: light.directional_light
+                entity: light.living_room_directional_light
                 hold_action:
                   action: more-info
                 tap_action:
                   action: toggle
               - type: entity-button
                 state_color: true
-                entity: light.top_light
+                entity: light.living_room_top_light
                 hold_action:
                   action: more-info
                 tap_action:
@@ -49,7 +49,8 @@ cards:
               - type: light
                 entity: light.living_room
               - type: light
-                entity: light.desctop_lamp
+                entity: light.ligt_strip_1
+                icon: mdi:led-strip-variant
           - type: horizontal-stack
             cards:
               - type: entity-button
@@ -75,6 +76,38 @@ cards:
                   action: more-info
                 # tap_action:
                 #   action: toggle
+          - type: horizontal-stack
+            cards:
+              - type: custom:gap-card
+              - type: custom:button-card
+                entity: fan.air_humidifier
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                show_icon: true
+                show_name: true
+                state:
+                  - value: 'on'
+                    spin: true
+                label: >
+                  [[[
+                    var bri = states['fan.air_humidifier'].attributes.depth;
+                    return 'Water level: ' + (bri ? bri : '0') + '%';
+                  ]]]
+                show_label: true
+                # custom_fields:
+                #   graph:
+                #     card:
+                #       type: sensor
+                #       entity: sensor.humidifier_water_level
+                #       graph: line
+                #       style: |
+                #         ha-card {
+                #           box-shadow: none;
+                #         }
+              - type: light
+                entity: light.desctop_lamp
           - type: horizontal-stack
             cards:
               - type: gauge
@@ -256,14 +289,15 @@ cards:
       - type: picture-glance
         camera_image: camera.reolink_camera_1
         camera_view: live
+        aspect_ratio: 56.25
         entities:
           - entity: binary_sensor.reolink_camera_1_motion
           - entity: sensor.living_room_temperature
             show_state: true
           - entity: binary_sensor.living_room_balcony_window_sensor
-          - entity: light.directional_light
-          - entity: light.general_light
-          - entity: light.top_light
+          - entity: light.living_room_directional_light
+          - entity: light.living_room_general_light
+          - entity: light.living_room_top_light
             icon: mdi:led-strip-variant
         # show_state: true
         # state_filter:
@@ -271,5 +305,6 @@ cards:
       - type: picture-entity
         entity: camera.sonoff_gk_200mp2_b_rtsp
         show_state: true
+        aspect_ratio: 56.25
         state_filter:
           - null

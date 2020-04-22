@@ -3,6 +3,9 @@
 
 airvisual:
   api_key: !secret airvisual_api_key
+  geographies:
+      latitude: !secret home_latitude # 51.148178807361205
+      longitude: !secret home_longitude # 16.932619214057926
   # monitored_conditions:
   #   - us
   #   # - cn

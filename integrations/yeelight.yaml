@@ -1,0 +1,30 @@
+---
+#
+# The yeelight component allows you to control your Yeelight Wifi
+# bulbs with Home Assistant.
+#
+# This loads up my bulbs.
+#
+# https://www.home-assistant.io/components/yeelight/
+#
+yeelight:
+  devices: !include_dir_merge_named ../entities/yeelight/devices
+  custom_effects: !include_dir_list ../entities/yeelight/custom_effects
+    # - name: 'Fire Flicker'
+    #   flow_params:
+    #     count: 0
+    #     transitions:
+    #       - TemperatureTransition: [1900, 1000, 80]
+    #       - TemperatureTransition: [1900, 2000, 60]
+    #       - SleepTransition:       [1000]
+    # - name: 'Sunrise'
+    #   flow_params:
+    #     count: 1
+    #     action: stay
+    #     transitions:
+    #       - RGBTransition: [255, 0, 0, 50, 1]
+    #       - TemperatureTransition: [1700, 180000, 10]
+    #       - TemperatureTransition: [2700, 180000, 11]
+    #       - TemperatureTransition: [3700, 180000, 12]
+    #       - TemperatureTransition: [4700, 180000, 13]
+    #       - TemperatureTransition: [6500, 180000, 100]

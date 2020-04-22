@@ -1,4 +1,6 @@
 digitalClock: true
+date: true
+dateFormat: dddd, MMMM, YYYYr
 # clock: true
 hideTopMenu: false
 style: |
@@ -14,8 +16,11 @@ style: |
   }
 width:
   mobile: 0
-  tablet: 15
-  desktop: 15
+  tablet: 20
+  desktop: 18
+breakpoints:
+  mobile: 768
+  tablet: 1024
 template: |
   <li>
     {% if now().hour < 5 %} Good Night! {{’\U0001F634’}}
@@ -23,3 +28,61 @@ template: |
     {% elif now().hour < 18 %} Good Afternoon! {{’\U0001F44B\U0001F3FB’}}
     {% else %} Good Evening! {{’\U0001F44B\U0001F3FB’}}{% endif %}
   </li>
+
+bottomCard:
+  type: vertical-stack
+  cardOptions:
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:simple-weather-card
+            entity: weather.dark_sky
+            backdrop: true
+            primary_info:
+              - wind_bearing
+              - humidity
+            secondary_info:
+              - precipitation
+              - precipitation_probability
+      - type: horizontal-stack
+        cards:
+          - type: custom:air-visual-card
+            air_pollution_level: sensor.u_s_air_pollution_level
+            air_quality_index: sensor.u_s_air_quality_index
+            main_pollutant: sensor.u_s_main_pollutant
+            temp: weather.dark_sky
+            city: "Home"
+          # - type: custom:weather-card
+          #   entity: weather.dark_sky
+      - type: horizontal-stack
+        cards:
+          - type: "custom:button-card"
+            color_type: card
+            color: rgb(255, 255, 255)
+            icon: mdi:home
+          - type: "custom:button-card"
+            color_type: card
+            color: rgb(255, 255, 255)
+            icon: mdi:lightbulb
+
+sidebarMenu:
+  - action: navigate
+    navigation_path: "/lovelace/main-panel"
+    name: "Home"
+    active: true
+    icon: mdi:home
+  - action: navigate
+    navigation_path: "/lovelace/flowers"
+    name: "Flowers"
+    icon: mdi:flower-tulip
+#   - action: navigate
+#     navigation_path: "/lovelace/music"
+#     name: "Muziek"
+#   - action: navigate
+#     navigation_path: "/lovelace/4"
+#     name: "Test"
+#   - action: toggle
+#     entity: light.beganegrond
+#     name: Lichtstrip
+#     state: light.beganegrond
+#     icon: mdi:led-strip-variant

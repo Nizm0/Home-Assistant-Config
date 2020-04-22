@@ -96,19 +96,19 @@ cards:
                 state_image:
                   "off": /local/images/vacuum_dark.jpeg
                   "on": /local/images/vacuum.jpeg
-          - type: custom:xiaomi-vacuum-card
-            entity: vacuum.rockrobo
-            name: false
-            # buttons: true
-            image: local/images/vacuum_small.png
-            # labels:
-            #   battery: Battery
-            #   filter: Filter
-            #   main_brush: Main Brush
-            #   mode: Mode
-            #   sensor: Sensors
-            #   side_brush: Side Brush
-            #   status: Status
+          # - type: custom:xiaomi-vacuum-card
+          #   entity: vacuum.rockrobo
+          #   name: false
+          #   # buttons: true
+          #   image: local/images/vacuum_small.png
+          #   # labels:
+          #   #   battery: Battery
+          #   #   filter: Filter
+          #   #   main_brush: Main Brush
+          #   #   mode: Mode
+          #   #   sensor: Sensors
+          #   #   side_brush: Side Brush
+          #   #   status: Status
           - type: "custom:xiaomi-vacuum-map-card"
             calibration_points:
               - map:
@@ -297,12 +297,12 @@ cards:
           # title: Map
             aspect_ratio: 60%
             dark_mode: false
+            hours_to_show: 72
             geo_location_sources:
               - all
             entities:
               - entity: device_tracker.google_maps_104688658658376260645
               - entity: device_tracker.google_maps_109218123589188227395
-          
 
       # - entity: camera.front_dor_fish_eye
       #   show_state: true
@@ -365,49 +365,52 @@ cards:
       - type: custom:vertical-stack-in-card
         cards:
           - type: custom:auto-entities
+            show_empty: false
+            unique: true
+            sort:
+              numeric: true
             card:
               type: custom:bar-card
               severity:
-                - value: 50
-                  color: '#bf4040'
-                - value: 75
-                  color: '#bf9540'
-                - value: 100
-                  color: '#40bf40'
-              title_position: inside
+                - color: Red
+                  from: 0
+                  to: 25
+                - color: Orange
+                  from: 26
+                  to: 50
+                - color: Green
+                  from: 51
+                  to: 100
               columns: 3
-              padding: 2px
-              align: left
-              title_style:
-                font-size: 16px
-              value_style:
-                font-size: 8px
+              positions:
+                icon: inside
+                title: inside
             filter:
               include:
                 - entity_id: "*_battery*"
                   state: "<=25"
-          - type: custom:auto-entities
-            card:
-              type: custom:bar-card
-              severity:
-                - value: 50
-                  color: '#bf4040'
-                - value: 75
-                  color: '#bf9540'
-                - value: 100
-                  color: '#40bf40'
-              title_position: inside
-              attribute: battery_level
-              columns: 3
-              padding: 2px
-              align: left
-              title_style:
-                font-size: 16px
-              value_style:
-                font-size: 8px
-            filter:
-              include:
-                - attributes:
-                    battery_level: "<=25"
-                - attributes:
-                    battery: "<=25"
+          # - type: custom:auto-entities
+          #   card:
+          #     type: custom:bar-card
+          #     severity:
+          #       - value: 50
+          #         color: '#bf4040'
+          #       - value: 75
+          #         color: '#bf9540'
+          #       - value: 100
+          #         color: '#40bf40'
+          #     title_position: inside
+          #     attribute: battery_level
+          #     columns: 3
+          #     padding: 2px
+          #     align: left
+          #     title_style:
+          #       font-size: 16px
+          #     value_style:
+          #       font-size: 8px
+          #   filter:
+          #     include:
+          #       - attributes:
+          #           battery_level: "<=25"
+          #       - attributes:
+          #           battery: "<=25"

@@ -30,7 +30,9 @@ google54d9d9f0104cb9cd.html
 *.pyc
 *.cookies
 *.delete
+*.code-workspace
 appdaemon/custom_widgets
+appdaemon/compiled
 www/community
 www/custom-lovelace
 www/images/home

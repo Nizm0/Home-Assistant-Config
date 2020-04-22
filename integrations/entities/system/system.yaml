@@ -75,6 +75,8 @@ proxmoxve:
         vms:
           - 107
           - 101
+          - 102
+          - 108
         # containers:
         #   - pve
 

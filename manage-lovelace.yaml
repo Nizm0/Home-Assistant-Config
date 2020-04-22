@@ -20,4 +20,4 @@ views:
   - !include lovelace/views/104_manage.yaml
   - !include lovelace/views/105_stats.yaml
   # - !include lovelace/views/120_floreplan.yaml
-  - !include lovelace/views/01_tablet.yaml
+  # - !include lovelace/views/01_tablet.yaml
