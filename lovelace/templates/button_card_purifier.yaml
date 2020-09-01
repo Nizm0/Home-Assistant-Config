@@ -1,0 +1,27 @@
+air_purifier_control_button_template:
+  card:
+    color: 'rgba(255, 255, 255, 0)'
+    color_type: card
+    icon: 'mdi:[[icon]]'
+    state:
+      - operator: template
+        styles:
+          card:
+            - color: var(--primary-color)
+        value: |
+          [[[ return [[condition]] ]]]
+      - operator: default
+        styles:
+          card:
+            - color: 'rgba(150,150,150, 1.0)'
+    styles:
+      card:
+        - height: 50px
+        - color: 'rgba(150, 150, 150, 1.0)'
+        - box-shadow: none
+    tap_action:
+      action: call-service
+      service: '[[service]]'
+      service_data:
+        entity_id: '[[entity]]'
+    type: 'custom:button-card'

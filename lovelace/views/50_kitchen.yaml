@@ -9,13 +9,9 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - type: entity-button
+          - type: light
             entity: light.kitchen_top_light
             state_color: true
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
           - type: entity-button
             entity: binary_sensor.kitchen_motion_sensor
             state_color: true

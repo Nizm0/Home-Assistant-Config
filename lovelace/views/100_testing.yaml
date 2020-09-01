@@ -19,6 +19,14 @@ cards:
   #   entity: fan.xiaomi_miio_device
   #   tap_action:
   #     action: more-info
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:button-card
+        icon: mdi:restart
+        name: HA restart
+        tap_action:
+          action: call-service
+          service: homeassistant.restart
   - type: entities
     state_color: true
     entities:
@@ -87,6 +95,19 @@ cards:
           type: picture-entity
           entity: camera.ender_3
           show_state: false
+      - type: conditional
+        conditions:
+          - entity: binary_sensor.ender_3_printing
+            state: "on"
+          # - entity: binary_sensor.ender_3_printing_error
+          #   state: on
+        card:
+          type: picture-entity
+          entity: camera.sonoff_gk_200mp2_b_rtsp
+          show_state: true
+          aspect_ratio: 56.25
+          state_filter:
+            - null
       - type: conditional
         conditions:
           - entity: binary_sensor.ender_3_printing
@@ -171,6 +192,12 @@ cards:
             icon: "off"
             title: inside
           columns: 3
+          style: |-
+            bar-card-value {
+              margin-right: auto;
+              font-size: 8px;
+              text-shadow: 1px 1px #0005;
+            }
         filter:
           include:
             - entity_id: "*_battery*"
@@ -196,6 +223,12 @@ cards:
             title: inside
           attribute: battery_level
           columns: 3
+          style: |-
+            bar-card-value {
+              margin-right: auto;
+              font-size: 8px;
+              text-shadow: 1px 1px #0005;
+            }
         filter:
           include:
             - attributes:
@@ -307,3 +340,122 @@ cards:
           - entity: input_select.gmusic_player_playlist
           - entity: input_select.gmusic_player_station
           - entity: input_select.gmusic_player_speakers
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.bw_shp6_01_relay
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.bw_shp6_01_wattage
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+          - type: custom:mini-graph-card
+            title: Temperature
+            entities:
+              - sensor.bw_shp6_01_wattage
+            # color_thresholds:
+            #   - color: "#0000ff"
+            #     value: 15
+            #   - color: "#00ff00"
+            #     value: 21
+            #   - color: "#ffb347"
+            #     value: 26
+            #   - color: "#ff0000"
+            #     value: 30
+            #   - color: "#FF00FF"
+            #     value: 35
+            # height: 75
+            hour24: true
+            hours_to_show: 48
+            line_color: var(--primary-color)
+            location_icon: left
+            location_state: center
+            show:
+              extrema: false
+              fill: fade
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.bw_shp6_02_relay
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.bw_shp6_02_wattage
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+          - type: custom:mini-graph-card
+            title: Temperature
+            entities:
+              - sensor.bw_shp6_02_wattage
+            # color_thresholds:
+            #   - color: "#0000ff"
+            #     value: 15
+            #   - color: "#00ff00"
+            #     value: 21
+            #   - color: "#ffb347"
+            #     value: 26
+            #   - color: "#ff0000"
+            #     value: 30
+            #   - color: "#FF00FF"
+            #     value: 35
+            # height: 75
+            hour24: true
+            hours_to_show: 48
+            line_color: var(--primary-color)
+            location_icon: left
+            location_state: center
+            show:
+              extrema: false
+              fill: fade
+
+  - type: custom:auto-entities
+    card:
+      type: entities
+      state_color: true
+    filter:
+      include:
+        - entity_id: "automation.*"
+          state: "off"

@@ -1,22 +1,4 @@
 sensor:
-  #---
-  # The time and date (time_date) sensor platform.
-  # Has the time in various formats, the date, or both.
-  #
-  # This is usefull for displaying and automation purposes.
-  #
-  # https://www.home-assistant.io/components/time_date/
-  #
-  # - platform: time_date
-  #   display_options:
-  #     - 'time'
-  #     - 'date'
-  #     - 'date_time'
-  #     - 'date_time_iso'
-  #     - 'time_date'
-  #     - 'time_utc'
-  #     - 'beat'
-  #---
   # The version sensor platform is displaying the
   # current version.
   #
@@ -24,7 +6,6 @@ sensor:
   #
   - platform: version
     name: version_current
-  #---
   # The version sensor platform is displaying the
   # available version online.
   #
@@ -35,20 +16,13 @@ sensor:
     source: hassio
     image: qemux86-64
 
-  # - platform: travisci
-  #   api_key: !secret travisapi
-  #   scan_interval: 3600
-  #   repository: Home-Assistant-Config
-  #   branch: hassio
-  #   monitored_conditions: 
-  #     - last_build_state
-  #     - last_build_id
-  #     - last_build_duration
-  #     - state
-
-  # - platform: cert_expiry
-  #   host: has.nizmo.eu
-  #   name: LetsEncrypt
+  - platform: sql
+    db_url: !secret maria_db
+    queries:
+      - name: Maria HA DB size
+        query: 'SELECT table_schema "homeassistant", Round(Sum(data_length + index_length) / 1024 / 1024, 1) "value" FROM information_schema.tables WHERE table_schema="homeassistant" GROUP BY table_schema;'
+        column: 'value'
+        unit_of_measurement: MB
 
   - platform: systemmonitor
     resources:

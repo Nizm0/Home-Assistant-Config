@@ -1,0 +1,10 @@
+platform: local_luftdaten
+host: 192.168.1.88
+name: Outside Home AIR PM Sensor
+monitored_conditions:
+  - SDS_P1
+  - SDS_P2
+  - BME280_temperature
+  - BME280_humidity
+  - BME280_pressure
+  - signal

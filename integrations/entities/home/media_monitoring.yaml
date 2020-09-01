@@ -5,11 +5,14 @@ sensor:
       - frenck
       - DrZzs
       - dziarowski1
+      - battlestategames
+      - DrewWagar
   - platform: discord_game
     token: !secret secretDiscordBotToken
     members:
     - Thaeliaris#9947
     - Nizm0#9673
+    - Seth#7297
   - platform: steam_online
     api_key: !secret steamWebApiKey
     accounts:

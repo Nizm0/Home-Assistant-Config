@@ -1,8 +1,8 @@
 substitutions:
-  hostname: sonoff_hallway_light
-  plug_name: Sonoff Hallway Light
-  entity_name: Top Light
-  reboot_time: 2min
+  hostname: sonoff_doorbell
+  plug_name: Sonoff Doorbell
+  entity_name: Doorbell
+  reboot_time: 10min
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 

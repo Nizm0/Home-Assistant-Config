@@ -14,61 +14,27 @@ sensors: #!include_dir_merge_named templates
         ---NAN---
       {%- endif %}
 
-  battery_status:
-    friendly_name: "Battery Status"
-    entity_id:
-    - input_boolean.battery_status_update
-    value_template: >
-      {%- set threshold = 20 -%}
-      {%- set domains = ['light', 'switch', 'sensor', 'zwave', 'lock'] -%}
-      {%- for domain in domains -%}
-        {%- for item in states[domain] if ((item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) or ("battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown"))) -%}
-          {%- if (item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) -%}
-          {{ item.name }} ({{ item.attributes['battery_level'] }}){%- if not loop.last %}, {% endif -%}{% endif -%}
-            {%- if "battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown") -%}
-            {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
-        {%- endfor -%}
-      {%- endfor -%}
+  # battery_status:
+  #   friendly_name: "Battery Status"
+  #   entity_id:
+  #   - input_boolean.battery_status_update
+  #   value_template: >
+  #     {%- set threshold = 20 -%}
+  #     {%- set domains = ['light', 'switch', 'sensor', 'zwave', 'lock'] -%}
+  #     {%- for domain in domains -%}
+  #       {%- for item in states[domain] if ((item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) or ("battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown"))) -%}
+  #         {%- if (item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) -%}
+  #         {{ item.name }} ({{ item.attributes['battery_level'] }}){%- if not loop.last %}, {% endif -%}{% endif -%}
+  #           {%- if "battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown") -%}
+  #           {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
+  #       {%- endfor -%}
+  #     {%- endfor -%}
 
   solar_angle:
     friendly_name: "Sun angle"
     unit_of_measurement: 'degrees'
     value_template: "{{ state_attr('sun.sun', 'elevation') }}"
 
-  # vacuum_battery:
-  #   entity_id: vacuum.rockrobo
-  #   friendly_name: "Vacuum - Battery"
-  #   value_template: "{{ states.vacuum.rockrobo.attributes.battery_level }}"
-  #   device_class: battery
-  #   unit_of_measurement: '%'
-
-  # vacuum_main_brush:
-  #   entity_id: vacuum.rockrobo
-  #   friendly_name: "Vacuum - Main Brush left"
-  #   value_template: "{{ states.vacuum.rockrobo.attributes.main_brush_left }}"
-  #   # device_class: battery
-  #   # unit_of_measurement: '%'
-
-  # vacuum_side_brush:
-  #   entity_id: vacuum.rockrobo
-  #   friendly_name: "Vacuum - Side Brush left"
-  #   value_template: "{{ states.vacuum.rockrobo.attributes.side_brush_left }}"
-  #   # device_class: battery
-  #   # unit_of_measurement: '%'
-
-  # vacuum_filter:
-  #   entity_id: vacuum.rockrobo
-  #   friendly_name: "Vacuum - Filter left"
-  #   value_template: "{{ states.vacuum.rockrobo.attributes.filter_left }}"
-  #   # device_class: battery
-  #   # unit_of_measurement: '%'
-
-  # vacuum_sensors:
-  #   entity_id: vacuum.rockrobo
-  #   friendly_name: "Vacuum - Sensor dirty left"
-  #   value_template: "{{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
-  #   # device_class: battery
-  #   # unit_of_measurement: '%'
 
   in_bed_bayesian_probability:
     entity_id: binary_sensor.in_bed
@@ -132,36 +98,19 @@ sensors: #!include_dir_merge_named templates
     entity_id: fan.air_humidifier
     value_template: "{{state_attr('fan.air_humidifier', 'depth')}}"
 
-# - platform: template
-#   sensors:
-#     bedroom_battery_level:
-#       friendly_name: "Bedroom room batteries"
-#       # entity_id: sensor.bedroom_temperature
-#       unit_of_measurement: "%"
-#       value_template: "{{states.sensor.bedroom_temperature.attributes.battery_level}}"
-#       icon_template: '{% if states.binary_sensor.bedroom_temperature.attributes.battery_level == 100 %}
-#                           mdi:battery
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 90 %}
-#                           mdi:battery-90
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 80 %}
-#                           mdi:battery-80
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 70 %}
-#                           mdi:battery-70
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 60 %}
-#                           mdi:battery-60
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 50 %}
-#                           mdi:battery-50
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 40 %}
-#                           mdi:battery-40
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 30 %}
-#                           mdi:battery-30
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 20 %}
-#                           mdi:battery-20
-#                       {% elif states.binary_sensor.bedroom_temperature.attributes.battery_level >= 10 %}
-#                           mdi:battery-10
-#                       {% else %}
-#                           mdi:battery-charging-wireless-outline
-#                       {% endif %}'
+  home_air_purifier_aqi:
+    friendly_name: Home air purifier AQI
+    # device_class: level
+    unit_of_measurement: AQI #µg/m³
+    entity_id: fan.air_purifier
+    value_template: "{{state_attr('fan.air_purifier', 'aqi')}}"
+  home_air_purifier_motor_speed:
+    friendly_name: Home air purifier motor_speed
+    # device_class: level
+    unit_of_measurement: rpm #µg/m³
+    entity_id: fan.air_purifier
+    value_template: "{{state_attr('fan.air_purifier', 'motor_speed')}}"
+
   air_quality_pm_maslice_25:
     friendly_name: Air Quality PM Maslice 2.5
     unit_of_measurement: 'particles'
@@ -170,3 +119,17 @@ sensors: #!include_dir_merge_named templates
     friendly_name: Air Quality PM Maslice 10
     unit_of_measurement: 'particles'
     value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_10') }}"
+
+  outside_home_atmospheric_pressure:
+    value_template: >-
+      {% set temperature_gradient = 0.0065 %}
+      {% set exponent = 0.03416 / temperature_gradient %}
+
+      {% set altitude_meters = 300 %}
+      {% set temperature_celsius = states('sensor.feinstaubsensor_temperature') | float %}
+      {% set temperautre_at_sealevel_kelvin = temperature_celsius + (temperature_celsius * temperature_gradient) + 273.15 %}
+      {% set air_pressure_hpa = (states('sensor.feinstaubsensor_pressure') | float / 100) | round(1) %}
+
+      {{ (air_pressure_hpa / (1 - ((temperature_gradient * altitude_meters) / temperautre_at_sealevel_kelvin)) ** exponent) | round(1) }}
+    friendly_name: 'Outside Home Atmospheric pressure'
+    unit_of_measurement: 'hPa'

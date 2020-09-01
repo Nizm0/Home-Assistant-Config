@@ -293,75 +293,76 @@ cards:
           - entity: person.nizm0
             state: not_home
         card:
-          - type: map
-          # title: Map
-            aspect_ratio: 60%
-            dark_mode: false
-            hours_to_show: 72
-            geo_location_sources:
-              - all
-            entities:
-              - entity: device_tracker.google_maps_104688658658376260645
-              - entity: device_tracker.google_maps_109218123589188227395
+          type: map
+        # title: Map
+          aspect_ratio: 60%
+          dark_mode: false
+          hours_to_show: 72
+          geo_location_sources:
+            - all
+          entities:
+            - entity: device_tracker.google_maps_104688658658376260645
+            - entity: device_tracker.google_maps_109218123589188227395
 
       # - entity: camera.front_dor_fish_eye
       #   show_state: true
       #   type: picture-entity
       #   state_filter:
       #     - null
-      - type: custom:vertical-stack-in-card
-        cards:
-          - type: glance
-            title: Worldwide
-            show_icon: true
-            show_name: true
-            show_state: true
-            entities:
-              - entity: sensor.worldwide_coronavirus_confirmed
-                icon: "mdi:emoticon-neutral-outline"
-                name: Confirmed
-              - entity: sensor.worldwide_coronavirus_current
-                icon: "mdi:emoticon-frown-outline"
-                name: Current
-              - entity: sensor.worldwide_coronavirus_recovered
-                icon: "mdi:emoticon-happy-outline"
-                name: Recovered
-              - entity: sensor.worldwide_coronavirus_deaths
-                icon: "mdi:emoticon-dead-outline"
-                name: Deaths
-          - type: glance
-            title: Poland
-            show_icon: true
-            show_name: true
-            show_state: true
-            entities:
-              - entity: sensor.poland_coronavirus_confirmed
-                icon: "mdi:emoticon-neutral-outline"
-                name: Confirmed
-              - entity: sensor.poland_coronavirus_current
-                icon: "mdi:emoticon-frown-outline"
-                name: Current
-              - entity: sensor.poland_coronavirus_recovered
-                icon: "mdi:emoticon-happy-outline"
-                name: Recovered
-              - entity: sensor.poland_coronavirus_deaths
-                icon: "mdi:emoticon-dead-outline"
-                name: Deaths
-          - type: glance
-            show_icon: true
-            show_name: true
-            show_state: true
-            title: Worldwide Coronavirus Stats
-            entities:
-              - entity: sensor.covid_19_percentage_recovered
-                name: Recovered
-                icon: mdi:calendar-check-outline
-              - entity: sensor.covid_19_percentage_infected
-                name: Infected
-                icon: mdi:biohazard
-              - entity: sensor.covid_19_percentage_deceased
-                name: Deceased
-                icon: mdi:grave-stone
+
+      # - type: custom:vertical-stack-in-card
+      #   cards:
+      #     - type: glance
+      #       title: Worldwide
+      #       show_icon: true
+      #       show_name: true
+      #       show_state: true
+      #       entities:
+      #         - entity: sensor.worldwide_coronavirus_confirmed
+      #           icon: "mdi:emoticon-neutral-outline"
+      #           name: Confirmed
+      #         - entity: sensor.worldwide_coronavirus_current
+      #           icon: "mdi:emoticon-frown-outline"
+      #           name: Current
+      #         - entity: sensor.worldwide_coronavirus_recovered
+      #           icon: "mdi:emoticon-happy-outline"
+      #           name: Recovered
+      #         - entity: sensor.worldwide_coronavirus_deaths
+      #           icon: "mdi:emoticon-dead-outline"
+      #           name: Deaths
+      #     - type: glance
+      #       title: Poland
+      #       show_icon: true
+      #       show_name: true
+      #       show_state: true
+      #       entities:
+      #         - entity: sensor.poland_coronavirus_confirmed
+      #           icon: "mdi:emoticon-neutral-outline"
+      #           name: Confirmed
+      #         - entity: sensor.poland_coronavirus_current
+      #           icon: "mdi:emoticon-frown-outline"
+      #           name: Current
+      #         - entity: sensor.poland_coronavirus_recovered
+      #           icon: "mdi:emoticon-happy-outline"
+      #           name: Recovered
+      #         - entity: sensor.poland_coronavirus_deaths
+      #           icon: "mdi:emoticon-dead-outline"
+      #           name: Deaths
+      #     - type: glance
+      #       show_icon: true
+      #       show_name: true
+      #       show_state: true
+      #       title: Worldwide Coronavirus Stats
+      #       entities:
+      #         - entity: sensor.covid_19_percentage_recovered
+      #           name: Recovered
+      #           icon: mdi:calendar-check-outline
+      #         - entity: sensor.covid_19_percentage_infected
+      #           name: Infected
+      #           icon: mdi:biohazard
+      #         - entity: sensor.covid_19_percentage_deceased
+      #           name: Deceased
+      #           icon: mdi:grave-stone
       - type: custom:vertical-stack-in-card
         cards:
           - type: custom:auto-entities
@@ -414,3 +415,114 @@ cards:
           #           battery_level: "<=25"
           #       - attributes:
           #           battery: "<=25"
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                title: Temperature
+                update_interval: 120
+                entities:
+                  - sensor.outside_home_air_pm_sensor_temperature
+                color_thresholds:
+                  - color: "#0000ff"
+                    value: 15
+                  - color: "#00ff00"
+                    value: 21
+                  - color: "#ffb347"
+                    value: 26
+                  - color: "#ff0000"
+                    value: 30
+                  - color: "#FF00FF"
+                    value: 35
+                # height: 75
+                hour24: true
+                hours_to_show: 48
+                line_color: var(--primary-color)
+                location_icon: left
+                location_state: center
+                show:
+                  extrema: false
+                  fill: fade
+              - type: custom:mini-graph-card
+                title: Humidity
+                update_interval: 120
+                entities:
+                  - sensor.outside_home_air_pm_sensor_humidity
+                # color_thresholds_transition: hard
+                color_thresholds:
+                  - color: "#ff0000"
+                    value: 0
+                  - color: "#ffb347"
+                    value: 40
+                  - color: "#00ff00"
+                    value: 60
+                  - color: "#0000ff"
+                    value: 90
+                # height: 75
+                hour24: true
+                hours_to_show: 48
+                line_color: var(--primary-color)
+                location_icon: left
+                location_state: center
+                show:
+                  extrema: false
+                  fill: fade
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                title: Outside home air pm sensor
+                update_interval: 120
+                entities:
+                  - sensor.outside_home_air_pm_sensor_pm2_5
+                  - sensor.outside_home_air_pm_sensor_pm10
+                # color_thresholds_transition: hard
+                color_thresholds:
+                  - color: "#00ff00"
+                    value: 0
+                  - color: "#ffb347"
+                    value: 15
+                  - color: "#ff0000"
+                    value: 35
+                  - color: "#FF00FF"
+                    value: 100
+                  # - color: "#0000ff"
+                  #   value: 30
+                height: 75
+                hour24: true
+                hours_to_show: 76
+                line_color: var(--primary-color)
+                location_icon: left
+                location_state: center
+                show:
+                  extrema: false
+                  fill: fade
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-graph-card
+                title: Maslice air pm sensor
+                update_interval: 120
+                entities:
+                  - sensor.air_quality_pm_maslice_25
+                  - sensor.air_quality_pm_maslice_10
+                # color_thresholds_transition: hard
+                color_thresholds:
+                  - color: "#00ff00"
+                    value: 0
+                  - color: "#ffb347"
+                    value: 15
+                  - color: "#ff0000"
+                    value: 35
+                  - color: "#FF00FF"
+                    value: 100
+                  # - color: "#0000ff"
+                  #   value: 30
+                height: 75
+                hour24: true
+                hours_to_show: 76
+                line_color: var(--primary-color)
+                location_icon: left
+                location_state: center
+                show:
+                  extrema: false
+                  fill: fade

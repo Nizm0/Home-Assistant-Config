@@ -7,11 +7,9 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - type: entity-button
+          - type: light
             entity: light.hallway_top_light
             state_color: true
-            hold_action: more-info
-            tap_action: toggle
           - type: light
             entity: light.hallway_gateway_light
       - type: horizontal-stack
@@ -23,8 +21,8 @@ cards:
             name: Temperature
             severity:
               green: 18
-              red: 30
               yellow: 25
+              red: 30
             theme: default
             unit: C
           - type: gauge
@@ -34,8 +32,8 @@ cards:
             name: Humidity
             severity:
               green: 30
-              red: 60
               yellow: 50
+              red: 60
             theme: default
             unit: "%"
   - entities:

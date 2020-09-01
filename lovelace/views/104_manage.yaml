@@ -17,6 +17,8 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.pve_hassos_running
         secondary_info: last-changed
+      - entity: sensor.hassos_uptime
+        secondary_info: last-changed
       - entity: binary_sensor.pve_hassosbeta_running
         secondary_info: last-changed
       - entity: binary_sensor.pve_hassosdev_running
@@ -31,6 +33,20 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.remote_ui
         secondary_info: last-changed
+      - type: custom:mini-graph-card
+        title: HASS Uptime 76h
+        animate: false
+        entities:
+          - sensor.hassos_uptime
+        height: 100
+        hour24: true
+        hours_to_show: 76
+        align_icon: left
+        align_state: center
+        show:
+          extrema: true
+          fill: true
+          title: true
   - type: entities
     title: My Title
     entities:
@@ -42,9 +58,13 @@ cards:
       - entity: sensor.nginx_manager_status
         type: 'custom:secondaryinfo-entity-row'
         secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: switch.nginx_proxy
+        secondary_info: last-changed
       - entity: sensor.esphome_status
         type: 'custom:secondaryinfo-entity-row'
         secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: switch.esp_home
+        secondary_info: last-changed
       - entity: sensor.samba_status
         type: 'custom:secondaryinfo-entity-row'
         secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
@@ -64,6 +84,16 @@ cards:
           - value: 66
             color: '#bf9540'
           - value: 100
+            color: '#bf4040'
+      - type: custom:bar-card
+        entity: sensor.maria_ha_db_size
+        max: 2000
+        severity:
+          - value: 1000
+            color: '#40bf40'
+          - value: 1500
+            color: '#bf9540'
+          - value: 2000
             color: '#bf4040'
       - type: custom:bar-card
         entity: sensor.memory_use_percent
@@ -170,8 +200,9 @@ cards:
     direction: up
     entities:
       - entity: sensor.mfc_j200_black_ink_remaining
-        title: Black
+        name: Black
         color: black
+        icon: mdi:water
         background_style:
           background: '#515151'
           opacity: 1
@@ -181,9 +212,12 @@ cards:
             color: red
           - value: 100
             color: black
+        positions:
+          icon: inside
       - entity: sensor.mfc_j200_magenta_ink_remaining
-        title: Magenta
+        name: Magenta
         color: magenta
+        icon: mdi:water
         background_style:
           background: magenta
           opacity: 1
@@ -193,9 +227,12 @@ cards:
             color: red
           - value: 100
             color: magenta
+        positions:
+          icon: inside
       - entity: sensor.mfc_j200_yellow_ink_remaining
-        title: Yellow
+        name: Yellow
         color: yellow
+        icon: mdi:water
         background_style:
           background: yellow
           opacity: 1
@@ -205,9 +242,12 @@ cards:
             color: red
           - value: 100
             color: '#F7F96C'
+        positions:
+          icon: inside
       - entity: sensor.mfc_j200_cyan_ink_remaining
-        title: Cyan
+        name: Cyan
         color: cyan
+        icon: mdi:water
         background_style:
           background: cyan
           opacity: 1
@@ -217,6 +257,17 @@ cards:
             color: red
           - value: 100
             color: cyan
+        positions:
+          icon: inside
+    style: |-
+      bar-card-value {
+        margin: 0px;
+      }
+      bar-card-value {
+        margin-top: auto;
+        margin-bottom: auto;
+        font-weight: bold;
+      }
     # severity:
     #   - value: 15
     #     color: red #var(--bar-red)

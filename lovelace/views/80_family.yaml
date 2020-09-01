@@ -83,11 +83,11 @@ cards:
       - home
       - Home
   - entities:
-      - entity: sensor.nizm0_ariela_alarm_sensor
+      - entity: sensor.nizm0_oneplus3_next_alarm
       # - entity: sensor.galaxy_s9_alarm_sensor
     type: entities
   - entities:
-      - entity: sensor.nizm0_ariela_alarm_sensor
+      - entity: sensor.nizm0_oneplus3_next_alarm
       # - entity: sensor.galaxy_s9_alarm_sensor
     hours_to_show: 120
     refresh_interval: 60

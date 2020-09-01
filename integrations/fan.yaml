@@ -6,11 +6,11 @@
 # https://www.home-assistant.io/integrations/fan.xiaomi_miio/
 
 fan:
-  # - platform: xiaomi_miio
-  #   name: Air Purifier
-  #   host: 192.168.1.151
-  #   token: !secret xiaomi_airpurifierr_key
-  #   model: zhimi.airpurifier.ma4
+  - platform: xiaomi_miio
+    name: Air Purifier
+    host: 192.168.1.151
+    token: !secret xiaomi_airpurifierr_key
+    model: zhimi.airpurifier.ma4
   - platform: xiaomi_miio
     name: Air Humidifier
     host: 192.168.1.152

@@ -14,42 +14,25 @@ cards:
         cards:
           - type: horizontal-stack
             cards:
-              - type: entity-button
+              - type: light
                 state_color: true
                 entity: light.living_room_general_light
-                hold_action:
-                  action: more-info
-                tap_action:
-                  action: toggle
-              - type: entity-button
+              - type: light
                 state_color: true
                 entity: light.living_room_directional_light
-                hold_action:
-                  action: more-info
-                tap_action:
-                  action: toggle
-              - type: entity-button
+              - type: light
                 state_color: true
                 entity: light.living_room_top_light
-                hold_action:
-                  action: more-info
-                tap_action:
-                  action: toggle
                 icon: mdi:led-strip-variant
           - type: horizontal-stack
             cards:
-              - type: entity-button
+              - type: light
                 state_color: true
                 entity: light.tv_ambilights
-                hold_action:
-                  action: more-info
-                tap_action:
-                  action: toggle
                 icon: mdi:spotlight
+              - type: custom:gap-card
               - type: light
-                entity: light.living_room
-              - type: light
-                entity: light.ligt_strip_1
+                entity: light.light_strip_1
                 icon: mdi:led-strip-variant
           - type: horizontal-stack
             cards:
@@ -61,13 +44,13 @@ cards:
                 # tap_action:
                 #   action: toggle
               # - type: custom:gap-card
-              - type: entity-button
+              - type: light
                 state_color: true
                 entity: light.christmas_tree
-                hold_action:
-                  action: more-info
-                tap_action:
-                  action: toggle
+                # hold_action:
+                #   action: more-info
+                # tap_action:
+                #   action: toggle
                 icon: mdi:pine-tree
               - type: entity-button
                 state_color: true
@@ -78,7 +61,23 @@ cards:
                 #   action: toggle
           - type: horizontal-stack
             cards:
-              - type: custom:gap-card
+              - type: custom:button-card
+                entity: fan.air_purifier
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                show_icon: true
+                show_name: true
+                state:
+                  - value: 'on'
+                    spin: true
+                label: >
+                  [[[
+                    var bri = states['fan.air_purifier'].attributes.aqi;
+                    return 'Air AQI: ' + (bri ? bri : '0');
+                  ]]]
+                show_label: true
               - type: custom:button-card
                 entity: fan.air_humidifier
                 hold_action:
@@ -108,6 +107,34 @@ cards:
                 #         }
               - type: light
                 entity: light.desctop_lamp
+          - type: horizontal-stack
+            cards:
+              - type: custom:mini-humidifier
+                entity: fan.air_humidifier
+                led_button:
+                  type: dropdown
+                  source:
+                    bright: 'Bright'
+                    dim: 'Dim'
+                    'off': 'Off'
+          # - type: horizontal-stack
+          #   cards:
+              # - type: 'custom:air-filter'
+              #   modes:
+              #     - auto
+              #     - silent
+              #     - Strong
+              #   entity: fan.air_purifier
+              #   title: air_filter
+              #   aspect_ratio: '.6'
+          #     - type: custom:mini-humidifier
+          #       entity: fan.air_purifier
+          #       led_button:
+          #         type: dropdown
+          #         source:
+          #           bright: 'Bright'
+          #           dim: 'Dim'
+          #           'off': 'Off'
           - type: horizontal-stack
             cards:
               - type: gauge
@@ -239,48 +266,51 @@ cards:
           - type: horizontal-stack
             cards:
               - type: plant-status
+                entity: plant.third_plant
+                name: Third
+              - type: plant-status
                 entity: plant.fourth_plant
                 name: Fourth
-              - type: plant-status
-                entity: plant.fifth_plant
-                name: Fifth
           - type: horizontal-stack
             cards:
               - type: plant-status
+                entity: plant.fifth_plant
+                name: Fifth
+              - type: plant-status
                 entity: plant.sixth_plant
                 name: Sixth
-              - type: custom:gap-card
-      - type: custom:mini-graph-card
-        title: Temperature
-        # animate: true
-        color_thresholds:
-          - color: "#0000ff"
-            value: 17
-          - color: "#00ff00"
-            value: 22
-          - color: "#ffb347"
-            value: 26
-          - color: "#ff0000"
-            value: 30
-          - color: "#FF00FF"
-            value: 35
-        entities:
-          - sensor.miflora_temperature_4
-          - sensor.miflora_temperature_3
-        height: 75
-        hour24: true
-        hours_to_show: 48
-        line_color: var(--primary-color)
-        location_icon: left
-        location_state: center
-        show:
-          extrema: true
-          fill: fade
-      # - entity: camera.sonoff_gk_200mp2_b_rtsp
-      #   show_state: true
-      #   type: picture-entity
-      #   state_filter:
-      #     - null
+              # - type: custom:gap-card
+      # - type: custom:mini-graph-card
+      #   title: Temperature
+      #   # animate: true
+      #   color_thresholds:
+      #     - color: "#0000ff"
+      #       value: 17
+      #     - color: "#00ff00"
+      #       value: 22
+      #     - color: "#ffb347"
+      #       value: 26
+      #     - color: "#ff0000"
+      #       value: 30
+      #     - color: "#FF00FF"
+      #       value: 35
+      #   entities:
+      #     - sensor.miflora_temperature_4
+      #     - sensor.miflora_temperature_3
+      #   height: 75
+      #   hour24: true
+      #   hours_to_show: 48
+      #   line_color: var(--primary-color)
+      #   location_icon: left
+      #   location_state: center
+      #   show:
+      #     extrema: true
+      #     fill: fade
+      - entity: camera.sonoff_gk_200mp2_b_rtsp
+        show_state: true
+        type: picture-entity
+        state_filter:
+          - null
       # - entity: camera.sonoff_gk_200mp2_b_mjpg
       #   show_state: true
       #   type: picture-entity
@@ -302,9 +332,3 @@ cards:
         # show_state: true
         # state_filter:
         #   - null
-      - type: picture-entity
-        entity: camera.sonoff_gk_200mp2_b_rtsp
-        show_state: true
-        aspect_ratio: 56.25
-        state_filter:
-          - null

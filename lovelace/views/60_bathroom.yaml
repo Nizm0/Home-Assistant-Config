@@ -1,3 +1,4 @@
+---
 icon: "mdi:shower"
 id: 3
 path: bathroom
@@ -8,20 +9,11 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - type: entity-button
+          - type: light
             entity: light.bathroom_top_light
             state_color: true
-            hold_action:
-              action: more-info
-            tap_action:
-              action: toggle
-          - type: entity-button
-            entity: binary_sensor.bathroom_motion_sensor
-            state_color: true
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
+          - type: light
+            entity: light.bathroom_over_bath
           - type: entity-button
             entity: binary_sensor.washer_vibration
             state_color: true
@@ -39,7 +31,7 @@ cards:
             tap_action:
               action: more-info
           - type: entity-button
-            entity: sensor.bathroom_illumination
+            entity: binary_sensor.washer_vibration
             state_color: true
             hold_action:
               action: none
@@ -136,3 +128,9 @@ cards:
     detail: 2
     entity: sensor.bathroom_pressure
     graph: line
+  - entity: camera.sonoff_gk_200mp2_b_rtsp
+    show_state: true
+    camera_view: live
+    type: picture-entity
+    state_filter:
+      - null

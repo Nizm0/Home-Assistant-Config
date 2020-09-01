@@ -23,10 +23,10 @@ breakpoints:
   tablet: 1024
 template: |
   <li>
-    {% if now().hour < 5 %} Good Night! {{’\U0001F634’}}
-    {% elif now().hour < 12 %} Good Morning! {{’\u2615\uFE0F’}}
-    {% elif now().hour < 18 %} Good Afternoon! {{’\U0001F44B\U0001F3FB’}}
-    {% else %} Good Evening! {{’\U0001F44B\U0001F3FB’}}{% endif %}
+    {% if now().hour < 5 %} Good Night! {{"\U0001F634"}}
+    {% elif now().hour < 12 %} Good Morning! {{"\u2615\uFE0F"}}
+    {% elif now().hour < 18 %} Good Afternoon! {{"\U0001F44B\U0001F3FB"}}
+    {% else %} Good Evening! {{"\U0001F44B\U0001F3FB"}}{% endif %}
   </li>
 
 bottomCard:
@@ -35,15 +35,19 @@ bottomCard:
     cards:
       - type: horizontal-stack
         cards:
-          - type: custom:simple-weather-card
+          - type: weather-forecast
             entity: weather.dark_sky
-            backdrop: true
-            primary_info:
-              - wind_bearing
-              - humidity
-            secondary_info:
-              - precipitation
-              - precipitation_probability
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: custom:simple-weather-card
+      #       entity: weather.dark_sky
+      #       backdrop: true
+      #       primary_info:
+      #         - wind_bearing
+      #         - humidity
+      #       secondary_info:
+      #         - precipitation
+      #         - precipitation_probability
       - type: horizontal-stack
         cards:
           - type: custom:air-visual-card

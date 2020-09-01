@@ -1,6 +1,6 @@
 substitutions:
-  hostname: sonoff_hallway_light
-  plug_name: Sonoff Hallway Light
+  hostname: sonoff_bathroom_light
+  plug_name: Sonoff Bathroom Light
   entity_name: Top Light
   reboot_time: 2min
   ssid: !secret wifi_ssid
@@ -31,7 +31,7 @@ sensor:
     icon: mdi:clock-outline
   # WiFi Signal sensor
   - platform: wifi_signal
-    name: ${plug_name} Wifi Signal
+    name: ${plug_name} Wifi_Signal
     update_interval: 30s
     icon: mdi:wifi
 

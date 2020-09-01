@@ -8,10 +8,11 @@ cards:
     cards:
       - type: horizontal-stack
         cards:
-          - entity: light.bedroom_main_light
-            type: light
-          - entity: light.bedroom_main_light_2
-            type: light
+          - type: light
+            entity: light.bedroom_main_light
+          - type: custom:gap-card
+          # - entity: light.bedroom_main_light_2
+          #   type: light
           - type: entity-button
             state_color: true
             entity: binary_sensor.bedroom_motion_sensor

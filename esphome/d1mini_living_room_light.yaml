@@ -7,7 +7,7 @@ substitutions:
 esphome:
   name: $hostname
   platform: ESP8266
-  board: esp01_1m
+  board: nodemcuv2 #esp01_1m
   board_flash_mode: dout
 
 wifi:
@@ -32,6 +32,38 @@ switch:
   - platform: restart
     name: "Reboot Living Room Swith"
     id: living_room_swith_restart
+  - platform: template
+    # pin:
+    #   number: D4 #GPIO2
+    #   mode: INPUT_PULLUP
+    #   inverted: True
+    name: Living Room switch 2
+    internal: false
+    id: template_swi
+    # icon: mdi:lightbulb
+    lambda: |-
+      if (id(bin_gpio02).state) {
+        return true;
+      } else {
+        return false;
+      }
+  # - platform: template
+  #   name: Living Room switch 2
+  #   internal: false
+  #   id: template_swi
+  #   icon: mdi:lightbulb
+  #   lambda: |-
+  #     if (id(light2).state) {
+  #       return true;
+  #     } else {
+  #       return false;
+  #     }
+    # on_state:
+    #   then:
+    #     - light.toggle: light2
+    # on_release:
+    #   then:
+    #     - light.toggle: light2
   # - platform: output
   #   name: "Desk Lamp Switch"
   #   output: relay1
@@ -86,14 +118,16 @@ binary_sensor:
       number: GPIO2
       mode: INPUT_PULLUP
       inverted: True
-    name: Living Room Swith 2
-    internal: true
-    on_state:
-      then:
-        - light.toggle: light2
+    name: Living Room Bonary Sensor switch 2
+    internal: false
+    id: bin_gpio02
+    # icon: mdi:lightbulb
+    # on_state:
+    #   then:
+    #     - switch.toggle: template_swi
     # on_release:
     #   then:
-    #     - light.toggle: light2
+    #     - switch.toggle: template_swi
   - platform: gpio
     pin: 
       number: GPIO15
@@ -126,7 +160,7 @@ light:
     name: General Light
     id: light1
     output: relay1
-    restore_mode: RESTORE_DEFAULT_ON
+    restore_mode: RESTORE_DEFAULT_OFF
     # on_on:
     #   then:
     #   - delay: 3sec
@@ -136,6 +170,7 @@ light:
     id: light2
     output: relay2
     restore_mode: RESTORE_DEFAULT_ON
+    internal: false
   - platform: binary
     name: Living Room Light 3
     id: light3

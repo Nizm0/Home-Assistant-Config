@@ -53,3 +53,64 @@
       entity_id: media_player.living_room_speaker
       message: Drzzs is now online
     service: tts.cloud_say
+- id: '1590066631245'
+  alias: Kitchen turn on light on motion on
+  description: ''
+  trigger:
+  - device_id: 90da5d057bd74a93bf3ca888305d9db8
+    domain: binary_sensor
+    entity_id: binary_sensor.kitchen_motion_sensor
+    platform: device
+    type: motion
+  condition:
+  - condition: or
+    conditions:
+    - before: sunrise
+      condition: sun
+    - after: sunset
+      after_offset: -01:00:00
+      condition: sun
+    - below: 50
+      condition: device
+      device_id: 90da5d057bd74a93bf3ca888305d9db8
+      domain: sensor
+      entity_id: sensor.kitchen_illumination
+      type: is_illuminance
+  action:
+  - device_id: 5a8b0915e5834d4b91341ea4a1c71f07
+    domain: light
+    entity_id: light.kitchen_top_light
+    type: turn_on
+  mode: single
+- id: '1590066700654'
+  alias: Kitchen turn off light on motion off
+  description: ''
+  trigger:
+  - device_id: 90da5d057bd74a93bf3ca888305d9db8
+    domain: binary_sensor
+    entity_id: binary_sensor.kitchen_motion_sensor
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    platform: device
+    type: no_motion
+  condition: []
+  action:
+  - device_id: 5a8b0915e5834d4b91341ea4a1c71f07
+    domain: light
+    entity_id: light.kitchen_top_light
+    type: turn_off
+  mode: single
+- id: '1591536466380'
+  alias: Turn on/off Living Room Directional Lights
+  description: ''
+  trigger:
+  - entity_id: switch.living_room_switch_2
+    platform: state
+  condition: []
+  action:
+  - device_id: 15a7dd19261a492083929bbfeaa572b3
+    domain: light
+    entity_id: light.living_room_directional_light
+    type: toggle

@@ -31,7 +31,7 @@ sensor:
 switch:
   - platform: restart
     name: "Reboot Kids Top Light"
-    id: kids_top_ligts_restart
+    id: kids_top_lights_restart
 
 binary_sensor:
   - platform: gpio
@@ -55,14 +55,14 @@ binary_sensor:
         - ON for at most 0.5s
         - OFF for at least 0.2s
       then:
-        - switch.turn_on: kids_top_ligts_restart
+        - switch.turn_on: kids_top_lights_restart
 
 light:
   - platform: binary
     name: Top Light
     id: light1
     output: relay1
-    restore_mode: RESTORE_DEFAULT_ON
+    restore_mode: RESTORE_DEFAULT_OFF
 
 output:
   - platform: gpio

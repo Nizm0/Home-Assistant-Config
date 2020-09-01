@@ -15,18 +15,18 @@ exceptions:
     config:
       hide_config: true
       hide_help: true
-      hide_tabs:
-        - 1
-        - 10 to 14
+      # hide_tabs:
+      #   - 1
+      #   - 10 to 14
   - conditions:
       user: Tablet
     config:
       hide_config: true
       hide_help: true
       hide_unused: true
-      hide_tabs:
-        - 1
-        - 10 to 14
+      # hide_tabs:
+      #   - 1
+      #   - 10 to 14
   - conditions:
       query_string: kiosk
     config:
