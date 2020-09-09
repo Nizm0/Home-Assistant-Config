@@ -1,6 +1,6 @@
 automation:
   - alias: Battery alert
-    id: battery_alert
+    id: 651e8ac2-412f-4a05-999f-bd2ac69a80d6
     initial_state: 'off'
     trigger:
       - platform: time

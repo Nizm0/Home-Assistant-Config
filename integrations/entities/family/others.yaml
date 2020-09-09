@@ -1,5 +1,5 @@
 automation:
-  - id: portex_entered_the_home
+  - id: 6ebec726-4af1-4d04-a0a2-ba191ab6c892
     alias: Krzychu entered the home
     initial_state: 'true'
     trigger: 

@@ -1,7 +1,7 @@
 badges:
 path: manage
 title: Manage
-icon: mdi:settings
+icon: mdi:cog
 # theme: darked
 cards:
   - type: entities
@@ -48,12 +48,17 @@ cards:
           fill: true
           title: true
   - type: entities
-    title: My Title
+    title: Addons status
     entities:
       - entity: sensor.appdaemon_status
         type: 'custom:secondaryinfo-entity-row'
         secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
       - entity: switch.appdaemon
+        secondary_info: last-changed
+      - entity: sensor.deconz_status
+        type: 'custom:secondaryinfo-entity-row'
+        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+      - entity: switch.deconz
         secondary_info: last-changed
       - entity: sensor.nginx_manager_status
         type: 'custom:secondaryinfo-entity-row'

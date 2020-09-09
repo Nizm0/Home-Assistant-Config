@@ -73,11 +73,15 @@ binary_sensor:
 
 automation:
   - alias: Notify if new devices
-    id: notify_if_new_devices
+    id: 57ab6d01-befd-4d82-a54b-736f59162ce0
     initial_state: 'true'
     trigger:
       - platform: event
         event_type: device_tracker_new_device
+    # condition:
+    #   - platform: template
+    #     value_template: >-
+    #       {{ not trigger.event.data.host_name|string|regex_search('_7E_FB', ignorecase=True)}}
     action:
       - service: notify.pushbullet_nizmo
         data_template:
@@ -128,6 +132,7 @@ automation:
     - service: hangouts.reconnect
 
   - alias: Notify on Hass start
+    id: e7d39900-0d31-4144-8b43-bf616b015a56
     initial_state: 'true'
     trigger:
       - event: start
@@ -148,3 +153,31 @@ automation:
           title: Hass IO
           data:
             tag: 'hass-os-notify'
+
+  - alias: Restart after 1min when Hass started and plugins are up and entity unavailable
+    id: 5f7af4f5-0665-49af-9374-a2dce9a4477d
+    initial_state: 'true'
+    trigger:
+      - event: start
+        platform: homeassistant
+    condition:
+    action:
+      - delay: 0:05
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: light.living_room_general_light
+            state: 'unavailable'
+          - condition: numeric_state
+            entity_id: sensor.hassos_uptime
+            above: 0.02
+          - condition: state
+            entity_id: sensor.esphome_status
+            state: 'on'
+          - condition: state
+            entity_id: sensor.nginx_manager_status
+            state: 'on'
+          - condition: state
+            entity_id: sensor.deconz_status
+            state: 'on'
+      - service: homeassistant.restart

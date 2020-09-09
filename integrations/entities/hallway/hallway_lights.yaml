@@ -3,7 +3,7 @@
 automation:
   #### MOTION BEGUN
   - alias: Hallway motion detected
-    id: hallway_motion_detected
+    id: 848853b1-d2ec-4019-9bb5-b220c96cd509
     initial_state: 'true'
     trigger:
     - platform: state
@@ -35,7 +35,7 @@ automation:
 
   #### MOTION OVER
   - alias: Hallway motion over
-    id: hallway_motion_over
+    id: 68c295a8-6ca6-4441-8bb0-fff1b025bd5c
     initial_state: 'true'
     trigger:
     - platform: state

@@ -21,12 +21,20 @@ cards:
   #     action: more-info
   - type: custom:vertical-stack-in-card
     cards:
-      - type: custom:button-card
-        icon: mdi:restart
-        name: HA restart
-        tap_action:
-          action: call-service
-          service: homeassistant.restart
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            icon: mdi:restart
+            name: HA restart
+            tap_action:
+              action: call-service
+              service: homeassistant.restart
+          - type: custom:button-card
+            icon: mdi:refresh
+            name: Deconz refresh
+            tap_action:
+              action: call-service
+              service: deconz.device_refresh
   - type: entities
     state_color: true
     entities:
@@ -325,21 +333,21 @@ cards:
         - attr_as_list: tomorrow
           modify: x.end
           name: expire
-  - type: custom:vertical-stack-in-card
-    cards:
-      - type: custom:mini-media-player
-        entity: media_player.gmusic_player
-        artwork: cover
-        artwork_border: true
-        show_source: true
+  # - type: custom:vertical-stack-in-card
+  #   cards:
+  #     - type: custom:mini-media-player
+  #       entity: media_player.gmusic_player
+  #       artwork: cover
+  #       artwork_border: true
+  #       show_source: true
 
 
-      - type: entities
-        entities:
-          - entity: input_select.gmusic_player_source
-          - entity: input_select.gmusic_player_playlist
-          - entity: input_select.gmusic_player_station
-          - entity: input_select.gmusic_player_speakers
+  #     - type: entities
+  #       entities:
+  #         - entity: input_select.gmusic_player_source
+  #         - entity: input_select.gmusic_player_playlist
+  #         - entity: input_select.gmusic_player_station
+  #         - entity: input_select.gmusic_player_speakers
   - type: custom:vertical-stack-in-card
     cards:
       - type: horizontal-stack

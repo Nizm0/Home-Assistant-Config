@@ -1,5 +1,5 @@
 automation:
-  - id: michal_is_out_from_work
+  - id: 455065b4-fd71-4406-ad40-c714718a99db
     alias: Michał is out from Work
     initial_state: "true"
     trigger:
@@ -26,7 +26,7 @@ automation:
           message: >
             Current location: {{ state_attr('device_tracker.google_maps_104688658658376260645', 'address') }}
           title: Michał is out from work
-  - id: michal_entered_the_home
+  - id: a3f85958-c4d7-49db-ac72-400006f0121e
     alias: Michał entered the home
     initial_state: "true"
     trigger:
@@ -49,7 +49,7 @@ automation:
           message: >
             New value is: {{ trigger.to_state.state }}
           title: Michał entered the home
-  - id: 589437twnoe86ogw6pw
+  - id: 07435202-f585-4a7d-a431-16b872ac8723
     alias: Time to go home
     initial_state: "true"
     trigger:

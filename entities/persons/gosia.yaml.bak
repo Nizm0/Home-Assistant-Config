@@ -1,7 +1,7 @@
 ---
 name: Gosia
 id: gosia
-# user_id: !secret user_id_frenck
+user_id: !secret user_id_gosia
 device_trackers:
   - device_tracker.google_maps_109218123589188227395
   - device_tracker.gosia_galaxy_s9

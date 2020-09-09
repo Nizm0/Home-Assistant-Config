@@ -1,5 +1,6 @@
 automation:
   - alias: Sonof Camera record
+    id: c33488d7-4e9f-438b-9d14-050db3c83f86
     initial_state: 'true'
     trigger:
     - platform: state

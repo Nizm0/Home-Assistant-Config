@@ -150,7 +150,7 @@ input_datetime:
 
 automation:
   - alias: Notify when temperature is to hight or to low
-    id: notify_when_temperature_is_to_hight_or_to_low
+    id: 4141ad64-5424-4d1c-8ade-7f5531a96e6b
     initial_state: "true"
     trigger:
       platform: state
@@ -175,7 +175,7 @@ automation:
       #     message: "({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params"
       #     title: "Problem with Temperature in {{ trigger.to_state.attributes.friendly_name }}"
   - alias: Notify on sun change
-    id: notify_on_sun_change
+    id: b301f9f6-1f06-4858-b04c-8a0e3b5956d2
     initial_state: "true"
     trigger:
       - event: sunrise
@@ -192,7 +192,7 @@ automation:
             tag: sun-state-change
 
   - alias: Motion detected in empty home
-    id: motion_detected_in_empty_home
+    id: adfcc93b-5a94-4a6c-8fcb-84acbdf8597d
     initial_state: "true"
     trigger:
       - platform: state
@@ -221,3 +221,12 @@ automation:
           title: Someone walking in empty home
           message: >
             ({{ states('sensor.date_time_iso') }}) Motion detected in: {{ trigger.to_state.attributes.friendly_name }}
+
+  # - alias: Turn off all light when home is empty after restart
+  #   id: ff79109b-b88c-4987-a361-b2b422335a24
+  #   initial_state: 'true'
+  #   trigger:
+  #     - event: start
+  #       platform: homeassistant
+  #   action:
+  #     - 

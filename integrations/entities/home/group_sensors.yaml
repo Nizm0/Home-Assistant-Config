@@ -37,7 +37,7 @@ script:
 
 automation:
   - alias: Startup Stuff - Notifications
-    # id: cea3ed9689054b0dasdadadsasdw
+    id: 5f28f927-56c7-4867-98fb-7d27d0c6e52d
     trigger:
       - event: start
         platform: homeassistant

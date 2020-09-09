@@ -1,5 +1,5 @@
 automation:
-  - id: gosia_entered_the_home
+  - id: ac630c56-6eaa-45e5-9f71-db63e15032b6
     alias: Gosia entered the home
     initial_state: 'true'
     trigger: 

@@ -1,6 +1,6 @@
 automation:
   - alias: Living room top light turned on
-    id: living_room_top_light_turned_on
+    id: c11e9bc8-caf0-40f8-be31-87efcf945614
     initial_state: 'true'
     trigger:
     - platform: state
@@ -24,7 +24,7 @@ automation:
       entity_id: light.living_room_general_light
 
   - alias: Living room light 1 and 2 turned on
-    id: living_room_light_1_and_2_turned_on
+    id: fa44c9fd-be9b-4216-9e8d-e3e9d9d895ef
     initial_state: 'true'
     trigger:
     - platform: state

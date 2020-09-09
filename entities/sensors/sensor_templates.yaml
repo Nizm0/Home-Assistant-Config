@@ -37,7 +37,7 @@ sensors: #!include_dir_merge_named templates
 
 
   in_bed_bayesian_probability:
-    entity_id: binary_sensor.in_bed
+    # entity_id: binary_sensor.in_bed
     value_template: "{{states.binary_sensor.in_bed.attributes.probability * 100}}"
     unit_of_measurement: '%'
 
@@ -80,7 +80,7 @@ sensors: #!include_dir_merge_named templates
   max_recorded_temp:
     friendly_name: Max recorded temperature
     device_class: temperature
-    entity_id: sensor.max_temperature_in_home
+    # entity_id: sensor.max_temperature_in_home
     unit_of_measurement: '°C'
     value_template: >
       {% if states.sensor.max_recorded_temp.state | float > states.sensor.max_temperature_in_home.state | float -%}
@@ -95,20 +95,20 @@ sensors: #!include_dir_merge_named templates
     friendly_name: Humidifier water level
     # device_class: level
     unit_of_measurement: 'mm'
-    entity_id: fan.air_humidifier
+    # entity_id: fan.air_humidifier
     value_template: "{{state_attr('fan.air_humidifier', 'depth')}}"
 
   home_air_purifier_aqi:
     friendly_name: Home air purifier AQI
     # device_class: level
     unit_of_measurement: AQI #µg/m³
-    entity_id: fan.air_purifier
+    # entity_id: fan.air_purifier
     value_template: "{{state_attr('fan.air_purifier', 'aqi')}}"
   home_air_purifier_motor_speed:
     friendly_name: Home air purifier motor_speed
     # device_class: level
     unit_of_measurement: rpm #µg/m³
-    entity_id: fan.air_purifier
+    # entity_id: fan.air_purifier
     value_template: "{{state_attr('fan.air_purifier', 'motor_speed')}}"
 
   air_quality_pm_maslice_25:

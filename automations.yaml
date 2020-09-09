@@ -114,3 +114,40 @@
     domain: light
     entity_id: light.living_room_directional_light
     type: toggle
+- id: '1599140047737'
+  alias: PC Turn off on low power
+  description: ''
+  trigger:
+  - below: 5
+    device_id: 4adc54ca759f4d2085ba563f487cf2b3
+    domain: sensor
+    entity_id: sensor.bw_shp6_01_wattage
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    platform: device
+    type: value
+  condition: []
+  action:
+  - device_id: 4adc54ca759f4d2085ba563f487cf2b3
+    domain: switch
+    entity_id: switch.bw_shp6_01_relay
+    type: turn_off
+  mode: single
+- id: '1599140148066'
+  alias: PC Turn On switch 1 press
+  description: ''
+  trigger:
+  - device_id: afbf7c1c12434200a39ea17187a21356
+    domain: deconz
+    platform: device
+    subtype: turn_on
+    type: remote_button_short_release
+  condition: []
+  action:
+  - device_id: 4adc54ca759f4d2085ba563f487cf2b3
+    domain: switch
+    entity_id: switch.bw_shp6_01_relay
+    type: turn_on
+  mode: single

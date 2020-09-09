@@ -1,5 +1,0 @@
-name: Kindergarden
-latitude: !secret kindergarden_latitude
-longitude: !secret kindergarden_longitude
-radius: 150
-icon: mdi:human-child

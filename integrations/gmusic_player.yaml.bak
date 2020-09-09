@@ -67,7 +67,7 @@ sensor:
         value_template: "{{ states.media_player.gmusic_player.attributes._player_state }}"
 
 
-automation old:
+automation:
   - alias: "gmusic_player_auto_advance"
     initial_state: 'on'
     trigger:

@@ -1,6 +1,6 @@
 automation:
   - alias: Home door opened
-    id: home_door_opened
+    id: 2500790a-b412-4af1-bfc5-e5912827c55e
     initial_state: 'true'
     trigger:
       - platform: state
@@ -38,7 +38,7 @@ automation:
 
   #### HOME DOOR CLOSED
   - alias: Home door closed
-    id: home_door_closed
+    id: 244aae0e-f9af-49d6-991b-2dd9c5e6f929
     initial_state: 'true'
     trigger:
       - platform: state
@@ -54,7 +54,7 @@ automation:
         entity_id: script.home_doors_has_been_closed
 
   - alias: Home door closed notification
-    id: home_door_closed_notification
+    id: 5fce2f0f-c733-499a-889d-cd4b8b345e28
     initial_state: 'true'
     trigger:
       - platform: state
