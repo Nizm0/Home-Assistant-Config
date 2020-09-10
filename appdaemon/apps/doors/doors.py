@@ -67,7 +67,8 @@ class DoorsManager(hass.Hass):
                                     seconds=int(kwargs['ttl']),
                                     entity_name=entity,
                                     ttl=kwargs['ttl'],
-                                    entity_state=new)
+                                    entity_state=new,
+                                    delay=0)
 
   def notifier(self, kwargs):
     friendly_name = self.get_state(kwargs['entity_name'], attribute='friendly_name')

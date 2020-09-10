@@ -60,7 +60,7 @@ PEOPLE = {
 #     # turn on ambient lights
 #     CMD_AMBIENT_LIGHTS_ON = 'CMD_AMBIENT_LIGHTS_ON'
 #     # turn off ambient lights
-#     CMD_AMBIENT_LIGHTS_OFF = 'CMD_AMBIENT_LIGTS_OFF'
+#     CMD_AMBIENT_LIGHTS_OFF = 'CMD_AMBIENT_LightS_OFF'
 
 
 class HouseModes(Enum):

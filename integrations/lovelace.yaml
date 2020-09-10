@@ -20,7 +20,7 @@ lovelace:
     lovelace-manage:
       mode: yaml
       title: Manage
-      icon: mdi:settings
+      icon: mdi:cog
       filename: manage-lovelace.yaml
       show_in_sidebar: true
       require_admin: true

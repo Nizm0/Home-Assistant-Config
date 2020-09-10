@@ -18,7 +18,7 @@ class DeconzHelper(hass.Hass):
       event_data = data["event"]
       event_id = data["id"]
       event_received = datetime.now()
-      self.log("fDeconz event received from {event_id}. Event was: {event_data}")
+      self.log(f"Deconz event received from {event_id}. Event was: {event_data}")
       # self.set_state("sensor.deconz_event", state = event_id, attributes = {"event_data": event_data, "event_received": str(event_received)})
       if event_id in self.args['switch']:
         self.event_button(event_name, data, kwargs)

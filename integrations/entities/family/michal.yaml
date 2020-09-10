@@ -11,7 +11,7 @@ automation:
         #   minutes: 2
     condition:
     action:
-      - service: notify.push_to_chrome
+      - service: notify.mobile_app_gosia_s8
         data_template:
           message: >
             ({{ states('sensor.date_time_iso') }})
@@ -21,6 +21,7 @@ automation:
             icon: https://lh4.googleusercontent.com/-s5iO7HHJJlM/AAAAAAAAAAI/AAAAAAAADC8/ARWGIM9G_r8/photo.jpg
             url: https://maps.google.com/maps/@?api=1&map_action=map&center={{ state_attr('device_tracker.google_maps_104688658658376260645', 'latitude') }},{{ state_attr('device_tracker.google_maps_104688658658376260645', 'longitude') }}&zoom=17
             tag: nizmo-location-info
+            group: Location
       - service: notify.hangouts
         data_template:
           message: >
@@ -36,7 +37,7 @@ automation:
         event: enter
     condition:
     action:
-      - service: notify.push_to_chrome
+      - service: notify.mobile_app_gosia_s8
         data_template:
           message: >
             ({{ states('sensor.date_time_iso') }})
@@ -44,6 +45,7 @@ automation:
           title: Michał entered the home
           data:
             tag: nizmo-location-info
+            group: Location
       - service: notify.hangouts
         data_template:
           message: >
@@ -61,10 +63,11 @@ automation:
         entity_id: device_tracker.google_maps_104688658658376260645
         zone: zone.work
     action:
-      - service: notify.push_to_chrome_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
             New value is: {{ trigger.to_state.state }}
           title: Michał it's time to leave
           data:
             tag: nizmo-location-info
+            group: Location

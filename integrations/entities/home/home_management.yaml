@@ -164,12 +164,13 @@ automation:
       - condition: template
         value_template: '{{ (trigger.to_state.state|float > states.input_number.temp_max.state|float or trigger.to_state.state|float < states.input_number.temp_min.state|float) and trigger.to_state.state != "unavailable" and trigger.to_state.state|float > 0}}'
     action:
-      - service: notify.push_to_chrome
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: ({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params
           title: Problem with Temperature in {{ trigger.to_state.attributes.friendly_name }}
           data:
             tag: room_{{trigger.to_state.attributes.friendly_name}}_temp
+            group: Home
       # - service: persistent_notification.create
       #   data_template:
       #     message: "({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params"
@@ -183,13 +184,14 @@ automation:
       - event: sunset
         platform: sun
     action:
-      - service: notify.push_to_chrome
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
             We have {{ trigger.event }}
           title: Sun is changing state
           data:
             tag: sun-state-change
+            group: Home
 
   - alias: Motion detected in empty home
     id: adfcc93b-5a94-4a6c-8fcb-84acbdf8597d
@@ -216,11 +218,17 @@ automation:
       #   entity_id: vacuum.rockrobo
       #   state: "Empty"
     action:
-      - service: notify.push_to_chrome_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           title: Someone walking in empty home
           message: >
             ({{ states('sensor.date_time_iso') }}) Motion detected in: {{ trigger.to_state.attributes.friendly_name }}
+          data:
+            # channel: motion
+            group: Motion
+            ttl: 0
+            priority: high
+            color: red #'#2DF56D'
 
   # - alias: Turn off all light when home is empty after restart
   #   id: ff79109b-b88c-4987-a361-b2b422335a24

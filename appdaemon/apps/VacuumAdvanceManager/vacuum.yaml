@@ -1,18 +1,23 @@
+---
 vacuum_manager:
   module: vacuum
-  class: VacuumActions
+  class: VacuumAdvanceManager
+  vacuum_entity: vacuum.rockrobo
   tag: home-vacuum-automation
   vacuum_time_entity: input_datetime.vacuum_day_time
-  vacuum_entity: vacuum.rockrobo
   ready_to_vacuum: input_boolean.ready_to_vacuum
   cleaned_area: input_number.vacuum_cleaned_area
-  ocupancy: group.family #"not_home"
+  occupancy: group.family #"not_home"
   home_preset_select: input_select.home_preset #"Empty"
   notifiers:
-    - notify/push_to_chrome_nizm0_oneplus3
+    # - notify/push_to_chrome_nizm0_oneplus3
+    - notify/mobile_app_nizm0_oneplus3
     # - notify/mobile_app_nizm0_s_oneplus_a3003
-  tts: tts/google_say
+  tts_service: tts/cloud_say
+  tts_devices:
+    - media_player.lenovo_tab_10
+    - media_player.living_room_speaker
   emptying_location: [24450,30850]
-  area_befor_emptying: 90
+  area_before_emptying: 90
   # dependencies: globals
-  switch: smart_switch
+  switch: lumi_sensor_switch_48 #smart_switch

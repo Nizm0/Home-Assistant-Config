@@ -102,7 +102,7 @@ automation:
             ({{trigger.event.data.entity_id}})
             {{trigger.event.data.source_type}}
           title: New device tracked
-      - service: notify.push_to_chrome_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
             ({{states('sensor.date_time_iso')}})
@@ -113,6 +113,7 @@ automation:
           title: New device tracked
           data:
             tag: 'new-device-{{trigger.event.data.host_name}}'
+            group: NewDevice
       # - service: notify.home_assistant
       #   data_template:
       #     message: >
@@ -139,7 +140,7 @@ automation:
         platform: homeassistant
     condition: []
     action:
-      - service: notify.push_to_chrome_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
             ({{states('sensor.date_time_iso')}})
@@ -153,6 +154,7 @@ automation:
           title: Hass IO
           data:
             tag: 'hass-os-notify'
+            group: HassStart
 
   - alias: Restart after 1min when Hass started and plugins are up and entity unavailable
     id: 5f7af4f5-0665-49af-9374-a2dce9a4477d

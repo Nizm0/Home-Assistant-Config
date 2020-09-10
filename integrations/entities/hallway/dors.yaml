@@ -9,7 +9,7 @@ automation:
     action:
       - service: homeassistant.turn_on
         entity_id: script.home_doors_has_been_opened
-      - service: notify.push_to_chrome
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template: 
           message: >
             ({{states('sensor.date_time_iso')}})
@@ -34,6 +34,7 @@ automation:
               - action: open_door
                 title: Open door
             tag: 'home-door-notification'
+            group: Home
 
 
   #### HOME DOOR CLOSED
@@ -62,7 +63,7 @@ automation:
         from: 'on'
         to: 'off'
     action:
-      - service: notify.push_to_chrome
+      - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
             ({{states('sensor.date_time_iso')}})

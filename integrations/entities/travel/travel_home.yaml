@@ -1,7 +1,7 @@
-sensor:
-  - platform: waze_travel_time
-    name: Home to Nursery
-    origin: zone.home
-    destination: zone.nursery
-    region: 'EU'
-    vehicle_type: 'car'
+# sensor:
+#   - platform: waze_travel_time
+#     name: Home to Nursery
+#     origin: zone.home
+#     destination: zone.nursery
+#     region: 'EU'
+#     vehicle_type: 'car'
