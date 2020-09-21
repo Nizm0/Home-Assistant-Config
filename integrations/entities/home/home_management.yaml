@@ -225,7 +225,7 @@ automation:
             ({{ states('sensor.date_time_iso') }}) Motion detected in: {{ trigger.to_state.attributes.friendly_name }}
           data:
             # channel: motion
-            group: Motion
+            group: HomeSecurity
             ttl: 0
             priority: high
             color: red #'#2DF56D'

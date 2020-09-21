@@ -1,5 +1,5 @@
 import appdaemon.plugins.hass.hassapi as hass
-from vacuum import VacuumActions
+# from vacuum import VacuumAdvanceManager
 from base import Base
 
 from datetime import datetime, timedelta

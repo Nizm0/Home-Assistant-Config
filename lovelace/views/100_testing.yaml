@@ -211,6 +211,7 @@ cards:
             - entity_id: "*_battery*"
           exclude:
             - entity_id: "*_battery_state"
+            - entity_id: "*_battery_health"
             - state: "unknown"
             - state: "unavailable"
       - type: custom:auto-entities

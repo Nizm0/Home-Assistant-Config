@@ -4,6 +4,8 @@ vacuum_manager:
   class: VacuumAdvanceManager
   vacuum_entity: vacuum.rockrobo
   tag: home-vacuum-automation
+  log_file: vacuum
+  log_level: INFO
   vacuum_time_entity: input_datetime.vacuum_day_time
   ready_to_vacuum: input_boolean.ready_to_vacuum
   cleaned_area: input_number.vacuum_cleaned_area
@@ -15,9 +17,45 @@ vacuum_manager:
     # - notify/mobile_app_nizm0_s_oneplus_a3003
   tts_service: tts/cloud_say
   tts_devices:
-    - media_player.lenovo_tab_10
+    - media_player.lenovo_tab_10_full_kiosk
     - media_player.living_room_speaker
-  emptying_location: [24450,30850]
+  emptying_location: 
+    x: 24450
+    y: 30850
   area_before_emptying: 90
-  # dependencies: globals
-  switch: lumi_sensor_switch_48 #smart_switch
+  switch:
+    - name: smart_switch #smart_switch
+      event_type: deconz_event
+      data_id_name: id
+      event_data_name: event
+      event_data:
+        - action: ready_to_vacuum
+          event: '1002'
+        - action: clean_vacuum
+          event: '1003'
+        - action: start_stop_vacuum
+          event: '1004'
+        - action: emergency_stop
+          event: '1005'
+        - action: emergency_stop
+          event: '1006'
+        - action: emergency_stop
+          event: '1007'
+        - action: emergency_stop
+          event: '1008'
+        - action: emergency_stop
+          event: '1009'
+        - action: emergency_stop
+          event: '1010'
+          # long: ['1003']
+          # double: ['1004']
+          # multi: ['1005', '1006', '1007', '1008', '1009', '1010']
+    - name: '00:12:4b:00:1f:8a:af:63'
+      event_type: zha_event
+      data_id_name: device_ieee
+      event_data_name: command
+      event_data:
+        - action: ready_to_vacuum
+          event: toggle
+        - action: start_stop_vacuum
+          event: 'on'

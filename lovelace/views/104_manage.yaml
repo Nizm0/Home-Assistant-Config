@@ -140,54 +140,54 @@ cards:
   - type: entities
     title: My Computer
     entities:
-      # - binary_sensor.nizmo_pc_connected
-      - camera.nizmo_pc_screen_0
-      - camera.nizmo_pc_screen_1
-      # - script.nizmo_pc_displays_off
-      # - script.nizmo_pc_displays_on
-      # - script.nizmo_pc_hibernate
-      # - script.nizmo_pc_lock
-      # - script.nizmo_pc_logoff
-      # - script.nizmo_pc_notify
-      # - script.nizmo_pc_reboot
-      # - script.nizmo_pc_refresh
-      # - script.nizmo_pc_run_chrome
-      # - script.nizmo_pc_shutdown
-      # - script.nizmo_pc_suspend
-      # - script.nizmo_pc_vol_max
-      # - script.nizmo_pc_vol_mute
-      # - script.nizmo_pc_wake
-      - sensor.nizmo_pc_cpu_usage
-      - sensor.nizmo_pc_current_username
-      - sensor.nizmo_pc_media_volume
-      - binary_sensor.nizmo_pc_media_playing
-      - binary_sensor.nizmo_pc_volume_muted
-      - binary_sensor.nizmo_pc_power_status
-      # - sensor.nizmo_pc_storage_label_c
-      # - sensor.nizmo_pc_storage_label_d
-      - sensor.nizmo_pc_storage_c_total_free_space
-      - sensor.nizmo_pc_storage_c_total_storage
-      - sensor.nizmo_pc_storage_c_usage
-      - sensor.nizmo_pc_storage_d_total_free_space
-      - sensor.nizmo_pc_storage_d_total_storage
-      - sensor.nizmo_pc_storage_d_usage
-      - sensor.nizmo_pc_storage_e_total_free_space
-      - sensor.nizmo_pc_storage_e_total_storage
-      - sensor.nizmo_pc_storage_e_usage
-      - sensor.nizmo_pc_storage_g_total_free_space
-      - sensor.nizmo_pc_storage_g_total_storage
-      - sensor.nizmo_pc_storage_g_usage
-      - sensor.nizmo_pc_system_idle_time
-      - sensor.nizmo_pc_network_0_ipv4
-      - sensor.nizmo_pc_network_0_ipv6
-      - sensor.nizmo_pc_network_0_speed
-      - sensor.nizmo_pc_network_0_bps_sent
-      - sensor.nizmo_pc_network_0_bps_received
-      - binary_sensor.nizmo_pc_network_0_wired
-      - sensor.nizmo_pc_memory_available
-      - sensor.nizmo_pc_memory_total
-      - sensor.nizmo_pc_memory_usage
-      - sensor.nizmo_pc_memory_used
+      # - binary_sensor.nizm0_desctop_connected
+      - camera.nizm0_desctop_screen_0
+      - camera.nizm0_desctop_screen_1
+      # - script.nizm0_desctop_displays_off
+      # - script.nizm0_desctop_displays_on
+      # - script.nizm0_desctop_hibernate
+      # - script.nizm0_desctop_lock
+      # - script.nizm0_desctop_logoff
+      # - script.nizm0_desctop_notify
+      # - script.nizm0_desctop_reboot
+      # - script.nizm0_desctop_refresh
+      # - script.nizm0_desctop_run_chrome
+      # - script.nizm0_desctop_shutdown
+      # - script.nizm0_desctop_suspend
+      # - script.nizm0_desctop_vol_max
+      # - script.nizm0_desctop_vol_mute
+      # - script.nizm0_desctop_wake
+      - sensor.nizm0_desctop_cpu_usage
+      - sensor.nizm0_desctop_current_username
+      # - sensor.nizm0_desctop_media_volume
+      # - binary_sensor.nizm0_desctop_media_playing
+      # - binary_sensor.nizm0_desctop_volume_muted
+      - binary_sensor.nizm0_desctop_power_status
+      # - sensor.nizm0_desctop_storage_label_c
+      # - sensor.nizm0_desctop_storage_label_d
+      - sensor.nizm0_desctop_storage_c_total_free_space
+      - sensor.nizm0_desctop_storage_c_total_storage
+      - sensor.nizm0_desctop_storage_c_usage
+      - sensor.nizm0_desctop_storage_d_total_free_space
+      - sensor.nizm0_desctop_storage_d_total_storage
+      - sensor.nizm0_desctop_storage_d_usage
+      - sensor.nizm0_desctop_storage_e_total_free_space
+      - sensor.nizm0_desctop_storage_e_total_storage
+      - sensor.nizm0_desctop_storage_f_usage
+      - sensor.nizm0_desctop_storage_f_total_free_space
+      - sensor.nizm0_desctop_storage_f_total_storage
+      - sensor.nizm0_desctop_storage_f_usage
+      - sensor.nizm0_desctop_system_idle_time
+      - sensor.nizm0_desctop_network_0_ipv4
+      - sensor.nizm0_desctop_network_0_ipv6
+      - sensor.nizm0_desctop_network_0_speed
+      - sensor.nizm0_desctop_network_0_bps_sent
+      - sensor.nizm0_desctop_network_0_bps_received
+      - binary_sensor.nizm0_desctop_network_0_wired
+      - sensor.nizm0_desctop_memory_available
+      - sensor.nizm0_desctop_memory_total
+      - sensor.nizm0_desctop_memory_usage
+      - sensor.nizm0_desctop_memory_used
       # - switch.nizmo_pc
     show_header_toggle: false
   - type: custom:bar-card

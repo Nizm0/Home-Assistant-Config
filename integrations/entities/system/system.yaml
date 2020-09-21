@@ -156,7 +156,7 @@ automation:
             tag: 'hass-os-notify'
             group: HassStart
 
-  - alias: Restart after 1min when Hass started and plugins are up and entity unavailable
+  - alias: Restart after 1 min when Hass started and plugins are up and entity unavailable
     id: 5f7af4f5-0665-49af-9374-a2dce9a4477d
     initial_state: 'true'
     trigger:
