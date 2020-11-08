@@ -157,6 +157,8 @@ cards:
                   red: 60
                   yellow: 50
                 theme: default
+      - type: thermostat
+        entity: climate.living_room_thermostat
       - type: custom:vertical-stack-in-card
         cards:
           - type: custom:mini-media-player

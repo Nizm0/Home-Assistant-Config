@@ -7,6 +7,9 @@ logger:
     # Log level from STEAM
     homeassistant.components.steam_online: critical
 
+    # Log level from pyscript
+    custom_components.pyscript: info
+
     # # log level for HA core
     # homeassistant.core: fatal
 

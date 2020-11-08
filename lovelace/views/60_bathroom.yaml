@@ -79,6 +79,8 @@ cards:
               green: 30
               red: 60
               yellow: 50
+  # - type: thermostat
+  #   entity: climate.bathroom_valve_climate
   - type: "custom:mini-graph-card"
     title: Temperature
     # animate: true

@@ -86,30 +86,30 @@ automation:
       - service: notify.pushbullet_nizmo
         data_template:
           message: >
-            ({{states('sensor.date_time_iso')}})
             New device:
             {{trigger.event.data.host_name}}
             ({{trigger.event.data.entity_id}})
             {{trigger.event.data.source_type}}
+            ({{states('sensor.date_time_iso')}})
           title: New device tracked
           # target: device/oneplus 3
       - service: persistent_notification.create
         data_template:
           message: >
-            ({{states('sensor.date_time_iso')}})
             New device:
             {{trigger.event.data.host_name}}
             ({{trigger.event.data.entity_id}})
             {{trigger.event.data.source_type}}
+            ({{states('sensor.date_time_iso')}})
           title: New device tracked
       - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
-            ({{states('sensor.date_time_iso')}})
             New device:
             {{trigger.event.data.host_name}}
             {{trigger.event.data.entity_id}}
             {{trigger.event.data.source_type}}
+            ({{states('sensor.date_time_iso')}})
           title: New device tracked
           data:
             tag: 'new-device-{{trigger.event.data.host_name}}'
@@ -143,7 +143,6 @@ automation:
       - service: notify.mobile_app_nizm0_oneplus3
         data_template:
           message: >
-            ({{states('sensor.date_time_iso')}})
             {% if states("sensor.local_ip") == "192.168.1.101" %}
             HassIO have just started
             {% elif states("sensor.local_ip") == "192.168.1.102" %}
@@ -151,6 +150,7 @@ automation:
             {% else %}
             Unknown Hass have just started
             {% endif %}
+            ({{states('sensor.date_time_iso')}})
           title: Hass IO
           data:
             tag: 'hass-os-notify'

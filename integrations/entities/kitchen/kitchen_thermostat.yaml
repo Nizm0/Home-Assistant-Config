@@ -1,0 +1,9 @@
+---
+
+sensor:
+  platform: template
+  sensors:
+    kitchen_valve_position:
+      friendly_name: Kitchen valve position
+      value_template: "{{ state_attr('climate.kitchen_valve_climate', 'position') }}"
+      unit_of_measurement: '%'

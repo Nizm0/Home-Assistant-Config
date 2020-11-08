@@ -1,0 +1,63 @@
+
+- cal_id: p#weather@group.v.calendar.google.com
+  entities:
+  - device_id: weather
+    ignore_availability: true
+    name: Weather
+    track: true
+
+- cal_id: family05058227607438556796@group.calendar.google.com
+  entities:
+  - device_id: familijne
+    ignore_availability: true
+    name: Familijne
+    track: true
+
+- cal_id: nizmoo@gmail.com
+  entities:
+  - device_id: nizmoo_gmail_com
+    ignore_availability: true
+    name: nizmoo@gmail.com
+    track: true
+
+- cal_id: en.polish#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_poland
+    ignore_availability: true
+    name: Holidays in Poland
+    track: true
+
+- cal_id: pl.polish#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: swieta_w_polsce
+    ignore_availability: true
+    name: "\u015Awi\u0119ta w Polsce"
+    track: true
+
+- cal_id: mar3n32f7ibnsqkto1irtk1i48@group.calendar.google.com
+  entities:
+  - device_id: todoist
+    ignore_availability: true
+    name: Todoist
+    track: true
+
+- cal_id: cofv4k010rlmlfd0k0mc7bmfhg@group.calendar.google.com
+  entities:
+  - device_id: drzzs_streams
+    ignore_availability: true
+    name: DrZzs Streams
+    track: true
+
+- cal_id: f6srsloemhvu7s72hqsoo8do04@group.calendar.google.com
+  entities:
+  - device_id: my_streams
+    ignore_availability: true
+    name: My Streams
+    track: true
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: birthdays
+    ignore_availability: true
+    name: Birthdays
+    track: true

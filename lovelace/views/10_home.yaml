@@ -9,6 +9,7 @@ badges:
   - sensor.tv_is_idle_app_runing
   - sensor.netflix_is_on
   - sensor.ps4_is_on
+  - sensor.gosia_parents
   - sensor.nizm0_today_at_work
   - sensor.nizm0_week_work
   - sensor.mold_indicator

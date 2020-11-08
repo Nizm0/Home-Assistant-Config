@@ -171,7 +171,7 @@ cards:
           geo_location_sources:
             - all
           entities:
-            - entity: device_tracker.google_maps_104688658658376260645
+            - entity: person.nizm0
             - entity: device_tracker.google_maps_109218123589188227395
 
       # - entity: camera.front_dor_fish_eye
@@ -518,7 +518,7 @@ cards:
                   y: 26500
             default_mode: predefined_zones
             entity: vacuum.rockrobo
-            map_image: /hacsfiles/xiaomi-vacuum-map-card-mine/home.png
+            map_image: /hacsfiles/lovelace-xiaomi-vacuum-map-card/home.png
             zones:
               - [[22308, 25089, 26658, 29639]]
               - [[22154, 29811, 25354, 32461]]

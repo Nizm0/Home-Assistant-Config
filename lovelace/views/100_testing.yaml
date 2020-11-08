@@ -37,6 +37,7 @@ cards:
               service: deconz.device_refresh
   - type: entities
     state_color: true
+    show_header_toggle: false
     entities:
       # - entity: fan.xiaomi_miio_device
       - entity: group.all_sensors_motion
@@ -75,16 +76,21 @@ cards:
   #     - entity: binary_sensor.remote_ui
   #       secondary_info: last-changed
   - type: entities
+    show_header_toggle: false
     entities:
-      - input_boolean.ready_to_vacuum
-      - input_boolean.ready_to_emptying_vacuum
-      - input_datetime.vacuum_day_time
-      - input_number.vacuum_cleaned_area
-      - sensor.vacuum_battery
-      - sensor.vacuum_filter
-      - sensor.vacuum_main_brush
-      - sensor.vacuum_sensors
-      - sensor.vacuum_side_brush
+      - entity: input_boolean.ready_to_vacuum
+      - entity: input_boolean.going_to_be_emptyied
+      - entity: input_boolean.ready_for_emptying
+      - entity: input_boolean.ready_to_vacuum
+      - entity: input_boolean.waiting_for_emptying
+      - entity: input_boolean.waiting_return_home
+      - entity: input_datetime.vacuum_day_time
+      - entity: input_number.vacuum_cleaned_area
+      - entity: sensor.vacuum_battery
+      - entity: sensor.vacuum_filter
+      - entity: sensor.vacuum_main_brush
+      - entity: sensor.vacuum_sensors
+      - entity: sensor.vacuum_side_brush
   - type: entities
     entities:
       - entity: binary_sensor.washer_vibration
@@ -212,6 +218,7 @@ cards:
           exclude:
             - entity_id: "*_battery_state"
             - entity_id: "*_battery_health"
+            - entity_id: "*_battery_status"
             - state: "unknown"
             - state: "unavailable"
       - type: custom:auto-entities
@@ -459,6 +466,60 @@ cards:
             show:
               extrema: false
               fill: fade
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.bw_shp5_01_switch
+            icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.bw_shp5_01_power
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+          - type: custom:mini-graph-card
+            title: Temperature
+            entities:
+              - sensor.bw_shp5_01_power
+            # color_thresholds:
+            #   - color: "#0000ff"
+            #     value: 15
+            #   - color: "#00ff00"
+            #     value: 21
+            #   - color: "#ffb347"
+            #     value: 26
+            #   - color: "#ff0000"
+            #     value: 30
+            #   - color: "#FF00FF"
+            #     value: 35
+            # height: 75
+            hour24: true
+            hours_to_show: 48
+            line_color: var(--primary-color)
+            location_icon: left
+            location_state: center
+            show:
+              extrema: false
+              fill: fade
 
   - type: custom:auto-entities
     card:
@@ -468,3 +529,39 @@ cards:
       include:
         - entity_id: "automation.*"
           state: "off"
+  - type: 'custom:purifier-card'
+    entity: fan.air_purifier
+    stats:
+      - attribute: filter_life_remaining
+        unit: '%'
+        subtitle: Filter Remaining
+      - attribute: motor_speed
+        unit: RPS
+        subtitle: Motor Speed
+    actions:
+      - name: Silent
+        icon: 'mdi:weather-night'
+        speed: Silent
+      - name: 25%
+        icon: 'mdi:circle-slice-2'
+        speed: Favorite
+        xiaomi_miio_favorite_level: 3
+      - name: 50%
+        icon: 'mdi:circle-slice-4'
+        speed: Favorite
+        xiaomi_miio_favorite_level: 7
+      - name: 75%
+        icon: 'mdi:circle-slice-6'
+        speed: Favorite
+        xiaomi_miio_favorite_level: 10
+      - name: 100%
+        icon: 'mdi:circle-slice-8'
+        speed: Favorite
+        xiaomi_miio_favorite_level: 14
+      - name: Auto
+        icon: 'mdi:brightness-auto'
+        speed: Auto
+    show_name: true
+    show_state: true
+    show_toolbar: true
+    compact_view: false

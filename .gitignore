@@ -26,6 +26,7 @@ __*
 *.log
 *.pyc
 *.save
+*.token
 *.uuid
 *gmail*
 appdaemon.yaml

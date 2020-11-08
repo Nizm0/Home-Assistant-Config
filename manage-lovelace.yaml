@@ -1,5 +1,4 @@
 ---
-custom_header: !include lovelace/cards/custom_header.yaml
 # resources: !include_dir_list lovelace/resources
 # sidebar: !include lovelace/cards/sidebar.yaml
 button_card_templates: !include lovelace/templates/button_card_templates.yaml

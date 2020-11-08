@@ -17,9 +17,12 @@ media_player:
   # - platform: cast
   #   host: 192.168.1.130
     # name: Living room Android Tv Philips
+
+## https://www.home-assistant.io/integrations/gpmdp/
   - platform: gpmdp
     host: 192.168.1.100
     name: Pc_gpmdp
+  
   # - platform: cast
   #   host: 192.168.1.131
     # name: Living room Google Home Mini

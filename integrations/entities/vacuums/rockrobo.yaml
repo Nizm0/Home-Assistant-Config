@@ -10,9 +10,9 @@ input_boolean:
     icon: mdi:robot-vacuum
     # initial: off
     # restore_state:
-  ready_to_emptying_vacuum:
-    name: Vacuum needs emptying
-    icon: mdi:delete-circle
+  # vacuum_needs_emptying:
+  #   name: Vacuum needs emptying
+  #   icon: mdi:delete-circle
 
 input_datetime:
   vacuum_day_time:

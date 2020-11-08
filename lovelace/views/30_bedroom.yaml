@@ -56,6 +56,8 @@ cards:
           # - type: custom:gap-card
             # height: 
             # size: 
+  - type: thermostat
+    entity: climate.bedroom_thermostat
   - title: Temperature
     type: "custom:mini-graph-card"
     entities:

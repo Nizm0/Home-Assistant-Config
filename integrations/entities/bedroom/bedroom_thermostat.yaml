@@ -1,0 +1,9 @@
+---
+
+sensor:
+  platform: template
+  sensors:
+    bedroom_valve_position:
+      friendly_name: Bedroom valve position
+      value_template: "{{ state_attr('climate.bedroom_thermostat', 'valve') }}"
+      unit_of_measurement: '%'

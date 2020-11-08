@@ -3,7 +3,8 @@ icon: "mdi:home-heart"
 id: 7
 path: family
 cards:
-  - entities:
+  - type: entities
+    entities:
       - entity: group.family
         secondary_info: last-changed
       - entity: person.nizm0
@@ -18,10 +19,10 @@ cards:
         secondary_info: last-changed
       - entity: device_tracker.gosia_galaxy_s9
         secondary_info: last-changed
-      - entity: device_tracker.sm_g965f
-        secondary_info: last-changed
-      - entity: device_tracker.oneplus_a3003
-        secondary_info: last-changed
+      # - entity: device_tracker.sm_g965f
+      #   secondary_info: last-changed
+      # - entity: device_tracker.oneplus_a3003
+      #   secondary_info: last-changed
       - entity: input_select.home_preset
         secondary_info: last-changed
       - entity: device_tracker.portex
@@ -32,34 +33,33 @@ cards:
         secondary_info: last-changed
       - entity: device_tracker.gosia_laptop
         secondary_info: last-changed
-      - entity: device_tracker.f6_67_40_d4_f8_00
-        secondary_info: last-changed
+      # - entity: device_tracker.f6_67_40_d4_f8_00
+      #   secondary_info: last-changed
     show_header_toggle: false
     theme: default
-    type: entities
-  - entities:
-      - device_tracker.google_maps_104688658658376260645
-      - device_tracker.google_maps_109218123589188227395
+  - type: history-graph
+    entities:
+      - person.nizm0
+      - person.gosia
     hours_to_show: 120
     refresh_interval: 60
     title: Family tracking
-    type: history-graph
-  - entities:
+  - type: entities
+    entities:
       - entity: input_number.temp_max
       - entity: input_number.temp_min
       - entity: input_datetime.both_date_and_time
       - entity: input_number.slider1
       - entity: input_datetime.vacuum_day_time
-    type: entities
-  - entities:
+  - type: entities
+    entities:
       - entity: device_tracker.bozena_phone
       - entity: device_tracker.portex
       - entity: device_tracker.babcia_teresa
-    type: entities
-  - entities:
+  - type: entities
+    entities:
       - person.nizm0
       - person.gosia
-    type: entities
   - type: entity-filter
     # title: all devices
     card:
@@ -71,7 +71,7 @@ cards:
       - person.gosia
       - device_tracker.lg_g6_phone
       - device_tracker.lenovo_tablet
-      - device_tracker.f6_67_40_d4_f8_00
+      # - device_tracker.f6_67_40_d4_f8_00
       - device_tracker.portex
       - device_tracker.p20_pro_ania
       - device_tracker.bozena_phone
@@ -82,24 +82,24 @@ cards:
     state_filter:
       - home
       - Home
-  - entities:
+  - type: entities
+    entities:
       - entity: sensor.nizm0_oneplus3_next_alarm
-      # - entity: sensor.galaxy_s9_alarm_sensor
-    type: entities
-  - entities:
+      - entity: sensor.gosia_s8_next_alarm
+  - type: history-graph
+    entities:
       - entity: sensor.nizm0_oneplus3_next_alarm
-      # - entity: sensor.galaxy_s9_alarm_sensor
+      - entity: sensor.gosia_s8_next_alarm
     hours_to_show: 120
     refresh_interval: 60
     title: Family tracking
-    type: history-graph
   - type: entities
     title: Travel time
     show_header_toggle: false
     entities:
-      - sensor.home_to_nursery
+      # - sensor.home_to_nursery
       - sensor.gp_to_home
-      - sensor.gp_to_nursery
+      # - sensor.gp_to_nursery
 # popup_cards:
 #   person.gosia:
 #     card:

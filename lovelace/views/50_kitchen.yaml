@@ -62,6 +62,8 @@ cards:
               yellow: 50
             theme: default
             unit: "%"
+  - type: thermostat
+    entity: climate.kitchen_valve_climate
   - title: Temperature
     type: "custom:mini-graph-card"
     # animate: true

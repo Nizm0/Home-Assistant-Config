@@ -53,6 +53,8 @@ cards:
             theme: default
             type: gauge
             unit: "%"
+  - type: thermostat
+    entity: climate.kids_valve_climate
   - title: Temperature
     type: "custom:mini-graph-card"
     # animate: true
