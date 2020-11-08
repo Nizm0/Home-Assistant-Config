@@ -23,39 +23,45 @@ vacuum_manager:
     x: 24450
     y: 30850
   area_before_emptying: 90
-  switch:
-    - name: smart_switch #smart_switch
-      event_type: deconz_event
-      data_id_name: id
-      event_data_name: event
-      event_data:
-        - action: ready_to_vacuum
-          event: '1002'
-        - action: clean_vacuum
-          event: '1003'
-        - action: start_stop_vacuum
-          event: '1004'
-        - action: emergency_stop
-          event: '1005'
-        - action: emergency_stop
-          event: '1006'
-        - action: emergency_stop
-          event: '1007'
-        - action: emergency_stop
-          event: '1008'
-        - action: emergency_stop
-          event: '1009'
-        - action: emergency_stop
-          event: '1010'
-          # long: ['1003']
-          # double: ['1004']
-          # multi: ['1005', '1006', '1007', '1008', '1009', '1010']
-    - name: '00:12:4b:00:1f:8a:af:63'
-      event_type: zha_event
-      data_id_name: device_ieee
-      event_data_name: command
-      event_data:
-        - action: ready_to_vacuum
-          event: toggle
-        - action: start_stop_vacuum
-          event: 'on'
+  events_config:
+    switch_list:
+      - name: smart_switch #smart_switch
+        event_type: deconz_event
+        data_id_name: id
+        event_data_name: event
+        event_data:
+          - action: ready_to_vacuum
+            event: '1002'
+          - action: clean_vacuum
+            event: '1003'
+          - action: start_stop_vacuum
+            event: '1004'
+          - action: emergency_stop
+            event: '1005'
+          - action: emergency_stop
+            event: '1006'
+          - action: emergency_stop
+            event: '1007'
+          - action: emergency_stop
+            event: '1008'
+          - action: emergency_stop
+            event: '1009'
+          - action: emergency_stop
+            event: '1010'
+            # long: ['1003']
+            # double: ['1004']
+            # multi: ['1005', '1006', '1007', '1008', '1009', '1010']
+      - name: '00:12:4b:00:1f:8a:af:63'
+        event_type: zha_event
+        data_id_name: device_ieee
+        event_data_name: command
+        event_data:
+          - action: send_test_message
+            event: toggle
+          - action: start_stop_vacuum
+            event: 'on'
+    entity_list:
+      - id: input_boolean.vacuum_starter
+        state_data:
+          - action: ready_to_vacuum
+            state: 'on'

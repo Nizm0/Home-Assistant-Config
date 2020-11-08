@@ -1,6 +1,7 @@
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
 import json
+import traceback
 # from datetime import datetime
 from collections import namedtuple
 from base import Base
@@ -18,8 +19,9 @@ CONF_TITLE = 'title'
 CONF_VACUUM_TIME = 'vacuum_time_entity'
 CONF_GOING_TO_BE_EMPTYIED = 'going_to_be_emptyied_entity'
 CONF_READY_TO_VACUUM = 'ready_to_vacuum'
+# CONF_VACUUM_NEEDS_EMPTYING_ENTITY = 'vacuum_needs_emptying_entity'
 CONF_READY_FOR_EMPTYING_ENTITY = 'ready_for_emptying_entity'
-CONF_READY_TO_EMPTYING_VACUUM = 'ready_to_emptying_vacuum_entity'
+# CONF_READY_TO_EMPTYING_VACUUM = 'ready_to_emptying_vacuum_entity'
 CONF_WAITING_FOR_EMPTYING = 'waiting_for_emptying_entity'
 CONF_WAITING_RETURN_HOME = 'waiting_return_home_entity'
 CONF_CLEANED_AREA = 'cleaned_area'
@@ -30,13 +32,16 @@ CONF_TTS_SERVICE = 'tts_service'
 CONF_TTS_DEVICES = 'tts_devices'
 CONF_EMPTYING_LOCATION = 'emptying_location'
 CONF_AREA_BEFORE_EMPTYING = 'area_before_emptying'
+CONF_EVENTS_CONFIG = 'events_config'
 CONF_SWITCH = 'switch'
+CONF_SWITCH_LIST = 'switch_list'
+CONF_ENTITY_LIST = 'entity_list'
 CONF_LOG_LEVEL = 'log_level'
 CONF_LOG_FILE = 'log_file'
 CONF_X = 'x'
 CONF_Y = 'y'
 
-# Dafault values
+# Default values
 
 DEFAULT_TITLE = 'Roborock'
 DEFAULT_OCCUPANCY_ENTITY = 'group.family'
@@ -45,8 +50,9 @@ DEFAULT_VACUUM_TIME_ENTITY = 'input_datetime.vacuum_day_time'
 DEFAULT_GOING_TO_BE_EMPTYIED_ENTITY = 'input_boolean.going_to_be_emptyied'
 DEFAULT_HOME_PRESET_SELECT_ENTITY = 'input_select.home_preset'
 DEFAULT_READY_TO_VACUUM_ENTITY = 'input_boolean.ready_to_vacuum'
+# DEFAULT_VACUUM_NEEDS_EMPTYING_ENTITY = 'input_boolean.vacuum_needs_emptying'
 DEFAULT_READY_FOR_EMPTYING_ENTITY = 'input_boolean.ready_for_emptying'
-DEFAULT_READY_TO_EMPTYING_VACUUM_ENTITY = 'input_boolean.ready_to_emptying_vacuum'
+# DEFAULT_READY_TO_EMPTYING_VACUUM_ENTITY = 'input_boolean.ready_to_emptying_vacuum'
 DEFAULT_WAITING_FOR_EMPTYING_ENTITY = 'input_boolean.waiting_for_emptying'
 DEFAULT_WAITING_RETURN_HOME_ENTITY = 'input_boolean.waiting_return_home'
 
@@ -59,14 +65,19 @@ CONF_EVENT_TYPE = 'event_type'
 CONF_DATA_ID_NAME = 'data_id_name'
 CONF_EVENT_DATA = 'event_data'
 CONF_EVENT_DATA_NAME = 'event_data_name'
+CONF_ID = 'id'
+CONF_STATE = 'state'
+CONF_STATE_DATA= 'state_data'
 
-CONF_CLICK = 'ready_to_vacuum'
-CONF_DOUBLE = 'start_stop_vacuum'
-CONF_LONG = 'clean_vacuum'
-CONF_MULTI = 'emergency_stop'
+CONF_READY_TO_VACUUM = 'ready_to_vacuum'
+CONF_START_STOP_VACUUM = 'start_stop_vacuum'
+CONF_CLEAN_VACUUM = 'clean_vacuum'
+CONF_EMERGENCY_STOP = 'emergency_stop'
+CONF_TEST_MESSAGE = 'send_test_message'
 
 CONF_ACTION = 'action'
 CONF_EVENT = 'event'
+CONF_ENTITY = 'entity'
 # input_select
 
 CONF_EMPTY = 'Empty'
@@ -99,20 +110,35 @@ SERVICE = 'service'
 
 # Schemas
 
-SWITCH_ACTION_SCHEMA = {
-  vol.Required(CONF_ACTION): vol.Any(CONF_CLICK, CONF_DOUBLE, CONF_LONG, CONF_MULTI),
+SWITCH_EVENT_ACTION_SCHEMA = {
+  vol.Required(CONF_ACTION): vol.Any(CONF_READY_TO_VACUUM, CONF_START_STOP_VACUUM, CONF_CLEAN_VACUUM, CONF_EMERGENCY_STOP, CONF_TEST_MESSAGE),
   vol.Required(CONF_EVENT): str
 }
 
-SWITCH_SCHEMA = {
+SWITCH_ENTITY_ACTION_SCHEMA = {
+  vol.Required(CONF_ACTION): vol.Any(CONF_READY_TO_VACUUM, CONF_START_STOP_VACUUM, CONF_CLEAN_VACUUM, CONF_EMERGENCY_STOP, CONF_TEST_MESSAGE),
+  vol.Required(CONF_STATE): str
+}
+
+EVENT_SCHEMA = {
   vol.Required(CONF_NAME): str,
   vol.Required(CONF_EVENT_TYPE): str,
   vol.Required(CONF_DATA_ID_NAME): str,
   vol.Required(CONF_EVENT_DATA_NAME): str,
-  vol.Required(CONF_EVENT_DATA): [SWITCH_ACTION_SCHEMA]
+  vol.Required(CONF_EVENT_DATA): [SWITCH_EVENT_ACTION_SCHEMA]
 }
 
-LOCATION_SHEMA = {
+ENTITY_SCHEMA = {
+  vol.Required(CONF_ID): str,
+  vol.Required(CONF_STATE_DATA): [SWITCH_ENTITY_ACTION_SCHEMA]
+}
+
+EVENTS_CONFIG_SCHEMA = {
+  vol.Optional(CONF_SWITCH_LIST): [EVENT_SCHEMA],
+  vol.Optional(CONF_ENTITY_LIST): [ENTITY_SCHEMA]
+}
+
+LOCATION_SCHEMA = {
   vol.Required(CONF_X): int,
   vol.Required(CONF_Y): int
 }
@@ -129,15 +155,17 @@ APP_SCHEMA = vol.Schema({
   vol.Optional(CONF_WAITING_FOR_EMPTYING, default=DEFAULT_WAITING_FOR_EMPTYING_ENTITY): str,
   vol.Optional(CONF_GOING_TO_BE_EMPTYIED, default=DEFAULT_GOING_TO_BE_EMPTYIED_ENTITY): str,
   vol.Optional(CONF_WAITING_RETURN_HOME, default=DEFAULT_WAITING_RETURN_HOME_ENTITY): str,
-  vol.Optional(CONF_READY_TO_EMPTYING_VACUUM, default=DEFAULT_READY_TO_EMPTYING_VACUUM_ENTITY): str,
+  vol.Optional(CONF_READY_FOR_EMPTYING_ENTITY, default=DEFAULT_READY_FOR_EMPTYING_ENTITY): str,
+  # vol.Optional(CONF_VACUUM_NEEDS_EMPTYING_ENTITY, default=DEFAULT_VACUUM_NEEDS_EMPTYING_ENTITY): str,
   vol.Optional(CONF_CLEANED_AREA, default=DEFAULT_CLEANED_AREA_ENTITY): str,
   vol.Optional(CONF_OCCUPANCY, default=DEFAULT_OCCUPANCY_ENTITY): str,
   vol.Optional(CONF_NOTIFIERS): [str],
   vol.Optional(CONF_TTS_SERVICE): str,
   vol.Optional(CONF_TTS_DEVICES): [str],
-  vol.Optional(CONF_EMPTYING_LOCATION): LOCATION_SHEMA,
+  vol.Optional(CONF_EMPTYING_LOCATION): LOCATION_SCHEMA,
   vol.Optional(CONF_AREA_BEFORE_EMPTYING, default=100): int,
-  vol.Optional(CONF_SWITCH): [SWITCH_SCHEMA],
+  vol.Optional(CONF_EVENTS_CONFIG): EVENTS_CONFIG_SCHEMA,
+  # vol.Optional(CONF_SWITCH): SWITCH_SCHEMA,
   # vol.Required(CONF_PEOPLE_TRACKER, default=PEOPLE_TRACKER_ENTITY_ID): str,
   # vol.Optional(CONF_NOTIFY): NOTIFY_SCHEMA,
   vol.Optional(CONF_LOG_LEVEL, default=LOG_DEBUG): vol.Any(LOG_INFO, LOG_DEBUG),
@@ -158,7 +186,7 @@ class VacuumAdvanceManager(Base):
     self.log(f'Fresh start of vacuum Appdaemon app', log=self._log_file, level=self._level)
     self.log(args, log=self._log_file, level=self._level)
 
-    self._title = args.get(DEFAULT_TITLE)
+    self._title = args.get(CONF_TITLE)
     self._tag = args.get(CONF_TAG)
     self._vacuum_entity = args.get(CONF_VACUUM)
     self._vacuum_time_entity = args.get(CONF_VACUUM_TIME)
@@ -166,19 +194,26 @@ class VacuumAdvanceManager(Base):
     self._cleaned_area_entity = args.get(CONF_CLEANED_AREA)
     self._ready_to_vacuum_entity = args.get(CONF_READY_TO_VACUUM)
     self._ready_for_emptying_entity = args.get(CONF_READY_FOR_EMPTYING_ENTITY)
+    # self._vacuum_neads_emptying = args.get(CONF_VACUUM_NEEDS_EMPTYING_ENTITY)
     self._waiting_for_emptying_entity = args.get(CONF_WAITING_FOR_EMPTYING)
     self._going_to_be_emptyied_entity = args.get(CONF_GOING_TO_BE_EMPTYIED)
     self._waiting_return_home_entity = args.get(CONF_WAITING_RETURN_HOME)
-    self._ready_to_emptying_vacuum_entity = args.get(CONF_READY_TO_EMPTYING_VACUUM)
+    # self._ready_to_emptying_vacuum_entity = args.get(CONF_READY_TO_EMPTYING_VACUUM)
     
     self._switches = []
-    for switch in args.get(CONF_SWITCH, {}):
+    for switch in args.get(CONF_EVENTS_CONFIG).get(CONF_SWITCH_LIST, {}):
       self.log(f"One item from list switch {switch}", log=self._log_file, level=self._level)
       self._switches.append(Switch(switch))
       self.listen_event(self.event_received, switch.get(CONF_EVENT_TYPE))
     # for s in self._switches:
     #   self.log(f"switch list {s.name} with actions {s._actions}", log=self._log_file, level=self._level)
-    
+
+    self._entites = []
+    for entity in args.get(CONF_EVENTS_CONFIG).get(CONF_ENTITY_LIST, {}):
+      self.log(f"One item from list entity {entity}", log=self._log_file, level=self._level)
+      self._entites.append(Entity(entity))
+      self.listen_state(self.entity_state_changed, entity.get(CONF_ID))
+
     self._home_preset_select = args.get(CONF_HOME_PRESET_SELECT)
     self._notifiers = args.get(CONF_NOTIFIERS)
     self._vacuum_daily = None
@@ -259,17 +294,17 @@ class VacuumAdvanceManager(Base):
     self.__turn_on_off_input_boolean(value, self._waiting_return_home_entity)
     self.log(f"write self.waiting_return_home {self.__waiting_return_home}", log=self._log_file, level=self._level)
 
-  @property
-  def ready_to_emptying_vacuum(self):
-    self.__ready_to_emptying_vacuum = self.self.__convert_on_off_to_boolean(self.get_state(self._ready_to_emptying_vacuum_entity))
-    self.log(f"read self.ready_to_emptying_vacuum {self.__ready_to_emptying_vacuum}", log=self._log_file, level=self._level)
-    return self.__ready_to_emptying_vacuum
+  # @property
+  # def vacuum_neads_emptying(self):
+  #   self.__vacuum_neads_emptying = self.self.__convert_on_off_to_boolean(self.get_state(self._vacuum_neads_emptying))
+  #   self.log(f"read self.vacuum_neads_emptying {self.__vacuum_neads_emptying}", log=self._log_file, level=self._level)
+  #   return self.__vacuum_neads_emptying
 
-  @ready_to_emptying_vacuum.setter
-  def ready_to_emptying_vacuum(self, value):
-    self.__ready_to_emptying_vacuum = value
-    self.__turn_on_off_input_boolean(value, self._ready_to_emptying_vacuum_entity)
-    self.log(f"write self.ready_to_emptying_vacuum {self.__ready_to_emptying_vacuum}", log=self._log_file, level=self._level)
+  # @vacuum_neads_emptying.setter
+  # def vacuum_neads_emptying(self, value):
+  #   self.__vacuum_neads_emptying = value
+  #   self.__turn_on_off_input_boolean(value, self._vacuum_neads_emptying)
+  #   self.log(f"write self.vacuum_neads_emptying {self.__vacuum_neads_emptying}", log=self._log_file, level=self._level)
 
   @property
   def cleaned_area(self):
@@ -331,10 +366,14 @@ class VacuumAdvanceManager(Base):
       if not self.ready_to_vacuum:
         message = "Flor is not ready to cleanup"
         if not today:
-          message = message + "and no one vacuums it"
+          message = message + " and no one vacuums it"
         message = message + ". Did you forget about me?"
         self.notify_on_change(self._title, message, actions=[Actions["start_vacuum"], Actions["cancel"]])
         self.log("Flor is not ready, wainting for response.", log=self._log_file, level=self._level)
+      elif self.ready_for_emptying:
+        message = f"Hey, time for daily cleaning, but I'm full. Could you please clean me up?"
+        self.notify_on_change(self._title, message, actions=[Actions["send_for_emptying"]])
+        self.log(f"Vacuum is full, {self.cleaned_area}m\u00b2 cleaned from last emptying. User notified", log=self._log_file, level=self._level)
       elif occupancy_state == 'not_home' and home_preset == CONF_EMPTY:
         message = "Started daily Cleanup"
         self.notify_on_change(self._title, message, actions=[Actions["return_vacuum"]])
@@ -342,7 +381,7 @@ class VacuumAdvanceManager(Base):
         self.log("Vacuum started", log=self._log_file, level=self._level)
       else:
         message = "Flor is ready to cleanup, but I can see that someone is in home. I will start vacuum in 5 min."
-        self.notify_on_change(self._title, message, actions=[Actions["pospone"], Actions["cancel_postpone"]])
+        self.notify_on_change(self._title, message, actions=[Actions["start_vacuum"], Actions["pospone"], Actions["cancel_postpone"]])
         self._vacuum_timer_handler = self.run_in(self.start_vacuum_event_handler, 300)
         self.log("Vacuum will start in 5 min.", log=self._log_file, level=self._level)
     else:
@@ -384,16 +423,23 @@ class VacuumAdvanceManager(Base):
     start = self.time() + "01:00:00"
     self.notify_on_change(title=self._title, message=f"Vacuuming postponed to {start}", actions=[Actions["start_vacuum"], Actions["return_vacuum"]])
 
-  def notify_on_change(self, title, message, actions):
-    # try:
-    data = self.prepare_data_for_notify(actions=actions, tag=self._tag)
-    for sender in self._notifiers:
-      self.call_service(sender, title=title, message=message, data=data)
-      self.log(f"Message \"{message}\" sent to {sender} with data={data}", log=self._log_file, level=self._level)
-    self.notify_by_tts_service(message)
-    # except:
-    #   self.log(f"Some data are missing sender={self._notifiers} title={title} message={message} actions={actions}", log=self._log_file, level=self._level)
-    #   return
+  def notify_on_change(self, title, message, actions, deep=1):
+    try:
+      data = self.prepare_data_for_notify(actions=actions, tag=self._tag)
+      for sender in self._notifiers:
+        self.call_service(sender, title=title, message=message, data=data)
+        self.log(f"Message \"{message}\" with title \"{title}\"sent to \"{sender}\" with data {data}", log=self._log_file, level=self._level)
+      self.notify_by_tts_service(message)
+    except TimeoutError:
+      if deep <= 5:
+        self.log(f"Notification error faild. Retry send for {deep}", log=self._log_file, level=self._level)
+        self.notify_on_change(title, message, actions, deep+1)
+      else:
+        self.log(f"Notification error faild. tryed {deep} without success.", log=self._log_file, level=self._level)
+      return
+    except:
+      self.log(f"Some data are missing sender={self._notifiers} title={title} message={message} actions={actions}", log=self._log_file, level=self._level)
+      return
 
   def notify_by_tts_service(self, message):
     service = self.args.get("tts_service")
@@ -428,31 +474,46 @@ class VacuumAdvanceManager(Base):
     for switch in self._switches:
       if event_name == switch.event_type and switch.name == data[switch.data_id_name]:
         self.log(f'{event_name} = {switch.event_type} Switch name {switch.name} = {data[switch.data_id_name]}', log=self._log_file, level=self._level)
-        method_name = ''
-        event_received = datetime.datetime.now()
-        try:
-          # self.log(f'invoked data {data},\nevent: {switch.event_data_name}\nlist of keys {switch._actions.keys()}', log=self._log_file, level=self._level)
-          method_name = 'button_action_' + str(switch.action(data))
-          method = getattr(self, method_name, lambda: 'Invalid')
-          self.log(f'invoked methot {method_name} at date {event_received}', log=self._log_file, level=self._level)
-          return method()
-        except Exception as inst:
-          self.log(f"Function {method_name} not exists,\nerror {inst}", log=self._log_file, level=LOG_ERROR)
+        self.execute_button_action(str(switch.action(data)), kwargs)
 
-  def button_action_ready_to_vacuum(self):
-    self.log(f'I\'m ready to cleanup')
+  def entity_state_changed(self, entity, attribute, old, new, kwargs):
+    self.log(f'Entity name {entity} state changed to {new}', log=self._log_file, level=self._level)
+    for _entity in self._entites:
+      if entity == _entity.id:
+        self.log(f'Entity id {_entity.id} = {entity}', log=self._log_file, level=self._level)
+        self.execute_button_action(_entity.action(new), kwargs)
+    pass
+
+  def execute_button_action(self, action, kwargs):
+    method_name = ''
+    event_time = datetime.datetime.now()
+    try:
+      # self.log(f'invoked data {data},\nevent: {switch.event_data_name}\nlist of keys {switch._actions.keys()}', log=self._log_file, level=self._level)
+      method_name = 'button_action_' + action
+      method = getattr(self, method_name, lambda: 'Invalid')
+      self.log(f'invoked methot {method_name} at date {event_time}', log=self._log_file, level=self._level)
+      return method(kwargs)
+    except ValueError:
+      pass
+    except SyntaxError:
+      pass
+    except Exception as inst:
+      self.log(f"Function {method_name} not exists,\nerror {inst}\n{traceback.format_exc()}", log=self._log_file, level=LOG_ERROR)
+
+  def button_action_ready_to_vacuum(self, kwargs):
+    self.log(f'I\'m ready to cleanup', log=self._log_file, level=self._level)
     self.ready_to_vacuum = True
-  def button_action_clean_vacuum(self):
+  def button_action_clean_vacuum(self, kwargs):
     __vacuum_state = self._vacuum["state"]
     if not self.waiting_for_emptying:
       self.log(f'Vacuum waiting for emptying.', log=self._log_file, level=self._level)
       self.send_vacuum_for_emptying(None, None, None, None, kwargs)
     elif self.waiting_for_emptying and __vacuum_state in ["idle"]:
       self.log(f'Vacuum emptied, returning to base.', log=self._log_file, level=self._level)
-      self.return_to_base()
+      self.dock_vacuum()
     else:
       self.log(f'Unknown exact action state.', log=self._log_file, level=self._level)
-  def button_action_start_stop_vacuum(self):
+  def button_action_start_stop_vacuum(self, kwargs):
     __vacuum_state = self._vacuum["state"]
     if __vacuum_state in ["cleaning"]:
       self.log(f'Stoping cleanup immediately', log=self._log_file, level=self._level)
@@ -462,7 +523,7 @@ class VacuumAdvanceManager(Base):
       self.start_vacuum()
     else:
       self.log(f'Unsupported vacuum state: {self._vacuum}', log=self._log_file, level=self._level)
-  def button_action_emergency_stop(self):
+  def button_action_emergency_stop(self, kwargs):
     self.log(f'Panic button!! Stop or return to dock', log=self._log_file, level=self._level)
     __vacuum_state = self._vacuum["state"]
     if __vacuum_state not in ["error", "idle", "paused"]:
@@ -471,8 +532,9 @@ class VacuumAdvanceManager(Base):
       self.dock_vacuum()
     else:
       self.log(f'{__vacuum_state} User action is required', log=self._log_file, level=self._level)
-
-
+  def button_action_send_test_message(self, kwargs):
+    self.log(f'Test message command induced', log=self._log_file, level=self._level)
+    self.notify_on_change(title=self._title, message=f"test message", actions=[])
 
   def vacuum_state_handle(self, entity, attribute, old, new, kwargs):
     self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
@@ -661,11 +723,32 @@ class Switch(object):
       if action in self._actions:
         return str(self._actions[action])
       else:
-        raise Exception(f'Not supported action')
+        raise ValueError(f'Not supported action: {action}')
     else:
-      raise Exception(f'Not suported event name')
+      raise ValueError(f'Not suported event name: {self.event_data_name}')
+
+class Entity(object):
+  def __init__(self, args):
+    self.id = args[CONF_ID]
+    self._state_data_list = args[CONF_STATE_DATA]
+    self._actions = {}
+
+    for s in self._state_data_list:
+      self._actions[s[CONF_STATE]] = s[CONF_ACTION]
+
+  def action(self, state):
+    # action = str(state)
+    if state in self._actions:
+      return str(self._actions[state])
+    else:
+      raise ValueError(f'Not supported action: {state}')
 
 class SwitchEventData(object):
   def __init__(self, action, event):
     self.action = action
     self.event = event
+
+class EntityStateData(object):
+  def __init__(self, action, state):
+    self.action = action
+    self.state = state
