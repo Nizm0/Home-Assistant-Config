@@ -5,7 +5,7 @@ import globals
 class NotifyRain(hass.Hass):
 
     def initialize(self):
-        notify = ["notify/push_to_chrome_nizm0_oneplus3"]
+        notify = ["notify/push_to_chrome_nizm0_oneplus_8t"]
         self.notified_today = False
         self.rain_percent_today = 0
 

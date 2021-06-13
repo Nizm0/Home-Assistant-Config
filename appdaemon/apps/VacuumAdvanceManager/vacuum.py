@@ -32,6 +32,7 @@ CONF_TTS_SERVICE = 'tts_service'
 CONF_TTS_DEVICES = 'tts_devices'
 CONF_EMPTYING_LOCATION = 'emptying_location'
 CONF_AREA_BEFORE_EMPTYING = 'area_before_emptying'
+CONF_IDLE_TIME = 'idle_time'
 CONF_EVENTS_CONFIG = 'events_config'
 CONF_SWITCH = 'switch'
 CONF_SWITCH_LIST = 'switch_list'
@@ -81,6 +82,8 @@ CONF_ENTITY = 'entity'
 # input_select
 
 CONF_EMPTY = 'Empty'
+CONF_VISITORS = 'Visitors'
+CONF_ALONE = 'Alone'
 
 # PEOPLE_TRACKER_ENTITY_ID = 'sensor.people_tracker'
 DEFAULT_TIMESTAMP_FORMAT = '%Y-%m-%dT%H:%M:%S'
@@ -164,6 +167,7 @@ APP_SCHEMA = vol.Schema({
   vol.Optional(CONF_TTS_DEVICES): [str],
   vol.Optional(CONF_EMPTYING_LOCATION): LOCATION_SCHEMA,
   vol.Optional(CONF_AREA_BEFORE_EMPTYING, default=100): int,
+  vol.Optional(CONF_IDLE_TIME, default=300): int,
   vol.Optional(CONF_EVENTS_CONFIG): EVENTS_CONFIG_SCHEMA,
   # vol.Optional(CONF_SWITCH): SWITCH_SCHEMA,
   # vol.Required(CONF_PEOPLE_TRACKER, default=PEOPLE_TRACKER_ENTITY_ID): str,
@@ -222,7 +226,7 @@ class VacuumAdvanceManager(Base):
     self._emptying_location = [args.get(CONF_EMPTYING_LOCATION).get(CONF_X), args.get(CONF_EMPTYING_LOCATION).get(CONF_Y)]
     self._area_before_emptying = args.get(CONF_AREA_BEFORE_EMPTYING)
     
-    self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
+    # self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
 
     self.set_run_daily(self, self._vacuum_time_entity, '', self.get_state(self._vacuum_time_entity), '')
     # self.listen_state(self.cleaned_area_changed, self._cleaned_area_entity)
@@ -233,6 +237,24 @@ class VacuumAdvanceManager(Base):
     # if self._switch_name is not None:
     #   self.log(f'New even listener: {self._switch_name}, date {self._switch_event_name}', log=self._log_file, level=self._level)
     #   self.listen_event(self.event_received, self._switch_event_name)
+
+  @property
+  def vacuum(self):
+    self.__vacuum = self.get_state(self._vacuum_entity, attribute="all")
+    self.log(f"read self.vacuum {self.__vacuum}", log=self._log_file, level=self._level)
+    return self.__vacuum
+
+  @property
+  def occupancy_state(self):
+    self.__occupancy_state = self.get_state(self._occupancy_entity)
+    self.log(f"read self.occupancy_state {self.__occupancy_state}", log=self._log_file, level=self._level)
+    return self.__occupancy_state
+
+  @property
+  def home_preset(self):
+    self.__home_preset = self.get_state(self._home_preset_select)
+    self.log(f"read self.home_preset {self.__home_preset}", log=self._log_file, level=self._level)
+    return self.__home_preset
 
   @property
   def ready_to_vacuum(self):
@@ -355,37 +377,39 @@ class VacuumAdvanceManager(Base):
 
   def run_daily_callback(self, kwargs):
     self.log("Run daily vacuum", log=self._log_file, level=self._level)
-    self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
+    # self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
     # ready = self.get_state(self._ready_to_vacuum_entity)
-    occupancy_state = self.get_state(self._occupancy_entity)
-    home_preset = self.get_state(self._home_preset_select)
-    clean_start = datetime.datetime.strptime(self._vacuum['attributes']['clean_start'], DEFAULT_TIMESTAMP_FORMAT).date()
+    # occupancy_state = self.get_state(self._occupancy_entity)
+    # home_preset = self.get_state(self._home_preset_select)
+    clean_start = datetime.datetime.strptime(self.vacuum['attributes']['clean_start'], DEFAULT_TIMESTAMP_FORMAT).date()
     today = clean_start == datetime.date.today()
     message = ""
-    if self._vacuum["state"] not in ["cleaning", "error", "returning"]:
+    if self.vacuum["state"] not in ["cleaning", "error", "returning"] and not today:
       if not self.ready_to_vacuum:
         message = "Flor is not ready to cleanup"
-        if not today:
-          message = message + " and no one vacuums it"
+        # if not today:
+        #   message = message + " and no one vacuums it"
         message = message + ". Did you forget about me?"
         self.notify_on_change(self._title, message, actions=[Actions["start_vacuum"], Actions["cancel"]])
-        self.log("Flor is not ready, wainting for response.", log=self._log_file, level=self._level)
+        self.log("Flor is not ready, waiting for response.", log=self._log_file, level=self._level)
       elif self.ready_for_emptying:
         message = f"Hey, time for daily cleaning, but I'm full. Could you please clean me up?"
         self.notify_on_change(self._title, message, actions=[Actions["send_for_emptying"]])
         self.log(f"Vacuum is full, {self.cleaned_area}m\u00b2 cleaned from last emptying. User notified", log=self._log_file, level=self._level)
-      elif occupancy_state == 'not_home' and home_preset == CONF_EMPTY:
+      elif self.ready_to_vacuum and self.occupancy_state == 'not_home' and self.home_preset == CONF_EMPTY:
         message = "Started daily Cleanup"
         self.notify_on_change(self._title, message, actions=[Actions["return_vacuum"]])
         self.start_vacuum()
         self.log("Vacuum started", log=self._log_file, level=self._level)
-      else:
+      elif self.ready_to_vacuum and self.occupancy_state == 'home' and self.home_preset in [CONF_VISITORS, CONF_ALONE]:
         message = "Flor is ready to cleanup, but I can see that someone is in home. I will start vacuum in 5 min."
         self.notify_on_change(self._title, message, actions=[Actions["start_vacuum"], Actions["pospone"], Actions["cancel_postpone"]])
         self._vacuum_timer_handler = self.run_in(self.start_vacuum_event_handler, 300)
         self.log("Vacuum will start in 5 min.", log=self._log_file, level=self._level)
+      else:
+        self.log(f"Daily cleanup skipped. self.ready_to_vacuum='{self.ready_to_vacuum}' today='{today}", log=self._log_file, level=self._level)
     else:
-      self.log(f"Nothing has hapened, vacuum {self._vacuum['attributes']['friendly_name']} is now {self._vacuum['state']}", log=self._log_file, level=self._level)
+      self.log(f"Nothing has hapened, vacuum {self.vacuum['attributes']['friendly_name']} is now {self.vacuum['state']}", log=self._log_file, level=self._level)
 
   def vacuum_action(self, service, **kwargs):
     self.log(f"{service} for {kwargs}", log=self._log_file, level=self._level)
@@ -444,8 +468,8 @@ class VacuumAdvanceManager(Base):
   def notify_by_tts_service(self, message):
     service = self.args.get("tts_service")
     devices = self.args.get("tts_devices")
-    occupancy_state = self.get_state(self._occupancy_entity)
-    if service is not None and occupancy_state == 'home':
+    # occupancy_state = self.get_state(self._occupancy_entity)
+    if service is not None and self.occupancy_state == 'home':
       for sender in devices:
         self.call_service(service, entity_id=sender, message=message)
 
@@ -488,11 +512,14 @@ class VacuumAdvanceManager(Base):
     method_name = ''
     event_time = datetime.datetime.now()
     try:
-      # self.log(f'invoked data {data},\nevent: {switch.event_data_name}\nlist of keys {switch._actions.keys()}', log=self._log_file, level=self._level)
-      method_name = 'button_action_' + action
-      method = getattr(self, method_name, lambda: 'Invalid')
-      self.log(f'invoked methot {method_name} at date {event_time}', log=self._log_file, level=self._level)
-      return method(kwargs)
+      if action is not None:
+        # self.log(f'invoked data {data},\nevent: {switch.event_data_name}\nlist of keys {switch._actions.keys()}', log=self._log_file, level=self._level)
+        method_name = 'button_action_' + action
+        method = getattr(self, method_name, lambda: 'Invalid')
+        self.log(f'invoked methot {method_name} at date {event_time}', log=self._log_file, level=self._level)
+        return method(kwargs)
+      else:
+        pass
     except ValueError:
       pass
     except SyntaxError:
@@ -504,7 +531,7 @@ class VacuumAdvanceManager(Base):
     self.log(f'I\'m ready to cleanup', log=self._log_file, level=self._level)
     self.ready_to_vacuum = True
   def button_action_clean_vacuum(self, kwargs):
-    __vacuum_state = self._vacuum["state"]
+    __vacuum_state = self.vacuum["state"]
     if not self.waiting_for_emptying:
       self.log(f'Vacuum waiting for emptying.', log=self._log_file, level=self._level)
       self.send_vacuum_for_emptying(None, None, None, None, kwargs)
@@ -514,7 +541,7 @@ class VacuumAdvanceManager(Base):
     else:
       self.log(f'Unknown exact action state.', log=self._log_file, level=self._level)
   def button_action_start_stop_vacuum(self, kwargs):
-    __vacuum_state = self._vacuum["state"]
+    __vacuum_state = self.vacuum["state"]
     if __vacuum_state in ["cleaning"]:
       self.log(f'Stoping cleanup immediately', log=self._log_file, level=self._level)
       self.stop_vacuum()
@@ -522,10 +549,10 @@ class VacuumAdvanceManager(Base):
       self.log(f'Starting cleanup immediately', log=self._log_file, level=self._level)
       self.start_vacuum()
     else:
-      self.log(f'Unsupported vacuum state: {self._vacuum}', log=self._log_file, level=self._level)
+      self.log(f'Unsupported vacuum state: {self.vacuum}', log=self._log_file, level=self._level)
   def button_action_emergency_stop(self, kwargs):
     self.log(f'Panic button!! Stop or return to dock', log=self._log_file, level=self._level)
-    __vacuum_state = self._vacuum["state"]
+    __vacuum_state = self.vacuum["state"]
     if __vacuum_state not in ["error", "idle", "paused"]:
       self.stop_vacuum()
     elif __vacuum_state in ["idle", "paused"]:
@@ -537,11 +564,11 @@ class VacuumAdvanceManager(Base):
     self.notify_on_change(title=self._title, message=f"test message", actions=[])
 
   def vacuum_state_handle(self, entity, attribute, old, new, kwargs):
-    self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
+    # self._vacuum = self.get_state(self._vacuum_entity, attribute="all")
     # self.log(f"VACUUM ENTITY AS OBJECT {self._vacuum}", log=self._log_file, level=self._level)
     message = ""
     if (old != new):
-      self.log(f"New vacuum state: {new} and attribute: {attribute}", log=self._log_file, level=self._level)
+      self.log(f"New vacuum state new: {new}, old: {old} and attribute: {attribute}={self.vacuum[attribute]}, entity: {entity}", log=self._log_file, level=self._level)
       if new == "error":
         self.log(f"Error detected attribute for {entity}, the user has been informed", log=self._log_file, level=self._level)
         self.notify_on_change(title=self._title, message="Vacuum encounter an problem", actions=[])
@@ -554,28 +581,34 @@ class VacuumAdvanceManager(Base):
           self.stop_vacuum()
           # self.ready_for_emptying = True
           # self.notify_by_tts(message)
-        elif not self.run_by_app and old == "docked" and not self.going_to_be_emptyied:
-          self.log(f"Vacuum started cleaning by unknown sourse, self.run_by_app: {self.run_by_app}", log=self._log_file, level=self._level)
-          message = f"Vacuum is now {new}, is it intended?"
-          self.notify_on_change(title=self._title, message=message, actions=[Actions["stop_vacuum"], Actions["cancel"]])
-          # self.notify_by_tts(message)
         elif self.going_to_be_emptyied:
           self.log(f"Vacuum is going to be emptyied", log=self._log_file, level=self._level)
           message = f"Vacuum is going to be emptyied"
           self.notify_on_change(title=self._title, message=message, actions=[])
         else:
-          self.log(f"Vacuum just started cleaning, no action required", log=self._log_file, level=self._level)
+          if not self.run_by_app and old == "docked" and not self.going_to_be_emptyied and not self.waiting_for_emptying:
+            self.log(f"Vacuum started cleaning by unknown sourse, self.run_by_app: {self.run_by_app}", log=self._log_file, level=self._level)
+            message = f"Vacuum is now {new}, is it intended?"
+            self.notify_on_change(title=self._title, message=message, actions=[Actions["stop_vacuum"], Actions["cancel"]])
+            # self.notify_by_tts(message)
+          elif self.waiting_for_emptying:
+            self.log("Vacuum is now clear, and started cleaning.", log=self._log_file, level=self._level)
+            message = f"Vacuum is now clear, and started cleaning."
+            self.notify_on_change(title=self._title, message=message, actions=[Actions["stop_vacuum"], Actions["return_vacuum"]])
+            self.vacuum_emptied()
+          else:
+            self.log(f"Vacuum just started cleaning, no action required", log=self._log_file, level=self._level)
       elif new == "returning":
         self.cancel_vacuum_timer(self._vacuum_timer_handler)
         actions = []
         if old == "cleaning":
-          cleaned_area = self._vacuum["attributes"]["cleaned_area"]
-          cleaning_time = self._vacuum["attributes"]["cleaning_time"]
+          cleaned_area = self.vacuum["attributes"]["cleaned_area"]
+          cleaning_time = self.vacuum["attributes"]["cleaning_time"]
           self.log(f"Vacuum cleaned area from last emptying: {self.cleaned_area} and type {type(self.cleaned_area)}\n and in the current time: {cleaned_area} and type {type(cleaned_area)}", log=self._log_file, level=self._level)
           self.cleaned_area = self.cleaned_area + cleaned_area
           message = f"Vacuum has finished his work, cleaned {cleaned_area} m\u00b2 in {cleaning_time} min."
           if self.cleaned_area > self._area_before_emptying:
-            message = message + f"You have nod emptied me that long, I'm almost full."
+            message = message + f" You have nod emptied me that long, I'm almost full."
             actions = [Actions["stop_vacuum"], Actions["send_for_emptying"]]
             self.log(f"Vacuum require cleaning", log=self._log_file, level=self._level)
             self.ready_for_emptying = True
@@ -592,7 +625,7 @@ class VacuumAdvanceManager(Base):
             message = f"Vacuum returning home."
             self.notify_on_change(title=self._title, message=message, actions=actions)
         else:
-          self.log(f"Hej!!!!!!!!! What just happened\n{self._vacuum}", log=self._log_file, level=self._level)
+          self.log(f"Hej!!!!!!!!! What just happened\nvacuum: {self.vacuum}", log=self._log_file, level=self._level)
       elif new == "docked":
         self.log(f"Vacuum is docked, user informed", log=self._log_file, level=self._level)
         self.run_by_app = False
@@ -615,10 +648,10 @@ class VacuumAdvanceManager(Base):
             self.log(f"Vacuum is idle, will send it to dock in 300s", log=self._log_file, level=self._level)
             self._vacuum_timer_handler = self.run_in(self.dock_vacuum_event_handler, 300)
       elif new == "paused":
-        self.log(f"Vacuum new state: {new} and attribute {attribute}", log=self._log_file, level=self._level)
+        self.log(f"Vacuum is paused, state: {new} and attribute: {attribute}", log=self._log_file, level=self._level)
         self.notify_on_change(title=self._title, message="The vacuum cleaner has been suspended", actions=[Actions["start_vacuum"], Actions["return_vacuum"]])
       else:
-        self.log(f"Vacuum new state: {new} and attribute {attribute}", log=self._log_file, level=self._level)
+        self.log(f"Vacuum new state: {new} and attribute: {attribute}\nvacuum: {self.vacuum}", log=self._log_file, level=self._level)
     else:
       self.log(f"New and old state are the same {new}", log=self._log_file, level=self._level)
 
@@ -723,7 +756,8 @@ class Switch(object):
       if action in self._actions:
         return str(self._actions[action])
       else:
-        raise ValueError(f'Not supported action: {action}')
+        return None
+        # raise ValueError(f'Not supported action: {action}')
     else:
       raise ValueError(f'Not suported event name: {self.event_data_name}')
 

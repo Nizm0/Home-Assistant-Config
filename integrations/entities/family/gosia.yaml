@@ -9,7 +9,7 @@ automation:
       event: enter
     condition:
     action: 
-    - service: notify.mobile_app_nizm0_oneplus3
+    - service: notify.mobile_app_nizm0_oneplus_8t
       data_template:
         message: >
           New value is: {{ trigger.to_state.state }}
@@ -18,7 +18,7 @@ automation:
         data:
           tag: gosia-location-info
           group: Location
-    - service: notify.hangouts
+    - service: notify.hangouts_gosia_michal
       data_template:
         message: >
           New value is: {{ trigger.to_state.state }}

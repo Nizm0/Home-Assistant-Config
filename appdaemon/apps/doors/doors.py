@@ -83,4 +83,4 @@ class DoorsManager(hass.Hass):
           "priority": "high",
           "tag": "home-door-notifications-appdaemon"
         }
-    self.call_service('notify/push_to_chrome_nizm0_oneplus3', title=title, message=message, data=data)
+    self.call_service('notify/push_to_chrome_nizm0_oneplus_8t', title=title, message=message, data=data)

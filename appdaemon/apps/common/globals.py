@@ -2,8 +2,8 @@ from enum import Enum
 
 # Global variables
 
-android_michal = 'push_to_chrome_nizm0_oneplus3'
-notify_michal = "notify/push_to_chrome_nizm0_oneplus3"
+android_michal = 'push_to_chrome_nizm0_oneplus_8t'
+notify_michal = "notify/push_to_chrome_nizm0_oneplus_8t"
 
 michal = "person.nizm0"
 gosia = "person.gosia"
@@ -31,7 +31,7 @@ PEOPLE = {
     'Michal': {
         'device_tracker': 'person.nizm0',
         'proximity': 'proximity.home_michal',
-        'notifier': 'notify/push_to_chrome_nizm0_oneplus3'
+        'notifier': 'notify/push_to_chrome_nizm0_oneplus_8t'
     },
     'Gosia': {
         'device_tracker': 'person.gosia',

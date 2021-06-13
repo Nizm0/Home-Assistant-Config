@@ -5,14 +5,22 @@ light:
     username: !secret philips_user
     password: !secret philips_pass
 
-switch:
-  - platform: philips_ambilight+hue
-    name: Ambilight+hue
-    host: 192.168.1.130
-    username: !secret philips_user
-    password: !secret philips_pass
-    scan_interval: 5
-
+# switch:
+#   - platform: philips_ambilight+hue
+#     name: Ambilight+hue
+#     host: 192.168.1.130
+#     username: !secret philips_user
+#     password: !secret philips_pass
+#     scan_interval: 5
+# switch:
+#   - platform: philips_ambilight+yeelight
+#     name: Lounge Lamp (Top) # (Name in Front-End)
+#     host: 192.168.1.130 # (the TV)
+#     username: !secret philips_user
+#     password: !secret philips_pass
+#     address: 192.168.1.122 # (The Bulb)
+#     display_options: top-average
+  
 media_player:
   # - platform: cast
   #   host: 192.168.1.130

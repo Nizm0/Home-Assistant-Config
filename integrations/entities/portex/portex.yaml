@@ -1,0 +1,8 @@
+binary_sensor:
+  - platform: ping
+    host: portexst.eu
+    name: "portexst.eu"
+    count: 2
+    scan_interval: 30
+
+# automation:

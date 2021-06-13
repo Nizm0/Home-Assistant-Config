@@ -14,7 +14,7 @@ automation:
       - service: notify.mobile_app_gosia_s8
         data_template:
           message: >
-            Current location: {{ states('sensor.nizm0_oneplus3_geocoded_location') }}
+            Current location: {{ states('sensor.nizm0_oneplus_8t_geocoded_location') }}
             ({{ states('sensor.date_time_iso') }})
           title: Michał is out form work
           data:
@@ -22,10 +22,10 @@ automation:
             url: https://maps.google.com/maps/@?api=1&map_action=map&center={{ state_attr('person.nizm0', 'latitude') }},{{ state_attr('person.nizm0', 'longitude') }}&zoom=17
             tag: nizmo-location-info
             group: Location
-      - service: notify.hangouts
+      - service: notify.hangouts_gosia_michal
         data_template:
           message: >
-            Current location: {{ states('sensor.nizm0_oneplus3_geocoded_location') }}
+            Current location: {{ states('sensor.nizm0_oneplus_8t_geocoded_location') }}
           title: Michał is out from work
   - id: a3f85958-c4d7-49db-ac72-400006f0121e
     alias: Michał entered the home
@@ -46,7 +46,7 @@ automation:
           data:
             tag: nizmo-location-info
             group: Location
-      - service: notify.hangouts
+      - service: notify.hangouts_gosia_michal
         data_template:
           message: >
             New value is: {{ trigger.to_state.state }}
@@ -63,7 +63,7 @@ automation:
         entity_id: person.nizm0
         zone: zone.work
     action:
-      - service: notify.mobile_app_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus_8t
         data_template:
           message: >
             New value is: {{ trigger.to_state.state }}

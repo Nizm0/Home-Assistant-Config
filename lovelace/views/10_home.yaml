@@ -38,8 +38,8 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.bathroom_motion_sensor
         secondary_info: last-changed
-      - entity: binary_sensor.reolink_camera_1_motion
-        secondary_info: last-changed
+      # - entity: binary_sensor.reolink_camera_1_motion
+      #   secondary_info: last-changed
       - entity: binary_sensor.home_door_sensor
         secondary_info: last-changed
       - entity: binary_sensor.living_room_balcony_window_sensor
@@ -54,6 +54,8 @@ cards:
     filter:
       include:
         - entity_id: "*battery_level*"
+          state: < 35
+        - entity_id: "*poziom_baterii*"
           state: < 35
         - attributes:
             battery: < 35
@@ -104,6 +106,12 @@ cards:
         secondary_info: last-changed
       - entity: light.living_room_top_light
         secondary_info: last-changed
+      - entity: light.living_room_directional_light_power_switch
+        secondary_info: last-changed
+      - entity: light.wled_christmas_tree
+        secondary_info: last-changed
+      - entity: switch.circadian_lighting_living_room_cl
+        secondary_info: last-changed
       - entity: light.christmas_tree
         secondary_info: last-changed
       - entity: binary_sensor.living_room_motion_sensor
@@ -123,8 +131,8 @@ cards:
     entities:
       - entity: light.bedroom_main_light
         secondary_info: last-changed
-      - entity: light.bedroom_main_light_2
-        secondary_info: last-changed
+      # - entity: light.bedroom_main_light_2
+      #   secondary_info: last-changed
       - entity: binary_sensor.bedroom_motion_sensor
         secondary_info: last-changed
       - entity: sensor.bedroom_temperature
@@ -133,6 +141,7 @@ cards:
         secondary_info: last-changed
       - entity: sensor.bedroom_pressure
         secondary_info: last-changed
+      - entity: media_player.bedroom_clock
   - title: Kitchen
     type: entities
     show_header_toggle: true

@@ -2,5 +2,5 @@
   name: Bedroom Main Light
   transition: 1000
   use_music_mode: true #(defaults to False)
-  save_on_change: false #(defaults to True)
+  save_on_change: true #(defaults to True)
   nightlight_switch_type: light

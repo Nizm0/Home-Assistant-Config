@@ -40,7 +40,7 @@ binary_sensor:
     name: "Nizm0 miBand5"
   # - platform: ble_presence
   #   mac_address: C0:EE:FB:DB:B5:BA
-  #   name: "Nizm0 OnePlus3"
+  #   name: "Nizm0 OnePlus8t"
     
 sensor:
   - platform: wifi_signal

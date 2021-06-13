@@ -38,6 +38,7 @@ esphome/*/
 google54d9d9f0104cb9cd.html
 image
 ip_bans.yaml
+.ip_authenticated.yaml
 known_devices.yaml
 node-red
 notebooks

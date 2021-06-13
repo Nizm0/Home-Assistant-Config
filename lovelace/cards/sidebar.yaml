@@ -16,7 +16,7 @@ style: |
   }
 width:
   mobile: 0
-  tablet: 20
+  tablet: 11
   desktop: 18
 breakpoints:
   mobile: 768
@@ -33,37 +33,29 @@ bottomCard:
   type: vertical-stack
   cardOptions:
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: weather-forecast
-            entity: weather.dark_sky
       # - type: horizontal-stack
       #   cards:
-      #     - type: custom:simple-weather-card
+      #     - type: weather-forecast
       #       entity: weather.dark_sky
-      #       backdrop: true
-      #       primary_info:
-      #         - wind_bearing
-      #         - humidity
-      #       secondary_info:
-      #         - precipitation
-      #         - precipitation_probability
-      - type: horizontal-stack
-        cards:
-          - type: custom:air-visual-card
-            air_pollution_level: sensor.u_s_air_pollution_level
-            air_quality_index: sensor.u_s_air_quality_index
-            main_pollutant: sensor.u_s_main_pollutant
-            temp: weather.dark_sky
-            city: "Home"
-          # - type: custom:weather-card
-          #   entity: weather.dark_sky
+      # - type: horizontal-stack
+      #   cards:
+      #     - type: custom:air-visual-card
+      #       air_pollution_level: sensor.u_s_air_pollution_level
+      #       air_quality_index: sensor.u_s_air_quality_index
+      #       main_pollutant: sensor.u_s_main_pollutant
+      #       temp: weather.dark_sky
+      #       city: "Home"
+      #     # - type: custom:weather-card
+      #     #   entity: weather.dark_sky
       - type: horizontal-stack
         cards:
           - type: "custom:button-card"
             color_type: card
+            tap_action:
+              action: navigate
+              navigation_path: /a0d7b954_grocy
             color: rgb(255, 255, 255)
-            icon: mdi:home
+            icon: mdi:basket
           - type: "custom:button-card"
             color_type: card
             color: rgb(255, 255, 255)
@@ -76,17 +68,34 @@ sidebarMenu:
     active: true
     icon: mdi:home
   - action: navigate
+    navigation_path: "/lovelace/living-room"
+    name: "Living room"
+    icon: mdi:sofa
+  - action: navigate
+    navigation_path: "/lovelace/bedroom"
+    name: "Bedroom"
+    icon: mdi:bed-empty
+  - action: navigate
+    navigation_path: "/lovelace/kids"
+    name: "Kids"
+    icon: mdi:human-child
+  - action: navigate
+    navigation_path: "/lovelace/kitchen"
+    name: "Kitchen"
+    icon: mdi:silverware-fork-knife
+  - action: navigate
+    navigation_path: "/lovelace/bathroom"
+    name: "Bathroom"
+    icon: mdi:shower
+  - action: navigate
+    navigation_path: "/lovelace/hallway"
+    name: "Hallway"
+    icon: mdi:stairs
+  - action: navigate
     navigation_path: "/lovelace/flowers"
     name: "Flowers"
     icon: mdi:flower-tulip
-#   - action: navigate
-#     navigation_path: "/lovelace/music"
-#     name: "Muziek"
-#   - action: navigate
-#     navigation_path: "/lovelace/4"
-#     name: "Test"
-#   - action: toggle
-#     entity: light.beganegrond
-#     name: Lichtstrip
-#     state: light.beganegrond
-#     icon: mdi:led-strip-variant
+  - action: navigate
+    navigation_path: "https://has.nizmo.eu/a0d7b954_grocy"
+    name: "Grocy"
+    icon: mdi:basket

@@ -5,5 +5,5 @@ sensor:
   sensors:
     kids_valve_position:
       friendly_name: Kids valve position
-      value_template: "{{ state_attr('climate.kids_valve_climate', 'position') }}"
+      value_template: "{{ state_attr('climate.kids_thermostat', 'valve') }}"
       unit_of_measurement: '%'

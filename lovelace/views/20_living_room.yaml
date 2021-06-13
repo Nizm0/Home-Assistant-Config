@@ -30,7 +30,9 @@ cards:
                 state_color: true
                 entity: light.tv_ambilights
                 icon: mdi:spotlight
-              - type: custom:gap-card
+              # - type: custom:gap-card
+              - type: entity-button
+                entity: switch.circadian_lighting_living_room_cl
               - type: light
                 entity: light.light_strip_1
                 icon: mdi:led-strip-variant
@@ -46,7 +48,7 @@ cards:
               # - type: custom:gap-card
               - type: light
                 state_color: true
-                entity: light.christmas_tree
+                entity: light.wled_christmas_tree
                 # hold_action:
                 #   action: more-info
                 # tap_action:
@@ -92,7 +94,7 @@ cards:
                 label: >
                   [[[
                     var bri = states['fan.air_humidifier'].attributes.depth;
-                    return 'Water level: ' + (bri ? bri : '0') + '%';
+                    return 'Water: ' + (bri ? bri : '0') + 'mm';
                   ]]]
                 show_label: true
                 # custom_fields:
@@ -319,11 +321,11 @@ cards:
       #   state_filter:
       #     - null
       - type: picture-glance
-        camera_image: camera.reolink_camera_1
+        camera_image: camera.reolink_e1_pro_profile000_mainstream
         camera_view: live
         aspect_ratio: 56.25
         entities:
-          - entity: binary_sensor.reolink_camera_1_motion
+          # - entity: binary_sensor.reolink_camera_1_motion
           - entity: sensor.living_room_temperature
             show_state: true
           - entity: binary_sensor.living_room_balcony_window_sensor

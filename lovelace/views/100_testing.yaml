@@ -215,10 +215,13 @@ cards:
         filter:
           include:
             - entity_id: "*_battery*"
+            - entity_id: "*_baterii*"
           exclude:
             - entity_id: "*_battery_state"
             - entity_id: "*_battery_health"
             - entity_id: "*_battery_status"
+            - entity_id: "*_stan_baterii"
+            - entity_id: "*_zdrowie_baterii"
             - state: "unknown"
             - state: "unavailable"
       - type: custom:auto-entities
@@ -388,30 +391,34 @@ cards:
                 - grid-template-areas: '"i" "n" "graph"'
                 - grid-template-columns: 1fr
                 - grid-template-rows: 1fr min-content min-content
-          - type: custom:mini-graph-card
-            title: Temperature
-            entities:
-              - sensor.bw_shp6_01_wattage
-            # color_thresholds:
-            #   - color: "#0000ff"
-            #     value: 15
-            #   - color: "#00ff00"
-            #     value: 21
-            #   - color: "#ffb347"
-            #     value: 26
-            #   - color: "#ff0000"
-            #     value: 30
-            #   - color: "#FF00FF"
-            #     value: 35
-            # height: 75
-            hour24: true
-            hours_to_show: 48
-            line_color: var(--primary-color)
-            location_icon: left
-            location_state: center
-            show:
-              extrema: false
-              fill: fade
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.bw_shp6_03_relay
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.bw_shp6_03_wattage
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
       - type: horizontal-stack
         cards:
           - type: custom:button-card
@@ -442,30 +449,34 @@ cards:
                 - grid-template-areas: '"i" "n" "graph"'
                 - grid-template-columns: 1fr
                 - grid-template-rows: 1fr min-content min-content
-          - type: custom:mini-graph-card
-            title: Temperature
-            entities:
-              - sensor.bw_shp6_02_wattage
-            # color_thresholds:
-            #   - color: "#0000ff"
-            #     value: 15
-            #   - color: "#00ff00"
-            #     value: 21
-            #   - color: "#ffb347"
-            #     value: 26
-            #   - color: "#ff0000"
-            #     value: 30
-            #   - color: "#FF00FF"
-            #     value: 35
-            # height: 75
-            hour24: true
-            hours_to_show: 48
-            line_color: var(--primary-color)
-            location_icon: left
-            location_state: center
-            show:
-              extrema: false
-              fill: fade
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.bw_shp6_04_relay
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.bw_shp6_04_wattage
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
       - type: horizontal-stack
         cards:
           - type: custom:button-card
@@ -496,30 +507,34 @@ cards:
                 - grid-template-areas: '"i" "n" "graph"'
                 - grid-template-columns: 1fr
                 - grid-template-rows: 1fr min-content min-content
-          - type: custom:mini-graph-card
-            title: Temperature
-            entities:
-              - sensor.bw_shp5_01_power
-            # color_thresholds:
-            #   - color: "#0000ff"
-            #     value: 15
-            #   - color: "#00ff00"
-            #     value: 21
-            #   - color: "#ffb347"
-            #     value: 26
-            #   - color: "#ff0000"
-            #     value: 30
-            #   - color: "#FF00FF"
-            #     value: 35
-            # height: 75
-            hour24: true
-            hours_to_show: 48
-            line_color: var(--primary-color)
-            location_icon: left
-            location_state: center
-            show:
-              extrema: false
-              fill: fade
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.bw_shp6_05_relay
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.bw_shp6_05_wattage
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
 
   - type: custom:auto-entities
     card:

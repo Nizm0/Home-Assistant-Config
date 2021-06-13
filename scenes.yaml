@@ -1,3 +1,98 @@
 - id: '1582621016612'
   name: test
   entities: {}
+- id: '1603920169803'
+  name: Bedroom Night time
+  entities:
+    light.bedroom_main_light:
+      min_mireds: 153
+      max_mireds: 588
+      effect_list:
+      - Strobe color
+      - Police
+      - Christmas
+      - RGB
+      - Random Loop
+      - Fast Random Loop
+      - LSD
+      - Slowdown
+      - Disco
+      - Strobe epilepsy!
+      - Alarm
+      - Police2
+      - WhatsApp
+      - Facebook
+      - Twitter
+      - Slow Temp
+      - Stop
+      - Fire Flicker
+      - Sunrise
+      brightness: 5
+      color_temp: 220
+      hs_color:
+      - 0
+      - 100
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      xy_color:
+      - 0.701
+      - 0.299
+      flowing: false
+      friendly_name: Bedroom Main Light
+      supported_features: 63
+      state: 'on'
+  icon: mdi:weather-night
+- id: '1605208135274'
+  name: Bedroom Day time
+  entities:
+    light.bedroom_main_light:
+      min_mireds: 153
+      max_mireds: 588
+      effect_list:
+      - Strobe color
+      - Police
+      - Christmas
+      - RGB
+      - Random Loop
+      - Fast Random Loop
+      - LSD
+      - Slowdown
+      - Night Mode
+      - Date Night
+      - Movie
+      - Sunrise
+      - Sunset
+      - Romance
+      - Happy Birthday
+      - Disco
+      - Strobe epilepsy!
+      - Alarm
+      - Police2
+      - WhatsApp
+      - Facebook
+      - Twitter
+      - Home
+      - Candle Flicker
+      - Slow Temp
+      - Stop
+      - Fire Flicker
+      - Sunrise
+      brightness: 235
+      color_temp: 182
+      hs_color:
+      - 27.913
+      - 12.917
+      rgb_color:
+      - 255
+      - 237
+      - 222
+      xy_color:
+      - 0.354
+      - 0.343
+      flowing: false
+      friendly_name: Bedroom main light
+      supported_features: 63
+      state: 'on'
+  icon: mdi:weather-sunny

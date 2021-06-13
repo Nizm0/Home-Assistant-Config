@@ -19,6 +19,13 @@ cards:
               action: none
             tap_action:
               action: more-info
+          - type: entity-button
+            entity: binary_sensor.presence_52
+            state_color: true
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
       - type: horizontal-stack
         cards:
           - type: custom:mini-graph-card
@@ -63,7 +70,7 @@ cards:
             theme: default
             unit: "%"
   - type: thermostat
-    entity: climate.kitchen_valve_climate
+    entity: climate.kitchen_thermostat
   - title: Temperature
     type: "custom:mini-graph-card"
     # animate: true

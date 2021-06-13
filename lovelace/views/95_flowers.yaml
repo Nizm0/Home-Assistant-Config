@@ -58,3 +58,18 @@ cards:
   - type: custom:flower-card
     entity: plant.first_plant
     species: "tulipa 'hollandia'"
+  - type: custom:flower-card
+    entity: plant.second_plant
+    species: "litchi chinensis"
+  - type: custom:flower-card
+    entity: plant.third_plant
+    species: "lobivia arachnacantha"
+  - type: custom:flower-card
+    entity: plant.fourth_plant
+    species: "lophophora williamsii"
+  - type: custom:flower-card
+    entity: plant.fifth_plant
+    species: "mahonia aquifolium"
+  - type: custom:flower-card
+    entity: plant.sixth_plant
+    species: "mangifera indica"

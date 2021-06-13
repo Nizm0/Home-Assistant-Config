@@ -1,6 +1,6 @@
 ---
 # resources: !include_dir_list lovelace/resources
-sidebar: !include lovelace/cards/sidebar.yaml
+# sidebar: !include lovelace/cards/sidebar.yaml
 
 title: Home
 views:

@@ -44,9 +44,9 @@
     to: streaming
   condition:
   - condition: device
-    device_id: 3df8ca33c46a4292a5a78441f5c0e28f
+    device_id: 610d7357fd8f008af8a1bd381840585a
     domain: device_tracker
-    entity_id: device_tracker.nizm0_oneplus3
+    entity_id: device_tracker.nizm0_oneplus_8t
     type: is_home
   action:
   - data:
@@ -119,7 +119,7 @@
   alias: PC Turn off on low power
   description: ''
   trigger:
-  - below: 5
+  - below: 10
     device_id: 4adc54ca759f4d2085ba563f487cf2b3
     domain: sensor
     entity_id: sensor.bw_shp6_01_wattage
@@ -176,4 +176,97 @@
     device_id: 3367910d1a8549189a95361700983d6b
     entity_id: light.desctop_lamp
     domain: light
+  mode: single
+- id: '1607956116675'
+  alias: Christmas lights turn on after sunset
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+    offset: 00:30:00
+  condition:
+  - condition: or
+    conditions:
+    - condition: template
+      value_template: '{% set n = now() %} {{ n.month == 12 and 14 <= n.day <= 31
+        }}'
+    - condition: template
+      value_template: '{% set n = now() %} {{ n.month == 1 and 1 <= n.day <= 30 }}'
+  action:
+  - type: turn_on
+    device_id: d98be1384fd94ccc9ea31d77accf8fd6
+    entity_id: switch.bw_shp6_03_relay
+    domain: switch
+  - type: turn_on
+    device_id: 243903ee717f1fa4bd16ce65c869f056
+    entity_id: light.wled_christmas_tree
+    domain: light
+    brightness_pct: 100
+  mode: single
+- id: '1607956218820'
+  alias: Christmas lights turn off after sunset
+  description: ''
+  trigger:
+  - platform: time
+    at: 01:00
+  condition:
+  - condition: or
+    conditions:
+    - condition: template
+      value_template: '{% set n = now() %} {{ n.month == 12 and 14 <= n.day <= 31
+        }}'
+    - condition: template
+      value_template: '{% set n = now() %} {{ n.month == 1 and 1 <= n.day <= 31 }}'
+  action:
+  - type: turn_off
+    device_id: d98be1384fd94ccc9ea31d77accf8fd6
+    entity_id: switch.bw_shp6_03_relay
+    domain: switch
+  - type: turn_off
+    device_id: 243903ee717f1fa4bd16ce65c869f056
+    entity_id: light.wled_christmas_tree
+    domain: light
+  mode: single
+- id: '1611578959480'
+  alias: PC Desk Lamp Off when Pc is on and Nizm0 Not in home
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: e98572e3b2854cc59ef431dd0fd90928
+    entity_id: light.desctop_lights
+    domain: light
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition:
+  - condition: not
+    conditions:
+    - condition: device
+      device_id: 610d7357fd8f008af8a1bd381840585a
+      domain: device_tracker
+      entity_id: device_tracker.nizm0_oneplus_8t
+      type: is_home
+  action:
+  - type: turn_off
+    device_id: 3367910d1a8549189a95361700983d6b
+    entity_id: light.desctop_lamp
+    domain: light
+  mode: single
+- id: '1612520803809'
+  alias: portex.eu is unavailable
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.portexst_eu
+    from: 'on'
+    to: 'off'
+    for: 00:05
+  condition: []
+  action:
+  - service: notify.hangouts_portex
+    data:
+      title: portex.eu is down
+      message: hey, something is wrong with internet access
   mode: single

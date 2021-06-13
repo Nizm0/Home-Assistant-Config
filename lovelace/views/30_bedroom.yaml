@@ -10,9 +10,23 @@ cards:
         cards:
           - type: light
             entity: light.bedroom_main_light
-          - type: custom:gap-card
-          # - entity: light.bedroom_main_light_2
-          #   type: light
+          # - type: custom:gap-card
+          - type: vertical-stack
+            cards:
+              - type: button
+                entity: scene.bedroom_day_time
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.bedroom_day_time
+              - type: button
+                entity: scene.time_to_sleep
+                tap_action:
+                  action: call-service
+                  service: scene.turn_on
+                  service_data:
+                    entity_id: scene.time_to_sleep
           - type: entity-button
             state_color: true
             entity: binary_sensor.bedroom_motion_sensor
@@ -106,3 +120,8 @@ cards:
     detail: 2
     entity: sensor.bedroom_pressure
     graph: line
+  - type: custom:mini-media-player
+    artwork: cover
+    artwork_border: true
+    entity: media_player.bedroom_clock
+    show_source: true

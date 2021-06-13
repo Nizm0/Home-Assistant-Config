@@ -12,9 +12,7 @@ vacuum_manager:
   occupancy: group.family #"not_home"
   home_preset_select: input_select.home_preset #"Empty"
   notifiers:
-    # - notify/push_to_chrome_nizm0_oneplus3
-    - notify/mobile_app_nizm0_oneplus3
-    # - notify/mobile_app_nizm0_s_oneplus_a3003
+    - notify/mobile_app_nizm0_oneplus_8t
   tts_service: tts/cloud_say
   tts_devices:
     - media_player.lenovo_tab_10_full_kiosk

@@ -4,6 +4,6 @@
 #
 # https://www.home-assistant.io/components/speedtestdotnet/
 #
-speedtestdotnet:
-  scan_interval:
-    minutes: 15
+# speedtestdotnet:
+#   scan_interval:
+#     minutes: 15

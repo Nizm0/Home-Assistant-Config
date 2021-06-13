@@ -1,0 +1,4 @@
+name: hangouts_portex
+platform: hangouts
+default_conversations:
+  - id: Ugwz--AJYbMn5bWC6xF4AaABAagB7PaHDw

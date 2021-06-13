@@ -1,0 +1,11 @@
+sensor:
+  - platform: nextbike
+    name: Near home bikes
+    city_id: 148
+    radius: 100
+  - platform: nextbike
+    name: Near work bikes
+    city_id: 148
+    latitude: !secret work_latitude
+    longitude: !secret work_longitude
+    radius: 250

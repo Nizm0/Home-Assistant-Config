@@ -5,5 +5,5 @@ sensor:
   sensors:
     kitchen_valve_position:
       friendly_name: Kitchen valve position
-      value_template: "{{ state_attr('climate.kitchen_valve_climate', 'position') }}"
+      value_template: "{{ state_attr('climate.kitchen_thermostat', 'valve') }}"
       unit_of_measurement: '%'

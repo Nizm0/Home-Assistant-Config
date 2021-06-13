@@ -125,10 +125,10 @@ sensors: #!include_dir_merge_named templates
       {% set temperature_gradient = 0.0065 %}
       {% set exponent = 0.03416 / temperature_gradient %}
 
-      {% set altitude_meters = 300 %}
-      {% set temperature_celsius = states('sensor.feinstaubsensor_temperature') | float %}
+      {% set altitude_meters = 160 %}
+      {% set temperature_celsius = states('sensor.outside_home_air_pm_sensor_temperature') | float %}
       {% set temperautre_at_sealevel_kelvin = temperature_celsius + (temperature_celsius * temperature_gradient) + 273.15 %}
-      {% set air_pressure_hpa = (states('sensor.feinstaubsensor_pressure') | float / 100) | round(1) %}
+      {% set air_pressure_hpa = (states('sensor.outside_home_air_pm_sensor_pressure') | float / 100) | round(1) %}
 
       {{ (air_pressure_hpa / (1 - ((temperature_gradient * altitude_meters) / temperautre_at_sealevel_kelvin)) ** exponent) | round(1) }}
     friendly_name: 'Outside Home Atmospheric pressure'

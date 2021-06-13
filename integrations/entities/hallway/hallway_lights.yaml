@@ -1,5 +1,4 @@
 ---
-
 automation:
   #### MOTION BEGUN
   - alias: Hallway motion detected
@@ -15,12 +14,9 @@ automation:
       - condition: state
         entity_id: binary_sensor.home_door_sensor
         state: 'off'
-      # - condition: numeric_state
-      #   entity_id: sensor.living_room_gateway_illumination
-      #   below: 600
-      # - condition: state
-      #   entity_id: light.hallway_top_light
-      #   state: 'off'
+      - condition: state
+        entity_id: light.hallway_top_light
+        state: 'off'
       - condition: or
         conditions:
         - condition: sun
@@ -41,9 +37,6 @@ automation:
     - platform: state
       entity_id: binary_sensor.hallway_motion_sensor
       to: 'off'
-    # - platform: state
-    #   entity_id: binary_sensor.living_room_motion_sensor
-    #   to: 'off'
     condition:
     - condition: state
       entity_id: binary_sensor.home_door_sensor
@@ -66,7 +59,7 @@ script:
       # - service: script.turn_on
       #   data: 
       #     entity_id: script.hallway_light_timer
-      # - service: notify.mobile_app_nizm0_oneplus3
+      # - service: notify.mobile_app_nizm0_oneplus_8t
       #   data_template:
       #     message: >
       #       New value is: 'open'
@@ -94,7 +87,7 @@ script:
       # - service: script.turn_on
       #   data: 
       #     entity_id: script.hallway_light_timer
-      # - service: notify.mobile_app_nizm0_oneplus3
+      # - service: notify.mobile_app_nizm0_oneplus_8t
       #   data_template:
       #     message: >
       #       New value is:

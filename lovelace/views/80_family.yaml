@@ -11,18 +11,10 @@ cards:
         secondary_info: last-changed
       - entity: person.gosia
         secondary_info: last-changed
-      - entity: device_tracker.google_maps_104688658658376260645
-        secondary_info: last-changed
-      - entity: device_tracker.nizmo_phone
-        secondary_info: last-changed
-      - entity: device_tracker.google_maps_109218123589188227395
+      - entity: device_tracker.oliwia_oneplus
         secondary_info: last-changed
       - entity: device_tracker.gosia_galaxy_s9
         secondary_info: last-changed
-      # - entity: device_tracker.sm_g965f
-      #   secondary_info: last-changed
-      # - entity: device_tracker.oneplus_a3003
-      #   secondary_info: last-changed
       - entity: input_select.home_preset
         secondary_info: last-changed
       - entity: device_tracker.portex
@@ -84,11 +76,11 @@ cards:
       - Home
   - type: entities
     entities:
-      - entity: sensor.nizm0_oneplus3_next_alarm
+      - entity: sensor.nizm0_oneplus_8t_next_alarm
       - entity: sensor.gosia_s8_next_alarm
   - type: history-graph
     entities:
-      - entity: sensor.nizm0_oneplus3_next_alarm
+      - entity: sensor.nizm0_oneplus_8t_next_alarm
       - entity: sensor.gosia_s8_next_alarm
     hours_to_show: 120
     refresh_interval: 60

@@ -47,7 +47,7 @@ cards:
           - sensor.kitchen_temperature
           - sensor.bathroom_temperature
           - sensor.kids_temperature
-        hours_to_show: 168
+        hours_to_show: 72
         refresh_interval: 60
   - type: custom:swipe-card
     cards:
@@ -77,7 +77,7 @@ cards:
           - sensor.kitchen_humidity
           - sensor.bathroom_humidity
           - sensor.kids_humidity
-        hours_to_show: 168
+        hours_to_show: 72
         refresh_interval: 60
   - type: custom:swipe-card
     cards:
@@ -107,7 +107,7 @@ cards:
           - sensor.kitchen_pressure
           - sensor.bathroom_pressure
           - sensor.kids_pressure
-        hours_to_show: 168
+        hours_to_show: 72
         refresh_interval: 60
   - type: history-graph
     title: Dors in home
@@ -156,17 +156,37 @@ cards:
           - sensor.speedtest_download
           - sensor.speedtest_upload
   - type: custom:unused-card
-  - type: history-graph
-    entities:
-      - sensor.bedroom_valve_position
-      - sensor.kids_valve_position
-      - sensor.kitchen_valve_position
-      - sensor.living_room_valve_position
-    hours_to_show: 168
+  - type: custom:swipe-card
+    cards:
+      - type: history-graph
+        entities:
+          - sensor.bedroom_valve_position
+          - sensor.kids_valve_position
+          - sensor.kitchen_valve_position
+          - sensor.living_room_valve_position
+        hours_to_show: 72
+      - type: custom:mini-graph-card
+        entities:
+          - sensor.bedroom_valve_position
+          - sensor.kids_valve_position
+          - sensor.kitchen_valve_position
+          - sensor.living_room_valve_position
+        hours_to_show: 72
+        height: 100
+        hour24: true
+        refresh_interval: 60
+        align_icon: left
+        align_state: center
+        smoothing: false
+        show:
+          extrema: true
+          fill: true
+          title: true
+          state: true
   - type: history-graph
     entities:
       - climate.bedroom_thermostat
-      - climate.kids_valve_climate
-      - climate.kitchen_valve_climate
+      - climate.kids_thermostat
+      - climate.kitchen_thermostat
       - climate.living_room_thermostat
-    hours_to_show: 168
+    hours_to_show: 48

@@ -23,134 +23,134 @@ cards:
                 entity: weather.dark_sky
               - type: weather-forecast
                 entity: weather.home
-      - type: custom:swipe-card
-        cards:
-          - type: custom:vertical-stack-in-card
-            # title: Temperature
+          - type: custom:swipe-card
             cards:
-              - type: horizontal-stack
+              - type: custom:vertical-stack-in-card
+                # title: Temperature
                 cards:
-                  - entity: sensor.living_room_temperature
-                    type: gauge
-                    name: Living room
-                    max: 40
-                    min: 0
-                    severity:
-                      green: 18
-                      red: 30
-                      yellow: 25
-                    theme: default
-                  - type: custom:gap-card
-                  - entity: sensor.bedroom_temperature
-                    type: gauge
-                    max: 40
-                    min: 0
-                    name: Bedroom
-                    severity:
-                      green: 18
-                      red: 30
-                      yellow: 25
-                    theme: default
-              - type: horizontal-stack
+                  - type: horizontal-stack
+                    cards:
+                      - entity: sensor.living_room_temperature
+                        type: gauge
+                        name: Living room
+                        max: 40
+                        min: 0
+                        severity:
+                          green: 18
+                          red: 30
+                          yellow: 25
+                        theme: default
+                      - type: custom:gap-card
+                      - entity: sensor.bedroom_temperature
+                        type: gauge
+                        max: 40
+                        min: 0
+                        name: Bedroom
+                        severity:
+                          green: 18
+                          red: 30
+                          yellow: 25
+                        theme: default
+                  - type: horizontal-stack
+                    cards:
+                      - entity: sensor.kids_temperature
+                        type: gauge
+                        name: Kids
+                        theme: default
+                        unit: C
+                        max: 40
+                        min: 0
+                        severity:
+                          green: 19
+                          red: 30
+                          yellow: 25
+                      # - type: horizontal-stack
+                      #   cards:
+                      - entity: sensor.kitchen_temperature
+                        type: gauge
+                        name: Kitchen
+                        max: 40
+                        min: 0
+                        severity:
+                          green: 18
+                          red: 30
+                          yellow: 25
+                        theme: default
+                        unit: C
+                      - type: gauge
+                        entity: sensor.bathroom_temperature
+                        theme: default
+                        unit: C
+                        max: 40
+                        min: 0
+                        name: Bathroom
+                        severity:
+                          green: 18
+                          red: 30
+                          yellow: 25
+              - type: custom:vertical-stack-in-card
+                # title: Humidity
                 cards:
-                  - entity: sensor.kids_temperature
-                    type: gauge
-                    name: Kids
-                    theme: default
-                    unit: C
-                    max: 40
-                    min: 0
-                    severity:
-                      green: 19
-                      red: 30
-                      yellow: 25
-                  # - type: horizontal-stack
-                  #   cards:
-                  - entity: sensor.kitchen_temperature
-                    type: gauge
-                    name: Kitchen
-                    max: 40
-                    min: 0
-                    severity:
-                      green: 18
-                      red: 30
-                      yellow: 25
-                    theme: default
-                    unit: C
-                  - type: gauge
-                    entity: sensor.bathroom_temperature
-                    theme: default
-                    unit: C
-                    max: 40
-                    min: 0
-                    name: Bathroom
-                    severity:
-                      green: 18
-                      red: 30
-                      yellow: 25
-          - type: custom:vertical-stack-in-card
-            # title: Humidity
-            cards:
-              - type: horizontal-stack
-                cards:
-                  - entity: sensor.living_room_humidity
-                    type: gauge
-                    max: 100
-                    min: 0
-                    name: Living room
-                    severity:
-                      green: 30
-                      red: 60
-                      yellow: 50
-                    theme: default
-                  - type: custom:gap-card
-                  - type: gauge
-                    entity: sensor.bedroom_humidity
-                    max: 100
-                    min: 0
-                    name: Bedroom
-                    severity:
-                      green: 30
-                      red: 60
-                      yellow: 50
-                    theme: default
-              - type: horizontal-stack
-                cards:
-                  - type: gauge
-                    entity: sensor.kids_humidity
-                    max: 100
-                    min: 0
-                    name: Kids
-                    severity:
-                      green: 30
-                      red: 60
-                      yellow: 50
-                    theme: default
-                    unit: "%"
-                  # - type: horizontal-stack
-                  #   cards:
-                  - entity: sensor.kitchen_humidity
-                    type: gauge
-                    max: 100
-                    min: 0
-                    name: kitchen
-                    severity:
-                      green: 30
-                      red: 60
-                      yellow: 50
-                    theme: default
-                    unit: "%"
-                  - entity: sensor.bathroom_humidity
-                    type: gauge
-                    theme: default
-                    unit: "%"
-                    max: 100
-                    min: 0
-                    name: Bathroom
-                    severity:
-                      green: 30
-                      red: 60
-                      yellow: 50
+                  - type: horizontal-stack
+                    cards:
+                      - entity: sensor.living_room_humidity
+                        type: gauge
+                        max: 100
+                        min: 0
+                        name: Living room
+                        severity:
+                          green: 30
+                          red: 60
+                          yellow: 50
+                        theme: default
+                      - type: custom:gap-card
+                      - type: gauge
+                        entity: sensor.bedroom_humidity
+                        max: 100
+                        min: 0
+                        name: Bedroom
+                        severity:
+                          green: 30
+                          red: 60
+                          yellow: 50
+                        theme: default
+                  - type: horizontal-stack
+                    cards:
+                      - type: gauge
+                        entity: sensor.kids_humidity
+                        max: 100
+                        min: 0
+                        name: Kids
+                        severity:
+                          green: 30
+                          red: 60
+                          yellow: 50
+                        theme: default
+                        unit: "%"
+                      # - type: horizontal-stack
+                      #   cards:
+                      - entity: sensor.kitchen_humidity
+                        type: gauge
+                        max: 100
+                        min: 0
+                        name: kitchen
+                        severity:
+                          green: 30
+                          red: 60
+                          yellow: 50
+                        theme: default
+                        unit: "%"
+                      - entity: sensor.bathroom_humidity
+                        type: gauge
+                        theme: default
+                        unit: "%"
+                        max: 100
+                        min: 0
+                        name: Bathroom
+                        severity:
+                          green: 30
+                          red: 60
+                          yellow: 50
       # - type: iframe
       #   aspect_ratio: 60%
       #   url: >-
@@ -252,13 +252,15 @@ cards:
                 - color: Green
                   from: 51
                   to: 100
-              columns: 3
+              columns: 2
               positions:
                 icon: inside
                 title: inside
             filter:
               include:
-                - entity_id: "*_battery*"
+                - entity_id: "*battery_level*"
+                  state: "<=25"
+                - entity_id: "*poziom_baterii*"
                   state: "<=25"
           # - type: custom:auto-entities
           #   card:
@@ -285,6 +287,73 @@ cards:
           #           battery_level: "<=25"
           #       - attributes:
           #           battery: "<=25"
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: horizontal-stack
+            cards:
+              - type: picture-entity
+                entity: vacuum.rockrobo
+                hold_action:
+                  action: more-info
+                double_tap_action:
+                  action: call-service
+                  service: vacuum.start
+                  service_data:
+                    entity_id: vacuum.rockrobo
+                show_icon: true
+                show_name: true
+                state_image:
+                  cleaning: /local/images/vacuum.jpeg
+                  docked: /local/images/vacuum_docked_gray.jpeg
+                  error: /local/images/vacuum_dark.jpeg
+                  idle: /local/images/vacuum_dark.jpeg
+                  paused: /local/images/vacuum_dark.jpeg
+                  returning: /local/images/vacuum.jpeg
+              - type: picture-entity
+                entity: input_boolean.ready_to_vacuum
+                hold_action:
+                  action: more-info
+                tap_action:
+                  action: toggle
+                double_tap_action:
+                  action: call-service
+                  service: input_number.set_value
+                  service_data:
+                    entity_id: input_number.vacuum_cleaned_area
+                    value: 0
+                state_image:
+                  "off": /local/images/vacuum_dark.jpeg
+                  "on": /local/images/vacuum.jpeg
+          - type: "custom:xiaomi-vacuum-map-card"
+            camera_calibration:
+              - vacuum:
+                  x: 25500
+                  'y': 25500
+                map:
+                  x: 78
+                  'y': 210
+              - vacuum:
+                  x: 26500
+                  'y': 25500
+                map:
+                  x: 98
+                  'y': 210
+              - vacuum:
+                  x: 26500
+                  'y': 26500
+                map:
+                  x: 98
+                  'y': 190
+            default_mode: predefined_zones
+            entity: vacuum.rockrobo
+            map_camera: camera.xiaomi_cloud_map_extractor
+            zones:
+              - [[22308, 25089, 26658, 29639]]
+              - [[22154, 29811, 25354, 32461]]
+              - [[26713, 29772, 31213, 32222]]
+              - [[26742, 32255, 31192, 35255]]
+              - [[25275, 33279, 27125, 35129]]
+              - [[22470, 32189, 26870, 33689], [25403, 29586, 26803, 32336]]
       - type: custom:vertical-stack-in-card
         cards:
           - type: horizontal-stack
@@ -367,162 +436,3 @@ cards:
                 show:
                   extrema: false
                   fill: fade
-          - type: horizontal-stack
-            cards:
-              - type: custom:mini-graph-card
-                title: Maslice air pm sensor
-                update_interval: 120
-                entities:
-                  - sensor.air_quality_pm_maslice_25
-                  - sensor.air_quality_pm_maslice_10
-                # color_thresholds_transition: hard
-                color_thresholds:
-                  - color: "#00ff00"
-                    value: 0
-                  - color: "#ffb347"
-                    value: 15
-                  - color: "#ff0000"
-                    value: 35
-                  - color: "#FF00FF"
-                    value: 100
-                  # - color: "#0000ff"
-                  #   value: 30
-                height: 75
-                hour24: true
-                hours_to_show: 76
-                line_color: var(--primary-color)
-                location_icon: left
-                location_state: center
-                show:
-                  extrema: false
-                  fill: fade
-      - type: custom:vertical-stack-in-card
-        cards:
-          # - type: horizontal-stack
-          #   cards:
-          #     # - type: custom:button-card
-          #     #   entity: person.nizm0
-          #     #   # style:
-          #     #   show_entity_picture: true
-          #     #   entity_picture: /local/images/home/michal.jpg
-          #     #   show_name: false
-          #     #   tap_action:
-          #     #     action: more-info
-          #     # - type: custom:button-card
-          #     #   entity: person.gosia
-          #     #   image: /local/images/home/gosia.jpg
-          #     #   show_name: false
-          #     #   tap_action:
-          #     #     action: more-info
-          #     - type: picture-glance
-          #       entity: person.nizm0
-          #       image: /local/images/home/michal.jpg
-          #       # show_name: false
-          #       tap_action:
-          #         action: more-info
-          #       entities:
-          #         - entity: person.nizm0
-          #           show_state: true
-          #         - entity: sensor.oneplus3_battery_level
-          #           show_state: true
-          #         - entity: sensor.oneplus3_wifi_connection
-          #           show_state: true
-          #       state_filter:
-          #         "Home": brightness(100%) saturate(1.2)
-          #         "Work": brightness(50%) hue-rotate(45deg)
-          #         "not_home": brightness(50%)
-          #     - type: picture-glance
-          #       entity: person.gosia
-          #       image: /local/images/home/gosia.jpg
-          #       show_name: false
-          #       tap_action:
-          #         action: more-info
-          #       entities:
-          #         - entity: person.gosia
-          #           show_state: true
-          #         - entity: sensor.samsung_battery_level
-          #           show_state: true
-          #         - entity: sensor.samsung_wifi_connection
-          #           show_state: true
-          #       state_filter:
-          #         "Home": brightness(100%) saturate(1.2)
-          #         "GP": brightness(50%) hue-rotate(45deg)
-          #         "not_home": brightness(50%)
-          - type: horizontal-stack
-            cards:
-              - type: picture-entity
-                entity: vacuum.rockrobo
-                hold_action:
-                  action: more-info
-                double_tap_action:
-                  action: call-service
-                  service: vacuum.start
-                  service_data:
-                    entity_id: vacuum.rockrobo
-                show_icon: true
-                show_name: true
-                state_image:
-                  cleaning: /local/images/vacuum.jpeg
-                  docked: /local/images/vacuum_docked_gray.jpeg
-                  error: /local/images/vacuum_dark.jpeg
-                  idle: /local/images/vacuum_dark.jpeg
-                  paused: /local/images/vacuum_dark.jpeg
-                  returning: /local/images/vacuum.jpeg
-              - type: picture-entity
-                entity: input_boolean.ready_to_vacuum
-                hold_action:
-                  action: more-info
-                tap_action:
-                  action: toggle
-                double_tap_action:
-                  action: call-service
-                  service: input_number.set_value
-                  service_data:
-                    entity_id: input_number.vacuum_cleaned_area
-                    value: 0
-                state_image:
-                  "off": /local/images/vacuum_dark.jpeg
-                  "on": /local/images/vacuum.jpeg
-          # - type: custom:xiaomi-vacuum-card
-          #   entity: vacuum.rockrobo
-          #   name: false
-          #   # buttons: true
-          #   image: local/images/vacuum_small.png
-          #   # labels:
-          #   #   battery: Battery
-          #   #   filter: Filter
-          #   #   main_brush: Main Brush
-          #   #   mode: Mode
-          #   #   sensor: Sensors
-          #   #   side_brush: Side Brush
-          #   #   status: Status
-          - type: "custom:xiaomi-vacuum-map-card"
-            calibration_points:
-              - map:
-                  x: 301
-                  y: 860
-                vacuum:
-                  x: 25500
-                  y: 25500
-              - map:
-                  x: 390
-                  y: 772
-                vacuum:
-                  x: 26500
-                  y: 26500
-              - map:
-                  x: 301
-                  y: 772
-                vacuum:
-                  x: 25500
-                  y: 26500
-            default_mode: predefined_zones
-            entity: vacuum.rockrobo
-            map_image: /hacsfiles/lovelace-xiaomi-vacuum-map-card/home.png
-            zones:
-              - [[22308, 25089, 26658, 29639]]
-              - [[22154, 29811, 25354, 32461]]
-              - [[26713, 29772, 31213, 32222]]
-              - [[26742, 32255, 31192, 35255]]
-              - [[25275, 33279, 27125, 35129]]
-              - [[22470, 32189, 26870, 33689], [25403, 29586, 26803, 32336]]

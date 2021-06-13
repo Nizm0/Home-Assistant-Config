@@ -16,7 +16,7 @@ automation:
           group: Octoprint
         message: Printer just finished his work ({{states('sensor.date_time_iso')}})
         title: Printing finished
-      service: notify.mobile_app_nizm0_oneplus3
+      service: notify.mobile_app_nizm0_oneplus_8t
     - delay: 0:2
     - condition: or
       conditions:

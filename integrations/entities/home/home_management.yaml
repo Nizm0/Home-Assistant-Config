@@ -164,7 +164,7 @@ automation:
       - condition: template
         value_template: '{{ (trigger.to_state.state|float > states.input_number.temp_max.state|float or trigger.to_state.state|float < states.input_number.temp_min.state|float) and trigger.to_state.state != "unavailable" and trigger.to_state.state|float > 0}}'
     action:
-      - service: notify.mobile_app_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus_8t
         data_template:
           message: Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params ({{states('sensor.date_time_iso')}})
           title: Problem with Temperature in {{ trigger.to_state.attributes.friendly_name }}
@@ -175,6 +175,25 @@ automation:
       #   data_template:
       #     message: "({{states('sensor.date_time_iso')}}) Temperature {{ trigger.to_state.state }} in {{ trigger.to_state.attributes.friendly_name }} and is out of demanded params"
       #     title: "Problem with Temperature in {{ trigger.to_state.attributes.friendly_name }}"
+  - alias: Notify on humidifier water level drop below 25mm
+    id: eaf6df25-1c46-40fa-bc8c-34e22cfcde0f
+    initial_state: "true"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.humidifier_water_level
+        below: 25
+    condition: []
+    action:
+      - service: notify.mobile_app_nizm0_oneplus_8t
+        data_template:
+          message: Please fill the humidiefier befor it can continue
+          title: Water level in himidifier is to low
+          data:
+            tag: humidifier
+            group: Home
+      - service: fan.turn_off
+        entity_id: fan.air_humidifier
+  
   - alias: Notify on sun change
     id: b301f9f6-1f06-4858-b04c-8a0e3b5956d2
     initial_state: "true"
@@ -184,7 +203,7 @@ automation:
       - event: sunset
         platform: sun
     action:
-      - service: notify.mobile_app_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus_8t
         data_template:
           message: >
             We have {{ trigger.event }}
@@ -218,7 +237,7 @@ automation:
       #   entity_id: vacuum.rockrobo
       #   state: "Empty"
     action:
-      - service: notify.mobile_app_nizm0_oneplus3
+      - service: notify.mobile_app_nizm0_oneplus_8t
         data_template:
           title: Someone walking in empty home
           message: >

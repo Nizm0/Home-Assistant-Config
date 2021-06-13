@@ -1,0 +1,2 @@
+sensor.bw_shp5_01_power:
+  device_class: power
