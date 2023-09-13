@@ -1,81 +1,99 @@
 icon: "mdi:bed-empty"
-id: 2
 path: bedroom
 title: Bedroom
 cards:
-  - type: "custom:vertical-stack-in-card"
-    layout: horizontal
+  - type: grid
+    columns: 3
+    square: false
     cards:
-      - type: horizontal-stack
-        cards:
-          - type: light
-            entity: light.bedroom_main_light
-          # - type: custom:gap-card
-          - type: vertical-stack
-            cards:
-              - type: button
-                entity: scene.bedroom_day_time
-                tap_action:
-                  action: call-service
-                  service: scene.turn_on
-                  service_data:
-                    entity_id: scene.bedroom_day_time
-              - type: button
-                entity: scene.time_to_sleep
-                tap_action:
-                  action: call-service
-                  service: scene.turn_on
-                  service_data:
-                    entity_id: scene.time_to_sleep
-          - type: entity-button
-            state_color: true
-            entity: binary_sensor.bedroom_motion_sensor
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            entities: 
-              - sensor.bedroom_illumination
-            hour24: true
-            points_per_hour: 5
-            align_icon: state
-            align_state: right
-            show:
-              fill: true
-              # icon: false
-              name: false
-          - entity: sensor.bedroom_temperature
-            type: gauge
-            max: 40
-            min: 0
-            name: Temperature
-            severity:
-              green: 18
-              red: 30
-              yellow: 25
-            theme: default
-          - entity: sensor.bedroom_humidity
-            type: gauge
-            max: 100
-            min: 0
-            name: Humidity
-            severity:
-              green: 30
-              red: 60
-              yellow: 50
-            theme: default
-          # - type: custom:gap-card
-            # height: 
-            # size: 
-  - type: thermostat
-    entity: climate.bedroom_thermostat
+      # - type: light
+      #   entity: light.bedroom_top_light
+      - type: light
+        entity: light.bedroom_top_light_bulb
+      - type: light
+        entity: light.desk_lamp
+      # - type: custom:gap-card
+      - type: button
+        entity: scene.bedroom_day_time
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.bedroom_day_time
+      - type: button
+        entity: scene.time_to_sleep
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.time_to_sleep
+      - type: button
+        state_color: true
+        entity: binary_sensor.bedroom_window_sensor_contact
+        hold_action:
+          action: none
+        tap_action:
+          action: more-info
+      - type: button
+        state_color: true
+        entity: binary_sensor.bedroom_motion_sensor_occupancy
+        hold_action:
+          action: none
+        tap_action:
+          action: more-info
+      # - type: custom:mini-graph-card
+      #   entities:
+      #     - sensor.bedroom_illumination
+      #   hour24: true
+      #   points_per_hour: 5
+      #   align_icon: state
+      #   align_state: right
+      #   show:
+      #     fill: true
+      #     # icon: false
+      #     name: false
+      - type: gauge
+        entity: sensor.bedroom_multi_sensor_temperature
+        theme: default
+        unit: C
+        max: 40
+        min: 0
+        name: Temperature
+        segments:
+          - from: 0
+            color: blue
+          - from: 19
+            color: green
+          - from: 25
+            color: yellow
+          - from: 30
+            color: red
+      - type: gauge
+        entity: sensor.bedroom_multi_sensor_humidity
+        max: 100
+        min: 0
+        name: Humidity
+        segments:
+          - from: 0
+            color: var(--error-color)
+          - from: 35
+            color: var(--warning-color)
+          - from: 40
+            color: var(--success-color)
+          - from: 60
+            color: var(--warning-color)
+          - from: 65
+            color: var(--error-color)
+        theme: default
+      # - type: custom:gap-card
+      # height:
+      # size:
+  # - type: thermostat
+  #   entity: climate.bedroom_thermostat
   - title: Temperature
     type: "custom:mini-graph-card"
     entities:
-      - sensor.bedroom_temperature
+      - sensor.bedroom_multi_sensor_temperature
     color_thresholds:
       - color: "#0000ff"
         value: 15
@@ -99,7 +117,7 @@ cards:
   - title: Humidity
     type: "custom:mini-graph-card"
     entities:
-      - sensor.bedroom_humidity
+      - sensor.bedroom_multi_sensor_humidity
     color_thresholds:
       - color: "#00ff00"
         value: 30
@@ -116,12 +134,44 @@ cards:
     show:
       extrema: true
       fill: fade
-  - type: sensor
-    detail: 2
-    entity: sensor.bedroom_pressure
-    graph: line
+  # - type: sensor
+  #   detail: 2
+  #   entity: sensor.bedroom_pressure
+  #   graph: line
   - type: custom:mini-media-player
     artwork: cover
     artwork_border: true
     entity: media_player.bedroom_clock
     show_source: true
+  - type: custom:vertical-stack-in-card
+    cards:
+      - type: custom:mini-media-player
+        artwork: cover
+        artwork_border: true
+        entity: media_player.living_room_speaker
+        show_source: true
+      # - type: custom:mini-media-player
+      #   artwork: cover
+      #   artwork_border: true
+      #   entity: media_player.pc_gpmdp
+      #   show_source: true
+      - type: custom:mini-media-player
+        artwork: cover
+        artwork_border: true
+        entity: media_player.living_room_tv_cast
+        show_source: true
+      - type: custom:mini-media-player
+        artwork: cover
+        artwork_border: true
+        entity: media_player.philips_55pus7303
+        show_source: true
+      - type: custom:mini-media-player
+        artwork: cover
+        artwork_border: true
+        entity: media_player.playstation_4
+        show_source: true
+      - type: custom:mini-media-player
+        artwork: cover
+        artwork_border: true
+        entity: media_player.chrome_home_pc
+        show_source: true

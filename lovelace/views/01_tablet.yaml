@@ -75,9 +75,9 @@ cards:
                     #     [[[ return states['sensor.isabellas_iphone_x_battery_level'].state ]]]
               - type: markdown
                 content: >
-                    # [[ sensor.time.state ]]
-                    
-                    ### [[ sensor.date.state ]]
+                  # [[ sensor.time.state ]]
+
+                  ### [[ sensor.date.state ]]
                 style: |
                   ha-card {
                     margin-top: 50px;
@@ -104,9 +104,9 @@ cards:
               #     !include notifications/dashboard_notifications.yaml
 
               - type: custom:weather-card
-                entity: weather.dark_sky
+                entity: weather.openweathermap
           - type: vertical-stack
-            cards: 
+            cards:
               - type: horizontal-stack
                 cards:
                   - type: custom:vertical-stack-in-card
@@ -141,7 +141,7 @@ cards:
                               action: call-service
                               service: input_number.set_value
                               service_data:
-                                entity_id: input_number.vacuum_cleaned_area
+                                entity_id: input_number.rockrobo_cleaned_area
                                 value: 0
                             state_image:
                               "off": /local/images/vacuum_dark.jpeg
@@ -165,12 +165,12 @@ cards:
                         air_pollution_level: sensor.u_s_air_pollution_level
                         air_quality_index: sensor.u_s_air_quality_index
                         main_pollutant: sensor.u_s_main_pollutant
-                        temp: weather.dark_sky
+                        temp: weather.openweathermap
                         city: "Home"
                       - type: custom:swipe-card
                         cards:
                           - type: custom:weather-card
-                            entity: weather.dark_sky
+                            entity: weather.openweathermap
                           - type: custom:weather-card
                             entity: weather.home
                       - type: custom:swipe-card

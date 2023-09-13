@@ -1,0 +1,160 @@
+sensor:
+  - platform: history_stats
+    name: Nizm0 week in the office
+    entity_id: person.nizm0 #nizmo
+    state: "Work"
+    type: time
+    start: "{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: Nizm0 today in the office
+    entity_id: person.nizm0 #nizmo
+    state: "Work"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"
+#   - platform: history_stats
+#     name: Oliwia on phome
+#     entity_id: person.nizm0 #nizmo
+#     state: "Work"
+#     type: time
+#     start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+#     end: "{{ now() }}"
+
+automation:
+  - id: ac630c56-6eaa-45e5-9f71-db63e15032b6
+    alias: (Family presents) Person entered the home
+    initial_state: on
+    trigger:
+      - platform: zone
+        entity_id: person.gosia
+        zone: zone.home
+        event: enter
+        id: Gosia
+      - platform: zone
+        entity_id: person.nizm0
+        zone: zone.home
+        event: enter
+        id: Michal
+      - platform: zone
+        entity_id: person.portex
+        zone: zone.home
+        event: enter
+        id: Krzychu
+      - platform: state
+        entity_id:
+          - person.oliwia
+        # zone: zone.home
+        # event: enter
+        for: 00:00:05
+        id: Oliwia
+      # - platform: zone
+      #   entity_id: person.oliwia
+      #   zone: zone.school
+      #   event: enter
+      #   id: Oliwia
+      - platform: zone
+        entity_id: person.babcia_t
+        zone: zone.home #, zone.siemiechow]
+        event: enter
+        id: Babcia_t
+    condition: []
+    action:
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: Gosia
+            sequence:
+              - service: notify.mobile_app_nizm0_oneplus_8t
+                data_template:
+                  message: >
+                    New value is: {{ trigger.to_state.state }}
+                    ({{states('sensor.date_time_iso')}})
+                  title: Gosia entered the home
+                  data:
+                    tag: gosia-location-info
+                    group: Location
+              # - service: notify.hangouts_gosia_michal
+              #   data_template:
+              #     message: >
+              #       New value is: {{ trigger.to_state.state }}
+              #     title: Gosia entered the home
+          - conditions:
+              - condition: trigger
+                id: Michal
+            sequence:
+              - service: notify.mobile_app_gosia_s9
+                data_template:
+                  message: >
+                    New value is: {{ trigger.to_state.state }}
+                    ({{ states('sensor.date_time_iso') }})
+                  title: Michał entered the home
+                  data:
+                    tag: nizmo-location-info
+                    group: Location
+              # - service: notify.hangouts_gosia_michal
+              #   data_template:
+              #     message: >
+              #       New value is: {{ trigger.to_state.state }}
+              #     title: Michał entered the home
+          - conditions:
+              - condition: trigger
+                id: Oliwia
+              - condition: not
+                conditions:
+                  - condition: state
+                    entity_id:
+                      - person.oliwia
+                    state:
+                      - Unavailable
+              - condition: template
+                value_template: >
+                  {{ trigger.to_state.state != trigger.from_state.state }}
+            sequence:
+              - service: notify.mobile_app_gosia_s9
+                data_template:
+                  message: >
+                    New value is: {{ trigger.to_state.state }} from: {{ trigger.from_state.state }}
+                    ({{ states('sensor.date_time_iso') }})
+                  title: Oliwia has moved
+                  data:
+                    tag: oliwia-location-info
+                    group: Location
+              # - service: notify.hangouts_gosia_michal
+              #   data_template:
+              #     message: >
+              #       New value is: {{ trigger.to_state.state }} from: {{ trigger.from_state.state }}
+              #     title: Oliwia has moved
+          - conditions:
+              - condition: trigger
+                id: Krzychu
+            sequence:
+              - service: notify.mobile_app_nizm0_oneplus_8t
+                data_template:
+                  message: >
+                    New value is: {{ trigger.to_state.state }}
+                    ({{states('sensor.date_time_iso')}})
+                  title: Portex entered the home
+                  data:
+                    title: Portex entered the home
+                    tag: portex_notification
+                    group: Location
+          - conditions:
+              - condition: trigger
+                id: Babcia_t
+            sequence:
+              - service: notify.mobile_app_nizm0_oneplus_8t
+                data_template:
+                  message: >
+                    New value is: {{ trigger.to_state.state }}
+                    ({{states('sensor.date_time_iso')}})
+                  title: Babcia entered the home
+                  data:
+                    title: Babcia entered the home
+                    tag: babcia_notification
+                    group: Location
+              # - service: notify.hangouts_gosia_michal
+              #   data_template:
+              #     message: >
+              #       New value is: {{ trigger.to_state.state }} from: {{ trigger.from_state.state }}
+              #     title: Babcia has moved

@@ -3,19 +3,22 @@ automation:
   #### MOTION BEGUN
   - alias: Hallway motion detected
     id: 848853b1-d2ec-4019-9bb5-b220c96cd509
-    initial_state: 'true'
+    initial_state: 'false'
     trigger:
     - platform: state
-      entity_id: binary_sensor.hallway_motion_sensor
+      entity_id: binary_sensor.hallway_motion_sensor_1_occupancy
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.hallway_motion_sensor_2_occupancy
       to: 'on'
     condition:
       condition: and
       conditions:
       - condition: state
-        entity_id: binary_sensor.home_door_sensor
+        entity_id: binary_sensor.home_door_sensor_contact
         state: 'off'
       - condition: state
-        entity_id: light.hallway_top_light
+        entity_id: light.hallway_light
         state: 'off'
       - condition: or
         conditions:
@@ -32,14 +35,17 @@ automation:
   #### MOTION OVER
   - alias: Hallway motion over
     id: 68c295a8-6ca6-4441-8bb0-fff1b025bd5c
-    initial_state: 'true'
+    initial_state: 'false'
     trigger:
     - platform: state
-      entity_id: binary_sensor.hallway_motion_sensor
+      entity_id: binary_sensor.hallway_motion_sensor_1_occupancy
+      to: 'off'
+    - platform: state
+      entity_id: binary_sensor.hallway_motion_sensor_2_occupancy
       to: 'off'
     condition:
     - condition: state
-      entity_id: binary_sensor.home_door_sensor
+      entity_id: binary_sensor.home_door_sensor_contact
       state: 'off'
     action:
     - service: homeassistant.turn_on
@@ -53,7 +59,7 @@ script:
           entity_id: script.hallway_light_timer
       - service: light.turn_on
         data:
-          entity_id: light.hallway_gateway_light
+          entity_id: light.hallway_light
           color_name: red
           brightness_pct: 100
       # - service: script.turn_on
@@ -81,8 +87,8 @@ script:
           entity_id: script.hallway_light_timer
       - service: light.turn_on
         data:
-          entity_id: light.hallway_gateway_light
-          color_name: red
+          entity_id: light.hallway_light
+          # color_name: red
           brightness_pct: 100
       # - service: script.turn_on
       #   data: 
@@ -108,4 +114,4 @@ script:
           seconds: 1
       - service: light.turn_off
         data:
-          entity_id: light.hallway_gateway_light
+          entity_id: light.hallway_light

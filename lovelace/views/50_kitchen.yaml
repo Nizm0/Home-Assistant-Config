@@ -1,5 +1,4 @@
 icon: "mdi:silverware-fork-knife"
-id: 4
 path: kitchen
 title: Kitchen
 badges: []
@@ -7,40 +6,42 @@ cards:
   - type: "custom:vertical-stack-in-card"
     layout: horizontal
     cards:
-      - type: horizontal-stack
+      - type: grid
+        columns: 3
+        square: true
         cards:
           - type: light
             entity: light.kitchen_top_light
             state_color: true
+          - type: light
+            entity: light.kitchen_small_light
+            state_color: true
           - type: entity-button
-            entity: binary_sensor.kitchen_motion_sensor
+            entity: binary_sensor.kitchen_motion_sensor_occupancy
             state_color: true
             hold_action:
               action: none
             tap_action:
               action: more-info
+          # - type: custom:mini-graph-card
+          #   entities:
+          #     - sensor.kitchen_illumination
+          #   hour24: true
+          #   points_per_hour: 5
+          #   align_icon: state
+          #   align_state: right
+          #   show:
+          #     fill: true
+          #     # icon: false
+          #     name: false
           - type: entity-button
-            entity: binary_sensor.presence_52
-            state_color: true
+            entity: binary_sensor.kitchen_window_sensor_contact
             hold_action:
               action: none
             tap_action:
               action: more-info
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            entities: 
-              - sensor.kitchen_illumination
-            hour24: true
-            points_per_hour: 5
-            align_icon: state
-            align_state: right
-            show:
-              fill: true
-              # icon: false
-              name: false
           - type: entity-button
-            entity: binary_sensor.kitchen_left_window_sensor
+            entity: binary_sensor.kitchen_smoke_detector_smoke
             hold_action:
               action: none
             tap_action:
@@ -48,7 +49,7 @@ cards:
       - type: horizontal-stack
         cards:
           - type: gauge
-            entity: sensor.kitchen_temperature
+            entity: sensor.kitchen_multi_sensor_temperature
             max: 40
             min: 0
             name: Temperature
@@ -59,23 +60,30 @@ cards:
             theme: default
             unit: C
           - type: gauge
-            entity: sensor.kitchen_humidity
+            entity: sensor.kitchen_multi_sensor_humidity
             max: 100
             min: 0
             name: Humidity
-            severity:
-              green: 30
-              red: 60
-              yellow: 50
+            segments:
+              - from: 0
+                color: var(--error-color)
+              - from: 35
+                color: var(--warning-color)
+              - from: 40
+                color: var(--success-color)
+              - from: 60
+                color: var(--warning-color)
+              - from: 65
+                color: var(--error-color)
             theme: default
             unit: "%"
-  - type: thermostat
-    entity: climate.kitchen_thermostat
+  # - type: thermostat
+  #   entity: climate.kitchen_thermostat
   - title: Temperature
     type: "custom:mini-graph-card"
     # animate: true
     entities:
-      - sensor.kitchen_temperature
+      - sensor.kitchen_multi_sensor_temperature
     color_thresholds:
       - color: "#0000ff"
         value: 15
@@ -97,14 +105,14 @@ cards:
       extrema: true
       fill: fade
   - entities:
-      - binary_sensor.kitchen_left_window_sensor
-      - binary_sensor.kitchen_motion_sensor
-      - sensor.kitchen_illumination
+      - binary_sensor.kitchen_window_sensor_contact
+      - binary_sensor.kitchen_motion_sensor_occupancy
+      # - sensor.kitchen_illumination
     type: entities
   - title: Humidity
     type: "custom:mini-graph-card"
     entities:
-      - sensor.kitchen_humidity
+      - sensor.kitchen_multi_sensor_humidity
     color_thresholds:
       - color: "#00ff00"
         value: 30
@@ -121,11 +129,11 @@ cards:
     show:
       extrema: true
       fill: fade
-  - detail: 2
-    entity: sensor.kitchen_pressure
-    graph: line
-    type: sensor
-  - detail: 2
-    entity: sensor.kitchen_illumination
-    graph: line
-    type: sensor
+  # - detail: 2
+  #   entity: sensor.kitchen_multi_sensor_pressure
+  #   graph: line
+  #   type: sensor
+  # - detail: 2
+  #   entity: sensor.kitchen_illumination
+  #   graph: line
+  #   type: sensor

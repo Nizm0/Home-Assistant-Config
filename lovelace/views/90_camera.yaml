@@ -1,13 +1,13 @@
 icon: "mdi:camera"
-path: null
+# path: null
 title: Camera
 badges: []
 cards:
   - entity: camera.camera_pjp
     show_state: false
     type: picture-entity
-    state_filter:
-      - null
+    # state_filter:
+    #   - null
   - entity: camera.camera_strzegomski
     show_state: false
     type: picture-entity

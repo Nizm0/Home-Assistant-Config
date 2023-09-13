@@ -7,6 +7,8 @@ from collections import namedtuple
 from base import Base
 import globals
 import voluptuous as vol
+
+from dateutil.parser import parse
 # from globals import Actions
 
 # General
@@ -16,6 +18,10 @@ CONF_CLASS = 'class'
 CONF_VACUUM = 'vacuum_entity'
 CONF_TAG = 'tag'
 CONF_TITLE = 'title'
+CONF_LAST_CLEAN_AREA = 'last_clean_area_entity'
+CONF_LAST_CLEAN_START = 'last_clean_start_entity'
+CONF_LAST_CLEAN_END = 'last_clean_end_entity'
+CONF_LAST_CLEAN_DURATION = 'last_clean_duration_entity'
 CONF_VACUUM_TIME = 'vacuum_time_entity'
 CONF_GOING_TO_BE_EMPTYIED = 'going_to_be_emptyied_entity'
 CONF_READY_TO_VACUUM = 'ready_to_vacuum'
@@ -46,8 +52,12 @@ CONF_Y = 'y'
 
 DEFAULT_TITLE = 'Roborock'
 DEFAULT_OCCUPANCY_ENTITY = 'group.family'
-DEFAULT_CLEANED_AREA_ENTITY = 'input_number.vacuum_cleaned_area'
-DEFAULT_VACUUM_TIME_ENTITY = 'input_datetime.vacuum_day_time'
+DEFAULT_LAST_CLEAN_AREA = 'sensor.rockrobo_last_clean_area'
+DEFAULT_LAST_CLEAN_START = 'sensor.rockrobo_last_clean_start'
+DEFAULT_LAST_CLEAN_END = 'sensor.rockrobo_last_clean_end'
+DEFAULT_LAST_CLEAN_DURATION = 'sensor.rockrobo_last_clean_duration'
+DEFAULT_CLEANED_AREA_ENTITY = 'input_number.rockrobo_cleaned_area'
+DEFAULT_VACUUM_TIME_ENTITY = 'input_datetime.rockrobo_day_time'
 DEFAULT_GOING_TO_BE_EMPTYIED_ENTITY = 'input_boolean.going_to_be_emptyied'
 DEFAULT_HOME_PRESET_SELECT_ENTITY = 'input_select.home_preset'
 DEFAULT_READY_TO_VACUUM_ENTITY = 'input_boolean.ready_to_vacuum'
@@ -86,7 +96,9 @@ CONF_VISITORS = 'Visitors'
 CONF_ALONE = 'Alone'
 
 # PEOPLE_TRACKER_ENTITY_ID = 'sensor.people_tracker'
-DEFAULT_TIMESTAMP_FORMAT = '%Y-%m-%dT%H:%M:%S'
+DEFAULT_TIMESTAMP_FORMAT = '%Y-%m-%dT%H:%M:%S%z'
+DEFAULT_HA_BUTTON_TIMESTAMP_FORMAT = '%Y-%m-%dT%H:%M:%S.%f%z'
+DEFAULT_HA_BUTTON_ACTION_NAME = 'DateTime'
 
 # logs
 
@@ -152,6 +164,10 @@ APP_SCHEMA = vol.Schema({
   vol.Required(CONF_VACUUM): str,
   vol.Required(CONF_TAG): str,
   vol.Optional(CONF_TITLE, default=DEFAULT_TITLE): str,
+  vol.Optional(CONF_LAST_CLEAN_AREA, default=DEFAULT_LAST_CLEAN_AREA): str,
+  vol.Optional(CONF_LAST_CLEAN_START, default=DEFAULT_LAST_CLEAN_START): str,
+  vol.Optional(CONF_LAST_CLEAN_END, default=DEFAULT_LAST_CLEAN_END): str,
+  vol.Optional(CONF_LAST_CLEAN_DURATION, default=DEFAULT_LAST_CLEAN_DURATION): str,
   vol.Optional(CONF_VACUUM_TIME, default=DEFAULT_VACUUM_TIME_ENTITY): str,
   vol.Optional(CONF_READY_TO_VACUUM, default=DEFAULT_READY_TO_VACUUM_ENTITY): str,
   vol.Optional(CONF_HOME_PRESET_SELECT, default=DEFAULT_HOME_PRESET_SELECT_ENTITY): str,
@@ -193,6 +209,10 @@ class VacuumAdvanceManager(Base):
     self._title = args.get(CONF_TITLE)
     self._tag = args.get(CONF_TAG)
     self._vacuum_entity = args.get(CONF_VACUUM)
+    self._vacuum_last_clean_area = args.get(CONF_LAST_CLEAN_AREA)
+    self._vacuum_last_clean_start = args.get(CONF_LAST_CLEAN_START)
+    self._vacuum_last_clean_end = args.get(CONF_LAST_CLEAN_END)
+    self._vacuum_last_clean_duration = args.get(CONF_LAST_CLEAN_DURATION)
     self._vacuum_time_entity = args.get(CONF_VACUUM_TIME)
     self._occupancy_entity = args.get(CONF_OCCUPANCY)
     self._cleaned_area_entity = args.get(CONF_CLEANED_AREA)
@@ -329,6 +349,30 @@ class VacuumAdvanceManager(Base):
   #   self.log(f"write self.vacuum_neads_emptying {self.__vacuum_neads_emptying}", log=self._log_file, level=self._level)
 
   @property
+  def last_clean_area(self):
+    self.__last_clean_area = int(float(self.get_state(self._vacuum_last_clean_area)))
+    self.log(f"read self.last_clean_area {self.__last_clean_area}", log=self._log_file, level=self._level)
+    return self.__last_clean_area
+
+  @property
+  def last_clean_start(self):
+    self.__last_clean_start = self.get_state(self._vacuum_last_clean_start)
+    self.log(f"read self.last_clean_start {self.__last_clean_start}", log=self._log_file, level=self._level)
+    return self.__last_clean_start
+
+  @property
+  def last_clean_end(self):
+    self.__last_clean_end = self.get_state(self._vacuum_last_clean_end)
+    self.log(f"read self.last_clean_end {self.__last_clean_end}", log=self._log_file, level=self._level)
+    return self.__last_clean_end
+
+  @property
+  def last_clean_duration(self):
+    self.__last_clean_duration = int(float(self.get_state(self._vacuum_last_clean_duration)))
+    self.log(f"read self.last_clean_duration {self.__last_clean_duration}", log=self._log_file, level=self._level)
+    return self.__last_clean_duration
+
+  @property
   def cleaned_area(self):
     self.__cleaned_area = int(float(self.get_state(self._cleaned_area_entity)))
     self.log(f"read self.cleaned_area {self.__cleaned_area}", log=self._log_file, level=self._level)
@@ -381,7 +425,11 @@ class VacuumAdvanceManager(Base):
     # ready = self.get_state(self._ready_to_vacuum_entity)
     # occupancy_state = self.get_state(self._occupancy_entity)
     # home_preset = self.get_state(self._home_preset_select)
-    clean_start = datetime.datetime.strptime(self.vacuum['attributes']['clean_start'], DEFAULT_TIMESTAMP_FORMAT).date()
+    self.log(f"Last cleaning start is: {self.last_clean_start} and default format: {DEFAULT_TIMESTAMP_FORMAT}", log=self._log_file, level=self._level)
+    if is_date(self.last_clean_start):
+      clean_start = datetime.datetime.strptime(self.last_clean_start, DEFAULT_TIMESTAMP_FORMAT).date()
+    else:
+      raise ValueError(f'Entity: {self._vacuum_last_clean_start} is corrupted: {self.last_clean_start}')
     today = clean_start == datetime.date.today()
     message = ""
     if self.vacuum["state"] not in ["cleaning", "error", "returning"] and not today:
@@ -401,7 +449,7 @@ class VacuumAdvanceManager(Base):
         self.notify_on_change(self._title, message, actions=[Actions["return_vacuum"]])
         self.start_vacuum()
         self.log("Vacuum started", log=self._log_file, level=self._level)
-      elif self.ready_to_vacuum and self.occupancy_state == 'home' and self.home_preset in [CONF_VISITORS, CONF_ALONE]:
+      elif self.ready_to_vacuum and (self.occupancy_state == 'home' or self.home_preset in [CONF_VISITORS, CONF_ALONE]):
         message = "Flor is ready to cleanup, but I can see that someone is in home. I will start vacuum in 5 min."
         self.notify_on_change(self._title, message, actions=[Actions["start_vacuum"], Actions["pospone"], Actions["cancel_postpone"]])
         self._vacuum_timer_handler = self.run_in(self.start_vacuum_event_handler, 300)
@@ -504,8 +552,9 @@ class VacuumAdvanceManager(Base):
     self.log(f'Entity name {entity} state changed to {new}', log=self._log_file, level=self._level)
     for _entity in self._entites:
       if entity == _entity.id:
-        self.log(f'Entity id {_entity.id} = {entity}', log=self._log_file, level=self._level)
         self.execute_button_action(_entity.action(new), kwargs)
+      else:
+        self.log(f'Entity id {_entity.id} = {entity}', log=self._log_file, level=self._level)
     pass
 
   def execute_button_action(self, action, kwargs):
@@ -516,7 +565,7 @@ class VacuumAdvanceManager(Base):
         # self.log(f'invoked data {data},\nevent: {switch.event_data_name}\nlist of keys {switch._actions.keys()}', log=self._log_file, level=self._level)
         method_name = 'button_action_' + action
         method = getattr(self, method_name, lambda: 'Invalid')
-        self.log(f'invoked methot {method_name} at date {event_time}', log=self._log_file, level=self._level)
+        self.log(f'Invoked methot {method_name} at date {event_time}', log=self._log_file, level=self._level)
         return method(kwargs)
       else:
         pass
@@ -602,11 +651,11 @@ class VacuumAdvanceManager(Base):
         self.cancel_vacuum_timer(self._vacuum_timer_handler)
         actions = []
         if old == "cleaning":
-          cleaned_area = self.vacuum["attributes"]["cleaned_area"]
-          cleaning_time = self.vacuum["attributes"]["cleaning_time"]
-          self.log(f"Vacuum cleaned area from last emptying: {self.cleaned_area} and type {type(self.cleaned_area)}\n and in the current time: {cleaned_area} and type {type(cleaned_area)}", log=self._log_file, level=self._level)
-          self.cleaned_area = self.cleaned_area + cleaned_area
-          message = f"Vacuum has finished his work, cleaned {cleaned_area} m\u00b2 in {cleaning_time} min."
+          # cleaned_area = self.last_clean_area
+          # cleaning_time = self.last_clean_duration
+          self.log(f"Vacuum cleaned area from last emptying: {self.cleaned_area} and type {type(self.cleaned_area)}\n and in the current time: {self.last_clean_area} and type {type(self.last_clean_area)}", log=self._log_file, level=self._level)
+          self.cleaned_area = self.cleaned_area + self.last_clean_area
+          message = f"Vacuum has finished his work, cleaned {self.last_clean_area} m\u00b2 in {self.last_clean_duration} sec."
           if self.cleaned_area > self._area_before_emptying:
             message = message + f" You have nod emptied me that long, I'm almost full."
             actions = [Actions["stop_vacuum"], Actions["send_for_emptying"]]
@@ -759,7 +808,7 @@ class Switch(object):
         return None
         # raise ValueError(f'Not supported action: {action}')
     else:
-      raise ValueError(f'Not suported event name: {self.event_data_name}')
+      raise ValueError(f'Event {self.event_data_name} is not suported.')
 
 class Entity(object):
   def __init__(self, args):
@@ -775,7 +824,11 @@ class Entity(object):
     if state in self._actions:
       return str(self._actions[state])
     else:
-      raise ValueError(f'Not supported action: {state}')
+      if state != 'None' and state != '' and state != 'unavailable':
+        if is_date(state) and datetime.datetime.strptime(state, DEFAULT_HA_BUTTON_TIMESTAMP_FORMAT):
+          return str(self._actions[DEFAULT_HA_BUTTON_ACTION_NAME])
+        else:
+          raise ValueError(f'Entity {self.id} has not supported action: {state}')
 
 class SwitchEventData(object):
   def __init__(self, action, event):
@@ -786,3 +839,17 @@ class EntityStateData(object):
   def __init__(self, action, state):
     self.action = action
     self.state = state
+
+def is_date(string, fuzzy=False):
+    """
+    Return whether the string can be interpreted as a date.
+
+    :param string: str, string to check for date
+    :param fuzzy: bool, ignore unknown tokens in string if True
+    """
+    try: 
+        parse(string, fuzzy=fuzzy)
+        return True
+
+    except ValueError:
+        return False

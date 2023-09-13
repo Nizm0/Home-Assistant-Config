@@ -1,8 +1,8 @@
-vacuum:
-  - platform: xiaomi_miio
-    host: 192.168.1.150
-    name: Rockrobo
-    token: !secret xiaomi_rockrobo_key
+# vacuum:
+# - platform: xiaomi_miio
+#   host: 192.168.1.150
+#   name: Rockrobo
+#   token: !secret xiaomi_rockrobo_key
 
 input_boolean:
   ready_to_vacuum:
@@ -15,14 +15,14 @@ input_boolean:
   #   icon: mdi:delete-circle
 
 input_datetime:
-  vacuum_day_time:
+  rockrobo_day_time:
     name: Vacuum date time
     has_date: false
     has_time: true
     # initial: '15:00'
 
 input_number:
-  vacuum_cleaned_area:
+  rockrobo_cleaned_area:
     name: Cleared area between emptying
     mode: box
     min: 0
@@ -34,7 +34,7 @@ camera:
     token: !secret xiaomi_rockrobo_key
     username: !secret xiaomi_cloud_username
     password: !secret xiaomi_cloud_password
-    draw: ['all']
+    draw: ["all"]
     attributes:
       - calibration_points
       - charger
@@ -55,12 +55,12 @@ camera:
       # - walls
       - zones
     map_transformation:
-      scale: 1
+      #   scale: 1
       trim:
-        top: 22
-        bottom: 25
-        left: 25
-        right: 25
+        top: 24
+        bottom: 22
+        left: 28
+        right: 23
     scan_interval:
       seconds: 10
     auto_update: true
@@ -85,43 +85,43 @@ camera:
       color_unknown: [0, 0, 0]
       color_scan: [0xDF, 0xDF, 0xDF]
 
-sensor:
-  - platform: template
-    sensors:
-      vacuum_battery:
-        # entity_id: vacuum.rockrobo
-        friendly_name: "Vacuum - Battery"
-        value_template: "{{ states.vacuum.rockrobo.attributes.battery_level }}"
-        device_class: battery
-        unit_of_measurement: '%'
+# sensor:
+#   - platform: template
+#     sensors:
+#       vacuum_battery:
+#         # entity_id: vacuum.rockrobo
+#         friendly_name: "Vacuum - Battery"
+#         value_template: "{{ states.vacuum.rockrobo.attributes.battery_level }}"
+#         device_class: battery
+#         unit_of_measurement: "%"
 
-      vacuum_main_brush:
-        # entity_id: vacuum.rockrobo
-        friendly_name: "Vacuum - Main Brush left"
-        value_template: "{{ states.vacuum.rockrobo.attributes.main_brush_left }}"
-        # device_class: battery
-        # unit_of_measurement: '%'
+#       vacuum_main_brush:
+#         # entity_id: vacuum.rockrobo
+#         friendly_name: "Vacuum - Main Brush left"
+#         value_template: "{{ states.vacuum.rockrobo.attributes.main_brush_left }}"
+#         # device_class: battery
+#         # unit_of_measurement: '%'
 
-      vacuum_side_brush:
-        # entity_id: vacuum.rockrobo
-        friendly_name: "Vacuum - Side Brush left"
-        value_template: "{{ states.vacuum.rockrobo.attributes.side_brush_left }}"
-        # device_class: battery
-        # unit_of_measurement: '%'
+#       vacuum_side_brush:
+#         # entity_id: vacuum.rockrobo
+#         friendly_name: "Vacuum - Side Brush left"
+#         value_template: "{{ states.vacuum.rockrobo.attributes.side_brush_left }}"
+#         # device_class: battery
+#         # unit_of_measurement: '%'
 
-      vacuum_filter:
-        # entity_id: vacuum.rockrobo
-        friendly_name: "Vacuum - Filter left"
-        value_template: "{{ states.vacuum.rockrobo.attributes.filter_left }}"
-        # device_class: battery
-        # unit_of_measurement: '%'
+#       vacuum_filter:
+#         # entity_id: vacuum.rockrobo
+#         friendly_name: "Vacuum - Filter left"
+#         value_template: "{{ states.vacuum.rockrobo.attributes.filter_left }}"
+#         # device_class: battery
+#         # unit_of_measurement: '%'
 
-      vacuum_sensors:
-        # entity_id: vacuum.rockrobo
-        friendly_name: "Vacuum - Sensor dirty left"
-        value_template: "{{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
-        # device_class: battery
-        # unit_of_measurement: '%'
+#       vacuum_sensors:
+#         # entity_id: vacuum.rockrobo
+#         friendly_name: "Vacuum - Sensor dirty left"
+#         value_template: "{{ states.vacuum.rockrobo.attributes.sensor_dirty_left }}"
+#         # device_class: battery
+#         # unit_of_measurement: '%'
 
 switch:
   - platform: template
@@ -139,43 +139,69 @@ switch:
             entity_id: vacuum.rockrobo
 
 automation:
-  - alias: Vacuum monitoring system for sensors
+  - alias: (Vacuum) Monitoring vacuum maintanance
     id: 597de832-5fac-4df3-b5ab-9c9756585548
-    initial_state: 'true'
+    initial_state: on
+    mode: single
     trigger:
-    - platform: template
-      value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', 5) %}true{% endif %}"
+      # - platform: template
+      #   value_template: "{% if is_state_attr('vacuum.rockrobo', 'sensor_dirty_left', 5) %}true{% endif %}"
+      - platform: numeric_state
+        entity_id: sensor.rockrobo_sensor_dirty_left
+        below: 1800
+        id: sensors
+      - platform: numeric_state
+        entity_id: sensor.rockrobo_filter_left
+        below: 3600
+        id: filters
+      - platform: numeric_state
+        entity_id: sensor.rockrobo_main_brush_left
+        below: 3600
+        id: brush_main
+      - platform: numeric_state
+        entity_id: sensor.rockrobo_side_brush_left
+        below: 3600
+        id: brush_side
     action:
-    - service: todoist.new_task
-      data_template:
-        content: "Clean sensors in vacuum rockrobo"
-        priority: 2
-        due_date_string: 'today'
-
-  - alias: Vacuum monitoring system for filters
-    id: 265c4295-69c5-41b0-905d-0557ebe9ba3e
-    initial_state: 'true'
-    trigger:
-    - platform: template
-      value_template: "{% if is_state_attr('vacuum.rockrobo', 'filter_left', 10) %}true{% endif %}"
-    action:
-    - service: todoist.new_task
-      data_template:
-        content: "Replace filter in vacuum rockrobo"
-        priority: 2
-        due_date_string: 'today'
-
-  - alias: Vacuum monitoring system for brushes
-    id: 5b51d070-44ce-4376-85d9-def7efe8f846
-    initial_state: 'true'
-    trigger:
-    - platform: template
-      value_template: "{% if is_state_attr('vacuum.rockrobo', 'side_brush_left', 10) %}true{% endif %}"
-    - platform: template
-      value_template: "{% if is_state_attr('vacuum.rockrobo', 'main_brush_left', 10) %}true{% endif %}"
-    action:
-    - service: todoist.new_task
-      data_template:
-        content: "Replace side or main brush in vacuum rockrobo"
-        priority: 2
-        due_date_string: 'today'
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: sensors
+            sequence:
+              - service: todoist.new_task
+                data_template:
+                  content: "Clean sensors in vacuum rockrobo"
+                  priority: 2
+                  due_date_string: "today"
+          - conditions:
+              - condition: trigger
+                id: filters
+            sequence:
+              - service: todoist.new_task
+                data_template:
+                  content: "Replace filter in vacuum rockrobo"
+                  priority: 2
+                  due_date_string: "today"
+          - conditions:
+              - condition: trigger
+                id: brush_mine
+            sequence:
+              - service: todoist.new_task
+                data_template:
+                  content: "Replace mine in vacuum rockrobo"
+                  priority: 2
+                  due_date_string: "today"
+          - conditions:
+              - condition: trigger
+                id: brush_side
+            sequence:
+              - service: todoist.new_task
+                data_template:
+                  content: "Replace side brush in vacuum rockrobo"
+                  priority: 2
+                  due_date_string: "today"
+      - delay:
+          hours: 0
+          minutes: 30
+          seconds: 0
+          milliseconds: 0

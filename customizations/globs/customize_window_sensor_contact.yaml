@@ -1,0 +1,2 @@
+"binary_sensor.*_window_sensor_contact":
+  device_class: window

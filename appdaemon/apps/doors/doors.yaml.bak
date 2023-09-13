@@ -1,0 +1,5 @@
+doors_manager:
+  module: doors
+  class: DoorsManager
+  binary_sensor: 'binary_sensor.home_door_sensor_contact'
+  ttl: 1

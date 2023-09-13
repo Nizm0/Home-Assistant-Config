@@ -1,6 +1,5 @@
 title: Family
 icon: "mdi:home-heart"
-id: 7
 path: family
 cards:
   - type: entities
@@ -11,9 +10,13 @@ cards:
         secondary_info: last-changed
       - entity: person.gosia
         secondary_info: last-changed
-      - entity: device_tracker.oliwia_oneplus
+      - entity: person.oliwia
         secondary_info: last-changed
-      - entity: device_tracker.gosia_galaxy_s9
+      - entity: person.babcia_t
+        secondary_info: last-changed
+      - entity: device_tracker.oliwia_poco_m4_pro
+        secondary_info: last-changed
+      - entity: device_tracker.gosia_s9
         secondary_info: last-changed
       - entity: input_select.home_preset
         secondary_info: last-changed
@@ -41,8 +44,9 @@ cards:
       - entity: input_number.temp_max
       - entity: input_number.temp_min
       - entity: input_datetime.both_date_and_time
+      - entity: input_number.demand_home_temperature
       - entity: input_number.slider1
-      - entity: input_datetime.vacuum_day_time
+      - entity: input_datetime.rockrobo_day_time
   - type: entities
     entities:
       - entity: device_tracker.bozena_phone
@@ -61,6 +65,8 @@ cards:
     entities:
       - person.nizm0
       - person.gosia
+      - person.oliwia
+      - person.babcia_t
       - device_tracker.lg_g6_phone
       - device_tracker.lenovo_tablet
       # - device_tracker.f6_67_40_d4_f8_00
@@ -77,21 +83,21 @@ cards:
   - type: entities
     entities:
       - entity: sensor.nizm0_oneplus_8t_next_alarm
-      - entity: sensor.gosia_s8_next_alarm
+      - entity: sensor.gosia_s9_next_alarm
   - type: history-graph
     entities:
       - entity: sensor.nizm0_oneplus_8t_next_alarm
-      - entity: sensor.gosia_s8_next_alarm
+      - entity: sensor.gosia_s9_next_alarm
     hours_to_show: 120
     refresh_interval: 60
     title: Family tracking
-  - type: entities
-    title: Travel time
-    show_header_toggle: false
-    entities:
-      # - sensor.home_to_nursery
-      - sensor.gp_to_home
-      # - sensor.gp_to_nursery
+  # - type: entities
+  #   title: Travel time
+  #   show_header_toggle: false
+  #   entities:
+  #     # - sensor.home_to_nursery
+  #     - sensor.gp_to_home
+  #     # - sensor.gp_to_nursery
 # popup_cards:
 #   person.gosia:
 #     card:

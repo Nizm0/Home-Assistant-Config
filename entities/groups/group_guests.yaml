@@ -1,8 +1,6 @@
 guests:
   name: Guests
   entities:
-    # - person.gosia
-    # - person.nizm0
     - device_tracker.babcia_teresa
     - device_tracker.bozena_phone
     - device_tracker.portex

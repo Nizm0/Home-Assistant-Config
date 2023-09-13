@@ -7,15 +7,21 @@
 platform: template
 sensors: #!include_dir_merge_named templates
   motion_last30:
+    device_class: motion
     friendly_name: Motion in Last 30min
-    value_template: "{{(as_timestamp(states.sensor.date_time_iso.state)|int - as_timestamp(states.sensor.template_last_motion.last_changed))|int < 1800 }}"
-    # device_class: motion
-
-    # {% for state in states.binary_sensor if ('motion' in state.entity_id) and ('sensor' in state.entity_id.split('.')[1])-%}
-    #   {{state.entity_id}}
-    # {%- endfor %}
+    value_template: |-
+      {% if states.sensor.template_last_motion is defined and states.sensor.template_last_motion.last_changed is defined -%}
+        {{(as_timestamp(states.sensor.date_time_iso.state)|int - as_timestamp(states.sensor.template_last_motion.last_changed))|int < 1800 }}
+      {%- else -%}
+        False
+      {%- endif %}
 
   taking_bath:
     friendly_name: Taking bath
     device_class: occupancy
-    value_template: "{{states('sensor.bathroom_humidity')|float > states('sensor.average_house_humidity')|float +5 }}"
+    value_template: |-
+      {% if states.sensor.bathroom_multi_sensor_humidity != defined and states.sensor.average_house_humidity != defined and is_number(states.sensor.bathroom_multi_sensor_humidity.state) and is_number(states.sensor.average_house_humidity.state) -%}
+        {{states('sensor.bathroom_multi_sensor_humidity')|float > states('sensor.average_house_humidity')|float + 5 }}
+      {%- else -%}
+        False
+      {%- endif %}

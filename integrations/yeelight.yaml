@@ -8,8 +8,9 @@
 # https://www.home-assistant.io/components/yeelight/
 #
 yeelight:
-  devices: !include_dir_merge_named ../entities/yeelight/devices
-  custom_effects: !include_dir_list ../entities/yeelight/custom_effects
+  # devices: !include_dir_merge_named ../entities/yeelight/devices
+  custom_effects:
+    !include_dir_list ../entities/yeelight/custom_effects
     # - name: 'Fire Flicker'
     #   flow_params:
     #     count: 0

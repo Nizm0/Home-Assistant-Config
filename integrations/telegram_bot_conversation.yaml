@@ -1,9 +1,0 @@
----
-# This is a custom integration.
-# It is highly experimental and in a POC state.
-#
-# https://gist.github.com/balloob/d59cae89d19a14bcec99ce1bde05bd44
-# https://github.com/frenck/home-assistant-config/tree/master/config/custom_components/telegram_bot_conversation
-#
-
-telegram_bot_conversation:

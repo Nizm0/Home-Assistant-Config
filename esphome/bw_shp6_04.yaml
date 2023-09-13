@@ -6,13 +6,17 @@
 substitutions:
   # Modify variables based on your settings
   hostname: 'bw_shp6_04'
-  plug_name: BW_SHP6_04
+  plug_name: BW SHP6 04
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-  # Higher value gives lower watt readout
-  current_res: "0.00290"
-  # Lower value gives lower voltage readout
-  voltage_div: "940"
+  # Higher value gives lower watt readout 2020 model uses 0.00290 older uses 0.00117
+  current_res: "0.00117"
+  # Lower value gives lower voltage readout 2020 model uses 940 older uses 755
+  voltage_div: "700"
+  # Max Power is 3450W for 15A and 2300W for 10A
+  max_power: "3450"
+  # 2020 model uses GPIO4 for CF1 older use GPIO14
+  cf1_pin: GPIO4
   reboot_time: 10min
   
 esphome:
@@ -96,32 +100,49 @@ sensor:
       number: GPIO12
       inverted: True
     cf_pin: GPIO05
-    cf1_pin: GPIO14
+    cf1_pin: $cf1_pin
     current_resistor: ${current_res}
     voltage_divider: ${voltage_div}
     current:
-      name: ${plug_name} Amperage
+      name: ${plug_name} Current
       unit_of_measurement: A
+      device_class: current
       accuracy_decimals: 3
       icon: mdi:flash-circle
     voltage:
       name: ${plug_name} Voltage
       unit_of_measurement: V
+      device_class: voltage
       icon: mdi:flash-circle
     power:
       name: ${plug_name} Wattage
+      id: power
       unit_of_measurement: W
-      id: ${plug_name}_wattage
+      device_class: power
       icon: mdi:flash-circle
+      filters:
+        - multiply: 0.41
+      on_value_range:
+        - above: ${max_power}
+          then:
+            - output.turn_off: led1
+            - switch.turn_off: relay
+            - homeassistant.service:
+                service: persistent_notification.create
+                data:
+                  title: Message from ${plug_name}
+                data_template:
+                  message: Switch turned off because power exceeded ${max_power}W
     change_mode_every: 4
     update_interval: 10s
   - platform: total_daily_energy
     name: ${plug_name} Total Daily Energy
-    power_id: ${plug_name}_wattage
+    power_id: power
+    unit_of_measurement: kWh
+    device_class: energy
     filters:
         # Multiplication factor from W to kW is 0.001
         - multiply: 0.001
-    unit_of_measurement: kWh
     icon: mdi:clock-alert
       
 # Extra sensor to keep track of plug uptime

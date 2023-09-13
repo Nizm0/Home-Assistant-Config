@@ -1,2 +1,0 @@
-binary_sensor.living_room_balcony_window_sensor:
-  device_class: window

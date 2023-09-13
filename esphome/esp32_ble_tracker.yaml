@@ -29,20 +29,56 @@ ota:
 
 # Example configuration entry
 esp32_ble_tracker:
-#   scan_interval: 300s
+  scan_parameters:
+    duration: 10s
+    active: false
+  on_ble_service_data_advertise:
+    - mac_address: a4:c1:38:82:5a:5c
+      service_uuid: FE95
+      then:
+        - lambda: |-
+            id(kettle_temp).publish_state(float(x[16]));
+            if(x[15] == 01) {
+              id(kettle_mode).publish_state(true);
+            } else {
+              id(kettle_mode).publish_state(false);
+            }
+      # ble_client:
+      #   - mac_address: a4:c1:38:82:5a:5c
+      #     id: itag_black
+
+bluetooth_proxy:
 
 binary_sensor:
+  - platform: template
+    id: kettle_mode
+    name: "Kettle Mode"
   # - platform: ble_presence
   #   mac_address: ED:94:E5:68:23:4A
   #   name: "Old miBand4"
   - platform: ble_presence
-    mac_address: EF:E9:09:D8:2A:AD
+    mac_address: F7:FA:D5:71:75:BC
     name: "Nizm0 miBand5"
   # - platform: ble_presence
   #   mac_address: C0:EE:FB:DB:B5:BA
   #   name: "Nizm0 OnePlus8t"
-    
+
 sensor:
+  - platform: template
+    id: kettle_temp
+    name: "Kettle Temp"
+    unit_of_measurement: 'C'
+    accuracy_decimals: 0
+    icon: "mdi:thermometer"
+    filters:
+      - delta: 1.0
+        # - platform: ble_client
+        #   ble_client_id: itag_black
+        #   name: "MiKettle Temp"
+        #   service_uuid: 'FE95'
+        #   characteristic_uuid: '0018'
+        #   icon: "mdi:thermometer"
+        #   unit_of_measurement: '°C'
   - platform: wifi_signal
     name: "Ble Tracker WiFi Signal"
     update_interval: 60s
@@ -124,11 +160,59 @@ sensor:
     # battery_level:
     #   name: "MiFlora Battery Level 6"
 
-  - platform: xiaomi_lywsdcgq
-    mac_address: 50:EC:50:7A:7C:1B
-    temperature:
-      name: "Xiaomi ble termometer Temperature"
-    humidity:
-      name: "Xiaomi ble termometer Humidity"
-    battery_level:
-      name: "Xiaomi LYWSDCGQ Battery Level"
+  # - platform: xiaomi_lywsdcgq
+  #   mac_address: 50:EC:50:7A:7C:1B
+  #   temperature:
+  #     name: "Xiaomi ble termometer Temperature"
+  #   humidity:
+  #     name: "Xiaomi ble termometer Humidity"
+  #   battery_level:
+  #     name: "Xiaomi LYWSDCGQ Battery Level"
+  - platform: xiaomi_miscale
+    mac_address: '50:FB:19:17:DB:48'
+    weight:
+      name: "Xiaomi Mi Scale Weight"
+      id: weight_miscale
+      # on_value:
+      #   then:
+      #     - lambda: |-
+      #         if (id(weight_miscale).state >= 69 && id(weight_miscale).state <= 74.49) {
+      #           return id(weight_user1).publish_state(x);}
+      #         else if (id(weight_miscale).state >= 74.50 && id(weight_miscale).state <= 83) {
+      #           return id(weight_user2).publish_state(x);}
+
+    impedance:
+      name: "Xiaomi Mi Scale Impedance"
+      id: impedance_xiaomi
+      # on_value:
+      #   then:
+      #     - lambda: |-
+      #         if (id(weight_miscale).state >= 69 && id(weight_miscale).state <= 74.49) {
+      #           return id(impedance_user1).publish_state(x);}
+      #         else if (id(weight_miscale).state >= 74.50 && id(weight_miscale).state <= 83) {
+      #           return id(impedance_user2).publish_state(x);}
+
+  # - platform: template
+  #   name: Weight Aurélien
+  #   id: weight_user1
+  #   unit_of_measurement: 'kg'
+  #   icon: mdi:weight-kilogram
+  #   accuracy_decimals: 2
+  # - platform: template
+  #   name: Impedance Aurélien
+  #   id: impedance_user1
+  #   unit_of_measurement: 'ohm'
+  #   icon: mdi:omega
+  #   accuracy_decimals: 0
+  # - platform: template
+  #   name: Weight Siham
+  #   id: weight_user2
+  #   unit_of_measurement: 'kg'
+  #   icon: mdi:weight-kilogram
+  #   accuracy_decimals: 2
+  # - platform: template
+  #   name: Impedance Siham
+  #   id: impedance_user2
+  #   unit_of_measurement: 'ohm'
+  #   icon: mdi:omega
+  #   accuracy_decimals: 0

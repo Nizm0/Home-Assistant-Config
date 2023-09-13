@@ -1,0 +1,3 @@
+group.all_sensors_windows:
+  friendly_name: All windows sensor
+  device_class: window

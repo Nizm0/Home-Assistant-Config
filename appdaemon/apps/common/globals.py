@@ -36,7 +36,7 @@ PEOPLE = {
     'Gosia': {
         'device_tracker': 'person.gosia',
         'proximity': 'proximity.home_gosia',
-        'notifier': 'notify/push_to_chrome_gosia_s8'
+        'notifier': 'notify/push_to_chrome_gosia_s9'
     }
 }
 

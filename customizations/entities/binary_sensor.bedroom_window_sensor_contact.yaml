@@ -1,0 +1,2 @@
+binary_sensor.bedroom_window_sensor_contact:
+  device_class: window

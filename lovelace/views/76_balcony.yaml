@@ -1,0 +1,46 @@
+icon: "mdi:home-floor-a"
+path: balcony
+title: Balcony
+cards:
+  - type: grid
+    columns: 2
+    square: true
+    cards:
+      - entity: sensor.balcony_multi_sensor_temperature
+        type: gauge
+        max: 40
+        min: -20
+        name: Temperature
+        segments:
+          - from: -20
+            color: purple
+          - from: -5
+            color: blue
+          - from: 5
+            color: light blue
+          - from: 15
+            color: light green
+          - from: 22
+            color: green
+          - from: 28
+            color: yellow
+          - from: 30
+            color: red
+        theme: default
+      - entity: sensor.balcony_multi_sensor_humidity
+        type: gauge
+        max: 100
+        min: 0
+        name: Humidity
+        segments:
+          - from: 0
+            color: var(--error-color)
+          - from: 35
+            color: var(--warning-color)
+          - from: 40
+            color: var(--success-color)
+          - from: 60
+            color: var(--warning-color)
+          - from: 65
+            color: var(--error-color)
+        theme: default

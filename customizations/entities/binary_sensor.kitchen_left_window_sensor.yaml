@@ -1,2 +1,0 @@
-binary_sensor.kitchen_left_window_sensor:
-  device_class: window

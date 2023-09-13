@@ -3,4 +3,4 @@ device_tracker:
   class: DeviceTracker
   switch_1_id: smart_switch_1
   switch_2_id: smart_switch_2
-  motions: ["binary_sensor.bathroom_motion_sensor","binary_sensor.kitchen_motion_sensor", "binary_sensor.living_room_motion_sensor", "binary_sensor.hallway_motion_sensor"]
+  motions: ["binary_sensor.bathroom_motion_sensor_occupancy","binary_sensor.kitchen_motion_sensor_occupancy", "binary_sensor.living_room_motion_sensor_occupancy", "binary_sensor.hallway_motion_sensor_occupancy"]

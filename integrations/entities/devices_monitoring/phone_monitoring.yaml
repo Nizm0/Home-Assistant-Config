@@ -1,0 +1,37 @@
+---
+sensor:
+  - platform: history_stats
+    name: Nizm0 phone in use
+    entity_id: binary_sensor.nizm0_oneplus_8t_interactive
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: Gosia phone in use
+    entity_id: binary_sensor.gosia_s9_interaktywny
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: Oliwia phone in use
+    entity_id: binary_sensor.oliwia_oneplus_interactive
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: LG phone in use
+    entity_id: binary_sensor.lg_h870_interactive
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: Tablet phone in use
+    entity_id: binary_sensor.lenovo_tb3_850m_interactive
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"

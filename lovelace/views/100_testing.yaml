@@ -9,7 +9,7 @@ badges:
   - sensor.average_house_temperature
   - sensor.average_house_humidity
   - sensor.max_temperature_in_home
-  - sensor.max_recorded_temp
+  # - sensor.max_recorded_temp
 path: testing-area
 title: Testing area
 icon: mdi:test-tube
@@ -46,17 +46,19 @@ cards:
         secondary_info: last-changed
       - entity: binary_sensor.motion_last30
         secondary_info: last-changed
-      - entity: binary_sensor.hallway_motion_sensor
+      - entity: binary_sensor.hallway_motion_sensor_1_occupancy
         secondary_info: last-changed
-      - entity: binary_sensor.living_room_motion_sensor
+      - entity: binary_sensor.hallway_motion_sensor_2_occupancy
         secondary_info: last-changed
-      - entity: binary_sensor.bathroom_motion_sensor
+      - entity: binary_sensor.living_room_motion_sensor_occupancy
         secondary_info: last-changed
-      - entity: binary_sensor.kitchen_motion_sensor
+      - entity: binary_sensor.bathroom_motion_sensor_occupancy
         secondary_info: last-changed
-      - entity: binary_sensor.kids_motion_sensor
+      - entity: binary_sensor.kitchen_motion_sensor_occupancy
         secondary_info: last-changed
-      - entity: binary_sensor.bedroom_motion_sensor
+      - entity: binary_sensor.kids_motion_sensor_occupancy
+        secondary_info: last-changed
+      - entity: binary_sensor.bedroom_motion_sensor_occupancy
         secondary_info: last-changed
       - entity: group.family
         secondary_info: last-changed
@@ -81,16 +83,15 @@ cards:
       - entity: input_boolean.ready_to_vacuum
       - entity: input_boolean.going_to_be_emptyied
       - entity: input_boolean.ready_for_emptying
-      - entity: input_boolean.ready_to_vacuum
       - entity: input_boolean.waiting_for_emptying
       - entity: input_boolean.waiting_return_home
-      - entity: input_datetime.vacuum_day_time
-      - entity: input_number.vacuum_cleaned_area
-      - entity: sensor.vacuum_battery
-      - entity: sensor.vacuum_filter
-      - entity: sensor.vacuum_main_brush
-      - entity: sensor.vacuum_sensors
-      - entity: sensor.vacuum_side_brush
+      - entity: input_datetime.rockrobo_day_time
+      - entity: input_number.rockrobo_cleaned_area
+      # - entity: sensor.rockrobo_battery
+      - entity: sensor.rockrobo_filter_left
+      - entity: sensor.rockrobo_main_brush_left
+      - entity: sensor.rockrobo_sensor_dirty_left
+      - entity: sensor.rockrobo_side_brush_left
   - type: entities
     entities:
       - entity: binary_sensor.washer_vibration
@@ -118,10 +119,10 @@ cards:
         card:
           type: picture-entity
           entity: camera.sonoff_gk_200mp2_b_rtsp
-          show_state: true
+          # show_state: true
           aspect_ratio: 56.25
-          state_filter:
-            - null
+          # state_filter:
+          #   - null
       - type: conditional
         conditions:
           - entity: binary_sensor.ender_3_printing
@@ -157,7 +158,7 @@ cards:
         entities:
           - type: custom:restriction-card
             card:
-              entity: switch.shelly_ender_3_switch
+              entity: switch.shelly_ender_3
             restrictions:
               confirm:
                 exemptions:
@@ -168,14 +169,16 @@ cards:
               #     - user: Nizm0
             row: true
             action: double_tap
+          - entity: sensor.ender_3_estimated_finish_time
           - type: custom:fold-entity-row
-            head: 
+            head:
               type: section
               label: Ender 3
             entities:
-              - entity: sensor.shelly_shsw_pm_608c82_current_consumption
-              - entity: sensor.shelly_shsw_pm_608c82_device_temp
-              - entity: sensor.shelly_shsw_pm_608c82_total_consumption
+              - entity: sensor.shelly_ender_3_power
+              - entity: sensor.shelly_ender_3_energy
+              - entity: sensor.shelly_ender_3_device_temperature
+              - entity: binary_sensor.shelly_ender_3_overheating
               - entity: binary_sensor.ender_3_printing
               - entity: binary_sensor.ender_3_printing_error
               - entity: sensor.ender_3_target_bed_temp
@@ -184,9 +187,7 @@ cards:
               - entity: sensor.ender_3_actual_tool0_temp
               - entity: sensor.ender_3_current_state
               - entity: sensor.ender_3_job_percentage
-              - entity: sensor.ender_3_time_elapsed
-              - entity: sensor.ender_3_time_remaining
-              - entity: sensor.predicted_print_end_time
+              - entity: sensor.ender_3_start_time
   - type: custom:vertical-stack-in-card
     cards:
       - type: custom:auto-entities
@@ -220,6 +221,8 @@ cards:
             - entity_id: "*_battery_state"
             - entity_id: "*_battery_health"
             - entity_id: "*_battery_status"
+            - entity_id: "*_temperature"
+            - entity_id: "*_temperatura_*"
             - entity_id: "*_stan_baterii"
             - entity_id: "*_zdrowie_baterii"
             - state: "unknown"
@@ -309,7 +312,7 @@ cards:
   - type: conditional
     conditions:
       - entity: sensor.alert
-        state_not: '0'
+        state_not: "0"
     card:
       type: custom:flex-table-card
       title: today
@@ -328,7 +331,7 @@ cards:
   - type: conditional
     conditions:
       - entity: sensor.alert
-        state_not: '0'
+        state_not: "0"
     card:
       type: custom:flex-table-card
       title: tomorrow
@@ -351,7 +354,6 @@ cards:
   #       artwork: cover
   #       artwork_border: true
   #       show_source: true
-
 
   #     - type: entities
   #       entities:
@@ -490,7 +492,7 @@ cards:
               graph:
                 card:
                   type: sensor
-                  entity: sensor.bw_shp5_01_power
+                  entity: sensor.bw_shp5_01_wattage
                   graph: line
                   # style: |
                   #   ha-card {
@@ -535,6 +537,122 @@ cards:
                 - grid-template-areas: '"i" "n" "graph"'
                 - grid-template-columns: 1fr
                 - grid-template-rows: 1fr min-content min-content
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.kitchen_fridge_switch
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.kitchen_fridge_switch_power
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.shelly_ender_3
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.shelly_ender_3_power
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+      - type: horizontal-stack
+        cards:
+          - type: custom:button-card
+            aspect_ratio: 1/1
+            state_color: true
+            entity: switch.gosund_sp111_06_relay
+            # icon: mdi:power-socket-eu
+            hold_action:
+              action: more-info
+            custom_fields:
+              graph:
+                card:
+                  type: sensor
+                  entity: sensor.gosund_sp111_06_wattage
+                  graph: line
+                  # style: |
+                  #   ha-card {
+                  #     box-shadow: none;
+                  #   }
+            styles:
+              custom_fields:
+                graph:
+                  - filter: opacity(50%)
+                  - overflow: unset
+              card:
+                - overflow: unset
+              grid:
+                - grid-template-areas: '"i" "n" "graph"'
+                - grid-template-columns: 1fr
+                - grid-template-rows: 1fr min-content min-content
+          # - type: custom:button-card
+          #   aspect_ratio: 1/1
+          #   state_color: true
+          #   entity: switch.shelly_ender_3
+          #   # icon: mdi:power-socket-eu
+          #   hold_action:
+          #     action: more-info
+          #   custom_fields:
+          #     graph:
+          #       card:
+          #         type: sensor
+          #         entity: sensor.shelly_ender_3_power
+          #         graph: line
+          #         # style: |
+          #         #   ha-card {
+          #         #     box-shadow: none;
+          #         #   }
+          #   styles:
+          #     custom_fields:
+          #       graph:
+          #         - filter: opacity(50%)
+          #         - overflow: unset
+          #     card:
+          #       - overflow: unset
+          #     grid:
+          #       - grid-template-areas: '"i" "n" "graph"'
+          #       - grid-template-columns: 1fr
+          #       - grid-template-rows: 1fr min-content min-content
 
   - type: custom:auto-entities
     card:
@@ -544,37 +662,37 @@ cards:
       include:
         - entity_id: "automation.*"
           state: "off"
-  - type: 'custom:purifier-card'
+  - type: "custom:purifier-card"
     entity: fan.air_purifier
     stats:
       - attribute: filter_life_remaining
-        unit: '%'
+        unit: "%"
         subtitle: Filter Remaining
       - attribute: motor_speed
         unit: RPS
         subtitle: Motor Speed
     actions:
       - name: Silent
-        icon: 'mdi:weather-night'
+        icon: "mdi:weather-night"
         speed: Silent
       - name: 25%
-        icon: 'mdi:circle-slice-2'
+        icon: "mdi:circle-slice-2"
         speed: Favorite
         xiaomi_miio_favorite_level: 3
       - name: 50%
-        icon: 'mdi:circle-slice-4'
+        icon: "mdi:circle-slice-4"
         speed: Favorite
         xiaomi_miio_favorite_level: 7
       - name: 75%
-        icon: 'mdi:circle-slice-6'
+        icon: "mdi:circle-slice-6"
         speed: Favorite
         xiaomi_miio_favorite_level: 10
       - name: 100%
-        icon: 'mdi:circle-slice-8'
+        icon: "mdi:circle-slice-8"
         speed: Favorite
         xiaomi_miio_favorite_level: 14
       - name: Auto
-        icon: 'mdi:brightness-auto'
+        icon: "mdi:brightness-auto"
         speed: Auto
     show_name: true
     show_state: true

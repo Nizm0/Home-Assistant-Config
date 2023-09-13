@@ -51,73 +51,73 @@ cards:
     title: Addons status
     entities:
       - entity: sensor.appdaemon_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
       - entity: switch.appdaemon
         secondary_info: last-changed
       - entity: sensor.deconz_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
       - entity: switch.deconz
         secondary_info: last-changed
       - entity: sensor.nginx_manager_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
       - entity: switch.nginx_proxy
         secondary_info: last-changed
       - entity: sensor.esphome_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
       - entity: switch.esp_home
         secondary_info: last-changed
       - entity: sensor.samba_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
       - entity: sensor.mariadb_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
       - entity: sensor.google_backup_status
-        type: 'custom:secondaryinfo-entity-row'
-        secondary_info: 'IP: [[ {entity}.attributes.ip_address ]]'
+        type: "custom:secondaryinfo-entity-row"
+        secondary_info: "IP: [[ {entity}.attributes.ip_address ]]"
   - type: custom:vertical-stack-in-card
     cards:
       - type: custom:bar-card
         entity: sensor.disk_use_percent_home
         severity:
           - value: 33
-            color: '#40bf40'
+            color: "#40bf40"
           - value: 66
-            color: '#bf9540'
+            color: "#bf9540"
           - value: 100
-            color: '#bf4040'
+            color: "#bf4040"
       - type: custom:bar-card
         entity: sensor.maria_ha_db_size
         max: 2000
         severity:
           - value: 1000
-            color: '#40bf40'
+            color: "#40bf40"
           - value: 1500
-            color: '#bf9540'
+            color: "#bf9540"
           - value: 2000
-            color: '#bf4040'
+            color: "#bf4040"
       - type: custom:bar-card
         entity: sensor.memory_use_percent
         severity:
           - value: 33
-            color: '#40bf40'
+            color: "#40bf40"
           - value: 66
-            color: '#bf9540'
+            color: "#bf9540"
           - value: 100
-            color: '#bf4040'
+            color: "#bf4040"
       - type: custom:bar-card
         entity: sensor.processor_use
         severity:
           - value: 33
-            color: '#40bf40'
+            color: "#40bf40"
           - value: 66
-            color: '#bf9540'
+            color: "#bf9540"
           - value: 100
-            color: '#bf4040'
+            color: "#bf4040"
   - type: entities
     title: Server shelf
     entities:
@@ -137,64 +137,64 @@ cards:
       - entity: sensor.server_shelf_uptime
       - entity: sensor.server_shelf_wifi_signal
     show_header_toggle: false
-  - type: entities
-    title: My Computer
-    entities:
-      # - binary_sensor.nizm0_desctop_connected
-      - camera.nizm0_desctop_screen_0
-      - camera.nizm0_desctop_screen_1
-      # - script.nizm0_desctop_displays_off
-      # - script.nizm0_desctop_displays_on
-      # - script.nizm0_desctop_hibernate
-      # - script.nizm0_desctop_lock
-      # - script.nizm0_desctop_logoff
-      # - script.nizm0_desctop_notify
-      # - script.nizm0_desctop_reboot
-      # - script.nizm0_desctop_refresh
-      # - script.nizm0_desctop_run_chrome
-      # - script.nizm0_desctop_shutdown
-      # - script.nizm0_desctop_suspend
-      # - script.nizm0_desctop_vol_max
-      # - script.nizm0_desctop_vol_mute
-      # - script.nizm0_desctop_wake
-      - sensor.nizm0_desctop_cpu_usage
-      - sensor.nizm0_desctop_current_username
-      # - sensor.nizm0_desctop_media_volume
-      # - binary_sensor.nizm0_desctop_media_playing
-      # - binary_sensor.nizm0_desctop_volume_muted
-      - binary_sensor.nizm0_desctop_power_status
-      # - sensor.nizm0_desctop_storage_label_c
-      # - sensor.nizm0_desctop_storage_label_d
-      - sensor.nizm0_desctop_storage_c_total_free_space
-      - sensor.nizm0_desctop_storage_c_total_storage
-      - sensor.nizm0_desctop_storage_c_usage
-      - sensor.nizm0_desctop_storage_d_total_free_space
-      - sensor.nizm0_desctop_storage_d_total_storage
-      - sensor.nizm0_desctop_storage_d_usage
-      - sensor.nizm0_desctop_storage_e_total_free_space
-      - sensor.nizm0_desctop_storage_e_total_storage
-      - sensor.nizm0_desctop_storage_f_usage
-      - sensor.nizm0_desctop_storage_f_total_free_space
-      - sensor.nizm0_desctop_storage_f_total_storage
-      - sensor.nizm0_desctop_storage_f_usage
-      - sensor.nizm0_desctop_system_idle_time
-      - sensor.nizm0_desctop_network_0_ipv4
-      - sensor.nizm0_desctop_network_0_ipv6
-      - sensor.nizm0_desctop_network_0_speed
-      - sensor.nizm0_desctop_network_0_bps_sent
-      - sensor.nizm0_desctop_network_0_bps_received
-      - binary_sensor.nizm0_desctop_network_0_wired
-      - sensor.nizm0_desctop_memory_available
-      - sensor.nizm0_desctop_memory_total
-      - sensor.nizm0_desctop_memory_usage
-      - sensor.nizm0_desctop_memory_used
-      # - switch.nizmo_pc
-    show_header_toggle: false
+  # - type: entities
+  #   title: My Computer
+  #   entities:
+  #     # - binary_sensor.nizm0_desctop_connected
+  #     - camera.nizm0_desctop_screen_0
+  #     - camera.nizm0_desctop_screen_1
+  #     # - script.nizm0_desctop_displays_off
+  #     # - script.nizm0_desctop_displays_on
+  #     # - script.nizm0_desctop_hibernate
+  #     # - script.nizm0_desctop_lock
+  #     # - script.nizm0_desctop_logoff
+  #     # - script.nizm0_desctop_notify
+  #     # - script.nizm0_desctop_reboot
+  #     # - script.nizm0_desctop_refresh
+  #     # - script.nizm0_desctop_run_chrome
+  #     # - script.nizm0_desctop_shutdown
+  #     # - script.nizm0_desctop_suspend
+  #     # - script.nizm0_desctop_vol_max
+  #     # - script.nizm0_desctop_vol_mute
+  #     # - script.nizm0_desctop_wake
+  #     - sensor.nizm0_desctop_cpu_usage
+  #     - sensor.nizm0_desctop_current_username
+  #     # - sensor.nizm0_desctop_media_volume
+  #     # - binary_sensor.nizm0_desctop_media_playing
+  #     # - binary_sensor.nizm0_desctop_volume_muted
+  #     - binary_sensor.nizm0_desctop_power_status
+  #     # - sensor.nizm0_desctop_storage_label_c
+  #     # - sensor.nizm0_desctop_storage_label_d
+  #     - sensor.nizm0_desctop_storage_c_total_free_space
+  #     - sensor.nizm0_desctop_storage_c_total_storage
+  #     - sensor.nizm0_desctop_storage_c_usage
+  #     - sensor.nizm0_desctop_storage_d_total_free_space
+  #     - sensor.nizm0_desctop_storage_d_total_storage
+  #     - sensor.nizm0_desctop_storage_d_usage
+  #     - sensor.nizm0_desctop_storage_e_total_free_space
+  #     - sensor.nizm0_desctop_storage_e_total_storage
+  #     - sensor.nizm0_desctop_storage_f_usage
+  #     - sensor.nizm0_desctop_storage_f_total_free_space
+  #     - sensor.nizm0_desctop_storage_f_total_storage
+  #     - sensor.nizm0_desctop_storage_f_usage
+  #     - sensor.nizm0_desctop_system_idle_time
+  #     - sensor.nizm0_desctop_network_0_ipv4
+  #     - sensor.nizm0_desctop_network_0_ipv6
+  #     - sensor.nizm0_desctop_network_0_speed
+  #     - sensor.nizm0_desctop_network_0_bps_sent
+  #     - sensor.nizm0_desctop_network_0_bps_received
+  #     - binary_sensor.nizm0_desctop_network_0_wired
+  #     - sensor.nizm0_desctop_memory_available
+  #     - sensor.nizm0_desctop_memory_total
+  #     - sensor.nizm0_desctop_memory_usage
+  #     - sensor.nizm0_desctop_memory_used
+  #     # - switch.nizmo_pc
+  #   show_header_toggle: false
   - type: custom:bar-card
     # title: Broadlink MFC J200
     unit_of_measurement: "%"
     title_position: inside
-    icon_position : inside
+    icon_position: inside
     columns: 4
     height: 200px
     min: 1
@@ -209,7 +209,7 @@ cards:
         color: black
         icon: mdi:water
         background_style:
-          background: '#515151'
+          background: "#515151"
           opacity: 1
           filter: brightness(0.3)
         severity:
@@ -246,7 +246,7 @@ cards:
           - value: 15
             color: red
           - value: 100
-            color: '#F7F96C'
+            color: "#F7F96C"
         positions:
           icon: inside
       - entity: sensor.mfc_j200_cyan_ink_remaining
@@ -276,9 +276,9 @@ cards:
     # severity:
     #   - value: 15
     #     color: red #var(--bar-red)
-        # color: var(--label-badge-red)
-        # value_style:
-        #   color: red
+    # color: var(--label-badge-red)
+    # value_style:
+    #   color: red
   - type: custom:mini-graph-card
     title: Speed Test
     entities:

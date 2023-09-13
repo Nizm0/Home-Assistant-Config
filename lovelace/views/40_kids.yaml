@@ -1,65 +1,93 @@
 icon: "mdi:human-child"
-id: 5
 path: kids
 title: Kids room
 cards:
   - type: "custom:vertical-stack-in-card"
     layout: horizontal
     cards:
-      - type: horizontal-stack
+      - type: grid
+        columns: 2
+        square: true
         cards:
+          # - type: vertical-stack
+          #   cards:
           - type: light
             entity: light.kids_top_light
             state_color: true
+          - type: light
+            entity: light.light_strip_1
+            state_color: true
+          - type: button
+            entity: switch.kids_wall_switch_left
+            state_color: true
           - type: entity-button
-            entity: binary_sensor.kids_motion_sensor
+            entity: binary_sensor.kids_window_sensor_contact
             state_color: true
             hold_action:
               action: none
             tap_action:
               action: more-info
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            entities: 
-              - sensor.kids_illumination
-            hour24: true
-            points_per_hour: 5
-            align_icon: state
-            align_state: right
-            show:
-              fill: true
-              # icon: false
-              name: false
-          - entity: sensor.kids_temperature
+          - type: entity-button
+            entity: binary_sensor.kids_motion_sensor_occupancy
+            state_color: true
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+          # - type: horizontal-stack
+          #   cards:
+          # - type: custom:mini-graph-card
+          #   entities:
+          #     - sensor.kids_illumination
+          #   hour24: true
+          #   points_per_hour: 5
+          #   align_icon: state
+          #   align_state: right
+          #   show:
+          #     fill: true
+          #     # icon: false
+          #     name: false
+          - entity: sensor.kids_multi_sensor_temperature
             max: 40
             min: 0
             name: Temperature
-            severity:
-              green: 19
-              red: 30
-              yellow: 25
+            segments:
+              - from: 0
+                color: blue
+              - from: 19
+                color: green
+              - from: 25
+                color: yellow
+              - from: 30
+                color: red
             theme: default
             type: gauge
             unit: C
-          - entity: sensor.kids_humidity
+          - entity: sensor.kids_multi_sensor_humidity
             max: 100
             min: 0
             name: Humidity
-            severity:
-              green: 30
-              red: 60
-              yellow: 50
+            segments:
+              - from: 0
+                color: var(--error-color)
+              - from: 35
+                color: var(--warning-color)
+              - from: 40
+                color: var(--success-color)
+              - from: 60
+                color: var(--warning-color)
+              - from: 65
+                color: var(--error-color)
             theme: default
             type: gauge
             unit: "%"
-  - type: thermostat
-    entity: climate.kids_thermostat
+  # - type: thermostat
+  #   entity: climate.kids_thermostat
   - title: Temperature
     type: "custom:mini-graph-card"
     # animate: true
     entities:
-      - sensor.kids_temperature
+      - sensor.kids_multi_sensor_temperature
     color_thresholds:
       - color: "#0000ff"
         value: 15
@@ -83,7 +111,7 @@ cards:
   - title: Humidity
     type: "custom:mini-graph-card"
     entities:
-      - sensor.kids_humidity
+      - sensor.kids_multi_sensor_humidity
     color_thresholds:
       - color: "#00ff00"
         value: 30
@@ -100,7 +128,7 @@ cards:
     show:
       extrema: true
       fill: fade
-  - detail: 2
-    entity: sensor.kids_pressure
-    graph: line
-    type: sensor
+  # - detail: 2
+  #   entity: sensor.kids_pressure
+  #   graph: line
+  #   type: sensor

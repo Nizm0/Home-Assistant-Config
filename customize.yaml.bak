@@ -1,0 +1,14 @@
+binary_sensor.bedroom_window_sensor_contact:
+  device_class: window
+binary_sensor.home_door_sensor_contact:
+  device_class: door
+binary_sensor.kids_window_sensor_contact:
+  device_class: window
+binary_sensor.kitchen_smoke_detector_smoke:
+  device_class: smoke
+binary_sensor.kitchen_window_sensor_contact:
+  device_class: window
+binary_sensor.living_room_window_sensor_contact:
+  device_class: window
+binary_sensor.washer_vibration:
+  device_class: vibration

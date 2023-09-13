@@ -8,15 +8,15 @@
 # https://www.home-assistant.io/lovelace/yaml-mode/
 #
 lovelace:
-  mode: yaml
-  resources: !include_dir_list ../lovelace/resources
+  mode: storage
+  # resources: !include_dir_list ../lovelace/resources
   # Add more dashboards
   dashboards:
-    # lovelace-main:
-    #   mode: yaml
-    #   title: Home
-    #   filename: ../ui-lovelace.yaml
-    #   show_in_sidebar: true
+    lovelace-main:
+      mode: yaml
+      title: Home
+      filename: ui-lovelace.yaml
+      show_in_sidebar: true
     lovelace-manage:
       mode: yaml
       title: Manage

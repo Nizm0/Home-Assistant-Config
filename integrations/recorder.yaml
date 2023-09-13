@@ -14,14 +14,14 @@ recorder:
 
   exclude:
     domains:
-      - automation
+      # - automation
       - weblink
-      - updater
-      - group
+      # - updater
+      # - group
       # - input_boolean
       # - input_datetime
       # - input_number
       # - input_select
       # - media_player
-      - weather
-      - zone
+      # - weather
+      # - zone

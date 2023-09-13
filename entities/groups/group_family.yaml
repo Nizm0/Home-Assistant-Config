@@ -3,7 +3,5 @@ family:
   entities:
     - person.gosia
     - person.nizm0
-    # - device_tracker.babcia_teresa
-    # - device_tracker.bozena_phone
-    # - device_tracker.portex
-    # - device_tracker.p20_pro_ania
+    - person.oliwia
+    - person.babcia_t

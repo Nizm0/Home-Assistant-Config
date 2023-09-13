@@ -1,0 +1,2 @@
+binary_sensor.kids_window_sensor_contact:
+  device_class: window

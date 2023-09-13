@@ -1,47 +1,16 @@
-- id: '1584744623104'
-  alias: Decrease Living Room brightness
-  description: ''
-  trigger:
-  - device_id: d73bbd2c276743ccad09ffa03908f1d0
-    domain: deconz
-    platform: device
-    subtype: dim_down
-    type: remote_button_short_press
-  condition: []
-  action:
-  - device_id: 15a7dd19261a492083929bbfeaa572b3
-    domain: light
-    entity_id: light.living_room
-    type: brightness_decrease
-- id: '1584744721754'
-  alias: Increase Living Room brightness
-  description: ''
-  trigger:
-  - device_id: d73bbd2c276743ccad09ffa03908f1d0
-    domain: deconz
-    platform: device
-    subtype: dim_up
-    type: remote_button_short_press
-  condition: []
-  action:
-  - device_id: 15a7dd19261a492083929bbfeaa572b3
-    domain: light
-    entity_id: light.living_room
-    type: brightness_increase
-  - condition: state
-    entity_id: light.living_room_directional_light
-    state: 'off'
-  - data: {}
-    entity_id: light.living_room_directional_light
-    service: light.turn_on
 - id: '1587510128209'
   alias: On line Drzzs
   description: ''
   trigger:
-  - entity_id: sensor.drzzs
+  - entity_id:
+    - sensor.drzzs
     from: offline
     platform: state
     to: streaming
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 10
   condition:
   - condition: device
     device_id: 610d7357fd8f008af8a1bd381840585a
@@ -50,7 +19,7 @@
     type: is_home
   action:
   - data:
-      entity_id: media_player.living_room_speaker
+      entity_id: media_player.bedroom_clock
       message: Drzzs is now online
     service: tts.cloud_say
   mode: single
@@ -115,67 +84,59 @@
     domain: light
     entity_id: light.living_room_directional_light
     type: toggle
-- id: '1599140047737'
-  alias: PC Turn off on low power
-  description: ''
-  trigger:
-  - below: 10
-    device_id: 4adc54ca759f4d2085ba563f487cf2b3
-    domain: sensor
-    entity_id: sensor.bw_shp6_01_wattage
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-    platform: device
-    type: value
-  condition: []
-  action:
-  - device_id: 4adc54ca759f4d2085ba563f487cf2b3
-    domain: switch
-    entity_id: switch.bw_shp6_01_relay
-    type: turn_off
-  mode: single
-- id: '1599140148066'
-  alias: PC Turn On switch 1 press
-  description: ''
-  trigger:
-  - device_id: afbf7c1c12434200a39ea17187a21356
-    domain: deconz
-    platform: device
-    subtype: turn_on
-    type: remote_button_short_release
-  condition: []
-  action:
-  - device_id: 4adc54ca759f4d2085ba563f487cf2b3
-    domain: switch
-    entity_id: switch.bw_shp6_01_relay
-    type: turn_on
-  mode: single
 - id: '1599755142278'
-  alias: PC Desk Lamp Togle when Pc is on
+  alias: (PC) Toggle PC or Desc Lamp
   description: ''
   trigger:
-  - device_id: afbf7c1c12434200a39ea17187a21356
-    domain: deconz
+  - platform: device
+    domain: mqtt
+    device_id: b07a496287e991c252ad7dc5da21ee1a
+    type: action
+    subtype: single
+    discovery_id: 0x00158d0002241c98 action_single
+    id: Desk Lamp ON
+  - platform: device
+    domain: mqtt
+    device_id: b07a496287e991c252ad7dc5da21ee1a
+    type: action
+    subtype: hold
+    discovery_id: 0x00158d0002241c98 action_hold
+    id: PC On
+  - type: power
     platform: device
-    type: remote_button_short_release
-    subtype: turn_on
-  condition:
-  - condition: device
-    type: is_on
-    device_id: 4adc54ca759f4d2085ba563f487cf2b3
-    entity_id: switch.bw_shp6_01_relay
-    domain: switch
-    for:
-      hours: 0
-      minutes: 0
-      seconds: 1
+    device_id: d98be1384fd94ccc9ea31d77accf8fd6
+    entity_id: sensor.bw_shp6_03_wattage
+    domain: sensor
+    id: PC Off
+    enabled: true
+    below: 8
+  condition: []
   action:
-  - type: toggle
-    device_id: 3367910d1a8549189a95361700983d6b
-    entity_id: light.desctop_lamp
-    domain: light
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Desk Lamp ON
+      sequence:
+      - type: toggle
+        device_id: 593cf5ebc29b0901509230bedd40ec91
+        entity_id: light.desk_lamp
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: PC On
+      sequence:
+      - device_id: d98be1384fd94ccc9ea31d77accf8fd6
+        domain: switch
+        entity_id: switch.bw_shp6_03_relay
+        type: turn_on
+    - conditions:
+      - condition: trigger
+        id: PC Off
+      sequence:
+      - type: turn_off
+        device_id: d98be1384fd94ccc9ea31d77accf8fd6
+        entity_id: switch.bw_shp6_03_relay
+        domain: switch
   mode: single
 - id: '1607956116675'
   alias: Christmas lights turn on after sunset
@@ -194,21 +155,22 @@
       value_template: '{% set n = now() %} {{ n.month == 1 and 1 <= n.day <= 30 }}'
   action:
   - type: turn_on
-    device_id: d98be1384fd94ccc9ea31d77accf8fd6
-    entity_id: switch.bw_shp6_03_relay
-    domain: switch
-  - type: turn_on
     device_id: 243903ee717f1fa4bd16ce65c869f056
     entity_id: light.wled_christmas_tree
     domain: light
     brightness_pct: 100
+  - device_id: 243903ee717f1fa4bd16ce65c869f056
+    domain: select
+    entity_id: select.wled_preset
+    type: select_option
+    option: Glitter
   mode: single
 - id: '1607956218820'
   alias: Christmas lights turn off after sunset
   description: ''
   trigger:
   - platform: time
-    at: 01:00
+    at: '23:30'
   condition:
   - condition: or
     conditions:
@@ -219,16 +181,12 @@
       value_template: '{% set n = now() %} {{ n.month == 1 and 1 <= n.day <= 31 }}'
   action:
   - type: turn_off
-    device_id: d98be1384fd94ccc9ea31d77accf8fd6
-    entity_id: switch.bw_shp6_03_relay
-    domain: switch
-  - type: turn_off
     device_id: 243903ee717f1fa4bd16ce65c869f056
     entity_id: light.wled_christmas_tree
     domain: light
   mode: single
 - id: '1611578959480'
-  alias: PC Desk Lamp Off when Pc is on and Nizm0 Not in home
+  alias: (PC) Desk Lamp Off when Pc is on and Nizm0 Not in home
   description: ''
   trigger:
   - platform: device
@@ -254,19 +212,740 @@
     entity_id: light.desctop_lamp
     domain: light
   mode: single
-- id: '1612520803809'
-  alias: portex.eu is unavailable
+- id: '1631011549954'
+  alias: Hallway Light Off
   description: ''
   trigger:
   - platform: state
-    entity_id: binary_sensor.portexst_eu
+    entity_id: group.hallway_motion
     from: 'on'
     to: 'off'
-    for: 00:05
   condition: []
   action:
-  - service: notify.hangouts_portex
+  - type: turn_off
+    device_id: de3499dfa30e9281c8faa163cc910bf1
+    entity_id: light.hallway_top_light
+    domain: light
+  mode: single
+- id: '1631011651712'
+  alias: (Hallway) Light On/Off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.hallway_motion
+  - platform: device
+    type: turned_on
+    device_id: de3499dfa30e9281c8faa163cc910bf1
+    entity_id: light.hallway_top_light
+    domain: light
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{trigger.to_state.state == ''on''}}'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: time
+            after: '22:00'
+            before: 07:00
+          sequence:
+          - type: turn_on
+            device_id: de3499dfa30e9281c8faa163cc910bf1
+            entity_id: light.hallway_top_light
+            domain: light
+            brightness_pct: 5
+        - conditions:
+          - condition: sun
+            before: sunset
+            after: sunrise
+          sequence:
+          - type: turn_on
+            device_id: de3499dfa30e9281c8faa163cc910bf1
+            entity_id: light.hallway_top_light
+            domain: light
+            brightness_pct: 100
+        default:
+        - type: turn_on
+          device_id: de3499dfa30e9281c8faa163cc910bf1
+          entity_id: light.hallway_top_light
+          domain: light
+    - conditions:
+      - condition: template
+        value_template: '{{trigger.to_state.state == ''off''}}'
+      sequence:
+      - type: turn_off
+        device_id: de3499dfa30e9281c8faa163cc910bf1
+        entity_id: light.hallway_top_light
+        domain: light
+    default:
+    - type: turn_on
+      device_id: de3499dfa30e9281c8faa163cc910bf1
+      entity_id: light.hallway_top_light
+      domain: light
+      brightness_pct: 50
+    - service: notify.persistent_notification
+      data_template:
+        message: '{{trigger.to_state.state}}'
+  mode: single
+- id: '1631018237988'
+  alias: Kitchen Small light
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: 7bc6572fdbdf315de46b42db70a6fa22
+    type: action
+    subtype: single_right
+    discovery_id: 0x00158d00022c2384 action_single_right
+  condition: []
+  action:
+  - type: toggle
+    device_id: 89d9e0606ee5085b5da94f2729c6712b
+    entity_id: light.kitchen_small_light
+    domain: light
+  mode: single
+- id: '1633693746613'
+  alias: (heating) Turn on/off heating on all windows state change
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.all_sensors_windows
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+      milliseconds: 0
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sensor.openweathermap_temperature
+        below: '16'
+      - condition: state
+        entity_id: group.all_sensors_windows
+        state: 'off'
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 0
+      sequence:
+      - service: climate.turn_on
+        target:
+          entity_id: climate.home_thermostat
+    - conditions:
+      - condition: numeric_state
+        entity_id: sensor.openweathermap_temperature
+        above: '16'
+      - condition: state
+        entity_id: group.all_sensors_windows
+        state: 'off'
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 0
+      sequence:
+      - wait_for_trigger:
+        - platform: numeric_state
+          entity_id: sensor.openweathermap_temperature
+          below: '16'
+      - service: climate.turn_on
+        target:
+          entity_id: climate.home_thermostat
+    - conditions:
+      - condition: state
+        entity_id: group.all_sensors_windows
+        state: 'on'
+        for:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 0
+      sequence:
+      - service: climate.turn_off
+        target:
+          entity_id: climate.home_thermostat
+    default: []
+  mode: restart
+- id: '1633695072618'
+  alias: (Heating, Family presents) Home heating automations
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: group.family
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+    id: on_family_state
+  - platform: state
+    entity_id: climate.home_thermostat
+    attribute: temperature
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+    id: on_temperature_state
+    enabled: false
+  - platform: state
+    entity_id: group.all_sensors_windows
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    id: on_window_state
+  - platform: numeric_state
+    entity_id: sensor.openweathermap_temperature
+    above: 14
+    id: on_temp_abowe
+  - platform: numeric_state
+    entity_id: sensor.openweathermap_temperature
+    below: 14
+    id: on_temp_bellow
+  - platform: device
+    domain: mqtt
+    device_id: 255aa3361a838b7ec74f8747f3051c8e
+    type: click
+    subtype: 'on'
+    discovery_id: 0x680ae2fffe3737c1 click_on
+    id: click_on
+  - platform: device
+    domain: mqtt
+    device_id: 255aa3361a838b7ec74f8747f3051c8e
+    type: click
+    subtype: 'off'
+    discovery_id: 0x680ae2fffe3737c1 click_off
+    id: click_off
+  - platform: event
+    event_type: timer.finished
+    event_data:
+      entity_id: timer.heating_timer
+    id: timer_finished
+  - platform: state
+    entity_id:
+    - schedule.little_heat_up_plese
+    from: 'off'
+    to: 'on'
+    id: sheduler_on
+  - platform: state
+    entity_id:
+    - schedule.little_heat_up_plese
+    from: 'on'
+    to: 'off'
+    id: sheduler_off
+  - platform: state
+    entity_id:
+    - input_button.boost_heating
+    id: boost_button
+  - platform: time
+    at: sensor.gosia_s9_next_alarm
+    id: on_wake_up
+    enabled: false
+  - platform: state
+    entity_id:
+    - binary_sensor.in_bed
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    id: everyone_in_bed
+    enabled: false
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: on_family_state
+      sequence:
+      - choose:
+        - conditions:
+          - condition: template
+            value_template: '{{ trigger.to_state.state == ''home'' }}'
+          sequence:
+          - service: climate.set_preset_mode
+            data:
+              preset_mode: none
+            target:
+              entity_id: climate.home_thermostat
+        - conditions:
+          - condition: template
+            value_template: '{{ trigger.to_state.state == ''not_home'' }}'
+          - condition: state
+            entity_id: input_select.home_preset
+            state: Empty
+          sequence:
+          - service: climate.set_preset_mode
+            target:
+              entity_id: climate.home_thermostat
+            data:
+              preset_mode: away
+        default:
+        - service: climate.set_preset_mode
+          target:
+            entity_id: climate.home_thermostat
+          data:
+            preset_mode: none
+    - conditions:
+      - condition: trigger
+        id: on_temperature_state
+      sequence:
+      - device_id: 610d7357fd8f008af8a1bd381840585a
+        domain: mobile_app
+        type: notify
+        message: Heating temperature was changed to {{states.climate.home_thermostat.attributes.temperature}}
+    - conditions:
+      - condition: trigger
+        id: on_window_state
+      sequence:
+      - choose:
+        - conditions:
+          - condition: and
+            conditions:
+            - condition: numeric_state
+              entity_id: sensor.openweathermap_temperature
+              below: '14'
+            - condition: state
+              entity_id: group.all_sensors_windows
+              state: 'off'
+              for:
+                hours: 0
+                minutes: 0
+                seconds: 0
+                milliseconds: 0
+            - condition: state
+              entity_id: group.family
+              state: home
+          sequence:
+          - service: climate.turn_on
+            target:
+              entity_id: climate.home_thermostat
+            data: {}
+        - conditions:
+          - condition: state
+            entity_id: group.all_sensors_windows
+            state: 'on'
+            for:
+              hours: 0
+              minutes: 0
+              seconds: 0
+              milliseconds: 0
+          sequence:
+          - service: climate.turn_off
+            target:
+              entity_id: climate.home_thermostat
+            data: {}
+        default: []
+    - conditions:
+      - condition: trigger
+        id: on_temp_abowe
+      sequence:
+      - service: climate.turn_off
+        target:
+          entity_id: climate.home_thermostat
+        data: {}
+    - conditions:
+      - condition: and
+        conditions:
+        - condition: trigger
+          id: on_temp_bellow
+        - condition: state
+          entity_id: group.all_sensors_windows
+          state: 'off'
+          for:
+            hours: 0
+            minutes: 0
+            seconds: 0
+            milliseconds: 0
+        - condition: state
+          entity_id: group.family
+          state: home
+      sequence:
+      - service: climate.turn_on
+        target:
+          entity_id: climate.home_thermostat
+        data: {}
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: click_on
+        - condition: trigger
+          id: sheduler_on
+        - condition: trigger
+          id: on_wake_up
+        - condition: and
+          conditions:
+          - condition: trigger
+            id: boost_button
+          - condition: not
+            conditions:
+            - condition: state
+              entity_id: timer.heating_timer
+              state: active
+      sequence:
+      - if:
+        - condition: not
+          conditions:
+          - condition: state
+            entity_id: timer.heating_timer
+            state: active
+        then:
+        - service: input_number.set_value
+          data:
+            value: '{{states.climate.home_thermostat.attributes.temperature | float}}'
+          target:
+            entity_id: input_number.temp_heating_temp
+        - service: climate.set_temperature
+          data:
+            temperature: '{{states.sensor.average_house_temperature.state | float
+              + 2}}'
+          target:
+            entity_id: climate.home_thermostat
+      - service: timer.start
+        data:
+          duration: 00:30:00
+        target:
+          entity_id: timer.heating_timer
+    - conditions:
+      - condition: or
+        conditions:
+        - condition: trigger
+          id: click_off
+        - condition: trigger
+          id: timer_finished
+        - condition: trigger
+          id: sheduler_off
+        - condition: and
+          conditions:
+          - condition: trigger
+            id: boost_button
+          - condition: state
+            entity_id: timer.heating_timer
+            state: active
+      sequence:
+      - service: climate.set_temperature
+        data:
+          temperature: '{{states.input_number.temp_heating_temp.state | float}}'
+        target:
+          entity_id: climate.home_thermostat
+      - service: timer.cancel
+        data: {}
+        target:
+          entity_id: timer.heating_timer
+    - conditions:
+      - condition: trigger
+        id: on_wake_up
+      - condition: time
+        before: 07:29:00
+        after: 06:29:00
+        weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+      sequence:
+      - service: climate.set_preset_mode
+        data:
+          preset_mode: none
+        target:
+          entity_id: climate.home_thermostat
+      - service: timer.start
+        data: {}
+        target:
+          entity_id: timer.heating_timer
+    - conditions:
+      - condition: trigger
+        id: everyone_in_bed
+      sequence:
+      - service: climate.set_preset_mode
+        data:
+          preset_mode: sleep
+        target:
+          entity_id: climate.home_thermostat
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: binary_sensor.in_bed
+            state: 'on'
+          sequence:
+          - service: climate.set_preset_mode
+            data:
+              preset_mode: sleep
+            target:
+              entity_id: climate.home_thermostat
+        - conditions:
+          - condition: state
+            entity_id: binary_sensor.in_bed
+            state: 'off'
+          sequence:
+          - service: climate.set_preset_mode
+            data:
+              preset_mode: none
+            target:
+              entity_id: climate.home_thermostat
+  mode: queued
+  max: 4
+- id: '1633780423396'
+  alias: (ender 3) Starting print, tool temp is above 200C
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ender_3_actual_tool0_temp
+    above: '200'
+  condition: []
+  action:
+  - service: notify.mobile_app_nizm0_oneplus_8t
     data:
-      title: portex.eu is down
-      message: hey, something is wrong with internet access
+      title: Ender 3
+      message: Extruder Temperature is 200
+  mode: single
+- id: '1634072068936'
+  alias: (Washer) when the washing is finished
+  description: ''
+  use_blueprint:
+    path: Sbyx/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes.yaml
+    input:
+      power_sensor: sensor.bw_shp6_05_wattage
+      actions:
+      - device_id: 0215ab1b68ea4402ba945e3a429a2342
+        domain: mobile_app
+        type: notify
+        title: Hej tu pralka
+        message: Właśnie skończyłem pranie, możesz mnie opróżnić :)
+      starting_threshold: 10
+      starting_hysteresis: 30
+      finishing_threshold: 10
+- id: '1636575735333'
+  alias: (kids Light) Turn on desk strip
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: cc03b680a042e889451c9df5528f4987
+    entity_id: switch.kids_wall_switch_left
+    domain: switch
+    id: 'on'
+  - platform: device
+    type: turned_off
+    device_id: cc03b680a042e889451c9df5528f4987
+    entity_id: switch.kids_wall_switch_left
+    domain: switch
+    id: 'off'
+  - platform: device
+    type: turned_off
+    device_id: 888727d1f1e511eab416f781edf90f47
+    entity_id: light.light_strip_1
+    domain: light
+    id: light off
+  - platform: device
+    type: turned_on
+    device_id: 888727d1f1e511eab416f781edf90f47
+    entity_id: light.light_strip_1
+    domain: light
+    id: light on
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: 'on'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: or
+            conditions:
+            - condition: time
+              after: '22:00'
+            - condition: sun
+              before: sunrise
+          sequence:
+          - service: light.turn_on
+            data:
+              color_name: red
+              brightness_pct: 5
+            target:
+              device_id: 888727d1f1e511eab416f781edf90f47
+        - conditions:
+          - condition: sun
+            before: sunset
+            after: sunrise
+          sequence:
+          - service: light.turn_on
+            data:
+              color_name: white
+              brightness: 255
+            target:
+              device_id: 888727d1f1e511eab416f781edf90f47
+        default:
+        - service: light.turn_on
+          data:
+            brightness_pct: 100
+            color_name: white
+          target:
+            device_id: 888727d1f1e511eab416f781edf90f47
+    - conditions:
+      - condition: trigger
+        id: 'off'
+      sequence:
+      - type: turn_off
+        device_id: 888727d1f1e511eab416f781edf90f47
+        entity_id: light.light_strip_1
+        domain: light
+    - conditions:
+      - condition: trigger
+        id: light off
+      sequence:
+      - type: turn_off
+        device_id: cc03b680a042e889451c9df5528f4987
+        entity_id: switch.kids_wall_switch_left
+        domain: switch
+    - conditions:
+      - condition: trigger
+        id: light on
+      sequence:
+      - type: turn_on
+        device_id: cc03b680a042e889451c9df5528f4987
+        entity_id: switch.kids_wall_switch_left
+        domain: switch
+      - condition: time
+        before: '22:00:00'
+        after: 06:00:00
+      - service: light.turn_on
+        data:
+          color_name: white
+          brightness_pct: 100
+    default: []
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 500
+  mode: single
+- id: '1645461641833'
+  alias: New Automation
+  description: ''
+  trigger:
+  - platform: device
+    domain: mqtt
+    device_id: c75937b0c2c49669f65b8368c89eeb10
+    type: action
+    subtype: 'on'
+    discovery_id: 0x8cf681fffe4df2eb action_on
+  condition:
+  - condition: time
+    after: '23:00'
+    before: 06:00
+  action:
+  - type: toggle
+    device_id: 888727d1f1e511eab416f781edf90f47
+    entity_id: light.light_strip_1
+    domain: light
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - type: turn_off
+    device_id: 888727d1f1e511eab416f781edf90f47
+    entity_id: light.light_strip_1
+    domain: light
+  mode: single
+- id: '1646937371926'
+  alias: '! Temp'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: climate.home_thermostat
+    attribute: temperature
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 5
+  condition: []
+  action:
+  - device_id: 610d7357fd8f008af8a1bd381840585a
+    domain: mobile_app
+    type: notify
+    message: Heating temperature was changed to {{states.climate.home_thermostat.attributes.temperature}}
+  mode: single
+- id: '1657535805464'
+  alias: (Car) It's a good day to wash
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.car_wash
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - if:
+    - condition: time
+      before: '23:00:00'
+      after: '13:00:00'
+    then:
+    - service: notify.mobile_app_nizm0_oneplus_8t
+      data:
+        title: Car Wash
+        message: Hej, It's a good day to wash the car.
+    else:
+    - wait_for_trigger:
+      - platform: time
+        at: '13:00:00'
+    - service: notify.mobile_app_nizm0_oneplus_8t
+      data:
+        message: Hej, It's a good day to wash the car.
+        title: Car wash
+  mode: restart
+- id: '1671889242278'
+  alias: Bedroom Light Management
+  description: ''
+  trigger:
+  - platform: device
+    type: changed_states
+    device_id: 332a43a3db5b81520e09d5a2c9605db8
+    entity_id: switch.bedroom_top_light_switch
+    domain: switch
+  condition: []
+  action:
+  - type: toggle
+    device_id: b19d1f1d00645ec74dc3efe84d5788aa
+    entity_id: light.bedroom_top_light_bulb
+    domain: light
+  mode: single
+- id: '1689534702304'
+  alias: (roborock) Update Map Extractor camera
+  description: ''
+  use_blueprint:
+    path: PiotrMachowski/update_map_extractor.yaml
+    input:
+      vacuum: vacuum.rockrobo
+      camera: camera.xiaomi_cloud_map_extractor
+      mode_to_handle: turn_off_when_docked
+- id: '1690827843250'
+  alias: (Heating) notify when is ON
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.heating_hvac_action_status
+    to: heating
+  - platform: state
+    entity_id:
+    - sensor.heating_hvac_action_status
+    to: idle
+  condition: []
+  action:
+  - service: notify.mobile_app_nizm0_oneplus_8t
+    data_template:
+      message: Heating has bean turned to {{ trigger.to_state.state }}
+      title: Home Heating
   mode: single

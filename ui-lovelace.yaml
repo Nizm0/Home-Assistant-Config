@@ -6,12 +6,15 @@ title: Home
 views:
   # - !include lovelace/views/dashboard.yaml
   - !include lovelace/views/00_main.yaml
+  - !include lovelace/views/05_vacuum.yaml
   - !include lovelace/views/20_living_room.yaml
   - !include lovelace/views/30_bedroom.yaml
   - !include lovelace/views/40_kids.yaml
   - !include lovelace/views/50_kitchen.yaml
   - !include lovelace/views/60_bathroom.yaml
   - !include lovelace/views/70_hallway.yaml
+  - !include lovelace/views/75_basement.yaml
+  - !include lovelace/views/76_balcony.yaml
   - !include lovelace/views/80_family.yaml
   - !include lovelace/views/95_flowers.yaml
   - !include lovelace/views/90_camera.yaml

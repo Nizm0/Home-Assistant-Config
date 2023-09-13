@@ -1,0 +1,91 @@
+climate:
+  - platform: generic_thermostat
+    name: Home thermostat
+    unique_id: home_thermostat
+    heater: switch.thermostat_on_off
+    target_sensor: sensor.average_house_temperature
+    min_temp: 15
+    max_temp: 35
+    ac_mode: false
+    # target_temp: 21.5
+    cold_tolerance: 0.2
+    # hot_tolerance: 0.3
+    min_cycle_duration:
+      minutes: 5
+    # keep_alive:
+    #   minutes: 5
+    # initial_hvac_mode: "heat"
+    away_temp: 16
+    sleep_temp: 19
+    # home_temp: 20
+    # comfort_temp: 22
+    # activity_temp: 21
+    precision: 0.1
+
+automation:
+  - id: "1632348978000"
+    alias: (Heating) Turn on heating before wake up
+    description: ""
+    initial_state: off
+    trigger:
+      - platform: time
+        at: sensor.gosia_s9_next_alarm
+    condition:
+      - condition: time
+        before: 07:29
+        after: 06:29
+      - condition: numeric_state
+        entity_id: sensor.average_house_temperature
+        below: 20
+    action:
+      - service: climate.set_temperature
+        target:
+          entity_id: climate.home_thermostat
+        data_template:
+          hvac_mode: heat
+          temperature: "{{ state_attr('climate.home_thermostat', 'temperature') + 4 }}"
+      - delay:
+          hours: 0
+          minutes: 20
+          seconds: 0
+          milliseconds: 0
+      - service: climate.set_temperature
+        target:
+          entity_id: climate.home_thermostat
+        data_template:
+          temperature: "{{ state_attr('climate.home_thermostat', 'temperature') - 4 }}"
+    mode: single
+
+sensor:
+  - platform: history_stats
+    name: Heating is on today
+    entity_id: sensor.heating_hvac_action_status
+    state: "heating"
+    type: time
+    start: "{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}"
+    end: "{{ now() }}"
+
+template:
+  - sensor:
+      - name: Heating Hvac Action Status
+        state: |
+          {{ state_attr('climate.home_thermostat', 'hvac_action') }}
+      - name: Next Alarm
+        device_class: timestamp
+        state: >
+          {% if states('sensor.gosia_s9_next_alarm') < states('sensor.nizm0_oneplus_8t_next_alarm') %}
+            {{ states('sensor.gosia_s9_next_alarm')}}
+          {%else%}
+            {{ states('sensor.nizm0_oneplus_8t_next_alarm') }}
+          {% endif %}
+      - name: Minutest before next alarm
+        state: |
+          {{ ((states('sensor.next_alarm')|as_timestamp|int - now()|as_timestamp|int)/60)|int }}
+        unit_of_measurement: "m"
+# sensor:
+#   - platform: min_max
+#     name: Fisrt alarm min max
+#     type: min
+#     entity_ids:
+#       - sensor.gosia_s9_next_alarm
+#       - sensor.nizm0_oneplus_8t_next_alarm

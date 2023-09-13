@@ -1,11 +1,12 @@
 logger:
   default: warning
   logs:
+    homeassistant.components.camera: critical
     # Log level for TOMATO
     homeassistant.components.tomato: critical
 
     # Log level from STEAM
-    homeassistant.components.steam_online: critical
+    # homeassistant.components.steam_online: critical
 
     # Log level from pyscript
     custom_components.pyscript: info

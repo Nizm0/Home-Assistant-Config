@@ -1,0 +1,2 @@
+binary_sensor.kitchen_smoke_detector_smoke:
+  device_class: smoke

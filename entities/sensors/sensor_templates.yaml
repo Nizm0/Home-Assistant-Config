@@ -5,98 +5,46 @@
 #
 platform: template
 sensors: #!include_dir_merge_named templates
-  predicted_print_end_time:
-    friendly_name: Ender 3 Predicted End Time
-    value_template: >
-      {% if is_state("binary_sensor.ender_3_printing", "on") and states("sensor.ender_3_time_remaining") | int > 0 %}
-        {{ (as_timestamp(now()) + states.sensor.ender_3_time_remaining.state | float) | timestamp_local }}
-      {%- else -%}
-        ---NAN---
-      {%- endif %}
-
-  # battery_status:
-  #   friendly_name: "Battery Status"
-  #   entity_id:
-  #   - input_boolean.battery_status_update
-  #   value_template: >
-  #     {%- set threshold = 20 -%}
-  #     {%- set domains = ['light', 'switch', 'sensor', 'zwave', 'lock'] -%}
-  #     {%- for domain in domains -%}
-  #       {%- for item in states[domain] if ((item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) or ("battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown"))) -%}
-  #         {%- if (item.attributes.battery_level is defined and item.attributes['battery_level'] | int < threshold) -%}
-  #         {{ item.name }} ({{ item.attributes['battery_level'] }}){%- if not loop.last %}, {% endif -%}{% endif -%}
-  #           {%- if "battery" in item.name | lower and ((item.state | int < threshold and item.state|int != 0) or item.state | lower == "low" or item.state | lower == "unknown") -%}
-  #           {{ item.name }} ({{ item.state }}){%- if not loop.last %}, {% endif -%} {% endif -%}
-  #       {%- endfor -%}
-  #     {%- endfor -%}
-
   solar_angle:
     friendly_name: "Sun angle"
-    unit_of_measurement: 'degrees'
+    unit_of_measurement: "degrees"
     value_template: "{{ state_attr('sun.sun', 'elevation') }}"
-
 
   in_bed_bayesian_probability:
     # entity_id: binary_sensor.in_bed
     value_template: "{{states.binary_sensor.in_bed.attributes.probability * 100}}"
-    unit_of_measurement: '%'
+    unit_of_measurement: "%"
 
   template_last_motion:
-    friendly_name: 'Last Motion'
+    friendly_name: "Last Motion"
     value_template: >
-      {% set sensors = [states.binary_sensor.living_room_motion_sensor, states.binary_sensor.hallway_motion_sensor, states.binary_sensor.kitchen_motion_sensor, states.binary_sensor.bathroom_motion_sensor, states.binary_sensor.kids_motion_sensor, states.binary_sensor.bedroom_motion_sensor] %}
-      {% for sensor in sensors %}
-        {% if as_timestamp(sensor.last_changed) == as_timestamp(sensors | map(attribute='last_changed') | max) %}
-          {{ sensor.name }}
-        {% endif %}
-      {% endfor %}
+      {%- set sensors = expand('group.all_sensors_motion') -%}
+      {%- for sensor in sensors -%}
+        {%- if as_timestamp(sensor.last_changed) == as_timestamp(sensors | map(attribute='last_changed') | max) -%}
+          {{sensor.name}}
+        {%- endif -%}
+      {%- endfor %}
 
-    # {% for state in states.binary_sensor if ('motion' in state.entity_id) and ('sensor' in state.entity_id.split('.')[1])-%}
-    #   {{state.entity_id}}
-    # {%- endfor %}
-    
-  # last_motionv2:
-  #   friendly_name: Last motionv2
-  #   value_template: '{% if states.group.motion_check.last_updated is undefined %}{{"00:00:00"}}{% else %}{{ ((as_timestamp(states.sensor.date_time.last_updated)-as_timestamp(states.group.motion_indoors.last_updated))|int) }}{% endif %}'
-  #   entity_id:
-  #     - sensor.date_time
-  #   unit_of_measurement: 's'
-
-  # motion_last30:
-  #   value_template: '{{(as_timestamp(now())-as_timestamp(states.sensor.template_last_motion.last_changed)) < 1800 }}'
-  #   friendly_name: Motion in Last 30min
-    # device_class: motion
-
-  # taking_bath:
-  #   friendly_name: Taking bath
-  #   # entity_id: semsor.taking_bath
-  #   value_template: > 
-  #     {% if states('sensor.bathroom_humidity') | float > states('sensor.average_house_humidity') | float +5 %}
-  #       true
+  # max_recorded_temp:
+  #   friendly_name: Max recorded temperature
+  #   device_class: temperature
+  #   # entity_id: sensor.max_temperature_in_home
+  #   unit_of_measurement: '°C'
+  #   value_template: >
+  #     {% if states.sensor.max_recorded_temp.state | float > states.sensor.max_temperature_in_home.state | float -%}
+  #       {{states.sensor.max_recorded_temp.state | float}}
+  #     {%- elif states.sensor.max_recorded_temp.state == 'unknown' -%}
+  #       {{34.2}}
   #     {%- else -%}
-  #       false
+  #       {{states.sensor.max_temperature_in_home.state | float}}
   #     {%- endif %}
 
-  max_recorded_temp:
-    friendly_name: Max recorded temperature
-    device_class: temperature
-    # entity_id: sensor.max_temperature_in_home
-    unit_of_measurement: '°C'
-    value_template: >
-      {% if states.sensor.max_recorded_temp.state | float > states.sensor.max_temperature_in_home.state | float -%}
-        {{states.sensor.max_recorded_temp.state | float}}
-      {%- elif states.sensor.max_recorded_temp.state == 'unknown' -%}
-        {{34.2}}
-      {%- else -%}
-        {{states.sensor.max_temperature_in_home.state | float}}
-      {%- endif %}
-
-  humidifier_water_level:
-    friendly_name: Humidifier water level
-    # device_class: level
-    unit_of_measurement: 'mm'
-    # entity_id: fan.air_humidifier
-    value_template: "{{state_attr('fan.air_humidifier', 'depth')}}"
+  # humidifier_water_level:
+  #   friendly_name: Humidifier water level
+  #   # device_class: level
+  #   unit_of_measurement: 'mm'
+  #   # entity_id: fan.air_humidifier
+  #   value_template: "{{state_attr('fan.air_humidifier', 'depth')}}"
 
   home_air_purifier_aqi:
     friendly_name: Home air purifier AQI
@@ -111,25 +59,25 @@ sensors: #!include_dir_merge_named templates
     # entity_id: fan.air_purifier
     value_template: "{{state_attr('fan.air_purifier', 'motor_speed')}}"
 
-  air_quality_pm_maslice_25:
-    friendly_name: Air Quality PM Maslice 2.5
-    unit_of_measurement: 'particles'
-    value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_2_5') }}"
-  air_quality_pm_maslice_10:
-    friendly_name: Air Quality PM Maslice 10
-    unit_of_measurement: 'particles'
-    value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_10') }}"
+  # air_quality_pm_maslice_25:
+  #   friendly_name: Air Quality PM Maslice 2.5
+  #   unit_of_measurement: 'particles'
+  #   value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_2_5') }}"
+  # air_quality_pm_maslice_10:
+  #   friendly_name: Air Quality PM Maslice 10
+  #   unit_of_measurement: 'particles'
+  #   value_template: "{{ state_attr('air_quality.pm_maslice', 'particulate_matter_10') }}"
 
-  outside_home_atmospheric_pressure:
-    value_template: >-
-      {% set temperature_gradient = 0.0065 %}
-      {% set exponent = 0.03416 / temperature_gradient %}
+  # outside_home_atmospheric_pressure:
+  #   value_template: >-
+  #     {% set temperature_gradient = 0.0065 %}
+  #     {% set exponent = 0.03416 / temperature_gradient %}
 
-      {% set altitude_meters = 160 %}
-      {% set temperature_celsius = states('sensor.outside_home_air_pm_sensor_temperature') | float %}
-      {% set temperautre_at_sealevel_kelvin = temperature_celsius + (temperature_celsius * temperature_gradient) + 273.15 %}
-      {% set air_pressure_hpa = (states('sensor.outside_home_air_pm_sensor_pressure') | float / 100) | round(1) %}
+  #     {% set altitude_meters = 160 %}
+  #     {% set temperature_celsius = states('sensor.outside_home_air_pm_sensor_temperature') | float %}
+  #     {% set temperautre_at_sealevel_kelvin = temperature_celsius + (temperature_celsius * temperature_gradient) + 273.15 %}
+  #     {% set air_pressure_hpa = (states('sensor.outside_home_air_pm_sensor_pressure') | float / 100) | round(1) %}
 
-      {{ (air_pressure_hpa / (1 - ((temperature_gradient * altitude_meters) / temperautre_at_sealevel_kelvin)) ** exponent) | round(1) }}
-    friendly_name: 'Outside Home Atmospheric pressure'
-    unit_of_measurement: 'hPa'
+  #     {{ (air_pressure_hpa / (1 - ((temperature_gradient * altitude_meters) / temperautre_at_sealevel_kelvin)) ** exponent) | round(1) }}
+  #   friendly_name: 'Outside Home Atmospheric pressure'
+  #   unit_of_measurement: 'hPa'

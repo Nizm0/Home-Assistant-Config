@@ -1,0 +1,25 @@
+automation:
+  - id: ac630c56-6eaa-45e5-9f71-db63e15032b6
+    alias: (Family presents)Gosia entered the home
+    initial_state: on
+    trigger:
+      - platform: zone
+        entity_id: person.gosia # device_tracker.google_maps_109218123589188227395 #Gosia
+        zone: zone.home
+        event: enter
+    condition: []
+    action:
+      - service: notify.mobile_app_nizm0_oneplus_8t
+        data_template:
+          message: >
+            New value is: {{ trigger.to_state.state }}
+            ({{states('sensor.date_time_iso')}})
+          title: Gosia entered the home
+          data:
+            tag: gosia-location-info
+            group: Location
+      - service: notify.hangouts_gosia_michal
+        data_template:
+          message: >
+            New value is: {{ trigger.to_state.state }}
+          title: Gosia entered the home

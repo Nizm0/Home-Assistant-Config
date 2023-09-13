@@ -1,0 +1,111 @@
+"0x00158d0004514a0d":
+  friendly_name: Hallway Motion Sensor 1
+"0x00158d00022c2384":
+  friendly_name: Kitchen Wall Switch
+  operation_mode_right: decoupled
+  operation_mode_left: decoupled
+  homeassistant:
+    switch_left:
+      type: light
+      object_id: light_left
+    light_left:
+      name: Kitchen Top Light
+      value_template: null
+      state_value_template: "{{ value_json.state_left }}"
+"0x00158d0002241c98":
+  friendly_name: Switch 1
+"0xec1bbdfffeabdc25":
+  friendly_name: Kitchen Small Light
+"0x00158d0001ae808f":
+  friendly_name: Hallway Motion Sensor 2
+"0x00158d00020b569c":
+  friendly_name: Home Door Sensor
+"0x00158d00042551a3":
+  friendly_name: Hallway Multi Sensor
+"0x00158d00045ab82a":
+  friendly_name: Bedroom Window Sensor
+  device_class: window
+"0x00158d00044f2ed3":
+  friendly_name: Kids Window Sensor
+  device_class: window
+"0x00158d0004234f05":
+  friendly_name: Kitchen Window Sensor
+  device_class: window
+"0x00158d0002afd746":
+  friendly_name: Tilt and Vibration Sensor
+"0x00158d0004132b84":
+  friendly_name: Kitchen Multi Sensor
+  temperature_calibration: -0.2
+  humidity_calibration: 3
+"0x680ae2fffe379297":
+  friendly_name: Kitchen Motion Sensor
+"0x00158d000451482a":
+  friendly_name: Basement Motion Sensor
+"0xbc33acfffe77100c":
+  friendly_name: Kids Wall Switch
+  homeassistant:
+    switch_right:
+      type: light
+      object_id: light_right
+    light_right:
+      name: Kids Top Light
+      value_template: null
+      state_value_template: "{{ value_json.state_right }}"
+"0x00158d00044f3824":
+  friendly_name: Living Room Window Sensor
+  device_class: window
+"0xbc33acfffe770f1d":
+  friendly_name: Living Room Wall Switch
+  homeassistant:
+    switch:
+      type: light
+      object_id: light
+    light:
+      name: Living Room Top Light
+      value_template: null
+      state_value_template: "{{ value_json.state }}"
+"0x00158d0004210a46":
+  friendly_name: Living Room Multi Sensor
+"0x00158d00053eb7a3":
+  friendly_name: Kitchen Smoke Detector
+"0x00124b001faf4a10":
+  friendly_name: Bedroom Motion Sensor
+"0x0017880104576ae6":
+  friendly_name: Desk Lamp
+  color_sync: true
+"0x00158d0003cc6a95":
+  friendly_name: Bedroom Multi Sensor
+"0x588e81fffeff5dcf":
+  friendly_name: Kitchen Fridge Switch
+  measurement_poll_interval: 1
+"0x00158d000201894b":
+  friendly_name: Bathroom Multi Sensor
+"0xcc86ecfffe30ba2f":
+  friendly_name: "0xcc86ecfffe30ba2f"
+"0x00158d0001f41bec":
+  friendly_name: Switch 2
+"0xcc86ecfffe71c4e8":
+  friendly_name: Bathroom Top Over Shower
+"0xcc86ecfffe71cc93":
+  friendly_name: Bathroom Top 2
+"0xcc86ecfffe9305b7":
+  friendly_name: Bathroom Top 1
+"0x00158d0002e99d35":
+  friendly_name: Kids Motion Sensor
+"0x8cf681fffe4df2eb":
+  friendly_name: "0x8cf681fffe4df2eb"
+"0xa4c138b6510183d7":
+  friendly_name: Balcony Multi Sensor
+  temperature_calibration: -0.2
+  humidity_calibration: 1.6
+"0xa4c138482dba7b4c":
+  friendly_name: Basement Multi Sensor
+  humidity_calibration: 1.7
+"0x00124b002214ed01":
+  friendly_name: "0x00124b002214ed01"
+"0xa4c138ef75b4cfca":
+  friendly_name: Kids Multi Sensor
+"0xec1bbdfffea05db9":
+  friendly_name: Hallway Top Light
+"0x680ae2fffe3737c1":
+  friendly_name: Home Heating Switch

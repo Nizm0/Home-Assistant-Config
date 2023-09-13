@@ -1,18 +1,19 @@
 ---
-# Home Assistant can monitor air purtifier. 
+# Home Assistant can monitor air purtifier.
 #
 # This configuration loads up my mi air purtifier
 #
 # https://www.home-assistant.io/integrations/fan.xiaomi_miio/
 
 fan:
-  - platform: xiaomi_miio
-    name: Air Purifier
-    host: 192.168.1.151
-    token: !secret xiaomi_airpurifierr_key
-    model: zhimi.airpurifier.ma4
-  - platform: xiaomi_miio
-    name: Air Humidifier
-    host: 192.168.1.152
-    token: !secret xiaomi_humidifier_key
-    model: zhimi.humidifier.cb1
+  []
+  # - platform: xiaomi_miio_airpurifier
+  #   name: Air Purifier
+  #   host: 192.168.1.151
+  #   token: !secret xiaomi_airpurifierr_key
+  #   model: zhimi.airpurifier.ma4
+  # - platform: xiaomi_miio_airpurifier
+  #   name: Air Humidifier
+  #   host: 192.168.1.152
+  #   token: !secret xiaomi_humidifier_key
+  #   model: zhimi.humidifier.cb1

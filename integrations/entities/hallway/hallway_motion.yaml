@@ -1,0 +1,7 @@
+---
+group:
+  hallway_motion:
+    name: Hallway Motion
+    entities:
+      - binary_sensor.hallway_motion_sensor_1_occupancy
+      - binary_sensor.hallway_motion_sensor_2_occupancy

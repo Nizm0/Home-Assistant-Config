@@ -1,73 +1,78 @@
+template:
+  - binary_sensor:
+      - name: Michal Sleep Sensor
+        state: |-
+          {{ is_state('sensor.sleeping_time', 'unknown') }}
 automation:
   - id: 455065b4-fd71-4406-ad40-c714718a99db
-    alias: Michał is out from Work
-    initial_state: "true"
+    alias: (Family presents) Michał Work helper
+    initial_state: on
     trigger:
       - platform: zone
         entity_id: person.nizm0 #Nizm0
         zone: zone.work
         event: leave
-        # for:
-        #   minutes: 2
-    condition:
-    action:
-      - service: notify.mobile_app_gosia_s8
-        data_template:
-          message: >
-            Current location: {{ states('sensor.nizm0_oneplus_8t_geocoded_location') }}
-            ({{ states('sensor.date_time_iso') }})
-          title: Michał is out form work
-          data:
-            icon: https://lh4.googleusercontent.com/-s5iO7HHJJlM/AAAAAAAAAAI/AAAAAAAADC8/ARWGIM9G_r8/photo.jpg
-            url: https://maps.google.com/maps/@?api=1&map_action=map&center={{ state_attr('person.nizm0', 'latitude') }},{{ state_attr('person.nizm0', 'longitude') }}&zoom=17
-            tag: nizmo-location-info
-            group: Location
-      - service: notify.hangouts_gosia_michal
-        data_template:
-          message: >
-            Current location: {{ states('sensor.nizm0_oneplus_8t_geocoded_location') }}
-          title: Michał is out from work
-  - id: a3f85958-c4d7-49db-ac72-400006f0121e
-    alias: Michał entered the home
-    initial_state: "true"
-    trigger:
-      - platform: zone
-        entity_id: person.nizm0 # device_tracker.google_maps_104688658658376260645 #Nizm0
-        zone: zone.home
-        event: enter
-    condition:
-    action:
-      - service: notify.mobile_app_gosia_s8
-        data_template:
-          message: >
-            New value is: {{ trigger.to_state.state }}
-            ({{ states('sensor.date_time_iso') }})
-          title: Michał entered the home
-          data:
-            tag: nizmo-location-info
-            group: Location
-      - service: notify.hangouts_gosia_michal
-        data_template:
-          message: >
-            New value is: {{ trigger.to_state.state }}
-          title: Michał entered the home
-  - id: 07435202-f585-4a7d-a431-16b872ac8723
-    alias: Michał time to go home
-    initial_state: "true"
-    trigger:
+        id: out
       - platform: numeric_state
-        entity_id: sensor.nizm0_today_at_work
+        entity_id: sensor.nizm0_today_in_the_office
         above: 8
-    condition:
-      - condition: zone
-        entity_id: person.nizm0
-        zone: zone.work
+        id: gohome
+    condition: []
     action:
-      - service: notify.mobile_app_nizm0_oneplus_8t
-        data_template:
-          message: >
-            New value is: {{ trigger.to_state.state }}
-          title: Michał it's time to leave
-          data:
-            tag: nizmo-location-info
-            group: Location
+      - choose:
+          - conditions:
+              - condition: trigger
+                id: out
+            sequence:
+              - service: notify.mobile_app_gosia_s9
+                data_template:
+                  message: >
+                    Current location: {{ states('sensor.nizm0_oneplus_8t_geocoded_location') }}
+                    ({{ states('sensor.date_time_iso') }})
+                  title: Michał is out form work
+                  data:
+                    icon: https://lh4.googleusercontent.com/-s5iO7HHJJlM/AAAAAAAAAAI/AAAAAAAADC8/ARWGIM9G_r8/photo.jpg
+                    url: https://maps.google.com/maps/@?api=1&map_action=map&center={{ state_attr('person.nizm0', 'latitude') }},{{ state_attr('person.nizm0', 'longitude') }}&zoom=17
+                    tag: nizmo-location-info
+                    group: Location
+              # - service: notify.hangouts_gosia_michal
+              #   data_template:
+              #     message: >
+              #       Current location: {{ states('sensor.nizm0_oneplus_8t_geocoded_location') }}
+              #     title: Michał is out from work
+          - conditions:
+              - condition: trigger
+                id: gohome
+              - condition: zone
+                entity_id: person.nizm0
+                zone: zone.work
+            sequence:
+              - service: notify.mobile_app_nizm0_oneplus_8t
+                data_template:
+                  message: >
+                    New value is: {{ trigger.to_state.state }}
+                  title: Michał it's time to leave
+                  data:
+                    tag: nizmo-location-info
+                    group: Location
+  # - id: 07435202-f585-4a7d-a431-16b872ac8723
+  #   alias: (Family presents) Michał time to go home
+  #   initial_state: on
+  #   trigger:
+  #     - platform: numeric_state
+  #       entity_id: sensor.nizm0_today_in_the_office
+  #       above: 8
+  #       id: gohome
+  #   condition:
+  #     - condition: zone
+  #       entity_id: person.nizm0
+  #       zone: zone.work
+  #   action:
+  #     - service: notify.mobile_app_nizm0_oneplus_8t
+  #       data_template:
+  #         message: >
+  #           New value is: {{ trigger.to_state.state }}
+  #         title: Michał it's time to leave
+  #         data:
+  #           tag: nizmo-location-info
+  #           group: Location

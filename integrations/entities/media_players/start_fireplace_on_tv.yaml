@@ -1,7 +1,7 @@
 automation:
   - alias: Play Fireplace on tv
     id: 6d97032f-7771-485d-ac43-77cf9e6cffa0
-    initial_state: 'on'
+    initial_state: false
     trigger:
       - platform: event
         event_type: deconz_event

@@ -1,0 +1,2 @@
+group.all_sensors_humidity:
+  friendly_name: All humidity sensors

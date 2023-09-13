@@ -1,21 +1,60 @@
 sensor:
   - platform: twitch
     client_id: !secret twitchId
+    client_secret: !secret twitchSecret
+    token: !secret twitchToken
     channels:
       - frenck
       - DrZzs
       - dziarowski1
       - battlestategames
-      - DrewWagar
+      - roots_rat
+      - elitedangerous
   - platform: discord_game
     token: !secret secretDiscordBotToken
     members:
-    - Thaeliaris#9947
-    - Nizm0#9673
-    - Seth#7297
-  - platform: steam_online
-    api_key: !secret steamWebApiKey
-    accounts:
-      - 76561197992255354 #nizmoo
-      - 76561197988099383 #norion84
-      - 76561198010872379 #portex
+      - 197748378451443712 #Thaeliaris#9947
+      - 167985723985756160 #Nizm0#9673
+      - 706256281412960318 #Seth#7297
+  # - platform: steam_online
+  #   api_key: !secret steamWebApiKey
+  #   accounts:
+  #     - 76561197992255354 #nizmoo
+  #     - 76561197988099383 #norion84
+  #     - 76561198010872379 #portex
+
+  - platform: history_stats
+    name: TV is on
+    entity_id: media_player.philips_55pus7303
+    state: "on"
+    type: time
+    start: "{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: TV is idle(app runing)
+    entity_id: media_player.philips_55pus7303
+    state: "idle"
+    type: time
+    start: "{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: Netflix is on
+    entity_id: sensor.philips_tv_media_title
+    state: "Netflix"
+    type: time
+    start: "{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}"
+    end: "{{ now() }}"
+  - platform: history_stats
+    name: PS4 is on
+    entity_id: media_player.playstation_4
+    state: "on"
+    type: time
+    start: "{{ as_timestamp( now().replace(hour=0).replace(minute=0).replace(second=0) ) - now().weekday() * 86400 }}"
+    end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+      philips_tv_media_title:
+        friendly_name: "Philips TV Media Title"
+        value_template: |
+          {{ state_attr('media_player.philips_55pus7303', 'media_title') }}

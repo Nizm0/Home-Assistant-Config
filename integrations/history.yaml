@@ -5,32 +5,32 @@
 # https://www.home-assistant.io/components/history/
 #
 history:
-  exclude:
-    domains:
-      - automation
-      - alert
-      - camera
-      # - media_player
-      - sun
-      - calendar
-      # - sensor
-      - group
-      # - switch
-      - script
-    entities:
-      - sensor.processor_use
-      - sensor.memory_free
-      - sensor.disk_use_percent_home
-      - sensor.weather_cloudiness
-      - sensor.weather_dewpoint_temperature
-      - sensor.weather_fog
-      - sensor.weather_high_clouds
-      - sensor.weather_humidity
-      - sensor.weather_low_clouds
-      - sensor.weather_medium_clouds
-      - sensor.weather_precipitation
-      - sensor.weather_pressure
-      - sensor.weather_symbol
-      - sensor.weather_temperature
-      - sensor.weather_wind_direction
-      - sensor.weather_wind_speed
+  # exclude:
+  #   domains:
+  #     # - automation
+  #     # - alert
+  #     - camera
+  #     # - media_player
+  #     # - sun
+  #     - calendar
+  #     # - sensor
+  #     # - group
+  #     # - switch
+  #     # - script
+  #   # entities:
+  #   # - sensor.processor_use
+  #   # - sensor.memory_free
+  #   # - sensor.disk_use_percent_home
+  #   # - sensor.weather_cloudiness
+  #   # - sensor.weather_dewpoint_temperature
+  #   # - sensor.weather_fog
+  #   # - sensor.weather_high_clouds
+  #   # - sensor.weather_humidity
+  #   # - sensor.weather_low_clouds
+  #   # - sensor.weather_medium_clouds
+  #   # - sensor.weather_precipitation
+  #   # - sensor.weather_pressure
+  #   # - sensor.weather_symbol
+  #   # - sensor.weather_temperature
+  #   # - sensor.weather_wind_direction
+  #   # - sensor.weather_wind_speed

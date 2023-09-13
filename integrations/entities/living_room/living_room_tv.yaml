@@ -1,9 +1,9 @@
-light:
-  - platform: philips_ambilight
-    name: Tv Ambilights
-    host: 192.168.1.130
-    username: !secret philips_user
-    password: !secret philips_pass
+# light:
+  # - platform: philips_ambilight
+  #   name: Tv Ambilights
+  #   host: 192.168.1.130
+  #   username: !secret philips_user
+  #   password: !secret philips_pass
 
 # switch:
 #   - platform: philips_ambilight+hue
@@ -27,9 +27,9 @@ media_player:
     # name: Living room Android Tv Philips
 
 ## https://www.home-assistant.io/integrations/gpmdp/
-  - platform: gpmdp
-    host: 192.168.1.100
-    name: Pc_gpmdp
+  # - platform: gpmdp
+  #   host: 192.168.1.100
+  #   name: Pc_gpmdp
   
   # - platform: cast
   #   host: 192.168.1.131
@@ -41,10 +41,10 @@ media_player:
   #   ircodes_ini: 'broadlink_media_codes/philips.ini'
   #   ping_host: 192.168.1.46
 
-  - platform: philips_android_tv
-    name: Philips TV
-    host: 192.168.1.130
-    mac: 3C:A0:67:E0:3E:E1
-    username: !secret philips_user
-    password: !secret philips_pass
-    favorite_channels_only: true
+  # - platform: philips_android_tv
+  #   name: Philips TV
+  #   host: 192.168.1.130
+  #   mac: 3C:A0:67:E0:3E:E1
+  #   username: !secret philips_user
+  #   password: !secret philips_pass
+  #   favorite_channels_only: true

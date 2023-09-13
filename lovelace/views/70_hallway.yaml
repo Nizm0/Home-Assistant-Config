@@ -1,21 +1,20 @@
 icon: "mdi:stairs"
-id: 6
 path: hallway
 title: Hallway
 cards:
   - type: "custom:vertical-stack-in-card"
     cards:
-      - type: horizontal-stack
+      - type: grid
+        columns: 3
+        square: true
         cards:
           - type: light
             entity: light.hallway_top_light
             state_color: true
-          - type: light
-            entity: light.hallway_gateway_light
-      - type: horizontal-stack
-        cards:
+          # - type: light
+          #   entity: light.hallway_gateway_light
           - type: gauge
-            entity: sensor.hallway_temperature
+            entity: sensor.hallway_multi_sensor_temperature
             max: 40
             min: 0
             name: Temperature
@@ -26,26 +25,54 @@ cards:
             theme: default
             unit: C
           - type: gauge
-            entity: sensor.hallway_humidity
+            entity: sensor.hallway_multi_sensor_humidity
             max: 100
             min: 0
             name: Humidity
-            severity:
-              green: 30
-              yellow: 50
-              red: 60
+            segments:
+              - from: 0
+                color: var(--error-color)
+              - from: 35
+                color: var(--warning-color)
+              - from: 40
+                color: var(--success-color)
+              - from: 60
+                color: var(--warning-color)
+              - from: 65
+                color: var(--error-color)
             theme: default
             unit: "%"
-  - entities:
-      - entity: binary_sensor.hallway_motion_sensor
-      - entity: binary_sensor.home_door_sensor
-      - entity: sensor.hallway_illumination
-    type: entities
+          - type: entity-button
+            entity: binary_sensor.home_door_sensor_contact
+            state_color: true
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+          - type: entity-button
+            entity: binary_sensor.hallway_motion_sensor_1_occupancy
+            state_color: true
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+          - type: entity-button
+            entity: binary_sensor.hallway_motion_sensor_2_occupancy
+            state_color: true
+            hold_action:
+              action: none
+            tap_action:
+              action: more-info
+  # - entities:
+  #     - entity: binary_sensor.hallway_motion_sensor
+  #     - entity: binary_sensor.home_door_sensor_contact
+  #     - entity: sensor.hallway_illumination
+  #   type: entities
   - title: Temperature
     type: "custom:mini-graph-card"
     # animate: true
     entities:
-      - sensor.hallway_temperature
+      - sensor.hallway_multi_sensor_temperature
     color_thresholds:
       - color: "#0000ff"
         value: 15
@@ -69,7 +96,7 @@ cards:
   - title: Humidity
     type: "custom:mini-graph-card"
     entities:
-      - sensor.hallway_humidity
+      - sensor.hallway_multi_sensor_humidity
     color_thresholds:
       - color: "#00ff00"
         value: 30
@@ -86,11 +113,11 @@ cards:
     show:
       extrema: true
       fill: fade
-  - type: sensor
-    detail: 2
-    entity: sensor.hallway_pressure
-    graph: line
-  - type: sensor
-    detail: 2
-    entity: sensor.hallway_illumination
-    graph: line
+  # - type: sensor
+  #   detail: 2
+  #   entity: sensor.hallway_pressure
+  #   graph: line
+  # - type: sensor
+  #   detail: 2
+  #   entity: sensor.hallway_illumination
+  #   graph: line

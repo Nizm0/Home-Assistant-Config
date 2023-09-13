@@ -52,7 +52,7 @@ slider:
 hallway_sensor:
   widget_type: binary_sensor
   title: hallway motion sensor
-  entity: binary_sensor.hallway_motion_sensor
+  entity: binary_sensor.hallway_motion_sensor_1_occupancy
   icon_on: mdi-walk
   icon_off: mdi-human-male
 

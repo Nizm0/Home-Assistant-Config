@@ -1,0 +1,37 @@
+blueprint:
+  name: Device Connectivity Notification
+  description: Send a notification if a networked device loses connectivity
+  domain: automation
+  input:
+    server_group:
+      name: Server Group
+      description: This group of servers will be monitored for potential loss of connectivity
+      selector:
+        entity:
+          domain: group
+    notify_device:
+      name: Device to notify
+      description: Device needs to run the official Home Assistant app to receive
+        notifications
+      selector:
+        device:
+          integration: mobile_app
+    message:
+      name: Message
+      description: Notification message to send to Home Assistant app
+      default: ' Network connection lost for devices: {{ disconnected_servers }} '
+  source_url: https://gist.github.com/bfranke1973/4a0835efffc81759d02f44842265ea96
+trigger:
+- platform: state
+  entity_id: !input 'server_group'
+  from: 'on'
+  to: 'off'
+variables:
+  disconnected_servers: '{{ expand(''group.servers'') | selectattr(''attributes.device_class'',
+    ''eq'', ''connectivity'') | selectattr(''state'', ''eq'', ''off'') | map(attribute=''name'')
+    | list }}'
+action:
+  domain: mobile_app
+  type: notify
+  device_id: !input 'notify_device'
+  message: !input 'message'

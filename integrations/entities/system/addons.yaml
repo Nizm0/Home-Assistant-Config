@@ -49,137 +49,136 @@ switch:
           data:
             addon: 15ef4d2f_esphome
 
-
 ### https://www.home-assistant.io/integrations/rest/
-sensor:
-  - platform: rest
-    resource: !secret rest_appdaemon_info_link
-    name: AppDaemon Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
-  - platform: rest
-    resource: !secret rest_deconz_info_link
-    name: Deconz Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
-  - platform: rest
-    resource: !secret rest_nginx_info_link
-    name: NGINX Manager Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
-  - platform: rest
-    resource: !secret rest_esphome_info_link
-    name: ESPHome Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
-  - platform: rest
-    resource: !secret rest_samba_info_link
-    name: Samba Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
-  - platform: rest
-    resource: !secret rest_mariadb_info_link
-    name: MariaDB Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
-  - platform: rest
-    resource: !secret rest_google_backup_info_link
-    name: Google Backup Status
-    value_template: '{{ value_json.data.state }}'
-    scan_interval: 5
-    headers:
-      Authorization: !secret local_rest_api_token
-      Content-Type: application/json
-    json_attributes_path: '$.data'
-    json_attributes:
-      - ip_address
-      - version
+# sensor:
+#   - platform: rest
+#     resource: !secret rest_appdaemon_info_link
+#     name: AppDaemon Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
+#   - platform: rest
+#     resource: !secret rest_deconz_info_link
+#     name: Deconz Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
+#   - platform: rest
+#     resource: !secret rest_nginx_info_link
+#     name: NGINX Manager Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
+#   - platform: rest
+#     resource: !secret rest_esphome_info_link
+#     name: ESPHome Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
+#   - platform: rest
+#     resource: !secret rest_samba_info_link
+#     name: Samba Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
+#   - platform: rest
+#     resource: !secret rest_mariadb_info_link
+#     name: MariaDB Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
+#   - platform: rest
+#     resource: !secret rest_google_backup_info_link
+#     name: Google Backup Status
+#     value_template: "{{ value_template.data.state }}"
+#     scan_interval: 5
+#     headers:
+#       Authorization: !secret local_rest_api_token
+#       Content-Type: application/json
+#     json_attributes_path: "$.data"
+#     json_attributes:
+#       - ip_address
+#       - version
 
 automation:
-  - id: '1597650479096'
-    alias: Appdaemon turned off on start
-    description: ''
+  - id: "1597650479096"
+    alias: (Addon) Appdaemon turned off on start
+    description: ""
     trigger:
-    - event: start
-      platform: homeassistant
+      - event: start
+        platform: homeassistant
     condition:
-    - condition: state
-      entity_id: sensor.appdaemon_status
-      state: 'off'
+      - condition: state
+        entity_id: sensor.appdaemon_status
+        state: "off"
     action:
-    - data:
-        addon: a0d7b954_appdaemon
-      service: hassio.addon_start
+      - data:
+          addon: a0d7b954_appdaemon
+        service: hassio.addon_start
     mode: single
-  - id: '1597650682215'
-    alias: Nginx turned off on start
-    description: ''
+  - id: "1597650682215"
+    alias: (Addon) Nginx turned off on start
+    description: ""
     trigger:
-    - event: start
-      platform: homeassistant
+      - event: start
+        platform: homeassistant
     condition:
-    - condition: state
-      entity_id: sensor.nginx_manager_status
-      state: 'off'
+      - condition: state
+        entity_id: sensor.nginx_manager_status
+        state: "off"
     action:
-    - data:
-        addon: a0d7b954_nginxproxymanager
-      service: hassio.addon_start
+      - data:
+          addon: a0d7b954_nginxproxymanager
+        service: hassio.addon_start
     mode: single
-  - id: '1597650764992'
-    alias: EspHome turned off on start
-    description: ''
+  - id: "1597650764992"
+    alias: (Addon) EspHome turned off on start
+    description: ""
     trigger:
-    - event: start
-      platform: homeassistant
+      - event: start
+        platform: homeassistant
     condition:
-    - condition: state
-      entity_id: sensor.esphome_status
-      state: 'off'
+      - condition: state
+        entity_id: sensor.esphome_status
+        state: "off"
     action:
-    - data:
-        addon: 15ef4d2f_esphome
-      service: hassio.addon_restart
+      - data:
+          addon: 15ef4d2f_esphome
+        service: hassio.addon_restart
     mode: single

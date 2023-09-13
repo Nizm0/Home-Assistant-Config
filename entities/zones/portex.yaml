@@ -1,0 +1,4 @@
+name: PorteX
+latitude: !secret portex_latitude
+longitude: !secret portex_longitude
+radius: 100

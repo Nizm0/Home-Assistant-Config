@@ -1,41 +1,41 @@
 automation:
   - alias: Living room top light turned on
     id: c11e9bc8-caf0-40f8-be31-87efcf945614
-    initial_state: 'true'
+    initial_state: false
     trigger:
-    - platform: state
-      entity_id: light.living_room_top_light
-      to: 'on'
-      for:
-        seconds: 3
+      - platform: state
+        entity_id: light.living_room_top_light
+        to: "on"
+        for:
+          seconds: 3
     condition:
       condition: or
       conditions:
-      - condition: state
-        entity_id: light.living_room_directional_light
-        state: 'on'
-      - condition: state
-        entity_id: light.living_room_general_light
-        state: 'on'
+        - condition: state
+          entity_id: light.living_room_directional_light
+          state: "on"
+        - condition: state
+          entity_id: light.living_room_general_light
+          state: "on"
     action:
-    - service: homeassistant.turn_off
-      entity_id: light.living_room_directional_light
-    - service: homeassistant.turn_off
-      entity_id: light.living_room_general_light
+      - service: homeassistant.turn_off
+        entity_id: light.living_room_directional_light
+      - service: homeassistant.turn_off
+        entity_id: light.living_room_general_light
 
   - alias: Living room light 1 and 2 turned on
     id: fa44c9fd-be9b-4216-9e8d-e3e9d9d895ef
-    initial_state: 'true'
+    initial_state: false
     trigger:
-    - platform: state
-      entity_id: light.living_room_directional_light, light.living_room_general_light
-      to: 'on'
-      for:
-        seconds: 3
+      - platform: state
+        entity_id: light.living_room_directional_light, light.living_room_general_light
+        to: "on"
+        for:
+          seconds: 3
     condition:
-    - condition: state
-      entity_id: light.living_room_top_light
-      state: 'on'
+      - condition: state
+        entity_id: light.living_room_top_light
+        state: "on"
     action:
-    - service: homeassistant.turn_off
-      entity_id: light.living_room_top_light
+      - service: homeassistant.turn_off
+        entity_id: light.living_room_top_light

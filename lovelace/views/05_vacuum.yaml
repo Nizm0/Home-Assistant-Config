@@ -1,0 +1,81 @@
+badges: []
+path: vacuum-panel
+title: Vacuum page
+icon: mdi:robot-vacuum
+# panel: true
+cards:
+  - type: "custom:xiaomi-vacuum-map-card"
+    calibration_source:
+      camera: true
+    default_mode: predefined_zones
+    map_locked: true
+    entity: vacuum.rockrobo
+    map_source:
+      camera: camera.xiaomi_cloud_map_extractor
+    map_modes:
+      - template: vacuum_clean_zone
+      - template: vacuum_goto
+      - template: vacuum_clean_zone_predefined
+        predefined_selections:
+          - zones: [[27300, 17850, 30450, 22950]]
+          - zones: [[23300, 17950, 27000, 22950]]
+          - zones: [[23300, 23450, 26000, 27850]]
+          - zones: [[29350, 24600, 31650, 29350]]
+          - zones: [[27950, 24550, 28850, 27450]]
+          - zones: [[25800, 23000, 31700, 24550]]
+  # - type: custom:vertical-stack-in-card
+  #   cards:
+  - type: grid
+    columns: 2
+    cards:
+      - type: picture-entity
+        entity: vacuum.rockrobo
+        hold_action:
+          action: more-info
+        double_tap_action:
+          action: call-service
+          service: vacuum.start
+          service_data:
+            entity_id: vacuum.rockrobo
+        # show_icon: true
+        show_name: true
+        state_image:
+          cleaning: /local/images/vacuum.jpeg
+          docked: /local/images/vacuum_docked_gray.jpeg
+          error: /local/images/vacuum_dark.jpeg
+          idle: /local/images/vacuum_dark.jpeg
+          paused: /local/images/vacuum_dark.jpeg
+          returning: /local/images/vacuum.jpeg
+      - type: picture-entity
+        entity: input_boolean.ready_to_vacuum
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        double_tap_action:
+          action: call-service
+          service: input_number.set_value
+          service_data:
+            entity_id: input_number.rockrobo_cleaned_area
+            value: 0
+        state_image:
+          "off": /local/images/vacuum_dark.jpeg
+          "on": /local/images/vacuum.jpeg
+      - type: button
+        entity: input_button.vacuum_starter
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+      - type: button
+        entity: input_button.vacuum_cleaner
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+      - type: button
+        entity: input_button.vacuum_ready_for_schedule
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle

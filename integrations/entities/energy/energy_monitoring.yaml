@@ -1,0 +1,42 @@
+sensor:
+  - platform: template
+    sensors:
+      total_energy_monitor_usage:
+        friendly_name: "Energy Monitor Grid"
+        value_template: |-
+          {% set sensors = expand('group.all_power_sensors') -%}
+          {%- set summary = namespace(states=[]) -%}
+          {%- for sensor in sensors -%}
+            {%- if sensor.state != 'unavailable' -%}
+              {%- set summary.states = summary.states + [ sensor.state | float(0) ] -%}
+            {%- endif -%}
+          {%- endfor %}
+          {{ summary.states | sum | round(2) | float }}
+        unit_of_measurement: "W"
+  - platform: integration
+    source: sensor.total_energy_monitor_usage
+    name: Energy Spent
+    unit_prefix: k
+    round: 2
+  - platform: tauron_amiplus
+    name: Tauron AMIPlus
+    username: !secret tauron_amiplus.username
+    password: !secret tauron_amiplus.password
+    energy_meter_id: !secret tauron_amiplus.energy_meter_id
+    # check_generation: true
+    monitored_variables:
+      # - zone
+      - consumption_daily
+      - consumption_monthly
+      - consumption_yearly
+      # - generation_daily
+      # - generation_monthly
+      # - generation_yearly
+
+utility_meter:
+  bv_daily_test:
+    source: sensor.energy_spent
+    cycle: daily
+  bv_hourly_test:
+    source: sensor.energy_spent
+    cycle: hourly

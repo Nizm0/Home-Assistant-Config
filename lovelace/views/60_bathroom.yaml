@@ -1,28 +1,29 @@
 ---
 icon: "mdi:shower"
-id: 3
 path: bathroom
 title: Bathroom
 cards:
   - layout: horizontal
     type: "custom:vertical-stack-in-card"
     cards:
-      - type: horizontal-stack
+      - type: grid
+        columns: 3
+        square: true
         cards:
           - type: light
             entity: light.bathroom_top_light
             state_color: true
           - type: light
             entity: light.bathroom_over_bath
-          - type: entity-button
-            entity: binary_sensor.washer_vibration
-            state_color: true
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
-      - type: horizontal-stack
-        cards:
+          # - type: entity-button
+          #   entity: binary_sensor.washer_vibration
+          #   state_color: true
+          #   hold_action:
+          #     action: none
+          #   tap_action:
+          #     action: more-info
+          # - type: horizontal-stack
+          #   cards:
           - type: entity-button
             entity: binary_sensor.bathroom_water_leak
             state_color: true
@@ -30,13 +31,13 @@ cards:
               action: none
             tap_action:
               action: more-info
-          - type: entity-button
-            entity: binary_sensor.washer_vibration
-            state_color: true
-            hold_action:
-              action: none
-            tap_action:
-              action: more-info
+          # - type: entity-button
+          #   entity: binary_sensor.washer_vibration
+          #   state_color: true
+          #   hold_action:
+          #     action: none
+          #   tap_action:
+          #     action: more-info
           - type: entity-button
             entity: binary_sensor.taking_bath
             state_color: true
@@ -44,21 +45,21 @@ cards:
               action: none
             tap_action:
               action: more-info
-      - type: horizontal-stack
-        cards:
-          - type: custom:mini-graph-card
-            entities: 
-              - sensor.bathroom_illumination
-            hour24: true
-            points_per_hour: 5
-            align_icon: state
-            align_state: right
-            show:
-              fill: true
-              # icon: false
-              name: false
+          # - type: grid
+          #   cards:
+          # - type: custom:mini-graph-card
+          #   entities:
+          #     - sensor.bathroom_illumination
+          #   hour24: true
+          #   points_per_hour: 5
+          #   align_icon: state
+          #   align_state: right
+          #   show:
+          #     fill: true
+          #     # icon: false
+          #     name: false
           - type: gauge
-            entity: sensor.bathroom_temperature
+            entity: sensor.bathroom_multi_sensor_temperature
             theme: default
             unit: C
             max: 40
@@ -69,23 +70,30 @@ cards:
               red: 30
               yellow: 25
           - type: gauge
-            entity: sensor.bathroom_humidity
+            entity: sensor.bathroom_multi_sensor_humidity
             theme: default
             unit: "%"
             max: 100
             min: 0
             name: Humidity
-            severity:
-              green: 30
-              red: 60
-              yellow: 50
+            segments:
+              - from: 0
+                color: var(--error-color)
+              - from: 35
+                color: var(--warning-color)
+              - from: 40
+                color: var(--success-color)
+              - from: 60
+                color: var(--warning-color)
+              - from: 65
+                color: var(--error-color)
   # - type: thermostat
   #   entity: climate.bathroom_valve_climate
   - type: "custom:mini-graph-card"
     title: Temperature
     # animate: true
     entities:
-      - sensor.bathroom_temperature
+      - sensor.bathroom_multi_sensor_temperature
     color_thresholds:
       - color: "#0000ff"
         value: 15
@@ -109,7 +117,7 @@ cards:
   - type: "custom:mini-graph-card"
     title: Humidity
     entities:
-      - sensor.bathroom_humidity
+      - sensor.bathroom_multi_sensor_humidity
     color_thresholds:
       - color: "#00ff00"
         value: 30
@@ -126,13 +134,7 @@ cards:
     show:
       extrema: true
       fill: fade
-  - type: sensor
-    detail: 2
-    entity: sensor.bathroom_pressure
-    graph: line
-  - entity: camera.sonoff_gk_200mp2_b_rtsp
-    show_state: true
-    camera_view: live
-    type: picture-entity
-    state_filter:
-      - null
+  # - type: sensor
+  #   detail: 2
+  #   entity: sensor.bathroom_pressure
+  #   graph: line

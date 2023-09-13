@@ -1,6 +1,0 @@
-shelly:
-  discovery: false
-  version: true
-  sensors:
-    - all
-  devices: !include_dir_list ../entities/shelly

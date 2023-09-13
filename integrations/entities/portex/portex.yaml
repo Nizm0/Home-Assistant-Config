@@ -5,4 +5,21 @@ binary_sensor:
     count: 2
     scan_interval: 30
 
-# automation:
+automation:
+  - id: "1612520803809"
+    alias: (Server) portex.eu is unavailable
+    description: ""
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.portexst_eu
+        from: "on"
+        to: "off"
+        for: 00:05
+    condition: []
+    action:
+      []
+      # - service: notify.hangouts_portex
+      #   data:
+      #     title: portex.eu is down
+      #     message: hey, something is wrong with internet access
+    mode: single

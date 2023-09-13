@@ -24,6 +24,8 @@ __*
 *.db*
 *.delete
 *.log
+*.log.*
+log*.*
 *.pyc
 *.save
 *.token
@@ -38,7 +40,6 @@ esphome/*/
 google54d9d9f0104cb9cd.html
 image
 ip_bans.yaml
-.ip_authenticated.yaml
 known_devices.yaml
 node-red
 notebooks
@@ -51,3 +52,4 @@ www/floorplan
 www/images/home
 www/lovelace-flower-card/data/Images
 www/records
+zigbee2mqtt/state.json

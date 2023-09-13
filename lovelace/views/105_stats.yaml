@@ -1,5 +1,4 @@
 icon: mdi:chart-areaspline
-id: 8
 path: stats
 title: Stats
 cards:
@@ -18,11 +17,11 @@ cards:
         title: Temperatures 48h
         animate: false
         entities:
-          - sensor.living_room_temperature
-          - sensor.bedroom_temperature
-          - sensor.kids_temperature
-          - sensor.kitchen_temperature
-          - sensor.bathroom_temperature
+          - sensor.living_room_multi_sensor_temperature
+          - sensor.bedroom_multi_sensor_temperature
+          - sensor.kids_multi_sensor_temperature
+          - sensor.kitchen_multi_sensor_temperature
+          - sensor.bathroom_multi_sensor_temperature
           # - color: gray
           #   entity: sun.sun
           #   name: Night
@@ -42,11 +41,11 @@ cards:
       - type: history-graph
         title: Temperature in rooms
         entities:
-          - sensor.bedroom_temperature
-          - sensor.living_room_temperature
-          - sensor.kitchen_temperature
-          - sensor.bathroom_temperature
-          - sensor.kids_temperature
+          - sensor.bedroom_multi_sensor_temperature
+          - sensor.living_multi_sensor_room_temperature
+          - sensor.kitchen_multi_sensor_temperature
+          - sensor.bathroom_multi_sensor_temperature
+          - sensor.kids_multi_sensor_temperature
         hours_to_show: 72
         refresh_interval: 60
   - type: custom:swipe-card
@@ -55,11 +54,11 @@ cards:
         title: Humidity 48h
         animate: false
         entities:
-          - sensor.living_room_humidity
-          - sensor.bedroom_humidity
-          - sensor.kids_humidity
-          - sensor.kitchen_humidity
-          - sensor.bathroom_humidity
+          - sensor.living_room_multi_sensor_humidity
+          - sensor.bedroom_multi_sensor_humidity
+          - sensor.kids_multi_sensor_humidity
+          - sensor.kitchen_multi_sensor_humidity
+          - sensor.bathroom_multi_sensor_humidity
         height: 100
         hour24: true
         hours_to_show: 48
@@ -72,11 +71,11 @@ cards:
       - type: history-graph
         title: Humidity in rooms
         entities:
-          - sensor.bedroom_humidity
-          - sensor.living_room_humidity
-          - sensor.kitchen_humidity
-          - sensor.bathroom_humidity
-          - sensor.kids_humidity
+          - sensor.bedroom_multi_sensor_humidity
+          - sensor.living_multi_sensor_room_humidity
+          - sensor.kitchen_multi_sensor_humidity
+          - sensor.bathroom_multi_sensor_humidity
+          - sensor.kids_multi_sensor_humidity
         hours_to_show: 72
         refresh_interval: 60
   - type: custom:swipe-card
@@ -85,11 +84,11 @@ cards:
         title: Prsure 48h
         animate: true
         entities:
-          - sensor.living_room_pressure
-          - sensor.bedroom_pressure
-          - sensor.kids_pressure
-          - sensor.kitchen_pressure
-          - sensor.bathroom_pressure
+          - sensor.living_room_multi_sensor_pressure
+          - sensor.bathroom_multi_sensor_pressure
+          # - sensor.bedroom_multi_sensor_pressure
+          # - sensor.kids_multi_sensor_pressure
+          # - sensor.kitchen_multi_sensor_pressure
         height: 100
         hour24: true
         hours_to_show: 48
@@ -102,29 +101,30 @@ cards:
       - type: history-graph
         title: Presure in rooms
         entities:
-          - sensor.bedroom_pressure
-          - sensor.living_room_pressure
-          - sensor.kitchen_pressure
-          - sensor.bathroom_pressure
-          - sensor.kids_pressure
+          - sensor.living_room_multi_sensor_pressure
+          - sensor.bathroom_multi_sensor_pressure
+          # - sensor.bedroom_multi_sensor_pressure
+          # - sensor.kitchen_multi_sensor_pressure
+          # - sensor.kids_multi_sensor_pressure
         hours_to_show: 72
         refresh_interval: 60
   - type: history-graph
     title: Dors in home
     entities:
-      - binary_sensor.home_door_sensor
-      - binary_sensor.living_room_balcon_window_sensor
+      - binary_sensor.home_door_sensor_contact
+      # - binary_sensor.living_room_balcon_window_sensor
     hours_to_show: 24
     refresh_interval: 0
   - type: history-graph
     title: Motions in home
     entities:
       - sensor.template_last_motion
-      - binary_sensor.hallway_motion_sensor
-      - binary_sensor.living_room_motion_sensor
-      - binary_sensor.kitchen_motion_sensor
-      - binary_sensor.bathroom_motion_sensor
-      - binary_sensor.bedroom_motion_sensor
+      - binary_sensor.hallway_motion_sensor_1_occupancy
+      - binary_sensor.hallway_motion_sensor_2_occupancy
+      - binary_sensor.living_room_motion_sensor_occupancy
+      - binary_sensor.kitchen_motion_sensor_occupancy
+      - binary_sensor.bathroom_motion_sensor_occupancy
+      - binary_sensor.bedroom_motion_sensor_occupancy
       - binary_sensor.reolink_camera_1_motion
       - script.create_group_all_motion_sensors
     hours_to_show: 24
@@ -132,8 +132,10 @@ cards:
   - type: history-graph
     title: Windows in home
     entities:
-      - entity: binary_sensor.living_room_balcony_window_sensor
-      - entity: binary_sensor.kitchen_left_window_sensor
+      - entity: binary_sensor.living_room_window_sensor_contact
+      - entity: binary_sensor.kitchen_window_sensor_contact
+      - entity: binary_sensor.kids_window_sensor_contact
+      - entity: binary_sensor.bedroom_window_sensor_contact
     hours_to_show: 24
     refresh_interval: 0
   - type: custom:auto-entities

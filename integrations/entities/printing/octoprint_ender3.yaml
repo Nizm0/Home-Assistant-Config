@@ -1,0 +1,102 @@
+# octoprint:
+#   - host: !secret octoprint_local_ip # octopi.local #
+#     api_key: !secret octoprint_api_key
+#     name: Ender 3
+#     number_of_tools: 1
+#     bed: true
+#     sensors:
+#       monitored_conditions:
+#         - "Current State"
+#         - "Job Percentage"
+#         - "Temperatures"
+#         - "Time Elapsed"
+#         - "Time Remaining"
+
+# template:
+#   - sensor: #!include_dir_merge_named templates
+#       - name: Ender 3 Predicted End Time
+#         state: >
+#           {% if is_state("binary_sensor.ender_3_printing", "on") and states("sensor.ender_3_time_remaining") | int > 0 %}
+#             {{ (as_timestamp(now()) + states.sensor.ender_3_time_remaining.state | float) | timestamp_local }}
+#           {%- else -%}
+#             ---NAN---
+#           {%- endif %}
+
+# camera:
+#   - platform: mjpeg
+#     name: Ender 3
+#     still_image_url: http://add-your-octoprint-ip-here:8080/?action=snapshot
+#     mjpeg_url: http://add-your-octoprint-ip-here:8080/?action=stream
+
+automation:
+  - id: "1555699464312"
+    alias: (Ender 3) Octoprint staus update
+    mode: restart
+    trigger:
+      - entity_id: binary_sensor.ender_3_printing
+        platform: state
+        from: "on"
+        to: "off"
+        id: print_finished
+      - entity_id: sensor.ender_3_current_state
+        platform: state
+        from: "printing"
+        to: "pausing"
+        id: print_paused
+      # - type: turned_off
+      #   platform: device
+      #   device_id: 52fcf380e682727ec6b26e0ce499d5ae
+      #   entity_id: binary_sensor.ender_3_printing
+      #   domain: binary_sensor
+    condition:
+      - condition: state
+        entity_id: binary_sensor.ender_3_printing_error
+        state: "off"
+      - condition: numeric_state
+        entity_id: sensor.ender_3_job_percentage
+        above: 99
+    action:
+      - choose:
+          - conditions:
+              - condition: and
+                conditions:
+                  - condition: trigger
+                    id: print_finished
+                  - condition: state
+                    entity_id: binary_sensor.ender_3_printing_error
+                    state: "off"
+                  - condition: numeric_state
+                    entity_id: sensor.ender_3_job_percentage
+                    above: 99
+            sequence:
+              - data:
+                  data:
+                    tag: Octoprint_tag
+                    group: Octoprint
+                  message: Printer just finished his work ({{states('sensor.date_time_iso')}})
+                  title: Printing finished
+                service: notify.mobile_app_nizm0_oneplus_8t
+          - conditions:
+              condition: trigger
+              id: print_paused
+            sequence:
+              - data:
+                  data:
+                    tag: Octoprint_tag
+                    group: Octoprint
+                  message: Printer is waiting for filament change ({{states('sensor.date_time_iso')}})
+                  title: Printing paused
+                service: notify.mobile_app_nizm0_oneplus_8t
+
+      # - delay: 0:2
+      # - wait_for_trigger:
+      #     - platform: numeric_state
+      #       entity_id: sensor.ender_3_actual_tool0_temp
+      #       below: 100
+      # - condition: or
+      #   conditions:
+      #     - condition: state
+      #       entity_id: binary_sensor.ender_3_printing
+      #       state: "off"
+      # - service: switch.turn_off
+      #   entity_id: switch.shelly_ender_3
